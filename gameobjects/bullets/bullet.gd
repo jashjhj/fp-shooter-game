@@ -62,8 +62,11 @@ func hit_object():
 	var bullet_hole_inst = preload("res://gameobjects/bullets/hole/bullet_hole.tscn").instantiate()
 	get_tree().get_current_scene().add_child(bullet_hole_inst);
 	Globals.RUBBISH_COLLECTOR.add_rubbish(bullet_hole_inst);
-	bullet_hole_inst.global_position = FORWARDS_RAY.get_collision_point();
-	bullet_hole_inst.look_at(Vector3.FORWARD, FORWARDS_RAY.get_collision_normal());
+	bullet_hole_inst.global_position = FORWARDS_RAY.get_collision_point() + FORWARDS_RAY.get_collision_normal() * 0.01;
+	if(FORWARDS_RAY.get_collision_normal().dot(Vector3.RIGHT) != 0):
+		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.UP.cross(FORWARDS_RAY.get_collision_normal()), FORWARDS_RAY.get_collision_normal());
+	else: # normal is vertical, therefore use RIGHT to generate perpendicularity
+		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.RIGHT.cross(FORWARDS_RAY.get_collision_normal()), FORWARDS_RAY.get_collision_normal());
 
 	
 	queue_free()
