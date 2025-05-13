@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdol3ygswtj5c"
+path="res://.godot/imported/Main.obj-955f84eeaa2cf33294a0c334a2d94ccc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Main.obj-955f84eeaa2cf33294a0c334a2d94ccc.mesh"]
+
+source_file="res://assets/models/guns/bad_revolver/Main.obj"
+dest_files=["res://.godot/imported/Main.obj-955f84eeaa2cf33294a0c334a2d94ccc.mesh", "res://.godot/imported/Main.obj-955f84eeaa2cf33294a0c334a2d94ccc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -10,7 +10,7 @@ var camera_rot_y = 0;
 var is_mouse_focused = true;
 
 @export_range(0, 180, 1.0, "degrees") var LOOK_MAX_VERT = 100;
-@export_range(-180, 0, 1.0, "degrees") var LOOK_MIN_VERT = -80
+@export_range(-180, 0, 1.0, "degrees") var LOOK_MIN_VERT = -85
 
 
 @onready var HEAD = $Torso/Head
@@ -49,6 +49,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			HEAD.basis = Basis();
 			HEAD.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
 			
+	
+	if event.is_action_pressed("interact_0"): # Left click
+		$Torso/Head/RevolverDev.trigger.emit();
+	
+	
 	
 	if event.is_action_pressed("interact_1"): # RMB
 		is_mouse_focused = !is_mouse_focused;

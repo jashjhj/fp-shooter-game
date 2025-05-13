@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=4 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
+[ext_resource type="PackedScene" uid="uid://c02m78ydey4oa" path="res://gameobjects/guns/instances/revolver_dev.tscn" id="2_rkbax"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 radius = 0.3
 height = 1.8
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 16
 script = ExtResource("1_oul6g")
 
 [node name="Torso" type="Node3D" parent="."]
@@ -16,6 +18,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Torso/Head"]
+
+[node name="RevolverDev" parent="Torso/Head" instance=ExtResource("2_rkbax")]
+transform = Transform3D(-0.996195, 0, 0.0871556, 0, 1, 0, -0.0871556, 0, -0.996195, 0.145652, -0.178522, -0.318974)
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

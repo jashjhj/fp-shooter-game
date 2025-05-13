@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_v0r8n"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="2_6po2o"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_v0r8n"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6po2o"]
 size = Vector3(20, 1, 20)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6po2o"]
+[sub_resource type="BoxMesh" id="BoxMesh_v0r8n"]
 size = Vector3(20, 1, 20)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ps7t7"]
@@ -28,14 +28,17 @@ sky = SubResource("Sky_sab5y")
 [node name="Player" parent="." instance=ExtResource("1_v0r8n")]
 transform = Transform3D(1, 0, 0, 0, 0.999854, 0.0170685, 0, -0.0170685, 0.999854, 0, 5.498, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_6po2o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0.000380785, -0.000441232, -0.000380835, 1, -0.000111516, 0.000441189, 0.000111687, 1, 0, 0, 0)
 material_override = ExtResource("2_6po2o")
 mesh = SubResource("BoxMesh_v0r8n")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_6po2o")
+skeleton = NodePath("../..")
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.7, 0)

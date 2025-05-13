@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk6fd80nopw"]
+
+[ext_resource type="Script" uid="uid://cyh74h7octcmc" path="res://gameobjects/guns/parts/bullet-source/bullet_source.gd" id="1_1p1r5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk33e"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.384314)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_70ukg"]
+material = SubResource("StandardMaterial3D_vk33e")
+top_radius = 0.0
+bottom_radius = 0.002
+height = 0.01
+radial_segments = 4
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[node name="Bullet-source" type="Node3D"]
+script = ExtResource("1_1p1r5")
+
+[node name="Display" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.00512832)
+mesh = SubResource("CylinderMesh_70ukg")

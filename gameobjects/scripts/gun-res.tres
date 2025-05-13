@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Gun" load_steps=2 format=3 uid="uid://xp52un3sgeff"]
+
+[ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_o1rxo"]
+
+[resource]
+script = ExtResource("1_o1rxo")
+h = 2

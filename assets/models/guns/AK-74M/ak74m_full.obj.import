@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dgjx3tx1kvg5v"
+path="res://.godot/imported/ak74m_full.obj-e2a7fdcbc5a9d74284e2d028fb08111f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ak74m_full.obj-e2a7fdcbc5a9d74284e2d028fb08111f.mesh"]
+
+source_file="res://assets/models/guns/AK-74M/ak74m_full.obj"
+dest_files=["res://.godot/imported/ak74m_full.obj-e2a7fdcbc5a9d74284e2d028fb08111f.mesh", "res://.godot/imported/ak74m_full.obj-e2a7fdcbc5a9d74284e2d028fb08111f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

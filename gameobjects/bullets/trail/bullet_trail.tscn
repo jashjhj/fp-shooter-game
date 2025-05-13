@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnf72nmn1rmtm"]
+
+[ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="1_e0bea"]
+[ext_resource type="Texture2D" uid="uid://bg1ffqme1aj00" path="res://assets/textures/bullet/trail.png" id="2_2dwf0"]
+[ext_resource type="Script" uid="uid://c3tm066m26wr" path="res://gameobjects/bullets/trail/bullet_trail.gd" id="2_spkf0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spkf0"]
+render_priority = 0
+shader = ExtResource("1_e0bea")
+shader_parameter/albedo_mult = 1.0
+shader_parameter/Texture2DParameter = ExtResource("2_2dwf0")
+shader_parameter/alpha_mult = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_rxpf1"]
+material = SubResource("ShaderMaterial_spkf0")
+orientation = 1
+
+[node name="BulletTrail" type="MeshInstance3D"]
+top_level = true
+layers = 32
+mesh = SubResource("QuadMesh_rxpf1")
+script = ExtResource("2_spkf0")

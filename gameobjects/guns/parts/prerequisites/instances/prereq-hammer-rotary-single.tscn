@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://62lf6wbcg6t0"]
+
+[ext_resource type="Script" uid="uid://dg547bcbwhkg4" path="res://gameobjects/guns/parts/prerequisites/instances/prereq_hammer_rotary_single.gd" id="1_2oj40"]
+
+[node name="Prereq-hammer" type="Node3D"]
+script = ExtResource("1_2oj40")
+metadata/_custom_type_script = "uid://jtjxsc5y7xkc"

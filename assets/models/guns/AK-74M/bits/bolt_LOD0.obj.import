@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjwsyenl6mi1y"
+path="res://.godot/imported/bolt_LOD0.obj-635d35931bbb7f0527be68f29c8b9cd9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bolt_LOD0.obj-635d35931bbb7f0527be68f29c8b9cd9.mesh"]
+
+source_file="res://assets/models/guns/AK-74M/bits/bolt_LOD0.obj"
+dest_files=["res://.godot/imported/bolt_LOD0.obj-635d35931bbb7f0527be68f29c8b9cd9.mesh", "res://.godot/imported/bolt_LOD0.obj-635d35931bbb7f0527be68f29c8b9cd9.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

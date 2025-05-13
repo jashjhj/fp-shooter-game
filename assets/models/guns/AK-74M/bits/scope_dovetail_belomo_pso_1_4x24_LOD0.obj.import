@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cfxp2puckfkjq"
+path="res://.godot/imported/scope_dovetail_belomo_pso_1_4x24_LOD0.obj-42b19df947e88c50135c2b23d16f867e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/scope_dovetail_belomo_pso_1_4x24_LOD0.obj-42b19df947e88c50135c2b23d16f867e.mesh"]
+
+source_file="res://assets/models/guns/AK-74M/bits/scope_dovetail_belomo_pso_1_4x24_LOD0.obj"
+dest_files=["res://.godot/imported/scope_dovetail_belomo_pso_1_4x24_LOD0.obj-42b19df947e88c50135c2b23d16f867e.mesh", "res://.godot/imported/scope_dovetail_belomo_pso_1_4x24_LOD0.obj-42b19df947e88c50135c2b23d16f867e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
