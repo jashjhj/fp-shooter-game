@@ -34,8 +34,8 @@ func _physics_process(delta: float) -> void:
 	
 	draw_trail()
 	
-	FORWARDS_RAY.look_at(velocity)
-	if((FORWARDS_RAY.get_collision_point() - global_position).length() < speed*delta): # Going to hit an object.
+	FORWARDS_RAY.look_at(global_position - velocity)
+	if((FORWARDS_RAY.get_collision_point() - global_position).length() < speed*delta * 2): # Going to hit an object.
 		hit_object()
 	else: # free room to travel forwards
 		position += velocity*delta;
@@ -62,6 +62,8 @@ func hit_object():
 	var bullet_hole_inst = preload("res://gameobjects/bullets/hole/bullet_hole.tscn").instantiate()
 	get_tree().get_current_scene().add_child(bullet_hole_inst);
 	Globals.RUBBISH_COLLECTOR.add_rubbish(bullet_hole_inst);
-	bullet_hole_inst.global_position = global_position;
+	bullet_hole_inst.global_position = FORWARDS_RAY.get_collision_point();
+	bullet_hole_inst.look_at(Vector3.FORWARD, FORWARDS_RAY.get_collision_normal());
+
 	
 	queue_free()

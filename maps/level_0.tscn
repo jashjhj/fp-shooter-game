@@ -41,6 +41,18 @@ material_override = ExtResource("2_6po2o")
 mesh = SubResource("BoxMesh_v0r8n")
 skeleton = NodePath("../..")
 
+[node name="Floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27541, -12.4941)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+shape = SubResource("BoxShape3D_6po2o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
+transform = Transform3D(1, 0.000380785, -0.000441232, -0.000380835, 1, -0.000111516, 0.000441189, 0.000111687, 1, 0, 0, 0)
+material_override = ExtResource("2_6po2o")
+mesh = SubResource("BoxMesh_v0r8n")
+skeleton = NodePath("../..")
+
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.7, 0)
 
