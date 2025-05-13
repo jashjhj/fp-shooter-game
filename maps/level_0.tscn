@@ -1,3 +1,47 @@
-[gd_scene format=3 uid="uid://c8abipasve7ck"]
+[gd_scene load_steps=8 format=3 uid="uid://c8abipasve7ck"]
+
+[ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_v0r8n"]
+[ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="2_6po2o"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v0r8n"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6po2o"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ps7t7"]
+sky_top_color = Color(0.475794, 0.680649, 0.881363, 1)
+sky_horizon_color = Color(0.584314, 0.752941, 0.917647, 1)
+ground_bottom_color = Color(0.197554, 0.386779, 0.58158, 1)
+ground_horizon_color = Color(0.584314, 0.752941, 0.917647, 1)
+
+[sub_resource type="Sky" id="Sky_sab5y"]
+sky_material = SubResource("ProceduralSkyMaterial_ps7t7")
+process_mode = 1
+
+[sub_resource type="Environment" id="Environment_lgvyb"]
+background_mode = 2
+sky = SubResource("Sky_sab5y")
 
 [node name="level_0" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_v0r8n")]
+transform = Transform3D(1, 0, 0, 0, 0.999854, 0.0170685, 0, -0.0170685, 0.999854, 0, 5.498, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_6po2o")
+mesh = SubResource("BoxMesh_v0r8n")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_6po2o")
+
+[node name="Environment" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.7, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.965926, -0.24321, -0.0885213, -0.0449434, -0.49444, 0.868049, -0.254887, -0.834493, -0.488523, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_lgvyb")

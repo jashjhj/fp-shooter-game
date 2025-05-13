@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://58xrrn0c2p73"]
+
+[ext_resource type="Texture2D" uid="uid://da6lfiafu7x6h" path="res://assets/textures/dev/default_surface.png" id="1_r6i7x"]
+
+[resource]
+albedo_texture = ExtResource("1_r6i7x")
+uv1_offset = Vector3(0, 0.5, 0)
+uv1_triplanar = true
+texture_filter = 0
