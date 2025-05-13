@@ -57,4 +57,11 @@ func draw_trail(): # not working yet
 
 func hit_object():
 	print("Bullet hit " + str(FORWARDS_RAY.get_collision_point()))
+	
+	#add bullet hole
+	var bullet_hole_inst = preload("res://gameobjects/bullets/hole/bullet_hole.tscn").instantiate()
+	get_tree().get_current_scene().add_child(bullet_hole_inst);
+	Globals.RUBBISH_COLLECTOR.add_rubbish(bullet_hole_inst);
+	bullet_hole_inst.global_position = global_position;
+	
 	queue_free()

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://miyu0xijfe7m"]
+
+[ext_resource type="Script" uid="uid://2dkow71dybwi" path="res://maps/map_resources/rubbish_collector.gd" id="1_3staa"]
+
+[node name="Rubbish" type="Node3D"]
+script = ExtResource("1_3staa")
