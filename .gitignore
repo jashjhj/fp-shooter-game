@@ -1,0 +1,18 @@
+# Godot 4+ specific ignores
+.godot/
+.uid
+
+
+#images
+#*.png
+#*.jpg
+#*.jpeg
+#*.bmp
+
+
+
+#3D
+#*.blend
+#*.obj
+#*.mat
+#*.gltf
