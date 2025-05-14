@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_xjbfu"]
 [ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="2_ebqv8"]
-[ext_resource type="Script" uid="uid://dg547bcbwhkg4" path="res://gameobjects/guns/parts/prerequisites/instances/prereq_hammer_rotary_single.gd" id="2_h76jk"]
+[ext_resource type="Script" uid="uid://dg547bcbwhkg4" path="res://gameobjects/guns/parts/instances/prereq_hammer_rotary_single.gd" id="2_h76jk"]
 [ext_resource type="ArrayMesh" uid="uid://b6wvee7b12gyo" path="res://assets/models/guns/bad_revolver/Hammer.obj" id="3_lvbds"]
 [ext_resource type="ArrayMesh" uid="uid://bdol3ygswtj5c" path="res://assets/models/guns/bad_revolver/Main.obj" id="4_ebqv8"]
 [ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://gameobjects/guns/parts/bullet-source/bullet-source.tscn" id="6_yxvtr"]

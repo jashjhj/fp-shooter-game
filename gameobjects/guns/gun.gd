@@ -2,7 +2,7 @@ class_name Gun extends Node3D
 
 signal trigger;
 
-@export var prerequisites:Array[GunPrerequisite];
+@export var trigger_functions:Array[Gun_Part];
 
 @export var bullet_source:Gun_BulletSource;
 
@@ -20,11 +20,8 @@ func _ready() -> void:
 
 func _trigger():
 	var is_success = true;
-	for prerequisite in prerequisites:
-		if(is_success): # If still going
-			var does_pass = prerequisite._trigger(self);
-			if(!does_pass): # if prerequisite check failed
-				is_success = false;
+	for part in trigger_functions:
+		part._trigger(self);
 	
 	if(is_success):
 		print("Succeeded")
