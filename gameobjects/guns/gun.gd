@@ -2,7 +2,7 @@ class_name Gun extends Node3D
 
 signal trigger;
 
-@export var trigger_functions:Array[Gun_Part];
+@export var trigger_functions:Array[Gun_Part_Listener];
 
 
 ##Set to the default bullet scene
@@ -17,5 +17,5 @@ func _ready() -> void:
 
 
 func _trigger():
-	for part in trigger_functions:
-		part._trigger();
+	for listener in trigger_functions:
+		listener.triggered.emit();

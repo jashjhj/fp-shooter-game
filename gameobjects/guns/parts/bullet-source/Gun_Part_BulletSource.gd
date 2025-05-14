@@ -1,20 +1,23 @@
 class_name Gun_Part_BulletSource extends Gun_Part
 
+
+@export var LISTENER:Gun_Part_Listener;
+@export var ATTACHED_RIGIDBODY:RigidBody3D;
+
 @export var bullet_data:BulletData;
 
-
-@export var ATTACHED_RIGIDBODY:RigidBody3D;
 
 var bullet:PackedScene = load("res://gameobjects/bullets/bullet.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assert(bullet_data != null, "No Bullet data set.")
+	LISTENER.triggered.connect(trigger)
+	
 	$Display.free()
 
-func _trigger():
+func trigger():
 	fire_bullet()
-	print("bang!")
 	return true;
 
 

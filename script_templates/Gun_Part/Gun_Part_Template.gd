@@ -1,6 +1,21 @@
 extends Gun_Part
 
-##This is called on the part being triggered
-func _trigger() -> bool:
+
+@export var LISTENER:Gun_Part_Listener;
+@export var TRIGGERS:Array[Gun_Part_Listener];
+
+
+func _ready() -> void:
+	#trigger.connect(_trigger)
+	LISTENER.triggered.connect(_trigger)
+
+
+##Asks to perform an action. does it?
+func _trigger():
 	trigger_all()
-	return true;
+
+
+##Triggers all parts in TRIGGERS
+func trigger_all():
+	for trigger_element in TRIGGERS:
+		trigger_element.trigger();
