@@ -17,15 +17,14 @@ metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
 [sub_resource type="Resource" id="Resource_87eem"]
 script = ExtResource("2_ebqv8")
-speed = 300
+speed = 2
 drag = 0.1
-gravity = 9.81
+gravity = 1.0
 mass = 0.005
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
-[node name="RevolverDev" type="Node3D" node_paths=PackedStringArray("trigger_functions")]
+[node name="RevolverDev" type="Node3D"]
 script = ExtResource("1_xjbfu")
-trigger_functions = [NodePath("Hammer")]
 bullet_data = SubResource("Resource_yxvtr")
 metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 

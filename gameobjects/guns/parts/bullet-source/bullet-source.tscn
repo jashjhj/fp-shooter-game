@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bk6fd80nopw"]
 
-[ext_resource type="Script" uid="uid://cyh74h7octcmc" path="res://gameobjects/guns/parts/bullet-source/bullet_source.gd" id="1_1p1r5"]
+[ext_resource type="Script" uid="uid://cyh74h7octcmc" path="res://gameobjects/guns/parts/bullet-source/Gun_Part_BulletSource.gd" id="1_1p1r5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk33e"]
 transparency = 1
@@ -17,9 +17,25 @@ rings = 0
 cap_top = false
 cap_bottom = false
 
-[node name="Bullet-source" type="Node3D"]
+[node name="Bullet-source" type="Node3D" node_paths=PackedStringArray("ATTACHED_RIGIDBODY")]
 script = ExtResource("1_1p1r5")
+ATTACHED_RIGIDBODY = NodePath("RigidBody3D")
 
 [node name="Display" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.00512832)
 mesh = SubResource("CylinderMesh_70ukg")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+input_ray_pickable = false
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+sleeping = true
+lock_rotation = true
+freeze = true

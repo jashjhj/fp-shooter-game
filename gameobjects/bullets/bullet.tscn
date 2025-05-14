@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://pyaspnaenanl" path="res://gameobjects/bullets/bullet.gd" id="1_kh0gy"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_kh0gy"]
+resource_local_to_scene = true
 top_radius = 0.03
 bottom_radius = 0.03
 radial_segments = 4
@@ -19,7 +20,7 @@ top_level = true
 script = ExtResource("1_kh0gy")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, 1)
+target_position = Vector3(0, 0, 1000)
 
 [node name="RayVisualiser" type="MeshInstance3D" parent="RayCast3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 1)
