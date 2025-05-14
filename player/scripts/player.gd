@@ -22,11 +22,14 @@ var CAMERA_CAPTURED:bool = false;
 func _ready():
 	Globals.PLAYER = self;
 	
+	Input.use_accumulated_input = false;
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	camera_rot_x = rotation.y; # initial values - set like this so can be set in editor
 	camera_rot_y = rotation.x;
 
+var mouse_input:Vector2;
+var mouse_velocity:Vector2;
 ##INPUT SCRIPT
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and is_mouse_focused:
@@ -34,20 +37,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if(!CAMERA_CAPTURED): # if free-roaming
 			
-			camera_rot_x += event.relative.x * -Settings.MouseSensitivity.x
-			camera_rot_y += event.relative.y * -Settings.MouseSensitivity.y
+			var viewport_transform: Transform2D = get_tree().root.get_final_transform() # resolves stretches
+			mouse_input += event.xformed_by(viewport_transform).relative
 			
-			transform.basis = Basis();
-			
-			rotate_object_local(Vector3(0, 1, 0), camera_rot_x);
-			
-			camera_rot_y = min(camera_rot_y, deg_to_rad(LOOK_MAX_VERT)); # impose limits
-			camera_rot_y = max(camera_rot_y, deg_to_rad(LOOK_MIN_VERT))
-			
-			TORSO.basis = Basis();
-			TORSO.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
-			HEAD.basis = Basis();
-			HEAD.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
+
 			
 	
 	if event.is_action_pressed("interact_0"): # Left click
@@ -65,6 +58,30 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"): # Kill program
 		get_tree().quit()
 
+func _process(delta:float) -> void:
+	
+	
+	mouse_velocity *= Settings.MouseAcceleration * (1-delta);
+	mouse_velocity += mouse_input/delta;
+	
+	#Camera rotation
+	camera_rot_x += mouse_velocity.x * -Settings.MouseSensitivity.x * delta
+	camera_rot_y += mouse_velocity.y * -Settings.MouseSensitivity.y * delta
+	
+	transform.basis = Basis();
+	
+	rotate_object_local(Vector3(0, 1, 0), camera_rot_x);
+	
+	camera_rot_y = min(camera_rot_y, deg_to_rad(LOOK_MAX_VERT)); # impose limits
+	camera_rot_y = max(camera_rot_y, deg_to_rad(LOOK_MIN_VERT))
+	
+	TORSO.basis = Basis();
+	TORSO.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
+	HEAD.basis = Basis();
+	HEAD.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
+	
+	mouse_input = Vector2.ZERO;
+	
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

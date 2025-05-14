@@ -8,5 +8,6 @@ resource_local_to_scene = true
 [node name="BulletTrail" type="MeshInstance3D"]
 top_level = true
 layers = 32
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_fpsj6")
 script = ExtResource("2_spkf0")
