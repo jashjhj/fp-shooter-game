@@ -12,7 +12,10 @@ var bullet:PackedScene = load("res://gameobjects/bullets/bullet.tscn");
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assert(bullet_data != null, "No Bullet data set.")
-	LISTENER.triggered.connect(trigger)
+	if(LISTENER == null):
+		push_warning("No Listener set.")
+	else:
+		LISTENER.triggered.connect(trigger)
 	
 	$Display.free()
 

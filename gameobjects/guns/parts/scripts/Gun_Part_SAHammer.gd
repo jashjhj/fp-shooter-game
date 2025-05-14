@@ -14,7 +14,13 @@ var cocked := true;
 var current_angle = 15;
 
 func _ready() -> void:
-	RELEASE_LISTENER.triggered.connect(_release);
+	if(RELEASE_LISTENER == null):
+		push_warning("Listener not set!")
+	else: RELEASE_LISTENER.triggered.connect(_release);
+	
+	if(COCK_LISTENER == null):
+		push_warning("listener not set!")
+	else: COCK_LISTENER.triggered.connect(cock)
 
 
 func _release():
@@ -32,3 +38,6 @@ func _process(delta: float) -> void:
 
 func loose_hammer():
 	pass;
+
+func cock():
+	pass

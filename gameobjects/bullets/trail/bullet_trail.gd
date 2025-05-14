@@ -1,34 +1,68 @@
 class_name BulletTrail extends MeshInstance3D
 
-var direction:Vector3;
-var length:Vector3;
-
 var camera:Camera3D;
+var width:= 0.1;
 
-var init_tick:int = 0;
+var segment_origin:Vector3;
+var segment_end:Vector3;
 
-@export var lifetime := 2000;
+var lifetime_start:int;
+@export var lifetime:int = 2000;
+@export var material:Material;
 
-var current_alpha_mult := 1.0;
+var up := Vector3.UP;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	lifetime_start = Time.get_ticks_msec()
+	
 	camera = get_viewport().get_camera_3d()
-	init_tick = Time.get_ticks_msec()
+	
+	var surface_array = [];
+	surface_array.resize(Mesh.ARRAY_MAX);
+	var verts = PackedVector3Array();
+	var uvs = PackedVector2Array();
+	
+	#var up:Vector3 = camera.position.cross(segment_end-segment_origin).normalized();
+	
+	up = up.normalized()
+	
+	var vector:Vector3 = segment_end-segment_origin
+	
+	var pos0 := up*width; # Creates mesh rect
+	var pos1 := -up*width;
+	var pos2 := vector + up*width;
+	var pos3 := vector - up*width
+	
+	verts.append(pos0);
+	verts.append(pos1);
+	verts.append(pos2);
+	verts.append(pos1);
+	verts.append(pos2);
+	verts.append(pos3);
+	
+	var texture_loop_rate = 1.0;
+	
+	uvs.append(Vector2(0, 0))
+	uvs.append(Vector2(1, 0))
+	uvs.append(Vector2(0, vector.length()*texture_loop_rate))
+	uvs.append(Vector2(1, 0))
+	uvs.append(Vector2(0, vector.length()*texture_loop_rate))
+	uvs.append(Vector2(1, vector.length()*texture_loop_rate))
+	
+	surface_array[Mesh.ARRAY_VERTEX] = verts;
+	surface_array[Mesh.ARRAY_TEX_UV] = uvs;
+	
+	surface_array.resize(Mesh.ARRAY_MAX);
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array);
+	mesh.surface_set_material(0, material)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	var time_passed = float(Time.get_ticks_msec() - lifetime_start) / float(lifetime)
 	
-	var lifetime_spent = Time.get_ticks_msec() - init_tick;
-	if(lifetime_spent > lifetime):
-		queue_free()
-		return
-	
-	current_alpha_mult = pow(1.0 - (float(lifetime_spent)/float(lifetime)), 2); # power for smoother alpha dropoff
-	
-	mesh.material.set("shader_parameter/alpha_mult", current_alpha_mult);
-	mesh.material.set("shader_parameter/albedo_mult", 1-0.5*(1-current_alpha_mult));
-	
-	
-	#look_at(direction, (global_position-camera.global_position).normalized()); # look right way, perpendicular to cam
+	if(time_passed > 1.0):
+		queue_free();
+	pass

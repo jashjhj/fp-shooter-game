@@ -12,14 +12,15 @@ rings = 0
 [sub_resource type="SphereMesh" id="SphereMesh_kh0gy"]
 radius = 0.03
 height = 0.06
-radial_segments = 4
-rings = 1
+radial_segments = 6
+rings = 2
 
 [node name="Bullet" type="Node3D"]
 top_level = true
 script = ExtResource("1_kh0gy")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+visible = false
 target_position = Vector3(0, 0, 1000)
 
 [node name="RayVisualiser" type="MeshInstance3D" parent="RayCast3D"]

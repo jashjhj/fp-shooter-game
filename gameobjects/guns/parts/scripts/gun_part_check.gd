@@ -10,8 +10,10 @@ class_name Gun_Part_Check extends Gun_Part
 
 func _ready() -> void:
 	#trigger.connect(_trigger)
-	LISTENER.triggered.connect(_trigger)
-	pass
+	if(LISTENER == null):
+		push_warning("No Listener set.")
+	else:
+		LISTENER.triggered.connect(_trigger)
 
 ##This is called on the part being triggered
 func _trigger():

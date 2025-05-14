@@ -8,6 +8,7 @@ class_name Bullet extends Node3D
 
 @onready var FORWARDS_RAY:RayCast3D = $RayCast3D;
 
+var lifetime_start:int;
 #var speed:float;
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +19,7 @@ func _ready() -> void:
 		free()
 		return
 	
+	lifetime_start = Time.get_ticks_msec()
 	#initialise velocity.
 	
 	global_position = origin_global_pos;
@@ -33,14 +35,26 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	var time_passed = float(Time.get_ticks_msec() - lifetime_start) / float(data.lifetime)
+	
+	if(time_passed > 1.0):
+		queue_free();
+	
+	
 	var speed = velocity.length()
+	
 	
 	
 	FORWARDS_RAY.look_at(global_position - velocity)
 	FORWARDS_RAY.force_raycast_update()
 	if((FORWARDS_RAY.get_collision_point() - global_position).length() < speed*delta and FORWARDS_RAY.get_collider() != null): # Going to hit an object.
 		hit_object()
+		draw_trail(FORWARDS_RAY.get_collision_point() - global_position) # draws it only to the object
+		queue_free()
 	else: # free room to travel forwards
+		
+		draw_trail(velocity)
+		
 		position += velocity*delta;
 		
 		#calculate next frames data
@@ -53,14 +67,31 @@ func _physics_process(delta: float) -> void:
 	
 
 
-func draw_trail(): # not working yet
-	pass
-	#var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
-	#trail.lifetime = 2000;
-	#trail.direction = velocity.normalized();
+
+func draw_trail(vector): # not working yet
+	var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
+	trail.lifetime = 100;
+	trail.segment_origin = global_position;
+	trail.segment_end = global_position + vector;
 	
-	#get_tree().get_current_scene().add_child(trail);
-	#trail.global_position = global_position;
+	trail.material = data.trail_material;
+	
+	trail.up = Vector3.UP;
+	get_tree().get_current_scene().add_child(trail);
+	trail.global_position = global_position
+
+	
+	var trail2 = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
+	trail2.lifetime = 100;
+	trail2.segment_origin = global_position;
+	trail2.segment_end = global_position + vector;
+	
+	trail2.material = data.trail_material;
+	
+	trail2.up = Vector3.UP.cross(vector)
+	get_tree().get_current_scene().add_child(trail2);
+	trail2.global_position = global_position;
+
 
 
 func hit_object():
@@ -75,6 +106,7 @@ func hit_object():
 		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.UP.cross(FORWARDS_RAY.get_collision_normal()), FORWARDS_RAY.get_collision_normal());
 	else: # normal is vertical, therefore use RIGHT to generate perpendicularity
 		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.RIGHT.cross(FORWARDS_RAY.get_collision_normal()), FORWARDS_RAY.get_collision_normal());
-
+	
+	bullet_hole_inst.rotate_object_local(Vector3.UP, randf()*2*PI) # make it random rotation
 	
 	queue_free()
