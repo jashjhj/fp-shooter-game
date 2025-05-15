@@ -5,7 +5,6 @@ class_name Gun_Part_Interactive extends Gun_Part
 var INTERACT_PLANE:Area3D;
 
 
-
 const BEGIN_INTERACT_COLLISION_LAYER := 65536
 const PLANE_COLLISION_LAYER := 131072
 
@@ -13,17 +12,12 @@ var is_interactive:bool = false; # Interactivity - e.g. when playeris currently 
 var is_focused:bool = false; # Is currently being held/clicked on
 
 
-#Inherited functions. called when focues and unfocused
+#Inherited functions. called when focused and unfocused
 func enable_focus():
 	pass
 
 func disable_focus():
 	pass
-
-##Ready for children
-func _ready1():
-	pass
-
 
 
 
@@ -35,13 +29,13 @@ func disable_interactive():
 
 func _ready():
 	init();
-	
-	_ready1()
 
 
 func init(): # load the tools required.
-	var tools = load("res://gameobjects/guns/parts/interactivity/Gun_Part_Tools.tscn").instantiate()
-	assert(tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity/Gun_Part_Tools.tscn`") # check
+	var tools = load("res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Tools.tscn").instantiate()
+	assert(tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Tools.tscn`") # check
+	
+	assert(BEGIN_INTERACT_COLLIDER != null, "No Interact collider set.")
 	
 	add_child(tools, true) # true makes them internal so not as easy to modify
 	
@@ -87,11 +81,15 @@ func _disable_focus():
 ##Gets position of mouse on the plane in local space
 func get_mouse_plane_position() -> Vector3:
 	var ray = get_viewport().get_camera_3d().get_mouse_ray(4, PLANE_COLLISION_LAYER);
-	return ray.get_collision_point() - global_position;
+	if(ray.is_colliding()):
+		return ray.get_collision_point() - global_position;
+	return Vector3.ZERO
 	
 
 
+func _process(_delta: float) -> void:
+	#super._process(delta);
 
-func _process(delta: float) -> void:
 	if(is_focused):
-		if(!is_interactive):disable_focus() # If no longer interactive
+		if(!is_interactive):_disable_focus() # If no longer interactive
+	
