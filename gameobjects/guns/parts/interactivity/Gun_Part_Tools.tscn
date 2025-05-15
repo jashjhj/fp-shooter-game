@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn87p7eq210ec"]
+
+[ext_resource type="Script" uid="uid://c3rfjbnda174v" path="res://gameobjects/guns/parts/interactivity/Gun_Part_Tools.gd" id="1_tvcft"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pyk3q"]
+size = Vector3(3, 0.001, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwlgp"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 1, 1, 0.278431)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m7242"]
+material = SubResource("StandardMaterial3D_vwlgp")
+size = Vector2(1, 1)
+
+[node name="Gun_Part_Tools" type="Node3D"]
+script = ExtResource("1_tvcft")
+
+[node name="Interact_Plane" type="Area3D" parent="."]
+collision_layer = 131072
+collision_mask = 0
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interact_Plane"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_pyk3q")
+
+[node name="Visualiser" type="MeshInstance3D" parent="Interact_Plane"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_m7242")

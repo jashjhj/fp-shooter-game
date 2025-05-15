@@ -32,6 +32,7 @@ var mouse_input:Vector2;
 var mouse_velocity:Vector2;
 ##INPUT SCRIPT
 func _unhandled_input(event: InputEvent) -> void:
+	
 	if event is InputEventMouseMotion and is_mouse_focused:
 		#Handle mouse movement
 		
@@ -40,11 +41,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			var viewport_transform: Transform2D = get_tree().root.get_final_transform() # resolves stretches
 			mouse_input += event.xformed_by(viewport_transform).relative
 			
-
-			
 	
-	if event.is_action_pressed("interact_0"): # Left click
-		$Torso/Head/RevolverDev.trigger.emit();
+	if(is_mouse_focused == true):
+		if event.is_action_pressed("interact_0"): # Left click
+			$Torso/Head/RevolverDev.trigger.emit();
+	
+	if event.is_action_pressed("inspect"):
+		$Torso/Head/RevolverDev.start_inspect();
+		is_mouse_focused = false;
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if event.is_action_released("inspect"):
+		$Torso/Head/RevolverDev.end_inspect();
+		is_mouse_focused = true
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 	
 	
 	

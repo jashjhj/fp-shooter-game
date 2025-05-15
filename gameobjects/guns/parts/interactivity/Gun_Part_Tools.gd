@@ -1,0 +1,11 @@
+extends Node3D
+
+@onready var INTERACT_PLANE:Area3D = $Interact_Plane
+
+var is_visualiser_visible:bool;
+func _ready() -> void:
+	is_visualiser_visible = $Interact_Plane/Visualiser.visible;
+
+func _process(delta: float) -> void:
+	if(is_visualiser_visible): # Only shows visualiser if visualiser is visible at start (setting) and currently active, to reduce clutter.
+		$Interact_Plane/Visualiser.visible = true if INTERACT_PLANE.process_mode != Node.PROCESS_MODE_DISABLED else false;

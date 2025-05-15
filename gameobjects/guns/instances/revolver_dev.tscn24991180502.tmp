@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c02m78ydey4oa"]
+[gd_scene load_steps=12 format=3 uid="uid://c02m78ydey4oa"]
 
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_xjbfu"]
 [ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="2_ebqv8"]
-[ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://gameobjects/guns/parts/interactivity/Gun_Part_Rotateable.gd" id="3_jwvsd"]
+[ext_resource type="Script" uid="uid://dg547bcbwhkg4" path="res://gameobjects/guns/parts/scripts/Gun_Part_SAHammer.gd" id="2_h76jk"]
 [ext_resource type="ArrayMesh" uid="uid://b6wvee7b12gyo" path="res://assets/models/guns/bad_revolver/Hammer.obj" id="3_lvbds"]
 [ext_resource type="ArrayMesh" uid="uid://bdol3ygswtj5c" path="res://assets/models/guns/bad_revolver/Main.obj" id="4_ebqv8"]
 [ext_resource type="Script" uid="uid://ddvk46wqlsnn4" path="res://gameobjects/guns/parts/Gun_Part_Listener.gd" id="5_87eem"]
@@ -17,9 +17,6 @@ gravity = 1.0
 mass = 0.005
 lifetime = 2000
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4cdc6"]
-size = Vector3(0.03125, 0.0523682, 0.0328369)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4cdc6"]
 render_priority = 0
@@ -37,58 +34,48 @@ trail_material = SubResource("ShaderMaterial_4cdc6")
 lifetime = 2000
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
-[node name="RevolverDev" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION", "HOLD_POSITION")]
+[node name="RevolverDev" type="Node3D" node_paths=PackedStringArray("trigger_functions")]
 script = ExtResource("1_xjbfu")
-trigger_functions = [NodePath("Gun_Model/Hammer/Gun_Part_Listener")]
+trigger_functions = [NodePath("Main/Hammer/Gun_Part_Listener")]
 bullet_data = SubResource("Resource_yxvtr")
-GUN_MODEL = NodePath("Gun_Model")
-INSPECT_POSITION = NodePath("Inspect_Position")
-HOLD_POSITION = NodePath("Hold_Position")
 metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 
-[node name="Gun_Model" type="Node3D" parent="."]
+[node name="Main" type="Node3D" parent="."]
 
-[node name="Hammer" type="Node3D" parent="Gun_Model" node_paths=PackedStringArray("ROTATEABLE", "BEGIN_INTERACT_COLLIDER")]
+[node name="Hammer" type="Node3D" parent="Main" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "VISUAL_HAMMER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04869, -0.00626498)
-script = ExtResource("3_jwvsd")
-ROTATEABLE = NodePath("HammerVisual")
-BEGIN_INTERACT_COLLIDER = NodePath("HammerVisual/Interact_Collider")
+script = ExtResource("2_h76jk")
+RELEASE_LISTENER = NodePath("Gun_Part_Listener")
+TRIGGER = NodePath("../Bullet-source/Gun_Part_Listener")
+VISUAL_HAMMER = NodePath("HammerVisual")
+COCKED_ANGLE = 1.5708
 metadata/_custom_type_script = "uid://dg547bcbwhkg4"
 
-[node name="Gun_Part_Listener" type="Node" parent="Gun_Model/Hammer"]
+[node name="Gun_Part_Listener" type="Node" parent="Main/Hammer"]
 script = ExtResource("5_87eem")
 metadata/_custom_type_script = "uid://ddvk46wqlsnn4"
 
-[node name="HammerVisual" type="Node3D" parent="Gun_Model/Hammer"]
+[node name="HammerVisual" type="Node3D" parent="Main/Hammer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000313845, 0.00336476)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Gun_Model/Hammer/HammerVisual"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main/Hammer/HammerVisual"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 mesh = ExtResource("3_lvbds")
 skeleton = NodePath("../..")
 
-[node name="Interact_Collider" type="Area3D" parent="Gun_Model/Hammer/HammerVisual"]
-collision_layer = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Gun_Model/Hammer/HammerVisual/Interact_Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0188599, 0.00262451)
-shape = SubResource("BoxShape3D_4cdc6")
-
-[node name="Bullet-source" parent="Gun_Model" node_paths=PackedStringArray("LISTENER") instance=ExtResource("6_yxvtr")]
+[node name="Bullet-source" parent="Main" node_paths=PackedStringArray("LISTENER") instance=ExtResource("6_yxvtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0466461, 0.133009)
 LISTENER = NodePath("Gun_Part_Listener")
 bullet_data = SubResource("Resource_87eem")
 
-[node name="Gun_Part_Listener" type="Node" parent="Gun_Model/Bullet-source"]
+[node name="Gun_Part_Listener" type="Node" parent="Main/Bullet-source"]
 script = ExtResource("5_87eem")
 metadata/_custom_type_script = "uid://ddvk46wqlsnn4"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Gun_Model"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.0462628, 0.0323124)
 mesh = ExtResource("4_ebqv8")
 skeleton = NodePath("../..")
 
 [node name="Inspect_Position" type="Node3D" parent="."]
-transform = Transform3D(0.539953, -0.388633, 0.746603, -0.025738, 0.878984, 0.476156, -0.841302, -0.276318, 0.464607, 0.0665818, 0.0452865, 0.0455508)
-
-[node name="Hold_Position" type="Node3D" parent="."]
+transform = Transform3D(0.663025, 0, 0.748597, -0.254193, 0.940585, 0.225136, -0.704119, -0.339559, 0.623631, -0.0761675, 0.0341837, 0.0454893)

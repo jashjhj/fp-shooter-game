@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=5 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://c02m78ydey4oa" path="res://gameobjects/guns/instances/revolver_dev.tscn" id="2_rkbax"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
@@ -18,6 +19,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Torso/Head"]
+script = ExtResource("2_g1dw6")
+
+[node name="RayCast3D" type="RayCast3D" parent="Torso/Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+top_level = true
+collision_mask = 0
+collide_with_areas = true
 
 [node name="RevolverDev" parent="Torso/Head" instance=ExtResource("2_rkbax")]
 transform = Transform3D(-0.996195, 0, 0.0871556, 0, 1, 0, -0.0871556, 0, -0.996195, 0.145652, -0.178522, -0.318974)

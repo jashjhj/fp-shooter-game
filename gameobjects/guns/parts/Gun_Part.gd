@@ -4,6 +4,8 @@ class_name Gun_Part extends Node3D
 
 
 
+
+
 ##Triggers all parts in TRIGGERS
 #func trigger_all():
 #	for trigger_element in TRIGGERS:
