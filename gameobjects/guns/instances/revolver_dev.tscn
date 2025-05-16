@@ -19,7 +19,7 @@ lifetime = 2000
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
 [sub_resource type="Curve" id="Curve_jwvsd"]
-_data = [Vector2(0.457643, 0.104283), 0.0, 0.0, 0, 0, Vector2(0.498158, 0.0351157), 0.0, 0.0, 0, 0, Vector2(0.525783, 0.0835328), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.752302, 0.0900168), 0.0, 0.0, 0, 0, Vector2(0.802026, 0.00607002), 0.0, 0.0, 0, 0, Vector2(0.866483, 0.103448), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4cdc6"]
@@ -58,6 +58,8 @@ script = ExtResource("3_jwvsd")
 RELEASE_LISTENER = NodePath("Hammer_Release_Listener")
 TRIGGER = NodePath("../Bullet-source/Fire Bullet")
 VISUAL_HAMMER = NodePath("HammerVisual")
+MAX_ANGLE = 0.959931
+SPRING_FORCE = 10.0
 FOCUS_RESISTANCE_CURVE = SubResource("Curve_jwvsd")
 ELASTICITY_TOP = 0.3
 BEGIN_INTERACT_COLLIDER = NodePath("HammerVisual/Interact_Collider")
