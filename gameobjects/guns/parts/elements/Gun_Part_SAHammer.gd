@@ -13,6 +13,8 @@ class_name Gun_Part_DAHammer extends Gun_Part_Rotateable
 
 ##Rads^-1. Minimum velocity to strike, and trigger.
 @export var VELOCITY_THRESHOLD:float = 0.4
+## IF TRUE, cannot be manipulated past cock unless triggered to release.
+@export var LOCK_IN_COCK:bool = false;
 
 
 var is_cocked:bool = false;
@@ -24,9 +26,20 @@ func _ready():
 	super._ready();
 
 func release():
-	is_cocked = false;
-	MIN_ANGLE = MIN_ANGLE_RESET;
+	if(is_cocked):
+		MIN_ANGLE = MIN_ANGLE_RESET
+		is_cocked = false;
+	
 
+func enable_focus():
+	super.enable_focus()
+	if(!LOCK_IN_COCK): # limit @ cock when held
+		MIN_ANGLE = MIN_ANGLE_RESET;
+
+func disable_focus():
+	super.disable_focus()
+	if(is_cocked):
+		MIN_ANGLE = COCKED_ANGLE
 
 
 func hit_min_angle(speed:float) -> void:
@@ -34,6 +47,8 @@ func hit_min_angle(speed:float) -> void:
 		#print(current_angle)
 		if(TRIGGER != null):
 			TRIGGER.trigger();
+		else:
+			print("bang!")
 func hit_max_angle(_speed:float) -> void:
 	pass
 
@@ -45,6 +60,12 @@ func _process(delta:float) -> void:
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
 	
-	if(!is_cocked and current_angle > COCKED_ANGLE):
-		is_cocked = true;
-		MIN_ANGLE = COCKED_ANGLE;
+	if(is_focused):
+		if(current_angle >= COCKED_ANGLE):
+			is_cocked = true;
+			if(LOCK_IN_COCK):
+				MIN_ANGLE = COCKED_ANGLE
+		else:
+			is_cocked = false;
+		#if(LOCK_IN_COCK):
+		#	MIN_ANGLE = COCKED_ANGLE;

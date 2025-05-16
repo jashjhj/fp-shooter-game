@@ -145,7 +145,6 @@ func _physics_process(delta:float) -> void:
 		current_angle += current_angular_velocity
 		
 		if(current_angle <= MIN_ANGLE and current_angular_velocity < 0): # if JUST hit the wall
-			print(current_angular_velocity)
 			current_angle = MIN_ANGLE;
 			
 			hit_min_angle(current_angular_velocity)
@@ -153,7 +152,6 @@ func _physics_process(delta:float) -> void:
 			current_angular_velocity *= -ELASTICITY_TOP;
 		
 		if(current_angle >= MAX_ANGLE and current_angular_velocity > 0): # if JUST hit the wall
-			print(current_angular_velocity)
 			current_angle = MIN_ANGLE;
 			
 			hit_max_angle(current_angular_velocity)

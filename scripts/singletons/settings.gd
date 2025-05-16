@@ -1,6 +1,6 @@
 extends Node
 
-var MouseSensitivity := Vector2(0.0075, 0.0075);
+var MouseSensitivity := Vector2(0.005, 0.005);
 
 var MouseAcceleration := Vector2(0.33, 0.33);
 
