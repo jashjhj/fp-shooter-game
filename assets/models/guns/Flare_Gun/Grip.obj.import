@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5t7rn8skv3gl"
+path="res://.godot/imported/Grip.obj-a9e7770bac81369bfe78392a16e95676.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Grip.obj-a9e7770bac81369bfe78392a16e95676.mesh"]
+
+source_file="res://assets/models/guns/Flare_Gun/Grip.obj"
+dest_files=["res://.godot/imported/Grip.obj-a9e7770bac81369bfe78392a16e95676.mesh", "res://.godot/imported/Grip.obj-a9e7770bac81369bfe78392a16e95676.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://diui1vqmyxnjp"]
+
+[ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_rxssa"]
+[ext_resource type="ArrayMesh" uid="uid://sjdemqvuwe75" path="res://assets/models/guns/Flare_Gun/Reciever.obj" id="2_fbj6v"]
+[ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="2_wbnyp"]
+[ext_resource type="ArrayMesh" uid="uid://b5t7rn8skv3gl" path="res://assets/models/guns/Flare_Gun/Grip.obj" id="3_wbnyp"]
+[ext_resource type="Script" uid="uid://cspvfnih4rfcf" path="res://gameobjects/guns/parts/elements/Gun_Part_SAHammer.gd" id="4_0cm1b"]
+[ext_resource type="Script" uid="uid://ddvk46wqlsnn4" path="res://gameobjects/guns/parts/Gun_Part_Listener.gd" id="5_nq1xb"]
+[ext_resource type="ArrayMesh" uid="uid://clrl1m3vy0iys" path="res://assets/models/guns/Flare_Gun/Hammer.obj" id="6_h5mg1"]
+[ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Rotateable.gd" id="7_pfsts"]
+[ext_resource type="ArrayMesh" uid="uid://b47ll0ectwnc" path="res://assets/models/guns/Flare_Gun/Barrel.obj" id="8_t570b"]
+
+[sub_resource type="Resource" id="Resource_0cm1b"]
+script = ExtResource("2_wbnyp")
+speed = 300
+drag = 0.1
+gravity = 9.81
+mass = 0.005
+lifetime = 2000
+metadata/_custom_type_script = "uid://cuj1evxe65gdy"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3caqd"]
+size = Vector3(0.00426758, 0.02, 0.0198804)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_drcqq"]
+size = Vector3(0.02, 0.02, 0.07)
+
+[node name="FlareGun" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION")]
+script = ExtResource("1_rxssa")
+trigger_functions = [NodePath("Model/Hammer/Release_Hammer")]
+bullet_data = SubResource("Resource_0cm1b")
+GUN_MODEL = NodePath("Model")
+INSPECT_POSITION = NodePath("Inspect_Pos")
+metadata/_custom_type_script = "uid://7yjt2q14eqdj"
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = ExtResource("2_fbj6v")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+mesh = ExtResource("3_wbnyp")
+
+[node name="Hammer" type="Node3D" parent="Model" node_paths=PackedStringArray("RELEASE_LISTENER", "VISUAL_HAMMER", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0352166, 0.0213647)
+script = ExtResource("4_0cm1b")
+RELEASE_LISTENER = NodePath("Release_Hammer")
+COCKED_ANGLE = 0.523599
+VISUAL_HAMMER = NodePath("Moving_Parts")
+MAX_ANGLE = 0.698132
+SPRING_FORCE = 10.0
+BEGIN_INTERACT_COLLIDER = NodePath("Moving_Parts/Area3D")
+metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
+
+[node name="Release_Hammer" type="Node" parent="Model/Hammer"]
+script = ExtResource("5_nq1xb")
+metadata/_custom_type_script = "uid://ddvk46wqlsnn4"
+
+[node name="Moving_Parts" type="Node3D" parent="Model/Hammer"]
+
+[node name="Area3D" type="Area3D" parent="Model/Hammer/Moving_Parts"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Hammer/Moving_Parts/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000307617, 0.0109807, -0.00348639)
+shape = SubResource("BoxShape3D_3caqd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Hammer/Moving_Parts"]
+mesh = ExtResource("6_h5mg1")
+skeleton = NodePath("../../..")
+
+[node name="Barrel" type="Node3D" parent="Model" node_paths=PackedStringArray("VISUAL_HAMMER", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0337331, 0.0746421)
+script = ExtResource("7_pfsts")
+VISUAL_HAMMER = NodePath("Moving_Parts")
+MIN_ANGLE = -0.523599
+MAX_ANGLE = 0.0
+BEGIN_INTERACT_COLLIDER = NodePath("Moving_Parts/Area3D")
+metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
+
+[node name="Moving_Parts" type="Node3D" parent="Model/Barrel"]
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/Barrel/Moving_Parts"]
+mesh = ExtResource("8_t570b")
+skeleton = NodePath("../../..")
+
+[node name="Area3D" type="Area3D" parent="Model/Barrel/Moving_Parts"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0145933, -0.0110023)
+shape = SubResource("BoxShape3D_drcqq")
+
+[node name="Inspect_Pos" type="Node3D" parent="."]
+transform = Transform3D(0.0735515, 0, 0.997291, 0, 1, 0, -0.997291, 0, 0.0735515, 0, 0, 0)

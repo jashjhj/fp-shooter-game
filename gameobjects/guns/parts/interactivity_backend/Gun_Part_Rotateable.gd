@@ -70,7 +70,7 @@ func disable_focus():
 
 @export var VISUAL_HAMMER:Node3D;
 
-@export_range(-360, 360, 1.0, "radians_as_degrees") var MIN_ANGLE = 0;
+@export_range(-360, 360, 1.0, "radians_as_degrees") var MIN_ANGLE = 0.0;
 @export_range(-360, 360, 1.0, "radians_as_degrees") var MAX_ANGLE = 2*PI/3;
 
 ##Starting angle
@@ -98,6 +98,8 @@ var current_angular_velocity:float;
 func _ready2():
 	if(FOCUS_RESISTANCE_CURVE == null):
 		push_error("No Resistance Curve set.")
+		FOCUS_RESISTANCE_CURVE = Curve.new()
+		FOCUS_RESISTANCE_CURVE.add_point(Vector2(0, 0.1));
 	elif(FOCUS_RESISTANCE_CURVE.point_count <= 0):
 		push_warning("No points set on Resistance Curve.")
 		FOCUS_RESISTANCE_CURVE.add_point(Vector2(0, 0.1));
@@ -117,7 +119,7 @@ func _physics_process(delta:float) -> void:
 		current_angle += follow_delta
 		
 		
-		current_angle = max(min(current_angle, MAX_ANGLE), 0);
+		current_angle = max(min(current_angle, MAX_ANGLE), MIN_ANGLE);
 		
 		
 	else:
@@ -161,8 +163,8 @@ func _physics_process(delta:float) -> void:
 
 
 ##Function is called when the mechanism hits the {angle==zero} position
-func hit_min_angle(speed:float) -> void:
+func hit_min_angle(_speed:float) -> void:
 	pass
 ##Function is called when the mechanism hits the {angle==MAX} position
-func hit_max_angle(speed:float) -> void:
+func hit_max_angle(_speed:float) -> void:
 	pass

@@ -17,6 +17,9 @@ var is_mouse_focused = true;
 @onready var TORSO = $Torso
 @onready var CAMERA = $Torso/Head/Camera3D
 
+@export var GUN:Gun;
+
+
 var CAMERA_CAPTURED:bool = false;
 
 func _ready():
@@ -44,14 +47,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if(is_mouse_focused == true):
 		if event.is_action_pressed("interact_0"): # Left click
-			$Torso/Head/RevolverDev.trigger.emit();
+			GUN.trigger.emit();
 	
 	if event.is_action_pressed("inspect"):
-		$Torso/Head/RevolverDev.start_inspect();
+		GUN.start_inspect();
 		is_mouse_focused = false;
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if event.is_action_released("inspect"):
-		$Torso/Head/RevolverDev.end_inspect();
+		GUN.end_inspect();
 		is_mouse_focused = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 	
