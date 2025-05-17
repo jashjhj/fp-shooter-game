@@ -1,7 +1,7 @@
 class_name Gun_Part_Rotateable extends Gun_Part_Interactive
 
 
-@export var ROTATION_AXIS:Vector3 = Vector3.LEFT;
+@export var ROTATION_AXIS:Vector3 = Vector3.RIGHT;
 
 
 
@@ -21,7 +21,7 @@ func _ready():
 	super._ready();
 	ROTATION_AXIS = ROTATION_AXIS.normalized()
 	INTERACT_PLANE.position = Vector3(0,0,0);
-	INTERACT_PLANE.look_at(global_position + global_transform.basis * ROTATION_AXIS) # looks perpendicularly to the rotation axis.
+	set_interact_plane_normal(ROTATION_AXIS) # looks perpendicularly to the rotation axis.
 	
 	#Extras
 	
@@ -81,9 +81,10 @@ func disable_focus():
 @export var SPRING_FORCE:float = 0.0;
 ##Gravity force, arbitrary units. Dependent on angle player is lookign at.
 @export var GRAVITY_FORCE:float = 0.0;
+var is_affected_by_gravity:bool = false;
 
 ## 0 -> 1 = 0 -> MAX_ANGLE
-@export var FOCUS_RESISTANCE_CURVE:Curve;
+@export var FOCUS_RESISTANCE_CURVE:Curve = Curve.new();
 
 @export var ELASTICITY_TOP:float = 0.2;
 @export var ELASTICITY_BOTTOM:float = 0.1;
@@ -110,6 +111,7 @@ func _process2():
 		VISUAL_HAMMER.rotate_object_local(ROTATION_AXIS, current_angle)
 
 
+var forces:float = 0; # Outside of loop so can be altered by inherited functions
 func _physics_process(delta:float) -> void:
 	
 	if(is_focused): #Manual controls
@@ -123,8 +125,8 @@ func _physics_process(delta:float) -> void:
 		
 		
 	else:
-		var forces:float = -SPRING_FORCE
-		forces += GRAVITY_FORCE * cos(acos(global_basis.y.dot(Vector3.UP)) + current_angle); # gravity calculation
+		forces = -SPRING_FORCE
+		if(is_affected_by_gravity): forces += GRAVITY_FORCE * cos(acos(global_basis.y.dot(Vector3.UP)) + current_angle); # gravity calculation
 		
 		#Initial checks:
 		if(current_angle <= MIN_ANGLE and current_angular_velocity >= 0): # Previously...

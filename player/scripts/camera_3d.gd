@@ -7,6 +7,10 @@ extends Camera3D
 var has_been_updated:bool = false;
 var current_normal:Vector3;
 
+
+func _ready() -> void:
+	RAY.top_level = true;
+
 func _process(_delta: float):
 	has_been_updated = false;
 

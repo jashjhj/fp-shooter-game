@@ -2,6 +2,10 @@ class_name Gun_Part extends Node3D
 
 #@export var TRIGGERS:Array[Signal];
 
+##Set to parent gun object
+var PARENT_GUN:Gun;
+
+
 ##Float that can be set extrenally. When set, triggers `settable_float_set(with the value)`.
 var SETTABLE_FLOAT:float = 0:
 	set(value): settable_float_set(value)

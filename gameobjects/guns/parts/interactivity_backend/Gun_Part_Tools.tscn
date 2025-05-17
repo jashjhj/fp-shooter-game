@@ -12,7 +12,7 @@ albedo_color = Color(0, 1, 1, 0.278431)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_m7242"]
 material = SubResource("StandardMaterial3D_vwlgp")
-size = Vector2(1, 1)
+size = Vector2(0.4, 0.4)
 
 [node name="Gun_Part_Tools" type="Node3D"]
 script = ExtResource("1_tvcft")

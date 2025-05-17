@@ -5,12 +5,22 @@ class_name Gun_Part_Interactive extends Gun_Part
 var INTERACT_PLANE:Area3D;
 
 
-const BEGIN_INTERACT_COLLISION_LAYER := 65536
-const PLANE_COLLISION_LAYER := 131072
+const BEGIN_INTERACT_COLLISION_LAYER := 65536 # 2^16
+const PLANE_COLLISION_LAYER := 131072 # 2^17
 
 var is_interactive:bool = false; # Interactivity - e.g. when playeris currently 'Inspecting'
 var is_focused:bool = false; # Is currently being held/clicked on
-
+var is_focusable:bool = true:
+	set(value):
+		is_focusable = value;
+		if(!is_focusable and is_focused): # cancel focus when this is toggled.
+			_disable_focus()
+		
+		if(is_focusable): # makes it unregisterable
+			BEGIN_INTERACT_COLLIDER.collision_layer = BEGIN_INTERACT_COLLISION_LAYER;
+		else:
+			BEGIN_INTERACT_COLLIDER.collision_layer = 0;
+		
 
 #Inherited functions. called when focused and unfocused
 func enable_focus():
@@ -66,6 +76,8 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 
 func _enable_focus():
 	if(is_focused): return # If already focused, cancel
+	if(!is_focusable): return
+	
 	is_focused = true;
 	enable_plane_collider()
 	
@@ -88,8 +100,11 @@ func get_mouse_plane_position() -> Vector3:
 
 
 func _process(_delta: float) -> void:
-	#super._process(delta);
+	#super._process(delta); No process function in GUN_PART
 
 	if(is_focused):
 		if(!is_interactive):_disable_focus() # If no longer interactive
 	
+
+func set_interact_plane_normal(n:Vector3) -> void:
+	INTERACT_PLANE.look_at(INTERACT_PLANE.global_position + global_transform.basis * n)

@@ -23,13 +23,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 script = ExtResource("2_g1dw6")
 
 [node name="RayCast3D" type="RayCast3D" parent="Torso/Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-top_level = true
+visible = false
 collision_mask = 0
 collide_with_areas = true
 
 [node name="FlareGun" parent="Torso/Head" instance=ExtResource("3_g1dw6")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0532616, -0.0871637, -0.14252)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0532616, -0.0871637, -0.14252)
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
