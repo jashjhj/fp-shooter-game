@@ -80,7 +80,7 @@ func _enable_focus():
 	
 	is_focused = true;
 	enable_plane_collider()
-	
+	#Do not call scripts that may interfere with further rays in the same moment - e.g. Reparenting, or changing the area collider
 	enable_focus() # inherited function
 
 func _disable_focus():

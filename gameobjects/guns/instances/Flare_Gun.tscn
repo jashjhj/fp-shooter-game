@@ -1,16 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://diui1vqmyxnjp"]
+[gd_scene load_steps=21 format=3 uid="uid://diui1vqmyxnjp"]
 
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_rxssa"]
 [ext_resource type="ArrayMesh" uid="uid://sjdemqvuwe75" path="res://assets/models/guns/Flare_Gun/Reciever.obj" id="2_fbj6v"]
 [ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="2_wbnyp"]
 [ext_resource type="ArrayMesh" uid="uid://b5t7rn8skv3gl" path="res://assets/models/guns/Flare_Gun/Grip.obj" id="3_wbnyp"]
-[ext_resource type="Script" uid="uid://cspvfnih4rfcf" path="res://gameobjects/guns/parts/elements/Gun_Part_SAHammer.gd" id="4_0cm1b"]
+[ext_resource type="Script" uid="uid://cspvfnih4rfcf" path="res://gameobjects/guns/parts/elements/Gun_Part_Hammer_Single.gd" id="4_0cm1b"]
 [ext_resource type="Script" uid="uid://ddvk46wqlsnn4" path="res://gameobjects/guns/parts/Gun_Part_Listener.gd" id="5_nq1xb"]
 [ext_resource type="ArrayMesh" uid="uid://clrl1m3vy0iys" path="res://assets/models/guns/Flare_Gun/Hammer.obj" id="6_h5mg1"]
 [ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Rotateable.gd" id="7_pfsts"]
 [ext_resource type="ArrayMesh" uid="uid://b47ll0ectwnc" path="res://assets/models/guns/Flare_Gun/Barrel.obj" id="8_t570b"]
-[ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Insertable.gd" id="10_0cm1b"]
+[ext_resource type="Script" uid="uid://itw3hsoocbo4" path="res://gameobjects/guns/parts/elements/Gun_Part_Chamber_Manual.gd" id="10_pfsts"]
+[ext_resource type="Script" uid="uid://dod00lbrjpcyo" path="res://gameobjects/guns/parts/interactivity_backend/action_nodes/Gun_Action_Rotatable_Impose_Limit.gd" id="11_h5mg1"]
 [ext_resource type="PackedScene" uid="uid://biiynoqsxedi6" path="res://gameobjects/guns/parts/insertable/rounds/12ga_Shot.tscn" id="11_nq1xb"]
+[ext_resource type="Script" uid="uid://bra8dox2utiy" path="res://gameobjects/guns/parts/interactivity_backend/action_nodes/Gun_Action_Insertable_Lock.gd" id="11_pfsts"]
+[ext_resource type="Script" uid="uid://4id254ocdthx" path="res://gameobjects/guns/parts/interactivity_backend/action_nodes/Gun_Action_Chamber_Fireable.gd" id="12_t570b"]
 
 [sub_resource type="Resource" id="Resource_0cm1b"]
 script = ExtResource("2_wbnyp")
@@ -18,20 +21,22 @@ speed = 300
 drag = 0.1
 gravity = 9.81
 mass = 0.005
+base_inaccuracy = 0.05
+amount = 1
 lifetime = 2000
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3caqd"]
-size = Vector3(0.00585938, 0.02, 0.0198804)
+size = Vector3(0.00500488, 0.02, 0.0256873)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_drcqq"]
-size = Vector3(0.02, 0.0210864, 0.0890417)
+size = Vector3(0.02, 0.0210864, 0.0870013)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h5mg1"]
 size = Vector3(0.00585938, 0.0141602, 0.0903931)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nq1xb"]
-size = Vector3(0.00390625, 0.0157446, 0.0414716)
+size = Vector3(0.00390625, 0.0351563, 0.0248373)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t570b"]
 size = Vector3(0.0166016, 0.0178223, 0.00209863)
@@ -46,16 +51,17 @@ metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 
 [node name="Model" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+[node name="Reciever" type="MeshInstance3D" parent="Model"]
 mesh = ExtResource("2_fbj6v")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+[node name="Grip" type="MeshInstance3D" parent="Model"]
 mesh = ExtResource("3_wbnyp")
 
-[node name="Hammer" type="Node3D" parent="Model" node_paths=PackedStringArray("RELEASE_LISTENER", "VISUAL_HAMMER", "BEGIN_INTERACT_COLLIDER")]
+[node name="Hammer" type="Node3D" parent="Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "VISUAL_HAMMER", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0505769, -0.0299239)
 script = ExtResource("4_0cm1b")
 RELEASE_LISTENER = NodePath("Release_Hammer")
+TRIGGER = NodePath("../Barrel/Moving_Parts/Chamber/Hammer_Hit")
 COCKED_ANGLE = 0.523599
 VISUAL_HAMMER = NodePath("Moving_Parts")
 MAX_ANGLE = 0.698132
@@ -72,63 +78,88 @@ metadata/_custom_type_script = "uid://ddvk46wqlsnn4"
 [node name="Area3D" type="Area3D" parent="Model/Hammer/Moving_Parts"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Hammer/Moving_Parts/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000307617, 0.0109807, -0.00348639)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000119629, 0.0109807, -0.000582956)
 shape = SubResource("BoxShape3D_3caqd")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Hammer/Moving_Parts"]
 mesh = ExtResource("6_h5mg1")
 skeleton = NodePath("../../..")
 
-[node name="Barrel" type="Node3D" parent="Model" node_paths=PackedStringArray("VISUAL_HAMMER", "BEGIN_INTERACT_COLLIDER")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0470401, -0.108572)
+[node name="Barrel" type="Node3D" parent="Model" node_paths=PackedStringArray("VISUAL_HAMMER", "TOGGLE_ACTIONS", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0486204, -0.107582)
 script = ExtResource("7_pfsts")
 VISUAL_HAMMER = NodePath("Moving_Parts")
 MIN_ANGLE = -0.523599
 MAX_ANGLE = 0.0
+TOGGLE_ACTIONS = [NodePath("Moving_Parts/Chamber/Gun_Action_Insertable_Lock"), NodePath("Moving_Parts/Chamber/Gun_Action_Chamber_Fireable")]
+WHEN_WITHIN_LIMITS = Array[Vector2]([Vector2(-13, 0), Vector2(-2, 0)])
 BEGIN_INTERACT_COLLIDER = NodePath("Moving_Parts/BarrelArea")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 
 [node name="Moving_Parts" type="Node3D" parent="Model/Barrel"]
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/Barrel/Moving_Parts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0012681, 0.00139984)
 mesh = ExtResource("8_t570b")
 skeleton = NodePath("../../..")
 
 [node name="BarrelArea" type="Area3D" parent="Model/Barrel/Moving_Parts"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/BarrelArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0192419, 0.0214142)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0192419, 0.020394)
 shape = SubResource("BoxShape3D_drcqq")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/BarrelArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00219727, 0.021759)
 shape = SubResource("BoxShape3D_h5mg1")
 
-[node name="Gun_Part_Insertable" type="Node3D" parent="Model/Barrel/Moving_Parts" node_paths=PackedStringArray("INSERTABLE_OBJECT", "INSERTION_ENTRY_AREA", "BEGIN_INTERACT_COLLIDER")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017959, 0.0662793)
-script = ExtResource("10_0cm1b")
-INSERTABLE_OBJECT = NodePath("../../../../12GaShot")
+[node name="Chamber" type="Node3D" parent="Model/Barrel/Moving_Parts" node_paths=PackedStringArray("FIRE_TRIGGER", "INSERTABLE_OBJECT", "INSERTION_ENTRY_AREA", "IMPOSED_LIMITS_ROTATEABLES", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, -0.000632217, -0.000703904, 0.000631433, 0.999999, -0.00114288, 0.000704608, 0.00114245, 0.999999, 0, 0.0165175, 0.0667646)
+script = ExtResource("10_pfsts")
+FIRE_TRIGGER = NodePath("Hammer_Hit")
+INSERTABLE_OBJECT = NodePath("../../../../12Ga_Shot")
 INSERTION_DIRECTION = Vector3(0, 0, -1)
-INSERTION_LENGTH = 0.056
+INSERTION_LENGTH = 0.057
 INSERTION_ENTRY_AREA = NodePath("InsertionArea")
+IMPOSED_LIMITS_ROTATEABLES = [NodePath("../../Gun_Action_Rotateable_Impose_Limit")]
+WHEN_WITHIN_LIMITS = Array[Vector2]([Vector2(0, 0.055)])
 BEGIN_INTERACT_COLLIDER = NodePath("GrabFromArea")
 metadata/_custom_type_script = "uid://dymfggnfgsan6"
 
-[node name="InsertionArea" type="Area3D" parent="Model/Barrel/Moving_Parts/Gun_Part_Insertable"]
+[node name="InsertionArea" type="Area3D" parent="Model/Barrel/Moving_Parts/Chamber"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/Gun_Part_Insertable/InsertionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.22571e-05, 0.0210696)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/Chamber/InsertionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.22645e-05, 0.0112225)
 shape = SubResource("BoxShape3D_nq1xb")
 
-[node name="GrabFromArea" type="Area3D" parent="Model/Barrel/Moving_Parts/Gun_Part_Insertable"]
+[node name="GrabFromArea" type="Area3D" parent="Model/Barrel/Moving_Parts/Chamber"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/Gun_Part_Insertable/GrabFromArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/Chamber/GrabFromArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.93154e-05)
 shape = SubResource("BoxShape3D_t570b")
 
-[node name="Inspect_Pos" type="Node3D" parent="."]
-transform = Transform3D(0.370492, 0, 0.928835, 0, 1, 0, -0.928835, 0, 0.370492, -0.00559456, 0, 0.00514434)
+[node name="Gun_Action_Insertable_Lock" type="Node" parent="Model/Barrel/Moving_Parts/Chamber" node_paths=PackedStringArray("INSERTABLE")]
+script = ExtResource("11_pfsts")
+INSERTABLE = NodePath("..")
+metadata/_custom_type_script = "uid://bra8dox2utiy"
 
-[node name="12GaShot" parent="." instance=ExtResource("11_nq1xb")]
+[node name="Hammer_Hit" type="Node" parent="Model/Barrel/Moving_Parts/Chamber"]
+script = ExtResource("5_nq1xb")
+metadata/_custom_type_script = "uid://ddvk46wqlsnn4"
+
+[node name="Gun_Action_Chamber_Fireable" type="Node" parent="Model/Barrel/Moving_Parts/Chamber" node_paths=PackedStringArray("INSERTABLE")]
+script = ExtResource("12_t570b")
+INSERTABLE = NodePath("..")
+metadata/_custom_type_script = "uid://4id254ocdthx"
+
+[node name="Gun_Action_Rotateable_Impose_Limit" type="Node" parent="Model/Barrel" node_paths=PackedStringArray("ROTATEABLE")]
+script = ExtResource("11_h5mg1")
+ROTATEABLE = NodePath("..")
+LIMIT = -0.305433
+EDGE = 1
+metadata/_custom_type_script = "uid://dod00lbrjpcyo"
+
+[node name="Inspect_Pos" type="Node3D" parent="."]
+transform = Transform3D(0.534249, 0, 0.845326, 0, 1, 0, -0.845326, 0, 0.534249, -0.0314448, 0, -0.0100336)
+
+[node name="12Ga_Shot" parent="." instance=ExtResource("11_nq1xb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161705, 0.0637344, 0)

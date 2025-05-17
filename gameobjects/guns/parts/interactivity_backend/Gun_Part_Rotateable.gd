@@ -93,6 +93,9 @@ var is_affected_by_gravity:bool = false;
 ##Maximum mouse torque. Beyond this point, will be capped as if.
 @export var MAX_MOUSE_TORQUE_DIST:float = 0.1;
 
+@onready var functional_min:float = MIN_ANGLE;
+@onready var functional_max:float = MAX_ANGLE;
+
 
 var current_angular_velocity:float;
 
@@ -109,6 +112,8 @@ func _process2():
 	if(VISUAL_HAMMER != null):
 		VISUAL_HAMMER.transform.basis = Basis.IDENTITY
 		VISUAL_HAMMER.rotate_object_local(ROTATION_AXIS, current_angle)
+	
+	optional_extras()
 
 
 var forces:float = 0; # Outside of loop so can be altered by inherited functions
@@ -117,11 +122,11 @@ func _physics_process(delta:float) -> void:
 	if(is_focused): #Manual controls
 		current_angular_velocity = 0; # make it grabbed
 		#Glorified lerp, following curve to add resistance
-		var follow_delta = (angle_goal - current_angle) * min(FOCUS_RESISTANCE_CURVE.sample(current_angle/MAX_ANGLE), 0.8)
+		var follow_delta = (angle_goal - current_angle) * min(FOCUS_RESISTANCE_CURVE.sample(current_angle/functional_max), 0.8)
 		current_angle += follow_delta
 		
 		
-		current_angle = max(min(current_angle, MAX_ANGLE), MIN_ANGLE);
+		current_angle = max(min(current_angle, functional_max), functional_min);
 		
 		
 	else:
@@ -129,14 +134,14 @@ func _physics_process(delta:float) -> void:
 		if(is_affected_by_gravity): forces += GRAVITY_FORCE * cos(acos(global_basis.y.dot(Vector3.UP)) + current_angle); # gravity calculation
 		
 		#Initial checks:
-		if(current_angle <= MIN_ANGLE and current_angular_velocity >= 0): # Previously...
-			current_angle = MIN_ANGLE
+		if(current_angle <= functional_min and current_angular_velocity >= 0): # Previously...
+			current_angle = functional_min
 			current_angular_velocity = 0;
 			if(forces > 0): # if forces will push it away ,
 				current_angular_velocity += forces*delta;
 				
-		elif(current_angle >= MAX_ANGLE and current_angular_velocity <= 0):
-			current_angle = MAX_ANGLE
+		elif(current_angle >= functional_max and current_angular_velocity <= 0):
+			current_angle = functional_max
 			current_angular_velocity = 0;
 			if(forces < 0): # if forces will push it away
 				current_angular_velocity += forces*delta;
@@ -146,15 +151,15 @@ func _physics_process(delta:float) -> void:
 		
 		current_angle += current_angular_velocity
 		
-		if(current_angle <= MIN_ANGLE and current_angular_velocity < 0): # if JUST hit the wall
-			current_angle = MIN_ANGLE;
+		if(current_angle <= functional_min and current_angular_velocity < 0): # if JUST hit the wall
+			current_angle = functional_min;
 			
 			hit_min_angle(current_angular_velocity)
 			
 			current_angular_velocity *= -ELASTICITY_TOP;
 		
-		if(current_angle >= MAX_ANGLE and current_angular_velocity > 0): # if JUST hit the wall
-			current_angle = MIN_ANGLE;
+		if(current_angle >= functional_max and current_angular_velocity > 0): # if JUST hit the wall
+			current_angle = functional_max;
 			
 			hit_max_angle(current_angular_velocity)
 			
@@ -168,3 +173,22 @@ func hit_min_angle(_speed:float) -> void:
 ##Function is called when the mechanism hits the {angle==MAX} position
 func hit_max_angle(_speed:float) -> void:
 	pass
+
+
+
+@export_group("Optional Extras")
+@export var TOGGLE_ACTIONS:Array[Gun_Action_Toggle];
+##In degrees
+@export var WHEN_WITHIN_LIMITS: Array[Vector2];
+
+func optional_extras():
+	var i = 0;
+	for limits_set in WHEN_WITHIN_LIMITS:
+		if(TOGGLE_ACTIONS[i] == null):
+			push_warning("Limits set, but no correlating limits object")
+		else:
+			if current_angle >= deg_to_rad(limits_set.x) and current_angle <= deg_to_rad(limits_set.y):
+				TOGGLE_ACTIONS[i].ACTIVE = true;
+			else:
+				TOGGLE_ACTIONS[i].ACTIVE = false;
+		i += 1;

@@ -24,7 +24,9 @@ script = ExtResource("2_g1dw6")
 
 [node name="RayCast3D" type="RayCast3D" parent="Torso/Head/Camera3D"]
 visible = false
+exclude_parent = false
 collision_mask = 0
+hit_back_faces = false
 collide_with_areas = true
 
 [node name="FlareGun" parent="Torso/Head" instance=ExtResource("3_g1dw6")]

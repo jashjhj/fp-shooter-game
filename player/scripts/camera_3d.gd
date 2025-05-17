@@ -30,3 +30,12 @@ func get_mouse_ray(length:int = 10, mask:int = -1) -> RayCast3D:
 	#print("to: " + str(RAY.global_position + RAY.target_position));
 	#print(RAY.get_collider())
 	return RAY
+
+func get_ray_from_camera_through(pos:Vector3, length:int = 10, mask:int = -1) -> RayCast3D:
+	has_been_updated = false; # for other ray script.
+	RAY.global_position = global_position;
+	RAY.target_position = (pos - global_position).normalized() * length;
+	RAY.collision_mask = mask;
+	
+	RAY.force_raycast_update();
+	return RAY;
