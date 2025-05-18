@@ -5,21 +5,18 @@ class_name Gun_Action_Rotateable_Impose_Limit extends Gun_Action_Toggle
 
 @export_enum("MIN", "MAX") var EDGE:int = 0
 
+func _ready():
+	super._ready()
+	check_node_is_set(ROTATEABLE)
 
 func activate():
-	if(ROTATEABLE == null):
-		push_error("Rotateable not set.")
+	if(EDGE == 0):
+		ROTATEABLE.functional_min = LIMIT;
 	else:
-		if(EDGE == 0):
-			ROTATEABLE.functional_min = LIMIT;
-		else:
-			ROTATEABLE.functional_max = LIMIT;
+		ROTATEABLE.functional_max = LIMIT;
 
 func deactivate():
-	if(ROTATEABLE == null):
-		push_error("Rotateable not set.")
+	if(EDGE == 0):
+		ROTATEABLE.functional_min = ROTATEABLE.MIN_ANGLE;
 	else:
-		if(EDGE == 0):
-			ROTATEABLE.functional_min = ROTATEABLE.MIN_ANGLE;
-		else:
-			ROTATEABLE.functional_max = ROTATEABLE.MAX_ANGLE;
+		ROTATEABLE.functional_max = ROTATEABLE.MAX_ANGLE;

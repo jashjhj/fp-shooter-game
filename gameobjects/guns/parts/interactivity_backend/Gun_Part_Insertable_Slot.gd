@@ -15,6 +15,17 @@ class_name Gun_Part_Insertable_Slot extends Gun_Part
 @export_group("Flags")
 @export_flags("1","2","4","8","16","32","64") var INSERTION_ACCEPTANCE:int = 1;
 
+var is_locked:bool:
+	set(value):
+		is_locked = value;
+		if(is_locked): # Locks/unlocks the slot.
+			INSERTION_ENTRY_AREA.process_mode = Node.PROCESS_MODE_DISABLED
+			if(housed_insertable != null):
+				housed_insertable.is_focusable = false;
+		else:
+			INSERTION_ENTRY_AREA.process_mode = Node.PROCESS_MODE_INHERIT
+			if(housed_insertable != null):
+				housed_insertable.is_focusable = true;
 
 var is_housed:bool = false;
 var insertion:float = 0;
@@ -30,27 +41,30 @@ func _ready() -> void:
 	INSERTION_ENTRY_AREA.collision_layer = INSERTION_LAYER;
 	
 
+func _process(delta: float) -> void:
+	#super._process(delta);
+	optional_extras()
 
 
+## OPTIONAL EXTRAS
 
-### OPTIONAL EXTRAS
-#
-#@export_group("Optional Extras")
-#@export var IMPOSED_LIMITS_ROTATEABLES:Array[Gun_Action_Rotateable_Impose_Limit];
-#@export var WHEN_WITHIN_LIMITS: Array[Vector2];
-#
-#func optional_extras():
-	#var i = 0;
-	#for limits_set in WHEN_WITHIN_LIMITS:
-		#if(len(IMPOSED_LIMITS_ROTATEABLES) <= i):
-			#push_warning("Limits set, but no correlating limits object")
-			#return
-		#elif(IMPOSED_LIMITS_ROTATEABLES[i] == null):
-			#push_warning("Limits set, but no correlating limits object")
-			#return
-		#else:
-			#if insertion >= limits_set.x and insertion <= limits_set.y:
-				#IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = true;
-			#else:
-				#IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = false;
-		#i += 1;
+@export_group("Optional Extras")
+@export var IMPOSED_LIMITS_ROTATEABLES:Array[Gun_Action_Rotateable_Impose_Limit];
+@export var WHEN_WITHIN_LIMITS: Array[Vector2];
+
+
+func optional_extras():
+	var i = 0;
+	for limits_set in WHEN_WITHIN_LIMITS:
+		if(len(IMPOSED_LIMITS_ROTATEABLES) <= i):
+			push_warning("Limits set, but no correlating limits object")
+			return
+		elif(IMPOSED_LIMITS_ROTATEABLES[i] == null):
+			push_warning("Limits set, but no correlating limits object")
+			return
+		else:
+			if insertion > limits_set.x and insertion < limits_set.y:
+				IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = true;
+			else:
+				IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = false;
+		i += 1;

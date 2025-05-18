@@ -63,13 +63,13 @@ func start_inspect():
 	is_inspecting = true;
 	for child in get_all_children(self):
 		if child is Gun_Part_Interactive:
-			child.enable_interactive()
+			child.is_interactive = true;
 
 func end_inspect():
 	is_inspecting = false;
 	for child in get_all_children(self):
 		if child is Gun_Part_Interactive:
-			child.disable_interactive()
+			child.is_interactive = false;
 
 
 ##Recursive get_children

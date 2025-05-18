@@ -74,7 +74,7 @@ var insertion:float = -999;
 func _process(delta:float) -> void:
 	super._process(delta);
 	
-	Debug.point(projected_position.global_position, 0.1); # DEBUG LINE
+	#Debug.point(projected_position.global_position, 0.1); # DEBUG LINE
 	
 	if(is_focused):
 		

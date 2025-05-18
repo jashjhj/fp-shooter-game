@@ -15,9 +15,10 @@ func deactivate():
 	pass
 
 func _ready():
-	if(ACTIVE): activate() # Triggers on startup
+	pass
+	#if(ACTIVE): activate() # Triggers on startup
 
 func check_node_is_set(n:Node):
 	if(n == null):
-		push_error("Insertable not set.")
+		push_error("Node not set.")
 		return
