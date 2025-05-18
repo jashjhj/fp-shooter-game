@@ -30,7 +30,7 @@ var ORIGINAL_PARENT:Node3D;
 ##Is it within a slot?
 var is_housed:bool = false;
 
-var INSERTION_PLANE
+#var INSERTION_PLANE:Area3D
 
 
 
@@ -63,6 +63,7 @@ func setup_planes():
 	set_interact_plane_normal(plane_normal)
 	
 	add_child(insertion_plane_tools)
+	insertion_plane_tools.INTERACT_PLANE.process_mode = PROCESS_MODE_DISABLED
 	assert(insertion_plane_tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Tools.tscn`") # check
 	insertion_plane_tools.INTERACT_PLANE.collision_layer = INSERTION_PLANE_LAYER;
 
@@ -92,7 +93,7 @@ func _process(delta:float) -> void:
 		
 		
 		
-		var nearest_slot:Gun_Part_Insertable_Slot = null;
+		var nearest_slot:Gun_Part_Insertable_Slot = null; # Might be useful? for smoothing thigns out ?
 		for slot in NEARBY_SLOTS:
 			if nearest_slot == null: nearest_slot = slot;
 			elif (slot.global_position - global_position).length() < (nearest_slot.global_position - global_position).length():
@@ -124,8 +125,9 @@ func _process(delta:float) -> void:
 					push_error("Gun_part_Insertable_Slot's Area3D not direct child @ " + str(in_slot_collider.get_parent()))
 					return
 				
-				if(in_slot_collider.get_parent().INSERTION_ACCEPTANCE & INSERTION_ACCEPTANCE != 0): # If there is overlap, meaning can be inserted
-					CURRENT_SLOT = in_slot_collider.get_parent()
+				var new_slot:Gun_Part_Insertable_Slot = in_slot_collider.get_parent()
+				if(new_slot.INSERTION_ACCEPTANCE & INSERTION_ACCEPTANCE != 0 and new_slot.is_housed == false): # If there is overlap, meaning can be inserted, and slot is free
+					CURRENT_SLOT = new_slot
 					
 					
 					#INTERACT_PLANE.reparent(CURRENT_SLOT);

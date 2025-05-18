@@ -153,3 +153,15 @@ script = ExtResource("15_3caqd")
 DEFAULT_DIRECTION = Vector3(0, 0, -1)
 NEARBY_SLOTS = [NodePath("../Model/Barrel/Moving_Parts/Chamber")]
 INSERTION_ACCEPTANCE = 1
+
+[node name="12Ga_Shot2" parent="." node_paths=PackedStringArray("NEARBY_SLOTS") instance=ExtResource("11_nq1xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.109571, 0.0637344, 0)
+script = ExtResource("15_3caqd")
+DEFAULT_DIRECTION = Vector3(0, 0, -1)
+NEARBY_SLOTS = [NodePath("../Model/Barrel/Moving_Parts/Chamber")]
+INSERTION_ACCEPTANCE = 1
+
+[node name="12Ga_Shot3" parent="." instance=ExtResource("11_nq1xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133358, 0.0604644, -0.0438111)
+DEFAULT_DIRECTION = Vector3(0, 0, -1)
+INSERTION_ACCEPTANCE = 1
