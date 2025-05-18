@@ -137,7 +137,7 @@ func _process(delta:float) -> void:
 					
 					#Cosmetics - Near slot
 					if(current_insertion_vector_global != Vector3.ZERO): # Updates on the second frame, so wait.
-						projected_position.look_at(projected_position.global_position + current_insertion_vector_global, current_insertion_vector_global.cross(CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_PLANE_NORMAL));
+						projected_position.look_at(projected_position.global_position + global_basis*current_insertion_vector_global, Vector3.UP);
 						projected_position.rotate(projected_position.basis.x, -PI/2)
 						model_goal.global_position = get_viewport().get_camera_3d().get_ray_from_camera_through(projected_position.global_position, 2, INSERTION_PLANE_LAYER).get_collision_point();
 						model_goal.global_basis = projected_position.basis
