@@ -185,7 +185,7 @@ func optional_extras():
 	var i = 0;
 	for limits_set in WHEN_WITHIN_LIMITS:
 		if(TOGGLE_ACTIONS[i] == null):
-			push_warning("Limits set, but no correlating limits object")
+			push_error("Limits set, but no correlating limits object")
 		else:
 			if current_angle >= deg_to_rad(limits_set.x) and current_angle <= deg_to_rad(limits_set.y):
 				TOGGLE_ACTIONS[i].ACTIVE = true;

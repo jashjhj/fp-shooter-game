@@ -7,9 +7,6 @@
 [ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="5_ws1k8"]
 [ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="6_rcm1f"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ws1k8"]
-size = Vector3(0.0136719, 0.0562402, 0.013916)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcm1f"]
 albedo_texture = ExtResource("3_ga23a")
 metallic = 0.6
@@ -38,24 +35,31 @@ trail_material = SubResource("ShaderMaterial_5sp2j")
 lifetime = 2000
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
-[node name="12Ga_Shot" type="Node3D" node_paths=PackedStringArray("BULLET_SOURCE", "GRABBABLE_AREA")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ws1k8"]
+size = Vector3(0.0175781, 0.0562402, 0.0166016)
+
+[node name="12Ga_Shot" type="Node3D" node_paths=PackedStringArray("BULLET_SOURCE", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 script = ExtResource("1_ws1k8")
-BULLET_SOURCE = NodePath("Bullet-source")
-GRABBABLE_AREA = NodePath("Area3D")
+BULLET_SOURCE = NodePath("Model/Bullet-source")
+MODEL = NodePath("Model")
+BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://dinyj7n6bftbt"
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0281201, 0)
-shape = SubResource("BoxShape3D_ws1k8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.028456, 0)
 mesh = ExtResource("2_40wjq")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rcm1f")
 surface_material_override/1 = SubResource("StandardMaterial3D_5sp2j")
 
-[node name="Bullet-source" parent="." instance=ExtResource("4_ga23a")]
+[node name="Bullet-source" parent="Model" instance=ExtResource("4_ga23a")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 bullet_data = SubResource("Resource_rcm1f")
+
+[node name="Area3D" type="Area3D" parent="Model"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0281201, 0)
+shape = SubResource("BoxShape3D_ws1k8")

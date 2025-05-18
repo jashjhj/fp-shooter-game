@@ -36,7 +36,7 @@ size = Vector3(0.02, 0.0210864, 0.0870013)
 size = Vector3(0.00585938, 0.0141602, 0.0903931)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nq1xb"]
-size = Vector3(0.00390625, 0.0351563, 0.108504)
+size = Vector3(0.00390625, 0.0351563, 0.0248373)
 
 [node name="FlareGun" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION")]
 script = ExtResource("1_rxssa")
@@ -109,18 +109,18 @@ shape = SubResource("BoxShape3D_drcqq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00219727, 0.021759)
 shape = SubResource("BoxShape3D_h5mg1")
 
-[node name="Chamber" type="Node3D" parent="Model/Barrel/Moving_Parts" node_paths=PackedStringArray("INSERTION_ENTRY_AREA", "INSERTION_PATH")]
+[node name="Chamber" type="Node3D" parent="Model/Barrel/Moving_Parts" node_paths=PackedStringArray("INSERTION_ENTRY_AREA")]
 transform = Transform3D(1, -0.000632217, -0.000703904, 0.000631433, 0.999999, -0.00114288, 0.000704608, 0.00114245, 0.999999, 0, 0.0165175, 0.0667646)
 script = ExtResource("10_3caqd")
+INSERTION_DIRECTION = Vector3(0, 0, -1)
 INSERTION_LENGTH = 0.057
 INSERTION_ENTRY_AREA = NodePath("InsertionArea")
-INSERTION_PATH = NodePath("InsertionVectorNode")
 metadata/_custom_type_script = "uid://dymfggnfgsan6"
 
 [node name="InsertionArea" type="Area3D" parent="Model/Barrel/Moving_Parts/Chamber"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/Chamber/InsertionArea"]
-transform = Transform3D(0.999995, -4.84789e-09, 3.55067e-09, 6.91784e-11, 0.999995, 1.07102e-08, -1.74623e-10, -4.65661e-10, 0.999995, -1.14596e-10, 6.22794e-05, -0.0306108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.22645e-05, 0.0112225)
 shape = SubResource("BoxShape3D_nq1xb")
 
 [node name="Gun_Action_Insertable_Lock" type="Node" parent="Model/Barrel/Moving_Parts/Chamber" node_paths=PackedStringArray("INSERTABLE")]
@@ -132,9 +132,6 @@ metadata/_custom_type_script = "uid://bra8dox2utiy"
 script = ExtResource("5_nq1xb")
 metadata/_custom_type_script = "uid://ddvk46wqlsnn4"
 
-[node name="InsertionVectorNode" type="Node3D" parent="Model/Barrel/Moving_Parts/Chamber"]
-transform = Transform3D(1, -7.05427e-11, 5.82077e-11, 1.5234e-11, 1, 1.16415e-10, 0, 0, 1, -4.22327e-05, -6.84708e-05, -0.0599364)
-
 [node name="Gun_Action_Rotateable_Impose_Limit" type="Node" parent="Model/Barrel" node_paths=PackedStringArray("ROTATEABLE")]
 script = ExtResource("11_h5mg1")
 ROTATEABLE = NodePath("..")
@@ -143,11 +140,10 @@ EDGE = 1
 metadata/_custom_type_script = "uid://dod00lbrjpcyo"
 
 [node name="Inspect_Pos" type="Node3D" parent="."]
-transform = Transform3D(0.441872, 0.562069, 0.699161, -0.300285, 0.82709, -0.475131, -0.845326, 0, 0.534249, -0.0314448, 0, -0.0100336)
+transform = Transform3D(0.534249, 0, 0.845326, 0, 1, 0, -0.845326, 0, 0.534249, -0.0314448, 0, -0.0100336)
 
-[node name="12Ga_Shot" parent="." node_paths=PackedStringArray("NEARBY_SLOTS") instance=ExtResource("11_nq1xb")]
+[node name="12Ga_Shot" parent="." instance=ExtResource("11_nq1xb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161705, 0.0637344, 0)
 script = ExtResource("15_3caqd")
-DEFAULT_DIRECTION = Vector3(0, 0, -1)
-NEARBY_SLOTS = [NodePath("../Model/Barrel/Moving_Parts/Chamber")]
+INSERTION_PLANE_NORMAL = null
 INSERTION_ACCEPTANCE = 1

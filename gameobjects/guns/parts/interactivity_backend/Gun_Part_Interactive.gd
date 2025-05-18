@@ -91,8 +91,8 @@ func _disable_focus():
 	disable_focus() # inherited function
 
 ##Gets position of mouse on the plane in local space
-func get_mouse_plane_position() -> Vector3:
-	var ray = get_viewport().get_camera_3d().get_mouse_ray(4, PLANE_COLLISION_LAYER);
+func get_mouse_plane_position(mask = PLANE_COLLISION_LAYER) -> Vector3:
+	var ray = get_viewport().get_camera_3d().get_mouse_ray(4, mask);
 	if(ray.is_colliding()):
 		return ray.get_collision_point() - global_position;
 	return Vector3.ZERO

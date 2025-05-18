@@ -72,6 +72,7 @@ inspect={
 3d_physics/layer_17="Gun_Begin_Interaction"
 3d_physics/layer_18="Gun_Part_Interaction_Plane"
 3d_physics/layer_19="Gun_Use_Element"
+3d_physics/layer_20="Gun_Use_Layer_Extra"
 
 [rendering]
 

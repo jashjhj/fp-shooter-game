@@ -1,0 +1,56 @@
+class_name Gun_Part_Insertable_Slot extends Gun_Part
+##Magazine/Bullet/clip etc.
+
+
+@export var INSERTION_PLANE_NORMAL:Vector3 = Vector3.LEFT;
+@export var INSERTION_LENGTH:float = 0.1;
+
+@export var INSERTION_ENTRY_AREA:Area3D;
+
+@export var INSERTION_PATH:Node3D
+#@export var OFFSET_NOT_IN_ENTRY:float = 0.02;
+
+#@export var HOUSED_TOLERANCE:float = 0.001
+
+@export_group("Flags")
+@export_flags("1","2","4","8","16","32","64") var INSERTION_ACCEPTANCE:int = 1;
+
+
+var is_housed:bool = false;
+var insertion:float = 0;
+var housed_insertable:Gun_Insertable;
+
+
+const INSERTION_LAYER = 262144 # 2^18 = layer 19
+
+
+func _ready() -> void:
+	assert(INSERTION_ENTRY_AREA != null, "No insertion entry area set.")
+	assert(INSERTION_PATH != null, "No insertion path node set.")
+	INSERTION_ENTRY_AREA.collision_layer = INSERTION_LAYER;
+	
+
+
+
+
+### OPTIONAL EXTRAS
+#
+#@export_group("Optional Extras")
+#@export var IMPOSED_LIMITS_ROTATEABLES:Array[Gun_Action_Rotateable_Impose_Limit];
+#@export var WHEN_WITHIN_LIMITS: Array[Vector2];
+#
+#func optional_extras():
+	#var i = 0;
+	#for limits_set in WHEN_WITHIN_LIMITS:
+		#if(len(IMPOSED_LIMITS_ROTATEABLES) <= i):
+			#push_warning("Limits set, but no correlating limits object")
+			#return
+		#elif(IMPOSED_LIMITS_ROTATEABLES[i] == null):
+			#push_warning("Limits set, but no correlating limits object")
+			#return
+		#else:
+			#if insertion >= limits_set.x and insertion <= limits_set.y:
+				#IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = true;
+			#else:
+				#IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = false;
+		#i += 1;
