@@ -38,8 +38,8 @@ func _ready():
 
 
 func init(): # load the tools required.
-	var tools = load("res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Tools.tscn").instantiate()
-	assert(tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Tools.tscn`") # check
+	var tools = load("res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.tscn").instantiate()
+	assert(tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.tscn`") # check
 	
 	assert(BEGIN_INTERACT_COLLIDER != null, "No Interact collider set.")
 	

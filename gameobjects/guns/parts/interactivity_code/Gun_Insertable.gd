@@ -52,7 +52,7 @@ func _ready():
 	#INSERTABLE_OBJECT.ungrabbed.connect(object_ungrabbed)
 
 
-var insertion_plane_tools = preload("res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Tools.tscn").instantiate()
+var insertion_plane_tools = preload("res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.tscn").instantiate()
 var plane_normal:Vector3;
 func setup_planes():
 	#Initialises the plane. Requires parent's position, so must be called deferred.
@@ -64,7 +64,7 @@ func setup_planes():
 	
 	add_child(insertion_plane_tools)
 	insertion_plane_tools.INTERACT_PLANE.process_mode = PROCESS_MODE_DISABLED
-	assert(insertion_plane_tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity_backend/Gun_Part_Tools.tscn`") # check
+	assert(insertion_plane_tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.tscn`") # check
 	insertion_plane_tools.INTERACT_PLANE.collision_layer = INSERTION_PLANE_LAYER;
 
 
@@ -137,13 +137,17 @@ func _process(delta:float) -> void:
 					
 					#Cosmetics - Near slot
 					if(current_insertion_vector_global != Vector3.ZERO): # Updates on the second frame, so wait.
+						
+						#projected_position.global_position = CURRENT_SLOT.global_position + insertion * current_insertion_vector_global; # make it closer to the slot
+						
+						
 						projected_position.look_at(projected_position.global_position + global_basis*current_insertion_vector_global, Vector3.UP);
 						projected_position.rotate(projected_position.basis.x, -PI/2)
 						model_goal.global_position = get_viewport().get_camera_3d().get_ray_from_camera_through(projected_position.global_position, 2, INSERTION_PLANE_LAYER).get_collision_point();
 						model_goal.global_basis = projected_position.basis
 					
-					insertion = current_insertion_vector_global.dot(model_goal.global_position - CURRENT_SLOT.global_position);
 					
+					insertion = current_insertion_vector_global.dot(model_goal.global_position - CURRENT_SLOT.global_position);
 			else:
 				CURRENT_SLOT = null;
 				

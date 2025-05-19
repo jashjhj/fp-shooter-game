@@ -1,6 +1,9 @@
 class_name Gun_Part_Listener extends Node
 
-signal triggered
+#This sinply allows communication between different gun-parts.
 
-func trigger():
-	triggered.emit()
+signal trigger
+
+
+func _trigger() -> void:
+	trigger.emit()

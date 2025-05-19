@@ -45,7 +45,7 @@ func hit_min_angle(speed:float) -> void:
 	if current_angle == MIN_ANGLE and abs(speed) > VELOCITY_THRESHOLD:
 		#print(current_angle)
 		if(TRIGGER != null):
-			TRIGGER.trigger();
+			TRIGGER.trigger.emit();
 		else:
 			print("bang!")
 func hit_max_angle(_speed:float) -> void:

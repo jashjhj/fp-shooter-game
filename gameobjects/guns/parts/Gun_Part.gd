@@ -13,11 +13,13 @@ var SETTABLE_FLOAT:float = 0:
 func settable_float_set(value):
 	SETTABLE_FLOAT = value;
 
+func _process(_delta:float) -> void:
+	pass
 
 func connect_listener(listener:Gun_Part_Listener, function:Callable) ->void:
 	if(listener == null):
 		push_warning("Listener not set!")
-	else: listener.triggered.connect(function);
+	else: listener.trigger.connect(function);
 
 ##Triggers all parts in TRIGGERS
 #func trigger_all():

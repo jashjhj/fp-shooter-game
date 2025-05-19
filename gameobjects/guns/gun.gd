@@ -56,7 +56,7 @@ func _process(_delta:float):
 
 func _trigger():
 	for listener in trigger_functions:
-		listener.triggered.emit();
+		listener.trigger.emit();
 
 
 func start_inspect():

@@ -1,0 +1,14 @@
+Action nodes can be added to a gun's scene to allow interactivity between parts.
+
+USE:
+For example - with Gun_Action_Toggle Action Nodes:
+	If object A wants to affect object B:
+Object A would have a check, a criteria. If TRUE, set (Interactivity Object).ACTIVE = TRUE. else, set it to FALSE.
+The node then affects object B (Set in @exports) by its described function, e.g.
+ -> MUST set Object B in the NODE, and NODE in object A.
+
+
+WRITING NEW Action Nodes:
+Gun_Action_Toggle:
+	activated elsewhere by setting ().ACTIVE = true/false. When updated,
+	activated() -> void / deactivated() -> void    is triggered. Operate within that.

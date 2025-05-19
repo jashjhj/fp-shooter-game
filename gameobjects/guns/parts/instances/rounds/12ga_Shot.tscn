@@ -1,30 +1,30 @@
 [gd_scene load_steps=12 format=3 uid="uid://biiynoqsxedi6"]
 
-[ext_resource type="Script" uid="uid://cgdcsghmpvmn3" path="res://gameobjects/guns/parts/insertable/Gun_Insertable_Chamberable_Round.gd" id="1_ws1k8"]
-[ext_resource type="ArrayMesh" uid="uid://cqflfdpvj02hj" path="res://assets/models/ammo/12ga_shot.obj" id="2_40wjq"]
-[ext_resource type="Texture2D" uid="uid://o5ynm8o46psj" path="res://assets/textures/bullet/12ga_shot.png" id="3_ga23a"]
-[ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://gameobjects/guns/parts/bullet-source/bullet-source.tscn" id="4_ga23a"]
-[ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="5_ws1k8"]
-[ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="6_rcm1f"]
+[ext_resource type="Script" uid="uid://cgdcsghmpvmn3" path="res://gameobjects/guns/parts/elements/insertable/Gun_Insertable_Chamberable_Round.gd" id="1_w1svs"]
+[ext_resource type="ArrayMesh" uid="uid://cqflfdpvj02hj" path="res://assets/models/ammo/12ga_shot.obj" id="2_w5d3s"]
+[ext_resource type="Texture2D" uid="uid://o5ynm8o46psj" path="res://assets/textures/bullet/12ga_shot.png" id="3_yry1a"]
+[ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://gameobjects/guns/parts/bullet-source/bullet-source.tscn" id="4_isiau"]
+[ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="5_6w6il"]
+[ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="6_om5l7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcm1f"]
-albedo_texture = ExtResource("3_ga23a")
+albedo_texture = ExtResource("3_yry1a")
 metallic = 0.6
 roughness = 0.4
 texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sp2j"]
-albedo_texture = ExtResource("3_ga23a")
+albedo_texture = ExtResource("3_yry1a")
 texture_filter = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5sp2j"]
 render_priority = 0
-shader = ExtResource("6_rcm1f")
+shader = ExtResource("6_om5l7")
 shader_parameter/albedo_mult = 1.0
 shader_parameter/alpha_mult = 1.0
 
 [sub_resource type="Resource" id="Resource_rcm1f"]
-script = ExtResource("5_ws1k8")
+script = ExtResource("5_6w6il")
 speed = 160
 drag = 0.1
 gravity = 9.81
@@ -39,7 +39,7 @@ metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 size = Vector3(0.0175781, 0.0562402, 0.0166016)
 
 [node name="12Ga_Shot" type="Node3D" node_paths=PackedStringArray("BULLET_SOURCE", "MODEL", "BEGIN_INTERACT_COLLIDER")]
-script = ExtResource("1_ws1k8")
+script = ExtResource("1_w1svs")
 BULLET_SOURCE = NodePath("Model/Bullet-source")
 MODEL = NodePath("Model")
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
@@ -49,12 +49,12 @@ metadata/_custom_type_script = "uid://dinyj7n6bftbt"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.028456, 0)
-mesh = ExtResource("2_40wjq")
+mesh = ExtResource("2_w5d3s")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rcm1f")
 surface_material_override/1 = SubResource("StandardMaterial3D_5sp2j")
 
-[node name="Bullet-source" parent="Model" instance=ExtResource("4_ga23a")]
+[node name="Bullet-source" parent="Model" instance=ExtResource("4_isiau")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 bullet_data = SubResource("Resource_rcm1f")
 
