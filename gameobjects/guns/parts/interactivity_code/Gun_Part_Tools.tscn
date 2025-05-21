@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bn87p7eq210ec"]
 
-[ext_resource type="Script" uid="uid://c3rfjbnda174v" path="res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.gd" id="1_tvcft"]
+[ext_resource type="Script" uid="uid://c3rfjbnda174v" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Tools.gd" id="1_tvcft"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pyk3q"]
 size = Vector3(3, 0.001, 3)

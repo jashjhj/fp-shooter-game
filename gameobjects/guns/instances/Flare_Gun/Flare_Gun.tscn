@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cspvfnih4rfcf" path="res://gameobjects/guns/parts/elements/Gun_Part_Hammer_Single.gd" id="4_0cm1b"]
 [ext_resource type="Script" uid="uid://oftnu600v54l" path="res://gameobjects/guns/parts/Gun_Part_Listener.gd" id="5_nq1xb"]
 [ext_resource type="ArrayMesh" uid="uid://clrl1m3vy0iys" path="res://assets/models/guns/Flare_Gun/Hammer.obj" id="6_h5mg1"]
-[ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://gameobjects/guns/parts/interactivity_code/Gun_Part_Rotateable.gd" id="7_pfsts"]
+[ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Rotateable.gd" id="7_pfsts"]
 [ext_resource type="ArrayMesh" uid="uid://b47ll0ectwnc" path="res://assets/models/guns/Flare_Gun/Barrel.obj" id="8_t570b"]
 [ext_resource type="Script" uid="uid://itw3hsoocbo4" path="res://gameobjects/guns/parts/elements/Gun_Part_Chamber_Manual.gd" id="10_t570b"]
 [ext_resource type="Script" uid="uid://dod00lbrjpcyo" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/toggle/Gun_Action_Rotatable_Impose_Limit.gd" id="11_h5mg1"]

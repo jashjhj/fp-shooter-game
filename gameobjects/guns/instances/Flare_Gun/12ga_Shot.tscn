@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://biiynoqsxedi6"]
+[gd_scene load_steps=14 format=3 uid="uid://biiynoqsxedi6"]
 
 [ext_resource type="Script" uid="uid://cgdcsghmpvmn3" path="res://gameobjects/guns/parts/elements/insertable/Gun_Insertable_Chamberable_Round.gd" id="1_v48hg"]
 [ext_resource type="ArrayMesh" uid="uid://cqflfdpvj02hj" path="res://assets/models/ammo/12ga_shot.obj" id="2_ibt1g"]
@@ -38,12 +38,20 @@ metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 [sub_resource type="BoxShape3D" id="BoxShape3D_ws1k8"]
 size = Vector3(0.0175781, 0.0562402, 0.0166016)
 
-[node name="12Ga_Shot" type="Node3D" node_paths=PackedStringArray("BULLET_SOURCE", "MODEL", "BEGIN_INTERACT_COLLIDER")]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v48hg"]
+friction = 0.3
+bounce = 0.4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v48hg"]
+height = 0.06
+radius = 0.01
+
+[node name="12Ga_Shot" type="Node3D" node_paths=PackedStringArray("BULLET_SOURCE", "RIGIDBODY", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 script = ExtResource("1_v48hg")
 BULLET_SOURCE = NodePath("Model/Bullet-source")
+RIGIDBODY = NodePath("Model/RigidBody3D")
 MODEL = NodePath("Model")
-BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
-metadata/_custom_type_script = "uid://dinyj7n6bftbt"
+BEGIN_INTERACT_COLLIDER = NodePath("Model/Interact_Area")
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -58,8 +66,21 @@ surface_material_override/1 = SubResource("StandardMaterial3D_5sp2j")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 bullet_data = SubResource("Resource_rcm1f")
 
-[node name="Area3D" type="Area3D" parent="Model"]
+[node name="Interact_Area" type="Area3D" parent="Model"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Interact_Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0281201, 0)
 shape = SubResource("BoxShape3D_ws1k8")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Model"]
+collision_layer = 0
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_v48hg")
+continuous_cd = true
+
+[node name="Rigidbody_Collider" type="CollisionShape3D" parent="Model/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0281201, 0)
+shape = SubResource("CylinderShape3D_v48hg")

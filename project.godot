@@ -79,6 +79,11 @@ look_during_inspect={
 3d_physics/layer_19="Gun_Use_Element"
 3d_physics/layer_20="Gun_Use_Layer_Extra"
 
+[physics]
+
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/penetration_slop=0.001
+
 [rendering]
 
 lights_and_shadows/directional_shadow/size=8192

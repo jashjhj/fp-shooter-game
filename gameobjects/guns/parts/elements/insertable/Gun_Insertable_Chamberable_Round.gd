@@ -1,4 +1,4 @@
-class_name Gun_Insertable_Chamberable_Round extends Gun_Insertable
+class_name Gun_Insertable_Chamberable_Round extends Gun_Insertable_Droppable
 
 ##Is a live round
 @export var is_live:bool = true

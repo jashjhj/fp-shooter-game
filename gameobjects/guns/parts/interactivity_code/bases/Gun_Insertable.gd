@@ -1,5 +1,6 @@
 class_name Gun_Insertable extends Gun_Part_Interactive
 
+##Everything that should move with the model, should be a child of MODEL.
 @export var MODEL:Node3D;
 
 @export var PLANE_NORMAL:Vector3 = Vector3(0, 0, 1)
@@ -99,7 +100,9 @@ func _process(delta:float) -> void:
 				if(not collider_parent is Gun_Part_Insertable_Slot):
 					push_error("Collider with layer 18 - INSERTION AREA LAYER - Not a child of an Insertable Slot", insertable_searcher.get_collider())
 				collider_parent = collider_parent as Gun_Part_Insertable_Slot; #type casting
-				if(collider_parent.INSERTION_ACCEPTANCE & INSERTION_ACCEPTANCE != 0 and not collider_parent.is_locked): # if overlap, ie can be accepted
+				
+				#Condition for allowing a slot
+				if(collider_parent.INSERTION_ACCEPTANCE & INSERTION_ACCEPTANCE != 0 and not collider_parent.is_locked and not collider_parent.is_housed): # if overlap, ie can be accepted
 					CURRENT_SLOT = collider_parent;
 					CURRENT_SLOT.housed_insertable = self;
 			
@@ -120,7 +123,7 @@ func _process(delta:float) -> void:
 			
 			if(insertion >= 0): # If being inserted
 				if(cos(CURRENT_SLOT.SLOT_ANGLE_TOLERANCE) > abs(MODEL.global_basis.y.dot(CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR))):#If within tolerances for slot
-					insertion = min(0, insertion)
+					insertion = min(0.0, insertion)
 				else:
 					insertion = min(insertion, CURRENT_SLOT.INSERTION_LENGTH)
 					effective_lerp_rate_angular = 0.9
