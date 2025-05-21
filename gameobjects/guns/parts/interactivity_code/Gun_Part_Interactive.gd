@@ -1,6 +1,7 @@
 class_name Gun_Part_Interactive extends Gun_Part
 
 @export var BEGIN_INTERACT_COLLIDER:Area3D;
+#@export var INTERACT_PLANE_NORMAL:Node3D;
 
 var INTERACT_PLANE:Area3D;
 
@@ -115,4 +116,8 @@ func _process(_delta: float) -> void:
 	
 
 func set_interact_plane_normal(n:Vector3) -> void:
-	INTERACT_PLANE.look_at(INTERACT_PLANE.global_position + global_transform.basis * n)
+	INTERACT_PLANE.look_at(INTERACT_PLANE.global_position + global_basis * n)
+	#INTERACT_PLANE.look_at(INTERACT_PLANE.global_position + n)
+#
+#func set_interact_plane_normal_toward_node() ->void:
+	#set_interact_plane_normal(INTERACT_PLANE_NORMAL.global_position - global_position)

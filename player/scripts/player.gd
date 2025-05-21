@@ -36,7 +36,7 @@ var mouse_velocity:Vector2;
 ##INPUT SCRIPT
 func _unhandled_input(event: InputEvent) -> void:
 	
-	if event is InputEventMouseMotion and is_mouse_focused:
+	if event is InputEventMouseMotion and (is_mouse_focused or Input.is_action_pressed("look_during_inspect")):
 		#Handle mouse movement
 		
 		if(!CAMERA_CAPTURED): # if free-roaming
@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_mouse_focused = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 	
-	
+
 	
 	if event.is_action_pressed("interact_1"): # RMB
 		is_mouse_focused = !is_mouse_focused;

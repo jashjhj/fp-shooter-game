@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _process(_delta: float):
 	has_been_updated = false;
+	RAY.transform = transform
 
 func get_mouse_ray(length:int = 10, mask:int = -1) -> RayCast3D:
 	if(!has_been_updated): # Updates if hasnt been updated yet

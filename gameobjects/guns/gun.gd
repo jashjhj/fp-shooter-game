@@ -5,8 +5,7 @@ signal trigger;
 @export var trigger_functions:Array[Gun_Part_Listener];
 
 ##Set to the default bullet scene
-var bullet:PackedScene = load("res://gameobjects/bullets/bullet.tscn");
-@export var bullet_data:BulletData
+#var bullet:PackedScene = load("res://gameobjects/bullets/bullet.tscn");
 
 @export var GUN_MODEL:Node3D;
 @export var INSPECT_POSITION:Node3D;
@@ -16,7 +15,6 @@ var is_inspecting := false;
 
 func _ready() -> void:
 	trigger.connect(_trigger);
-	assert(bullet_data != null, "No Bullet data set.")
 	
 	if(INSPECT_POSITION == null): # autocreate if not existent
 		INSPECT_POSITION = Node3D.new();

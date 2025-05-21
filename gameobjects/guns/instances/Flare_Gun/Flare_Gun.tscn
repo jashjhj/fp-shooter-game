@@ -1,0 +1,145 @@
+[gd_scene load_steps=18 format=3 uid="uid://diui1vqmyxnjp"]
+
+[ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_rxssa"]
+[ext_resource type="ArrayMesh" uid="uid://sjdemqvuwe75" path="res://assets/models/guns/Flare_Gun/Reciever.obj" id="2_fbj6v"]
+[ext_resource type="ArrayMesh" uid="uid://b5t7rn8skv3gl" path="res://assets/models/guns/Flare_Gun/Grip.obj" id="3_wbnyp"]
+[ext_resource type="Script" uid="uid://cspvfnih4rfcf" path="res://gameobjects/guns/parts/elements/Gun_Part_Hammer_Single.gd" id="4_0cm1b"]
+[ext_resource type="Script" uid="uid://oftnu600v54l" path="res://gameobjects/guns/parts/Gun_Part_Listener.gd" id="5_nq1xb"]
+[ext_resource type="ArrayMesh" uid="uid://clrl1m3vy0iys" path="res://assets/models/guns/Flare_Gun/Hammer.obj" id="6_h5mg1"]
+[ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://gameobjects/guns/parts/interactivity_code/Gun_Part_Rotateable.gd" id="7_pfsts"]
+[ext_resource type="ArrayMesh" uid="uid://b47ll0ectwnc" path="res://assets/models/guns/Flare_Gun/Barrel.obj" id="8_t570b"]
+[ext_resource type="Script" uid="uid://itw3hsoocbo4" path="res://gameobjects/guns/parts/elements/Gun_Part_Chamber_Manual.gd" id="10_t570b"]
+[ext_resource type="Script" uid="uid://dod00lbrjpcyo" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/toggle/Gun_Action_Rotatable_Impose_Limit.gd" id="11_h5mg1"]
+[ext_resource type="PackedScene" uid="uid://biiynoqsxedi6" path="res://gameobjects/guns/instances/Flare_Gun/12ga_Shot.tscn" id="11_nq1xb"]
+[ext_resource type="Script" uid="uid://bra8dox2utiy" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/toggle/Gun_Action_Insertable_Lock.gd" id="11_pfsts"]
+[ext_resource type="Script" uid="uid://yurqf46wbi6y" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/toggle/Gun_Action_Chamber_is_pin_connected.gd" id="12_t570b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3caqd"]
+size = Vector3(0.00500488, 0.02, 0.0256873)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_drcqq"]
+size = Vector3(0.0244141, 0.0253906, 0.0870013)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h5mg1"]
+size = Vector3(0.00585938, 0.0141602, 0.0903931)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nq1xb"]
+size = Vector3(0.00390625, 0.0351563, 0.0254171)
+
+[node name="FlareGun" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION")]
+script = ExtResource("1_rxssa")
+trigger_functions = [NodePath("Model/Hammer/Release_Hammer")]
+GUN_MODEL = NodePath("Model")
+INSPECT_POSITION = NodePath("Inspect_Pos")
+metadata/_custom_type_script = "uid://7yjt2q14eqdj"
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Reciever" type="MeshInstance3D" parent="Model"]
+mesh = ExtResource("2_fbj6v")
+
+[node name="Grip" type="MeshInstance3D" parent="Model"]
+mesh = ExtResource("3_wbnyp")
+
+[node name="Hammer" type="Node3D" parent="Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "VISUAL_HAMMER", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0505769, -0.0299239)
+script = ExtResource("4_0cm1b")
+RELEASE_LISTENER = NodePath("Release_Hammer")
+TRIGGER = NodePath("../Barrel/Moving_Parts/Chamber/Hammer_Hit")
+COCKED_ANGLE = 0.523599
+VISUAL_HAMMER = NodePath("Moving_Parts")
+MAX_ANGLE = 0.698132
+SPRING_FORCE = 10.0
+BEGIN_INTERACT_COLLIDER = NodePath("Moving_Parts/Area3D")
+metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
+
+[node name="Release_Hammer" type="Node" parent="Model/Hammer"]
+script = ExtResource("5_nq1xb")
+
+[node name="Moving_Parts" type="Node3D" parent="Model/Hammer"]
+
+[node name="Area3D" type="Area3D" parent="Model/Hammer/Moving_Parts"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Hammer/Moving_Parts/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000119629, 0.0109807, -0.000582956)
+shape = SubResource("BoxShape3D_3caqd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Hammer/Moving_Parts"]
+mesh = ExtResource("6_h5mg1")
+skeleton = NodePath("../../..")
+
+[node name="Barrel" type="Node3D" parent="Model" node_paths=PackedStringArray("VISUAL_HAMMER", "TOGGLE_ACTIONS", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0486204, -0.107582)
+script = ExtResource("7_pfsts")
+VISUAL_HAMMER = NodePath("Moving_Parts")
+MIN_ANGLE = -0.523599
+MAX_ANGLE = 0.0
+TOGGLE_ACTIONS = [NodePath("Moving_Parts/Chamber/Gun_Action_Insertable_Lock"), NodePath("Moving_Parts/Chamber/Gun_Action_Chamber_is_pin_connected")]
+WHEN_WITHIN_LIMITS = Array[Vector2]([Vector2(-13, 0), Vector2(-1, 0)])
+BEGIN_INTERACT_COLLIDER = NodePath("Moving_Parts/BarrelArea")
+metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
+
+[node name="Moving_Parts" type="Node3D" parent="Model/Barrel"]
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model/Barrel/Moving_Parts"]
+mesh = ExtResource("8_t570b")
+skeleton = NodePath("../../..")
+
+[node name="BarrelArea" type="Area3D" parent="Model/Barrel/Moving_Parts"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/BarrelArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0192419, 0.020394)
+shape = SubResource("BoxShape3D_drcqq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/BarrelArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00219727, 0.021759)
+shape = SubResource("BoxShape3D_h5mg1")
+
+[node name="Chamber" type="Node3D" parent="Model/Barrel/Moving_Parts" node_paths=PackedStringArray("FIRE_TRIGGER", "INSERTION_ENTRY_AREA", "IMPOSED_LIMITS_ROTATEABLES")]
+transform = Transform3D(1, -0.000632217, -0.000703904, 0.000631433, 0.999999, -0.00114288, 0.000704608, 0.00114245, 0.999999, 0, 0.0165175, 0.0667646)
+script = ExtResource("10_t570b")
+FIRE_TRIGGER = NodePath("Hammer_Hit")
+INSERTION_LENGTH = 0.057
+INSERTION_ENTRY_AREA = NodePath("InsertionArea")
+IMPOSED_LIMITS_ROTATEABLES = [NodePath("../../Gun_Action_Rotateable_Impose_Limit")]
+WHEN_WITHIN_LIMITS = Array[Vector2]([Vector2(0, 0.056)])
+metadata/_custom_type_script = "uid://dymfggnfgsan6"
+
+[node name="InsertionArea" type="Area3D" parent="Model/Barrel/Moving_Parts/Chamber"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Barrel/Moving_Parts/Chamber/InsertionArea"]
+transform = Transform3D(0.999991, -8.28544e-09, 6.0536e-09, 5.31259e-10, 0.999991, 1.90921e-08, -5.23869e-10, -5.82077e-10, 0.999991, 2.72848e-11, 6.23092e-05, 0.0109326)
+shape = SubResource("BoxShape3D_nq1xb")
+
+[node name="Gun_Action_Insertable_Lock" type="Node" parent="Model/Barrel/Moving_Parts/Chamber" node_paths=PackedStringArray("SLOT")]
+script = ExtResource("11_pfsts")
+SLOT = NodePath("..")
+metadata/_custom_type_script = "uid://bra8dox2utiy"
+
+[node name="Hammer_Hit" type="Node" parent="Model/Barrel/Moving_Parts/Chamber"]
+script = ExtResource("5_nq1xb")
+
+[node name="Gun_Action_Chamber_is_pin_connected" type="Node" parent="Model/Barrel/Moving_Parts/Chamber" node_paths=PackedStringArray("CHAMBER")]
+script = ExtResource("12_t570b")
+CHAMBER = NodePath("..")
+ACTIVE = true
+metadata/_custom_type_script = "uid://yurqf46wbi6y"
+
+[node name="Gun_Action_Rotateable_Impose_Limit" type="Node" parent="Model/Barrel" node_paths=PackedStringArray("ROTATEABLE")]
+script = ExtResource("11_h5mg1")
+ROTATEABLE = NodePath("..")
+LIMIT = -0.305433
+EDGE = 1
+metadata/_custom_type_script = "uid://dod00lbrjpcyo"
+
+[node name="Inspect_Pos" type="Node3D" parent="."]
+transform = Transform3D(0.433042, 0.206576, 0.877382, -0.040178, 0.97684, -0.210162, -0.900477, 0.0557577, 0.431313, -0.0314448, 0, -0.0100336)
+
+[node name="12Ga_Shot" parent="." instance=ExtResource("11_nq1xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10016, 0.110841, 0.0211464)
+
+[node name="12Ga_Shot2" parent="." instance=ExtResource("11_nq1xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141818, 0.110841, 0.024367)
+
+[node name="12Ga_Shot3" parent="." instance=ExtResource("11_nq1xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172097, 0.110841, 0.00308693)

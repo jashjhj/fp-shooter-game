@@ -24,10 +24,11 @@ func populate_mag():
 	AMMO_SPRITES = [];
 	
 	for i in range(0, MAX_CAPACITY):
-		if(AMMO_POSITIONS[i] != null):
-			var new_object:Node3D =AMMO_OBJECT.duplicate()
-			AMMO_SPRITES.append(new_object);
-			new_object.transform = AMMO_POSITIONS[i].transform
+		if(len(AMMO_POSITIONS) > i):
+			if(AMMO_POSITIONS[i] != null):
+				var new_object:Node3D =AMMO_OBJECT.duplicate()
+				AMMO_SPRITES.append(new_object);
+				new_object.transform = AMMO_POSITIONS[i].transform
 	
 	set_ammo_visibilities()
 

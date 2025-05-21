@@ -54,6 +54,7 @@ func _process(delta:float)->void:
 
 func enable_focus():
 	super.enable_focus()
+	INTERACT_PLANE.global_position = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collision_point();
 	start_focus_mouse_pos = get_mouse_plane_position();
 	previous_focus_mouse_pos = start_focus_mouse_pos
 	angle_change_goal = 0.0;

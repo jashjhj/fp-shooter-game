@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://7ayolcmhcbpv"]
+
+[ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://gameobjects/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_k4cmo"]
+[ext_resource type="ArrayMesh" uid="uid://bv662ngxvypbh" path="res://assets/models/guns/Welrod_Special/Magazine.obj" id="2_wd8w7"]
+[ext_resource type="ArrayMesh" uid="uid://b33wk4e78wehj" path="res://assets/models/guns/Welrod_Special/Round.obj" id="3_dkgn8"]
+[ext_resource type="ArrayMesh" uid="uid://c8hdndbsrjlm4" path="res://assets/models/guns/Welrod_Special/Magazine_Spring.obj" id="4_45m7n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dmk8"]
+cull_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y7nfo"]
+size = Vector3(0.0681152, 0.140747, 0.0175781)
+
+[node name="WelrodSpecial1" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "MODEL", "BEGIN_INTERACT_COLLIDER")]
+script = ExtResource("1_k4cmo")
+AMMO_OBJECT = NodePath("All/Round")
+AMMO_POSITIONS = [NodePath("All/Ammo_Positions/Node3D"), NodePath("All/Ammo_Positions/Node3D2"), NodePath("All/Ammo_Positions/Node3D3"), NodePath("All/Ammo_Positions/Node3D4")]
+MAG_SPRING = NodePath("All/Spring")
+MODEL = NodePath("All")
+PLANE_NORMAL = Vector3(1, 0, 0)
+BEGIN_INTERACT_COLLIDER = NodePath("All/Grab_Collider")
+
+[node name="All" type="Node3D" parent="."]
+
+[node name="Magazine" type="MeshInstance3D" parent="All"]
+mesh = ExtResource("2_wd8w7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4dmk8")
+
+[node name="Round" type="MeshInstance3D" parent="All"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00174775, 0, -0.0269694)
+visible = false
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../..")
+
+[node name="Spring" type="Node3D" parent="All"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000823721, 0.135457, 0)
+
+[node name="SpringMesh" type="MeshInstance3D" parent="All/Spring"]
+mesh = ExtResource("4_45m7n")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4dmk8")
+
+[node name="Ammo_Positions" type="Node3D" parent="All"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0356425, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.00991543, 0)
+
+[node name="Node3D2" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.0271687, 0)
+
+[node name="Node3D3" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.0456339, 0)
+
+[node name="Node3D4" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.0620718, 0)
+
+[node name="Grab_Collider" type="Area3D" parent="All"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="All/Grab_Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0713501, 0)
+shape = SubResource("BoxShape3D_y7nfo")
