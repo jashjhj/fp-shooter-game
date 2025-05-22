@@ -56,7 +56,7 @@ BEGIN_INTERACT_COLLIDER = NodePath("Model/Interact_Area")
 [node name="Model" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.028456, 0)
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0, -0.028456, 0)
 mesh = ExtResource("2_ibt1g")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rcm1f")

@@ -9,6 +9,9 @@ var INTERACT_PLANE:Area3D;
 const BEGIN_INTERACT_COLLISION_LAYER := 65536 # 2^16
 const PLANE_COLLISION_LAYER := 131072 # 2^17
 
+##Set once been focused.
+var has_been_focused = false;
+
 #Can be clicked on
 var is_interactive:bool = false:
 	set(value):
@@ -36,6 +39,9 @@ var is_focusable:bool = true:
 
 func _ready():
 	init();
+	if(get_parent() is Gun):
+		if(get_parent().is_inspecting):
+			is_interactive = true;
 
 
 func init(): # load the tools required.
@@ -74,7 +80,7 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 func _enable_focus():
 	if(is_focused): return # If already focused, cancel
 	if(!is_focusable): return
-	
+	has_been_focused = true;
 	is_focused = true;
 	enable_plane_collider()
 	#Do not call scripts that may interfere with further rays in the same moment - e.g. Reparenting, or changing the area collider

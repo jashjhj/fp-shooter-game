@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://diui1vqmyxnjp"]
+[gd_scene load_steps=19 format=3 uid="uid://diui1vqmyxnjp"]
 
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_rxssa"]
 [ext_resource type="ArrayMesh" uid="uid://sjdemqvuwe75" path="res://assets/models/guns/Flare_Gun/Reciever.obj" id="2_fbj6v"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://biiynoqsxedi6" path="res://gameobjects/guns/instances/Flare_Gun/12ga_Shot.tscn" id="11_nq1xb"]
 [ext_resource type="Script" uid="uid://bra8dox2utiy" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/toggle/Gun_Action_Insertable_Lock.gd" id="11_pfsts"]
 [ext_resource type="Script" uid="uid://yurqf46wbi6y" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/toggle/Gun_Action_Chamber_is_pin_connected.gd" id="12_t570b"]
+[ext_resource type="Script" uid="uid://loortei0f5ym" path="res://gameobjects/guns/things/Insertable_Pouch.gd" id="13_f7qc2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3caqd"]
 size = Vector3(0.00500488, 0.02, 0.0256873)
@@ -69,7 +70,7 @@ mesh = ExtResource("6_h5mg1")
 skeleton = NodePath("../../..")
 
 [node name="Barrel" type="Node3D" parent="Model" node_paths=PackedStringArray("VISUAL_HAMMER", "TOGGLE_ACTIONS", "BEGIN_INTERACT_COLLIDER")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0486204, -0.107582)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0486204, -0.107782)
 script = ExtResource("7_pfsts")
 VISUAL_HAMMER = NodePath("Moving_Parts")
 MIN_ANGLE = -0.523599
@@ -96,10 +97,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00219727, 0.021759)
 shape = SubResource("BoxShape3D_h5mg1")
 
 [node name="Chamber" type="Node3D" parent="Model/Barrel/Moving_Parts" node_paths=PackedStringArray("FIRE_TRIGGER", "INSERTION_ENTRY_AREA", "IMPOSED_LIMITS_ROTATEABLES")]
-transform = Transform3D(1, -0.000632217, -0.000703904, 0.000631433, 0.999999, -0.00114288, 0.000704608, 0.00114245, 0.999999, 0, 0.0165175, 0.0667646)
+transform = Transform3D(1, -0.000632217, -0.000703904, 0.000631433, 0.999999, -0.00114288, 0.000704608, 0.00114245, 0.999999, 0, 0.0171388, 0.0667646)
 script = ExtResource("10_t570b")
 FIRE_TRIGGER = NodePath("Hammer_Hit")
-INSERTION_LENGTH = 0.057
+INSERTION_LENGTH = 0.0572
 INSERTION_ENTRY_AREA = NodePath("InsertionArea")
 IMPOSED_LIMITS_ROTATEABLES = [NodePath("../../Gun_Action_Rotateable_Impose_Limit")]
 WHEN_WITHIN_LIMITS = Array[Vector2]([Vector2(0, 0.056)])
@@ -135,11 +136,10 @@ metadata/_custom_type_script = "uid://dod00lbrjpcyo"
 [node name="Inspect_Pos" type="Node3D" parent="."]
 transform = Transform3D(0.433042, 0.206576, 0.877382, -0.040178, 0.97684, -0.210162, -0.900477, 0.0557577, 0.431313, -0.0314448, 0, -0.0100336)
 
-[node name="12Ga_Shot" parent="." instance=ExtResource("11_nq1xb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10016, 0.110841, 0.0211464)
+[node name="Player_Insertable_Pouch" type="Node3D" parent="." node_paths=PackedStringArray("INSERTABLE")]
+transform = Transform3D(0.849092, 0.528246, 0, -0.528246, 0.849092, 0, 0, 0, 1, -0.184091, 0.113364, 0.027466)
+script = ExtResource("13_f7qc2")
+INSERTABLE = NodePath("12Ga_Shot")
+metadata/_custom_type_script = "uid://loortei0f5ym"
 
-[node name="12Ga_Shot2" parent="." instance=ExtResource("11_nq1xb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141818, 0.110841, 0.024367)
-
-[node name="12Ga_Shot3" parent="." instance=ExtResource("11_nq1xb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172097, 0.110841, 0.00308693)
+[node name="12Ga_Shot" parent="Player_Insertable_Pouch" instance=ExtResource("11_nq1xb")]
