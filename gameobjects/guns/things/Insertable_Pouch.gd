@@ -1,6 +1,6 @@
 class_name Player_Insertable_Pouch extends Node3D
 
-@export var INSERTABLE:Gun_Insertable;
+@export var INSERTABLE:PackedScene;
 @export var MAX_EXISTING:int = 2;
 
 
@@ -8,8 +8,7 @@ var current_instances:int = 0;
 var instances:Array[Gun_Insertable];
 
 func _ready() -> void:
-	INSERTABLE.process_mode = Node.PROCESS_MODE_DISABLED
-	INSERTABLE.visible = false;
+	pass
 
 func _process(delta: float) -> void:
 	#Logic to decide if to summon a new instance
@@ -30,7 +29,7 @@ func _process(delta: float) -> void:
 func summon_new() -> void:
 	summoning_in_progress = false;
 	
-	var new_instance = INSERTABLE.duplicate() as Gun_Insertable;
+	var new_instance:Gun_Insertable = INSERTABLE.instantiate();
 	new_instance.visible = true;
 	new_instance.process_mode = Node.PROCESS_MODE_INHERIT
 	get_parent().add_child(new_instance)
@@ -41,6 +40,7 @@ func summon_new() -> void:
 	instances.push_back(new_instance)
 
 	current_instances += 1
+
 
 var summoning_in_progress:bool = false;
 func summon_new_after_delay(time:float = 0.5, forced:bool = false):

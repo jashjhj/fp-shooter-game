@@ -102,6 +102,7 @@ script = ExtResource("10_t570b")
 FIRE_TRIGGER = NodePath("Hammer_Hit")
 INSERTION_LENGTH = 0.0572
 INSERTION_ENTRY_AREA = NodePath("InsertionArea")
+PULL_OBJECT_IN_FACTOR = 4.0
 IMPOSED_LIMITS_ROTATEABLES = [NodePath("../../Gun_Action_Rotateable_Impose_Limit")]
 WHEN_WITHIN_LIMITS = Array[Vector2]([Vector2(0, 0.056)])
 metadata/_custom_type_script = "uid://dymfggnfgsan6"

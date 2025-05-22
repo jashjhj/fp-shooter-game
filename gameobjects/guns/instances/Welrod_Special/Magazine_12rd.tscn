@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7ayolcmhcbpv"]
+[gd_scene load_steps=8 format=3 uid="uid://7ayolcmhcbpv"]
 
 [ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://gameobjects/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_k4cmo"]
 [ext_resource type="ArrayMesh" uid="uid://bv662ngxvypbh" path="res://assets/models/guns/Welrod_Special/Magazine.obj" id="2_wd8w7"]
@@ -7,17 +7,25 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dmk8"]
 cull_mode = 2
+metallic = 1.0
+metallic_specular = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y7nfo"]
 size = Vector3(0.0681152, 0.140747, 0.0175781)
 
-[node name="WelrodSpecial1" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "MODEL", "BEGIN_INTERACT_COLLIDER")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_eslu3"]
+size = Vector3(0.0683594, 0.140625, 0.0195313)
+
+[node name="WelrodSpecial1" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "RIGIDBODY", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 script = ExtResource("1_k4cmo")
+MAX_CAPACITY = 12
+STORING = 8
 AMMO_OBJECT = NodePath("All/Round")
-AMMO_POSITIONS = [NodePath("All/Ammo_Positions/Node3D"), NodePath("All/Ammo_Positions/Node3D2"), NodePath("All/Ammo_Positions/Node3D3"), NodePath("All/Ammo_Positions/Node3D4")]
+AMMO_POSITIONS = [NodePath("All/Ammo_Positions/Node3D"), NodePath("All/Ammo_Positions/Node3D2"), NodePath("All/Ammo_Positions/Node3D3"), NodePath("All/Ammo_Positions/Node3D4"), NodePath("All/Ammo_Positions/Node3D5"), NodePath("All/Ammo_Positions/Node3D6"), NodePath("All/Ammo_Positions/Node3D7"), NodePath("All/Ammo_Positions/Node3D8"), NodePath("All/Ammo_Positions/Node3D9"), NodePath("All/Ammo_Positions/Node3D10"), NodePath("All/Ammo_Positions/Node3D11"), NodePath("All/Ammo_Positions/Node3D12")]
 MAG_SPRING = NodePath("All/Spring")
+MAG_MIN_EXTENSION_SCALE = 0.16
+RIGIDBODY = NodePath("RigidBody3D")
 MODEL = NodePath("All")
-PLANE_NORMAL = Vector3(1, 0, 0)
 BEGIN_INTERACT_COLLIDER = NodePath("All/Grab_Collider")
 
 [node name="All" type="Node3D" parent="."]
@@ -27,37 +35,117 @@ mesh = ExtResource("2_wd8w7")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4dmk8")
 
-[node name="Round" type="MeshInstance3D" parent="All"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00174775, 0, -0.0269694)
-visible = false
+[node name="Round" type="Node3D" parent="All"]
+
+[node name="Round" type="MeshInstance3D" parent="All/Round"]
+transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("3_dkgn8")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
 [node name="Spring" type="Node3D" parent="All"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000823721, 0.135457, 0)
 
 [node name="SpringMesh" type="MeshInstance3D" parent="All/Spring"]
+transform = Transform3D(1, 0, 0, 0, 1.0445, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("4_45m7n")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4dmk8")
 
 [node name="Ammo_Positions" type="Node3D" parent="All"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0356425, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0313992, 0.00682727, 0)
 
 [node name="Node3D" type="Node3D" parent="All/Ammo_Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.00991543, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00331355)
+
+[node name="Round2" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
 
 [node name="Node3D2" type="Node3D" parent="All/Ammo_Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.0271687, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00953956, 0.00193922)
+
+[node name="Round3" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D2"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
 
 [node name="Node3D3" type="Node3D" parent="All/Ammo_Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.0456339, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0188758, -0.00331355)
+
+[node name="Round2" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D3"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
 
 [node name="Node3D4" type="Node3D" parent="All/Ammo_Positions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576611, 0.0620718, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0284154, 0.00193922)
+
+[node name="Round3" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D4"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D5" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0377019, -0.00331355)
+
+[node name="Round2" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D5"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D6" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0472415, 0.00193922)
+
+[node name="Round3" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D6"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D7" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0565777, -0.00331355)
+
+[node name="Round2" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D7"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D8" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0661173, 0.00193922)
+
+[node name="Round3" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D8"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D9" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0748203, -0.00331355)
+
+[node name="Round2" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D9"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D10" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0843598, 0.00193922)
+
+[node name="Round3" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D10"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D11" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0936961, -0.00331355)
+
+[node name="Round2" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D11"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
+
+[node name="Node3D12" type="Node3D" parent="All/Ammo_Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.103236, 0.00193922)
+
+[node name="Round3" type="MeshInstance3D" parent="All/Ammo_Positions/Node3D12"]
+mesh = ExtResource("3_dkgn8")
+skeleton = NodePath("../../../..")
 
 [node name="Grab_Collider" type="Area3D" parent="All"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="All/Grab_Collider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0713501, 0)
 shape = SubResource("BoxShape3D_y7nfo")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0725839, 0)
+shape = SubResource("BoxShape3D_eslu3")

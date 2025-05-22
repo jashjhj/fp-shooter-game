@@ -137,12 +137,14 @@ func _process(delta:float) -> void:
 				# Move closer to barrel                                     PARRALLEL                                                           PERPENDICULAR
 				var perpendicular_vector:Vector3 = CURRENT_SLOT.global_basis*(CURRENT_SLOT.INSERTION_VECTOR.cross(CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized())
 				var perpendicular_distance:float = (insertion_plane_position - CURRENT_SLOT.global_position).dot(perpendicular_vector)
-				model_goal.global_position = CURRENT_SLOT.global_position + CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR*insertion + CURRENT_SLOT.PULL_OBJECT_IN_FACTOR*2000*(insertion*insertion)*perpendicular_vector*perpendicular_distance;
+				model_goal.global_position = CURRENT_SLOT.global_position + CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR*insertion + CURRENT_SLOT.PULL_OBJECT_IN_FACTOR*500*(insertion*insertion)*perpendicular_vector*perpendicular_distance;
 			
 			CURRENT_SLOT.is_housed = is_housed
 			
 			var new_basis:Basis = Basis.IDENTITY; # Look in direction of CurrentSlot
 			new_basis.y = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR).normalized()
+			if(CURRENT_SLOT.FLIP_INSERTION):
+				new_basis.y = -new_basis.y
 			new_basis.z = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized()
 			new_basis.x = new_basis.y.cross(new_basis.z);
 			model_goal.global_basis = new_basis

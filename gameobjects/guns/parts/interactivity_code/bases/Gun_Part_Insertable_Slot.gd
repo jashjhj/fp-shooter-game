@@ -8,6 +8,7 @@ class_name Gun_Part_Insertable_Slot extends Gun_Part
 @export var INSERTION_ENTRY_AREA:Area3D;
 
 @export var INSERTION_VECTOR:Vector3 = Vector3(0, 0, -1);
+@export var FLIP_INSERTION:bool = false;
 #@export var OFFSET_NOT_IN_ENTRY:float = 0.02;
 
 #@export var HOUSED_TOLERANCE:float = 0.001
