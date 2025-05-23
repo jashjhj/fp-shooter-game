@@ -1,14 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://k6g5l4koiagb"]
+[gd_scene load_steps=15 format=3 uid="uid://k6g5l4koiagb"]
 
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_vac1r"]
 [ext_resource type="ArrayMesh" uid="uid://b1glaiv1kc12p" path="res://assets/models/guns/Welrod_Special/Reciever.obj" id="2_d7caa"]
 [ext_resource type="ArrayMesh" uid="uid://elmpags3uasr" path="res://assets/models/guns/Welrod_Special/Bolt.obj" id="3_cc0h1"]
 [ext_resource type="Script" uid="uid://dpp3u5ytyv45w" path="res://gameobjects/guns/parts/elements/Gun_Action.gd" id="5_ibb3d"]
+[ext_resource type="Script" uid="uid://oftnu600v54l" path="res://gameobjects/guns/parts/Gun_Part_Listener.gd" id="5_x4e7n"]
 [ext_resource type="Script" uid="uid://bkfsoqbr3ewi8" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Slideable.gd" id="5_ylrqn"]
 [ext_resource type="PackedScene" uid="uid://7ayolcmhcbpv" path="res://gameobjects/guns/instances/Welrod_Special/Magazine_12rd.tscn" id="6_8xgxp"]
 [ext_resource type="Script" uid="uid://loortei0f5ym" path="res://gameobjects/guns/things/Insertable_Pouch.gd" id="7_bhpic"]
 [ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Insertable_Slot.gd" id="7_jr0kp"]
 [ext_resource type="ArrayMesh" uid="uid://bwtm4vp7jdn8" path="res://assets/models/guns/Welrod_Special/Trigger.obj" id="7_l63kn"]
+[ext_resource type="Script" uid="uid://un4puemevabk" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/trigger/Gun_Action_Slideable_Apply_Velocity.gd" id="8_x4e7n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ibb3d"]
 height = 0.200195
@@ -20,8 +22,9 @@ size = Vector3(0.043457, 0.0178223, 0.017334)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bhpic"]
 size = Vector3(0.0100098, 0.0564728, 0.109375)
 
-[node name="WelrodSpecial" type="Node3D" node_paths=PackedStringArray("GUN_MODEL", "INSPECT_POSITION")]
+[node name="WelrodSpecial" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION")]
 script = ExtResource("1_vac1r")
+trigger_functions = [NodePath("Model/Gun_Action/Gun_Part_Listener")]
 GUN_MODEL = NodePath("Model")
 INSPECT_POSITION = NodePath("Inspect_Pos")
 metadata/_custom_type_script = "uid://7yjt2q14eqdj"
@@ -38,17 +41,25 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0066
 mesh = ExtResource("7_l63kn")
 skeleton = NodePath("../..")
 
-[node name="Gun_Action" type="Node3D" parent="Model" node_paths=PackedStringArray("ACTION_SLIDEABLE_LINK", "GATHER_FROM")]
+[node name="Gun_Action" type="Node3D" parent="Model" node_paths=PackedStringArray("ACTION_SLIDEABLE_LINK", "FIRE", "GATHER_FROM", "TRIGGER_ON_FIRE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.121555, 0.011993)
 script = ExtResource("5_ibb3d")
 ACTION_SLIDEABLE_LINK = NodePath("../Slide")
+FIRE = NodePath("Gun_Part_Listener")
 EJECT_DIST = 0.087
+EJECT_WHEN_DIR = null
 GATHER_FROM = NodePath("../Magwell")
 GATHER_DIST = 0.009
+GATHER_WHEN_DIR = null
 EJECTION_VELOCITY = Vector3(1.5, 0, 0)
 EJECTION_VELOCITY_ANGULAR = Vector3(0, -10, 0)
 EJECTION_SPEED_MULTIPLIER = 0.8
+TRIGGER_ON_FIRE = [NodePath("../Slide/Gun_Action_Slideable_Apply_Velocity")]
 metadata/_custom_type_script = "uid://dpp3u5ytyv45w"
+
+[node name="Gun_Part_Listener" type="Node" parent="Model/Gun_Action"]
+script = ExtResource("5_x4e7n")
+metadata/_custom_type_script = "uid://oftnu600v54l"
 
 [node name="Slide" type="Node3D" parent="Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.121301, 0.111357)
@@ -76,6 +87,12 @@ shape = SubResource("CylinderShape3D_ibb3d")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/Slide/Model/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0183105, 0, 0.0881579)
 shape = SubResource("BoxShape3D_ylrqn")
+
+[node name="Gun_Action_Slideable_Apply_Velocity" type="Node" parent="Model/Slide" node_paths=PackedStringArray("SLIDEABLE")]
+script = ExtResource("8_x4e7n")
+SLIDEABLE = NodePath("..")
+VELOCITY = -10.0
+metadata/_custom_type_script = "uid://un4puemevabk"
 
 [node name="Magwell" type="Node3D" parent="Model" node_paths=PackedStringArray("INSERTION_ENTRY_AREA")]
 transform = Transform3D(0.736768, 0.676146, 0, -0.676146, 0.736768, 0, 0, 0, 1, 0.0264591, 0.146245, -0.0248136)

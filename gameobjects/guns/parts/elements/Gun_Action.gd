@@ -2,6 +2,8 @@ class_name Gun_Action extends Gun_Part
 
 @export var ACTION_SLIDEABLE_LINK:Gun_Part_Slideable;
 
+@export var FIRE:Gun_Part_Listener;
+
 @export var EJECT_DIST:float = 0.1
 @export_enum("Forwards", "Backwards", "Both") var EJECT_WHEN_DIR:int = 1;
 @export var GATHER_FROM:Gun_Part_Insertable_Slot;
@@ -14,6 +16,9 @@ class_name Gun_Action extends Gun_Part
 #Multiplies ejection velocity by 1+(this multiplier * speed at which ejected) 
 @export var EJECTION_SPEED_MULTIPLIER = 1.0;
 
+@export_group("Extras")
+@export var TRIGGER_ON_FIRE:Array[Action_Node];
+
 
 ##Determines the position of the round, etc. A child of the Slideable link
 var action_node:Node3D = Node3D.new();
@@ -24,6 +29,10 @@ func _ready() -> void:
 	assert(GATHER_FROM != null, "No gather-from point set")
 	
 	ACTION_SLIDEABLE_LINK.add_child(action_node)
+	
+	assert(FIRE != null, "No fire trigger set.")
+	FIRE.trigger.connect(fire)
+	
 
 var prev_slide_pos:float = 0;
 func _process(delta: float) -> void:
@@ -89,3 +98,10 @@ func eject() -> void:
 	current_round.RIGIDBODY.angular_velocity = velocity_angular + global_basis*EJECTION_VELOCITY_ANGULAR * eject_speed_mult
 	current_round = null
 	pass
+
+func fire() -> void:
+	if(current_round != null):
+		current_round.fire.emit()
+		
+		for trigger in TRIGGER_ON_FIRE:
+			trigger.trigger.emit();

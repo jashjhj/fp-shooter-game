@@ -17,22 +17,19 @@ func _ready() -> void:
 	$Display.free()
 
 
-var triggered = false;
-func trigger(): # Triggers on next frame.
-	triggered = true;
-	return true;
 
-var prev_position:=Vector3.ZERO
-func _process(delta:float) -> void:
-	
-	if(triggered):
-		triggered = false;
-		var supplementary_velocity = (global_position - prev_position) / delta;
-		for i in range(0, bullet_data.amount):
-			fire_bullet(supplementary_velocity)
-	
-	
+func trigger(): # Triggers on next frame.
+	for i in range(0, bullet_data.amount):
+		fire_bullet(velocity)
+
+
+var prev_position:= Vector3.ZERO
+var velocity:=Vector3.ZERO
+func _physics_process(delta: float) -> void:
+	velocity = (global_position - prev_position) / delta
 	prev_position = global_position
+
+
 
 
 
