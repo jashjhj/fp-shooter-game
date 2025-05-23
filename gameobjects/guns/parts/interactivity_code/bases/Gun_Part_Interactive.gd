@@ -9,6 +9,9 @@ var INTERACT_PLANE:Area3D;
 const BEGIN_INTERACT_COLLISION_LAYER := 65536 # 2^16
 const PLANE_COLLISION_LAYER := 131072 # 2^17
 
+var mouse_focus_pos:Vector3;
+var mouse_focus_pos_relative:Vector3;
+
 ##Set once been focused.
 var has_been_focused = false;
 
@@ -82,6 +85,8 @@ func _enable_focus():
 	if(!is_focusable): return
 	has_been_focused = true;
 	is_focused = true;
+	mouse_focus_pos = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collision_point();
+	mouse_focus_pos_relative = global_basis.inverse()*(mouse_focus_pos - global_position)
 	enable_plane_collider()
 	#Do not call scripts that may interfere with further rays in the same moment - e.g. Reparenting, or changing the area collider
 	enable_focus() # inherited function
@@ -107,11 +112,11 @@ func disable_focus():
 
 
 
-##Gets position of mouse on the plane in local space
+##Gets position of mouse on the plane in global space
 func get_mouse_plane_position(mask = PLANE_COLLISION_LAYER) -> Vector3:
 	var ray = get_viewport().get_camera_3d().get_mouse_ray(4, mask);
 	if(ray.is_colliding()):
-		return ray.get_collision_point() - global_position;
+		return ray.get_collision_point();
 	return Vector3.ZERO
 	
 

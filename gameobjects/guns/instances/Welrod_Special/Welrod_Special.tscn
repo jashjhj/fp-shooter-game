@@ -1,13 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://k6g5l4koiagb"]
+[gd_scene load_steps=13 format=3 uid="uid://k6g5l4koiagb"]
 
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_vac1r"]
 [ext_resource type="ArrayMesh" uid="uid://b1glaiv1kc12p" path="res://assets/models/guns/Welrod_Special/Reciever.obj" id="2_d7caa"]
 [ext_resource type="ArrayMesh" uid="uid://elmpags3uasr" path="res://assets/models/guns/Welrod_Special/Bolt.obj" id="3_cc0h1"]
+[ext_resource type="Script" uid="uid://bkfsoqbr3ewi8" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Slideable.gd" id="5_ylrqn"]
 [ext_resource type="PackedScene" uid="uid://7ayolcmhcbpv" path="res://gameobjects/guns/instances/Welrod_Special/Magazine_12rd.tscn" id="6_8xgxp"]
 [ext_resource type="ArrayMesh" uid="uid://b33wk4e78wehj" path="res://assets/models/guns/Welrod_Special/Round.obj" id="6_j1grg"]
 [ext_resource type="Script" uid="uid://loortei0f5ym" path="res://gameobjects/guns/things/Insertable_Pouch.gd" id="7_bhpic"]
 [ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Insertable_Slot.gd" id="7_jr0kp"]
 [ext_resource type="ArrayMesh" uid="uid://bwtm4vp7jdn8" path="res://assets/models/guns/Welrod_Special/Trigger.obj" id="7_l63kn"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ibb3d"]
+height = 0.200195
+radius = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ylrqn"]
+size = Vector3(0.043457, 0.0178223, 0.017334)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bhpic"]
 size = Vector3(0.0100098, 0.0436096, 0.0644531)
@@ -25,11 +33,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0008
 mesh = ExtResource("2_d7caa")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.00312734, 0.122314, -0.0148258)
-mesh = ExtResource("3_cc0h1")
-skeleton = NodePath("../..")
-
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.00640725, 0.192568, -0.0615666)
 mesh = ExtResource("6_j1grg")
@@ -40,7 +43,33 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0066
 mesh = ExtResource("7_l63kn")
 skeleton = NodePath("../..")
 
-[node name="Gun_Part_Insertable_Slot" type="Node3D" parent="Model" node_paths=PackedStringArray("INSERTION_ENTRY_AREA")]
+[node name="Slide" type="Node3D" parent="Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.121301, 0.111357)
+script = ExtResource("5_ylrqn")
+MODEL = NodePath("Model")
+SLIDE_VECTOR = Vector3(0, 0, -1)
+SLIDE_DISTANCE = 0.125
+BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
+metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
+
+[node name="Model" type="Node3D" parent="Model/Slide"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Slide/Model"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("3_cc0h1")
+skeleton = NodePath("../../../..")
+
+[node name="Area3D" type="Area3D" parent="Model/Slide/Model"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Slide/Model/Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ibb3d")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/Slide/Model/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0183105, 0, 0.0881579)
+shape = SubResource("BoxShape3D_ylrqn")
+
+[node name="Magwell" type="Node3D" parent="Model" node_paths=PackedStringArray("INSERTION_ENTRY_AREA")]
 transform = Transform3D(0.736768, 0.676146, 0, -0.676146, 0.736768, 0, 0, 0, 1, 0.0264591, 0.146245, -0.0220782)
 script = ExtResource("7_jr0kp")
 INSERTION_LENGTH = 0.0215
@@ -49,14 +78,14 @@ INSERTION_VECTOR = Vector3(0, -1, 0)
 FLIP_INSERTION = true
 metadata/_custom_type_script = "uid://dymfggnfgsan6"
 
-[node name="Area3D" type="Area3D" parent="Model/Gun_Part_Insertable_Slot"]
+[node name="Area3D" type="Area3D" parent="Model/Magwell"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Gun_Part_Insertable_Slot/Area3D"]
-transform = Transform3D(-4.37114e-08, 3.11805e-13, -1, 1.55294e-22, 1, -5.32907e-15, 1, 2.98023e-08, -4.37114e-08, -7.41892e-05, 0.0216353, 0.00146873)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Magwell/Area3D"]
+transform = Transform3D(-4.37114e-08, 3.10502e-13, -1, 0, 1, 7.10543e-15, 1, -1.35725e-20, -4.37113e-08, -7.41892e-05, 0.0216353, 0.00146872)
 shape = SubResource("BoxShape3D_bhpic")
 
-[node name="Path" type="Node3D" parent="Model/Gun_Part_Insertable_Slot"]
+[node name="Path" type="Node3D" parent="Model/Magwell"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000585763, -0.0155155, 0.0113109)
 
 [node name="Inspect_Pos" type="Node3D" parent="."]

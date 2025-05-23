@@ -13,10 +13,15 @@ func _ready():
 	RIGIDBODY.collision_mask = 1 + 4096;
 	RIGIDBODY.collision_layer = 4096
 
+
 var prev_pos:Vector3;
 var prev_angles:Vector3;
+var pre_prev_pos:Vector3;
+var pre_prev_angles:Vector3;
 var prev_delta:float;
 func _physics_process(delta: float) -> void:
+	pre_prev_pos = prev_pos;
+	pre_prev_angles = prev_angles
 	prev_pos = MODEL.global_position;
 	prev_angles = MODEL.global_rotation;
 	prev_delta = delta
@@ -32,8 +37,8 @@ func disable_focus():
 			if child != RIGIDBODY:
 				child.reparent(RIGIDBODY)
 		
-		RIGIDBODY.linear_velocity = (MODEL.global_position - prev_pos)/prev_delta
-		RIGIDBODY.angular_velocity = (MODEL.global_rotation - prev_angles)/prev_delta * 5 # Dramatises angles. fun!
+		RIGIDBODY.linear_velocity = (prev_pos - pre_prev_pos)/prev_delta
+		RIGIDBODY.angular_velocity = (prev_angles - pre_prev_angles)/prev_delta * 3 # Dramatises angles. fun!
 		
 		Globals.RUBBISH_COLLECTOR.add_rubbish(RIGIDBODY);
 		

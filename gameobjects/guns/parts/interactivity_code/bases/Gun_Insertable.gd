@@ -63,7 +63,7 @@ func enable_focus():
 	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	
 	insertable_position.global_position = model_goal.global_position
-	var mouse_click_position := get_mouse_plane_position();
+	var mouse_click_position := get_mouse_plane_position() - global_position;
 	var insertable_visual_position := screen_raycast(model_goal.global_position, PLANE_COLLISION_LAYER).get_collision_point()
 	#var insertable_position_distance_from_plane := (insertable_position.global_position - insertable_visual_position).dot(global_basis*PLANE_NORMAL) # this hsits borked
 	
@@ -90,7 +90,7 @@ func _process(delta:float) -> void:
 		var effective_lerp_rate_angular := LERP_RATE_ANGULAR;
 		
 		
-		insertable_position.global_position = global_position + get_mouse_plane_position() + start_focus_mouse_difference;
+		insertable_position.global_position = get_mouse_plane_position() + start_focus_mouse_difference;
 		if(CURRENT_SLOT == null): # ---------------------- NO CURRENT SLOT
 			
 			

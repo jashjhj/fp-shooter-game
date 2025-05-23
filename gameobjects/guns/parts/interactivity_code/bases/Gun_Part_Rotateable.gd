@@ -34,7 +34,7 @@ func _process(delta:float)->void:
 	
 	if(is_focused):
 		#print(get_mouse_plane_position())
-		var next_focus_mouse_pos:Vector3 = get_mouse_plane_position()
+		var next_focus_mouse_pos:Vector3 = get_mouse_plane_position() - global_position
 		
 		var clockwise_right_vector = previous_focus_mouse_pos.normalized().cross(INTERACT_PLANE.global_basis.z);
 		angle_change_delta = asin(clockwise_right_vector.dot(next_focus_mouse_pos.normalized())) # Gets angle
@@ -54,8 +54,8 @@ func _process(delta:float)->void:
 
 func enable_focus():
 	super.enable_focus()
-	INTERACT_PLANE.global_position = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collision_point();
-	start_focus_mouse_pos = get_mouse_plane_position();
+	INTERACT_PLANE.global_position = mouse_focus_pos #get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collision_point();
+	start_focus_mouse_pos = get_mouse_plane_position() - global_position;
 	previous_focus_mouse_pos = start_focus_mouse_pos
 	angle_change_goal = 0.0;
 	start_focus_angle = current_angle;
