@@ -36,14 +36,18 @@ var mouse_velocity:Vector2;
 ##INPUT SCRIPT
 func _unhandled_input(event: InputEvent) -> void:
 	
-	if event is InputEventMouseMotion and (is_mouse_focused or Input.is_action_pressed("look_during_inspect")):
-		#Handle mouse movement
+	if event is InputEventMouseMotion:
+		if (is_mouse_focused or Input.is_action_pressed("look_during_inspect")):
+			#Handle mouse movement
+			
+			if(!CAMERA_CAPTURED): # if free-roaming
+				
+				var viewport_transform: Transform2D = get_tree().root.get_final_transform() # resolves stretches
+				mouse_input += event.xformed_by(viewport_transform).relative
 		
-		if(!CAMERA_CAPTURED): # if free-roaming
-			
-			var viewport_transform: Transform2D = get_tree().root.get_final_transform() # resolves stretches
-			mouse_input += event.xformed_by(viewport_transform).relative
-			
+		if(GUN.is_inspecting == true and Input.is_action_pressed("rotate_during_inspect")):
+			GUN.rotate_inspect_node(event.relative * Settings.MouseSensitivity)
+		
 	
 	if(is_mouse_focused == true):
 		if event.is_action_pressed("interact_0"): # Left click
@@ -58,9 +62,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_mouse_focused = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 	
-
 	
-	if event.is_action_pressed("interact_1"): # RMB
+	
+	
+	
+	if event.is_action_pressed("free_mouse"):
 		is_mouse_focused = !is_mouse_focused;
 		if(is_mouse_focused):Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		else:Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -77,8 +83,12 @@ func _process(delta:float) -> void:
 	mouse_velocity += mouse_input/delta;
 	
 	#Camera rotation
-	camera_rot_x += mouse_velocity.x * -Settings.MouseSensitivity.x * delta
-	camera_rot_y += mouse_velocity.y * -Settings.MouseSensitivity.y * delta
+	#camera_rot_x += mouse_velocity.x * -Settings.MouseSensitivity.x * delta
+	#camera_rot_y += mouse_velocity.y * -Settings.MouseSensitivity.y * delta
+	
+	camera_rot_x += mouse_input.x * -Settings.MouseSensitivity.x
+	camera_rot_y += mouse_input.y * -Settings.MouseSensitivity.y
+	
 	
 	transform.basis = Basis();
 	

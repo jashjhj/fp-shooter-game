@@ -13,6 +13,8 @@ signal trigger;
 
 var is_inspecting := false;
 
+@onready var default_inspect_transform:Transform3D = INSPECT_POSITION.transform
+
 func _ready() -> void:
 	trigger.connect(_trigger);
 	
@@ -32,8 +34,8 @@ func _ready() -> void:
 	for child in get_all_children(self):
 		if child is Gun_Part:
 			child.PARENT_GUN = self;
-	
-	
+
+
 
 
 func _process(_delta:float):
@@ -52,6 +54,13 @@ func _process(_delta:float):
 
 
 
+func rotate_inspect_node(rot: Vector2):
+	INSPECT_POSITION.rotate_y(rot.x)
+	INSPECT_POSITION.rotate_x(rot.y)
+	
+	GUN_MODEL.basis = Quaternion(GUN_MODEL.transform.basis).slerp(Quaternion(INSPECT_POSITION.transform.basis), 0.1); # increases responsiveness
+
+
 func _trigger():
 	for listener in trigger_functions:
 		listener.trigger.emit();
@@ -62,6 +71,8 @@ func start_inspect():
 	for child in get_all_children(self):
 		if child is Gun_Part_Interactive:
 			child.is_interactive = true;
+	
+	INSPECT_POSITION.transform = default_inspect_transform;
 
 func end_inspect():
 	is_inspecting = false;

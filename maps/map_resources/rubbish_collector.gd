@@ -24,11 +24,10 @@ func add_rubbish(node:Node):
 			RUBBISH[end_pointer].queue_free(); # frees up excess rubbish
 		end_pointer += 1;
 	
-	if(front_pointer >= Settings.Max_Rubbish): # loop the queue
+	if(front_pointer > Settings.Max_Rubbish): # loop the queue
 		front_pointer = 0;
-	if(end_pointer >= Settings.Max_Rubbish):
+	if(end_pointer > Settings.Max_Rubbish):
 		end_pointer = 0;
-	
 	
 
 func clear_rubbish():

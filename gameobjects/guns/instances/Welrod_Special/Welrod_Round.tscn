@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwpc33y2thj7e"]
+
+[ext_resource type="Script" uid="uid://bglstfp5jf4ur" path="res://gameobjects/guns/parts/rounds/Gun_Round.gd" id="1_eo65a"]
+[ext_resource type="ArrayMesh" uid="uid://b33wk4e78wehj" path="res://assets/models/guns/Welrod_Special/Round.obj" id="2_k42gg"]
+[ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://gameobjects/guns/parts/rounds/Bullet_Source/bullet-source.tscn" id="3_2d7wb"]
+[ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="4_6bn3m"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v2pj0"]
+height = 0.0584717
+radius = 0.00585938
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urq71"]
+cull_mode = 2
+albedo_color = Color(0.643137, 0.494118, 0.105882, 1)
+metallic = 0.43
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7c6fw"]
+top_radius = 0.005
+bottom_radius = 0.005
+height = 0.045
+radial_segments = 8
+rings = 0
+cap_top = false
+
+[sub_resource type="Resource" id="Resource_tk0w3"]
+script = ExtResource("4_6bn3m")
+speed = 300
+drag = 0.1
+gravity = 9.81
+mass = 0.005
+base_inaccuracy = 0.05
+amount = 1
+lifetime = 2000
+metadata/_custom_type_script = "uid://cuj1evxe65gdy"
+
+[node name="Welrod_Round" type="Node3D" node_paths=PackedStringArray("BULLET_SOURCE", "RIGIDBODY", "LIVE_ROUND_MODEL", "SPENT_ROUND_MODEL")]
+script = ExtResource("1_eo65a")
+BULLET_SOURCE = NodePath("Bullet-source")
+RIGIDBODY = NodePath("RigidBody3D")
+LIVE_ROUND_MODEL = NodePath("Live_Mesh")
+SPENT_ROUND_MODEL = NodePath("Spent_Mesh")
+metadata/_custom_type_script = "uid://bglstfp5jf4ur"
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 0, -0.03)
+shape = SubResource("CylinderShape3D_v2pj0")
+
+[node name="Live_Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.897e-08, 0, -1, 0, 1, 0, 1.1203, 0, -4.37114e-08, -0.000200839, 0, -2.71443e-05)
+mesh = ExtResource("2_k42gg")
+surface_material_override/0 = SubResource("StandardMaterial3D_urq71")
+
+[node name="Spent_Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.91069e-15, 4.897e-08, -1, 1, -4.897e-08, 0, -4.37114e-08, -1.1203, -4.37114e-08, -0.000200837, 0, -0.0252956)
+mesh = SubResource("CylinderMesh_7c6fw")
+surface_material_override/0 = SubResource("StandardMaterial3D_urq71")
+
+[node name="Bullet-source" parent="." instance=ExtResource("3_2d7wb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.000123814, 0, -0.0465679)
+bullet_data = SubResource("Resource_tk0w3")

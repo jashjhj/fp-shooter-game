@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cgdcsghmpvmn3" path="res://gameobjects/guns/parts/elements/insertable/Gun_Insertable_Chamberable_Round.gd" id="1_v48hg"]
 [ext_resource type="ArrayMesh" uid="uid://cqflfdpvj02hj" path="res://assets/models/ammo/12ga_shot.obj" id="2_ibt1g"]
 [ext_resource type="Texture2D" uid="uid://o5ynm8o46psj" path="res://assets/textures/bullet/12ga_shot.png" id="3_md1ta"]
-[ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://gameobjects/guns/parts/bullet-source/bullet-source.tscn" id="4_ibo4w"]
+[ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://gameobjects/guns/parts/rounds/Bullet_Source/bullet-source.tscn" id="4_ibo4w"]
 [ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="5_u1rmd"]
 [ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="6_qyi58"]
 

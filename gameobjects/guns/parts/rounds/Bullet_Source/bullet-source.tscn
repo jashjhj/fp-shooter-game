@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bk6fd80nopw"]
 
-[ext_resource type="Script" uid="uid://cyh74h7octcmc" path="res://gameobjects/guns/parts/bullet-source/Gun_Part_BulletSource.gd" id="1_1p1r5"]
+[ext_resource type="Script" uid="uid://cyh74h7octcmc" path="res://gameobjects/guns/parts/rounds/Bullet_Source/Gun_Part_BulletSource.gd" id="1_1p1r5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk33e"]
 transparency = 1

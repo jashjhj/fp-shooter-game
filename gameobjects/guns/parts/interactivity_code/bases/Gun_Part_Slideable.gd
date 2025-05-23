@@ -8,10 +8,19 @@ class_name Gun_Part_Slideable extends Gun_Part_Interactive
 
 @export var LERP_RATE:float = 0.3;
 
+
+@export_group("Extras")
+@export var SPRING:float = 0.0;
+
+
 var model_goal:Node3D = Node3D.new()
 
 @onready var slide_pos:float = SLIDE_START_POS
+@onready var visual_slide_pos:float = SLIDE_START_POS;
 var start_focus_slide_pos:float;
+
+
+var velocity:float = 0.0;
 
 ##Ready
 func _ready():
@@ -21,7 +30,10 @@ func _ready():
 	
 	add_child(model_goal)
 
+
+
 var prev_mouse_delta:float;
+var prev_slide_pos:float = 0;
 func _process(delta:float) -> void:
 	super._process(delta);
 	if(is_focused):
@@ -29,17 +41,31 @@ func _process(delta:float) -> void:
 		var mouse_goal_delta = mouse_goal_delta_from_start - prev_mouse_delta
 		slide_pos += mouse_goal_delta# +start_focus_slide_pos 
 		
+		velocity = (slide_pos - prev_slide_pos)/delta
+		
 		prev_mouse_delta = mouse_goal_delta_from_start
-		
-		slide_pos = max(0, slide_pos)
-		slide_pos = min(SLIDE_DISTANCE, slide_pos)
-		
-		
+	
+	else:#not focused
+		slide_pos += velocity*delta;
+	
+	if(slide_pos < 0 or slide_pos > SLIDE_DISTANCE): velocity = 0;
+	slide_pos = max(0, slide_pos)
+	slide_pos = min(SLIDE_DISTANCE, slide_pos)
+	
 	model_goal.global_position = global_position + slide_pos*(global_basis*SLIDE_VECTOR)
 	
-	MODEL.global_position = MODEL.global_position.lerp(model_goal.global_position, LERP_RATE)
+	if(is_focused):
+		MODEL.global_position = MODEL.global_position.lerp(model_goal.global_position, LERP_RATE)
+		visual_slide_pos = lerp(visual_slide_pos, slide_pos, LERP_RATE)
+	else:
+		MODEL.global_position = model_goal.global_position
+		visual_slide_pos = slide_pos
 	
+	prev_slide_pos = slide_pos;
 
+func _physics_process(delta: float) -> void:
+	if(not is_focused):
+		velocity += SPRING*delta;
 
 
 #Enable and disable being clicked on
