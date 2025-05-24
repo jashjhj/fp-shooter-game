@@ -1,0 +1,128 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnsjodlk4krx"]
+
+[ext_resource type="ArrayMesh" uid="uid://b70gfyf52nfej" path="res://assets/models/npcs/turret/Base.obj" id="1_sskfx"]
+[ext_resource type="ArrayMesh" uid="uid://did5yni3yf6gx" path="res://assets/models/npcs/turret/Leg.obj" id="2_aoex5"]
+[ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/Hittable.gd" id="2_bfj0u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bfj0u"]
+size = Vector3(0.749756, 0.0247192, 0.468384)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gpkpn"]
+points = PackedVector3Array(-0.062926, -0.450227, -0.063395, -0.062926, -0.450227, 0.018815, -0.062926, -0.25098, -0.063395, 0.019293, -0.450227, -0.063395, 0.019293, -0.450227, 0.018815, -0.062926, -0.25098, 0.018815, -0.0193457, 0.013125, -0.0197428, 0.019293, -0.25098, -0.063395, 0.019293, -0.25098, 0.018815, -0.0193457, 0.013125, 0.0185494, 0.0189389, 0.013125, -0.0197428, 0.0189389, 0.013125, 0.0185494)
+
+[node name="Turret" type="Node3D"]
+
+[node name="Base" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327089, 0)
+collision_layer = 64
+collision_mask = 65
+
+[node name="BaseMesh" type="MeshInstance3D" parent="Base"]
+mesh = ExtResource("1_sskfx")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0939053)
+shape = SubResource("BoxShape3D_bfj0u")
+
+[node name="Leg1" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337198, 0.305792, -0.106896)
+collision_layer = 64
+collision_mask = 65
+mass = 0.1
+script = ExtResource("2_bfj0u")
+MINIMUM_DAMAGE_THRESHOLD = 125.0
+FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
+THRESHOLDS = Array[float]([800.0, 0.0])
+
+[node name="Leg" type="MeshInstance3D" parent="Leg1"]
+mesh = ExtResource("2_aoex5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Leg1"]
+shape = SubResource("ConvexPolygonShape3D_gpkpn")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Leg1"]
+node_a = NodePath("../../Base")
+node_b = NodePath("..")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Leg2" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333306, 0.305792, -0.106896)
+collision_layer = 64
+collision_mask = 65
+mass = 0.1
+script = ExtResource("2_bfj0u")
+MINIMUM_DAMAGE_THRESHOLD = 125.0
+FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
+THRESHOLDS = Array[float]([800.0, 0.0])
+
+[node name="Leg" type="MeshInstance3D" parent="Leg2"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_aoex5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Leg2"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_gpkpn")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Leg2"]
+node_a = NodePath("../../Base")
+node_b = NodePath("..")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Leg3" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337198, 0.305792, 0.287029)
+collision_layer = 64
+collision_mask = 65
+mass = 0.1
+script = ExtResource("2_bfj0u")
+MINIMUM_DAMAGE_THRESHOLD = 125.0
+FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
+THRESHOLDS = Array[float]([800.0, 0.0])
+
+[node name="Leg" type="MeshInstance3D" parent="Leg3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+mesh = ExtResource("2_aoex5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Leg3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_gpkpn")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Leg3"]
+node_a = NodePath("../../Base")
+node_b = NodePath("..")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Leg4" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333306, 0.305792, 0.287029)
+collision_layer = 64
+collision_mask = 65
+mass = 0.1
+script = ExtResource("2_bfj0u")
+MINIMUM_DAMAGE_THRESHOLD = 125.0
+FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
+THRESHOLDS = Array[float]([800.0, 0.0])
+
+[node name="Leg" type="MeshInstance3D" parent="Leg4"]
+transform = Transform3D(-1, 0, 0, 0, 1, 8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
+mesh = ExtResource("2_aoex5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Leg4"]
+transform = Transform3D(-1, 0, 0, 0, 1, 8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_gpkpn")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Leg4"]
+node_a = NodePath("../../Base")
+node_b = NodePath("..")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0

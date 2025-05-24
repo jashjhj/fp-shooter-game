@@ -10,6 +10,7 @@ height = 1.8
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("GUN")]
 collision_layer = 16
+collision_mask = 113
 script = ExtResource("1_oul6g")
 GUN = NodePath("Torso/Head/WelrodSpecial")
 

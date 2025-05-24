@@ -22,14 +22,18 @@ size = Vector3(0.043457, 0.0178223, 0.017334)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bhpic"]
 size = Vector3(0.0100098, 0.0564728, 0.109375)
 
-[node name="WelrodSpecial" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION")]
+[node name="WelrodSpecial" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION", "ADS_CAM_POS")]
 script = ExtResource("1_vac1r")
 trigger_functions = [NodePath("Model/Gun_Action/Gun_Part_Listener")]
 GUN_MODEL = NodePath("Model")
 INSPECT_POSITION = NodePath("Inspect_Pos")
+ADS_CAM_POS = NodePath("Model/ADS_Cam_pos")
 metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 
 [node name="Model" type="Node3D" parent="."]
+
+[node name="ADS_Cam_pos" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0192832, 0.143276, 0.303929)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.000891544, 0.0325087, 0.0170356)

@@ -10,6 +10,7 @@ signal trigger;
 @export var GUN_MODEL:Node3D;
 @export var INSPECT_POSITION:Node3D;
 @export var HOLD_POSITION:Node3D;
+@export var ADS_CAM_POS:Node3D;
 
 var is_inspecting := false;
 

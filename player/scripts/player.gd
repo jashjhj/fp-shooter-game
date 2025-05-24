@@ -21,6 +21,9 @@ var is_mouse_focused = true;
 
 
 var CAMERA_CAPTURED:bool = false;
+var aiming_down_sights:bool = false;
+
+
 
 func _ready():
 	Globals.PLAYER = self;
@@ -48,6 +51,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		if(GUN.is_inspecting == true and Input.is_action_pressed("rotate_during_inspect")):
 			GUN.rotate_inspect_node(event.relative * Settings.MouseSensitivity)
 		
+	if(GUN.is_inspecting == false):
+		if(event.is_action_pressed("aim_down_sights")):
+			aiming_down_sights = true;
+		if(event.is_action_released("aim_down_sights")):
+			aiming_down_sights = false;
+	else:
+		aiming_down_sights = false;
+	
 	
 	if(is_mouse_focused == true):
 		if event.is_action_pressed("interact_0"): # Left click
@@ -103,6 +114,13 @@ func _process(delta:float) -> void:
 	HEAD.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
 	
 	mouse_input = Vector2.ZERO;
+	
+	if(aiming_down_sights):
+		CAMERA.position = CAMERA.position.lerp(HEAD.global_basis.inverse()*(GUN.ADS_CAM_POS.global_position - HEAD.global_position), min(1, delta*5));
+		#CAMERA.basis = Quaternion(CAMERA.basis).slerp(Quaternion(HEAD.global_basis.inverse()*GUN.ADS_CAM_POS.global_basis), min(1, delta*5))
+	else:
+		CAMERA.position = CAMERA.position.lerp(Vector3.ZERO, min(1, delta*5));
+		#CAMERA.basis = Quaternion(CAMERA.basis).slerp(Quaternion(Basis.IDENTITY), min(1, delta*5))
 	
 
 func _physics_process(delta: float) -> void:

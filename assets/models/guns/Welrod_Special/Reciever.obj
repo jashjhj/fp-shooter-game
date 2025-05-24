@@ -1,5 +1,6 @@
 # Blender 3.6.1
 # www.blender.org
+mtllib Reciever.mtl
 o Reciever
 v -0.040865 -0.041269 0.011498
 v -0.067306 0.052586 0.011498

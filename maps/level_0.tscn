@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8abipasve7ck"]
+[gd_scene load_steps=10 format=3 uid="uid://c8abipasve7ck"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_v0r8n"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="2_6po2o"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="3_ps7t7"]
+[ext_resource type="PackedScene" uid="uid://cnsjodlk4krx" path="res://npc/emeny/turret/Turret.tscn" id="4_sab5y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6po2o"]
 size = Vector3(20, 1, 20)
@@ -64,3 +65,6 @@ shadow_enabled = true
 environment = SubResource("Environment_lgvyb")
 
 [node name="Rubbish" parent="." instance=ExtResource("3_ps7t7")]
+
+[node name="Turret" parent="." instance=ExtResource("4_sab5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.99549, 0.735744, 0.763306)

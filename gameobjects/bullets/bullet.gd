@@ -8,6 +8,9 @@ class_name Bullet extends Node3D
 
 @onready var FORWARDS_RAY:RayCast3D = $RayCast3D;
 
+ #                     FLOOR + NPC + NPC_PHYSICS + Debris
+const BULLET_HIT_MASK = 1+ 32 + 64 + 4096
+
 var lifetime_start:int;
 #var speed:float;
 
@@ -27,6 +30,7 @@ func _ready() -> void:
 	velocity = direction*data.speed;
 	
 	FORWARDS_RAY.target_position = Vector3(0,0,data.speed*1.5);
+	FORWARDS_RAY.collision_mask = BULLET_HIT_MASK
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -97,9 +101,17 @@ func draw_trail(vector): # not working yet
 func hit_object():
 	#print("Bullet hit " + str(FORWARDS_RAY.get_collision_point()))
 	
+	var collider = FORWARDS_RAY.get_collider();
+	if(collider is Hittable):
+		collider.hit(velocity.length()*velocity.length() * data.mass)
+	
+	if(collider is RigidBody3D):
+		collider.apply_impulse(velocity*data.mass, FORWARDS_RAY.get_collision_point())
+
+	
 	#add bullet hole
 	var bullet_hole_inst = preload("res://gameobjects/bullets/hole/bullet_hole.tscn").instantiate()
-	get_tree().get_current_scene().add_child(bullet_hole_inst);
+	collider.add_child(bullet_hole_inst);
 	Globals.RUBBISH_COLLECTOR.add_rubbish(bullet_hole_inst);
 	bullet_hole_inst.global_position = FORWARDS_RAY.get_collision_point() + FORWARDS_RAY.get_collision_normal() * 0.01;
 	if(FORWARDS_RAY.get_collision_normal().dot(Vector3.RIGHT) != 0):
