@@ -96,9 +96,10 @@ func _process(delta:float) -> void:
 	#Camera rotation
 	#camera_rot_x += mouse_velocity.x * -Settings.MouseSensitivity.x * delta
 	#camera_rot_y += mouse_velocity.y * -Settings.MouseSensitivity.y * delta
-	
-	camera_rot_x += mouse_input.x * -Settings.MouseSensitivity.x
-	camera_rot_y += mouse_input.y * -Settings.MouseSensitivity.y
+	var mouse_vector := mouse_input * -Settings.MouseSensitivity
+	if(aiming_down_sights): mouse_vector *= Settings.ADS_Sensitivity_Mult
+	camera_rot_x += mouse_vector.x
+	camera_rot_y += mouse_vector.y
 	
 	
 	transform.basis = Basis();

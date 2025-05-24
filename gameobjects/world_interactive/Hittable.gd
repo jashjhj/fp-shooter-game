@@ -26,7 +26,8 @@ func hit(energy:float):
 	for i in range(0, number_of_thresholds):
 		if(has_been_freed[i] == false):
 			if(hp < THRESHOLDS[i]):
-				FREE_ON_THRESHOLD[i].queue_free()
+				if(FREE_ON_THRESHOLD[i] != null): # If not previously freed,
+					FREE_ON_THRESHOLD[i].queue_free()
 				has_been_freed[i] = true;
 		
 

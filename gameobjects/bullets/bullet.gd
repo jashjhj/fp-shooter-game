@@ -105,6 +105,7 @@ func hit_object():
 	if(collider is Hittable):
 		collider.hit(velocity.length()*velocity.length() * data.mass)
 	
+	
 	if(collider is RigidBody3D):
 		collider.apply_impulse(velocity*data.mass, FORWARDS_RAY.get_collision_point())
 

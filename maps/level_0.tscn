@@ -68,3 +68,6 @@ environment = SubResource("Environment_lgvyb")
 
 [node name="Turret" parent="." instance=ExtResource("4_sab5y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.99549, 0.735744, 0.763306)
+
+[node name="Turret2" parent="." instance=ExtResource("4_sab5y")]
+transform = Transform3D(-0.999993, 0, -0.00366702, 0.00105379, 0.95782, -0.287367, 0.00351235, -0.287369, -0.957813, -2.25693, 1.91215, -2.5922)
