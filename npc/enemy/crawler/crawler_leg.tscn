@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cck2i0r0uriym"]
+[gd_scene load_steps=11 format=3 uid="uid://cck2i0r0uriym"]
 
 [ext_resource type="Script" uid="uid://sel62qjtekyj" path="res://npc/enemy/crawler/crawler_leg.gd" id="1_42w6q"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="2_pmr1i"]
@@ -20,6 +20,10 @@ top_radius = 0.012
 bottom_radius = 0.0
 height = 0.4
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nlsi1"]
+radius = 0.00924713
+height = 0.344872
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qeov"]
 radius = 0.0140135
 height = 0.204708
@@ -32,7 +36,11 @@ height = 0.397537
 script = ExtResource("1_42w6q")
 UPPER_LEG = NodePath("Upper Leg")
 LOWER_LEG = NodePath("Lower Leg")
-DESTROY_SIGNAL = NodePath("Upper Leg/Area3D/Hit_Signal")
+DESTROY_SIGNAL = NodePath("Hit_Signal")
+
+[node name="Hit_Signal" type="Node" parent="."]
+script = ExtResource("4_nlsi1")
+metadata/_custom_type_script = "uid://da5p3e6j010qa"
 
 [node name="Upper Leg" type="Node3D" parent="."]
 
@@ -44,15 +52,11 @@ mesh = SubResource("CylinderMesh_wh3jt")
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("2_pmr1i")
-HITTABLE = [null, NodePath("Hit_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody"), null]
+HITTABLE = [NodePath("../../Hit_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Upper Leg/Area3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.101986)
 shape = SubResource("CapsuleShape3D_kssld")
-
-[node name="Hit_Signal" type="Node" parent="Upper Leg/Area3D"]
-script = ExtResource("4_nlsi1")
-metadata/_custom_type_script = "uid://da5p3e6j010qa"
 
 [node name="Lower Leg" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.201251)
@@ -60,6 +64,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.201251)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lower Leg"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.2)
 mesh = SubResource("CylinderMesh_pmr1i")
+
+[node name="Area3D" type="Area3D" parent="Lower Leg" node_paths=PackedStringArray("HITTABLE")]
+script = ExtResource("2_pmr1i")
+HITTABLE = [NodePath("../../Hit_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lower Leg/Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.177406)
+shape = SubResource("CapsuleShape3D_nlsi1")
 
 [node name="Debris_rigidbody" type="RigidBody3D" parent="."]
 collision_layer = 4096

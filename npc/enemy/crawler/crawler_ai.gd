@@ -163,7 +163,7 @@ func do_legs():
 		
 		targets_right[4].global_position = LEAD_R.global_position
 		targets_right[4].global_position += global_basis*current_velocity.normalized() * GAIT_STEP_LENGTH
-		Debug.point(targets_right[4].global_position)
+		#Debug.point(targets_right[4].global_position)
 		targets_right.push_front(targets_right.pop_back())
 		right_step_number += 1;
 	
