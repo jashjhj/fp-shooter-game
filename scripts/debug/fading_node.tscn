@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cp4y5wf12eti7" path="res://scripts/debug/fading_point.gd" id="1_e6q5i"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fqb20"]
-radius = 0.002
-height = 0.004
+radius = 0.02
+height = 0.04
 radial_segments = 6
 rings = 2
 

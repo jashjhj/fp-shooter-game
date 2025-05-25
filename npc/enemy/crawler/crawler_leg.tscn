@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cck2i0r0uriym"]
+
+[ext_resource type="Script" uid="uid://sel62qjtekyj" path="res://npc/enemy/crawler/crawler_leg.gd" id="1_42w6q"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wh3jt"]
+resource_local_to_scene = true
+top_radius = 0.01
+bottom_radius = 0.012
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pmr1i"]
+top_radius = 0.012
+bottom_radius = 0.0
+height = 0.4
+
+[node name="CrawlerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG")]
+script = ExtResource("1_42w6q")
+UPPER_LEG = NodePath("Upper Leg")
+LOWER_LEG = NodePath("Lower Leg")
+
+[node name="Upper Leg" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Upper Leg"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.1)
+mesh = SubResource("CylinderMesh_wh3jt")
+
+[node name="Lower Leg" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.206379)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lower Leg"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.2)
+mesh = SubResource("CylinderMesh_pmr1i")

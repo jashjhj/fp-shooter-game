@@ -52,7 +52,6 @@ func _physics_process(delta: float) -> void:
 		queue_free();
 	
 	
-	var speed = velocity.length()
 	
 	
 	
@@ -96,14 +95,15 @@ var max_ricochets:int = 20;
 
 func hit_object() -> int:
 	#print("Bullet hit " + str(FORWARDS_RAY.get_collision_point()))
+	var collision_normal:Vector3 = FORWARDS_RAY.get_collision_normal()
 	
-	var angle:float = asin(-velocity.normalized().dot(FORWARDS_RAY.get_collision_normal()))
+	var angle:float = asin(-velocity.normalized().dot(collision_normal))
 	var delta_v:Vector3;
 	
 	var result:int = 2;
 	
 	if(angle < data.ricochet_angle):#Ricochet
-		delta_v = -velocity.dot(FORWARDS_RAY.get_collision_normal())*FORWARDS_RAY.get_collision_normal() * (1.0+data.NEL_coefficient)
+		delta_v = -velocity.dot(collision_normal)*collision_normal * (1.0+data.NEL_coefficient)
 		velocity += delta_v # bounces it
 		
 		current_ricochet += 1
@@ -117,11 +117,10 @@ func hit_object() -> int:
 	var damage = data.damage * (delta_v.length()/data.speed)
 	
 	
-
 	
 	
 	if(collider is RigidBody3D):
-		collider.apply_impulse(delta_v*data.mass, FORWARDS_RAY.get_collision_point())
+		collider.apply_impulse(-delta_v*data.mass, FORWARDS_RAY.get_collision_point())
 		
 		if(collider is Hittable_RB):
 			for hittable in collider.HITTABLE:
@@ -138,11 +137,11 @@ func hit_object() -> int:
 	var bullet_hole_inst = preload("res://gameobjects/bullets/hole/bullet_hole.tscn").instantiate()
 	collider.add_child(bullet_hole_inst);
 	Globals.RUBBISH_COLLECTOR.add_rubbish(bullet_hole_inst);
-	bullet_hole_inst.global_position = FORWARDS_RAY.get_collision_point() + FORWARDS_RAY.get_collision_normal() * 0.01;
-	if(FORWARDS_RAY.get_collision_normal().dot(Vector3.RIGHT) != 0):
-		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.UP.cross(FORWARDS_RAY.get_collision_normal()), FORWARDS_RAY.get_collision_normal());
+	bullet_hole_inst.global_position = FORWARDS_RAY.get_collision_point() + collision_normal * 0.01;
+	if(collision_normal.dot(Vector3.RIGHT) != 0):
+		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.UP.cross(collision_normal), collision_normal);
 	else: # normal is vertical, therefore use RIGHT to generate perpendicularity
-		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.RIGHT.cross(FORWARDS_RAY.get_collision_normal()), FORWARDS_RAY.get_collision_normal());
+		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.RIGHT.cross(collision_normal), collision_normal);
 	
 	bullet_hole_inst.rotate_object_local(Vector3.UP, randf()*2*PI) # make it random rotation
 	

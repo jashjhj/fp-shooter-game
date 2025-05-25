@@ -241,10 +241,11 @@ shadow_enabled = true
 spot_range = 4.0
 spot_angle = 21.4811
 
-[node name="Cam_Collider" type="Area3D" parent="Base/Cradle2/Gun/Camera2"]
-collision_layer = 0
+[node name="Cam_Collider" type="Area3D" parent="Base/Cradle2/Gun/Camera2" node_paths=PackedStringArray("HITTABLE")]
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("10_yqngf")
+HITTABLE = [NodePath("../Hit_Free")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cradle2/Gun/Camera2/Cam_Collider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7921, 0.14058)
