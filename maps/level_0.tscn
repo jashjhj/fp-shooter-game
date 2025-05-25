@@ -25,6 +25,8 @@ process_mode = 1
 [sub_resource type="Environment" id="Environment_lgvyb"]
 background_mode = 2
 sky = SubResource("Sky_sab5y")
+ssao_enabled = true
+glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_sab5y"]
 size = Vector3(0.3, 2, 5)

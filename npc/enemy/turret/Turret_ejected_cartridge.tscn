@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://b55e6r42cmrnt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ua411"]
+friction = 0.75
+bounce = 0.41
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bm274"]
+cull_mode = 2
+albedo_color = Color(0.643779, 0.507678, 0.141569, 1)
+metallic = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j45xt"]
+material = SubResource("StandardMaterial3D_bm274")
+top_radius = 0.007
+bottom_radius = 0.01
+height = 0.03
+radial_segments = 6
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1f4g8"]
+material = SubResource("StandardMaterial3D_bm274")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.07
+radial_segments = 6
+rings = 0
+cap_top = false
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bgwaj"]
+height = 0.0952759
+radius = 0.00878906
+
+[node name="Turret_Casing" type="RigidBody3D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+collision_layer = 4096
+collision_mask = 97
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_ua411")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.0257154)
+mesh = SubResource("CylinderMesh_j45xt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.0190517)
+mesh = SubResource("CylinderMesh_1f4g8")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.00666371)
+shape = SubResource("CylinderShape3D_bgwaj")

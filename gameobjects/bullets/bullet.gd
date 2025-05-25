@@ -33,6 +33,7 @@ func _ready() -> void:
 	
 	FORWARDS_RAY.target_position = Vector3(0,0,data.speed*1.5);
 	FORWARDS_RAY.collision_mask = BULLET_HIT_MASK
+	FORWARDS_RAY.collide_with_areas = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -88,32 +89,6 @@ func _physics_process(delta: float) -> void:
 
 
 
-func draw_trail(vector):
-	var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
-	trail.lifetime = 0.1;
-	trail.segment_origin = global_position;
-	trail.segment_end = global_position + vector;
-	
-	trail.material = data.trail_material;
-	
-	trail.up = Vector3.UP;
-	get_tree().get_current_scene().add_child(trail);
-	trail.global_position = global_position
-
-	
-	var trail2 = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
-	trail2.lifetime = 0.1;
-	trail2.segment_origin = global_position;
-	trail2.segment_end = global_position + vector;
-	
-	trail2.material = data.trail_material;
-	
-	trail2.up = Vector3.UP.cross(vector)
-	get_tree().get_current_scene().add_child(trail2);
-	trail2.global_position = global_position;
-
-
-
 var current_ricochet:int = 0;
 var max_ricochets:int = 20;
 
@@ -141,15 +116,22 @@ func hit_object() -> int:
 	var collider = FORWARDS_RAY.get_collider();
 	var damage = data.damage * (delta_v.length()/data.speed)
 	
-	if(collider is Hittable):
-		#print("hit with force: ", damage) # use this for figuring out how much damage needs doing
-		collider.hit(damage) # 1/2mv^2
+	
+
 	
 	
 	if(collider is RigidBody3D):
 		collider.apply_impulse(delta_v*data.mass, FORWARDS_RAY.get_collision_point())
-
+		
+		if(collider is Hittable_RB):
+			for hittable in collider.HITTABLE:
+				if(hittable != null):
+					hittable.hit(damage);
 	
+	if(collider is Hittable_Collider):
+		for hittable in collider.HITTABLE:
+			if(hittable != null):
+				hittable.hit(damage);
 	
 	
 	#add bullet hole
@@ -165,3 +147,33 @@ func hit_object() -> int:
 	bullet_hole_inst.rotate_object_local(Vector3.UP, randf()*2*PI) # make it random rotation
 	
 	return result
+
+
+
+
+
+
+
+func draw_trail(vector):
+	var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
+	trail.lifetime = 0.1;
+	trail.segment_origin = global_position;
+	trail.segment_end = global_position + vector;
+	
+	trail.material = data.trail_material;
+	
+	trail.up = Vector3.UP;
+	get_tree().get_current_scene().add_child(trail);
+	trail.global_position = global_position
+
+	
+	var trail2 = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
+	trail2.lifetime = 0.1;
+	trail2.segment_origin = global_position;
+	trail2.segment_end = global_position + vector;
+	
+	trail2.material = data.trail_material;
+	
+	trail2.up = Vector3.UP.cross(vector)
+	get_tree().get_current_scene().add_child(trail2);
+	trail2.global_position = global_position;

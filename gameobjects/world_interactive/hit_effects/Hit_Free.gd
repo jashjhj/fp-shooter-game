@@ -1,7 +1,7 @@
-class_name Hittable extends RigidBody3D
+class_name Hit_Free extends Hit_Component
 
-@export var MAX_HP:float = 1000;
-@export var MINIMUM_DAMAGE_THRESHOLD:float = 200;
+@export var MAX_HP:float = 5;
+@export var MINIMUM_DAMAGE_THRESHOLD:float = 1;
 
 @export var FREE_ON_THRESHOLD:Array[Node];
 @export var THRESHOLDS:Array[float];
@@ -9,6 +9,8 @@ class_name Hittable extends RigidBody3D
 @onready var hp = MAX_HP;
 var has_been_freed:Array[bool] = [];
 var number_of_thresholds:int;
+
+signal on_hit
 
 func _ready() -> void:
 	for i in range(0, len(THRESHOLDS)):
@@ -18,10 +20,10 @@ func _ready() -> void:
 		has_been_freed.append(false);
 	number_of_thresholds = len(THRESHOLDS)
 
-func hit(energy:float):
+func hit(damage:float):
 	
-	if(energy > MINIMUM_DAMAGE_THRESHOLD):
-		hp -= energy - MINIMUM_DAMAGE_THRESHOLD
+	if(damage > MINIMUM_DAMAGE_THRESHOLD):
+		hp -= damage - MINIMUM_DAMAGE_THRESHOLD
 	
 	for i in range(0, number_of_thresholds):
 		if(has_been_freed[i] == false):
@@ -29,7 +31,8 @@ func hit(energy:float):
 				if(FREE_ON_THRESHOLD[i] != null): # If not previously freed,
 					FREE_ON_THRESHOLD[i].queue_free()
 				has_been_freed[i] = true;
-		
+	
+	on_hit.emit()
 
 func _destroyed():
 	destroy()

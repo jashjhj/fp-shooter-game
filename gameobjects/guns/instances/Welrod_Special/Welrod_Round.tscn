@@ -35,13 +35,13 @@ speed = 300
 drag = 0.1
 gravity = 9.81
 mass = 0.005
-damage = 250
+damage = 10
 base_inaccuracy = 0.008
 amount = 1
 NEL_coefficient = 0.8
 ricochet_angle = 0.523599
 trail_material = SubResource("ShaderMaterial_urq71")
-lifetime = 2000
+lifetime = 2.0
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
 [node name="Welrod_Round" type="Node3D" node_paths=PackedStringArray("BULLET_SOURCE", "RIGIDBODY", "LIVE_ROUND_MODEL", "SPENT_ROUND_MODEL")]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://cnsjodlk4krx"]
+[gd_scene load_steps=51 format=3 uid="uid://cnsjodlk4krx"]
 
 [ext_resource type="Script" uid="uid://b053l48nxqp6f" path="res://npc/enemy/turret/turret_ai.gd" id="1_eymqg"]
 [ext_resource type="ArrayMesh" uid="uid://b70gfyf52nfej" path="res://assets/models/npcs/turret/Base.obj" id="1_sskfx"]
 [ext_resource type="ArrayMesh" uid="uid://did5yni3yf6gx" path="res://assets/models/npcs/turret/Leg.obj" id="2_aoex5"]
-[ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/Hittable.gd" id="2_bfj0u"]
+[ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/hit_effects/Hit_Free.gd" id="2_bfj0u"]
 [ext_resource type="ArrayMesh" uid="uid://dur68usvkofo4" path="res://assets/models/npcs/turret/ammo_crate.obj" id="4_bfj0u"]
 [ext_resource type="Texture2D" uid="uid://ogtpii4v750e" path="res://assets/models/npcs/turret/battery.png" id="5_e10rt"]
 [ext_resource type="ArrayMesh" uid="uid://cqqpw3a6j5o2i" path="res://assets/models/npcs/turret/battery.obj" id="6_ytfm6"]
@@ -12,7 +12,11 @@
 [ext_resource type="ArrayMesh" uid="uid://lk48osxu32u8" path="res://assets/models/npcs/turret/motor.obj" id="8_mewfn"]
 [ext_resource type="ArrayMesh" uid="uid://b46gi6ccrsn8u" path="res://assets/models/npcs/turret/cradle.obj" id="9_3f3ei"]
 [ext_resource type="ArrayMesh" uid="uid://c0cguakswbqnw" path="res://assets/models/npcs/turret/gun.obj" id="10_3f3ei"]
+[ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittable_RB.gd" id="10_ah1fg"]
+[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="10_yqngf"]
+[ext_resource type="Script" uid="uid://dn68rquobbhe6" path="res://gameobjects/world_interactive/debris_spawner.gd" id="11_igmkq"]
 [ext_resource type="ArrayMesh" uid="uid://dgierqv5cjwto" path="res://assets/models/npcs/turret/camera.obj" id="11_n3noi"]
+[ext_resource type="PackedScene" uid="uid://b55e6r42cmrnt" path="res://npc/enemy/turret/Turret_ejected_cartridge.tscn" id="12_morib"]
 [ext_resource type="Script" uid="uid://do4am13na3svu" path="res://gameobjects/bullets/Bullet_Source.gd" id="12_ro2dr"]
 [ext_resource type="ArrayMesh" uid="uid://dw250qx4q34ip" path="res://assets/models/npcs/turret/Front_Guard.obj" id="12_scij8"]
 [ext_resource type="ArrayMesh" uid="uid://drfrx02wahh55" path="res://assets/models/npcs/turret/Front_Support.000.obj" id="13_0fiss"]
@@ -20,10 +24,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bfj0u"]
 size = Vector3(0.749756, 0.0247192, 0.468384)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ov44l"]
-height = 0.182007
-radius = 0.0390625
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ah1fg"]
 render_priority = 0
@@ -37,20 +37,23 @@ speed = 300
 drag = 0.1
 gravity = 9.81
 mass = 0.005
-damage = 250
+damage = 10
 base_inaccuracy = 0.05
 amount = 1
 NEL_coefficient = 0.8
 ricochet_angle = 0.523599
 trail_material = SubResource("ShaderMaterial_ah1fg")
-lifetime = 1
+lifetime = 2.0
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ov44l"]
-points = PackedVector3Array(-0.029462, 0.751191, 0.0277901, -0.029462, 0.783884, -0.0728382, -0.00906124, 0.836132, -0.458631, -0.00640804, 0.829731, -0.458631, 0, 0.827084, -0.458631, 0.029462, 0.751191, 0.0277901, -0.029462, 0.793972, 0.149242, -0.029462, 0.889671, -0.0728382, -0.00640804, 0.842534, -0.458631, -0.029462, 0.922381, 0.0277901, 0.00640227, 0.829731, -0.458631, 0.00905547, 0.836132, -0.458631, 0.029462, 0.783884, -0.0728382, 0.029462, 0.793972, 0.149242, -0.0194433, 0.818471, 0.167065, -0.029462, 0.879567, 0.149242, 0, 0.845198, -0.458631, 0.029462, 0.922381, 0.0277901, 0.00640227, 0.842534, -0.458631, 0.029462, 0.889671, -0.0728382, 0.029462, 0.879567, 0.149242, 0.0194375, 0.818471, 0.167065, -0.0194433, 0.855085, 0.167065, 0.0194375, 0.855085, 0.167065)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqngf"]
+diffuse_mode = 1
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_scij8"]
-points = PackedVector3Array(-0.00864017, 0.749698, -0.095586, 0.00863588, 0.749698, -0.095586, -0.021881, 0.75745, -0.095586, -0.00864017, 0.758941, -0.183692, 0.021881, 0.75745, -0.095586, 0.00863588, 0.758941, -0.183692, -0.00988243, 0.802789, -0.0956045, -0.021881, 0.778385, -0.0955952, -0.021881, 0.766698, -0.183692, 0.00390242, 0.768467, -0.189886, 0.0099167, 0.76598, -0.189886, 0.021881, 0.778385, -0.0955952, 0.00987815, 0.802789, -0.0956045, 0.021881, 0.766698, -0.183692, 0.015931, 0.768467, -0.189886, -0.00988243, 0.804052, -0.139644, -0.021881, 0.784264, -0.183683, 0.00141361, 0.774482, -0.189886, 0.021881, 0.784264, -0.183683, 0.00987815, 0.804052, -0.139644, 0.0184241, 0.774482, -0.189886, -0.00988243, 0.805309, -0.183674, 0.00390242, 0.780497, -0.189886, 0.015931, 0.780497, -0.189886, 0.00987815, 0.805309, -0.183674, 0.0099167, 0.782991, -0.189886)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_igmkq"]
+data = PackedVector3Array(-0.0099, 0.8041, -0.1396, -0.0115, 0.7875, -0.1396, -0.0099, 0.8053, -0.1837, -0.0099, 0.8053, -0.1837, -0.0115, 0.7875, -0.1396, -0.0115, 0.7896, -0.1837, -0.0099, 0.8053, -0.1837, -0.0115, 0.7896, -0.1837, 0.0099, 0.8053, -0.1837, 0.0099, 0.8053, -0.1837, -0.0115, 0.7896, -0.1837, 0.0115, 0.7896, -0.1837, 0.0099, 0.8041, -0.1396, 0.0115, 0.7875, -0.1396, 0.0099, 0.8028, -0.0956, 0.0099, 0.8028, -0.0956, 0.0115, 0.7875, -0.1396, 0.0115, 0.7854, -0.0956, 0.0099, 0.8028, -0.0956, 0.0115, 0.7854, -0.0956, -0.0099, 0.8028, -0.0956, -0.0099, 0.8028, -0.0956, 0.0115, 0.7854, -0.0956, -0.0115, 0.7854, -0.0956, 0.0219, 0.7575, -0.0956, 0.0219, 0.7667, -0.1837, 0.0086, 0.7497, -0.0956, 0.0086, 0.7497, -0.0956, 0.0219, 0.7667, -0.1837, 0.0086, 0.7589, -0.1837, -0.0099, 0.8041, -0.1396, 0.0099, 0.8041, -0.1396, -0.0099, 0.8028, -0.0956, -0.0099, 0.8028, -0.0956, 0.0099, 0.8041, -0.1396, 0.0099, 0.8028, -0.0956, -0.0099, 0.8041, -0.1396, 0.0099, 0.8053, -0.1837, 0.0099, 0.8041, -0.1396, -0.0099, 0.8053, -0.1837, 0.0099, 0.8053, -0.1837, -0.0099, 0.8041, -0.1396, -0.021, 0.7602, -0.0956, -0.021, 0.7756, -0.0956, -0.021, 0.7602, -0.1012, -0.021, 0.7602, -0.1012, -0.021, 0.7756, -0.0956, -0.021, 0.7756, -0.1012, 0.0219, 0.7843, -0.1837, 0.0219, 0.7667, -0.1837, 0.0219, 0.7813, -0.1396, 0.0219, 0.7813, -0.1396, 0.0219, 0.7667, -0.1837, 0.0219, 0.7784, -0.0956, 0.0219, 0.7784, -0.0956, 0.0219, 0.7667, -0.1837, 0.0219, 0.7575, -0.0956, 0.0114, 0.7869, -0.1837, -0.0114, 0.7869, -0.1837, 0.0114, 0.7867, -0.1763, 0.0114, 0.7867, -0.1763, -0.0114, 0.7869, -0.1837, -0.0114, 0.7867, -0.1763, -0.0219, 0.7784, -0.0956, -0.0219, 0.7575, -0.0956, -0.0219, 0.7813, -0.1396, -0.0219, 0.7813, -0.1396, -0.0219, 0.7575, -0.0956, -0.0219, 0.7843, -0.1837, -0.0219, 0.7843, -0.1837, -0.0219, 0.7575, -0.0956, -0.0219, 0.7667, -0.1837, 0.0086, 0.7589, -0.1837, -0.0086, 0.7589, -0.1837, 0.0086, 0.7497, -0.0956, 0.0086, 0.7497, -0.0956, -0.0086, 0.7589, -0.1837, -0.0086, 0.7497, -0.0956, -0.0219, 0.7575, -0.0956, 0.0219, 0.7575, -0.0956, -0.0086, 0.7497, -0.0956, -0.0086, 0.7497, -0.0956, 0.0219, 0.7575, -0.0956, 0.0086, 0.7497, -0.0956, -0.0201, 0.782, -0.1837, -0.0201, 0.7689, -0.1837, -0.0201, 0.7818, -0.1763, -0.0201, 0.7818, -0.1763, -0.0201, 0.7689, -0.1837, -0.0201, 0.7688, -0.1763, -0.0219, 0.7667, -0.1837, -0.0219, 0.7575, -0.0956, -0.0086, 0.7589, -0.1837, -0.0086, 0.7589, -0.1837, -0.0219, 0.7575, -0.0956, -0.0086, 0.7497, -0.0956, 0.0115, 0.7854, -0.0956, 0.0219, 0.7784, -0.0956, -0.0115, 0.7854, -0.0956, -0.0115, 0.7854, -0.0956, 0.0219, 0.7784, -0.0956, -0.0219, 0.7784, -0.0956, 0.0115, 0.7875, -0.1396, 0.0219, 0.7813, -0.1396, 0.0115, 0.7854, -0.0956, 0.0115, 0.7854, -0.0956, 0.0219, 0.7813, -0.1396, 0.0219, 0.7784, -0.0956, 0.0115, 0.7896, -0.1837, 0.0219, 0.7843, -0.1837, 0.0115, 0.7875, -0.1396, 0.0115, 0.7875, -0.1396, 0.0219, 0.7843, -0.1837, 0.0219, 0.7813, -0.1396, 0.0099, 0.8053, -0.1837, 0.0115, 0.7896, -0.1837, 0.0099, 0.8041, -0.1396, 0.0099, 0.8041, -0.1396, 0.0115, 0.7896, -0.1837, 0.0115, 0.7875, -0.1396, -0.0114, 0.7869, -0.1837, -0.0201, 0.782, -0.1837, -0.0114, 0.7867, -0.1763, -0.0114, 0.7867, -0.1763, -0.0201, 0.782, -0.1837, -0.0201, 0.7818, -0.1763, -0.0115, 0.7875, -0.1396, -0.0219, 0.7813, -0.1396, -0.0115, 0.7896, -0.1837, -0.0115, 0.7896, -0.1837, -0.0219, 0.7813, -0.1396, -0.0219, 0.7843, -0.1837, -0.0115, 0.7854, -0.0956, -0.0219, 0.7784, -0.0956, -0.0115, 0.7875, -0.1396, -0.0115, 0.7875, -0.1396, -0.0219, 0.7784, -0.0956, -0.0219, 0.7813, -0.1396, -0.0099, 0.8028, -0.0956, -0.0115, 0.7854, -0.0956, -0.0099, 0.8041, -0.1396, -0.0099, 0.8041, -0.1396, -0.0115, 0.7854, -0.0956, -0.0115, 0.7875, -0.1396, -0.0201, 0.7689, -0.1837, -0.0201, 0.782, -0.1837, -0.0219, 0.7667, -0.1837, -0.0219, 0.7667, -0.1837, -0.0201, 0.782, -0.1837, -0.0219, 0.7843, -0.1837, 0.0201, 0.782, -0.1837, 0.0201, 0.7689, -0.1837, 0.0219, 0.7843, -0.1837, 0.0219, 0.7843, -0.1837, 0.0201, 0.7689, -0.1837, 0.0219, 0.7667, -0.1837, -0.0201, 0.782, -0.1837, -0.0114, 0.7869, -0.1837, -0.0219, 0.7843, -0.1837, -0.0219, 0.7843, -0.1837, -0.0114, 0.7869, -0.1837, -0.0115, 0.7896, -0.1837, -0.0114, 0.7869, -0.1837, 0.0114, 0.7869, -0.1837, -0.0115, 0.7896, -0.1837, -0.0115, 0.7896, -0.1837, 0.0114, 0.7869, -0.1837, 0.0115, 0.7896, -0.1837, 0.0114, 0.7869, -0.1837, 0.0201, 0.782, -0.1837, 0.0115, 0.7896, -0.1837, 0.0115, 0.7896, -0.1837, 0.0201, 0.782, -0.1837, 0.0219, 0.7843, -0.1837, 0.0086, 0.7617, -0.1837, -0.0086, 0.7617, -0.1837, 0.0086, 0.7589, -0.1837, 0.0219, 0.7667, -0.1837, 0.0086, 0.7617, -0.1837, 0.0086, 0.7589, -0.1837, 0.0201, 0.7689, -0.1837, 0.0086, 0.7617, -0.1837, 0.0219, 0.7667, -0.1837, 0.0086, 0.7589, -0.1837, -0.0086, 0.7617, -0.1837, -0.0086, 0.7589, -0.1837, -0.0086, 0.7617, -0.1837, -0.0201, 0.7689, -0.1837, -0.0086, 0.7589, -0.1837, -0.0086, 0.7589, -0.1837, -0.0201, 0.7689, -0.1837, -0.0219, 0.7667, -0.1837, -0.0201, 0.7818, -0.1763, -0.0201, 0.7688, -0.1763, 0.0201, 0.7818, -0.1763, 0.0201, 0.7818, -0.1763, -0.0201, 0.7688, -0.1763, 0.0201, 0.7688, -0.1763, 0.0201, 0.7688, -0.1763, -0.0201, 0.7688, -0.1763, 0.0086, 0.7615, -0.1763, 0.0086, 0.7615, -0.1763, -0.0201, 0.7688, -0.1763, -0.0086, 0.7615, -0.1763, -0.0114, 0.7867, -0.1763, -0.0201, 0.7818, -0.1763, 0.0114, 0.7867, -0.1763, 0.0114, 0.7867, -0.1763, -0.0201, 0.7818, -0.1763, 0.0201, 0.7818, -0.1763, 0.0086, 0.7617, -0.1837, 0.0201, 0.7689, -0.1837, 0.0086, 0.7615, -0.1763, 0.0086, 0.7615, -0.1763, 0.0201, 0.7689, -0.1837, 0.0201, 0.7688, -0.1763, 0.0201, 0.782, -0.1837, 0.0114, 0.7869, -0.1837, 0.0201, 0.7818, -0.1763, 0.0201, 0.7818, -0.1763, 0.0114, 0.7869, -0.1837, 0.0114, 0.7867, -0.1763, 0.0201, 0.7689, -0.1837, 0.0201, 0.782, -0.1837, 0.0201, 0.7688, -0.1763, 0.0201, 0.7688, -0.1763, 0.0201, 0.782, -0.1837, 0.0201, 0.7818, -0.1763, -0.0201, 0.7689, -0.1837, -0.0086, 0.7617, -0.1837, -0.0201, 0.7688, -0.1763, -0.0201, 0.7688, -0.1763, -0.0086, 0.7617, -0.1837, -0.0086, 0.7615, -0.1763, -0.0086, 0.7617, -0.1837, 0.0086, 0.7617, -0.1837, -0.0086, 0.7615, -0.1763, -0.0086, 0.7615, -0.1763, 0.0086, 0.7617, -0.1837, 0.0086, 0.7615, -0.1763, 0.021, 0.7602, -0.0956, 0.021, 0.7756, -0.0956, 0.0219, 0.7575, -0.0956, 0.0219, 0.7575, -0.0956, 0.021, 0.7756, -0.0956, 0.0219, 0.7784, -0.0956, -0.0219, 0.7575, -0.0956, 0.021, 0.7602, -0.0956, 0.0219, 0.7575, -0.0956, 0.021, 0.7756, -0.0956, -0.021, 0.7756, -0.0956, 0.0219, 0.7784, -0.0956, -0.021, 0.7602, -0.0956, 0.021, 0.7602, -0.0956, -0.0219, 0.7575, -0.0956, 0.0219, 0.7784, -0.0956, -0.021, 0.7756, -0.0956, -0.0219, 0.7784, -0.0956, -0.021, 0.7756, -0.0956, -0.021, 0.7602, -0.0956, -0.0219, 0.7784, -0.0956, -0.0219, 0.7784, -0.0956, -0.021, 0.7602, -0.0956, -0.0219, 0.7575, -0.0956, 0.021, 0.7756, -0.1012, 0.021, 0.7602, -0.1012, -0.021, 0.7756, -0.1012, -0.021, 0.7756, -0.1012, 0.021, 0.7602, -0.1012, -0.021, 0.7602, -0.1012, 0.021, 0.7756, -0.0956, 0.021, 0.7602, -0.0956, 0.021, 0.7756, -0.1012, 0.021, 0.7756, -0.1012, 0.021, 0.7602, -0.0956, 0.021, 0.7602, -0.1012, -0.021, 0.7756, -0.0956, 0.021, 0.7756, -0.0956, -0.021, 0.7756, -0.1012, -0.021, 0.7756, -0.1012, 0.021, 0.7756, -0.0956, 0.021, 0.7756, -0.1012, 0.021, 0.7602, -0.0956, -0.021, 0.7602, -0.0956, 0.021, 0.7602, -0.1012, 0.021, 0.7602, -0.1012, -0.021, 0.7602, -0.0956, -0.021, 0.7602, -0.1012, 0.0099, 0.766, -0.1899, 0.0099, 0.766, -0.1739, 0.0159, 0.7685, -0.1899, 0.0159, 0.7685, -0.1899, 0.0099, 0.766, -0.1739, 0.0159, 0.7685, -0.1739, 0.0159, 0.7685, -0.1899, 0.0159, 0.7685, -0.1739, 0.0184, 0.7745, -0.1899, 0.0184, 0.7745, -0.1899, 0.0159, 0.7685, -0.1739, 0.0184, 0.7745, -0.1739, 0.0184, 0.7745, -0.1899, 0.0184, 0.7745, -0.1739, 0.0159, 0.7805, -0.1899, 0.0159, 0.7805, -0.1899, 0.0184, 0.7745, -0.1739, 0.0159, 0.7805, -0.1739, 0.0159, 0.7805, -0.1899, 0.0159, 0.7805, -0.1739, 0.0099, 0.783, -0.1899, 0.0099, 0.783, -0.1899, 0.0159, 0.7805, -0.1739, 0.0099, 0.783, -0.1739, 0.0099, 0.783, -0.1899, 0.0099, 0.783, -0.1739, 0.0039, 0.7805, -0.1899, 0.0039, 0.7805, -0.1899, 0.0099, 0.783, -0.1739, 0.0039, 0.7805, -0.1739, 0.0039, 0.7805, -0.1899, 0.0039, 0.7805, -0.1739, 0.0014, 0.7745, -0.1899, 0.0014, 0.7745, -0.1899, 0.0039, 0.7805, -0.1739, 0.0014, 0.7745, -0.1739, 0.0028, 0.7745, -0.1899, 0.0049, 0.7695, -0.1899, 0.0028, 0.7745, -0.185, 0.0028, 0.7745, -0.185, 0.0049, 0.7695, -0.1899, 0.0049, 0.7695, -0.185, 0.0014, 0.7745, -0.1899, 0.0014, 0.7745, -0.1739, 0.0039, 0.7685, -0.1899, 0.0039, 0.7685, -0.1899, 0.0014, 0.7745, -0.1739, 0.0039, 0.7685, -0.1739, 0.0039, 0.7685, -0.1899, 0.0039, 0.7685, -0.1739, 0.0099, 0.766, -0.1899, 0.0099, 0.766, -0.1899, 0.0039, 0.7685, -0.1739, 0.0099, 0.766, -0.1739, 0.0159, 0.7685, -0.1739, 0.0099, 0.766, -0.1739, 0.0184, 0.7745, -0.1739, 0.0184, 0.7745, -0.1739, 0.0099, 0.766, -0.1739, 0.0159, 0.7805, -0.1739, 0.0159, 0.7805, -0.1739, 0.0099, 0.766, -0.1739, 0.0099, 0.783, -0.1739, 0.0099, 0.783, -0.1739, 0.0099, 0.766, -0.1739, 0.0039, 0.7805, -0.1739, 0.0039, 0.7805, -0.1739, 0.0099, 0.766, -0.1739, 0.0014, 0.7745, -0.1739, 0.0014, 0.7745, -0.1739, 0.0099, 0.766, -0.1739, 0.0039, 0.7685, -0.1739, 0.0149, 0.7695, -0.1899, 0.0099, 0.7674, -0.1899, 0.0159, 0.7685, -0.1899, 0.0159, 0.7685, -0.1899, 0.0099, 0.7674, -0.1899, 0.0099, 0.766, -0.1899, 0.0184, 0.7745, -0.1899, 0.0149, 0.7695, -0.1899, 0.0159, 0.7685, -0.1899, 0.0099, 0.7674, -0.1899, 0.0049, 0.7695, -0.1899, 0.0099, 0.766, -0.1899, 0.017, 0.7745, -0.1899, 0.0149, 0.7695, -0.1899, 0.0184, 0.7745, -0.1899, 0.0099, 0.766, -0.1899, 0.0049, 0.7695, -0.1899, 0.0039, 0.7685, -0.1899, 0.0159, 0.7805, -0.1899, 0.017, 0.7745, -0.1899, 0.0184, 0.7745, -0.1899, 0.0049, 0.7695, -0.1899, 0.0028, 0.7745, -0.1899, 0.0039, 0.7685, -0.1899, 0.0149, 0.7795, -0.1899, 0.017, 0.7745, -0.1899, 0.0159, 0.7805, -0.1899, 0.0039, 0.7685, -0.1899, 0.0028, 0.7745, -0.1899, 0.0014, 0.7745, -0.1899, 0.0099, 0.783, -0.1899, 0.0149, 0.7795, -0.1899, 0.0159, 0.7805, -0.1899, 0.0028, 0.7745, -0.1899, 0.0049, 0.7795, -0.1899, 0.0014, 0.7745, -0.1899, 0.0099, 0.7816, -0.1899, 0.0149, 0.7795, -0.1899, 0.0099, 0.783, -0.1899, 0.0014, 0.7745, -0.1899, 0.0049, 0.7795, -0.1899, 0.0039, 0.7805, -0.1899, 0.0049, 0.7795, -0.1899, 0.0099, 0.7816, -0.1899, 0.0039, 0.7805, -0.1899, 0.0039, 0.7805, -0.1899, 0.0099, 0.7816, -0.1899, 0.0099, 0.783, -0.1899, 0.0028, 0.7745, -0.185, 0.0099, 0.7745, -0.1869, 0.0049, 0.7795, -0.185, 0.0099, 0.7816, -0.1899, 0.0049, 0.7795, -0.1899, 0.0099, 0.7816, -0.185, 0.0099, 0.7816, -0.185, 0.0049, 0.7795, -0.1899, 0.0049, 0.7795, -0.185, 0.017, 0.7745, -0.1899, 0.0149, 0.7795, -0.1899, 0.017, 0.7745, -0.185, 0.017, 0.7745, -0.185, 0.0149, 0.7795, -0.1899, 0.0149, 0.7795, -0.185, 0.0099, 0.7674, -0.1899, 0.0149, 0.7695, -0.1899, 0.0099, 0.7674, -0.185, 0.0099, 0.7674, -0.185, 0.0149, 0.7695, -0.1899, 0.0149, 0.7695, -0.185, 0.0049, 0.7695, -0.1899, 0.0099, 0.7674, -0.1899, 0.0049, 0.7695, -0.185, 0.0049, 0.7695, -0.185, 0.0099, 0.7674, -0.1899, 0.0099, 0.7674, -0.185, 0.0049, 0.7795, -0.1899, 0.0028, 0.7745, -0.1899, 0.0049, 0.7795, -0.185, 0.0049, 0.7795, -0.185, 0.0028, 0.7745, -0.1899, 0.0028, 0.7745, -0.185, 0.0149, 0.7795, -0.1899, 0.0099, 0.7816, -0.1899, 0.0149, 0.7795, -0.185, 0.0149, 0.7795, -0.185, 0.0099, 0.7816, -0.1899, 0.0099, 0.7816, -0.185, 0.0149, 0.7695, -0.1899, 0.017, 0.7745, -0.1899, 0.0149, 0.7695, -0.185, 0.0149, 0.7695, -0.185, 0.017, 0.7745, -0.1899, 0.017, 0.7745, -0.185, 0.0028, 0.7745, -0.185, 0.0049, 0.7695, -0.185, 0.0099, 0.7745, -0.1869, 0.0099, 0.7816, -0.185, 0.0099, 0.7745, -0.1869, 0.0149, 0.7795, -0.185, 0.0099, 0.7674, -0.185, 0.0149, 0.7695, -0.185, 0.0099, 0.7745, -0.1869, 0.0099, 0.7745, -0.1869, 0.0099, 0.7816, -0.185, 0.0049, 0.7795, -0.185, 0.0149, 0.7695, -0.185, 0.017, 0.7745, -0.185, 0.0099, 0.7745, -0.1869, 0.0049, 0.7695, -0.185, 0.0099, 0.7674, -0.185, 0.0099, 0.7745, -0.1869, 0.0099, 0.7745, -0.1869, 0.017, 0.7745, -0.185, 0.0149, 0.7795, -0.185, -0.0083, 0.7685, -0.1815, -0.0083, 0.7685, -0.1655, -0.004, 0.7702, -0.1815, -0.004, 0.7702, -0.1815, -0.0083, 0.7685, -0.1655, -0.004, 0.7702, -0.1655, -0.004, 0.7702, -0.1815, -0.004, 0.7702, -0.1655, -0.0023, 0.7745, -0.1815, -0.0023, 0.7745, -0.1815, -0.004, 0.7702, -0.1655, -0.0023, 0.7745, -0.1655, -0.0023, 0.7745, -0.1815, -0.0023, 0.7745, -0.1655, -0.004, 0.7788, -0.1815, -0.004, 0.7788, -0.1815, -0.0023, 0.7745, -0.1655, -0.004, 0.7788, -0.1655, -0.004, 0.7788, -0.1815, -0.004, 0.7788, -0.1655, -0.0083, 0.7805, -0.1815, -0.0083, 0.7805, -0.1815, -0.004, 0.7788, -0.1655, -0.0083, 0.7805, -0.1655, -0.0083, 0.7805, -0.1815, -0.0083, 0.7805, -0.1655, -0.0126, 0.7788, -0.1815, -0.0126, 0.7788, -0.1815, -0.0083, 0.7805, -0.1655, -0.0126, 0.7788, -0.1655, -0.0126, 0.7788, -0.1815, -0.0126, 0.7788, -0.1655, -0.0143, 0.7745, -0.1815, -0.0143, 0.7745, -0.1815, -0.0126, 0.7788, -0.1655, -0.0143, 0.7745, -0.1655, -0.0023, 0.7745, -0.1815, -0.004, 0.7788, -0.1815, -0.0023, 0.7745, -0.1815, -0.0023, 0.7745, -0.1815, -0.004, 0.7788, -0.1815, -0.004, 0.7788, -0.1815, -0.004, 0.7788, -0.1815, -0.0083, 0.7805, -0.1815, -0.004, 0.7788, -0.1815, -0.004, 0.7788, -0.1815, -0.0083, 0.7805, -0.1815, -0.0083, 0.7805, -0.1815, -0.004, 0.7702, -0.1815, -0.0023, 0.7745, -0.1815, -0.0023, 0.7745, -0.1815, -0.004, 0.7702, -0.1815, -0.0023, 0.7745, -0.1815, -0.004, 0.7702, -0.1815, -0.0083, 0.7685, -0.1815, -0.004, 0.7702, -0.1815, -0.004, 0.7702, -0.1815, -0.0083, 0.7685, -0.1815, -0.004, 0.7702, -0.1815, -0.0083, 0.7685, -0.1815, -0.0083, 0.7805, -0.1815, -0.0126, 0.7788, -0.1815, -0.0083, 0.7805, -0.1815, -0.0083, 0.7805, -0.1815, -0.0126, 0.7788, -0.1815, -0.0126, 0.7788, -0.1815, -0.0126, 0.7788, -0.1815, -0.0143, 0.7745, -0.1815, -0.0126, 0.7788, -0.1815, -0.0126, 0.7788, -0.1815, -0.0143, 0.7745, -0.1815, -0.0143, 0.7745, -0.1815, -0.0143, 0.7745, -0.1815, -0.0126, 0.7702, -0.1815, -0.0143, 0.7745, -0.1815, -0.0143, 0.7745, -0.1815, -0.0126, 0.7702, -0.1815, -0.0126, 0.7702, -0.1815, -0.0126, 0.7702, -0.1815, -0.0083, 0.7685, -0.1815, -0.0126, 0.7702, -0.1815, -0.0126, 0.7702, -0.1815, -0.0083, 0.7685, -0.1815, -0.0083, 0.7685, -0.1815, -0.0143, 0.7745, -0.1815, -0.0143, 0.7745, -0.1655, -0.0126, 0.7702, -0.1815, -0.0126, 0.7702, -0.1815, -0.0143, 0.7745, -0.1655, -0.0126, 0.7702, -0.1655, -0.0126, 0.7702, -0.1815, -0.0126, 0.7702, -0.1655, -0.0083, 0.7685, -0.1815, -0.0083, 0.7685, -0.1815, -0.0126, 0.7702, -0.1655, -0.0083, 0.7685, -0.1655, -0.004, 0.7702, -0.1655, -0.0083, 0.7685, -0.1655, -0.0023, 0.7745, -0.1655, -0.0023, 0.7745, -0.1655, -0.0083, 0.7685, -0.1655, -0.004, 0.7788, -0.1655, -0.004, 0.7788, -0.1655, -0.0083, 0.7685, -0.1655, -0.0083, 0.7805, -0.1655, -0.0083, 0.7805, -0.1655, -0.0083, 0.7685, -0.1655, -0.0126, 0.7788, -0.1655, -0.0126, 0.7788, -0.1655, -0.0083, 0.7685, -0.1655, -0.0143, 0.7745, -0.1655, -0.0143, 0.7745, -0.1655, -0.0083, 0.7685, -0.1655, -0.0126, 0.7702, -0.1655, -0.0083, 0.7698, -0.181, -0.005, 0.7712, -0.181, -0.0116, 0.7712, -0.181, -0.0116, 0.7712, -0.181, -0.005, 0.7712, -0.181, -0.013, 0.7745, -0.181, -0.013, 0.7745, -0.181, -0.005, 0.7712, -0.181, -0.0116, 0.7778, -0.181, -0.0116, 0.7778, -0.181, -0.005, 0.7712, -0.181, -0.0083, 0.7791, -0.181, -0.0083, 0.7791, -0.181, -0.005, 0.7712, -0.181, -0.005, 0.7778, -0.181, -0.005, 0.7778, -0.181, -0.005, 0.7712, -0.181, -0.0037, 0.7745, -0.181, -0.005, 0.7712, -0.181, -0.0083, 0.7698, -0.181, -0.004, 0.7702, -0.1815, -0.004, 0.7702, -0.1815, -0.0083, 0.7698, -0.181, -0.0083, 0.7685, -0.1815, -0.0037, 0.7745, -0.181, -0.005, 0.7712, -0.181, -0.0023, 0.7745, -0.1815, -0.0023, 0.7745, -0.1815, -0.005, 0.7712, -0.181, -0.004, 0.7702, -0.1815, -0.005, 0.7778, -0.181, -0.0037, 0.7745, -0.181, -0.004, 0.7788, -0.1815, -0.004, 0.7788, -0.1815, -0.0037, 0.7745, -0.181, -0.0023, 0.7745, -0.1815, -0.0083, 0.7791, -0.181, -0.005, 0.7778, -0.181, -0.0083, 0.7805, -0.1815, -0.0083, 0.7805, -0.1815, -0.005, 0.7778, -0.181, -0.004, 0.7788, -0.1815, -0.0116, 0.7778, -0.181, -0.0083, 0.7791, -0.181, -0.0126, 0.7788, -0.1815, -0.0126, 0.7788, -0.1815, -0.0083, 0.7791, -0.181, -0.0083, 0.7805, -0.1815, -0.013, 0.7745, -0.181, -0.0116, 0.7778, -0.181, -0.0143, 0.7745, -0.1815, -0.0143, 0.7745, -0.1815, -0.0116, 0.7778, -0.181, -0.0126, 0.7788, -0.1815, -0.0116, 0.7712, -0.181, -0.013, 0.7745, -0.181, -0.0126, 0.7702, -0.1815, -0.0126, 0.7702, -0.1815, -0.013, 0.7745, -0.181, -0.0143, 0.7745, -0.1815, -0.0083, 0.7698, -0.181, -0.0116, 0.7712, -0.181, -0.0083, 0.7685, -0.1815, -0.0083, 0.7685, -0.1815, -0.0116, 0.7712, -0.181, -0.0126, 0.7702, -0.1815)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n3noi"]
+points = PackedVector3Array(0.00033959, 0.463909, -0.057297, 0.00033959, 0.504386, -0.057297, 0.0405176, 0.463909, -0.0405274, -0.0886708, 0.463909, -0.0301067, -1.06692e-05, 0.544863, -0.0425802, 0.0300973, 0.544863, -0.0301067, 0.0405176, 0.504386, -0.0405274, -0.0886708, 0.544863, -0.0301067, 0.057301, 0.463909, 0, -0.091794, 0.463909, 0, 0.0425754, 0.544863, 0, 0.057301, 0.504386, 0, -0.091794, 0.544863, 0, 0.0405176, 0.463909, 0.0405162, -0.0886708, 0.463909, 0.0300955, 0.0405176, 0.504386, 0.0405162, 0.0300973, 0.544863, 0.0300955, -0.0886708, 0.544863, 0.0300955, 0.00033959, 0.463909, 0.057297, 0.00033959, 0.504386, 0.057297, -1.06692e-05, 0.544863, 0.0425689)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytfm6"]
 radius = 0.035
@@ -108,20 +111,22 @@ metallic_specular = 0.0
 albedo_color = Color(0.00096608, 0, 0.356691, 1)
 metallic_specular = 0.0
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n3noi"]
-points = PackedVector3Array(0.00033959, 0.463909, -0.057297, 0.00033959, 0.504386, -0.057297, 0.0405176, 0.463909, -0.0405274, -0.0886708, 0.463909, -0.0301067, -1.06692e-05, 0.544863, -0.0425802, 0.0300973, 0.544863, -0.0301067, 0.0405176, 0.504386, -0.0405274, -0.0886708, 0.544863, -0.0301067, 0.057301, 0.463909, 0, -0.091794, 0.463909, 0, 0.0425754, 0.544863, 0, 0.057301, 0.504386, 0, -0.091794, 0.544863, 0, 0.0405176, 0.463909, 0.0405162, -0.0886708, 0.463909, 0.0300955, 0.0405176, 0.504386, 0.0405162, 0.0300973, 0.544863, 0.0300955, -0.0886708, 0.544863, 0.0300955, 0.00033959, 0.463909, 0.057297, 0.00033959, 0.504386, 0.057297, -1.06692e-05, 0.544863, 0.0425689)
+[sub_resource type="Gradient" id="Gradient_morib"]
+offsets = PackedFloat32Array(0.444211, 0.610526)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8mwec"]
 noise_type = 2
 seed = 1
-frequency = 0.0059
+frequency = 0.0004
+offset = Vector3(-569.7, -0.5, 0)
 cellular_distance_function = 1
 cellular_return_type = 6
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jcc0l"]
 seamless = true
 as_normal_map = true
-bump_strength = 19.5
+bump_strength = 6.7
+color_ramp = SubResource("Gradient_morib")
 noise = SubResource("FastNoiseLite_8mwec")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa15h"]
@@ -150,12 +155,15 @@ albedo_texture = SubResource("NoiseTexture2D_ro2dr")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_brxp5"]
 points = PackedVector3Array(0.014896, -0.1, 0.010733, -0.014896, -0.1, 0.010733, 0.014896, -0.1, -0.0148994, 0.014896, 0.039387, -0.0376896, -0.014896, 0.039387, -0.0376896, -0.014896, -0.1, -0.0148994, 0.014896, 0.0123719, -0.050264, -0.014896, 0.0123719, -0.050264)
 
-[node name="Turret" type="Node3D" node_paths=PackedStringArray("CAMERA", "HINGE_X", "HINGE_Y", "BULLET_SOURCE")]
+[node name="Turret" type="Node3D" node_paths=PackedStringArray("CAMERA", "HINGE_X", "HINGE_Y", "BULLET_SOURCE", "POWER_SOURCE", "CAMERA_LIGHT", "EXPEL_CARTRIDGES")]
 script = ExtResource("1_eymqg")
-CAMERA = NodePath("Base/Cradle2/Gun2/Camera2")
+CAMERA = NodePath("Base/Cradle2/Gun/Camera2")
 HINGE_X = NodePath("Base/Cradle2")
-HINGE_Y = NodePath("Base/Cradle2/Gun2")
-BULLET_SOURCE = NodePath("Base/Cradle2/Gun2/Bullet_Source")
+HINGE_Y = NodePath("Base/Cradle2/Gun")
+BULLET_SOURCE = NodePath("Base/Cradle2/Gun/Bullet_Source")
+POWER_SOURCE = NodePath("Battery/BatteryWires")
+CAMERA_LIGHT = NodePath("Base/Cradle2/Gun/Camera2/SpotLight3D")
+EXPEL_CARTRIDGES = NodePath("Base/Cradle2/Gun/Debris_Spawner")
 
 [node name="Base" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327089, 0)
@@ -171,15 +179,9 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0939053)
 shape = SubResource("BoxShape3D_bfj0u")
 
-[node name="Motor_Hold" type="HingeJoint3D" parent="Base"]
-node_a = NodePath("..")
-node_b = NodePath("../../Motor")
-angular_limit/enable = true
-angular_limit/upper = 0.0
-angular_limit/lower = 0.0
-
 [node name="Left_Support" type="HingeJoint3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.370494, -0.0151365, -0.0580731)
+visible = false
 node_a = NodePath("..")
 node_b = NodePath("../../Guard_Support")
 angular_limit/enable = true
@@ -188,8 +190,18 @@ angular_limit/lower = 0.0
 
 [node name="Right_Support" type="HingeJoint3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38565, -0.0157457, -0.0630615)
+visible = false
 node_a = NodePath("..")
 node_b = NodePath("../../Guard_Support2")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Battery_Hold" type="HingeJoint3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.217603, 0, 0.118098)
+visible = false
+node_a = NodePath("..")
+node_b = NodePath("../../Battery")
 angular_limit/enable = true
 angular_limit/upper = 0.0
 angular_limit/lower = 0.0
@@ -202,109 +214,92 @@ transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0.01999,
 mesh = ExtResource("9_3f3ei")
 skeleton = NodePath("../../..")
 
-[node name="Cradle" type="RigidBody3D" parent="Base/Cradle2"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0239322, 0.420062, 0.0111149)
-collision_layer = 64
-collision_mask = 65
-mass = 3.0
-sleeping = true
-freeze = true
-script = ExtResource("2_bfj0u")
-metadata/_custom_type_script = "uid://0vp01sycjj0a"
-
-[node name="Gun_Hinge" type="HingeJoint3D" parent="Base/Cradle2/Cradle"]
-transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0.274371, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Gun2/Gun")
-angular_limit/enable = true
-angular_limit/upper = 0.523599
-angular_limit/lower = -0.174533
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cradle2/Cradle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0900269, 0)
-shape = SubResource("CylinderShape3D_ov44l")
-
-[node name="Gun2" type="Node3D" parent="Base/Cradle2"]
+[node name="Gun" type="Node3D" parent="Base/Cradle2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70237, 0)
 
-[node name="Bullet_Source" type="Node3D" parent="Base/Cradle2/Gun2"]
+[node name="Bullet_Source" type="Node3D" parent="Base/Cradle2/Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0217978, 0.0037176, -0.442006)
 script = ExtResource("12_ro2dr")
 bullet_data = SubResource("Resource_yqngf")
 metadata/_custom_type_script = "uid://do4am13na3svu"
 
-[node name="GunMesh" type="MeshInstance3D" parent="Base/Cradle2/Gun2"]
+[node name="GunMesh" type="MeshInstance3D" parent="Base/Cradle2/Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0217978, -0.831937, 0)
 mesh = ExtResource("10_3f3ei")
 skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yqngf")
 
-[node name="Gun" type="RigidBody3D" parent="Base/Cradle2/Gun2"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0217978, 0.0136921, 0)
-collision_layer = 64
-collision_mask = 65
-mass = 8.0
-sleeping = true
-script = ExtResource("2_bfj0u")
-metadata/_custom_type_script = "uid://0vp01sycjj0a"
+[node name="Camera2" type="Node3D" parent="Base/Cradle2/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0204947, -0.0329329, -0.137517)
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Base/Cradle2/Gun2/Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.845629, 0)
-visible = false
-shape = SubResource("ConvexPolygonShape3D_ov44l")
-
-[node name="CameraJoint" type="HingeJoint3D" parent="Base/Cradle2/Gun2/Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0428535, -0.160656)
-node_a = NodePath("..")
-node_b = NodePath("../../Camera2/Camera")
-angular_limit/enable = true
-angular_limit/upper = 0.0
-angular_limit/lower = 0.0
-
-[node name="Camera2" type="Node3D" parent="Base/Cradle2/Gun2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.70121, 0)
-
-[node name="Camera" type="RigidBody3D" parent="Base/Cradle2/Gun2/Camera2" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
-process_mode = 4
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0247896, 0.669724, -0.154023)
-collision_layer = 64
-collision_mask = 65
-freeze = true
-script = ExtResource("2_bfj0u")
-MINIMUM_DAMAGE_THRESHOLD = 0.0
-FREE_ON_THRESHOLD = [NodePath("."), NodePath("SpotLight3D")]
-THRESHOLDS = Array[float]([0.0, 999.0])
-metadata/_custom_type_script = "uid://0vp01sycjj0a"
-
-[node name="Camera2" type="MeshInstance3D" parent="Base/Cradle2/Gun2/Camera2/Camera"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00239785, -0.796972, -0.134219)
-mesh = ExtResource("11_n3noi")
-skeleton = NodePath("../../../../../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cradle2/Gun2/Camera2/Camera"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00239785, -0.796972, -0.134219)
-shape = SubResource("ConvexPolygonShape3D_scij8")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Base/Cradle2/Gun2/Camera2/Camera"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00999758, -0.021818, 0.0527966)
+[node name="SpotLight3D" type="SpotLight3D" parent="Base/Cradle2/Gun/Camera2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00833698, -0.0193499, -0.0441909)
 light_color = Color(1, 0.713726, 0.745098, 1)
 light_energy = 20.0
 shadow_enabled = true
 spot_range = 4.0
-spot_angle = 9.25
+spot_angle = 21.4811
 
-[node name="Leg1" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Cam_Collider" type="Area3D" parent="Base/Cradle2/Gun/Camera2"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("10_yqngf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cradle2/Gun/Camera2/Cam_Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7921, 0.14058)
+shape = SubResource("ConcavePolygonShape3D_igmkq")
+
+[node name="Mesh" type="MeshInstance3D" parent="Base/Cradle2/Gun/Camera2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7921, 0.14058)
+mesh = ExtResource("11_n3noi")
+skeleton = NodePath("../../../../..")
+
+[node name="Hit_Free" type="Node" parent="Base/Cradle2/Gun/Camera2" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+MINIMUM_DAMAGE_THRESHOLD = 0.0
+FREE_ON_THRESHOLD = [NodePath("../SpotLight3D"), NodePath("..")]
+THRESHOLDS = Array[float]([4.0, 0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Debris_Spawner" type="Node3D" parent="Base/Cradle2/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00111621, 0.00366479, 0.117175)
+script = ExtResource("11_igmkq")
+THING = ExtResource("12_morib")
+SPAWN_VELOCITY = Vector3(-2, 0, 0)
+SPAWN_ANGULAR_VELOCITY = Vector3(0, -2, 0)
+SPAWN_VELOCITY_RANDOM = Vector3(0.5, 0.4, 0.4)
+SPAWN_ANGULAR_VELOCITY_RANDOM = Vector3(0, 1, 0)
+
+[node name="Motor2" type="Node3D" parent="Base"]
+
+[node name="Motor" type="MeshInstance3D" parent="Base/Motor2"]
+transform = Transform3D(0.988995, 0, -0.147946, 0, 1, 0, 0.147946, 0, 0.988995, 0.0214904, -0.450192, 0.00872259)
+mesh = ExtResource("8_mewfn")
+skeleton = NodePath("../../..")
+
+[node name="Hittable_Component6" type="Node" parent="Base/Motor2" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+MINIMUM_DAMAGE_THRESHOLD = 8.0
+FREE_ON_THRESHOLD = [NodePath("../../../Battery/BatteryWires")]
+THRESHOLDS = Array[float]([0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Area3D" type="Area3D" parent="Base/Motor2" node_paths=PackedStringArray("HITTABLE")]
+script = ExtResource("10_yqngf")
+HITTABLE = [NodePath("../Hittable_Component6")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Base/Motor2/Area3D"]
+transform = Transform3D(0.988995, 0, -0.147946, 0, 1, 0, 0.147946, 0, 0.988995, 0.0214904, -0.450192, 0.00872259)
+shape = SubResource("ConvexPolygonShape3D_n3noi")
+
+[node name="Leg1" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337198, 0.305792, -0.122672)
 collision_layer = 64
 collision_mask = 65
 axis_lock_angular_y = true
 mass = 2.0
-script = ExtResource("2_bfj0u")
-MAX_HP = 2000.0
-MINIMUM_DAMAGE_THRESHOLD = 125.0
-FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
-THRESHOLDS = Array[float]([1800.0, 0.0])
+script = ExtResource("10_ah1fg")
+HITTABLE = [NodePath("Hittable_Component2")]
 
 [node name="Leg" type="MeshInstance3D" parent="Leg1"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
@@ -322,16 +317,21 @@ angular_limit/lower = 0.0
 transform = Transform3D(0.996195, 0.0871557, 4.63889e-10, -0.0868241, 0.992404, -0.0871557, -0.00759612, 0.0868241, 0.996195, -0.0142721, -0.112614, -0.0192559)
 shape = SubResource("CapsuleShape3D_ytfm6")
 
-[node name="Leg2" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Hittable_Component2" type="Node" parent="Leg1" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+MAX_HP = 15.0
+MINIMUM_DAMAGE_THRESHOLD = 2.0
+FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
+THRESHOLDS = Array[float]([12.0, 0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Leg2" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333306, 0.305792, -0.122672)
 collision_layer = 64
 collision_mask = 65
 axis_lock_angular_y = true
-script = ExtResource("2_bfj0u")
-MAX_HP = 2000.0
-MINIMUM_DAMAGE_THRESHOLD = 125.0
-FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
-THRESHOLDS = Array[float]([1800.0, 0.0])
+script = ExtResource("10_ah1fg")
+HITTABLE = [NodePath("Hittable_Component")]
 
 [node name="Leg" type="MeshInstance3D" parent="Leg2"]
 transform = Transform3D(-1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
@@ -349,16 +349,21 @@ angular_limit/lower = 0.0
 transform = Transform3D(0.996195, -0.0871557, 0, 0.0868241, 0.992404, -0.0871557, 0.00759612, 0.0868241, 0.996195, 0.0121965, -0.112614, -0.0192559)
 shape = SubResource("CapsuleShape3D_ytfm6")
 
-[node name="Leg3" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Hittable_Component" type="Node" parent="Leg2" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+MAX_HP = 15.0
+MINIMUM_DAMAGE_THRESHOLD = 2.0
+FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
+THRESHOLDS = Array[float]([12.0, 0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Leg3" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337198, 0.305792, 0.287029)
 collision_layer = 64
 collision_mask = 65
 axis_lock_angular_y = true
-script = ExtResource("2_bfj0u")
-MAX_HP = 2000.0
-MINIMUM_DAMAGE_THRESHOLD = 125.0
-FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
-THRESHOLDS = Array[float]([1800.0, 0.0])
+script = ExtResource("10_ah1fg")
+HITTABLE = [NodePath("Hittable_Component2")]
 
 [node name="Leg" type="MeshInstance3D" parent="Leg3"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, -1, 0, 0, 0)
@@ -376,16 +381,21 @@ angular_limit/lower = 0.0
 transform = Transform3D(0.996195, 0.0871557, 4.63889e-10, -0.0868241, 0.992404, 0.0871557, 0.00759612, -0.0868241, 0.996195, -0.0150715, -0.112614, 0.0172476)
 shape = SubResource("CapsuleShape3D_ytfm6")
 
-[node name="Leg4" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Hittable_Component2" type="Node" parent="Leg3" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+MAX_HP = 15.0
+MINIMUM_DAMAGE_THRESHOLD = 2.0
+FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
+THRESHOLDS = Array[float]([12.0, 0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Leg4" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333306, 0.305792, 0.287029)
 collision_layer = 64
 collision_mask = 65
 axis_lock_angular_y = true
-script = ExtResource("2_bfj0u")
-MAX_HP = 2000.0
-MINIMUM_DAMAGE_THRESHOLD = 125.0
-FREE_ON_THRESHOLD = [NodePath("HingeJoint3D"), NodePath(".")]
-THRESHOLDS = Array[float]([1800.0, 0.0])
+script = ExtResource("10_ah1fg")
+HITTABLE = [NodePath("Hittable_Component3")]
 
 [node name="Leg" type="MeshInstance3D" parent="Leg4"]
 transform = Transform3D(-1, 0, 0, 0, 0.5, 8.74228e-08, 0, 4.37114e-08, -1, 0, 0, 0)
@@ -403,16 +413,20 @@ angular_limit/lower = 0.0
 transform = Transform3D(0.996195, -0.0871557, 0, 0.0868241, 0.992404, 0.0871557, -0.00759612, -0.0868241, 0.996195, 0.0113971, -0.112614, 0.0172476)
 shape = SubResource("CapsuleShape3D_ytfm6")
 
-[node name="Ammo_Crate" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Hittable_Component3" type="Node" parent="Leg4" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+MAX_HP = 15.0
+MINIMUM_DAMAGE_THRESHOLD = 2.0
+FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
+THRESHOLDS = Array[float]([12.0, 0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Ammo_Crate" type="RigidBody3D" parent="."]
 transform = Transform3D(0.689709, 0, -0.724086, 0, 1, 0, 0.724086, 0, 0.689709, 0.186082, 0.336892, 0.212335)
 collision_layer = 64
 collision_mask = 65
 mass = 8.0
-script = ExtResource("2_bfj0u")
-MAX_HP = 6000.0
-MINIMUM_DAMAGE_THRESHOLD = 300.0
-FREE_ON_THRESHOLD = [NodePath(".")]
-THRESHOLDS = Array[float]([0.0])
+script = ExtResource("10_ah1fg")
 
 [node name="AmmoCrate" type="MeshInstance3D" parent="Ammo_Crate"]
 transform = Transform3D(0.78991, 0, 0.613223, 0, 1, 0, -0.613223, 0, 0.78991, -0.223877, -0.459467, -0.016452)
@@ -430,16 +444,17 @@ shape = SubResource("BoxShape3D_n3noi")
 transform = Transform3D(0.973277, 0.229634, 0, -0.229634, 0.973277, 0, 0, 0, 1, -0.00956681, 0.165271, 0)
 shape = SubResource("BoxShape3D_ov44l")
 
-[node name="Battery" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Hittable_Component4" type="Node" parent="Ammo_Crate"]
+script = ExtResource("2_bfj0u")
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Battery" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(-0.137374, 0, 0.990519, 0, 1, 0, -0.990519, 0, -0.137374, -0.233913, 0.34079, 0.13273)
 collision_layer = 64
 collision_mask = 65
 mass = 13.0
-script = ExtResource("2_bfj0u")
-MAX_HP = 1.0
-MINIMUM_DAMAGE_THRESHOLD = 0.0
-FREE_ON_THRESHOLD = [NodePath("BatteryWires")]
-THRESHOLDS = Array[float]([0.0])
+script = ExtResource("10_ah1fg")
+HITTABLE = [NodePath("Hittable_Component5")]
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
 [node name="Mesh" type="MeshInstance3D" parent="Battery"]
@@ -460,39 +475,20 @@ surface_material_override/0 = SubResource("StandardMaterial3D_mewfn")
 surface_material_override/1 = SubResource("StandardMaterial3D_n3noi")
 surface_material_override/2 = SubResource("StandardMaterial3D_ov44l")
 
-[node name="Motor" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34048, 0)
-collision_layer = 64
-collision_mask = 65
-mass = 6.0
+[node name="Hittable_Component5" type="Node" parent="Battery" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 script = ExtResource("2_bfj0u")
-FREE_ON_THRESHOLD = [NodePath("../Battery/BatteryWires"), NodePath("../Base/Motor_Hold")]
-THRESHOLDS = Array[float]([999.0, -500.0])
+MAX_HP = 40.0
+MINIMUM_DAMAGE_THRESHOLD = 3.0
+FREE_ON_THRESHOLD = [NodePath("../BatteryWires"), NodePath("../../Base/Battery_Hold"), NodePath("..")]
+THRESHOLDS = Array[float]([37.0, 20.0, 0.0])
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
-
-[node name="Motor" type="MeshInstance3D" parent="Motor"]
-transform = Transform3D(0.988995, 0, -0.147946, 0, 1, 0, 0.147946, 0, 0.988995, 0.0214904, -0.463583, 0.00872259)
-mesh = ExtResource("8_mewfn")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Motor"]
-transform = Transform3D(0.988995, 0, -0.147946, 0, 1, 0, 0.147946, 0, 0.988995, 0.0214904, -0.463583, 0.00872259)
-shape = SubResource("ConvexPolygonShape3D_n3noi")
-
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Motor"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0220234, 0.0825475, 0.0144186)
-node_a = NodePath("..")
-node_b = NodePath("../../Base/Cradle2/Cradle")
-exclude_nodes_from_collision = false
 
 [node name="Guard" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.997128, -0.0757323, 0, 0.0757323, 0.997128, 0, 0.427726, -0.146996)
 collision_layer = 64
 collision_mask = 65
 mass = 12.0
-script = ExtResource("2_bfj0u")
-MAX_HP = 2000.0
-MINIMUM_DAMAGE_THRESHOLD = 350.0
+script = ExtResource("10_ah1fg")
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
 [node name="FrontGuard" type="MeshInstance3D" parent="Guard"]
@@ -503,15 +499,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_sa15h")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Guard"]
 shape = SubResource("ConvexPolygonShape3D_muywi")
 
-[node name="Guard_Support" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Hittable_Component7" type="Node" parent="Guard"]
+script = ExtResource("2_bfj0u")
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Guard_Support" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2996, 0.43655, -0.0373033)
 collision_layer = 64
 collision_mask = 65
-script = ExtResource("2_bfj0u")
-MAX_HP = 600.0
-MINIMUM_DAMAGE_THRESHOLD = 100.0
-FREE_ON_THRESHOLD = [NodePath("."), NodePath("HingeJoint3D"), NodePath("../Base/Left_Support")]
-THRESHOLDS = Array[float]([0.0, 550.0, 250.0])
+script = ExtResource("10_ah1fg")
+HITTABLE = [NodePath("Hittable_Component8")]
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
 [node name="FrontSupport_000" type="MeshInstance3D" parent="Guard_Support"]
@@ -530,23 +527,28 @@ node_a = NodePath("..")
 node_b = NodePath("../../Guard")
 angular_limit/enable = true
 
-[node name="Guard_Support2" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Hittable_Component8" type="Node" parent="Guard_Support" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath(".."), NodePath("../../Base/Left_Support")]
+THRESHOLDS = Array[float]([4.0, 0.0, 0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Guard_Support2" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.388457, 0.420804, -0.0502395)
 collision_layer = 64
 collision_mask = 65
-script = ExtResource("2_bfj0u")
-MAX_HP = 600.0
-MINIMUM_DAMAGE_THRESHOLD = 100.0
-FREE_ON_THRESHOLD = [NodePath("."), NodePath("HingeJoint3D"), NodePath("../Base/Right_Support")]
-THRESHOLDS = Array[float]([0.0, 550.0, 200.0])
+script = ExtResource("10_ah1fg")
+HITTABLE = [NodePath("Hittable_Component9")]
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
 [node name="FrontSupport_000" type="MeshInstance3D" parent="Guard_Support2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00281993, 0, 0)
 mesh = ExtResource("13_0fiss")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ah1fg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Guard_Support2"]
+transform = Transform3D(1.1875, 0, 0, 0, 1.1875, 0, 0, 0, 1.1875, 0, 0.00318065, 0.00479005)
 shape = SubResource("ConvexPolygonShape3D_brxp5")
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="Guard_Support2"]
@@ -554,3 +556,9 @@ transform = Transform3D(1, 0, 0, 0, 0.853208, -0.521571, 0, 0.521571, 0.853208, 
 node_a = NodePath("..")
 node_b = NodePath("../../Guard")
 angular_limit/enable = true
+
+[node name="Hittable_Component9" type="Node" parent="Guard_Support2" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+script = ExtResource("2_bfj0u")
+FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath(".."), NodePath("../../Base/Right_Support")]
+THRESHOLDS = Array[float]([4.0, 0.0, 0.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"

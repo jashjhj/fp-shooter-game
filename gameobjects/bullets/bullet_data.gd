@@ -5,15 +5,16 @@ class_name BulletData extends Resource
 @export var gravity := 9.81
 @export var mass := 0.005 # 5g
 
-@export var damage := 250;
+@export var damage := 10;
 
 @export var base_inaccuracy := 0.05;
 
-@export var amount := 1;
+@export var amount:int = 1;
 
+##Newtons experimental law / coefficient of restitution
 @export var NEL_coefficient:= 0.8;
 @export var ricochet_angle:= PI/6
 
 @export var trail_material:Material
 
-@export var lifetime:=2000;
+@export var lifetime:float = 2;
