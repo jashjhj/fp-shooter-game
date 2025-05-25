@@ -13,7 +13,7 @@ class_name BulletData extends Resource
 
 ##Newtons experimental law / coefficient of restitution
 @export var NEL_coefficient:= 0.8;
-@export var ricochet_angle:= PI/6
+@export var ricochet_angle:= PI/9
 
 @export var trail_material:Material
 

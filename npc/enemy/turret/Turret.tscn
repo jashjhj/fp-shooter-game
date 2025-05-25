@@ -158,6 +158,7 @@ points = PackedVector3Array(0.014896, -0.1, 0.010733, -0.014896, -0.1, 0.010733,
 [node name="Turret" type="Node3D" node_paths=PackedStringArray("CAMERA", "HINGE_X", "HINGE_Y", "BULLET_SOURCE", "POWER_SOURCE", "CAMERA_LIGHT", "EXPEL_CARTRIDGES")]
 script = ExtResource("1_eymqg")
 CAMERA = NodePath("Base/Cradle2/Gun/Camera2")
+camera_fov_y = 0.785398
 HINGE_X = NodePath("Base/Cradle2")
 HINGE_Y = NodePath("Base/Cradle2/Gun")
 BULLET_SOURCE = NodePath("Base/Cradle2/Gun/Bullet_Source")
@@ -319,8 +320,8 @@ shape = SubResource("CapsuleShape3D_ytfm6")
 
 [node name="Hittable_Component2" type="Node" parent="Leg1" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 script = ExtResource("2_bfj0u")
-MAX_HP = 15.0
-MINIMUM_DAMAGE_THRESHOLD = 2.0
+MAX_HP = 20.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
 THRESHOLDS = Array[float]([12.0, 0.0])
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
@@ -351,8 +352,8 @@ shape = SubResource("CapsuleShape3D_ytfm6")
 
 [node name="Hittable_Component" type="Node" parent="Leg2" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 script = ExtResource("2_bfj0u")
-MAX_HP = 15.0
-MINIMUM_DAMAGE_THRESHOLD = 2.0
+MAX_HP = 20.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
 THRESHOLDS = Array[float]([12.0, 0.0])
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
@@ -383,8 +384,8 @@ shape = SubResource("CapsuleShape3D_ytfm6")
 
 [node name="Hittable_Component2" type="Node" parent="Leg3" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 script = ExtResource("2_bfj0u")
-MAX_HP = 15.0
-MINIMUM_DAMAGE_THRESHOLD = 2.0
+MAX_HP = 20.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
 THRESHOLDS = Array[float]([12.0, 0.0])
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
@@ -415,8 +416,8 @@ shape = SubResource("CapsuleShape3D_ytfm6")
 
 [node name="Hittable_Component3" type="Node" parent="Leg4" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 script = ExtResource("2_bfj0u")
-MAX_HP = 15.0
-MINIMUM_DAMAGE_THRESHOLD = 2.0
+MAX_HP = 20.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 FREE_ON_THRESHOLD = [NodePath("../HingeJoint3D"), NodePath("..")]
 THRESHOLDS = Array[float]([12.0, 0.0])
 metadata/_custom_type_script = "uid://0vp01sycjj0a"

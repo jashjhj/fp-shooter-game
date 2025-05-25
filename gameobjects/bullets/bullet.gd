@@ -11,7 +11,7 @@ class_name Bullet extends Node3D
 @onready var FORWARDS_RAY:RayCast3D = $RayCast3D;
 
  #                     FLOOR + NPC + NPC_PHYSICS + Debris
-const BULLET_HIT_MASK = 1+ 32 + 64 + 4096
+const BULLET_HIT_MASK = 1+ 16 + 32 + 64 + 4096
 
 var lifetime_start:int;
 #var speed:float;
