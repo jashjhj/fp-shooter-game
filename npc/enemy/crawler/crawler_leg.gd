@@ -5,13 +5,18 @@ class_name Crawler_Leg extends Node3D
 @export var UPPER_LEG_LENGTH:float = 0.2;
 @export var LOWER_LEG_LENGTH:float = 0.4;
 
+@export var DESTROY_SIGNAL:Hit_Signal;
+
 #@export var SKEW:float = 0.0; #Not yet implemented
-#@export var CURRENT_TARGET:Node3D;
+
 
 
 func _ready() -> void:
 	assert(UPPER_LEG != null, "No upper-leg set")
 	assert(LOWER_LEG != null, "No lower-leg set")
+	assert(DESTROY_SIGNAL != null, "No Destroy signal")
+	
+	DESTROY_SIGNAL.on_hit.connect(self.queue_free)
 
 
 var step_magnitude:float = 0.2;

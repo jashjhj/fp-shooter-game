@@ -125,12 +125,12 @@ func hit_object() -> int:
 		if(collider is Hittable_RB):
 			for hittable in collider.HITTABLE:
 				if(hittable != null):
-					hittable.hit(damage);
+					hittable._hit(damage);
 	
 	if(collider is Hittable_Collider):
 		for hittable in collider.HITTABLE:
 			if(hittable != null):
-				hittable.hit(damage);
+				hittable._hit(damage);
 	
 	
 	#add bullet hole

@@ -31,7 +31,9 @@ var LEAD_L:Node3D = Node3D.new();
 var LEAD_R:Node3D = Node3D.new();
 
 var current_velocity:Vector3# = Vector3(0, 0, 0.5)
-var current_speed:float = 1
+var current_speed:float = 1.8
+
+var legs_working = 6;
 
 
 func _ready():
@@ -64,11 +66,24 @@ func _ready():
 	targets_right.append(TARGET_R4)
 	
 	
+	LEG_L0.DESTROY_SIGNAL.on_hit.connect(remove_leg)
+	LEG_L1.DESTROY_SIGNAL.on_hit.connect(remove_leg)
+	LEG_L2.DESTROY_SIGNAL.on_hit.connect(remove_leg)
+	LEG_R0.DESTROY_SIGNAL.on_hit.connect(remove_leg)
+	LEG_R1.DESTROY_SIGNAL.on_hit.connect(remove_leg)
+	LEG_R2.DESTROY_SIGNAL.on_hit.connect(remove_leg)
+	
 	#nav_agent.path_height_offset = -GAIT_HEIGHT
 	nav_agent.height = GAIT_HEIGHT + 0.1
 
 
-
+func remove_leg():
+	legs_working -= 1;
+	current_speed *= 0.8
+	
+	#if(legs_working == 3): # FIX LATER
+		#rotate_z(PI/3)
+		#nav_agent.path_height_offset += 0.1
 
 func setup_target(t:Node3D, side:float):
 	t.position = Vector3(side*GAIT_WIDTH/2.0, -GAIT_HEIGHT, 0)
@@ -86,7 +101,7 @@ func _physics_process(delta):
 	
 	global_position.y = nav_agent.get_next_path_position().y
 	if((global_position - nav_agent.get_next_path_position()) * Vector3(1,0,1)).length() != 0:
-		look_at(nav_agent.get_next_path_position())
+		look_at(nav_agent.get_next_path_position(), global_basis.y)
 	
 	
 	
@@ -107,6 +122,9 @@ var targets_right:Array[Node3D];
 
 var left_step_number:int = 0;
 var right_step_number:int = 0;
+
+
+
 func do_legs():
 	#LEFT:
 	if(distance_till_left > GAIT_STEP_LENGTH):
@@ -122,13 +140,19 @@ func do_legs():
 	var left_step_progress:float = distance_till_left/GAIT_STEP_LENGTH;
 	
 	if(left_step_number % 2 == 0):
-		LEG_L0.update_leg_ik(targets_left[1])
-		LEG_L1.update_leg_slerp(targets_left[3], targets_left[1], left_step_progress)
-		LEG_L2.update_leg_ik(targets_left[3])
+		if(LEG_L0 != null):
+			LEG_L0.update_leg_ik(targets_left[1])
+		if(LEG_L1 != null):
+			LEG_L1.update_leg_slerp(targets_left[3], targets_left[1], left_step_progress)
+		if(LEG_L2 != null):
+			LEG_L2.update_leg_ik(targets_left[3])
 	else:
-		LEG_L0.update_leg_slerp(targets_left[2], targets_left[0], left_step_progress)
-		LEG_L1.update_leg_ik(targets_left[2])
-		LEG_L2.update_leg_slerp(targets_left[4], targets_left[2], left_step_progress)
+		if(LEG_L0 != null):
+			LEG_L0.update_leg_slerp(targets_left[2], targets_left[0], left_step_progress)
+		if(LEG_L1 != null):
+			LEG_L1.update_leg_ik(targets_left[2])
+		if(LEG_L2 != null):
+			LEG_L2.update_leg_slerp(targets_left[4], targets_left[2], left_step_progress)
 	
 	
 	#RIGHT:
@@ -146,13 +170,19 @@ func do_legs():
 	var right_step_progress:float = distance_till_right/GAIT_STEP_LENGTH;
 	
 	if(right_step_number % 2 == 1):
-		LEG_R0.update_leg_ik(targets_right[1])
-		LEG_R1.update_leg_slerp(targets_right[3], targets_right[1], right_step_progress)
-		LEG_R2.update_leg_ik(targets_right[3])
+		if(LEG_R0 != null):
+			LEG_R0.update_leg_ik(targets_right[1])
+		if(LEG_R1 != null):
+			LEG_R1.update_leg_slerp(targets_right[3], targets_right[1], right_step_progress)
+		if(LEG_R2 != null):
+			LEG_R2.update_leg_ik(targets_right[3])
 	else:
-		LEG_R0.update_leg_slerp(targets_right[2], targets_right[0], right_step_progress)
-		LEG_R1.update_leg_ik(targets_right[2])
-		LEG_R2.update_leg_slerp(targets_right[4], targets_right[2], right_step_progress)
+		if(LEG_R0 != null):
+			LEG_R0.update_leg_slerp(targets_right[2], targets_right[0], right_step_progress)
+		if(LEG_R1 != null):
+			LEG_R1.update_leg_ik(targets_right[2])
+		if(LEG_R2 != null):
+			LEG_R2.update_leg_slerp(targets_right[4], targets_right[2], right_step_progress)
 
 
 

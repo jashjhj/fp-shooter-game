@@ -1,12 +1,9 @@
 class_name Hit_Free extends Hit_Component
 
-@export var MAX_HP:float = 5;
-@export var MINIMUM_DAMAGE_THRESHOLD:float = 1;
 
 @export var FREE_ON_THRESHOLD:Array[Node];
 @export var THRESHOLDS:Array[float];
 
-@onready var hp = MAX_HP;
 var has_been_freed:Array[bool] = [];
 var number_of_thresholds:int;
 
@@ -21,13 +18,9 @@ func _ready() -> void:
 	number_of_thresholds = len(THRESHOLDS)
 
 func hit(damage:float):
-	
-	if(damage > MINIMUM_DAMAGE_THRESHOLD):
-		hp -= damage - MINIMUM_DAMAGE_THRESHOLD
-	
 	for i in range(0, number_of_thresholds):
 		if(has_been_freed[i] == false):
-			if(hp < THRESHOLDS[i]):
+			if(HP < THRESHOLDS[i]):
 				if(FREE_ON_THRESHOLD[i] != null): # If not previously freed,
 					FREE_ON_THRESHOLD[i].queue_free()
 				has_been_freed[i] = true;

@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cck2i0r0uriym"]
+[gd_scene load_steps=10 format=3 uid="uid://cck2i0r0uriym"]
 
 [ext_resource type="Script" uid="uid://sel62qjtekyj" path="res://npc/enemy/crawler/crawler_leg.gd" id="1_42w6q"]
+[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="2_pmr1i"]
+[ext_resource type="Script" uid="uid://da5p3e6j010qa" path="res://gameobjects/world_interactive/hit_effects/Hit_Signal.gd" id="4_nlsi1"]
+[ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="5_kssld"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wh3jt"]
 resource_local_to_scene = true
@@ -8,15 +11,28 @@ top_radius = 0.01
 bottom_radius = 0.012
 height = 0.2
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kssld"]
+radius = 0.0225907
+height = 0.233236
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_pmr1i"]
 top_radius = 0.012
 bottom_radius = 0.0
 height = 0.4
 
-[node name="CrawlerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qeov"]
+radius = 0.0140135
+height = 0.204708
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xocfa"]
+radius = 0.00807529
+height = 0.397537
+
+[node name="CrawlerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG", "DESTROY_SIGNAL")]
 script = ExtResource("1_42w6q")
 UPPER_LEG = NodePath("Upper Leg")
 LOWER_LEG = NodePath("Lower Leg")
+DESTROY_SIGNAL = NodePath("Upper Leg/Area3D/Hit_Signal")
 
 [node name="Upper Leg" type="Node3D" parent="."]
 
@@ -24,9 +40,43 @@ LOWER_LEG = NodePath("Lower Leg")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.1)
 mesh = SubResource("CylinderMesh_wh3jt")
 
+[node name="Area3D" type="Area3D" parent="Upper Leg" node_paths=PackedStringArray("HITTABLE")]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("2_pmr1i")
+HITTABLE = [null, NodePath("Hit_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody"), null]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Upper Leg/Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.101986)
+shape = SubResource("CapsuleShape3D_kssld")
+
+[node name="Hit_Signal" type="Node" parent="Upper Leg/Area3D"]
+script = ExtResource("4_nlsi1")
+metadata/_custom_type_script = "uid://da5p3e6j010qa"
+
 [node name="Lower Leg" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.206379)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.201251)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lower Leg"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.2)
 mesh = SubResource("CylinderMesh_pmr1i")
+
+[node name="Debris_rigidbody" type="RigidBody3D" parent="."]
+collision_layer = 4096
+mass = 0.3
+
+[node name="Hit_Make_Rigidbody" type="Node" parent="Debris_rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
+script = ExtResource("5_kssld")
+RIGIDBODY = NodePath("..")
+RIGIDBODY_BASIS_CLONE = NodePath("../../Upper Leg")
+NEW_CHILDREN = [NodePath("../../Upper Leg"), NodePath("../../Lower Leg")]
+TO_BE_REMOVED = [NodePath("../../Upper Leg/Area3D")]
+metadata/_custom_type_script = "uid://hhosnxuj45ad"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris_rigidbody"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.101756)
+shape = SubResource("CapsuleShape3D_4qeov")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Debris_rigidbody"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.191825, -0.200058)
+shape = SubResource("CapsuleShape3D_xocfa")
