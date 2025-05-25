@@ -38,10 +38,9 @@ func _process(_delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	
 	var time_passed = float(Time.get_ticks_msec() - lifetime_start) / float(data.lifetime)
 	
-	if(time_passed > 1.0):
+	if(time_passed > 1.0): # time_passed is proportional
 		queue_free();
 	
 	
@@ -52,12 +51,21 @@ func _physics_process(delta: float) -> void:
 	FORWARDS_RAY.look_at(global_position - velocity)
 	FORWARDS_RAY.force_raycast_update()
 	if((FORWARDS_RAY.get_collision_point() - global_position).length() < speed*delta and FORWARDS_RAY.get_collider() != null): # Going to hit an object.
-		hit_object()
-		draw_trail(FORWARDS_RAY.get_collision_point() - global_position) # draws it only to the object
-		queue_free()
-	else: # free room to travel forwards
+		var hit_result = hit_object()
+		if(hit_result == 1):#Ricochet
+			
+			var elapsed_time:float = (FORWARDS_RAY.get_collision_point() - global_position).length()/velocity.length()
+			draw_trail(FORWARDS_RAY.get_collision_point() - global_position)
+			global_position = FORWARDS_RAY.get_collision_point()
+			_physics_process(delta - elapsed_time)
+
+			
+		elif hit_result == 2:#Terminate
+			draw_trail(FORWARDS_RAY.get_collision_point() - global_position) # draws it only to the object
+			queue_free() # Final escape
 		
-		draw_trail(velocity)
+	else: #Normal procession
+		draw_trail(velocity*delta)
 		
 		position += velocity*delta;
 		
@@ -66,15 +74,16 @@ func _physics_process(delta: float) -> void:
 		velocity *= (1-data.drag*delta)   # drag
 		
 	
-	$RayCast3D/RayVisualiser.position.z = -speed*delta/2 # This shows it better as it is mvoed previously.
-	$RayCast3D/RayVisualiser.mesh.height = speed*delta;
-	
+	#DEBUG COSMETICS
+	#$RayCast3D/RayVisualiser.position.z = -speed*delta/2 # This shows it better as it is moved previously. - but purely cosmetic
+	#$RayCast3D/RayVisualiser.mesh.height = speed*delta;
 
 
 
-func draw_trail(vector): # not working yet
+
+func draw_trail(vector):
 	var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
-	trail.lifetime = 100;
+	trail.lifetime = 0.1;
 	trail.segment_origin = global_position;
 	trail.segment_end = global_position + vector;
 	
@@ -86,7 +95,7 @@ func draw_trail(vector): # not working yet
 
 	
 	var trail2 = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
-	trail2.lifetime = 100;
+	trail2.lifetime = 0.1;
 	trail2.segment_origin = global_position;
 	trail2.segment_end = global_position + vector;
 	
@@ -97,18 +106,36 @@ func draw_trail(vector): # not working yet
 	trail2.global_position = global_position;
 
 
-
-func hit_object():
+##Returns 1 for ricochet, 2 for termination
+func hit_object() -> int:
 	#print("Bullet hit " + str(FORWARDS_RAY.get_collision_point()))
 	
+	var angle:float = asin(-velocity.normalized().dot(FORWARDS_RAY.get_collision_normal()))
+	var delta_v:Vector3;
+	
+	var result:int;
+	
+	if(angle < data.ricochet_angle):#Ricochet
+		delta_v = -velocity.dot(FORWARDS_RAY.get_collision_normal())*FORWARDS_RAY.get_collision_normal() * (1.0+data.NEL_coefficient)
+		velocity = delta_v # bounces it
+		result = 1;
+	else:
+		delta_v = -velocity
+		result = 2;
+	
 	var collider = FORWARDS_RAY.get_collider();
+	var damage = data.damage * (delta_v.length()/data.speed)
+	
 	if(collider is Hittable):
-		collider.hit(velocity.length()*velocity.length() * data.mass)
+		#print("hit with force: ", damage) # use this for figuring out how much damage needs doing
+		collider.hit(damage) # 1/2mv^2
 	
 	
 	if(collider is RigidBody3D):
-		collider.apply_impulse(velocity*data.mass, FORWARDS_RAY.get_collision_point())
+		collider.apply_impulse(delta_v*data.mass, FORWARDS_RAY.get_collision_point())
 
+	
+	
 	
 	#add bullet hole
 	var bullet_hole_inst = preload("res://gameobjects/bullets/hole/bullet_hole.tscn").instantiate()
@@ -122,4 +149,4 @@ func hit_object():
 	
 	bullet_hole_inst.rotate_object_local(Vector3.UP, randf()*2*PI) # make it random rotation
 	
-	queue_free()
+	return result

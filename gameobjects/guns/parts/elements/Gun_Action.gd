@@ -35,7 +35,7 @@ func _ready() -> void:
 	
 
 var prev_slide_pos:float = 0;
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var slide_pos:float = ACTION_SLIDEABLE_LINK.slide_pos
 	
 	if(EJECT_WHEN_DIR == 0 or EJECT_WHEN_DIR == 2): # Eject when forwards

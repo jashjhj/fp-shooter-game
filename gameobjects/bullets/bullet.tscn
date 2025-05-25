@@ -29,4 +29,5 @@ visible = false
 mesh = SubResource("CylinderMesh_kh0gy")
 
 [node name="BulletVisualiser" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_kh0gy")

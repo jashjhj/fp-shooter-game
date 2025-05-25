@@ -10,7 +10,7 @@ var instances:Array[Gun_Insertable];
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#Logic to decide if to summon a new instance
 	for i in range(0, MAX_EXISTING):
 		if(len(instances) > i):

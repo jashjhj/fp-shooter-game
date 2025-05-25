@@ -26,7 +26,7 @@ cap_top = false
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_urq71"]
 render_priority = 0
 shader = ExtResource("5_6bn3m")
-shader_parameter/albedo_mult = 1.0
+shader_parameter/stretch_factor = 1.0
 shader_parameter/alpha_mult = 1.0
 
 [sub_resource type="Resource" id="Resource_tk0w3"]
@@ -35,8 +35,11 @@ speed = 300
 drag = 0.1
 gravity = 9.81
 mass = 0.005
+damage = 250
 base_inaccuracy = 0.008
 amount = 1
+NEL_coefficient = 0.8
+ricochet_angle = 0.523599
 trail_material = SubResource("ShaderMaterial_urq71")
 lifetime = 2000
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"

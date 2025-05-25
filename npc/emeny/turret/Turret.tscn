@@ -55,6 +55,7 @@ size = Vector3(0.195068, 0.0120239, 0.120117)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_78n5t"]
 albedo_texture = ExtResource("5_e10rt")
+roughness = 0.8
 texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mewfn"]
@@ -320,11 +321,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0220
 node_a = NodePath("..")
 node_b = NodePath("../../Cradle")
 exclude_nodes_from_collision = false
-angular_limit/bias = 0.99
-angular_limit/relaxation = 0.01
 
 [node name="Cradle" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0239322, 0.424662, 0.0111149)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0239322, 0.420062, 0.0111149)
 collision_layer = 64
 collision_mask = 65
 mass = 3.0

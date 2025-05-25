@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 [node name="Model" type="Node3D" parent="."]
 
 [node name="ADS_Cam_pos" type="Node3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0192832, 0.143276, 0.303929)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0197181, 0.142404, 0.0797108)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.000891544, 0.0325087, 0.0170356)
@@ -51,10 +51,8 @@ script = ExtResource("5_ibb3d")
 ACTION_SLIDEABLE_LINK = NodePath("../Slide")
 FIRE = NodePath("Gun_Part_Listener")
 EJECT_DIST = 0.087
-EJECT_WHEN_DIR = null
 GATHER_FROM = NodePath("../Magwell")
 GATHER_DIST = 0.009
-GATHER_WHEN_DIR = null
 EJECTION_VELOCITY = Vector3(1.5, 0, 0)
 EJECTION_VELOCITY_ANGULAR = Vector3(0, -10, 0)
 EJECTION_SPEED_MULTIPLIER = 0.8
