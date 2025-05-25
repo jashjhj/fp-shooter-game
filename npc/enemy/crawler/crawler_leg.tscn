@@ -82,7 +82,7 @@ script = ExtResource("5_kssld")
 RIGIDBODY = NodePath("..")
 RIGIDBODY_BASIS_CLONE = NodePath("../../Upper Leg")
 NEW_CHILDREN = [NodePath("../../Upper Leg"), NodePath("../../Lower Leg")]
-TO_BE_REMOVED = [NodePath("../../Upper Leg/Area3D")]
+TO_BE_REMOVED = [NodePath("../../Upper Leg/Area3D"), NodePath("../../Lower Leg/Area3D")]
 metadata/_custom_type_script = "uid://hhosnxuj45ad"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Debris_rigidbody"]

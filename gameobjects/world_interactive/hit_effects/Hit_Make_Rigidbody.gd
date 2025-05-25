@@ -20,9 +20,11 @@ func hit(damage):
 		RIGIDBODY.global_transform = RIGIDBODY_BASIS_CLONE.global_transform
 	
 	for removable in TO_BE_REMOVED:
-		removable.queue_free()
+		if(removable != null):
+			removable.queue_free()
 	for new_child in NEW_CHILDREN:
-		new_child.reparent(RIGIDBODY)
+		if(new_child != null):
+			new_child.reparent(RIGIDBODY)
 	
 	RIGIDBODY.reparent(Globals.RUBBISH_COLLECTOR)
 	Globals.RUBBISH_COLLECTOR.add_rubbish(RIGIDBODY)
