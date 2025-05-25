@@ -10,9 +10,8 @@ texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_r1dea"]
 material = SubResource("StandardMaterial3D_r1dea")
-size = Vector2(0.2, 0.2)
+size = Vector2(0.05, 0.05)
 
 [node name="BulletHole" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_r1dea")
 script = ExtResource("2_gppoq")

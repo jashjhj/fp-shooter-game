@@ -15,6 +15,8 @@ var vector:Vector3;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if(material == null):
+		push_error("No material set in bullet_data")
 	
 	lifetime_start = Time.get_ticks_msec()
 	

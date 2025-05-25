@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 [node name="Model" type="Node3D" parent="."]
 
 [node name="ADS_Cam_pos" type="Node3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0197181, 0.142404, 0.0797108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0221872, 0.143109, 0.0797108)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.000891544, 0.0325087, 0.0170356)

@@ -6,6 +6,8 @@ class_name Bullet extends Node3D
 @export var velocity:Vector3;
 @export var origin_global_pos:Vector3;
 
+@export var ticks_per_process:int = 3;
+
 @onready var FORWARDS_RAY:RayCast3D = $RayCast3D;
 
  #                     FLOOR + NPC + NPC_PHYSICS + Debris
@@ -37,8 +39,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+var tick_number = -0;
 func _physics_process(delta: float) -> void:
-	var time_passed = float(Time.get_ticks_msec() - lifetime_start) / float(data.lifetime)
+	tick_number += 1;
+	if(tick_number % ticks_per_process != 0):
+		delta *= ticks_per_process;
+
+	var time_passed = float(Time.get_ticks_msec() - lifetime_start) / 1000 / float(data.lifetime)
 	
 	if(time_passed > 1.0): # time_passed is proportional
 		queue_free();
@@ -48,9 +55,9 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	FORWARDS_RAY.look_at(global_position - velocity)
+	FORWARDS_RAY.look_at(global_position - velocity*delta)
 	FORWARDS_RAY.force_raycast_update()
-	if((FORWARDS_RAY.get_collision_point() - global_position).length() < speed*delta and FORWARDS_RAY.get_collider() != null): # Going to hit an object.
+	if(FORWARDS_RAY.get_collider() != null): # Going to hit an object.
 		var hit_result = hit_object()
 		if(hit_result == 1):#Ricochet
 			
@@ -106,19 +113,27 @@ func draw_trail(vector):
 	trail2.global_position = global_position;
 
 
+
+var current_ricochet:int = 0;
+var max_ricochets:int = 20;
+
 ##Returns 1 for ricochet, 2 for termination
+
 func hit_object() -> int:
 	#print("Bullet hit " + str(FORWARDS_RAY.get_collision_point()))
 	
 	var angle:float = asin(-velocity.normalized().dot(FORWARDS_RAY.get_collision_normal()))
 	var delta_v:Vector3;
 	
-	var result:int;
+	var result:int = 2;
 	
 	if(angle < data.ricochet_angle):#Ricochet
 		delta_v = -velocity.dot(FORWARDS_RAY.get_collision_normal())*FORWARDS_RAY.get_collision_normal() * (1.0+data.NEL_coefficient)
-		velocity = delta_v # bounces it
-		result = 1;
+		velocity += delta_v # bounces it
+		
+		current_ricochet += 1
+		if(current_ricochet < max_ricochets):  # check to prevent infintie ricochets
+			result = 1;
 	else:
 		delta_v = -velocity
 		result = 2;

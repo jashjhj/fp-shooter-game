@@ -1,21 +1,56 @@
-[gd_scene load_steps=35 format=3 uid="uid://cnsjodlk4krx"]
+[gd_scene load_steps=47 format=3 uid="uid://cnsjodlk4krx"]
 
+[ext_resource type="Script" uid="uid://b053l48nxqp6f" path="res://npc/enemy/turret/turret_ai.gd" id="1_eymqg"]
 [ext_resource type="ArrayMesh" uid="uid://b70gfyf52nfej" path="res://assets/models/npcs/turret/Base.obj" id="1_sskfx"]
 [ext_resource type="ArrayMesh" uid="uid://did5yni3yf6gx" path="res://assets/models/npcs/turret/Leg.obj" id="2_aoex5"]
 [ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/Hittable.gd" id="2_bfj0u"]
 [ext_resource type="ArrayMesh" uid="uid://dur68usvkofo4" path="res://assets/models/npcs/turret/ammo_crate.obj" id="4_bfj0u"]
 [ext_resource type="Texture2D" uid="uid://ogtpii4v750e" path="res://assets/models/npcs/turret/battery.png" id="5_e10rt"]
 [ext_resource type="ArrayMesh" uid="uid://cqqpw3a6j5o2i" path="res://assets/models/npcs/turret/battery.obj" id="6_ytfm6"]
+[ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="7_ro2dr"]
 [ext_resource type="ArrayMesh" uid="uid://bv3rtx1gh0r6w" path="res://assets/models/npcs/turret/battery_wires.obj" id="7_ytfm6"]
 [ext_resource type="ArrayMesh" uid="uid://lk48osxu32u8" path="res://assets/models/npcs/turret/motor.obj" id="8_mewfn"]
 [ext_resource type="ArrayMesh" uid="uid://b46gi6ccrsn8u" path="res://assets/models/npcs/turret/cradle.obj" id="9_3f3ei"]
 [ext_resource type="ArrayMesh" uid="uid://c0cguakswbqnw" path="res://assets/models/npcs/turret/gun.obj" id="10_3f3ei"]
 [ext_resource type="ArrayMesh" uid="uid://dgierqv5cjwto" path="res://assets/models/npcs/turret/camera.obj" id="11_n3noi"]
+[ext_resource type="Script" uid="uid://do4am13na3svu" path="res://gameobjects/bullets/Bullet_Source.gd" id="12_ro2dr"]
 [ext_resource type="ArrayMesh" uid="uid://dw250qx4q34ip" path="res://assets/models/npcs/turret/Front_Guard.obj" id="12_scij8"]
 [ext_resource type="ArrayMesh" uid="uid://drfrx02wahh55" path="res://assets/models/npcs/turret/Front_Support.000.obj" id="13_0fiss"]
+[ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="13_ah1fg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bfj0u"]
 size = Vector3(0.749756, 0.0247192, 0.468384)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ov44l"]
+height = 0.182007
+radius = 0.0390625
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ah1fg"]
+render_priority = 0
+shader = ExtResource("7_ro2dr")
+shader_parameter/stretch_factor = 1.0
+shader_parameter/alpha_mult = 0.5
+
+[sub_resource type="Resource" id="Resource_yqngf"]
+script = ExtResource("13_ah1fg")
+speed = 300
+drag = 0.1
+gravity = 9.81
+mass = 0.005
+damage = 250
+base_inaccuracy = 0.05
+amount = 1
+NEL_coefficient = 0.8
+ricochet_angle = 0.523599
+trail_material = SubResource("ShaderMaterial_ah1fg")
+lifetime = 1
+metadata/_custom_type_script = "uid://cuj1evxe65gdy"
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ov44l"]
+points = PackedVector3Array(-0.029462, 0.751191, 0.0277901, -0.029462, 0.783884, -0.0728382, -0.00906124, 0.836132, -0.458631, -0.00640804, 0.829731, -0.458631, 0, 0.827084, -0.458631, 0.029462, 0.751191, 0.0277901, -0.029462, 0.793972, 0.149242, -0.029462, 0.889671, -0.0728382, -0.00640804, 0.842534, -0.458631, -0.029462, 0.922381, 0.0277901, 0.00640227, 0.829731, -0.458631, 0.00905547, 0.836132, -0.458631, 0.029462, 0.783884, -0.0728382, 0.029462, 0.793972, 0.149242, -0.0194433, 0.818471, 0.167065, -0.029462, 0.879567, 0.149242, 0, 0.845198, -0.458631, 0.029462, 0.922381, 0.0277901, 0.00640227, 0.842534, -0.458631, 0.029462, 0.889671, -0.0728382, 0.029462, 0.879567, 0.149242, 0.0194375, 0.818471, 0.167065, -0.0194433, 0.855085, 0.167065, 0.0194375, 0.855085, 0.167065)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_scij8"]
+points = PackedVector3Array(-0.00864017, 0.749698, -0.095586, 0.00863588, 0.749698, -0.095586, -0.021881, 0.75745, -0.095586, -0.00864017, 0.758941, -0.183692, 0.021881, 0.75745, -0.095586, 0.00863588, 0.758941, -0.183692, -0.00988243, 0.802789, -0.0956045, -0.021881, 0.778385, -0.0955952, -0.021881, 0.766698, -0.183692, 0.00390242, 0.768467, -0.189886, 0.0099167, 0.76598, -0.189886, 0.021881, 0.778385, -0.0955952, 0.00987815, 0.802789, -0.0956045, 0.021881, 0.766698, -0.183692, 0.015931, 0.768467, -0.189886, -0.00988243, 0.804052, -0.139644, -0.021881, 0.784264, -0.183683, 0.00141361, 0.774482, -0.189886, 0.021881, 0.784264, -0.183683, 0.00987815, 0.804052, -0.139644, 0.0184241, 0.774482, -0.189886, -0.00988243, 0.805309, -0.183674, 0.00390242, 0.780497, -0.189886, 0.015931, 0.780497, -0.189886, 0.00987815, 0.805309, -0.183674, 0.0099167, 0.782991, -0.189886)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytfm6"]
 radius = 0.035
@@ -76,23 +111,51 @@ metallic_specular = 0.0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n3noi"]
 points = PackedVector3Array(0.00033959, 0.463909, -0.057297, 0.00033959, 0.504386, -0.057297, 0.0405176, 0.463909, -0.0405274, -0.0886708, 0.463909, -0.0301067, -1.06692e-05, 0.544863, -0.0425802, 0.0300973, 0.544863, -0.0301067, 0.0405176, 0.504386, -0.0405274, -0.0886708, 0.544863, -0.0301067, 0.057301, 0.463909, 0, -0.091794, 0.463909, 0, 0.0425754, 0.544863, 0, 0.057301, 0.504386, 0, -0.091794, 0.544863, 0, 0.0405176, 0.463909, 0.0405162, -0.0886708, 0.463909, 0.0300955, 0.0405176, 0.504386, 0.0405162, 0.0300973, 0.544863, 0.0300955, -0.0886708, 0.544863, 0.0300955, 0.00033959, 0.463909, 0.057297, 0.00033959, 0.504386, 0.057297, -1.06692e-05, 0.544863, 0.0425689)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ov44l"]
-height = 0.182007
-radius = 0.0390625
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8mwec"]
+noise_type = 2
+seed = 1
+frequency = 0.0059
+cellular_distance_function = 1
+cellular_return_type = 6
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ov44l"]
-points = PackedVector3Array(-0.029462, 0.751191, 0.0277901, -0.029462, 0.783884, -0.0728382, -0.00906124, 0.836132, -0.458631, -0.00640804, 0.829731, -0.458631, 0, 0.827084, -0.458631, 0.029462, 0.751191, 0.0277901, -0.029462, 0.793972, 0.149242, -0.029462, 0.889671, -0.0728382, -0.00640804, 0.842534, -0.458631, -0.029462, 0.922381, 0.0277901, 0.00640227, 0.829731, -0.458631, 0.00905547, 0.836132, -0.458631, 0.029462, 0.783884, -0.0728382, 0.029462, 0.793972, 0.149242, -0.0194433, 0.818471, 0.167065, -0.029462, 0.879567, 0.149242, 0, 0.845198, -0.458631, 0.029462, 0.922381, 0.0277901, 0.00640227, 0.842534, -0.458631, 0.029462, 0.889671, -0.0728382, 0.029462, 0.879567, 0.149242, 0.0194375, 0.818471, 0.167065, -0.0194433, 0.855085, 0.167065, 0.0194375, 0.855085, 0.167065)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jcc0l"]
+seamless = true
+as_normal_map = true
+bump_strength = 19.5
+noise = SubResource("FastNoiseLite_8mwec")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_scij8"]
-points = PackedVector3Array(-0.00864017, 0.749698, -0.095586, 0.00863588, 0.749698, -0.095586, -0.021881, 0.75745, -0.095586, -0.00864017, 0.758941, -0.183692, 0.021881, 0.75745, -0.095586, 0.00863588, 0.758941, -0.183692, -0.00988243, 0.802789, -0.0956045, -0.021881, 0.778385, -0.0955952, -0.021881, 0.766698, -0.183692, 0.00390242, 0.768467, -0.189886, 0.0099167, 0.76598, -0.189886, 0.021881, 0.778385, -0.0955952, 0.00987815, 0.802789, -0.0956045, 0.021881, 0.766698, -0.183692, 0.015931, 0.768467, -0.189886, -0.00988243, 0.804052, -0.139644, -0.021881, 0.784264, -0.183683, 0.00141361, 0.774482, -0.189886, 0.021881, 0.784264, -0.183683, 0.00987815, 0.804052, -0.139644, 0.0184241, 0.774482, -0.189886, -0.00988243, 0.805309, -0.183674, 0.00390242, 0.780497, -0.189886, 0.015931, 0.780497, -0.189886, 0.00987815, 0.805309, -0.183674, 0.0099167, 0.782991, -0.189886)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa15h"]
+albedo_color = Color(0.839216, 0.839216, 0.882353, 1)
+metallic = 1.0
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_jcc0l")
+uv1_scale = Vector3(1, 5, 1)
+texture_filter = 1
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_muywi"]
 points = PackedVector3Array(0.370503, 0.069713, 0.089435, 0.370503, 0.069713, 0.0750078, -0.370503, 0.069713, 0.089435, 0.370503, -0.1, 0.00720473, 0.370503, -0.1, -0.007213, -0.370503, 0.069713, 0.0750078, -0.370503, -0.1, 0.00720473, -0.370503, -0.1, -0.007213)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eymqg"]
+noise_type = 2
+frequency = 0.0308
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ro2dr"]
+noise = SubResource("FastNoiseLite_eymqg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ah1fg"]
+albedo_color = Color(0.301404, 0.181901, 0.0878414, 1)
+albedo_texture = SubResource("NoiseTexture2D_ro2dr")
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_brxp5"]
 points = PackedVector3Array(0.014896, -0.1, 0.010733, -0.014896, -0.1, 0.010733, 0.014896, -0.1, -0.0148994, 0.014896, 0.039387, -0.0376896, -0.014896, 0.039387, -0.0376896, -0.014896, -0.1, -0.0148994, 0.014896, 0.0123719, -0.050264, -0.014896, 0.0123719, -0.050264)
 
-[node name="Turret" type="Node3D"]
+[node name="Turret" type="Node3D" node_paths=PackedStringArray("CAMERA", "HINGE_X", "HINGE_Y", "BULLET_SOURCE")]
+script = ExtResource("1_eymqg")
+CAMERA = NodePath("Base/Cradle2/Gun2/Camera2")
+HINGE_X = NodePath("Base/Cradle2")
+HINGE_Y = NodePath("Base/Cradle2/Gun2")
+BULLET_SOURCE = NodePath("Base/Cradle2/Gun2/Bullet_Source")
 
 [node name="Base" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327089, 0)
@@ -116,7 +179,7 @@ angular_limit/upper = 0.0
 angular_limit/lower = 0.0
 
 [node name="Left_Support" type="HingeJoint3D" parent="Base"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.291982, 0, -0.0501253)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.370494, -0.0151365, -0.0580731)
 node_a = NodePath("..")
 node_b = NodePath("../../Guard_Support")
 angular_limit/enable = true
@@ -124,12 +187,112 @@ angular_limit/upper = 0.0
 angular_limit/lower = 0.0
 
 [node name="Right_Support" type="HingeJoint3D" parent="Base"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.330598, 0, -0.0501253)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38565, -0.0157457, -0.0630615)
 node_a = NodePath("..")
 node_b = NodePath("../../Guard_Support2")
 angular_limit/enable = true
 angular_limit/upper = 0.0
 angular_limit/lower = 0.0
+
+[node name="Cradle2" type="Node3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.327089, 0)
+
+[node name="Cradle2" type="MeshInstance3D" parent="Base/Cradle2"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0.01999, -0.127702, 0.0111149)
+mesh = ExtResource("9_3f3ei")
+skeleton = NodePath("../../..")
+
+[node name="Cradle" type="RigidBody3D" parent="Base/Cradle2"]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0239322, 0.420062, 0.0111149)
+collision_layer = 64
+collision_mask = 65
+mass = 3.0
+sleeping = true
+freeze = true
+script = ExtResource("2_bfj0u")
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Gun_Hinge" type="HingeJoint3D" parent="Base/Cradle2/Cradle"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0.274371, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../Gun2/Gun")
+angular_limit/enable = true
+angular_limit/upper = 0.523599
+angular_limit/lower = -0.174533
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cradle2/Cradle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0900269, 0)
+shape = SubResource("CylinderShape3D_ov44l")
+
+[node name="Gun2" type="Node3D" parent="Base/Cradle2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70237, 0)
+
+[node name="Bullet_Source" type="Node3D" parent="Base/Cradle2/Gun2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0217978, 0.0037176, -0.442006)
+script = ExtResource("12_ro2dr")
+bullet_data = SubResource("Resource_yqngf")
+metadata/_custom_type_script = "uid://do4am13na3svu"
+
+[node name="GunMesh" type="MeshInstance3D" parent="Base/Cradle2/Gun2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0217978, -0.831937, 0)
+mesh = ExtResource("10_3f3ei")
+skeleton = NodePath("../../../..")
+
+[node name="Gun" type="RigidBody3D" parent="Base/Cradle2/Gun2"]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0217978, 0.0136921, 0)
+collision_layer = 64
+collision_mask = 65
+mass = 8.0
+sleeping = true
+script = ExtResource("2_bfj0u")
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Base/Cradle2/Gun2/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.845629, 0)
+visible = false
+shape = SubResource("ConvexPolygonShape3D_ov44l")
+
+[node name="CameraJoint" type="HingeJoint3D" parent="Base/Cradle2/Gun2/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0428535, -0.160656)
+node_a = NodePath("..")
+node_b = NodePath("../../Camera2/Camera")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Camera2" type="Node3D" parent="Base/Cradle2/Gun2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.70121, 0)
+
+[node name="Camera" type="RigidBody3D" parent="Base/Cradle2/Gun2/Camera2" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+process_mode = 4
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0247896, 0.669724, -0.154023)
+collision_layer = 64
+collision_mask = 65
+freeze = true
+script = ExtResource("2_bfj0u")
+MINIMUM_DAMAGE_THRESHOLD = 0.0
+FREE_ON_THRESHOLD = [NodePath("."), NodePath("SpotLight3D")]
+THRESHOLDS = Array[float]([0.0, 999.0])
+metadata/_custom_type_script = "uid://0vp01sycjj0a"
+
+[node name="Camera2" type="MeshInstance3D" parent="Base/Cradle2/Gun2/Camera2/Camera"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00239785, -0.796972, -0.134219)
+mesh = ExtResource("11_n3noi")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cradle2/Gun2/Camera2/Camera"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00239785, -0.796972, -0.134219)
+shape = SubResource("ConvexPolygonShape3D_scij8")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Base/Cradle2/Gun2/Camera2/Camera"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00999758, -0.021818, 0.0527966)
+light_color = Color(1, 0.713726, 0.745098, 1)
+light_energy = 20.0
+shadow_enabled = true
+spot_range = 4.0
+spot_angle = 9.25
 
 [node name="Leg1" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337198, 0.305792, -0.122672)
@@ -319,92 +482,14 @@ shape = SubResource("ConvexPolygonShape3D_n3noi")
 [node name="HingeJoint3D" type="HingeJoint3D" parent="Motor"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0220234, 0.0825475, 0.0144186)
 node_a = NodePath("..")
-node_b = NodePath("../../Cradle")
+node_b = NodePath("../../Base/Cradle2/Cradle")
 exclude_nodes_from_collision = false
-
-[node name="Cradle" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0239322, 0.420062, 0.0111149)
-collision_layer = 64
-collision_mask = 65
-mass = 3.0
-script = ExtResource("2_bfj0u")
-metadata/_custom_type_script = "uid://0vp01sycjj0a"
-
-[node name="Cradle" type="MeshInstance3D" parent="Cradle"]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.00394219, -0.547764, 0)
-mesh = ExtResource("9_3f3ei")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cradle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0900269, 0)
-shape = SubResource("CylinderShape3D_ov44l")
-
-[node name="Gun_Hinge" type="HingeJoint3D" parent="Cradle"]
-transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0.274371, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Gun")
-angular_limit/enable = true
-angular_limit/upper = 0.523599
-angular_limit/lower = -0.174533
-
-[node name="Gun" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025845, 0.714902, 0)
-collision_layer = 64
-collision_mask = 65
-mass = 8.0
-script = ExtResource("2_bfj0u")
-metadata/_custom_type_script = "uid://0vp01sycjj0a"
-
-[node name="Gun" type="MeshInstance3D" parent="Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.845629, 0)
-mesh = ExtResource("10_3f3ei")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.845629, 0)
-visible = false
-shape = SubResource("ConvexPolygonShape3D_ov44l")
-
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0428535, -0.160656)
-node_a = NodePath("..")
-node_b = NodePath("../../Camera")
-angular_limit/enable = true
-angular_limit/upper = 0.0
-angular_limit/lower = 0.0
-
-[node name="Camera" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0247896, 0.669724, -0.154023)
-collision_layer = 64
-collision_mask = 65
-script = ExtResource("2_bfj0u")
-MINIMUM_DAMAGE_THRESHOLD = 0.0
-FREE_ON_THRESHOLD = [NodePath("."), NodePath("SpotLight3D")]
-THRESHOLDS = Array[float]([0.0, 999.0])
-metadata/_custom_type_script = "uid://0vp01sycjj0a"
-
-[node name="Camera2" type="MeshInstance3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.796972, 0.138632)
-mesh = ExtResource("11_n3noi")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.796972, 0.138632)
-shape = SubResource("ConvexPolygonShape3D_scij8")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00759975, -0.021818, -0.0483833)
-light_color = Color(1, 0.713726, 0.745098, 1)
-light_energy = 20.0
-shadow_enabled = true
-spot_range = 4.0
-spot_angle = 9.25
 
 [node name="Guard" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.997128, -0.0757323, 0, 0.0757323, 0.997128, 0, 0.427726, -0.146996)
 collision_layer = 64
 collision_mask = 65
-mass = 4.0
+mass = 12.0
 script = ExtResource("2_bfj0u")
 MAX_HP = 2000.0
 MINIMUM_DAMAGE_THRESHOLD = 350.0
@@ -413,12 +498,13 @@ metadata/_custom_type_script = "uid://0vp01sycjj0a"
 [node name="FrontGuard" type="MeshInstance3D" parent="Guard"]
 mesh = ExtResource("12_scij8")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_sa15h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Guard"]
 shape = SubResource("ConvexPolygonShape3D_muywi")
 
 [node name="Guard_Support" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297849, 0.43655, -0.0373033)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2996, 0.43655, -0.0373033)
 collision_layer = 64
 collision_mask = 65
 script = ExtResource("2_bfj0u")
@@ -429,20 +515,23 @@ THRESHOLDS = Array[float]([0.0, 550.0, 250.0])
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
 [node name="FrontSupport_000" type="MeshInstance3D" parent="Guard_Support"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0785125, -0.0151365, -0.00794783)
 mesh = ExtResource("13_0fiss")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ah1fg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Guard_Support"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0829679, -0.00813282, -0.0143657)
 shape = SubResource("ConvexPolygonShape3D_brxp5")
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="Guard_Support"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0208409, -0.0454755)
+transform = Transform3D(1, 0, 0, 0, 0.853208, -0.521571, 0, 0.521571, 0.853208, 0.0790929, 0.0163116, -0.0423187)
 node_a = NodePath("..")
 node_b = NodePath("../../Guard")
 angular_limit/enable = true
 
 [node name="Guard_Support2" type="RigidBody3D" parent="." node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324731, 0.43655, -0.0373033)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.388457, 0.420804, -0.0502395)
 collision_layer = 64
 collision_mask = 65
 script = ExtResource("2_bfj0u")
@@ -455,12 +544,13 @@ metadata/_custom_type_script = "uid://0vp01sycjj0a"
 [node name="FrontSupport_000" type="MeshInstance3D" parent="Guard_Support2"]
 mesh = ExtResource("13_0fiss")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ah1fg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Guard_Support2"]
 shape = SubResource("ConvexPolygonShape3D_brxp5")
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="Guard_Support2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0208409, -0.0454755)
+transform = Transform3D(1, 0, 0, 0, 0.853208, -0.521571, 0, 0.521571, 0.853208, -2.98023e-08, 0.0253702, -0.0486323)
 node_a = NodePath("..")
 node_b = NodePath("../../Guard")
 angular_limit/enable = true

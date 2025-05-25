@@ -15,12 +15,13 @@ script = ExtResource("1_oul6g")
 GUN = NodePath("Torso/Head/WelrodSpecial")
 
 [node name="Torso" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
 [node name="Head" type="Node3D" parent="Torso"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Torso/Head"]
+fov = 70.0
 script = ExtResource("2_g1dw6")
 
 [node name="RayCast3D" type="RayCast3D" parent="Torso/Head/Camera3D"]

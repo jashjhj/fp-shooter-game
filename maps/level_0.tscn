@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8abipasve7ck"]
+[gd_scene load_steps=12 format=3 uid="uid://c8abipasve7ck"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_v0r8n"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="2_6po2o"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="3_ps7t7"]
-[ext_resource type="PackedScene" uid="uid://cnsjodlk4krx" path="res://npc/emeny/turret/Turret.tscn" id="4_sab5y"]
+[ext_resource type="PackedScene" uid="uid://cnsjodlk4krx" path="res://npc/enemy/turret/Turret.tscn" id="4_sab5y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6po2o"]
+resource_local_to_scene = true
 size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_v0r8n"]
@@ -24,6 +25,12 @@ process_mode = 1
 [sub_resource type="Environment" id="Environment_lgvyb"]
 background_mode = 2
 sky = SubResource("Sky_sab5y")
+
+[sub_resource type="BoxMesh" id="BoxMesh_sab5y"]
+size = Vector3(0.3, 2, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgvyb"]
+size = Vector3(0.3, 2, 5)
 
 [node name="level_0" type="Node3D"]
 
@@ -67,7 +74,16 @@ environment = SubResource("Environment_lgvyb")
 [node name="Rubbish" parent="." instance=ExtResource("3_ps7t7")]
 
 [node name="Turret" parent="." instance=ExtResource("4_sab5y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.99549, 0.735744, 0.763306)
+transform = Transform3D(0.475001, 0, -0.879985, 0, 1, 0, 0.879985, 0, 0.475001, -7.83257, 0.735744, 0.763306)
 
-[node name="Turret2" parent="." instance=ExtResource("4_sab5y")]
-transform = Transform3D(-0.999993, 0, -0.00366702, 0.00105379, 0.95782, -0.287367, 0.00351235, -0.287369, -0.957813, -2.25693, 1.91215, -2.5922)
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45372, 0.488368, 3.45062)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("2_6po2o")
+mesh = SubResource("BoxMesh_sab5y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_lgvyb")

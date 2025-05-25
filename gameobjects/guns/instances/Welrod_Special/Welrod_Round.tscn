@@ -69,5 +69,5 @@ mesh = SubResource("CylinderMesh_7c6fw")
 surface_material_override/0 = SubResource("StandardMaterial3D_urq71")
 
 [node name="Bullet-source" parent="." instance=ExtResource("3_2d7wb")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.000123814, 0, -0.0465679)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000123814, 0, -0.0465679)
 bullet_data = SubResource("Resource_tk0w3")
