@@ -64,6 +64,18 @@ transform = Transform3D(0.475001, 0, -0.879985, 0, 1, 0, 0.879985, 0, 0.475001, 
 transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, -2.23715, 1.32928, 6.10399)
 freeze = true
 
+[node name="Crawler2" parent="." instance=ExtResource("5_lgvyb")]
+transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, 7.61631, 0.498891, 1.52735)
+freeze = true
+
+[node name="Crawler3" parent="." instance=ExtResource("5_lgvyb")]
+transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, -1.22292, 1.32928, 1.39011)
+freeze = true
+
+[node name="Crawler4" parent="." instance=ExtResource("5_lgvyb")]
+transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, 3.14658, 1.73847, 6.10399)
+freeze = true
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_lgvyb")
 

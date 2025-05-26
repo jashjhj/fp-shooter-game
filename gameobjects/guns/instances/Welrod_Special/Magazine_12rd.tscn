@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://7ayolcmhcbpv"]
+[gd_scene load_steps=9 format=3 uid="uid://dearvhy02jr7o"]
 
 [ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://gameobjects/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_k4cmo"]
 [ext_resource type="ArrayMesh" uid="uid://bv662ngxvypbh" path="res://assets/models/guns/Welrod_Special/Magazine.obj" id="2_wd8w7"]
