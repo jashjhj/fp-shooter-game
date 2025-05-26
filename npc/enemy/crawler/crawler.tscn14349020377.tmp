@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://crs2svhqe1ryv"]
+[gd_scene load_steps=8 format=3 uid="uid://crs2svhqe1ryv"]
 
 [ext_resource type="Script" uid="uid://dy2frqj6k6c0k" path="res://npc/enemy/crawler/crawler_ai.gd" id="1_byoff"]
 [ext_resource type="PackedScene" uid="uid://cck2i0r0uriym" path="res://npc/enemy/crawler/crawler_leg.tscn" id="2_1nbr5"]
-[ext_resource type="Script" uid="uid://cv2tgniekj44e" path="res://npc/enemy/crawler/states/Sexapod_Walk_Tripod.gd" id="4_j8f5c"]
+[ext_resource type="Script" uid="uid://cv2tgniekj44e" path="res://npc/enemy/crawler/states/Sexapod_Walk_3+2.gd" id="4_j8f5c"]
+[ext_resource type="Script" uid="uid://cpcj2a7tqhufy" path="res://npc/enemy/crawler/states/Sexapod_Walk_3+3.gd" id="5_2kfhq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1nbr5"]
 
@@ -16,12 +17,13 @@ height = 0.3
 radial_segments = 6
 rings = 0
 
-[node name="Crawler" type="RigidBody3D" node_paths=PackedStringArray("STATE_WALK", "LEG_L0", "LEG_L1", "LEG_L2", "LEG_R0", "LEG_R1", "LEG_R2")]
+[node name="Crawler" type="RigidBody3D" node_paths=PackedStringArray("STATE_WALK_33", "STATE_WALK_32", "LEG_L0", "LEG_L1", "LEG_L2", "LEG_R0", "LEG_R1", "LEG_R2")]
 collision_layer = 32
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_1nbr5")
 script = ExtResource("1_byoff")
-STATE_WALK = NodePath("States/Sexapod_Walk_Tripod")
+STATE_WALK_33 = NodePath("States/Sexapod_Walk_3+3")
+STATE_WALK_32 = NodePath("States/Sexapod_Walk_3+2")
 LEG_L0 = NodePath("LLeg1")
 LEG_L1 = NodePath("LLeg2")
 LEG_L2 = NodePath("LLeg3")
@@ -58,6 +60,10 @@ transform = Transform3D(0.0360543, 0, -0.99935, 0, 1, 0, 0.99935, 0, 0.0360543, 
 
 [node name="States" type="Node" parent="."]
 
-[node name="Sexapod_Walk_Tripod" type="Node" parent="States"]
+[node name="Sexapod_Walk_3+3" type="Node" parent="States"]
+script = ExtResource("5_2kfhq")
+metadata/_custom_type_script = "uid://cpcj2a7tqhufy"
+
+[node name="Sexapod_Walk_3+2" type="Node" parent="States"]
 script = ExtResource("4_j8f5c")
 metadata/_custom_type_script = "uid://cv2tgniekj44e"

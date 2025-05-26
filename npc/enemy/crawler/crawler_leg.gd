@@ -16,28 +16,55 @@ func _ready() -> void:
 	assert(LOWER_LEG != null, "No lower-leg set")
 	assert(DESTROY_SIGNAL != null, "No Destroy signal")
 	
-	DESTROY_SIGNAL.on_hit.connect(self.queue_free)
+	DESTROY_SIGNAL.on_hit.connect(destroy)
 
+func destroy():
+	queue_free()
 
-var step_magnitude:float = 0.2;
-func update_leg_slerp(from:Node3D, to:Node3D, progress:float):
-	var from_pos:Vector3 = to_local(from.global_position)
-	var to_pos:Vector3 = to_local(to.global_position)
+var following_ground:bool = true
+
+#Default pos @ start
+@onready var prev_pos:Vector3 = global_position + Vector3(0, UPPER_LEG_LENGTH - LOWER_LEG_LENGTH, 0);
+var goal_pos:Vector3;
+
+func set_leg_target(target:Vector3, on_ground:bool = true ):
+	following_ground = on_ground
+	prev_pos = goal_pos
+	goal_pos = target;
+
+func set_leg_stationary():
+	following_ground = true;
+	prev_pos = goal_pos
+
+func set_leg_progress(progress:float) -> float:
+	var target = to_local(prev_pos).lerp(to_local(goal_pos), progress)
 	
-	var target:Vector3 = (from_pos).lerp(to_pos, progress)
-	
-	target.y += 0.05*sin(PI*progress)
-	target.z -= 0.2*sin(PI*progress)
-	
-	set_leg_ik(target)
-	
-
-func update_leg_ik(target:Node3D):
-	set_leg_ik(to_local(target.global_position))
+	if(!following_ground):
+		target.y += 0.05*sin(PI*progress)
+		target.z -= 0.1*sin(PI*progress)*sin(PI*progress)
+		pass
+	return set_leg_ik(target)
 
 
+#Deprecated old methods
+#func update_leg_slerp(from:Node3D, to:Node3D, progress:float) -> float:
+	#var from_pos:Vector3 = to_local(from.global_position)
+	#var to_pos:Vector3 = to_local(to.global_position)
+	#
+	#var target:Vector3 = (from_pos).lerp(to_pos, progress)
+	#
+	#target.y += 0.05*sin(PI*progress)
+	#target.z -= 0.1*sin(PI*progress)
+	#
+	#return set_leg_ik(target)
+	#
+#
+#func update_leg_ik(target:Node3D) -> float:
+	#return set_leg_ik(to_local(target.global_position))
 
-func set_leg_ik(pos:Vector3):
+
+
+func set_leg_ik(pos:Vector3) -> float:
 	
 	var relative_pos_3d = pos
 	
@@ -68,6 +95,7 @@ func set_leg_ik(pos:Vector3):
 	#LOWER_LEG.rotate(Vector3.FORWARD, SKEW)
 	
 	LOWER_LEG.position = -UPPER_LEG.basis.z*UPPER_LEG_LENGTH
+	return PI - a2 # Returns crux angle
 
 func calculate_second_angle(distance_squared:float) -> float:
 	var cos_angle = ((distance_squared - UPPER_LEG_LENGTH*UPPER_LEG_LENGTH - LOWER_LEG_LENGTH*LOWER_LEG_LENGTH)/(2*UPPER_LEG_LENGTH*LOWER_LEG_LENGTH))
@@ -75,7 +103,7 @@ func calculate_second_angle(distance_squared:float) -> float:
 	#if(abs(cos_angle) > 1): print("TOO FAR") # Its fine though, just stretches
 	var angle = acos(cos_angle)
 	
-	if (angle > 0): # Always return positive for 'elbow-down'
+	if (angle > 0): # Always return negative for 'elbow-up'
 		return -angle
 	else:
 		return angle

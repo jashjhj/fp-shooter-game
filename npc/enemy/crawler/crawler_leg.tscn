@@ -12,7 +12,7 @@ bottom_radius = 0.012
 height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kssld"]
-radius = 0.0225907
+radius = 0.0404779
 height = 0.233236
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pmr1i"]
@@ -36,9 +36,9 @@ height = 0.397537
 script = ExtResource("1_42w6q")
 UPPER_LEG = NodePath("Upper Leg")
 LOWER_LEG = NodePath("Lower Leg")
-DESTROY_SIGNAL = NodePath("Hit_Signal")
+DESTROY_SIGNAL = NodePath("Destroy_Signal")
 
-[node name="Hit_Signal" type="Node" parent="."]
+[node name="Destroy_Signal" type="Node" parent="."]
 script = ExtResource("4_nlsi1")
 metadata/_custom_type_script = "uid://da5p3e6j010qa"
 
@@ -52,7 +52,7 @@ mesh = SubResource("CylinderMesh_wh3jt")
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("2_pmr1i")
-HITTABLE = [NodePath("../../Hit_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody")]
+HITTABLE = [NodePath("../../Destroy_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Upper Leg/Area3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.101986)
@@ -67,7 +67,7 @@ mesh = SubResource("CylinderMesh_pmr1i")
 
 [node name="Area3D" type="Area3D" parent="Lower Leg" node_paths=PackedStringArray("HITTABLE")]
 script = ExtResource("2_pmr1i")
-HITTABLE = [NodePath("../../Hit_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody")]
+HITTABLE = [NodePath("../../Destroy_Signal"), NodePath("../../Debris_rigidbody/Hit_Make_Rigidbody")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lower Leg/Area3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.177406)
@@ -90,5 +90,5 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 shape = SubResource("CapsuleShape3D_4qeov")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Debris_rigidbody"]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.191825, -0.200058)
+transform = Transform3D(0.988955, 0.148213, 1.29572e-08, 0.148213, -0.988955, -8.64572e-08, 0, 8.74228e-08, -1, 0, -0.191825, -0.200058)
 shape = SubResource("CapsuleShape3D_xocfa")
