@@ -31,6 +31,9 @@ collision_mask = 0
 hit_back_faces = false
 collide_with_areas = true
 
+[node name="AudioListener3D" type="AudioListener3D" parent="Torso/Head/Camera3D"]
+current = true
+
 [node name="WelrodSpecial" parent="Torso/Head" instance=ExtResource("3_g1dw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0664793, -0.200434, -0.288826)
 

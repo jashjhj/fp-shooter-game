@@ -5,6 +5,8 @@ class_name Crawler extends RigidBody3D
 @export var GAIT_HEIGHT:float = 0.2;
 @export var GAIT_STEP_LENGTH:float = 0.36;
 
+@export var current_speed:float = 1.8#1.8
+
 #@export var STATE_WALK_33:Sexapod_State;
 @export var STATE_WALK:Sexapod_State;
 
@@ -21,7 +23,7 @@ class_name Crawler extends RigidBody3D
 var CURRENT_WALK_STATE:Sexapod_State
 
 var current_velocity:Vector3# = Vector3(0, 0, 0.5)
-var current_speed:float = 1.8#1.8
+
 var effective_speed:float;
 
 var legs_working:int = 6;
@@ -45,7 +47,7 @@ func _ready():
 	
 	
 	nav_agent.height = GAIT_HEIGHT + 0.1
-	nav_agent.path_height_offset = -GAIT_HEIGHT + 0.3
+	nav_agent.path_height_offset = 0.15 - GAIT_HEIGHT
 
 
 func remove_leg():
@@ -62,7 +64,7 @@ func _physics_process(delta):
 	
 	update_nav_location(Globals.PLAYER.global_position)
 	
-	var next_vector = to_local(nav_agent.get_next_path_position()).normalized()
+	var next_vector = (nav_agent.get_next_path_position() - global_position).normalized()
 	current_velocity = next_vector*effective_speed# * 60 * delta;
 	#current_velocity = current_velocity.rotated(Vector3.UP, PI/2)
 	
@@ -70,11 +72,11 @@ func _physics_process(delta):
 	
 	global_position.y = nav_agent.get_next_path_position().y
 	#if((global_position - nav_agent.get_next_path_position()) * Vector3(1,0,1)).length() != 0:
-	look_at(Globals.PLAYER.global_position + Vector3(0, 1, 0), Vector3.UP)
+	look_at(nav_agent.get_next_path_position(), Vector3.UP)
 	
 	#rotate_y(PI/2)
 	
-	position -= global_basis.z*current_velocity.length()*delta
+	position += current_velocity*delta
 	
 	
 	distance_travelled += current_velocity.length()*delta

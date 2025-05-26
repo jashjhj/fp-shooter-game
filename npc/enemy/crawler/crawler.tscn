@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://crs2svhqe1ryv"]
+[gd_scene load_steps=8 format=3 uid="uid://crs2svhqe1ryv"]
 
 [ext_resource type="Script" uid="uid://dy2frqj6k6c0k" path="res://npc/enemy/crawler/crawler_ai.gd" id="1_byoff"]
 [ext_resource type="PackedScene" uid="uid://cck2i0r0uriym" path="res://npc/enemy/crawler/crawler_leg.tscn" id="2_1nbr5"]
+[ext_resource type="Material" uid="uid://cyooiq8jky0w6" path="res://npc/enemy/crawler/crawler_material.tres" id="2_j8f5c"]
 [ext_resource type="Script" uid="uid://cv2tgniekj44e" path="res://npc/enemy/crawler/states/Sexapod_Walk_Tripod.gd" id="4_j8f5c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1nbr5"]
@@ -34,9 +35,11 @@ shape = SubResource("BoxShape3D_aqq67")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.51181, 0, 0, 0, -4.37114e-08, -0.213696, 0, 1, -9.34095e-09, 0, 0, 0)
+material_override = ExtResource("2_j8f5c")
 mesh = SubResource("CylinderMesh_byoff")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+height = 0.5
 
 [node name="LLeg1" parent="." instance=ExtResource("2_1nbr5")]
 transform = Transform3D(-0.0360542, 0, 0.99935, 0, 1, 0, -0.99935, 0, -0.0360542, -0.116719, 0.0249069, -0.110737)

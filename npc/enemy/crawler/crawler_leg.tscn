@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cck2i0r0uriym"]
+[gd_scene load_steps=13 format=3 uid="uid://cck2i0r0uriym"]
 
 [ext_resource type="Script" uid="uid://sel62qjtekyj" path="res://npc/enemy/crawler/crawler_leg.gd" id="1_42w6q"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="2_pmr1i"]
+[ext_resource type="Material" uid="uid://cyooiq8jky0w6" path="res://npc/enemy/crawler/crawler_material.tres" id="3_kssld"]
 [ext_resource type="Script" uid="uid://da5p3e6j010qa" path="res://gameobjects/world_interactive/hit_effects/Hit_Signal.gd" id="4_nlsi1"]
+[ext_resource type="AudioStream" uid="uid://b8f51he6jfdh1" path="res://assets/sfx/metal_tap.wav" id="5_4qeov"]
 [ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="5_kssld"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wh3jt"]
@@ -32,11 +34,12 @@ height = 0.204708
 radius = 0.00807529
 height = 0.397537
 
-[node name="CrawlerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG", "DESTROY_SIGNAL")]
+[node name="CrawlerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG", "DESTROY_SIGNAL", "HIT_SURFACE_SFX")]
 script = ExtResource("1_42w6q")
 UPPER_LEG = NodePath("Upper Leg")
 LOWER_LEG = NodePath("Lower Leg")
 DESTROY_SIGNAL = NodePath("Destroy_Signal")
+HIT_SURFACE_SFX = NodePath("Lower Leg/AudioStreamPlayer3D")
 
 [node name="Destroy_Signal" type="Node" parent="."]
 script = ExtResource("4_nlsi1")
@@ -46,6 +49,7 @@ metadata/_custom_type_script = "uid://da5p3e6j010qa"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Upper Leg"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.1)
+material_override = ExtResource("3_kssld")
 mesh = SubResource("CylinderMesh_wh3jt")
 
 [node name="Area3D" type="Area3D" parent="Upper Leg" node_paths=PackedStringArray("HITTABLE")]
@@ -63,6 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.201251)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lower Leg"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.2)
+material_override = ExtResource("3_kssld")
 mesh = SubResource("CylinderMesh_pmr1i")
 
 [node name="Area3D" type="Area3D" parent="Lower Leg" node_paths=PackedStringArray("HITTABLE")]
@@ -73,7 +78,16 @@ HITTABLE = [NodePath("../../Destroy_Signal"), NodePath("../../Debris_rigidbody/H
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.177406)
 shape = SubResource("CapsuleShape3D_nlsi1")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Lower Leg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.356467)
+visible = false
+stream = ExtResource("5_4qeov")
+volume_db = -17.0
+pitch_scale = 1.8
+max_polyphony = 3
+
 [node name="Debris_rigidbody" type="RigidBody3D" parent="."]
+process_mode = 4
 collision_layer = 4096
 mass = 0.3
 
