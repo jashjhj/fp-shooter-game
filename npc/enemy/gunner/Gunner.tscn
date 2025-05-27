@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6s7shgruaqyx"]
+
+[ext_resource type="Script" uid="uid://2p4nfacfiask" path="res://npc/enemy/gunner/gunner.gd" id="1_xnvj7"]
+[ext_resource type="Script" uid="uid://c52akob5kscrb" path="res://npc/enemy/states/state_machine.gd" id="2_jbvlm"]
+[ext_resource type="Script" uid="uid://c2e8suxg2p0oa" path="res://npc/enemy/gunner/states/idle.gd" id="3_lu8wf"]
+[ext_resource type="Script" uid="uid://b7hsq4uux6083" path="res://npc/enemy/gunner/states/active.gd" id="4_qj8e5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jbvlm"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lu8wf"]
+albedo_color = Color(1, 0.44, 0.44, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qj8e5"]
+material = SubResource("StandardMaterial3D_lu8wf")
+radius = 0.3
+height = 1.8
+radial_segments = 32
+rings = 2
+
+[node name="Gunner" type="CharacterBody3D" node_paths=PackedStringArray("STATE_MACHINE")]
+collision_layer = 32
+script = ExtResource("1_xnvj7")
+STATE_MACHINE = NodePath("StateMachine")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_jbvlm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_qj8e5")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
+script = ExtResource("2_jbvlm")
+CURRENT_STATE = NodePath("Gunner_State_Idle")
+
+[node name="Gunner_State_Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_lu8wf")
+metadata/_custom_type_script = "uid://c2e8suxg2p0oa"
+
+[node name="Active" type="Node" parent="StateMachine"]
+script = ExtResource("4_qj8e5")
+metadata/_custom_type_script = "uid://b7hsq4uux6083"
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4881, 0.00267211)
+
+[node name="RayCast3D" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1)
+collision_mask = 16
