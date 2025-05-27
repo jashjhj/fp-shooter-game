@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8abipasve7ck"]
+[gd_scene load_steps=13 format=3 uid="uid://c8abipasve7ck"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_v0r8n"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="2_6po2o"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="3_ps7t7"]
 [ext_resource type="PackedScene" uid="uid://cnsjodlk4krx" path="res://npc/enemy/turret/Turret.tscn" id="4_sab5y"]
-[ext_resource type="PackedScene" uid="uid://crs2svhqe1ryv" path="res://npc/enemy/crawler/crawler.tscn" id="5_lgvyb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ps7t7"]
 sky_top_color = Color(0.475794, 0.680649, 0.881363, 1)
@@ -59,22 +58,6 @@ environment = SubResource("Environment_lgvyb")
 
 [node name="Turret" parent="." instance=ExtResource("4_sab5y")]
 transform = Transform3D(0.475001, 0, -0.879985, 0, 1, 0, 0.879985, 0, 0.475001, -7.83257, 0.735744, 0.763306)
-
-[node name="Crawler" parent="." instance=ExtResource("5_lgvyb")]
-transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, -2.23715, 1.32928, 6.10399)
-freeze = true
-
-[node name="Crawler2" parent="." instance=ExtResource("5_lgvyb")]
-transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, 7.61631, 0.498891, 1.52735)
-freeze = true
-
-[node name="Crawler3" parent="." instance=ExtResource("5_lgvyb")]
-transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, -1.22292, 1.32928, 1.39011)
-freeze = true
-
-[node name="Crawler4" parent="." instance=ExtResource("5_lgvyb")]
-transform = Transform3D(-0.140875, 0, -0.990027, 0, 1, 0, 0.990027, 0, -0.140875, 3.14658, 1.73847, 6.10399)
-freeze = true
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_lgvyb")

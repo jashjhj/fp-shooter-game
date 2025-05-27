@@ -22,13 +22,16 @@ func _process(_delta: float) -> void:
 					summon_new_after_delay(0.3)
 					
 	if(current_instances == 0):
-		summon_new()
+		summon_new_after_delay(0.3)
 
 
 
 func summon_new() -> void:
 	summoning_in_progress = false;
 	
+	if(INSERTABLE == null):
+		push_warning("No valid insertable to summon")
+		return
 	var new_instance:Gun_Insertable = INSERTABLE.instantiate();
 	new_instance.visible = true;
 	new_instance.process_mode = Node.PROCESS_MODE_INHERIT
