@@ -13,9 +13,9 @@ var is_mouse_focused = true;
 @export_range(-180, 0, 1.0, "degrees") var LOOK_MIN_VERT = -85
 
 
-@onready var HEAD = $Torso/Head
-@onready var TORSO = $Torso
-@onready var CAMERA = $Torso/Head/Camera3D
+@onready var HEAD:Node3D = $Torso/Head
+@onready var TORSO:Node3D = $Torso
+@onready var CAMERA:Camera3D = $Torso/Head/Camera3D
 
 @export var GUN:Gun;
 
@@ -143,6 +143,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED/8)
 		velocity.z = move_toward(velocity.z, 0, SPEED/8)
-
+	
 	#velocity.y = 0
 	move_and_slide()
