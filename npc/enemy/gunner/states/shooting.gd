@@ -18,4 +18,8 @@ func physics_update(delta:float) -> void:
 	if(distance_to_player > OWNER.STATS.SHOOT_DISTANCE+OWNER.STATS.SHOOT_DISTANCE_TOLERANCE or distance_to_player < OWNER.STATS.SHOOT_DISTANCE-OWNER.STATS.SHOOT_DISTANCE_TOLERANCE):
 		transition.emit("Gunner_State_Approaching")
 	
+	OWNER.RAY.target_position = OWNER.RAY.to_local(Globals.PLAYER.TORSO.global_position);
+	OWNER.RAY.force_raycast_update()
+	if(OWNER.RAY.get_collider() != Globals.PLAYER):
+		transition.emit("Gunner_State_Approaching")
 	OWNER.GUN.shoot.emit()

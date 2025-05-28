@@ -13,7 +13,14 @@ func enter():
 	OWNER.NAV_AGENT.velocity_computed.connect(set_velocity)
 
 func physics_update(delta):
-	OWNER.NAV_AGENT.target_position = get_radial_target_position(OWNER.STATS.SHOOT_DISTANCE);
+	
+	OWNER.RAY.target_position = OWNER.RAY.to_local(Globals.PLAYER.TORSO.global_position);
+	OWNER.RAY.force_raycast_update()
+	if(OWNER.RAY.get_collider() == Globals.PLAYER):
+		OWNER.NAV_AGENT.target_position = get_radial_target_position(OWNER.STATS.SHOOT_DISTANCE);
+	else:
+		OWNER.NAV_AGENT.target_position = Globals.PLAYER.global_position
+	
 	
 	var walk_vector = (OWNER.NAV_AGENT.get_next_path_position() - OWNER.global_position).normalized()
 	var look_at_dir = walk_vector;
