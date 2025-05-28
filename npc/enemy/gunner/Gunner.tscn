@@ -1,9 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6s7shgruaqyx"]
+[gd_scene load_steps=18 format=3 uid="uid://b6s7shgruaqyx"]
 
 [ext_resource type="Script" uid="uid://2p4nfacfiask" path="res://npc/enemy/gunner/gunner.gd" id="1_xnvj7"]
+[ext_resource type="Script" uid="uid://bfu73den4mto0" path="res://npc/enemy/gunner/states/Gunner_Stats.gd" id="2_hv40q"]
 [ext_resource type="Script" uid="uid://c52akob5kscrb" path="res://npc/enemy/states/state_machine.gd" id="2_jbvlm"]
 [ext_resource type="Script" uid="uid://c2e8suxg2p0oa" path="res://npc/enemy/gunner/states/idle.gd" id="3_lu8wf"]
-[ext_resource type="Script" uid="uid://b7hsq4uux6083" path="res://npc/enemy/gunner/states/active.gd" id="4_qj8e5"]
+[ext_resource type="Script" uid="uid://b7hsq4uux6083" path="res://npc/enemy/gunner/states/approaching.gd" id="4_qj8e5"]
+[ext_resource type="Script" uid="uid://do4am13na3svu" path="res://gameobjects/bullets/Bullet_Source.gd" id="5_plx2x"]
+[ext_resource type="Script" uid="uid://cry3esaeocs4y" path="res://npc/enemy/gunner/states/shooting.gd" id="5_shukn"]
+[ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="6_shb7v"]
+[ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="7_shb7v"]
+
+[sub_resource type="Resource" id="Resource_ymt5a"]
+script = ExtResource("2_hv40q")
+SHOOT_DISTANCE = 5.0
+SHOOT_DISTANCE_TOLERANCE = 1.0
+metadata/_custom_type_script = "uid://bfu73den4mto0"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jbvlm"]
 radius = 0.3
@@ -19,10 +30,41 @@ height = 1.8
 radial_segments = 32
 rings = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qj8e5"]
+albedo_color = Color(0.505344, 0.505344, 0.505344, 1)
+metallic = 0.75
+
+[sub_resource type="PrismMesh" id="PrismMesh_0r5jb"]
+material = SubResource("StandardMaterial3D_qj8e5")
+size = Vector3(0.1, 0.1, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shb7v"]
+render_priority = 0
+shader = ExtResource("7_shb7v")
+shader_parameter/stretch_factor = 1.0
+shader_parameter/alpha_mult = 0.5
+
+[sub_resource type="Resource" id="Resource_shukn"]
+script = ExtResource("6_shb7v")
+speed = 300
+drag = 0.1
+gravity = 9.81
+mass = 0.005
+damage = 10
+base_inaccuracy = 0.05
+amount = 1
+NEL_coefficient = 0.8
+ricochet_angle = 0.349066
+trail_material = SubResource("ShaderMaterial_shb7v")
+lifetime = 2.0
+metadata/_custom_type_script = "uid://cuj1evxe65gdy"
+
 [node name="Gunner" type="CharacterBody3D" node_paths=PackedStringArray("STATE_MACHINE")]
 collision_layer = 32
 script = ExtResource("1_xnvj7")
 STATE_MACHINE = NodePath("StateMachine")
+STATS = SubResource("Resource_ymt5a")
+VIEW_DISTANCE = 10.0
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -33,6 +75,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("CapsuleMesh_qj8e5")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 0.5
+path_height_offset = 0.25
 avoidance_enabled = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
@@ -43,13 +87,33 @@ CURRENT_STATE = NodePath("Gunner_State_Idle")
 script = ExtResource("3_lu8wf")
 metadata/_custom_type_script = "uid://c2e8suxg2p0oa"
 
-[node name="Active" type="Node" parent="StateMachine"]
+[node name="Gunner_State_Approaching" type="Node" parent="StateMachine"]
 script = ExtResource("4_qj8e5")
 metadata/_custom_type_script = "uid://b7hsq4uux6083"
 
-[node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4881, 0.00267211)
+[node name="Gunner_State_Shooting" type="Node" parent="StateMachine"]
+script = ExtResource("5_shukn")
+metadata/_custom_type_script = "uid://cry3esaeocs4y"
 
-[node name="RayCast3D" type="RayCast3D" parent="Head"]
+[node name="Torso" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Gun_Pos" type="Node3D" parent="Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177641, -0.427612)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso/Gun_Pos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00192738, -0.153411)
+mesh = SubResource("PrismMesh_0r5jb")
+
+[node name="Bullet_Source" type="Node3D" parent="Torso/Gun_Pos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.29447)
+script = ExtResource("5_plx2x")
+bullet_data = SubResource("Resource_shukn")
+metadata/_custom_type_script = "uid://do4am13na3svu"
+
+[node name="Head" type="Node3D" parent="Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4881, 0.00267211)
+
+[node name="RayCast3D" type="RayCast3D" parent="Torso/Head"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 16

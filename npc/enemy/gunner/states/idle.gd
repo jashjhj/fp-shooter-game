@@ -20,6 +20,6 @@ func physics_update(delta:float) -> void:
 				if(OWNER.RAY.is_colliding()):
 					if(OWNER.RAY.get_collider() == Globals.PLAYER):
 						#Can see the player
-						transition.emit("Active")
+						transition.emit("Gunner_State_Approaching")
 	
 	
