@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8abipasve7ck"]
+[gd_scene load_steps=14 format=3 uid="uid://c8abipasve7ck"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_v0r8n"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="2_6po2o"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="3_ps7t7"]
 [ext_resource type="PackedScene" uid="uid://cnsjodlk4krx" path="res://npc/enemy/turret/Turret.tscn" id="4_sab5y"]
+[ext_resource type="PackedScene" uid="uid://b6s7shgruaqyx" path="res://npc/enemy/gunner/Gunner.tscn" id="5_lgvyb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ps7t7"]
 sky_top_color = Color(0.475794, 0.680649, 0.881363, 1)
@@ -22,9 +23,8 @@ ssao_enabled = true
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_lgvyb"]
-vertices = PackedVector3Array(-9.5046, -2.13066, -21.2511, -9.5046, 1.86934, -2.50112, 9.4954, 1.96934, -2.50112, 9.4954, -2.13066, -21.2511, -5.2546, 0.169343, 0.498882, -4.5046, 0.169343, 0.248882, -4.5046, 0.169343, -1.25112, -9.5046, 0.169343, -1.25112, -4.5046, 0.169343, 9.49888, -4.5046, 0.169343, 6.49888, -5.2546, 0.169343, 6.24888, -9.5046, 0.169343, 9.49888, -3.7546, 0.169343, 0.498882, 9.4954, 0.169343, -1.25112, -3.7546, 0.169343, 6.24888, 9.4954, 0.169343, 9.49888)
+vertices = PackedVector3Array(-9.5046, -1.93066, -21.2511, -9.5046, 2.06934, -2.50112, 9.4954, 2.06934, -2.50112, 9.4954, -1.93066, -21.2511, -5.2546, 0.319344, 0.498882, -4.5046, 0.319344, 0.248882, -4.5046, 0.319344, -1.25112, -9.5046, 0.319344, -1.25112, -4.5046, 0.319344, 9.49888, -4.5046, 0.319344, 6.49888, -5.2546, 0.319344, 6.24888, -9.5046, 0.319344, 9.49888, -3.7546, 0.319344, 0.498882, 9.4954, 0.319344, -1.25112, -3.7546, 0.319344, 6.24888, 9.4954, 0.319344, 9.49888)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(4, 10, 7), PackedInt32Array(7, 10, 11), PackedInt32Array(5, 6, 12), PackedInt32Array(12, 6, 13), PackedInt32Array(9, 14, 8), PackedInt32Array(8, 14, 15), PackedInt32Array(12, 13, 14), PackedInt32Array(14, 13, 15)]
-cell_height = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6po2o"]
 resource_local_to_scene = true
@@ -42,7 +42,7 @@ size = Vector3(0.3, 2, 5)
 [node name="level_0" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_v0r8n")]
-transform = Transform3D(0.80914, 0.0100297, -0.58753, 0, 0.999854, 0.0170685, 0.587616, -0.0138108, 0.809022, 0, -0.00308013, 6.4688)
+transform = Transform3D(-0.0862797, 0.0170048, -0.996126, -7.5357e-10, 0.999854, 0.0170685, 0.996271, 0.00147265, -0.0862668, 0, -0.00308013, 6.4688)
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.7, 0)
@@ -97,3 +97,12 @@ mesh = SubResource("BoxMesh_sab5y")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_lgvyb")
+
+[node name="Gunner" parent="." instance=ExtResource("5_lgvyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.15102, 1.67727, 7.71708)
+
+[node name="Gunner2" parent="." instance=ExtResource("5_lgvyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5417, 1.67727, 7.71708)
+
+[node name="Gunner3" parent="." instance=ExtResource("5_lgvyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.79009, 1.67727, 7.71708)

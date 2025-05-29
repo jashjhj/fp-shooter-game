@@ -15,6 +15,7 @@ var vector:Vector3;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	if(material == null):
 		push_error("No material set in bullet_data")
 	
@@ -67,13 +68,14 @@ func _ready() -> void:
 	#mesh = surface_tool.commit()
 	
 	
-	var timer = Timer.new() # Deletion timer
+	var timer:Timer = Timer.new() # Deletion timer
 	add_child(timer)
 	timer.wait_time = lifetime * 1
 	timer.timeout.connect(self.queue_free)
 	timer.timeout.connect(timer.queue_free)
 	timer.start()
-	mesh.surface_get_material(0).set_shader_parameter("alpha_mult", 0.8)
+	
+	#mesh.surface_get_material(0).set_shader_parameter("alpha_mult", 0.8)
 
 
 #func _process(delta: float) -> void:

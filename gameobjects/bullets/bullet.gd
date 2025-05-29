@@ -154,6 +154,9 @@ func hit_object() -> int:
 
 
 func draw_trail(vector):
+	if(global_position - Globals.PLAYER.global_position).length_squared() > 2500: #>50m away, dont render mesh
+		return;
+	
 	var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
 	trail.lifetime = 0.1;
 	trail.segment_origin = global_position;
