@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b361hbdt5pf77"]
+
+[ext_resource type="Script" uid="uid://e6otnece73sl" path="res://maps/map_resources/pathfinding/cover/cover.gd" id="1_jhxv6"]
+
+[node name="Cover" type="Node3D"]
+script = ExtResource("1_jhxv6")
