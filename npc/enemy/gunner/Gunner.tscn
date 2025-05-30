@@ -87,12 +87,14 @@ CURRENT_STATE = NodePath("Gunner_State_Idle")
 script = ExtResource("3_lu8wf")
 metadata/_custom_type_script = "uid://c2e8suxg2p0oa"
 
-[node name="Gunner_State_Approaching" type="Node" parent="StateMachine"]
+[node name="Gunner_State_Approaching" type="Node" parent="StateMachine" node_paths=PackedStringArray("GUN_IDLE_POS")]
 script = ExtResource("4_qj8e5")
+GUN_IDLE_POS = NodePath("../../Torso/Gun_Idle_Pos")
 metadata/_custom_type_script = "uid://b7hsq4uux6083"
 
-[node name="Gunner_State_Shooting" type="Node" parent="StateMachine"]
+[node name="Gunner_State_Shooting" type="Node" parent="StateMachine" node_paths=PackedStringArray("GUN_SHOOT_POS")]
 script = ExtResource("5_shukn")
+GUN_SHOOT_POS = NodePath("../../Torso/Gun_Shoot_Pos")
 metadata/_custom_type_script = "uid://cry3esaeocs4y"
 
 [node name="Torso" type="Node3D" parent="."]
@@ -117,3 +119,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4881, 0.00267211)
 [node name="RayCast3D" type="RayCast3D" parent="Torso/Head"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 16
+
+[node name="Gun_Idle_Pos" type="Node3D" parent="Torso"]
+transform = Transform3D(1, 0, 0, 0, 0.753937, 0.656946, 0, -0.656946, 0.753937, 0, -0.143511, -0.407831)
+
+[node name="Gun_Shoot_Pos" type="Node3D" parent="Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.244924, -0.587418)
