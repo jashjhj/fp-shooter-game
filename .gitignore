@@ -2,6 +2,9 @@
 .godot/
 .uid
 
+#Addons
+addons/*
+examples_dd3d/*
 
 #images
 #*.png
