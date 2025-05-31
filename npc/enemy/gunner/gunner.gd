@@ -12,9 +12,9 @@ class_name Gunner extends CharacterBody3D
 @onready var NAV_AGENT:NavigationAgent3D = $NavigationAgent3D;
 @onready var GUN_TARGET_POS:Node3D = Node3D.new();
 @onready var GUN_POS:Node3D = $Torso/Gun_Pos;
-@onready var GUN = $Torso/Gun_Pos/Bullet_Source
+@onready var GUN:Node3D = $Torso/Gun_Pos/Bullet_Source
 
-@export var GUN_LERP_RATE:float = 8.0;
+@export var GUN_LERP_RATE:float = 4.0;
 
 func _ready() -> void:
 	assert(STATE_MACHINE != null, "No State Machine Set")

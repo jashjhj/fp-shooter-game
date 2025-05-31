@@ -75,4 +75,4 @@ use_collision = true
 size = Vector3(2.68164, 2.92674, 1)
 
 [node name="Gunner" parent="." instance=ExtResource("4_6ity8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69065, 0, -4.67321)
+transform = Transform3D(-0.882124, 0, -0.471018, 0, 1, 0, 0.471018, 0, -0.882124, -6.77635, 0, -8.46412)

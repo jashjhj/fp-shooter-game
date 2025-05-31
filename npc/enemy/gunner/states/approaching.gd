@@ -39,7 +39,8 @@ func physics_update(delta):
 	var walk_vector = (OWNER.NAV_AGENT.get_next_path_position() - OWNER.global_position).normalized()
 	var look_at_dir = walk_vector;
 	look_at_dir.y = 0;
-	OWNER.look_at(OWNER.global_position + look_at_dir)
+	if(look_at_dir != Vector3.ZERO):
+		OWNER.look_at(OWNER.global_position + look_at_dir)
 	OWNER.NAV_AGENT.velocity = walk_vector * WALK_SPEED;
 	
 	var distance_to_player = (OWNER.global_position - Globals.PLAYER.global_position).length()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6s7shgruaqyx"]
+[gd_scene load_steps=19 format=3 uid="uid://b6s7shgruaqyx"]
 
 [ext_resource type="Script" uid="uid://2p4nfacfiask" path="res://npc/enemy/gunner/gunner.gd" id="1_xnvj7"]
 [ext_resource type="Script" uid="uid://bfu73den4mto0" path="res://npc/enemy/gunner/states/Gunner_Stats.gd" id="2_hv40q"]
@@ -29,6 +29,9 @@ radius = 0.3
 height = 1.8
 radial_segments = 32
 rings = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_hv40q"]
+size = Vector3(0.5, 0.1, 0.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qj8e5"]
 albedo_color = Color(0.505344, 0.505344, 0.505344, 1)
@@ -70,9 +73,14 @@ VIEW_DISTANCE = 10.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_jbvlm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("CapsuleMesh_qj8e5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.703402, -0.152241)
+mesh = SubResource("BoxMesh_hv40q")
+skeleton = NodePath("../..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 0.5
