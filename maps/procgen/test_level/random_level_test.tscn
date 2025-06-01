@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://beijwpakms1a6"]
+
+[ext_resource type="Script" uid="uid://bh8ik85f46luu" path="res://maps/procgen/elements/Level_Generator.gd" id="1_dlyai"]
+[ext_resource type="PackedScene" uid="uid://dqohl4jnlcpta" path="res://maps/procgen/test_level/segments/player_start.tscn" id="2_1qqvm"]
+[ext_resource type="PackedScene" uid="uid://c5esi53gc5ex6" path="res://maps/procgen/test_level/segments/Blank_Area.tscn" id="3_fo2f6"]
+[ext_resource type="PackedScene" uid="uid://ccpkk01iohe6t" path="res://maps/procgen/test_level/segments/coridoor.tscn" id="4_5y23i"]
+[ext_resource type="PackedScene" uid="uid://6iwvem2ecddd" path="res://maps/map_resources/environment.tscn" id="4_fo2f6"]
+[ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="5_5y23i"]
+[ext_resource type="PackedScene" uid="uid://rb58dcok123a" path="res://maps/procgen/maintenance/Pipe_Coridoor.tscn" id="5_gurrt"]
+
+[node name="RandomLevelTest" type="Node3D"]
+script = ExtResource("1_dlyai")
+START_SEGMENT = ExtResource("2_1qqvm")
+LEVEL_SEGMENTS = Array[PackedScene]([ExtResource("3_fo2f6"), ExtResource("4_5y23i"), ExtResource("5_gurrt")])
+LEVEL_SEGMENT_WEIGHTS = Array[float]([1.0, 1.0, 3.0])
+BUDGET = 1000.0
+
+[node name="Environment" parent="." instance=ExtResource("4_fo2f6")]
+
+[node name="Rubbish" parent="." instance=ExtResource("5_5y23i")]

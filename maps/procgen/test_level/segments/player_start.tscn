@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqohl4jnlcpta"]
+
+[ext_resource type="Script" uid="uid://dtw2ia6dldwe1" path="res://maps/procgen/elements/Level_Segment.gd" id="1_owi48"]
+[ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="2_tyvsc"]
+[ext_resource type="Script" uid="uid://bbdcosj5b80r" path="res://gameobjects/static/StaticBody3D_Mat.gd" id="3_0hons"]
+[ext_resource type="Script" uid="uid://cmkh3eal45ltb" path="res://maps/procgen/elements/Level_Segment_Connector.gd" id="4_t1ld2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6de5s"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_adigw"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nntly"]
+size = Vector3(2, 3, 2)
+
+[node name="PlayerStart" type="Node3D" node_paths=PackedStringArray("INBOUND", "OUTBOUND", "BOUNDING_BOX")]
+script = ExtResource("1_owi48")
+INBOUND = NodePath("IN")
+OUTBOUND = [NodePath("Level_Segment_Connector2")]
+BOUNDING_BOX = NodePath("Bounding Box")
+
+[node name="Player" parent="." instance=ExtResource("2_tyvsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.03266, 0)
+
+[node name="StaticBody3D_Mat" type="StaticBody3D" parent="."]
+script = ExtResource("3_0hons")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D_Mat"]
+shape = SubResource("BoxShape3D_6de5s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D_Mat"]
+mesh = SubResource("BoxMesh_adigw")
+skeleton = NodePath("")
+
+[node name="Bounding Box" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounding Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_nntly")
+
+[node name="Level_Segment_Connector2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+script = ExtResource("4_t1ld2")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="IN" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("4_t1ld2")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
