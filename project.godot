@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="first_person_shooter"
-run/main_scene="uid://c8abipasve7ck"
+run/main_scene="uid://ytkqw7poq2yc"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,10 @@ Debug="*res://scripts/singletons/debug.gd"
 [debug]
 
 gdscript/warnings/unused_parameter=0
+
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [input]
 
@@ -100,6 +104,7 @@ aim_down_sights={
 3d_physics/layer_18="Gun_Part_Interaction_Plane"
 3d_physics/layer_19="Gun_Use_Element"
 3d_physics/layer_20="Gun_Use_Layer_Extra"
+3d_physics/layer_25="MapGen_AreaBoundingBox"
 
 [physics]
 

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsilh4fmj1kwk"]
+
+[ext_resource type="Script" uid="uid://bbdcosj5b80r" path="res://gameobjects/static/StaticBody3D_Mat.gd" id="1_ukh2l"]
+[ext_resource type="Material" uid="uid://dm84jioj7ge25" path="res://assets/environment/pipes/pipe_material.tres" id="2_lc4nx"]
+[ext_resource type="ArrayMesh" uid="uid://3uukwm83clrw" path="res://assets/environment/pipes/Pipe-Straight-2m.obj" id="3_5p1e5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g6hbj"]
+radius = 0.154297
+
+[node name="Pipe_2" type="StaticBody3D"]
+script = ExtResource("1_ukh2l")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -4.37114e-08, -1)
+shape = SubResource("CylinderShape3D_g6hbj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+material_override = ExtResource("2_lc4nx")
+mesh = ExtResource("3_5p1e5")
+skeleton = NodePath("")
