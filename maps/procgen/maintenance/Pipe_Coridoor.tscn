@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://rb58dcok123a"]
+
+[ext_resource type="Script" uid="uid://dtw2ia6dldwe1" path="res://maps/procgen/elements/Level_Segment.gd" id="1_qnxjd"]
+[ext_resource type="Script" uid="uid://bbdcosj5b80r" path="res://gameobjects/static/StaticBody3D_Mat.gd" id="2_gufvs"]
+[ext_resource type="PackedScene" uid="uid://dyx1v5ol3bo08" path="res://assets/environment/level_segments/maintenance_pipes.glb" id="3_le8aq"]
+[ext_resource type="Script" uid="uid://cmkh3eal45ltb" path="res://maps/procgen/elements/Level_Segment_Connector.gd" id="4_lc0lv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jt3ux"]
+size = Vector3(5.99011, 0.462219, 0.376404)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pn7im"]
+size = Vector3(1.62476, 1.29248, 0.310547)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dw3vg"]
+size = Vector3(1.63574, 1.76855, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6hnl"]
+size = Vector3(6, 0.5, 2.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0e7a7"]
+size = Vector3(5.98804, 3.13184, 0.362305)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4tn11"]
+size = Vector3(6, 3.6, 2.7)
+
+[node name="PipeCoridoor" type="Node3D" node_paths=PackedStringArray("INBOUND", "OUTBOUND")]
+script = ExtResource("1_qnxjd")
+INBOUND = NodePath("IN")
+OUTBOUND = [NodePath("OUT")]
+
+[node name="Step(Right)" type="StaticBody3D" parent="."]
+script = ExtResource("2_gufvs")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Step(Right)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00494, 0.203094, -1.07993)
+shape = SubResource("BoxShape3D_jt3ux")
+
+[node name="Pillar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77548, 0, 0.9)
+script = ExtResource("2_gufvs")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.101499, 0.523193, -0.211914)
+shape = SubResource("BoxShape3D_pn7im")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Pillar"]
+transform = Transform3D(1, 0, 0, 0, 0.992429, 0.122817, 0, -0.122817, 0.992429, -0.106649, 1.77598, 0.0393213)
+shape = SubResource("BoxShape3D_dw3vg")
+
+[node name="Things" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Things"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+script = ExtResource("2_gufvs")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Things/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.25)
+shape = SubResource("BoxShape3D_h6hnl")
+
+[node name="Cieling" type="StaticBody3D" parent="Things"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.99074, 0)
+script = ExtResource("2_gufvs")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Things/Cieling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.25)
+shape = SubResource("BoxShape3D_h6hnl")
+
+[node name="maintenance_pipes_mesh" parent="Things" instance=ExtResource("3_le8aq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99036, 1.19209e-07, -3.26606)
+
+[node name="Wall" type="StaticBody3D" parent="Things"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+script = ExtResource("2_gufvs")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Things/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06592, -0.0834961)
+shape = SubResource("BoxShape3D_0e7a7")
+
+[node name="Wall2" type="StaticBody3D" parent="Things"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1.36038)
+script = ExtResource("2_gufvs")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Things/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06592, -0.0834961)
+shape = SubResource("BoxShape3D_0e7a7")
+
+[node name="IN" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("4_lc0lv")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 0)
+script = ExtResource("4_lc0lv")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="Bounding Box" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounding Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.3, -0.25)
+shape = SubResource("BoxShape3D_4tn11")

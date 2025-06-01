@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5esi53gc5ex6"]
+
+[ext_resource type="Script" uid="uid://dtw2ia6dldwe1" path="res://maps/procgen/elements/Level_Segment.gd" id="1_i7dbo"]
+[ext_resource type="Script" uid="uid://bbdcosj5b80r" path="res://gameobjects/static/StaticBody3D_Mat.gd" id="2_4i2b4"]
+[ext_resource type="Script" uid="uid://cmkh3eal45ltb" path="res://maps/procgen/elements/Level_Segment_Connector.gd" id="3_ucfo3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ldrq"]
+size = Vector3(4, 0.4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_87ufi"]
+size = Vector3(4, 0.4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e52gx"]
+margin = 0.0
+size = Vector3(4, 2, 4)
+
+[node name="Level_Segment" type="Node3D" node_paths=PackedStringArray("INBOUND", "OUTBOUND", "BOUNDING_BOX")]
+script = ExtResource("1_i7dbo")
+INBOUND = NodePath("In")
+OUTBOUND = [NodePath("OUT"), NodePath("OUT2"), NodePath("OUT_CORRIDOOR1"), NodePath("OUT_CORIDOOR2"), NodePath("OUT3")]
+BOUNDING_BOX = NodePath("Bounding_Box")
+metadata/_custom_type_script = "uid://dtw2ia6dldwe1"
+
+[node name="Floor" type="StaticBody3D" parent="."]
+script = ExtResource("2_4i2b4")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("BoxMesh_2ldrq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+shape = SubResource("BoxShape3D_87ufi")
+
+[node name="Bounding_Box" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounding_Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_e52gx")
+
+[node name="In" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+script = ExtResource("3_ucfo3")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+script = ExtResource("3_ucfo3")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+script = ExtResource("3_ucfo3")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+script = ExtResource("3_ucfo3")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT_CORRIDOOR1" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, 0)
+script = ExtResource("3_ucfo3")
+TYPE = 1
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT_CORIDOOR2" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 0)
+script = ExtResource("3_ucfo3")
+TYPE = 1
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"

@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccpkk01iohe6t"]
+
+[ext_resource type="Script" uid="uid://dtw2ia6dldwe1" path="res://maps/procgen/elements/Level_Segment.gd" id="1_y2esx"]
+[ext_resource type="Script" uid="uid://bbdcosj5b80r" path="res://gameobjects/static/StaticBody3D_Mat.gd" id="2_euj8e"]
+[ext_resource type="Script" uid="uid://cmkh3eal45ltb" path="res://maps/procgen/elements/Level_Segment_Connector.gd" id="3_1b83f"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jkq04"]
+size = Vector3(2, 0.4, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gneko"]
+size = Vector3(2, 0.4, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y5q5l"]
+size = Vector3(2, 1.6, 3)
+
+[node name="Coridoor" type="Node3D" node_paths=PackedStringArray("INBOUND", "OUTBOUND", "BOUNDING_BOX")]
+script = ExtResource("1_y2esx")
+INBOUND = NodePath("IN")
+OUTBOUND = [NodePath("OUT"), NodePath("OUT_NORMAL")]
+BOUNDING_BOX = NodePath("Area3D")
+COST = 2.0
+metadata/_custom_type_script = "uid://dtw2ia6dldwe1"
+
+[node name="Floor" type="StaticBody3D" parent="."]
+script = ExtResource("2_euj8e")
+metadata/_custom_type_script = "uid://bbdcosj5b80r"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -1.5)
+mesh = SubResource("BoxMesh_jkq04")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -1.5)
+shape = SubResource("BoxShape3D_gneko")
+
+[node name="IN" type="Node3D" parent="."]
+script = ExtResource("3_1b83f")
+TYPE = 1
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+script = ExtResource("3_1b83f")
+TYPE = 1
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="OUT_NORMAL" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+script = ExtResource("3_1b83f")
+metadata/_custom_type_script = "uid://cmkh3eal45ltb"
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -1.5)
+shape = SubResource("BoxShape3D_y5q5l")
