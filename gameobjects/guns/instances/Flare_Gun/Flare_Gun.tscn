@@ -27,11 +27,12 @@ size = Vector3(0.00585938, 0.0141602, 0.0903931)
 [sub_resource type="BoxShape3D" id="BoxShape3D_nq1xb"]
 size = Vector3(0.00390625, 0.0351563, 0.0254171)
 
-[node name="FlareGun" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION")]
+[node name="FlareGun" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION", "ADS_CAM_POS")]
 script = ExtResource("1_rxssa")
 trigger_functions = [NodePath("Model/Hammer/Release_Hammer")]
 GUN_MODEL = NodePath("Model")
 INSPECT_POSITION = NodePath("Inspect_Pos")
+ADS_CAM_POS = NodePath("Model/ADS Cam Pos")
 metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 
 [node name="Model" type="Node3D" parent="."]
@@ -134,13 +135,14 @@ LIMIT = -0.305433
 EDGE = 1
 metadata/_custom_type_script = "uid://dod00lbrjpcyo"
 
+[node name="ADS Cam Pos" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0808774, 0.0333572)
+
 [node name="Inspect_Pos" type="Node3D" parent="."]
 transform = Transform3D(0.433042, 0.206576, 0.877382, -0.040178, 0.97684, -0.210162, -0.900477, 0.0557577, 0.431313, -0.0314448, 0, -0.0100336)
 
-[node name="Player_Insertable_Pouch" type="Node3D" parent="." node_paths=PackedStringArray("INSERTABLE")]
-transform = Transform3D(0.849092, 0.528246, 0, -0.528246, 0.849092, 0, 0, 0, 1, -0.184091, 0.113364, 0.027466)
+[node name="Player_Insertable_Pouch" type="Node3D" parent="."]
+transform = Transform3D(0.849092, 0.528246, 0, -0.528246, 0.849092, 0, 0, 0, 1, -0.176148, 0.113364, 0.027466)
 script = ExtResource("13_f7qc2")
-INSERTABLE = NodePath("12Ga_Shot")
+INSERTABLE = ExtResource("11_nq1xb")
 metadata/_custom_type_script = "uid://loortei0f5ym"
-
-[node name="12Ga_Shot" parent="Player_Insertable_Pouch" instance=ExtResource("11_nq1xb")]

@@ -20,7 +20,7 @@ texture_filter = 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5sp2j"]
 render_priority = 0
 shader = ExtResource("6_qyi58")
-shader_parameter/albedo_mult = 1.0
+shader_parameter/stretch_factor = 1.0
 shader_parameter/alpha_mult = 1.0
 
 [sub_resource type="Resource" id="Resource_rcm1f"]
@@ -29,8 +29,11 @@ speed = 160
 drag = 0.1
 gravity = 9.81
 mass = 0.005
+damage = 10
 base_inaccuracy = 0.1
 amount = 8
+NEL_coefficient = 0.8
+ricochet_angle = 0.349066
 trail_material = SubResource("ShaderMaterial_5sp2j")
 lifetime = 2000
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
@@ -63,7 +66,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_rcm1f")
 surface_material_override/1 = SubResource("StandardMaterial3D_5sp2j")
 
 [node name="Bullet-source" parent="Model" instance=ExtResource("4_ibo4w")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 bullet_data = SubResource("Resource_rcm1f")
 
 [node name="Interact_Area" type="Area3D" parent="Model"]
