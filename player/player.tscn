@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=6 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://k6g5l4koiagb" path="res://gameobjects/guns/instances/Welrod_Special/Welrod_Special.tscn" id="3_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://diui1vqmyxnjp" path="res://gameobjects/guns/instances/Flare_Gun/Flare_Gun.tscn" id="3_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://k6g5l4koiagb" path="res://gameobjects/guns/instances/Welrod_Special/Welrod_Special.tscn" id="4_yw30f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 radius = 0.3
@@ -34,8 +35,12 @@ collide_with_areas = true
 [node name="AudioListener3D" type="AudioListener3D" parent="Torso/Head/Camera3D"]
 current = true
 
-[node name="WelrodSpecial" parent="Torso/Head" instance=ExtResource("3_g1dw6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0664793, -0.200434, -0.288826)
+[node name="FlareGun" parent="Torso/Head" instance=ExtResource("3_g1dw6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0740882, -0.0829843, -0.171616)
+visible = false
+
+[node name="WelrodSpecial" parent="Torso/Head" instance=ExtResource("4_yw30f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0886336, -0.210112, -0.298332)
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
