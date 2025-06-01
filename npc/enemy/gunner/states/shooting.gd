@@ -52,7 +52,7 @@ func physics_update(delta:float) -> void:
 				
 				OWNER.GUN.shoot.emit()
 	
-	print(target_confidence)
+	#print(target_confidence)
 
 
 
