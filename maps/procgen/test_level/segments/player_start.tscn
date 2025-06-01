@@ -16,12 +16,12 @@ size = Vector3(2, 3, 2)
 
 [node name="PlayerStart" type="Node3D" node_paths=PackedStringArray("INBOUND", "OUTBOUND", "BOUNDING_BOX")]
 script = ExtResource("1_owi48")
-INBOUND = NodePath("Spawn_From")
+INBOUND = NodePath("IN")
 OUTBOUND = [NodePath("Level_Segment_Connector2")]
 BOUNDING_BOX = NodePath("Bounding Box")
 
 [node name="Player" parent="." instance=ExtResource("2_tyvsc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.539895, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.03266, 0)
 
 [node name="StaticBody3D_Mat" type="StaticBody3D" parent="."]
 script = ExtResource("3_0hons")
@@ -45,7 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 script = ExtResource("4_t1ld2")
 metadata/_custom_type_script = "uid://cmkh3eal45ltb"
 
-[node name="Spawn_From" type="Node3D" parent="."]
+[node name="IN" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("4_t1ld2")
 metadata/_custom_type_script = "uid://cmkh3eal45ltb"

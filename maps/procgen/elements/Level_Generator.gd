@@ -25,7 +25,7 @@ func load_level() -> void:
 	
 	var outbound_connections:Array[Level_Segment_Connector]
 	
-	var new_seg:Level_Segment = load_segment(START_SEGMENT, Vector3.ZERO, Basis.IDENTITY)
+	var new_seg:Level_Segment = load_segment(START_SEGMENT, Vector3(0, -10, 0), Basis.IDENTITY)
 	if(new_seg != null):
 		outbound_connections.append_array(new_seg.OUTBOUND);
 	
@@ -92,7 +92,7 @@ func load_segment(segment:PackedScene, pos:Vector3, orientation:Basis) -> Level_
 	
 	add_child(seg)
 	
-	seg.basis = seg.global_basis.inverse() * seg.INBOUND.global_basis * orientation
+	seg.basis = seg.global_basis * seg.INBOUND.global_basis.inverse() * orientation
 	seg.position = - seg.INBOUND.global_position + seg.global_position + pos;
 	
 	
