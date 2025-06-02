@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://nsu34clptgvc"]
+
+[ext_resource type="Script" uid="uid://cpsowrpjvxfbc" path="res://gameobjects/security_cameras/Security_Camera.gd" id="1_jssld"]
+[ext_resource type="Material" uid="uid://dhi0e7f0jfjyb" path="res://assets/models/cameras/securitycam1/Camera_Body_Mat.tres" id="2_ht5pv"]
+[ext_resource type="ArrayMesh" uid="uid://b3g0ep1q8inlt" path="res://assets/models/cameras/securitycam1/Stand.obj" id="3_icqcf"]
+[ext_resource type="ArrayMesh" uid="uid://bxqgvhas6r5r5" path="res://assets/models/cameras/securitycam1/Pivot.obj" id="4_e6fgj"]
+[ext_resource type="ArrayMesh" uid="uid://bqnvf1iabh3kx" path="res://assets/models/cameras/securitycam1/camera_head.obj" id="5_gkdp5"]
+[ext_resource type="Material" uid="uid://fdw7r64vxnq5" path="res://assets/models/cameras/securitycam1/Camera_Top_Mat.tres" id="6_dnm3r"]
+[ext_resource type="Material" uid="uid://du2mqnkqk6ebm" path="res://assets/models/cameras/securitycam1/Camera_Lens_Mat.tres" id="7_4y5qw"]
+
+[node name="Camera" type="Node3D" node_paths=PackedStringArray("CAMERA", "HINGE_X", "HINGE_Y")]
+script = ExtResource("1_jssld")
+CAMERA = NodePath("Pivot/Head/Camera")
+camera_fov_y = 1.5708
+HINGE_X = NodePath("Pivot")
+min_hinge_x = -1.5708
+max_hinge_x = 1.5708
+HINGE_SPEED_X = 2.5
+HINGE_Y = NodePath("Pivot/Head")
+min_hinge_y = -1.0472
+HINGE_SPEED_Y = 1.0
+
+[node name="Stand" type="MeshInstance3D" parent="."]
+transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0.00202143, 0.195892, -0.235198)
+material_override = ExtResource("2_ht5pv")
+mesh = ExtResource("3_icqcf")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.045743, -0.235454)
+
+[node name="Pivot_Mesh" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00248469, 0.0978868, 0.000700474)
+material_override = ExtResource("2_ht5pv")
+mesh = ExtResource("4_e6fgj")
+skeleton = NodePath("../..")
+
+[node name="Head" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0336833, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/Head"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0635056, -0.00232801)
+mesh = ExtResource("5_gkdp5")
+surface_material_override/0 = ExtResource("2_ht5pv")
+surface_material_override/1 = ExtResource("6_dnm3r")
+surface_material_override/2 = ExtResource("7_4y5qw")
+
+[node name="Camera" type="Node3D" parent="Pivot/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00784867, 0.0625376, -0.124781)

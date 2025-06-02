@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://fdw7r64vxnq5"]
+
+[ext_resource type="Texture2D" uid="uid://k732b21xyc7i" path="res://assets/models/cameras/securitycam1/cam_texture.png" id="1_2a25b"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_2a25b")
+metallic = 0.71
+roughness = 0.61
+texture_filter = 0
