@@ -6,6 +6,6 @@
 [resource]
 albedo_texture = ExtResource("1_unh32")
 emission_enabled = true
-emission_energy_multiplier = 17.5
+emission_energy_multiplier = 3.0
 emission_texture = ExtResource("2_ia754")
 texture_filter = 0
