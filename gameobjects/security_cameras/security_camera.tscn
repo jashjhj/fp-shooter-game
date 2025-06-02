@@ -35,7 +35,7 @@ mesh = ExtResource("4_e6fgj")
 skeleton = NodePath("../..")
 
 [node name="Head" type="Node3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0336833, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00240075, 0.0336833, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/Head"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0635056, -0.00232801)
