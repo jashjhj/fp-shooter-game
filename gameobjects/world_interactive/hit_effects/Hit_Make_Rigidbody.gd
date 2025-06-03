@@ -10,8 +10,8 @@ class_name Hit_Make_Rigidbody extends Hit_Component
 func  _ready() -> void:
 	assert(RIGIDBODY != null, "No rigidbody set.")
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_DISABLED
-	RIGIDBODY.collision_layer = 4096;
-	RIGIDBODY.collision_mask = 1 + 4096;
+	RIGIDBODY.collision_layer = 8192;
+	RIGIDBODY.collision_mask = 1 + 8192 + 16384;
 
 func hit(damage):
 	if(HP > AT_THRESHOLD): return

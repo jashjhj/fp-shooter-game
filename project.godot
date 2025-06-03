@@ -99,7 +99,9 @@ aim_down_sights={
 3d_physics/layer_6="NPC"
 3d_physics/layer_7="NPC_Physics"
 3d_physics/layer_9="Player_Hurtbox"
-3d_physics/layer_13="Debris"
+3d_physics/layer_13="Debris_Small"
+3d_physics/layer_14="Debris_Medium"
+3d_physics/layer_15="Debris_Physical"
 3d_physics/layer_17="Gun_Begin_Interaction"
 3d_physics/layer_18="Gun_Part_Interaction_Plane"
 3d_physics/layer_19="Gun_Use_Element"
@@ -113,5 +115,7 @@ jolt_physics_3d/simulation/penetration_slop=0.001
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 lights_and_shadows/directional_shadow/size=8192
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+textures/decals/filter=0

@@ -11,7 +11,7 @@ class_name Bullet extends Node3D
 @onready var FORWARDS_RAY:RayCast3D = $RayCast3D;
 
  #                     FLOOR + NPC + NPC_PHYSICS + Debris
-const BULLET_HIT_MASK = 1+ 16 + 32 + 64 + 4096
+const BULLET_HIT_MASK = 1+ 16 + 32 + 64 + 8192 + 16384 
 
 var lifetime_start:int;
 #var speed:float;
@@ -134,6 +134,12 @@ func hit_object() -> int:
 		for hittable in collider.HITTABLE:
 			if(hittable != null):
 				hittable._hit(damage, impulse, impulse_pos);
+	
+	if(collider is Hittable_StaticBody):
+		for hittable in collider.HITTABLE:
+			if(hittable != null):
+				hittable._hit(damage, impulse, impulse_pos);
+	
 	
 	
 	#add bullet hole

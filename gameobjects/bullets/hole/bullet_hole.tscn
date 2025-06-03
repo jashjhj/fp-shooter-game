@@ -12,6 +12,12 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_r1dea")
 size = Vector2(0.05, 0.05)
 
-[node name="BulletHole" type="MeshInstance3D"]
+[node name="Decal" type="Decal"]
+size = Vector3(0.060791, 0.0878906, 0.0625)
+texture_albedo = ExtResource("1_r1dea")
+script = ExtResource("2_gppoq")
+
+[node name="BulletHole" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PlaneMesh_r1dea")
 script = ExtResource("2_gppoq")
