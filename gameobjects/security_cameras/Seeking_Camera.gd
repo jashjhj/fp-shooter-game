@@ -14,6 +14,8 @@ class_name Seeking_Camera extends Node3D
 @export_range(-180, 180, 1.0, "radians_as_degrees") var max_hinge_y = PI/6; 
 @export var HINGE_SPEED_Y:float = 2;
 
+@export var IS_HINGE_SPEED_LINEAR:bool = false;
+
 ##Optional - if set, orients this node to point towards the player.
 @export var TARGET_TOWARDS_LOOKING_AT:Node3D;
 @onready var CAMERA_RAY:RayCast3D = RayCast3D.new();
@@ -53,9 +55,23 @@ func _physics_process(delta: float) -> void:
 		var x_angle_to_target:float = asin(target_local_vector.normalized().dot(Vector3.RIGHT));
 		var y_angle_to_target:float = asin(target_local_vector.normalized().dot(Vector3.UP));
 		
-		
-		hinge_x_angle += x_angle_to_target * min(1.0, HINGE_SPEED_X*delta)
-		hinge_y_angle += y_angle_to_target * min(1.0, HINGE_SPEED_Y*delta)
+		if(IS_HINGE_SPEED_LINEAR):
+			
+			if(abs(x_angle_to_target) < HINGE_SPEED_X*delta * 1.2): # Checks to cancel jiterring
+				x_angle_to_target = 0;
+			if(abs(y_angle_to_target) < HINGE_SPEED_Y*delta * 1.2):
+				y_angle_to_target = 0;
+			
+			
+			x_angle_to_target = min(HINGE_SPEED_X*delta, max(-HINGE_SPEED_X*delta, x_angle_to_target))
+			y_angle_to_target = min(HINGE_SPEED_Y*delta, max(-HINGE_SPEED_Y*delta, y_angle_to_target))
+			
+			
+			hinge_x_angle += x_angle_to_target
+			hinge_y_angle += y_angle_to_target
+		else:
+			hinge_x_angle += x_angle_to_target * min(1.0, HINGE_SPEED_X*delta)
+			hinge_y_angle += y_angle_to_target * min(1.0, HINGE_SPEED_Y*delta)
 		#print(hinge_x_angle)
 		
 	
