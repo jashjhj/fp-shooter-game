@@ -1,4 +1,4 @@
-class_name Security_Camera extends Node3D
+class_name Seeking_Camera extends Node3D
 
 @export var CAMERA:Node3D;
 @export_range(-180, 180, 1.0, "radians_as_degrees") var camera_fov_x = PI/2; 
@@ -22,6 +22,8 @@ class_name Security_Camera extends Node3D
 var hinge_x_angle:float = 0.0;
 var hinge_y_angle:float = 0.0;
 
+var is_active:bool = true;
+var can_see_player:bool = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,6 +45,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if(!is_active): return
 	var player_pos:Vector3 = check_for_player()
 	if(player_pos != Vector3.ZERO):
 		
@@ -65,6 +68,7 @@ func _physics_process(delta: float) -> void:
 
 
 func check_for_player() -> Vector3:
+	can_see_player = false;
 	if(CAMERA == null): return Vector3.ZERO
 
 	CAMERA_RAY.target_position = (CAMERA_RAY.to_local(Globals.PLAYER.TORSO.global_position) * SIGHT_DISTANCE) # Roughly COM
@@ -82,6 +86,7 @@ func check_for_player() -> Vector3:
 		if(angle_y > camera_fov_y):
 			return Vector3.ZERO
 		#Else: It okay 👍
+		can_see_player = true
 		return CAMERA_RAY.get_collision_point()
 	else:
 		return Vector3.ZERO

@@ -11,13 +11,19 @@ func  _ready() -> void:
 	assert(RIGIDBODY != null, "No rigidbody set.")
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_DISABLED
 	RIGIDBODY.collision_layer = 4096;
-	RIGIDBODY.collision_mask = 1;
+	RIGIDBODY.collision_mask = 1 + 4096;
 
 func hit(damage):
 	if(HP > AT_THRESHOLD): return
 	
+	
+	
 	if(RIGIDBODY_BASIS_CLONE != null):
 		RIGIDBODY.global_transform = RIGIDBODY_BASIS_CLONE.global_transform
+	else:
+		push_error("No basis to apply rigidbody to.")
+	
+	RIGIDBODY.reparent(Globals.RUBBISH_COLLECTOR)
 	
 	for removable in TO_BE_REMOVED:
 		if(removable != null):
@@ -26,7 +32,8 @@ func hit(damage):
 		if(new_child != null):
 			new_child.reparent(RIGIDBODY)
 	
-	RIGIDBODY.reparent(Globals.RUBBISH_COLLECTOR)
 	Globals.RUBBISH_COLLECTOR.add_rubbish(RIGIDBODY)
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_INHERIT
 	
+	
+	RIGIDBODY.apply_impulse(last_impulse, last_impulse_pos - RIGIDBODY.global_position)

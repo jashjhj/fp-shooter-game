@@ -118,19 +118,22 @@ func hit_object() -> int:
 	
 	
 	
+	var impulse = -delta_v*data.mass
+	var impulse_pos = FORWARDS_RAY.get_collision_point()
 	
 	if(collider is RigidBody3D):
-		collider.apply_impulse(-delta_v*data.mass, FORWARDS_RAY.get_collision_point())
+		
+		collider.apply_impulse(impulse, impulse_pos)
 		
 		if(collider is Hittable_RB):
 			for hittable in collider.HITTABLE:
 				if(hittable != null):
-					hittable._hit(damage);
+					hittable._hit(damage, impulse, impulse_pos);
 	
 	if(collider is Hittable_Collider):
 		for hittable in collider.HITTABLE:
 			if(hittable != null):
-				hittable._hit(damage);
+				hittable._hit(damage, impulse, impulse_pos);
 	
 	
 	#add bullet hole

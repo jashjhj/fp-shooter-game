@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ytkqw7poq2yc"]
+[gd_scene load_steps=7 format=3 uid="uid://ytkqw7poq2yc"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_u4umx"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="2_m7tll"]
 [ext_resource type="PackedScene" uid="uid://6iwvem2ecddd" path="res://maps/map_resources/environment.tscn" id="3_6ity8"]
 [ext_resource type="PackedScene" uid="uid://b6s7shgruaqyx" path="res://npc/enemy/gunner/Gunner.tscn" id="4_6ity8"]
+[ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="5_i432u"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_m7tll"]
 vertices = PackedVector3Array(-11.3292, 0.494647, 0.439457, -9.07919, 0.494647, 0.439457, -9.07919, 0.244647, -0.0605431, -5.07919, 0.494647, -8.81054, -4.57919, 0.494647, -9.06054, -4.57919, 0.494647, -11.0605, -5.07919, 0.494647, -4.31054, -4.57919, 0.494647, -6.56054, -5.07919, 0.494647, -6.81054, -9.07919, 0.494647, -4.31054, -5.57919, -0.505353, -0.0605431, -5.57919, -0.505353, -3.31054, -9.07919, 0.244647, -3.31054, -7.35419, -0.505353, -1.08554, -11.3292, 0.494647, -11.0605, 5.67081, 0.494647, -6.81054, 4.42081, 0.494647, -6.56054, 4.42081, 0.494647, -3.06054, 5.92081, 0.494647, -2.81054, 5.42081, 0.494647, -9.06054, 11.4208, 0.494647, -11.0605, 5.92081, 0.494647, -0.810543, 11.4208, 0.494647, -0.810543, -4.07919, 0.994647, -8.06054, -4.07919, 0.994647, -7.56054, -3.57919, 0.994647, -7.56054, -3.57919, 0.994647, -8.06054, -1.57919, 2.74465, -8.06054, -1.57919, 2.74465, -7.56054, -0.829186, 2.74465, -7.56054, -0.829186, 2.74465, -8.06054, 1.17081, 4.49465, -8.06054, 1.17081, 4.49465, -7.56054, 1.92081, 4.49465, -7.56054, 1.92081, 4.49465, -8.06054, 3.92081, 4.49465, -8.06054, 3.92081, 4.49465, -7.56054, 4.67081, 4.49465, -7.56054, 4.67081, 4.49465, -8.06054, -4.57919, 0.494647, -4.06054, 3.42081, 0.494647, -2.81054, -4.57919, 0.494647, -1.31054, 3.42081, 0.494647, -1.31054, 4.42081, 2.74465, -2.06054, 4.42081, 2.74465, 8.18946, 4.92081, 2.74465, 8.18946, 4.92081, 2.74465, -2.06054, -0.329186, 0.494647, 7.18946, -0.0791864, 0.494647, 7.68946, 3.42081, 0.494647, 7.68946, -4.57919, 0.494647, 0.689457, -5.07919, 0.494647, 0.939457, -4.57919, 0.494647, 7.18946, -0.329186, 0.494647, 9.68946, -3.07919, 0.494647, 9.68946, -3.32919, 0.494647, 10.9395, 3.67081, 0.494647, 9.18946, 5.92081, 0.494647, 8.93946, 11.4208, 0.494647, 10.9395, -5.07919, 0.494647, 9.43946, -11.3292, 0.494647, 10.9395, -9.07919, 0.494647, 0.939457, -5.07919, 0.494647, 7.43946, -4.07919, 3.99465, 8.18946, -4.07919, 3.99465, 8.68946, -1.07919, 3.99465, 8.68946, -1.07919, 3.99465, 8.18946)
@@ -75,4 +76,58 @@ use_collision = true
 size = Vector3(2.68164, 2.92674, 1)
 
 [node name="Gunner" parent="." instance=ExtResource("4_6ity8")]
-transform = Transform3D(-0.882124, 0, -0.471018, 0, 1, 0, 0.471018, 0, -0.882124, -6.77635, 0, -8.46412)
+transform = Transform3D(0.912905, 0, 0.408173, 0, 1, 0, -0.408173, 0, 0.912905, -6.77635, 0, -8.46412)
+
+[node name="Camera" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.40806, 3.51409, -7.07963)
+
+[node name="Camera2" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.65577, 3.38306, -7.07963)
+
+[node name="Camera3" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.08704, 3.06996, -7.07963)
+
+[node name="Camera4" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.68534, 2.96565, -7.07963)
+
+[node name="Camera5" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.93304, 2.83462, -7.07963)
+
+[node name="Camera6" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.36432, 2.52151, -7.07963)
+
+[node name="Camera7" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.68125, 2.51582, -7.07963)
+
+[node name="Camera8" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.92896, 2.38479, -7.07963)
+
+[node name="Camera9" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.36023, 2.07168, -7.07963)
+
+[node name="Camera10" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 3.51409, -7.70629)
+
+[node name="Camera11" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 3.38306, -7.45858)
+
+[node name="Camera12" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 3.06996, -8.02731)
+
+[node name="Camera13" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 2.96565, -7.42901)
+
+[node name="Camera14" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 2.83462, -7.1813)
+
+[node name="Camera15" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 2.52151, -7.75003)
+
+[node name="Camera16" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 2.51582, -7.4331)
+
+[node name="Camera17" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 2.38479, -7.18539)
+
+[node name="Camera18" parent="." instance=ExtResource("5_i432u")]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 1, 0, -1, 0, 1.94707e-07, 0.799016, 2.07168, -7.75412)

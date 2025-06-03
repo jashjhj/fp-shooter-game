@@ -7,7 +7,6 @@ class_name Hit_Free extends Hit_Component
 var has_been_freed:Array[bool] = [];
 var number_of_thresholds:int;
 
-signal on_hit
 
 func _ready() -> void:
 	for i in range(0, len(THRESHOLDS)):
@@ -25,7 +24,6 @@ func hit(damage:float):
 					FREE_ON_THRESHOLD[i].queue_free()
 				has_been_freed[i] = true;
 	
-	on_hit.emit()
 
 func _destroyed():
 	destroy()
