@@ -5,7 +5,7 @@ class_name Crawler_Leg extends Node3D
 @export var UPPER_LEG_LENGTH:float = 0.2;
 @export var LOWER_LEG_LENGTH:float = 0.4;
 
-@export var DESTROY_SIGNAL:Hit_Signal;
+@export var DESTROY_SIGNAL:Hit_Component;
 @export var HIT_SURFACE_SFX:AudioStreamPlayer3D
 
 #@export var SKEW:float = 0.0; #Not yet implemented
@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	add_child(sfx_timer)
 	sfx_timer.timeout.connect(play_sfx)
-	DESTROY_SIGNAL.on_hit.connect(destroy)
+	DESTROY_SIGNAL.on_hp_becomes_negative.connect(destroy)
 	
 
 func destroy():

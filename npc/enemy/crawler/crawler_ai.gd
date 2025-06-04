@@ -72,7 +72,8 @@ func _physics_process(delta):
 	
 	global_position.y = nav_agent.get_next_path_position().y
 	#if((global_position - nav_agent.get_next_path_position()) * Vector3(1,0,1)).length() != 0:
-	look_at(nav_agent.get_next_path_position(), Vector3.UP) # Error here - due to being not on the plane of the navmesh & trying to go down to it
+	if(global_position - nav_agent.get_next_path_position() != Vector3.ZERO):
+		look_at(nav_agent.get_next_path_position(), Vector3.UP) # Error here - due to being not on the plane of the navmesh & trying to go down to it
 	
 	#rotate_y(PI/2)
 	

@@ -1,6 +1,7 @@
 class_name Hit_Component extends Node
 
 @export var MAX_HP:float = 5;
+##Acts like a shield - Subtracted from incoming damage.
 @export var MINIMUM_DAMAGE_THRESHOLD:float = 1;
 
 var HP = MAX_HP;
