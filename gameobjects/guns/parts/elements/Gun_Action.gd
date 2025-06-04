@@ -34,9 +34,27 @@ func _ready() -> void:
 	FIRE.trigger.connect(fire)
 	
 
+
+
+
 var prev_slide_pos:float = 0;
-func _process(_delta: float) -> void:
-	var slide_pos:float = ACTION_SLIDEABLE_LINK.slide_pos
+
+
+var prev_pos:Vector3 = Vector3.ZERO;
+var velocity:Vector3;
+var prev_angles:Vector3 = Vector3.ZERO;
+var velocity_angular:Vector3;
+
+func _physics_process(delta: float) -> void:
+	velocity = (global_position - prev_pos) / delta
+	prev_pos = global_position;
+	velocity_angular = (global_rotation - prev_angles) / delta
+	prev_angles = global_rotation
+	
+	
+	
+	
+	var slide_pos:float = ACTION_SLIDEABLE_LINK.slide_pos # Ejection/Feeding
 	
 	if(EJECT_WHEN_DIR == 0 or EJECT_WHEN_DIR == 2): # Eject when forwards
 		if(slide_pos >= EJECT_DIST and prev_slide_pos < EJECT_DIST):
@@ -59,17 +77,6 @@ func _process(_delta: float) -> void:
 	prev_slide_pos = slide_pos
 
 
-var prev_pos:Vector3 = Vector3.ZERO;
-var velocity:Vector3;
-var prev_angles:Vector3 = Vector3.ZERO;
-var velocity_angular:Vector3;
-func _physics_process(delta: float) -> void:
-	velocity = (global_position - prev_pos) / delta
-	prev_pos = global_position;
-	velocity_angular = (global_rotation - prev_angles) / delta
-	prev_angles = global_rotation
-
-
 func gather() -> void:
 	if(current_round != null): return
 	if(GATHER_FROM.is_housed):
@@ -86,10 +93,13 @@ func gather() -> void:
 
 
 func eject() -> void:
+	
 	if(current_round == null):
 		return
 	
-	var eject_speed_mult = 1 + EJECTION_SPEED_MULTIPLIER*abs(ACTION_SLIDEABLE_LINK.velocity)
+	
+	var eject_speed_mult = 1 + EJECTION_SPEED_MULTIPLIER*sqrt(abs(ACTION_SLIDEABLE_LINK.prev_velocity))
+	
 	
 	Globals.RUBBISH_COLLECTOR.add_rubbish(current_round)
 	current_round.reparent(Globals.RUBBISH_COLLECTOR)

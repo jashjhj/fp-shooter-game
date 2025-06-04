@@ -34,8 +34,11 @@ func _ready():
 
 var prev_mouse_delta:float;
 var prev_slide_pos:float = 0;
+var prev_velocity:float = 0;
 func _process(delta:float) -> void:
 	super._process(delta);
+	prev_velocity = velocity
+	
 	if(is_focused):
 		var mouse_goal_delta_from_start = (get_mouse_plane_position()-global_position - global_basis*mouse_focus_pos_relative).dot(global_basis*SLIDE_VECTOR)
 		var mouse_goal_delta = mouse_goal_delta_from_start - prev_mouse_delta
@@ -63,7 +66,10 @@ func _process(delta:float) -> void:
 	
 	prev_slide_pos = slide_pos;
 
+
+
 func _physics_process(delta: float) -> void:
+	
 	if(not is_focused):
 		velocity += SPRING*delta;
 

@@ -15,7 +15,7 @@ metallic_specular = 0.0
 size = Vector3(0.0681152, 0.349182, 0.0175781)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eslu3"]
-size = Vector3(0.0683594, 0.140625, 0.0195313)
+size = Vector3(0.0683594, 0.347778, 0.0195313)
 
 [node name="WelrodSpecial1" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "RIGIDBODY", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 script = ExtResource("1_ymelt")
@@ -291,7 +291,7 @@ shape = SubResource("BoxShape3D_y7nfo")
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0725839, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.176161, 0)
 shape = SubResource("BoxShape3D_eslu3")
 
 [node name="Welrod_Round" parent="." instance=ExtResource("5_6maxp")]

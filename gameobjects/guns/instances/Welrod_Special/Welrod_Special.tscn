@@ -54,8 +54,8 @@ EJECT_DIST = 0.087
 GATHER_FROM = NodePath("../Magwell")
 GATHER_DIST = 0.009
 EJECTION_VELOCITY = Vector3(1.5, 0, 0)
-EJECTION_VELOCITY_ANGULAR = Vector3(0, -10, 0)
-EJECTION_SPEED_MULTIPLIER = 0.8
+EJECTION_VELOCITY_ANGULAR = Vector3(0, -15, 0)
+EJECTION_SPEED_MULTIPLIER = 0.4
 TRIGGER_ON_FIRE = [NodePath("../Slide/Gun_Action_Slideable_Apply_Velocity")]
 metadata/_custom_type_script = "uid://dpp3u5ytyv45w"
 

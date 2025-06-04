@@ -18,7 +18,7 @@ func _ready():
 	
 	if(RIGIDBODY != null):
 		RIGIDBODY.process_mode = Node.PROCESS_MODE_DISABLED
-		RIGIDBODY.collision_mask = 4096 + 1;
+		RIGIDBODY.collision_mask = 4096 + 1 + 8192;
 		RIGIDBODY.collision_layer = 4096
 	
 	if(SPENT_ROUND_MODEL != null):
