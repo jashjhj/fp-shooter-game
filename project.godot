@@ -112,6 +112,8 @@ aim_down_sights={
 
 3d/physics_engine="Jolt Physics"
 jolt_physics_3d/simulation/penetration_slop=0.001
+jolt_physics_3d/simulation/speculative_contact_distance=0.03
+common/physics_interpolation=true
 
 [rendering]
 

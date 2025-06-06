@@ -32,7 +32,7 @@ func _ready() -> void:
 	
 	assert(FIRE != null, "No fire trigger set.")
 	FIRE.trigger.connect(fire)
-	
+
 
 
 
