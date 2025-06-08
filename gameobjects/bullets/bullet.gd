@@ -11,7 +11,7 @@ class_name Bullet extends Node3D
 @onready var FORWARDS_RAY:RayCast3D = $RayCast3D;
 
  #                     FLOOR + NPC + NPC_PHYSICS + Debris
-const BULLET_HIT_MASK = 1+ 16 + 32 + 64 + 8192 + 16384 
+const BULLET_HIT_MASK = 1+ + 32 + 64 + 8192 + 16384 
 
 var lifetime_start:int;
 #var speed:float;
@@ -42,20 +42,26 @@ func _process(_delta: float) -> void:
 
 var tick_number = -0;
 func _physics_process(delta: float) -> void:
-	tick_number += 1;
-	if(tick_number % ticks_per_process != 0):
-		delta *= ticks_per_process;
+
 
 	var time_passed = float(Time.get_ticks_msec() - lifetime_start) / 1000 / float(data.lifetime)
 	
 	if(time_passed > 1.0): # time_passed is proportional
 		queue_free();
 	
+	tick_number += 1;
+	if(tick_number % ticks_per_process != 0): # Only operate per nth tick
+		delta *= ticks_per_process;
+		process_bullet_step(delta)
 	
 	
 	
 	
-	FORWARDS_RAY.look_at(global_position - velocity*delta)
+
+func process_bullet_step(delta:float) -> void:
+	
+	
+	FORWARDS_RAY.look_at(global_position - velocity*delta) # because forwards is -Z
 	FORWARDS_RAY.force_raycast_update()
 	if(FORWARDS_RAY.get_collider() != null): # Going to hit an object.
 		var hit_result = hit_object()
@@ -64,8 +70,9 @@ func _physics_process(delta: float) -> void:
 			var elapsed_time:float = (FORWARDS_RAY.get_collision_point() - global_position).length()/velocity.length()
 			draw_trail(FORWARDS_RAY.get_collision_point() - global_position)
 			global_position = FORWARDS_RAY.get_collision_point()
-			_physics_process(delta - elapsed_time)
-
+			
+			process_bullet_step(delta - elapsed_time) # Recurse
+			
 			
 		elif hit_result == 2:#Terminate
 			draw_trail(FORWARDS_RAY.get_collision_point() - global_position) # draws it only to the object
@@ -86,8 +93,6 @@ func _physics_process(delta: float) -> void:
 	#$RayCast3D/RayVisualiser.mesh.height = speed*delta;
 
 
-
-
 var current_ricochet:int = 0;
 var max_ricochets:int = 20;
 
@@ -103,12 +108,16 @@ func hit_object() -> int:
 	var result:int = 2;
 	
 	if(angle < data.ricochet_angle):#Ricochet
-		delta_v = -velocity.dot(collision_normal)*collision_normal * (1.0+data.NEL_coefficient)
+		#print(collision_normal)
+		delta_v = velocity.dot(collision_normal)*collision_normal * -(1.0+data.NEL_coefficient)
+		print(delta_v)
 		velocity += delta_v # bounces it
 		
 		current_ricochet += 1
 		if(current_ricochet < max_ricochets):  # check to prevent infintie ricochets
 			result = 1;
+		else:
+			result = 2;
 	else:
 		delta_v = -velocity
 		result = 2;
