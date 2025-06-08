@@ -14,6 +14,8 @@ process_mode = 1
 background_mode = 2
 sky = SubResource("Sky_sab5y")
 ssao_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
 [node name="Environment" type="Node3D"]
 

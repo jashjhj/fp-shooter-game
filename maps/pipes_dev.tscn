@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://c40j8sulf3jg1"]
+
+[ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="1_ee0kr"]
+[ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="2_60two"]
+[ext_resource type="PackedScene" uid="uid://6iwvem2ecddd" path="res://maps/map_resources/environment.tscn" id="3_ve5xd"]
+[ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="4_epl2y"]
+[ext_resource type="PackedScene" uid="uid://cs2xm1ciiudmi" path="res://gameobjects/environmental/Hot_gases/hot_gases.tscn" id="5_epl2y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ve5xd"]
+size = Vector3(40, 1, 40)
+
+[node name="PipesDev" type="Node3D"]
+
+[node name="Floor" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("1_ee0kr")
+use_collision = true
+mesh = SubResource("BoxMesh_ve5xd")
+
+[node name="Player" parent="." instance=ExtResource("2_60two")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76991, 0.76949, 1.12683)
+
+[node name="Environment" parent="." instance=ExtResource("3_ve5xd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+
+[node name="Rubbish" parent="." instance=ExtResource("4_epl2y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+
+[node name="Hot_Gases" parent="." instance=ExtResource("5_epl2y")]
+transform = Transform3D(-0.0737327, 0, -0.997278, 0, 1, 0, 0.997278, 0, -0.0737327, 1.94772, 2, -6.53361)

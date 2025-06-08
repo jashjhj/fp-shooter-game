@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs2xm1ciiudmi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mlg0w"]
+size = Vector3(8, 2, 2)
+
+[sub_resource type="FogMaterial" id="FogMaterial_mlg0w"]
+density = 2.0
+emission = Color(1, 1, 1, 1)
+
+[node name="Hot_Gases" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_mlg0w")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00773621, 0)
+size = Vector3(8, 2.01547, 2)
+material = SubResource("FogMaterial_mlg0w")
