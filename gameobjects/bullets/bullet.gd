@@ -110,7 +110,7 @@ func hit_object() -> int:
 	if(angle < data.ricochet_angle):#Ricochet
 		#print(collision_normal)
 		delta_v = velocity.dot(collision_normal)*collision_normal * -(1.0+data.NEL_coefficient)
-		print(delta_v)
+		#print(delta_v)
 		velocity += delta_v # bounces it
 		
 		current_ricochet += 1
