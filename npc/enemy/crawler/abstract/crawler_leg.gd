@@ -1,4 +1,4 @@
-class_name Crawler_Leg extends Node3D
+class_name IK_Leg extends Node3D
 
 @export var UPPER_LEG:Node3D;
 @export var LOWER_LEG:Node3D;
@@ -57,7 +57,7 @@ func set_leg_progress(progress:float) -> float:
 	if(!following_ground):
 		target.y += 0.05*sin(PI*progress)
 		target.z -= 0.1*sin(PI*progress)*sin(PI*progress)
-		pass
+	
 	return set_leg_ik(target)
 
 

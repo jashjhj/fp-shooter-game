@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://crs2svhqe1ryv"]
 
-[ext_resource type="Script" uid="uid://dy2frqj6k6c0k" path="res://npc/enemy/crawler/crawler_ai.gd" id="1_byoff"]
-[ext_resource type="PackedScene" uid="uid://cck2i0r0uriym" path="res://npc/enemy/crawler/crawler_leg.tscn" id="2_1nbr5"]
-[ext_resource type="Material" uid="uid://cyooiq8jky0w6" path="res://npc/enemy/crawler/crawler_material.tres" id="2_j8f5c"]
-[ext_resource type="Script" uid="uid://cv2tgniekj44e" path="res://npc/enemy/crawler/states/Sexapod_Walk_Tripod.gd" id="4_j8f5c"]
+[ext_resource type="Script" uid="uid://dy2frqj6k6c0k" path="res://npc/enemy/crawler/abstract/6-legged/crawler_ai.gd" id="1_byoff"]
+[ext_resource type="PackedScene" uid="uid://cck2i0r0uriym" path="res://npc/enemy/crawler/abstract/crawler_leg.tscn" id="2_1nbr5"]
+[ext_resource type="Material" uid="uid://cyooiq8jky0w6" path="res://npc/enemy/crawler/abstract/6-legged/crawler_material.tres" id="2_j8f5c"]
+[ext_resource type="Script" uid="uid://cv2tgniekj44e" path="res://npc/enemy/crawler/abstract/6-legged/states/Sexapod_Walk_Tripod.gd" id="4_j8f5c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1nbr5"]
 

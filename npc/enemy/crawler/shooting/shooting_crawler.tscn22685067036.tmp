@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://db2cge2kmcce2"]
+
+[ext_resource type="Script" uid="uid://nesy3vjf5wam" path="res://npc/enemy/crawler/shooting/shooting_crawler.gd" id="1_5ndyj"]
+[ext_resource type="PackedScene" uid="uid://cte6sk81x8r3e" path="res://npc/enemy/crawler/shooting/shooter_front_leg.tscn" id="2_4yak8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4yak8"]
+size = Vector3(0.2, 0.08, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eya8o"]
+size = Vector3(0.2, 0.08, 0.3)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4yak8"]
+height = 0.0292969
+radius = 0.0297852
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eya8o"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.03
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nro38"]
+size = Vector3(0.0917969, 0.0830078, 0.0126953)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eya8o"]
+size = Vector3(0.09, 0.08, 0.012)
+
+[node name="Crawler" type="Node3D" node_paths=PackedStringArray("LEG_L", "LEG_R", "REAR_WHEEL")]
+script = ExtResource("1_5ndyj")
+LEG_L = NodePath("Body/Left_Leg")
+LEG_R = NodePath("Body/Right_Leg")
+REAR_WHEEL = NodePath("Wheel")
+
+[node name="Body" type="RigidBody3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("BoxMesh_4yak8")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+shape = SubResource("BoxShape3D_eya8o")
+
+[node name="Right_Leg" parent="Body" instance=ExtResource("2_4yak8")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.100632, 0.0017448, -0.103108)
+
+[node name="Left_Leg" parent="Body" instance=ExtResource("2_4yak8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.101561, 0.00270178, -0.105673)
+
+[node name="Wheel_Pivot" type="HingeJoint3D" parent="Body"]
+transform = Transform3D(1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 0, -0.031443, 0.147876)
+node_a = NodePath("..")
+node_b = NodePath("../../Wheel_Turning")
+angular_limit/enable = true
+angular_limit/upper = 1.0472
+angular_limit/lower = -1.0472
+
+[node name="Wheel" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.083586, 0.170012)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_4yak8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_eya8o")
+
+[node name="Wheel_Turning" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0398631, 0.168796)
+
+[node name="Wheel_Axel" type="HingeJoint3D" parent="Wheel_Turning"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.96046e-08, -0.0406622, 0.000965163)
+node_a = NodePath("..")
+node_b = NodePath("../../Wheel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wheel_Turning"]
+transform = Transform3D(1, 0, 0, 0, 0.928727, 0.370765, 0, -0.370765, 0.928727, 0, -0.00589065, -0.0139201)
+shape = SubResource("BoxShape3D_nro38")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel_Turning"]
+transform = Transform3D(1, 0, 0, 0, 0.931548, 0.363619, 0, -0.363619, 0.931548, 0, -0.0068933, -0.013522)
+mesh = SubResource("BoxMesh_eya8o")
