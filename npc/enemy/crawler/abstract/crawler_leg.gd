@@ -1,4 +1,4 @@
-class_name IK_Leg extends Node3D
+class_name Crawler_Leg extends Node3D
 
 @export var UPPER_LEG:Node3D;
 @export var LOWER_LEG:Node3D;
