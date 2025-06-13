@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://5upxu38ed4sw"]
+
+[ext_resource type="Script" uid="uid://g5cfdgejd2qs" path="res://player/elements/leg/player_leg.gd" id="1_iqbap"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4p6b8"]
+radius = 0.05
+height = 0.45
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c2ley"]
+radius = 0.05
+height = 0.5
+
+[node name="PlayerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG")]
+script = ExtResource("1_iqbap")
+UPPER_LEG = NodePath("Upper")
+LOWER_LEG = NodePath("Lower")
+UPPER_LEG_LENGTH = 0.45
+LOWER_LEG_LENGTH = 0.5
+
+[node name="Upper" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 0)
+mesh = SubResource("CapsuleMesh_4p6b8")
+
+[node name="Lower" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("CapsuleMesh_c2ley")
+
+[node name="Target" type="Node3D" parent="."]
+
+[node name="End_Pos" type="Node3D" parent="."]

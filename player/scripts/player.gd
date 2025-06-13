@@ -13,9 +13,9 @@ var is_mouse_focused = true;
 @export_range(-180, 0, 1.0, "degrees") var LOOK_MIN_VERT = -85
 
 
-@onready var HEAD:Node3D = $Torso/Head
-@onready var TORSO:Node3D = $Torso
-@onready var CAMERA:Camera3D = $Torso/Head/Camera3D
+@onready var HEAD:Node3D = $Hip/Torso/Head
+@onready var TORSO:Node3D = $Hip/Torso
+@onready var CAMERA:Camera3D = $Hip/Torso/Head/Camera3D
 
 @export var GUN:Gun;
 

@@ -5,8 +5,6 @@ class_name IK_Leg extends Node3D
 @export var UPPER_LEG_LENGTH:float = 0.2;
 @export var LOWER_LEG_LENGTH:float = 0.4;
 
-@export var DESTROY_SIGNAL:Hit_Component;
-@export var HIT_SURFACE_SFX:AudioStreamPlayer3D
 
 #@export var SKEW:float = 0.0; #Not yet implemented
 
@@ -17,20 +15,12 @@ class_name IK_Leg extends Node3D
 # set_leg_progress(progress) - interpolates leg with float progress 0->1
 
 
-@onready var sfx_timer:Timer = Timer.new()
 
 func _ready() -> void:
 	assert(UPPER_LEG != null, "No upper-leg set")
 	assert(LOWER_LEG != null, "No lower-leg set")
-	assert(DESTROY_SIGNAL != null, "No Destroy signal")
-	
-	add_child(sfx_timer)
-	sfx_timer.timeout.connect(play_sfx)
-	DESTROY_SIGNAL.on_hp_becomes_negative.connect(destroy)
 	
 
-func destroy():
-	queue_free()
 
 var following_ground:bool = true
 
@@ -49,12 +39,7 @@ func set_leg_stationary():
 	following_ground = true;
 	prev_pos = goal_pos
 	
-	sfx_timer.start(0.01 + randf()*0.1)
-	
-func play_sfx():
-	sfx_timer.stop()
-	HIT_SURFACE_SFX.pitch_scale = 1.8 + randf()*0.2
-	HIT_SURFACE_SFX.play()
+
 
 
 func set_leg_progress(progress:float) -> float:
@@ -67,21 +52,6 @@ func set_leg_progress(progress:float) -> float:
 	return set_leg_ik(target)
 
 
-#Deprecated old methods
-#func update_leg_slerp(from:Node3D, to:Node3D, progress:float) -> float:
-	#var from_pos:Vector3 = to_local(from.global_position)
-	#var to_pos:Vector3 = to_local(to.global_position)
-	#
-	#var target:Vector3 = (from_pos).lerp(to_pos, progress)
-	#
-	#target.y += 0.05*sin(PI*progress)
-	#target.z -= 0.1*sin(PI*progress)
-	#
-	#return set_leg_ik(target)
-	#
-#
-#func update_leg_ik(target:Node3D) -> float:
-	#return set_leg_ik(to_local(target.global_position))
 
 
 
