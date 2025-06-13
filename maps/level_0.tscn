@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8abipasve7ck"]
+[gd_scene load_steps=12 format=3 uid="uid://c8abipasve7ck"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_v0r8n"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="2_6po2o"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="3_ps7t7"]
-[ext_resource type="PackedScene" uid="uid://cnsjodlk4krx" path="res://npc/enemy/turret/Turret.tscn" id="4_sab5y"]
-[ext_resource type="PackedScene" uid="uid://b6s7shgruaqyx" path="res://npc/enemy/gunner/Gunner.tscn" id="5_lgvyb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ps7t7"]
 sky_top_color = Color(0.475794, 0.680649, 0.881363, 1)
@@ -56,9 +54,6 @@ environment = SubResource("Environment_lgvyb")
 
 [node name="Rubbish" parent="." instance=ExtResource("3_ps7t7")]
 
-[node name="Turret" parent="." instance=ExtResource("4_sab5y")]
-transform = Transform3D(0.475001, 0, -0.879985, 0, 1, 0, 0.879985, 0, 0.475001, -7.83257, 0.735744, 0.763306)
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_lgvyb")
 
@@ -97,12 +92,3 @@ mesh = SubResource("BoxMesh_sab5y")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_lgvyb")
-
-[node name="Gunner" parent="." instance=ExtResource("5_lgvyb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.15102, 1.67727, 7.71708)
-
-[node name="Gunner2" parent="." instance=ExtResource("5_lgvyb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5417, 1.67727, 7.71708)
-
-[node name="Gunner3" parent="." instance=ExtResource("5_lgvyb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.79009, 1.67727, 7.71708)

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="first_person_shooter"
-run/main_scene="uid://ytkqw7poq2yc"
+run/main_scene="uid://c8abipasve7ck"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -107,6 +107,11 @@ aim_down_sights={
 3d_physics/layer_19="Gun_Use_Element"
 3d_physics/layer_20="Gun_Use_Layer_Extra"
 3d_physics/layer_25="MapGen_AreaBoundingBox"
+
+[navigation]
+
+3d/default_cell_size=0.1
+3d/default_cell_height=0.1
 
 [physics]
 
