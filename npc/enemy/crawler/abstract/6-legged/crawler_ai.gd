@@ -11,12 +11,12 @@ class_name Crawler extends RigidBody3D
 @export var STATE_WALK:Sexapod_State;
 
 @export_group("Legs")
-@export var LEG_L0:Crawler_Leg;
-@export var LEG_L1:Crawler_Leg;
-@export var LEG_L2:Crawler_Leg;
-@export var LEG_R0:Crawler_Leg;
-@export var LEG_R1:Crawler_Leg;
-@export var LEG_R2:Crawler_Leg;
+@export var LEG_L0:IK_Leg;
+@export var LEG_L1:IK_Leg;
+@export var LEG_L2:IK_Leg;
+@export var LEG_R0:IK_Leg;
+@export var LEG_R1:IK_Leg;
+@export var LEG_R2:IK_Leg;
 
 @onready var nav_agent := $NavigationAgent3D
 
