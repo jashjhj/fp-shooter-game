@@ -1,4 +1,4 @@
-class_name Crawler_Leg extends Node3D
+class_name IK_Leg extends Node3D
 
 @export var UPPER_LEG:Node3D;
 @export var LOWER_LEG:Node3D;
@@ -9,6 +9,12 @@ class_name Crawler_Leg extends Node3D
 @export var HIT_SURFACE_SFX:AudioStreamPlayer3D
 
 #@export var SKEW:float = 0.0; #Not yet implemented
+
+#IK LEG
+# set_leg_target(global pos, on ground) to set position
+# On ground makes it interpolate linearly, otheerwise adds a curve to it.
+# set_leg_stationary() - Set position as is.
+# set_leg_progress(progress) - interpolates leg with float progress 0->1
 
 
 @onready var sfx_timer:Timer = Timer.new()
