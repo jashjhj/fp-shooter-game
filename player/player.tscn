@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=8 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://diui1vqmyxnjp" path="res://gameobjects/guns/instances/Flare_Gun/Flare_Gun.tscn" id="3_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://k6g5l4koiagb" path="res://gameobjects/guns/instances/Welrod_Special/Welrod_Special.tscn" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://5upxu38ed4sw" path="res://player/elements/leg/player_leg.tscn" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://cl7p8ax1o4fh" path="res://player/elements/leg/bipedal_leg_controller.gd" id="6_g6k8r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 radius = 0.15
@@ -21,7 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_kqu6x")
 
 [node name="Hip" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.756033, 0)
 
 [node name="Torso" type="Node3D" parent="Hip"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
@@ -52,6 +53,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0886336, -0.210112, -0.2983
 
 [node name="PlayerLeg_Left" parent="Hip" instance=ExtResource("5_qjkh3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
+UPPER_LENGTH = 0.45
+LOWER_LENGTH = 0.5
 
 [node name="PlayerLeg_Right" parent="Hip" instance=ExtResource("5_qjkh3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+UPPER_LENGTH = 0.45
+LOWER_LENGTH = 0.5
+
+[node name="Bipedal_Leg_Controller" type="Node" parent="." node_paths=PackedStringArray("LEFT_LEG", "RIGHT_LEG")]
+script = ExtResource("6_g6k8r")
+LEFT_LEG = NodePath("../Hip/PlayerLeg_Left")
+RIGHT_LEG = NodePath("../Hip/PlayerLeg_Right")
+STRIDE = 0.8
+metadata/_custom_type_script = "uid://cl7p8ax1o4fh"
