@@ -3,7 +3,7 @@ class_name Bipedal_Leg_Controller extends Node
 @export var LEFT_LEG:Player_Leg;
 @export var RIGHT_LEG:Player_Leg;
 
-@export var STRIDE:float = 0.4;
+@export var STRIDE:float = 0.8;
 
 ## 0 = Left, 1 = Right -- Current leg is one currently stood upon
 var current_leg:int = 1;

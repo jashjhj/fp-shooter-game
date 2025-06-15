@@ -65,5 +65,4 @@ LOWER_LENGTH = 0.5
 script = ExtResource("6_g6k8r")
 LEFT_LEG = NodePath("../Hip/PlayerLeg_Left")
 RIGHT_LEG = NodePath("../Hip/PlayerLeg_Right")
-STRIDE = 0.8
 metadata/_custom_type_script = "uid://cl7p8ax1o4fh"
