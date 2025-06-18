@@ -1,14 +1,19 @@
 class_name Physics_Lerper extends Node
 
 @export var RIGIDBODY:RigidBody3D;
+##Optional: This must be a child of RIGIDBODY. It acts as the source of the force & relevant calculations.      
+##|      I recommend that if using this as the only source of forces on an object, enable angular damping on RIGIDBODY.
+@export var RIGIDBODY_ANCHOR:Node3D;
 @export var AUTO_TRIGGER:bool = false;
 @export var AUTO_TRIGGER_NODE:Node3D;
 
 ##Stable up to ~ 1000ms-2 acceleration
 @export var FORCE:float = 7.0;
+##Backup force to un-counter forces (e.g. Gravity)
 @export var RESERVE_FORCE:float = 20;
 ##Value for how much the object should bounce
 @export var BOUNCINESS:float = 1.0;
+##If (this) close, consider it there.
 @export var SLOP:float = 0.01;
 
 ##Should be called once per physics process, to apply the forces.
@@ -29,10 +34,16 @@ func apply_forces(delta:float) -> void:
 	
 	#Identifiers
 	var mass:float = RIGIDBODY.mass;
-	#Velocity is local to the point on the rigidbody.
-	var velocity:Vector3 = RIGIDBODY.linear_velocity
-	var pos:Vector3 = RIGIDBODY.global_position
+	var velocity:Vector3;
+	var pos:Vector3;
 	
+	if(RIGIDBODY_ANCHOR != null):
+		#Velocity is local to the point on the rigidbody.  ----------- This is magic that calculates local linear vlocity of a spinning object ----------
+		velocity = RIGIDBODY.linear_velocity# + RIGIDBODY.angular_velocity.cross(RIGIDBODY_ANCHOR.global_position - RIGIDBODY.global_position)
+		pos = RIGIDBODY_ANCHOR.global_position
+	else:
+		velocity = RIGIDBODY.linear_velocity;
+		pos = RIGIDBODY.global_position
 	
 	
 	var delta_pos = AUTO_TRIGGER_NODE.global_position - pos
@@ -75,12 +86,13 @@ func apply_forces(delta:float) -> void:
 	
 	last_velocity = velocity;
 	last_force = force_to_apply + appliable_lost_force;
+	print(appliable_lost_force)
 	
 	
-	
-	
-	
-	RIGIDBODY.apply_central_force(force_to_apply + appliable_lost_force)
+	if(RIGIDBODY_ANCHOR != null):
+		RIGIDBODY.apply_force(force_to_apply + appliable_lost_force, RIGIDBODY_ANCHOR.global_position - RIGIDBODY.global_position)
+	else:
+		RIGIDBODY.apply_central_force(force_to_apply + appliable_lost_force)
 	
 
 

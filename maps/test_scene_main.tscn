@@ -41,6 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.52197, 0, 2.75281)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Physics_Lerper_Test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32759, 0.325511, 0)
+angular_damp = 1000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Physics_Lerper_Test/RigidBody3D"]
 shape = SubResource("SphereShape3D_tohjk")
@@ -49,17 +50,40 @@ shape = SubResource("SphereShape3D_tohjk")
 material_override = ExtResource("1_tohjk")
 mesh = SubResource("SphereMesh_si6hl")
 
+[node name="Peg" type="Node3D" parent="Physics_Lerper_Test/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.1, 0)
+
+[node name="Peg2" type="Node3D" parent="Physics_Lerper_Test/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.1, 0)
+
 [node name="Target" type="Node3D" parent="Physics_Lerper_Test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69361, 1.25973, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Physics_Lerper_Test/Target"]
 mesh = SubResource("SphereMesh_nqgdp")
 
-[node name="physics_lerper" type="Node" parent="Physics_Lerper_Test" node_paths=PackedStringArray("RIGIDBODY", "AUTO_TRIGGER_NODE")]
+[node name="Target2" type="Node3D" parent="Physics_Lerper_Test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.09361, 1.25973, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Physics_Lerper_Test/Target2"]
+mesh = SubResource("SphereMesh_nqgdp")
+
+[node name="physics_lerper" type="Node" parent="Physics_Lerper_Test" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_ANCHOR", "AUTO_TRIGGER_NODE")]
 script = ExtResource("4_si6hl")
 RIGIDBODY = NodePath("../RigidBody3D")
+RIGIDBODY_ANCHOR = NodePath("../RigidBody3D/Peg")
 AUTO_TRIGGER = true
 AUTO_TRIGGER_NODE = NodePath("../Target")
-FORCE = 20.0
+FORCE = 5.0
+RESERVE_FORCE = 9.8
+metadata/_custom_type_script = "uid://btawb6tqvuf8s"
+
+[node name="physics_lerper2" type="Node" parent="Physics_Lerper_Test" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_ANCHOR", "AUTO_TRIGGER_NODE")]
+script = ExtResource("4_si6hl")
+RIGIDBODY = NodePath("../RigidBody3D")
+RIGIDBODY_ANCHOR = NodePath("../RigidBody3D/Peg2")
+AUTO_TRIGGER = true
+AUTO_TRIGGER_NODE = NodePath("../Target2")
+FORCE = 5.0
 RESERVE_FORCE = 9.8
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"
