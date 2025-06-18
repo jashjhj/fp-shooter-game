@@ -60,6 +60,6 @@ script = ExtResource("4_si6hl")
 RIGIDBODY = NodePath("../RigidBody3D")
 AUTO_TRIGGER = true
 AUTO_TRIGGER_NODE = NodePath("../Target")
-FORCE = 1000.0
+FORCE = 20.0
 RESERVE_FORCE = 9.8
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"

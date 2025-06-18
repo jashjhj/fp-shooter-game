@@ -69,7 +69,9 @@ func apply_forces(delta:float) -> void:
 	var lost_impulse = last_force*delta - mass*(velocity - last_velocity)
 	var lost_force_mag = lost_impulse.length() / delta
 	lost_force_mag = min(RESERVE_FORCE, lost_force_mag)
-	var appliable_lost_force = lost_impulse.normalized() * lost_force_mag
+	var appliable_lost_force:Vector3 = lost_impulse.normalized() * lost_force_mag
+	if(appliable_lost_force.length() > RESERVE_FORCE):
+		appliable_lost_force = appliable_lost_force.normalized() * RESERVE_FORCE # Caps it where necessary
 	
 	last_velocity = velocity;
 	last_force = force_to_apply + appliable_lost_force;
