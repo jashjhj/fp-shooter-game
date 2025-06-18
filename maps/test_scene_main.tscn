@@ -41,8 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.52197, 0, 2.75281)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Physics_Lerper_Test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32759, 0.325511, 0)
-mass = 0.1
-gravity_scale = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Physics_Lerper_Test/RigidBody3D"]
 shape = SubResource("SphereShape3D_tohjk")
@@ -62,4 +60,6 @@ script = ExtResource("4_si6hl")
 RIGIDBODY = NodePath("../RigidBody3D")
 AUTO_TRIGGER = true
 AUTO_TRIGGER_NODE = NodePath("../Target")
+FORCE = 1000.0
+RESERVE_FORCE = 9.8
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"
