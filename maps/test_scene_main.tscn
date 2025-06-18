@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk1yxmf7wacr"]
+[gd_scene load_steps=10 format=3 uid="uid://bk1yxmf7wacr"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_oknrb"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="1_tohjk"]
 [ext_resource type="PackedScene" uid="uid://6iwvem2ecddd" path="res://maps/map_resources/environment.tscn" id="2_tohjk"]
+[ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="3_nqgdp"]
+[ext_resource type="Script" uid="uid://btawb6tqvuf8s" path="res://npc/elements/physics_lerper/physics_lerper.gd" id="4_si6hl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tohjk"]
+radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_si6hl"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_si6hl"]
+transparency = 1
+albedo_color = Color(0.53, 1, 0.710167, 0.396078)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nqgdp"]
+material = SubResource("StandardMaterial3D_si6hl")
+radius = 0.225
+height = 0.45
 
 [node name="TestSceneMain" type="Node3D"]
 
@@ -15,4 +33,33 @@ size = Vector3(15, 1, 16)
 [node name="Player" parent="." instance=ExtResource("1_oknrb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.52197, 0, 2.75281)
 
+[node name="Rubbish" parent="." instance=ExtResource("3_nqgdp")]
+
 [node name="Environment" parent="." instance=ExtResource("2_tohjk")]
+
+[node name="Physics_Lerper_Test" type="Node3D" parent="."]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Physics_Lerper_Test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32759, 0.325511, 0)
+mass = 0.1
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics_Lerper_Test/RigidBody3D"]
+shape = SubResource("SphereShape3D_tohjk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Physics_Lerper_Test/RigidBody3D"]
+material_override = ExtResource("1_tohjk")
+mesh = SubResource("SphereMesh_si6hl")
+
+[node name="Target" type="Node3D" parent="Physics_Lerper_Test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69361, 1.25973, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Physics_Lerper_Test/Target"]
+mesh = SubResource("SphereMesh_nqgdp")
+
+[node name="physics_lerper" type="Node" parent="Physics_Lerper_Test" node_paths=PackedStringArray("RIGIDBODY", "AUTO_TRIGGER_NODE")]
+script = ExtResource("4_si6hl")
+RIGIDBODY = NodePath("../RigidBody3D")
+AUTO_TRIGGER = true
+AUTO_TRIGGER_NODE = NodePath("../Target")
+metadata/_custom_type_script = "uid://btawb6tqvuf8s"
