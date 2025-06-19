@@ -4,8 +4,8 @@ class_name Physics_Lerper extends Node
 ##Optional: This must be a child of RIGIDBODY. It acts as the source of the force & relevant calculations.      
 ##|      I recommend that if using this as the only source of forces on an object, enable angular damping on RIGIDBODY.
 @export var RIGIDBODY_ANCHOR:Node3D;
-@export var AUTO_TRIGGER:bool = false;
-@export var AUTO_TRIGGER_NODE:Node3D;
+@export var enabled:bool = true;
+@export var TARGET:Node3D;
 
 ##Stable up to ~ 1000ms-2 acceleration
 @export var FORCE:float = 7.0;
@@ -37,7 +37,7 @@ func apply_forces(delta:float) -> void:
 	var velocity:Vector3;
 	var pos:Vector3;
 	
-	if(RIGIDBODY_ANCHOR != null):
+	if(RIGIDBODY_ANCHOR != null): # Calculates Velocities/Positions
 		#Velocity is local to the point on the rigidbody.  ----------- This is magic that calculates local linear vlocity of a spinning object ----------
 		velocity = RIGIDBODY.linear_velocity# + RIGIDBODY.angular_velocity.cross(RIGIDBODY_ANCHOR.global_position - RIGIDBODY.global_position)
 		pos = RIGIDBODY_ANCHOR.global_position
@@ -46,7 +46,7 @@ func apply_forces(delta:float) -> void:
 		pos = RIGIDBODY.global_position
 	
 	
-	var delta_pos = AUTO_TRIGGER_NODE.global_position - pos
+	var delta_pos = TARGET.global_position - pos
 	if(delta_pos.length() < SLOP):
 		delta_pos = Vector3.ZERO # This works as delta_pos.normalised = (0,0,0)
 		
@@ -86,7 +86,7 @@ func apply_forces(delta:float) -> void:
 	
 	last_velocity = velocity;
 	last_force = force_to_apply + appliable_lost_force;
-	print(appliable_lost_force)
+	#print(appliable_lost_force)
 	
 	
 	if(RIGIDBODY_ANCHOR != null):
@@ -97,5 +97,6 @@ func apply_forces(delta:float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if(AUTO_TRIGGER):
-		apply_forces(delta)
+	if(enabled):
+		if(TARGET != null):
+			apply_forces(delta)
