@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cte6sk81x8r3e"]
 
-[ext_resource type="Script" uid="uid://sel62qjtekyj" path="res://npc/enemy/crawler/abstract/crawler_leg.gd" id="1_vbw85"]
+[ext_resource type="Script" uid="uid://dgq3h7ecgwgjj" path="res://npc/component_scripts/IK_Leg.gd" id="1_qinyg"]
 [ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="2_0xp81"]
 [ext_resource type="Material" uid="uid://cyooiq8jky0w6" path="res://npc/enemy/crawler/abstract/6-legged/crawler_material.tres" id="3_8fp55"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="4_764xn"]
@@ -26,12 +26,10 @@ height = 0.4
 radius = 0.0140135
 height = 0.204708
 
-[node name="CrawlerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG", "DESTROY_SIGNAL", "HIT_SURFACE_SFX")]
-script = ExtResource("1_vbw85")
+[node name="CrawlerLeg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG")]
+script = ExtResource("1_qinyg")
 UPPER_LEG = NodePath("Upper Leg")
 LOWER_LEG = NodePath("Lower Leg")
-DESTROY_SIGNAL = NodePath("Destroy_Signal")
-HIT_SURFACE_SFX = NodePath("Lower Leg/AudioStreamPlayer3D")
 
 [node name="Destroy_Signal" type="Node" parent="."]
 script = ExtResource("2_0xp81")
@@ -43,13 +41,13 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 material_override = ExtResource("3_8fp55")
 mesh = SubResource("CylinderMesh_wh3jt")
 
-[node name="Area3D" type="Area3D" parent="Upper Leg" node_paths=PackedStringArray("HITTABLE")]
+[node name="Destroy Area" type="Area3D" parent="Upper Leg" node_paths=PackedStringArray("HITTABLE")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("4_764xn")
 HITTABLE = [NodePath("../../Destroy_Signal"), NodePath("../../Hit_Make_Rigidbody")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Upper Leg/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Upper Leg/Destroy Area"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.101986)
 shape = SubResource("CapsuleShape3D_kssld")
 
@@ -74,7 +72,7 @@ script = ExtResource("6_kutuf")
 RIGIDBODY = NodePath("../Debris_rigidbody")
 RIGIDBODY_BASIS_CLONE = NodePath("../Upper Leg")
 NEW_CHILDREN = [NodePath("../Upper Leg"), NodePath("../Lower Leg")]
-TO_BE_REMOVED = [NodePath("../Upper Leg/Area3D"), null]
+TO_BE_REMOVED = [NodePath("../Upper Leg/Destroy Area"), null]
 metadata/_custom_type_script = "uid://hhosnxuj45ad"
 
 [node name="Debris_rigidbody" type="RigidBody3D" parent="."]
