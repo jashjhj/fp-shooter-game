@@ -25,6 +25,7 @@ class_name Physics_Lerper extends Node
 #  - maybe act goal_force agaisnt it, rather than towards goal?
 #
 
+
 var corrective_force:Vector3;
 
 var last_force:Vector3;
@@ -58,7 +59,7 @@ func apply_forces(delta:float) -> void:
 	maximum_velocity *= BOUNCINESS
 	var velocity_along_delta = velocity.dot(delta_pos.normalized()) * delta_pos.normalized()
 	
-	var force_to_apply:Vector3 = delta_pos.normalized() * FORCE
+	var force_to_apply:Vector3 = delta_pos.normalized() * FORCE # Initial setting for calculations. Checked in IF statement
 	
 	var prospective_dv:Vector3 = (force_to_apply / mass) * delta
 	var prospective_speed:Vector3 = velocity + prospective_dv
@@ -74,6 +75,29 @@ func apply_forces(delta:float) -> void:
 		force_to_apply = goal_force
 	
 	
+	##And again for perpendicular
+	#Maxmim velocity is constant as its proportional to distance
+	var p_velocity:Vector3 = velocity - velocity_along_delta;
+	var p_force_to_apply:Vector3 = (-p_velocity).normalized() * FORCE * min(1.0, velocity_along_delta.length()) # uses length as a limit so it doesnt overpower
+	
+	var p_prospective_dv:Vector3 = (p_force_to_apply / mass) * delta
+	var p_prospective_speed:Vector3 = p_velocity + p_prospective_dv
+	
+
+	
+	if(not p_prospective_speed.length() > maximum_velocity):
+		force_to_apply += p_force_to_apply
+	else:
+		var goal_v:Vector3 = Vector3.ZERO
+		var goal_dv:Vector3 = goal_v - p_prospective_speed
+		
+		#Attempt to apply goal_dv
+		var goal_force:Vector3 = (goal_dv*mass) / delta
+		if(goal_force.length() > FORCE):
+			goal_force = goal_force.normalized() * FORCE
+		
+		
+		force_to_apply += goal_force
 	
 	
 	#Lost force caluclations to counter gravity - TODO REDO to consider unexpected DVs correctly
@@ -100,3 +124,6 @@ func _physics_process(delta: float) -> void:
 	if(enabled):
 		if(TARGET != null):
 			apply_forces(delta)
+
+
+ 
