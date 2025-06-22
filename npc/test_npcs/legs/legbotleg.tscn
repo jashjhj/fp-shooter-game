@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://wj3o5lh1ipji"]
+
+[ext_resource type="Script" uid="uid://dgq3h7ecgwgjj" path="res://npc/component_scripts/IK_Leg.gd" id="1_gcapg"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c5mru"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qsgas"]
+top_radius = 0.04
+bottom_radius = 0.03
+height = 1.0
+
+[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG")]
+script = ExtResource("1_gcapg")
+UPPER_LEG = NodePath("Upper")
+LOWER_LEG = NodePath("Lower")
+UPPER_LENGTH = 1.0
+LOWER_LENGTH = 1.0
+
+[node name="Upper" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_c5mru")
+
+[node name="Lower" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_qsgas")

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://kfamnabyuul1"]
+
+[ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="1_lc2cb"]
+[ext_resource type="Script" uid="uid://ckvu0ffvy377x" path="res://npc/test_npcs/legs/legbot_3000.gd" id="1_yr67n"]
+[ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/test_npcs/legs/legbotleg.tscn" id="2_iv3ci"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iv3ci"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yr67n"]
+height = 0.3
+radius = 0.25
+
+[node name="Legbot3000" type="Node3D"]
+script = ExtResource("1_yr67n")
+
+[node name="Body" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99483, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("CylinderMesh_iv3ci")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+shape = SubResource("CylinderShape3D_yr67n")
+
+[node name="Visual_Camera" parent="Body" instance=ExtResource("1_lc2cb")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0168856, 0.0808798, -0.154391)
+
+[node name="Legbotleg" parent="Body" instance=ExtResource("2_iv3ci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229486)
+
+[node name="Legbotleg2" parent="Body" instance=ExtResource("2_iv3ci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.173183, 0, -0.143536)
+
+[node name="Legbotleg3" parent="Body" instance=ExtResource("2_iv3ci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18834, 0, -0.151752)
