@@ -19,17 +19,19 @@ func _physics_process(delta: float) -> void:
 
 func process_walking() -> void:
 	
+	# The * 1.2 is cheating a little as it puts legs out in front to prevent them being under the player, making planes funny becasue of floating point errors.
+	
 	if(current_leg == 0): # Left
 		
 		LEFT_LEG.set_leg_stationary()
 		
-		var right_leg_goal:Vector3 = RIGHT_LEG.DOWN.global_position + RIGHT_LEG.DOWN.global_position - RIGHT_LEG.CURRENT.global_position
+		var right_leg_goal:Vector3 = RIGHT_LEG.DOWN.global_position + 1.2*(RIGHT_LEG.DOWN.global_position - RIGHT_LEG.CURRENT.global_position)
 		RIGHT_LEG.goal_pos = right_leg_goal # Overwrites goal wihtout setting previous, to keep seamlessness
 		
 		var distance:float = LEFT_LEG.DOWN.global_position.distance_to(LEFT_LEG.CURRENT.global_position)
 		RIGHT_LEG.set_leg_progress(distance/(STRIDE/2.0))
 		
-		print(distance)
+		#print(distance)
 		
 		if(distance > STRIDE/2.0):
 			current_leg = 1;
@@ -45,7 +47,7 @@ func process_walking() -> void:
 		
 		RIGHT_LEG.set_leg_stationary()
 		
-		var left_leg_goal:Vector3 = LEFT_LEG.DOWN.global_position + LEFT_LEG.DOWN.global_position - LEFT_LEG.CURRENT.global_position
+		var left_leg_goal:Vector3 = LEFT_LEG.DOWN.global_position + 1.2*(LEFT_LEG.DOWN.global_position - LEFT_LEG.CURRENT.global_position)
 		LEFT_LEG.goal_pos = left_leg_goal # Overwrites goal wihtout setting previous, to keep seamlessness
 		
 		
