@@ -123,19 +123,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.09361, 1.25973, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Physics_Lerper_Test/Scenario 1/Target2"]
 mesh = SubResource("SphereMesh_nqgdp")
 
-[node name="physics_lerper" type="Node" parent="Physics_Lerper_Test/Scenario 1" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_ANCHOR", "TARGET")]
+[node name="physics_lerper" type="Node" parent="Physics_Lerper_Test/Scenario 1" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_PEG", "TARGET")]
 script = ExtResource("4_si6hl")
 RIGIDBODY = NodePath("../RigidBody3D")
-RIGIDBODY_ANCHOR = NodePath("../RigidBody3D/Peg")
+RIGIDBODY_PEG = NodePath("../RigidBody3D/Peg")
 TARGET = NodePath("../Target")
 FORCE = 5.0
 RESERVE_FORCE = 9.8
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"
 
-[node name="physics_lerper2" type="Node" parent="Physics_Lerper_Test/Scenario 1" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_ANCHOR", "TARGET")]
+[node name="physics_lerper2" type="Node" parent="Physics_Lerper_Test/Scenario 1" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_PEG", "TARGET")]
 script = ExtResource("4_si6hl")
 RIGIDBODY = NodePath("../RigidBody3D")
-RIGIDBODY_ANCHOR = NodePath("../RigidBody3D/Peg2")
+RIGIDBODY_PEG = NodePath("../RigidBody3D/Peg2")
 TARGET = NodePath("../Target2")
 FORCE = 5.0
 RESERVE_FORCE = 9.8

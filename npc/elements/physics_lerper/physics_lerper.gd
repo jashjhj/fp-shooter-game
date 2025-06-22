@@ -3,7 +3,7 @@ class_name Physics_Lerper extends Node
 @export var RIGIDBODY:RigidBody3D;
 ##Optional: This must be a child of RIGIDBODY. It acts as the source of the force & relevant calculations.      
 ##|      I recommend that if using this as the only source of forces on an object, enable angular damping on RIGIDBODY.
-@export var RIGIDBODY_ANCHOR:Node3D;
+@export var RIGIDBODY_PEG:Node3D;
 @export var enabled:bool = true;
 @export var TARGET:Node3D;
 
@@ -38,10 +38,10 @@ func apply_forces(delta:float) -> void:
 	var velocity:Vector3;
 	var pos:Vector3;
 	
-	if(RIGIDBODY_ANCHOR != null): # Calculates Velocities/Positions
+	if(RIGIDBODY_PEG != null): # Calculates Velocities/Positions
 		#Velocity is local to the point on the rigidbody.  ----------- This is magic that calculates local linear vlocity of a spinning object ----------
-		velocity = RIGIDBODY.linear_velocity# + RIGIDBODY.angular_velocity.cross(RIGIDBODY_ANCHOR.global_position - RIGIDBODY.global_position)
-		pos = RIGIDBODY_ANCHOR.global_position
+		velocity = RIGIDBODY.linear_velocity# + RIGIDBODY.angular_velocity.cross(RIGIDBODY_PEG.global_position - RIGIDBODY.global_position)
+		pos = RIGIDBODY_PEG.global_position
 	else:
 		velocity = RIGIDBODY.linear_velocity;
 		pos = RIGIDBODY.global_position
@@ -113,8 +113,8 @@ func apply_forces(delta:float) -> void:
 	#print(appliable_lost_force)
 	
 	
-	if(RIGIDBODY_ANCHOR != null):
-		RIGIDBODY.apply_force(force_to_apply + appliable_lost_force, RIGIDBODY_ANCHOR.global_position - RIGIDBODY.global_position)
+	if(RIGIDBODY_PEG != null):
+		RIGIDBODY.apply_force(force_to_apply + appliable_lost_force, RIGIDBODY_PEG.global_position - RIGIDBODY.global_position)
 	else:
 		RIGIDBODY.apply_central_force(force_to_apply + appliable_lost_force)
 	
