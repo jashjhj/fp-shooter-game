@@ -23,6 +23,9 @@ class_name Shooting_Crawler extends Node3D
 @onready var LEG_R_RAY:RayCast3D = $Body/Ray_Right
 @onready var nav_agent := $NavigationAgent3D
 
+@onready var STABILISER_L:Physics_Lerper = Physics_Lerper.new()
+@onready var STABILISER_R:Physics_Lerper = Physics_Lerper.new()
+
 @onready var POS:Node3D = Node3D.new()
 
 var is_stable:bool = true;
@@ -44,8 +47,21 @@ func _ready() -> void:
 	STABILISE_TARG_R.global_transform = STABILISE_POS_L.global_transform
 	#STABILISE_TARG_L.position += Vector3.UP * 0.04
 	#STABILISE_TARG_R.position += Vector3.UP * 0.04
-	#LEG_L.free()
-	#LEG_R.free()
+	
+	STABILISER_L.RIGIDBODY = BODY # Init Stabilisers.
+	STABILISER_L.RIGIDBODY_PEG = STABILISE_POS_L
+	STABILISER_L.TARGET = STABILISE_TARG_L
+	STABILISER_L.FORCE = 20
+	STABILISER_L.RESERVE_FORCE = 10;
+	add_child(STABILISER_L)
+	
+	STABILISER_R.RIGIDBODY = BODY
+	STABILISER_R.RIGIDBODY_PEG = STABILISE_POS_R
+	STABILISER_R.TARGET = STABILISE_TARG_R
+	STABILISER_R.FORCE = 20
+	STABILISER_R.RESERVE_FORCE = 10;
+	add_child(STABILISER_R)
+
 
 const FORCE_OFFSET:float = 12;
 const FORCE_MULT:float = 500.0
@@ -66,28 +82,24 @@ func _physics_process(delta: float) -> void:
 				POS.global_basis.y = floor_normal
 				POS.global_basis.x = floor_normal.cross(-BODY.global_basis.z)
 				POS.global_basis.z = -floor_normal.cross(BODY.global_basis.x)
-				
+			
+			STABILISER_R.enabled = true
+			STABILISER_L.enabled = true
 		else:# Becoming unstable
-			pass#print("Just became unstable")
+			STABILISER_R.enabled = false;
+			STABILISER_L.enabled = false;
+			
 	
 	is_stable = new_is_stable
 	
-	if(is_stable):
 		
-		var left_goal_dir:Vector3 = STABILISE_TARG_L.global_position - STABILISE_POS_L.global_position
-		var right_goal_dir:Vector3 = STABILISE_TARG_R.global_position - STABILISE_POS_R.global_position
-		var left_force:Vector3 = left_goal_dir * FORCE_MULT + Vector3.UP*FORCE_OFFSET
-		var right_force:Vector3 = right_goal_dir * FORCE_MULT + Vector3.UP*FORCE_OFFSET
-		print("L", left_force)
-		print("R", right_force)
-		BODY.apply_force(left_force, STABILISE_POS_L.global_position - BODY.global_position)
-		BODY.apply_force(right_force, STABILISE_POS_R.global_position - BODY.global_position)
+		
 		
 		# Walk
 		#position += -basis.z * delta
 	
-	DebugDraw3D.draw_position(STABILISE_TARG_L.global_transform, Color(0, 0, 1), 0)
-	DebugDraw3D.draw_position(STABILISE_TARG_R.global_transform, Color(1, 0, 0), 0)
+	#DebugDraw3D.draw_position(STABILISE_TARG_L.global_transform, Color(0, 0, 1), 0)
+	#DebugDraw3D.draw_position(STABILISE_TARG_R.global_transform, Color(1, 0, 0), 0)
 	#DebugDraw3D.draw_position(POS.global_transform, Color(1, 0, 1), 0)
 	
 	#var left_height:float = (1.0/WALK_NOSE_HEIGHT) * min(WALK_NOSE_HEIGHT, max(0, (LEG_L_RAY.get_collision_point() - LEG_L_RAY.global_position).length())) # As a float where 1 is fully extended and 0 is on floor
@@ -115,6 +127,9 @@ func _physics_process(delta: float) -> void:
 
 func check_stable() -> bool:
 	var result = true
+	
+	if(LEG_L == null or LEG_R == null):
+		return false
 	
 	var body_upness:float = BODY.global_basis.y.dot(Vector3.UP) # If not upright
 	if(body_upness < 0.3): result = false

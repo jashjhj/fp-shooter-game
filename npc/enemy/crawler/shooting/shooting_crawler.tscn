@@ -34,7 +34,7 @@ STABILISE_POS_L = NodePath("Body/Left Stabilise Pos")
 STABILISE_POS_R = NodePath("Body/Right Stabilise Pos")
 
 [node name="Body" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.107014, 0)
+transform = Transform3D(1, 0, 0, 0, 0.945988, -0.324201, 0, 0.324201, 0.945988, 0, 0.149901, 0)
 mass = 5.0
 
 [node name="Body" type="MeshInstance3D" parent="Body"]
