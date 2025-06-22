@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="first_person_shooter"
-run/main_scene="uid://ytkqw7poq2yc"
+run/main_scene="uid://bk1yxmf7wacr"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
