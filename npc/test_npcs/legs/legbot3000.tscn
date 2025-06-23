@@ -29,11 +29,14 @@ shape = SubResource("CylinderShape3D_yr67n")
 process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0168856, 0.0808798, -0.154391)
 
-[node name="Legbotleg" parent="Body" instance=ExtResource("2_iv3ci")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229486)
+[node name="Legbotleg" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.99483, 0.229486)
+BODY = NodePath("../Body")
 
-[node name="Legbotleg2" parent="Body" instance=ExtResource("2_iv3ci")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.173183, 0, -0.143536)
+[node name="Legbotleg2" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+transform = Transform3D(0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, 0.573576, -0.173183, 1.99483, -0.143536)
+BODY = NodePath("../Body")
 
-[node name="Legbotleg3" parent="Body" instance=ExtResource("2_iv3ci")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18834, 0, -0.151752)
+[node name="Legbotleg3" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 0.18834, 1.99483, -0.151752)
+BODY = NodePath("../Body")

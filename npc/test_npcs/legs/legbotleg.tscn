@@ -1,33 +1,115 @@
-[gd_scene load_steps=4 format=3 uid="uid://wj3o5lh1ipji"]
+[gd_scene load_steps=13 format=3 uid="uid://wj3o5lh1ipji"]
 
-[ext_resource type="Script" uid="uid://dgq3h7ecgwgjj" path="res://npc/component_scripts/IK_Leg.gd" id="1_gcapg"]
+[ext_resource type="Script" uid="uid://bbqoq87idvyqs" path="res://npc/test_npcs/legs/legbotleg.gd" id="1_gcapg"]
+[ext_resource type="Script" uid="uid://dmphd0qjx5qki" path="res://npc/component_scripts/IK_Leg_Abstract.gd" id="2_c5mru"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1ex0p"]
+friction = 0.4
+bounce = 0.4
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5mru"]
 top_radius = 0.05
 bottom_radius = 0.05
 height = 1.0
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gcapg"]
+height = 1.0
+radius = 0.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_gcapg"]
+size = Vector3(0.025, 0.3, 0.1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gcapg"]
+friction = 0.4
+bounce = 0.4
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_qsgas"]
 top_radius = 0.04
 bottom_radius = 0.03
 height = 1.0
 
-[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("UPPER_LEG", "LOWER_LEG")]
-script = ExtResource("1_gcapg")
-UPPER_LEG = NodePath("Upper")
-LOWER_LEG = NodePath("Lower")
-UPPER_LENGTH = 1.0
-LOWER_LENGTH = 1.0
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c5mru"]
+height = 1.0
+radius = 0.04
 
-[node name="Upper" type="Node3D" parent="."]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qsgas"]
+rough = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jrlnb"]
+radius = 0.06
+
+[sub_resource type="SphereMesh" id="SphereMesh_se5qo"]
+radius = 0.05
+height = 0.1
+
+[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("HIP", "KNEE")]
+script = ExtResource("1_gcapg")
+HIP = NodePath("Hip")
+KNEE = NodePath("Knee")
+
+[node name="Upper" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_1ex0p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Upper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("CylinderMesh_c5mru")
+skeleton = NodePath("")
 
-[node name="Lower" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Upper"]
+shape = SubResource("CylinderShape3D_gcapg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -0.1)
+mesh = SubResource("BoxMesh_gcapg")
+
+[node name="Lower" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+physics_material_override = SubResource("PhysicsMaterial_gcapg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lower"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("CylinderMesh_qsgas")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lower"]
+shape = SubResource("CylinderShape3D_c5mru")
+
+[node name="Foot" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mass = 0.4
+physics_material_override = SubResource("PhysicsMaterial_qsgas")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Foot"]
+shape = SubResource("SphereShape3D_jrlnb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Foot"]
+mesh = SubResource("SphereMesh_se5qo")
+
+[node name="Knee" type="HingeJoint3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1, 0)
+node_a = NodePath("../Upper")
+node_b = NodePath("../Lower")
+angular_limit/enable = true
+angular_limit/upper = 2.26893
+angular_limit/lower = -0.174533
+
+[node name="Ankle" type="HingeJoint3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -2, 0)
+node_a = NodePath("../Lower")
+node_b = NodePath("../Foot")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Hip" type="Generic6DOFJoint3D" parent="."]
+node_b = NodePath("../Upper")
+angular_limit_x/enabled = false
+angular_limit_x/upper_angle = 1.5708
+angular_limit_x/lower_angle = -0.0872665
+angular_limit_z/enabled = false
+angular_limit_z/upper_angle = 0.349066
+angular_limit_z/lower_angle = -0.349066
+
+[node name="IK_Leg_Abstract" type="Node" parent="."]
+script = ExtResource("2_c5mru")
+metadata/_custom_type_script = "uid://dmphd0qjx5qki"
