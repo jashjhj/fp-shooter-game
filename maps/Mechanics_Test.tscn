@@ -78,7 +78,7 @@ use_collision = true
 size = Vector3(2.68164, 2.92674, 1)
 
 [node name="Legbot3000" parent="." instance=ExtResource("4_kpkau")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26342, 0.616205, -24.652)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26342, 0.0774955, -24.652)
 
 [node name="Legbotleg" parent="." instance=ExtResource("5_ncl7n")]
 transform = Transform3D(2.18557e-08, -0.866025, 0.5, -3.78552e-08, -0.5, -0.866025, 1, 0, -4.37114e-08, 4.16341, 1.7793, -25.3235)

@@ -1,11 +1,62 @@
 extends Node3D
 
+@export var LEG1:LegBotLeg;
+@export var LEG2:LegBotLeg;
+@export var LEG3:LegBotLeg;
+
+##Should be placed at "centre" originally, facing forwards.
+@export var TARG:Node3D;
+@onready var targ_l1:Node3D = Node3D.new();
+@onready var targ_l2:Node3D = Node3D.new();
+@onready var targ_l3:Node3D = Node3D.new();
+
+@export var GOAL_HEIGHT:float = 1.5;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	TARG.add_child(targ_l1)
+	TARG.add_child(targ_l2)
+	TARG.add_child(targ_l3)
+	targ_l1.position = LEG1.position
+	targ_l2.position = LEG2.position
+	targ_l3.position = LEG3.position
+	
+	LEG1.PHYSLERP.TARGET = targ_l1
+	LEG2.PHYSLERP.TARGET = targ_l2
+	LEG3.PHYSLERP.TARGET = targ_l3
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _physics_process(delta: float) -> void:
+	#LEG1.PHYSLERP.apply_forces(delta)
+	#LEG1.PHYSLERP.apply_forces(delta)
+	#LEG1.PHYSLERP.apply_forces(delta)
+	
+	LEG1.attempt_apply_force(LEG1.PHYSLERP.calculate_forces(delta))
+	LEG2.attempt_apply_force(LEG2.PHYSLERP.calculate_forces(delta))
+	LEG3.attempt_apply_force(LEG3.PHYSLERP.calculate_forces(delta))
+
+func get_centre_of_stable_area() -> Vector3:
+	var average_position:Vector3 = Vector3.ZERO;# = (LEG1.target + LEG2.target + LEG3.target)/3.0
+	
+	var contributors:int = 0;
+	if(LEG1.is_stable):
+		average_position += LEG1.target;
+		contributors += 1;
+	if(LEG2.is_stable):
+		average_position += LEG2.target;
+		contributors += 1;
+	if(LEG3.is_stable):
+		average_position += LEG3.target;
+		contributors += 1;
+	
+	if(contributors != 0):
+		return average_position / float(contributors)
+	
+	#Completely unstable
+	return Vector3.ZERO

@@ -13,7 +13,7 @@ class IKAngles:
 
 
 ##Input is the delta-pos followed by a forwards vector. Must be in the same (local/global) space. Recommended local space.
-## +tive angles mean inwards/downwards/towards delta from forwards
+## | +tive angles mean towards delta from forwards
 func get_angles(delta:Vector3, forwards:Vector3 = Vector3.FORWARD) -> IKAngles:
 	forwards = forwards.normalized()
 	

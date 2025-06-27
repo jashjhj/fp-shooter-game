@@ -42,13 +42,18 @@ radius = 0.06
 radius = 0.05
 height = 0.1
 
-[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("HIP", "KNEE")]
+[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("HIP", "KNEE", "UPPER", "LOWER", "FOOT")]
 script = ExtResource("1_gcapg")
 HIP = NodePath("Hip")
 KNEE = NodePath("Knee")
+UPPER = NodePath("Upper")
+LOWER = NodePath("Lower")
+FOOT = NodePath("Foot")
 
 [node name="Upper" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 64
+collision_mask = 65
 mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_1ex0p")
 
@@ -65,6 +70,8 @@ mesh = SubResource("BoxMesh_gcapg")
 
 [node name="Lower" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+collision_layer = 64
+collision_mask = 65
 physics_material_override = SubResource("PhysicsMaterial_gcapg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lower"]
@@ -76,6 +83,8 @@ shape = SubResource("CylinderShape3D_c5mru")
 
 [node name="Foot" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_layer = 64
+collision_mask = 65
 mass = 0.4
 physics_material_override = SubResource("PhysicsMaterial_qsgas")
 
@@ -84,14 +93,6 @@ shape = SubResource("SphereShape3D_jrlnb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Foot"]
 mesh = SubResource("SphereMesh_se5qo")
-
-[node name="Knee" type="HingeJoint3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1, 0)
-node_a = NodePath("../Upper")
-node_b = NodePath("../Lower")
-angular_limit/enable = true
-angular_limit/upper = 2.26893
-angular_limit/lower = -0.174533
 
 [node name="Ankle" type="HingeJoint3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -2, 0)
@@ -103,12 +104,17 @@ angular_limit/lower = 0.0
 
 [node name="Hip" type="Generic6DOFJoint3D" parent="."]
 node_b = NodePath("../Upper")
-angular_limit_x/enabled = false
 angular_limit_x/upper_angle = 1.5708
 angular_limit_x/lower_angle = -0.0872665
-angular_limit_z/enabled = false
-angular_limit_z/upper_angle = 0.349066
-angular_limit_z/lower_angle = -0.349066
+angular_limit_y/upper_angle = 0.349066
+angular_limit_y/lower_angle = -0.349066
+
+[node name="Knee" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+node_a = NodePath("../Upper")
+node_b = NodePath("../Lower")
+angular_limit_x/upper_angle = 2.26893
+angular_limit_x/lower_angle = -0.174533
 
 [node name="IK_Leg_Abstract" type="Node" parent="."]
 script = ExtResource("2_c5mru")

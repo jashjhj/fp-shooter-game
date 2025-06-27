@@ -16,8 +16,6 @@ class_name Physics_Lerper extends Node
 ##If (this) close, consider it there.
 @export var SLOP:float = 0.01;
 
-##Should be called once per physics process, to apply the forces.
-@onready var max_deceleration = FORCE/RIGIDBODY.mass
 
 
 #TODO Known issues:
@@ -31,7 +29,20 @@ var corrective_force:Vector3;
 var last_force:Vector3;
 var last_velocity:Vector3;
 func apply_forces(delta:float) -> void:
-	if(RIGIDBODY == null): return
+	var force = calculate_forces(delta);
+	
+	if(RIGIDBODY_PEG != null):
+		RIGIDBODY.apply_force(force, RIGIDBODY_PEG.global_position - RIGIDBODY.global_position)
+	else:
+		RIGIDBODY.apply_central_force(force)
+
+
+##Should be called once per physics process, to calculate the forces. TODO: Add option to shortcut through function when ZERO to reset, maybe if delta == 0?
+func calculate_forces(delta:float) -> Vector3:
+	if(RIGIDBODY == null): return Vector3.ZERO
+	if(TARGET == null): 
+		push_warning("Attempted to calculate forces with no target set.")
+		return Vector3.ZERO
 	
 	#Identifiers
 	var mass:float = RIGIDBODY.mass;
@@ -47,13 +58,16 @@ func apply_forces(delta:float) -> void:
 		pos = RIGIDBODY.global_position
 	
 	
-	var delta_pos = TARGET.global_position - pos
-	if(delta_pos.length() < SLOP):
-		delta_pos = Vector3.ZERO # This works as delta_pos.normalised = (0,0,0)
-		
 	
+	var delta_pos = TARGET.global_position - pos
+	
+	
+	if(delta_pos.length() < SLOP):
+		delta_pos = Vector3.ZERO#This works as delta_pos.normalised = (0,0,0)
+
 	
 	## Maximum velocity function to wind up @ target. Scalar.
+	var max_deceleration = FORCE/RIGIDBODY.mass
 	# Using v^2 = u^2 + 2as  =>  u = sqrt(2as) (+v=0)
 	var maximum_velocity:float = sqrt(abs(2 * delta_pos.length() * max_deceleration)) 
 	maximum_velocity *= BOUNCINESS
@@ -110,14 +124,9 @@ func apply_forces(delta:float) -> void:
 	
 	last_velocity = velocity;
 	last_force = force_to_apply + appliable_lost_force;
-	#print(appliable_lost_force)
 	
 	
-	if(RIGIDBODY_PEG != null):
-		RIGIDBODY.apply_force(force_to_apply + appliable_lost_force, RIGIDBODY_PEG.global_position - RIGIDBODY.global_position)
-	else:
-		RIGIDBODY.apply_central_force(force_to_apply + appliable_lost_force)
-	
+	return force_to_apply + appliable_lost_force
 
 
 func _physics_process(delta: float) -> void:
