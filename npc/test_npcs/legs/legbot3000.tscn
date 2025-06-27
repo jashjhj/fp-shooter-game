@@ -23,8 +23,9 @@ top_radius = 0.2
 bottom_radius = 0.2
 height = 0.5
 
-[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("LEG1", "LEG2", "LEG3", "TARG")]
+[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "LEG1", "LEG2", "LEG3", "TARG")]
 script = ExtResource("1_yr67n")
+BODY = NodePath("Body")
 LEG1 = NodePath("Legbotleg1")
 LEG2 = NodePath("Legbotleg2")
 LEG3 = NodePath("Legbotleg3")
@@ -58,8 +59,7 @@ transform = Transform3D(0.573576, -5.167e-10, -0.819152, 0, 1, -1.49012e-08, 0.8
 BODY = NodePath("../Body")
 
 [node name="Target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81084, 0)
-top_level = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Target"]
 mesh = SubResource("CylinderMesh_62c5f")

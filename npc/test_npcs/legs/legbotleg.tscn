@@ -33,6 +33,7 @@ height = 1.0
 radius = 0.04
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qsgas"]
+friction = 0.0
 rough = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jrlnb"]
@@ -42,13 +43,14 @@ radius = 0.06
 radius = 0.05
 height = 0.1
 
-[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("HIP", "KNEE", "UPPER", "LOWER", "FOOT")]
+[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("HIP", "KNEE", "UPPER", "LOWER", "FOOT", "ORIGIN")]
 script = ExtResource("1_gcapg")
 HIP = NodePath("Hip")
 KNEE = NodePath("Knee")
 UPPER = NodePath("Upper")
 LOWER = NodePath("Lower")
 FOOT = NodePath("Foot")
+ORIGIN = NodePath("Upper/Origin")
 
 [node name="Upper" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -67,6 +69,9 @@ shape = SubResource("CylinderShape3D_gcapg")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Upper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -0.1)
 mesh = SubResource("BoxMesh_gcapg")
+
+[node name="Origin" type="Node3D" parent="Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Lower" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
@@ -104,8 +109,8 @@ angular_limit/lower = 0.0
 
 [node name="Hip" type="Generic6DOFJoint3D" parent="."]
 node_b = NodePath("../Upper")
-angular_limit_x/upper_angle = 1.5708
-angular_limit_x/lower_angle = -0.0872665
+angular_limit_x/upper_angle = 0.0872665
+angular_limit_x/lower_angle = -2.00713
 angular_limit_y/upper_angle = 0.349066
 angular_limit_y/lower_angle = -0.349066
 

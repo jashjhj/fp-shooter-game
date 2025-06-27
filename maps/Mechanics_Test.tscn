@@ -15,7 +15,8 @@ cell_height = 0.1
 [node name="MechanicsTest" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_uyhpc")]
-transform = Transform3D(-0.808327, 0, -0.588734, 0, 1, 0, 0.588734, 0, -0.808327, -1.15217, 0, -27.1494)
+transform = Transform3D(0.385819, 0, -0.922575, 0, 1, 0, 0.922575, 0, 0.385819, -0.0414588, 0, -23.6087)
+visible = false
 
 [node name="Rubbish" parent="." instance=ExtResource("2_kpkau")]
 
@@ -81,4 +82,4 @@ size = Vector3(2.68164, 2.92674, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26342, 0.0774955, -24.652)
 
 [node name="Legbotleg" parent="." instance=ExtResource("5_ncl7n")]
-transform = Transform3D(2.18557e-08, -0.866025, 0.5, -3.78552e-08, -0.5, -0.866025, 1, 0, -4.37114e-08, 4.16341, 1.7793, -25.3235)
+transform = Transform3D(2.18557e-08, -0.866025, 0.5, -3.78552e-08, -0.5, -0.866025, 1, 0, -4.37114e-08, 13.4312, 1.7793, -25.3235)

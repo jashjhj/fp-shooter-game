@@ -3,6 +3,7 @@ class_name IK_Leg_Abstract extends Node
 @export var UPPER_LENGTH:float = 1.0;
 @export var LOWER_LENGTH:float = 1.0;
 
+@export var ELBOW_IN:bool = false;
 
 
 ##IK_Leg_Abstract Return Class
@@ -42,11 +43,11 @@ func calculate_second_angle(distance_squared:float) -> float:
 	#if(abs(cos_angle) > 1): print("TOO FAR") # Its fine though, just stretches
 	var angle = acos(cos_angle)
 	
+	if(!ELBOW_IN):
+		return -abs(angle)
 	
-	if (angle > 0): # Always return negative for 'elbow-up'
-		return -angle
 	else:
-		return angle
+		return(abs(angle))
 
 ##In radians. Target position should be: (cmp. along forwards, cmp. along upvector)
 func calculate_first_angle(target_position:Vector2, second_angle:float) -> float:

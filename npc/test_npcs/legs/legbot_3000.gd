@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var BODY:RigidBody3D;
+
 @export var LEG1:LegBotLeg;
 @export var LEG2:LegBotLeg;
 @export var LEG3:LegBotLeg;
@@ -18,9 +20,9 @@ func _ready() -> void:
 	TARG.add_child(targ_l1)
 	TARG.add_child(targ_l2)
 	TARG.add_child(targ_l3)
-	targ_l1.position = LEG1.position
-	targ_l2.position = LEG2.position
-	targ_l3.position = LEG3.position
+	targ_l1.position = LEG1.global_position - BODY.global_position # Sets offset to that of each leg. TODO: May need tos et this to BODY centre of mass
+	targ_l2.position = LEG2.global_position - BODY.global_position
+	targ_l3.position = LEG3.global_position - BODY.global_position
 	
 	LEG1.PHYSLERP.TARGET = targ_l1
 	LEG2.PHYSLERP.TARGET = targ_l2
