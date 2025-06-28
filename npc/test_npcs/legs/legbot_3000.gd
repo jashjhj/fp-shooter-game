@@ -35,26 +35,31 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	#LEG1.PHYSLERP.apply_forces(delta)
-	#LEG1.PHYSLERP.apply_forces(delta)
-	#LEG1.PHYSLERP.apply_forces(delta)
+	#TARG.global_position = get_centre_of_stable_area() + Vector3.UP * GOAL_HEIGHT
 	
-	LEG1.attempt_apply_force(LEG1.PHYSLERP.calculate_forces(delta))
-	LEG2.attempt_apply_force(LEG2.PHYSLERP.calculate_forces(delta))
-	LEG3.attempt_apply_force(LEG3.PHYSLERP.calculate_forces(delta))
+	consider_for_forces(LEG1, delta)
+	consider_for_forces(LEG2, delta)
+	consider_for_forces(LEG3, delta)
+
+
+func consider_for_forces(leg:LegBotLeg, delta:float):
+	if(leg.is_on_floor()):
+		leg.attempt_apply_force(leg.PHYSLERP.calculate_forces(delta))
+	else:
+		leg.attempt_apply_force(Vector3.ZERO)
 
 func get_centre_of_stable_area() -> Vector3:
 	var average_position:Vector3 = Vector3.ZERO;# = (LEG1.target + LEG2.target + LEG3.target)/3.0
 	
 	var contributors:int = 0;
 	if(LEG1.is_stable):
-		average_position += LEG1.target;
+		average_position += LEG1.FOOT.global_position;
 		contributors += 1;
 	if(LEG2.is_stable):
-		average_position += LEG2.target;
+		average_position += LEG2.FOOT.global_position;
 		contributors += 1;
 	if(LEG3.is_stable):
-		average_position += LEG3.target;
+		average_position += LEG3.FOOT.global_position;
 		contributors += 1;
 	
 	if(contributors != 0):
