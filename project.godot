@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="first_person_shooter"
+config/tags=PackedStringArray("current")
 run/main_scene="uid://cnkn2p4cmdon3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"

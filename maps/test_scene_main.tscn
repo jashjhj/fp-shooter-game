@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="1_tohjk"]
 [ext_resource type="PackedScene" uid="uid://6iwvem2ecddd" path="res://maps/map_resources/environment.tscn" id="2_tohjk"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="3_nqgdp"]
-[ext_resource type="Script" uid="uid://btawb6tqvuf8s" path="res://npc/elements/physics_lerper/physics_lerper.gd" id="4_si6hl"]
+[ext_resource type="Script" uid="uid://btawb6tqvuf8s" path="res://false_physics/physics_lerper/physics_lerper.gd" id="4_si6hl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tohjk"]
 radius = 0.2

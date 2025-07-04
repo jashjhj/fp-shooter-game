@@ -12,6 +12,10 @@ extends Node3D
 @onready var targ_l2:Node3D = Node3D.new();
 @onready var targ_l3:Node3D = Node3D.new();
 
+@onready var peg_l1:Node3D = Node3D.new();
+@onready var peg_l2:Node3D = Node3D.new();
+@onready var peg_l3:Node3D = Node3D.new();
+
 @export var GOAL_HEIGHT:float = 1.5;
 
 
@@ -24,9 +28,28 @@ func _ready() -> void:
 	targ_l2.position = LEG2.global_position - BODY.global_position
 	targ_l3.position = LEG3.global_position - BODY.global_position
 	
+	BODY.add_child(peg_l1)
+	BODY.add_child(peg_l2)
+	BODY.add_child(peg_l3)
+	peg_l1.position = LEG1.global_position - BODY.global_position # Sets offset to that of each leg. TODO: May need tos et this to BODY centre of mass
+	peg_l2.position = LEG2.global_position - BODY.global_position
+	peg_l3.position = LEG3.global_position - BODY.global_position
+	
+	
 	LEG1.PHYSLERP.TARGET = targ_l1
 	LEG2.PHYSLERP.TARGET = targ_l2
 	LEG3.PHYSLERP.TARGET = targ_l3
+	LEG1.PHYSLERP.RIGIDBODY_PEG = peg_l1
+	LEG2.PHYSLERP.RIGIDBODY_PEG = peg_l2
+	LEG3.PHYSLERP.RIGIDBODY_PEG = peg_l3
+	
+	LEG1.ORIGIN = peg_l1
+	LEG2.ORIGIN = peg_l2
+	LEG3.ORIGIN = peg_l3
+	
+	LEG1.TARGET = targ_l1;
+	LEG2.TARGET = targ_l2
+	LEG3.TARGET = targ_l3
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,15 +61,19 @@ func _physics_process(delta: float) -> void:
 	#TARG.global_position = get_centre_of_stable_area() + Vector3.UP * GOAL_HEIGHT
 	
 	consider_for_forces(LEG1, delta)
-	consider_for_forces(LEG2, delta)
-	consider_for_forces(LEG3, delta)
+	#consider_for_forces(LEG2, delta)
+	#consider_for_forces(LEG3, delta)
 
 
 func consider_for_forces(leg:LegBotLeg, delta:float):
-	if(leg.is_on_floor()):
-		leg.attempt_apply_force(leg.PHYSLERP.calculate_forces(delta))
-	else:
-		leg.attempt_apply_force(Vector3.ZERO)
+	var forces = leg.PHYSLERP.apply_forces(delta)
+	print(forces)
+	
+	#leg.update_leg()
+	#if(leg.is_on_floor()):
+	#	leg.attempt_apply_force(leg.PHYSLERP.calculate_forces(delta))
+	#else:
+#		leg.attempt_apply_force(Vector3.ZERO)
 
 func get_centre_of_stable_area() -> Vector3:
 	var average_position:Vector3 = Vector3.ZERO;# = (LEG1.target + LEG2.target + LEG3.target)/3.0

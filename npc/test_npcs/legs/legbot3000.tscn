@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://kfamnabyuul1"]
 
 [ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="1_lc2cb"]
-[ext_resource type="Script" uid="uid://ckvu0ffvy377x" path="res://npc/test_npcs/legs/legbot_3000.gd" id="1_yr67n"]
+[ext_resource type="Script" uid="uid://b5ipcbyyx3hkv" path="res://npc/test_npcs/legs/legbot_3001.gd" id="1_yr67n"]
 [ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/test_npcs/legs/legbotleg.tscn" id="2_iv3ci"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_iv3ci"]
@@ -23,17 +23,18 @@ top_radius = 0.2
 bottom_radius = 0.2
 height = 0.5
 
-[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "LEG1", "LEG2", "LEG3", "TARG")]
+[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "LEG1", "LEG2", "LEG3", "TARGET")]
 script = ExtResource("1_yr67n")
 BODY = NodePath("Body")
 LEG1 = NodePath("Legbotleg1")
 LEG2 = NodePath("Legbotleg2")
 LEG3 = NodePath("Legbotleg3")
-TARG = NodePath("Target")
+TARGET = NodePath("Target")
 
 [node name="Body" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99483, 0)
 collision_layer = 64
+mass = 4.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
 mesh = SubResource("CylinderMesh_iv3ci")
@@ -44,6 +45,25 @@ shape = SubResource("CylinderShape3D_yr67n")
 [node name="Visual_Camera" parent="Body" instance=ExtResource("1_lc2cb")]
 process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0168856, 0.0808798, -0.154391)
+
+[node name="Angle_Helper" type="Generic6DOFJoint3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.99483, 0)
+node_a = NodePath("..")
+linear_limit_x/enabled = false
+linear_limit_y/enabled = false
+linear_limit_z/enabled = false
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+angular_spring_x/enabled = true
+angular_spring_x/stiffness = 8.0
+angular_spring_x/damping = 2.0
+angular_spring_y/enabled = true
+angular_spring_y/stiffness = 8.0
+angular_spring_y/damping = 2.0
+angular_spring_z/enabled = true
+angular_spring_z/stiffness = 8.0
+angular_spring_z/damping = 2.0
 
 [node name="Legbotleg1" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
 transform = Transform3D(-1, 0, -8.74228e-08, -3.55271e-15, 1, 0, 8.74228e-08, 0, -1, 0, 1.99483, 0.229486)
@@ -59,7 +79,7 @@ transform = Transform3D(0.573576, -5.167e-10, -0.819152, 0, 1, -1.49012e-08, 0.8
 BODY = NodePath("../Body")
 
 [node name="Target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, -2.72857)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Target"]
 mesh = SubResource("CylinderMesh_62c5f")

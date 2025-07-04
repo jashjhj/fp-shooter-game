@@ -2,7 +2,8 @@ class_name Physics_Lerper extends Node
 
 @export var RIGIDBODY:RigidBody3D;
 ##Optional: This must be a child of RIGIDBODY. It acts as the source of the force & relevant calculations.      
-##|      I recommend that if using this as the only source of forces on an object, enable angular damping on RIGIDBODY.
+##|      I recommend that if using this as the only source of forces on an object, and no PEG is set, enable angular damping on RIGIDBODY.
+##|      Contains issues with predicting and cancelling angular momentum.
 @export var RIGIDBODY_PEG:Node3D;
 @export var enabled:bool = true;
 @export var TARGET:Node3D;
@@ -11,7 +12,7 @@ class_name Physics_Lerper extends Node
 @export var FORCE:float = 7.0;
 ##Backup force to un-counter forces (e.g. Gravity)
 @export var RESERVE_FORCE:float = 20;
-##Value for how much the object should bounce
+##Value for how much the object should bounce, like a spring, damped to the end. Bigger is more bouncy
 @export var BOUNCINESS:float = 1.0;
 ##If (this) close, consider it there.
 @export var SLOP:float = 0.01;
@@ -28,14 +29,30 @@ var corrective_force:Vector3;
 
 var last_force:Vector3;
 var last_velocity:Vector3;
-func apply_forces(delta:float) -> void:
+func apply_forces(delta:float) -> Vector3:
 	var force = calculate_forces(delta);
 	
 	if(RIGIDBODY_PEG != null):
 		RIGIDBODY.apply_force(force, RIGIDBODY_PEG.global_position - RIGIDBODY.global_position)
 	else:
 		RIGIDBODY.apply_central_force(force)
+	
+	return force
 
+
+
+##Pos is global
+func calculate_forces_from_pos(delta:float, pos:Vector3) -> Vector3:
+	#Creates new target temporarily at position in order to calculate from there.
+	
+	var old_targ = TARGET.duplicate()
+	TARGET = Node3D.new()
+	TARGET.global_position = pos
+	
+	var result = calculate_forces(delta)
+	
+	TARGET = old_targ
+	return result
 
 ##Should be called once per physics process, to calculate the forces. TODO: Add option to shortcut through function when ZERO to reset, maybe if delta == 0?
 func calculate_forces(delta:float) -> Vector3:
