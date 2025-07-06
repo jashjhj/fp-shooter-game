@@ -14,6 +14,7 @@ signal on_hit
 signal on_hp_becomes_negative
 
 var last_impulse:Vector3 = Vector3.ZERO
+##Global Delta
 var last_impulse_pos:Vector3 = Vector3.ZERO
 
 func _hit(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 = Vector3.ZERO) -> void:
@@ -27,7 +28,9 @@ func _hit(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 = Ve
 		if(is_hp_positive and HP < 0): # check positivity
 			is_hp_positive = false
 			on_hp_becomes_negative.emit()
-		
+	
+	
+	on_hit.emit()
 	hit(damage)
 
 func hit(damage:float) -> void:

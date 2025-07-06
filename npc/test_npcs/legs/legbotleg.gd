@@ -3,19 +3,18 @@ class_name LegBotLeg extends Node3D
 #Rigidbody sibling to attach to - Must be set at runtime by parent.
 @export var BODY:RigidBody3D;
 
-@export var HIP:Generic6DOFJoint3D;
-@export var KNEE:Generic6DOFJoint3D;
-@export var UPPER:RigidBody3D;
-@export var LOWER:RigidBody3D;
+@export var UPPER:Node3D;
+@export var LOWER:Node3D;
 @export var UPPER_LENGTH:float = 1.0;
 @export var LOWER_LENGTH:float = 1.0;
 
 @export var FOOT:RigidBody3D;
-@export var ORIGIN:Node3D;
+
+@export var LOWER_HIT:Hit_Component;
+@export var UPPER_HIT:Hit_Component;
 
 @onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
-@onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
-@onready var DOWN_RAY:RayCast3D = RayCast3D.new()
+#@onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 
 @export var logging:bool = false;
 
@@ -26,6 +25,10 @@ var contact_point:Vector3;
 var is_physical:bool = true:
 	set(value):
 		is_physical = value;
+		if(is_physical):
+			FOOT.freeze = false;
+		else:
+			FOOT.freeze = true
 
 @export var TARGET:Node3D;
 
@@ -48,50 +51,72 @@ func _ready() -> void:
 	IKCALC.ELBOW_IN = true
 	
 	
-	DOWN_RAY.target_position = Vector3(0, -2.5, 0)
+	#DOWN_RAY.target_position = Vector3(0, -2.5, 0)
 	
 	await get_parent().ready
 	
-	if(BODY != null):
-		HIP.node_a = BODY.get_path()
+	FOOT.top_level = true
+	UPPER_HIT.on_hit.connect(upper_hit)
+	LOWER_HIT.on_hit.connect(lower_hit)
 	
-	PHYSLERP.RIGIDBODY = BODY
-	PHYSLERP.FORCE = 10;
-	PHYSLERP.RESERVE_FORCE = 0
-	#PHYSLERP.RIGIDBODY_PEG = ORIGIN
+
+
+#IMPLUSE REDISTRIBUTION
+func upper_hit():
+	var pos = UPPER_HIT.last_impulse_pos
+	var along = pos.dot(-UPPER.global_basis.z) / UPPER_LENGTH
+	along = min(1.0, max(0.0, along))
+	#Along is in the range 0 @ hip -> 1 at knee
+	along -= 1.0;
+	distribute_impulse(UPPER_HIT.last_impulse, along)
+
+func lower_hit():
+	var pos = LOWER_HIT.last_impulse_pos
+	var along = pos.dot(-LOWER.global_basis.z) / LOWER_LENGTH
+	along = min(1.0, max(0.0, along))
+	#Along is in the range 0 @ knee -> 1 at toes
+	distribute_impulse(LOWER_HIT.last_impulse, along)
+
+##Along is a measure of hwo far along the impulse is: -1:Hip, 0:Knee, 1:Toes
+func distribute_impulse(impulse:Vector3, along:float):
+	#Lines: Vert is through foot to hip, Forward is into the crux of the knee, (ie. would buckle it), perpendicular is the axis by which the knee rotates
+	var vert:Vector3 = (global_position - FOOT.global_position).normalized()
+	var perpendicular:Vector3 = LOWER.global_basis.x
+	var forwards:Vector3 = UPPER.global_basis.y.slerp(LOWER.global_basis.y, 0.5) # Middle angle is into crux of knee
+	
+	var cmp_vert:Vector3 = impulse.dot(vert) * vert
+	var cmp_forward:Vector3 = impulse.dot(forwards) * forwards
+	var cmp_perp:Vector3 = impulse.dot(perpendicular) * perpendicular
+	
+	##Resultant forces
+	var resultant_top:Vector3 = Vector3.ZERO
+	var resultant_bottom:Vector3 = Vector3.ZERO
+	
+	#PERPENDICULAR
+	var proportion_top:float = 1.0 - (along + 1.0) / 2.0
+	print(proportion_top)
+	
+	resultant_top += cmp_perp * proportion_top
+	resultant_bottom += cmp_perp * (1-proportion_top)
+	
+	#VERTICAL
+	resultant_top += cmp_vert * proportion_top
+	resultant_bottom += cmp_vert * (1-proportion_top)
+	
+	#Forwards
+	resultant_top += cmp_forward * proportion_top
+	resultant_bottom += cmp_forward * (1-proportion_top)
+	
+	var distance_to_knee = (1-abs(along));
+	resultant_top += cmp_forward.length() * -vert * distance_to_knee * 3 # Push it down too
 	
 	
-	set_stable(true)
-
-
-func set_stable(value:bool) -> void:
-	is_stable = value
+	#APPLY
+	BODY.apply_impulse(resultant_top, global_position - BODY.global_position)
+	FOOT.apply_impulse(resultant_bottom)
 	
-	if(is_stable):
-		HIP.process_mode = Node.PROCESS_MODE_DISABLED
-		KNEE.process_mode = Node.PROCESS_MODE_DISABLED
-		
-		HIP.free()
-		
-		UPPER.freeze = true
-		LOWER.freeze = true
-		FOOT.freeze = true
-	
-	else:#Unstable
-		UPPER.freeze = false
-		LOWER.freeze = false
-		FOOT.freeze = false
 
 
-
-
-
-
-#func set_new_target(new_target:Node3D):
-	#is_stable = false;
-	#
-	#
-	#TARGET = new_target
 
 
 func is_on_floor() -> bool:
@@ -105,90 +130,29 @@ func is_on_floor() -> bool:
 
 func update_leg() -> void:
 	
-	var global_target_delta:Vector3 = TARGET.global_position - ORIGIN.global_position
-	var local_target_delta:Vector3 = ORIGIN.global_basis.inverse()*global_target_delta
+	var global_target_delta:Vector3 = FOOT.global_position - global_position
+	var local_target_delta:Vector3 = global_basis.inverse()*global_target_delta
 	
 	#if(!is_stable): return
-	if(logging): print(global_target_delta)
+	
 	var ik = IKCALC.calculate_IK_nodes(local_target_delta, Vector3.DOWN)
 	UPPER.transform = ik.upper.transform
 	LOWER.transform = ik.lower.transform
-	FOOT.transform = ik.end.transform
+	#FOOT.transform = ik.end.transform
 
 
 
 
-#
-###Force in global space. Will bend/extend etc to attempt to apply such a force.
-###This should be set every frame and set to ZERO when unused, else remains constant force.
-#func attempt_apply_force(force:Vector3):
-	#var loc_force:Vector3 = force * ORIGIN.global_basis.inverse();
-	#
-	#if((loc_force * Vector3(0, 1, 1)).is_zero_approx()): # If its zero, cancel and move on
-		#KNEE.set("angular_motor_x/enabled", true);
-		#KNEE.set("angular_motor_x/target_velocity", 0);
-		#HIP.set("angular_motor_x/enabled", true);
-		#HIP.set("angular_motor_x/target_velocity", 0);
-		#
-	#else:
-		##Find directions of travel
-		#
-		##var ik_considered_delta = (ORIGIN.to_local(FOOT.global_position) - loc_force.normalized() * 0.01) * Vector3(0, 1, 1); # Omit X as this can only be fixed via hip yaw. Quantized to small amounts for simple delta-angles as per calculations
-		##var angles = IKCALC.get_angles(ik_considered_delta, Vector3.DOWN)
-		#
-		###From downwards
-		#var angle_hip = UPPER.rotation.x
-		###From Downwards
-		#var angle_knee = PI/2 + UPPER.rotation.x - LOWER.rotation.x# - angle_hip;
-		#
-		##var ik_delta_angle_hip = angles.hippitch - angle_hip;
-		##var ik_delta_angle_knee = angles.knee - angle_knee;
-		#
-		#
-		#
-		##var hip_to_knee_moment_ratio:float = ik_delta_angle_hip/ik_delta_angle_knee;
-		#
-		#
-		###Calculate Force limit(in Nm) per each joint knee, hip
-		#
-		##TODO knee moment is fucked oup. gets very large.
-		#
-		#var moment_hip = ((loc_force.y - tan(angle_knee)*loc_force.z) *UPPER_LENGTH) / (sin(angle_hip) - tan(angle_knee)*cos(angle_hip))
-		#var moment_knee = (loc_force.y - (moment_hip/UPPER_LENGTH)*cos(angle_hip)) * LOWER_LENGTH/cos(angle_knee)
-		#
-		##Old
-		##var moment_knee = (loc_force.z + loc_force.y) / (sin(angle_hip)*cos(angle_knee)/sin(angle_knee) + cos(angle_hip))
-		##var moment_hip = (loc_force.z - moment_knee*cos(angle_hip)) / cos(angle_knee)
-		##moment_hip *= IKCALC.UPPER_LENGTH;
-		##moment_knee *= IKCALC.LOWER_LENGTH;
-		#
-		#KNEE.set("angular_motor_x/enabled", true);
-		#KNEE.set("angular_motor_x/target_velocity", sign(moment_knee)*10); # Previosuly these were sign(ik_delta_angle) with no magnitude
-		#KNEE.set("angular_motor_x/force_limit", min(100, abs(moment_knee)))
-		#
-		#HIP.set("angular_motor_x/enabled", true);
-		#HIP.set("angular_motor_x/target_velocity", sign(moment_hip)*10);
-		#HIP.set("angular_motor_x/force_limit", min(100, abs(moment_hip)))
-		#
-		#
-		#HIP.set("angular_motor_y/enabled", false);
-		#HIP.set("angular_motor_y/target_velocity", -sign(loc_force.y) * 0.4)
-		#var moment_hip_yaw:float = abs(loc_force.y) * PHYSLERP.TARGET.global_position.distance_to(BODY.to_global(BODY.center_of_mass))
-		#HIP.set("angular_motor_y/force_limit", moment_hip_yaw)
-		#
-		#
-		#
-		#if(logging):
-			#print(KNEE.get("angular_motor_x/force_limit"))
-			#
-			##Line to target
-			#DebugDraw3D.draw_line(ORIGIN.global_position, PHYSLERP.TARGET.global_position)
-		#
-	#pass
-#
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass#position += Vector3.UP # Temp, tot take out of picture
-#
-##func get_new_target():
-	##target_position = 
+	
+	if(is_physical):
+		if(is_on_floor()):
+			is_physical = false;
+	
+	else: # False
+		
+		pass
+	
+	update_leg()
+	

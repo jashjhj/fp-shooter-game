@@ -26,15 +26,28 @@ height = 0.5
 [node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "LEG1", "LEG2", "LEG3", "TARGET")]
 script = ExtResource("1_yr67n")
 BODY = NodePath("Body")
-LEG1 = NodePath("Legbotleg1")
-LEG2 = NodePath("Legbotleg2")
-LEG3 = NodePath("Legbotleg3")
+LEG1 = NodePath("Body/Legbotleg1")
+LEG2 = NodePath("Body/Legbotleg2")
+LEG3 = NodePath("Body/Legbotleg3")
 TARGET = NodePath("Target")
 
 [node name="Body" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99483, 0)
 collision_layer = 64
 mass = 4.0
+
+[node name="Legbotleg1" parent="Body" node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+transform = Transform3D(-1, 0, -8.74228e-08, -3.55271e-15, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.229486)
+BODY = NodePath("..")
+logging = true
+
+[node name="Legbotleg2" parent="Body" node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+transform = Transform3D(0.573576, 5.167e-10, 0.819152, 0, 1, -1.49012e-08, -0.819152, 0, 0.573576, -0.173183, 0, -0.143536)
+BODY = NodePath("..")
+
+[node name="Legbotleg3" parent="Body" node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+transform = Transform3D(0.573576, -5.167e-10, -0.819152, 0, 1, -1.49012e-08, 0.819152, 0, 0.573576, 0.18834, 0, -0.151752)
+BODY = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
 mesh = SubResource("CylinderMesh_iv3ci")
@@ -65,21 +78,8 @@ angular_spring_z/enabled = true
 angular_spring_z/stiffness = 8.0
 angular_spring_z/damping = 2.0
 
-[node name="Legbotleg1" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
-transform = Transform3D(-1, 0, -8.74228e-08, -3.55271e-15, 1, 0, 8.74228e-08, 0, -1, 0, 1.99483, 0.229486)
-BODY = NodePath("../Body")
-logging = true
-
-[node name="Legbotleg2" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
-transform = Transform3D(0.573576, 5.167e-10, 0.819152, 0, 1, -1.49012e-08, -0.819152, 0, 0.573576, -0.173183, 1.99483, -0.143536)
-BODY = NodePath("../Body")
-
-[node name="Legbotleg3" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
-transform = Transform3D(0.573576, -5.167e-10, -0.819152, 0, 1, -1.49012e-08, 0.819152, 0, 0.573576, 0.18834, 1.99483, -0.151752)
-BODY = NodePath("../Body")
-
 [node name="Target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, -2.72857)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, 0.0339408)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Target"]
 mesh = SubResource("CylinderMesh_62c5f")
