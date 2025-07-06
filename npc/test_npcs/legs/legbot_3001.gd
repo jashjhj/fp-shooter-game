@@ -39,7 +39,17 @@ func _physics_process(delta: float) -> void:
 	PHYSLERP.RESERVE_FORCE = 16 * stable_legs
 	
 	PHYSLERP.apply_forces(delta)
+	
 
+
+func _process(delta: float) -> void:
+	
+	call_deferred("update_legs")
+
+func update_legs():
+	LEG1.update_leg()
+	LEG2.update_leg()
+	LEG3.update_leg()
 
 
 func calculate_stable_area() -> Array[Vector3]:

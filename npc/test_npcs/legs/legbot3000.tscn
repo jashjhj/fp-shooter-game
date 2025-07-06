@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://kfamnabyuul1"]
+[gd_scene load_steps=9 format=3 uid="uid://kfamnabyuul1"]
 
 [ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="1_lc2cb"]
 [ext_resource type="Script" uid="uid://b5ipcbyyx3hkv" path="res://npc/test_npcs/legs/legbot_3001.gd" id="1_yr67n"]
 [ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/test_npcs/legs/legbotleg.tscn" id="2_iv3ci"]
+[ext_resource type="Script" uid="uid://dnpmmrwqk78q4" path="res://false_physics/physics_lerper/angle_helper.gd" id="4_62c5f"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_iv3ci"]
 top_radius = 0.25
@@ -77,6 +78,9 @@ angular_spring_y/damping = 2.0
 angular_spring_z/enabled = true
 angular_spring_z/stiffness = 8.0
 angular_spring_z/damping = 2.0
+script = ExtResource("4_62c5f")
+STIFFNESS = 5.0
+DAMPING = 1.0
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, 0.0339408)

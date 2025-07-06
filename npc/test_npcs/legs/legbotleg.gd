@@ -94,7 +94,6 @@ func distribute_impulse(impulse:Vector3, along:float):
 	
 	#PERPENDICULAR
 	var proportion_top:float = 1.0 - (along + 1.0) / 2.0
-	print(proportion_top)
 	
 	resultant_top += cmp_perp * proportion_top
 	resultant_bottom += cmp_perp * (1-proportion_top)
@@ -154,5 +153,6 @@ func _process(delta: float) -> void:
 		
 		pass
 	
-	update_leg()
+	#Update elg should be called by parent Body to update corrcetly.
+	#update_leg()
 	
