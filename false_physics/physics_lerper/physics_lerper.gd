@@ -39,6 +39,16 @@ func apply_forces(delta:float) -> Vector3:
 	
 	return force
 
+##Pos is global
+func apply_forces_from_pos(delta:float, pos:Vector3) -> Vector3:
+	var force = calculate_forces_from_pos(delta, pos);
+	
+	if(RIGIDBODY_PEG != null):
+		RIGIDBODY.apply_force(force, RIGIDBODY_PEG.global_position - RIGIDBODY.global_position)
+	else:
+		RIGIDBODY.apply_central_force(force)
+	
+	return force
 
 
 ##Pos is global
