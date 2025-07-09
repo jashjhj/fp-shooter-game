@@ -9,6 +9,7 @@ class_name LegBotLeg extends Node3D
 @export var LOWER_LENGTH:float = 1.0;
 
 @export var FOOT:RigidBody3D;
+@export var FOOT_PHYSLERP:Physics_Lerper;
 
 @export var LOWER_HIT:Hit_Component;
 @export var UPPER_HIT:Hit_Component;
@@ -19,16 +20,19 @@ class_name LegBotLeg extends Node3D
 @export var logging:bool = false;
 
 ##Denotes as to whether it is being fully-physically-simulated or locked and stable.
-var is_stable:bool = true;
-var contact_point:Vector3;
+
 
 var is_physical:bool = true:
 	set(value):
 		is_physical = value;
 		if(is_physical):
 			FOOT.freeze = false;
+			FOOT_PHYSLERP.enabled = true;
 		else:
 			FOOT.freeze = true
+			FOOT_PHYSLERP.enabled = false;
+
+var is_stable:bool = false;
 
 @export var TARGET:Node3D;
 
@@ -58,10 +62,14 @@ func _ready() -> void:
 	FOOT.top_level = true
 	UPPER_HIT.on_hit.connect(upper_hit)
 	LOWER_HIT.on_hit.connect(lower_hit)
+	UPPER_HIT.on_hit.connect(generic_hit)
+	LOWER_HIT.on_hit.connect(generic_hit)
 	
+	TARGET.reparent(BODY)
+	TARGET.top_level = true
 
 
-#IMPLUSE REDISTRIBUTION
+#------------ IMPLUSE REDISTRIBUTION -------------#
 func upper_hit():
 	var pos = UPPER_HIT.last_impulse_pos
 	var along = pos.dot(-UPPER.global_basis.z) / UPPER_LENGTH
@@ -69,7 +77,6 @@ func upper_hit():
 	#Along is in the range 0 @ hip -> 1 at knee
 	along -= 1.0;
 	distribute_impulse(UPPER_HIT.last_impulse, along)
-
 func lower_hit():
 	var pos = LOWER_HIT.last_impulse_pos
 	var along = pos.dot(-LOWER.global_basis.z) / LOWER_LENGTH
@@ -108,13 +115,17 @@ func distribute_impulse(impulse:Vector3, along:float):
 	
 	var distance_to_knee = (1-abs(along));
 	resultant_top += cmp_forward.length() * -vert * distance_to_knee * 3 # Push it down too
-	
+	resultant_bottom -= cmp_forward.length() * -vert * distance_to_knee  # Push it up because impulse, can cause leg to jolt interestingly
 	
 	#APPLY
 	BODY.apply_impulse(resultant_top, global_position - BODY.global_position)
 	FOOT.apply_impulse(resultant_bottom)
 	
 
+
+##Called upon any hit
+func generic_hit():
+	is_physical = true
 
 
 
@@ -145,14 +156,29 @@ func update_leg() -> void:
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	update_leg()
+
+
+func _physics_process(delta: float) -> void:
+	
 	if(is_physical):
-		if(is_on_floor()):
-			is_physical = false;
-	
-	else: # False
 		
-		pass
+		is_stable = is_on_floor()
+		
+		if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is stable
+			#print("landed")
+			#is_physical = false;
+			pass
+		else:# Physical, flailing
+			var foot_forces:Vector3 = FOOT_PHYSLERP.apply_forces(delta)
+			#BODY.apply_force(-foot_forces, global_position - BODY.global_position);
 	
-	#Update elg should be called by parent Body to update corrcetly.
-	#update_leg()
+	#if(!is_on_floor()):print("n")
+	
+	
+	
+	var foot_vector = FOOT.global_position - global_position
+	if(foot_vector.length() > UPPER_LENGTH + LOWER_LENGTH): # If foot trying to escape
+		FOOT.global_position = global_position + foot_vector.normalized() * (UPPER_LENGTH + LOWER_LENGTH)
+		FOOT.linear_velocity += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + 0.4);
 	

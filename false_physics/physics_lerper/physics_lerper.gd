@@ -78,6 +78,7 @@ func calculate_forces(delta:float) -> Vector3:
 	
 	if(RIGIDBODY_PEG != null): # Calculates Velocities/Positions
 		#Velocity is local to the point on the rigidbody.  ----------- This is magic that calculates local linear vlocity of a spinning object ----------
+		#However, there is no suitable PID calculation to actually compnsate for this. So, best elft undone :(.
 		velocity = RIGIDBODY.linear_velocity# + RIGIDBODY.angular_velocity.cross(RIGIDBODY_PEG.global_position - RIGIDBODY.global_position)
 		pos = RIGIDBODY_PEG.global_position
 	else:

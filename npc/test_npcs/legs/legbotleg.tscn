@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://wj3o5lh1ipji"]
+[gd_scene load_steps=16 format=3 uid="uid://wj3o5lh1ipji"]
 
 [ext_resource type="Script" uid="uid://bbqoq87idvyqs" path="res://npc/test_npcs/legs/legbotleg.gd" id="1_gcapg"]
 [ext_resource type="Script" uid="uid://dmphd0qjx5qki" path="res://npc/component_scripts/IK_Leg_Abstract.gd" id="2_c5mru"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="2_qsgas"]
 [ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="3_jrlnb"]
+[ext_resource type="Script" uid="uid://btawb6tqvuf8s" path="res://false_physics/physics_lerper/physics_lerper.gd" id="5_se5qo"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5mru"]
 top_radius = 0.05
@@ -27,7 +28,6 @@ height = 1.0
 radius = 0.04
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qsgas"]
-friction = 0.0
 rough = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jrlnb"]
@@ -37,11 +37,25 @@ radius = 0.06
 radius = 0.05
 height = 0.1
 
-[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT", "LOWER_HIT", "UPPER_HIT", "TARGET")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_se5qo"]
+transparency = 1
+albedo_color = Color(1, 0.5, 0.5, 0.443137)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_shbhd"]
+material = SubResource("StandardMaterial3D_se5qo")
+top_radius = 0.0
+bottom_radius = 0.3
+height = 0.1
+radial_segments = 6
+rings = 0
+cap_top = false
+
+[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT", "FOOT_PHYSLERP", "LOWER_HIT", "UPPER_HIT", "TARGET")]
 script = ExtResource("1_gcapg")
 UPPER = NodePath("Upper")
 LOWER = NodePath("Lower")
 FOOT = NodePath("Foot")
+FOOT_PHYSLERP = NodePath("Foot_Physlerp")
 LOWER_HIT = NodePath("Lower/Lower_Hit_Component")
 UPPER_HIT = NodePath("Upper/Upper_Hit_Component")
 TARGET = NodePath("Target")
@@ -124,4 +138,14 @@ metadata/_custom_type_script = "uid://dmphd0qjx5qki"
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.68257, 0)
-top_level = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target"]
+mesh = SubResource("CylinderMesh_shbhd")
+
+[node name="Foot_Physlerp" type="Node" parent="." node_paths=PackedStringArray("RIGIDBODY", "TARGET")]
+script = ExtResource("5_se5qo")
+RIGIDBODY = NodePath("../Foot")
+TARGET = NodePath("../Target")
+FORCE = 12.0
+RESERVE_FORCE = 0.0
+metadata/_custom_type_script = "uid://btawb6tqvuf8s"

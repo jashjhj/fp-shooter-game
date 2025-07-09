@@ -24,13 +24,14 @@ top_radius = 0.2
 bottom_radius = 0.2
 height = 0.5
 
-[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "LEG1", "LEG2", "LEG3", "TARGET")]
+[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "LEG1", "LEG2", "LEG3", "TARGET", "DOWN_RAY")]
 script = ExtResource("1_yr67n")
 BODY = NodePath("Body")
 LEG1 = NodePath("Body/Legbotleg1")
 LEG2 = NodePath("Body/Legbotleg2")
 LEG3 = NodePath("Body/Legbotleg3")
 TARGET = NodePath("Target")
+DOWN_RAY = NodePath("Body/DownRay")
 
 [node name="Body" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99483, 0)
@@ -81,6 +82,12 @@ angular_spring_z/damping = 2.0
 script = ExtResource("4_62c5f")
 STIFFNESS = 5.0
 DAMPING = 1.0
+
+[node name="DownRay" type="RayCast3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00516999, 0)
+target_position = Vector3(0, -5, 0)
+hit_from_inside = true
+collide_with_areas = true
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, 0.0339408)
