@@ -43,13 +43,13 @@ func _physics_process(delta: float) -> void:
 	
 	PHYSLERP.apply_forces(delta)
 	
-	if (Time.get_ticks_msec() % 1000 < 2000):
+	if (Time.get_ticks_msec() < 2000):
 		
 		set_leg_target(LEG1)
 		set_leg_target(LEG2)
 		set_leg_target(LEG3)
 	
-	#apply_offbalance_force()
+	apply_offbalance_force()
 	
 	Debug.point(BODY.global_position +  get_centre_of_stable_area(calculate_stable_area()));
 	first = false
@@ -116,19 +116,19 @@ func get_centre_of_stable_area(arr:Array[Vector3]) -> Vector3:
 
 
 
-##S = start of line, D = delta. Considers X,Z. returns component lambda of 1 as x and 2 as y.
+##S = start of line, D = delta. Considers X,Z. returns component lambda of 1 as x and 2 as y. |     Simple mathematical solver.
 func get_intersection_components(s1:Vector3, s2:Vector3, d1:Vector3, d2:Vector3) -> Vector2:
 	var a = s1.x
-	var b = s1.y
+	var b = s1.z
 	var x = d1.x
-	var y = d1.y
+	var y = d1.z
 	
 	var d = s2.x
-	var e = s2.y
+	var e = s2.z
 	var u = d2.x
-	var v = d2.y
+	var v = d2.z
 	
-	var lambda = (e-b + (v/u)*(a+d)) / (y - x*v/u) # Solves to find collision
+	var lambda = (e-b + (v/u)*(a-d)) / (y - x*v/u) # Solves to find collision
 	var mu = (lambda*y + b - e)/v
 	
 	return Vector2(lambda, mu)
@@ -147,28 +147,57 @@ func apply_offbalance_force():
 		pivot_point = stable_area[0]
 	else: # TODO redo this function
 		var likeliest_pair:Array[int] = [-1, -1];
-		var likeliest_pair_lambda:float = -INF;
+		var likeliest_piv_pos:Vector3 = Vector3.ZERO;
 		
-		# Do twice to ensure no missed options for concavity.
-		for check in range(0, 2):
-			# For each pair,
-			for i in range(0, len(stable_area) - 1):
-				for j in range(i+1, len(stable_area)):
+		# For each line - if delta is perpendicular to a line.
+		for i in range(0, len(stable_area) - 1):
+			for j in range(i+1, len(stable_area)):
+				var line_delta = (stable_area[j] - stable_area[i]) * Vector3(1, 1, 1)
+				var line_normal = line_delta.cross(Vector3.UP) # direction not specified. could be in or out
+				
+				var components := get_intersection_components(stable_area[i], BODY.position + BODY.center_of_mass, line_delta, line_normal);
+				
+				
+				if(components.x >= 0.0 and components.x <= 1.0): # lines intersect.
 					
-					var components := get_intersection_components(stable_area[i], stable_centre, stable_area[j] - stable_area[i], com_delta);
-					if(components.y >= 0.0 and components.y <= 1.0): # Its valid
-						
-						var piv_pos = stable_area[i].lerp(stable_area[j], components.x)
-						var com_stable_delta = BODY.center_of_mass - stable_centre
-						if(components.x > likeliest_pair_lambda): # If further out
-							likeliest_pair = [i, j]
-							likeliest_pair_lambda = components.x
-						
+					var piv_pos = stable_area[i].lerp(stable_area[j], components.x)
+					
+					
+					
+					#If pivot pos is further out than COM pos, ie. COM is within the polygon
+					if(((stable_centre - piv_pos)*Vector3(1, 0, 1)).length_squared() > ((stable_centre - (BODY.position + BODY.center_of_mass))*Vector3(1,0,1)).length_squared()):
+						continue # This point can be disregarded.
+					else:
+						#Check case where its on other side, so dot product would be negative indicating they are not on the same side of the stable_centre
+						if(((stable_centre - piv_pos)*Vector3(1, 0, 1)).dot((stable_centre - (BODY.position + BODY.center_of_mass))*Vector3(1,0,1)) < 0):
+							continue
+						likeliest_pair = [i, j]
+						likeliest_piv_pos = piv_pos
 		
-		if(likeliest_pair[0] == -1 or likeliest_pair[1] == -1): # It is within stable area.
+		
+		if(likeliest_pair[0] == -1 or likeliest_pair[1] == -1): # No good line - get nearest point
+
+			var nearest_point:Vector3 = Vector3.INF
+			var nearest_distance_squared:float = INF
+			for i in range(0, len(stable_area)):
+				var point_dist_squared := (stable_area[i] - (BODY.position + BODY.center_of_mass)).length_squared()
+				if(point_dist_squared < nearest_distance_squared): # New point is closer
+					nearest_point = stable_area[i]
+					nearest_distance_squared = point_dist_squared
+			
+			pivot_point = nearest_point
+		else:
+			pivot_point = likeliest_piv_pos # Use previous result from nearest line
+		
+		#Finally - ensure that COM is actually outside of the calculated nearest point on perimeter of polygon
+		
+		if(((pivot_point - stable_centre)*Vector3(1, 0, 1)).length_squared() >= ((BODY.center_of_mass - stable_centre)*Vector3(1,0,1)).length_squared()):
+			# Within shape
+			
 			return
-		print("im unstable hahah")
-		pivot_point = stable_area[likeliest_pair[0]].lerp(stable_area[likeliest_pair[1]], likeliest_pair_lambda)
+		
+		#print("im unstable hahah")
+		Debug.point(pivot_point + BODY.global_position, 1, Color.RED)
 	
 	#We now have pivot_point
 	var com_pivot_delta:Vector3 = BODY.center_of_mass - pivot_point
@@ -176,9 +205,10 @@ func apply_offbalance_force():
 	#Angle between floor and pivot(on floor) to COM
 	var angle = atan(abs(com_pivot_delta.y) / com_pivot_delta_xz.length())
 	var moment_component:float = BODY.mass * ProjectSettings.get_setting("physics/3d/default_gravity") * sin(angle)
-	var moment_direction:Vector3 = (com_pivot_delta_xz.normalized() + Vector3.UP / atan(angle)).normalized() # prommy this works
-	
-	DebugDraw3D.draw_line(BODY.global_position + Vector3.UP, BODY.global_position + Vector3.UP + moment_component * moment_direction / 40)
+	print(angle)
+	var moment_direction:Vector3 = (com_pivot_delta_xz.normalized() - (Vector3.UP / tan(angle))).normalized() # prommy this works
+	print(moment_component)
+	DebugDraw3D.draw_line(BODY.global_position + Vector3.UP, BODY.global_position + Vector3.UP + moment_direction * moment_component / 40)
 	BODY.apply_central_force(moment_component * moment_direction)
 	
 
