@@ -51,7 +51,6 @@ func _physics_process(delta: float) -> void:
 	
 	apply_offbalance_force()
 	
-	Debug.point(BODY.global_position +  get_centre_of_stable_area(calculate_stable_area()));
 	first = false
 
 
@@ -197,7 +196,7 @@ func apply_offbalance_force():
 			return
 		
 		#print("im unstable hahah")
-		Debug.point(pivot_point + BODY.global_position, 1, Color.RED)
+		#Debug.point(pivot_point + BODY.global_position, 1, Color.RED)
 	
 	#We now have pivot_point
 	var com_pivot_delta:Vector3 = BODY.center_of_mass - pivot_point
@@ -205,10 +204,9 @@ func apply_offbalance_force():
 	#Angle between floor and pivot(on floor) to COM
 	var angle = atan(abs(com_pivot_delta.y) / com_pivot_delta_xz.length())
 	var moment_component:float = BODY.mass * ProjectSettings.get_setting("physics/3d/default_gravity") * sin(angle)
-	print(angle)
 	var moment_direction:Vector3 = (com_pivot_delta_xz.normalized() - (Vector3.UP / tan(angle))).normalized() # prommy this works
-	print(moment_component)
-	DebugDraw3D.draw_line(BODY.global_position + Vector3.UP, BODY.global_position + Vector3.UP + moment_direction * moment_component / 40)
+	
+	#DebugDraw3D.draw_line(BODY.global_position + Vector3.UP, BODY.global_position + Vector3.UP + moment_direction * moment_component / 40)
 	BODY.apply_central_force(moment_component * moment_direction)
 	
 

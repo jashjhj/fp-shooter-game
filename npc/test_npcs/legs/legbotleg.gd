@@ -32,6 +32,7 @@ var is_physical:bool = true:
 			FOOT.freeze = true
 			FOOT_PHYSLERP.enabled = false;
 
+
 var is_stable:bool = false;
 
 @export var TARGET:Node3D;
