@@ -145,7 +145,7 @@ func apply_offbalance_force():
 		return
 	elif(len(stable_area) == 1):
 		pivot_point = stable_area[0]
-	else: # TODO redo this function
+	else: # This function to calculate closest poitn can be optimised by only considering the edges connected to clsoest vertex. Will not have to consider 'other side'
 		var likeliest_pair:Array[int] = [-1, -1];
 		var likeliest_piv_pos:Vector3 = Vector3.ZERO;
 		
