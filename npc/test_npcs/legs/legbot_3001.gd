@@ -38,12 +38,15 @@ func _physics_process(delta: float) -> void:
 	var stable_area := calculate_stable_area()
 	var stable_legs := len(stable_area)
 	
+	
+	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * 1.5
+	
 	PHYSLERP.FORCE = 8 * stable_legs
 	PHYSLERP.RESERVE_FORCE = 16 * stable_legs
 	
 	PHYSLERP.apply_forces(delta)
 	
-	if (Time.get_ticks_msec() < 2000):
+	if (Time.get_ticks_msec() < 2000 or true):
 		
 		set_leg_target(LEG1)
 		set_leg_target(LEG2)
@@ -73,7 +76,8 @@ func calculate_leg_target(leg:LegBotLeg) -> Vector3:
 	#leg_delta *= global_basis.inverse()
 	var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
 	
-	var leg_prospective_xz = leg_delta_xz*1 + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1) # Calculates prospective pos. Needs work
+	#1.5 is a measure of Splay. Should eb standardised.
+	var leg_prospective_xz = leg_delta_xz*1.5 + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1) # Calculates prospective pos. Needs work
 	
 	DOWN_RAY.position = leg_prospective_xz
 	DOWN_RAY.force_raycast_update()
@@ -87,17 +91,17 @@ func calculate_leg_target(leg:LegBotLeg) -> Vector3:
 	
 	return Vector3.ZERO
 
-##Stable area is in a global delta from body
+##Stable area is as a global
 func calculate_stable_area() -> Array[Vector3]:
 	
 	var out:Array[Vector3] = [];
 	
 	if(LEG1.is_stable):
-		out.append(LEG1.FOOT.global_position - BODY.global_position)
+		out.append(LEG1.FOOT.global_position)
 	if(LEG2.is_stable):
-		out.append(LEG2.FOOT.global_position - BODY.global_position)
+		out.append(LEG2.FOOT.global_position)
 	if(LEG3.is_stable):
-		out.append(LEG3.FOOT.global_position - BODY.global_position)
+		out.append(LEG3.FOOT.global_position)
 	
 	return out
 
@@ -112,6 +116,8 @@ func get_centre_of_stable_area(arr:Array[Vector3]) -> Vector3:
 	
 	#Completely unstable
 	return Vector3.ZERO
+
+
 
 
 
@@ -136,6 +142,7 @@ func apply_offbalance_force():
 	var stable_area := calculate_stable_area()
 	
 	var stable_centre := get_centre_of_stable_area(stable_area)
+	var com_global:Vector3 = BODY.global_position + BODY.global_basis * BODY.center_of_mass
 	var com_delta = BODY.center_of_mass - stable_centre
 	
 	#Calculate closest point of the stable area
@@ -154,7 +161,7 @@ func apply_offbalance_force():
 				var line_delta = (stable_area[j] - stable_area[i]) * Vector3(1, 1, 1)
 				var line_normal = line_delta.cross(Vector3.UP) # direction not specified. could be in or out
 				
-				var components := get_intersection_components(stable_area[i], BODY.position + BODY.center_of_mass, line_delta, line_normal);
+				var components := get_intersection_components(stable_area[i], com_global, line_delta, line_normal);
 				
 				
 				if(components.x >= 0.0 and components.x <= 1.0): # lines intersect.
@@ -164,11 +171,11 @@ func apply_offbalance_force():
 					
 					
 					#If pivot pos is further out than COM pos, ie. COM is within the polygon
-					if(((stable_centre - piv_pos)*Vector3(1, 0, 1)).length_squared() > ((stable_centre - (BODY.position + BODY.center_of_mass))*Vector3(1,0,1)).length_squared()):
+					if(((stable_centre - piv_pos)*Vector3(1, 0, 1)).length_squared() > ((stable_centre - (com_global))*Vector3(1,0,1)).length_squared()):
 						continue # This point can be disregarded.
 					else:
 						#Check case where its on other side, so dot product would be negative indicating they are not on the same side of the stable_centre
-						if(((stable_centre - piv_pos)*Vector3(1, 0, 1)).dot((stable_centre - (BODY.position + BODY.center_of_mass))*Vector3(1,0,1)) < 0):
+						if(((stable_centre - piv_pos)*Vector3(1, 0, 1)).dot((stable_centre - (com_global))*Vector3(1,0,1)) < 0):
 							continue
 						likeliest_pair = [i, j]
 						likeliest_piv_pos = piv_pos
@@ -179,7 +186,7 @@ func apply_offbalance_force():
 			var nearest_point:Vector3 = Vector3.INF
 			var nearest_distance_squared:float = INF
 			for i in range(0, len(stable_area)):
-				var point_dist_squared := (stable_area[i] - (BODY.position + BODY.center_of_mass)).length_squared()
+				var point_dist_squared := (stable_area[i] - (com_global)).length_squared()
 				if(point_dist_squared < nearest_distance_squared): # New point is closer
 					nearest_point = stable_area[i]
 					nearest_distance_squared = point_dist_squared
@@ -190,7 +197,7 @@ func apply_offbalance_force():
 		
 		#Finally - ensure that COM is actually outside of the calculated nearest point on perimeter of polygon
 		
-		if(((pivot_point - stable_centre)*Vector3(1, 0, 1)).length_squared() >= ((BODY.center_of_mass - stable_centre)*Vector3(1,0,1)).length_squared()):
+		if(((pivot_point - stable_centre)*Vector3(1, 0, 1)).length_squared() >= ((com_global - stable_centre)*Vector3(1,0,1)).length_squared()):
 			# Within shape
 			
 			return
@@ -199,15 +206,19 @@ func apply_offbalance_force():
 		#Debug.point(pivot_point + BODY.global_position, 1, Color.RED)
 	
 	#We now have pivot_point
-	var com_pivot_delta:Vector3 = BODY.center_of_mass - pivot_point
+	var com_pivot_delta:Vector3 = com_global - pivot_point
 	var com_pivot_delta_xz = com_pivot_delta * Vector3(1,0,1)
 	#Angle between floor and pivot(on floor) to COM
 	var angle = atan(abs(com_pivot_delta.y) / com_pivot_delta_xz.length())
 	var moment_component:float = BODY.mass * ProjectSettings.get_setting("physics/3d/default_gravity") * sin(angle)
 	var moment_direction:Vector3 = (com_pivot_delta_xz.normalized() - (Vector3.UP / tan(angle))).normalized() # prommy this works
 	
-	#DebugDraw3D.draw_line(BODY.global_position + Vector3.UP, BODY.global_position + Vector3.UP + moment_direction * moment_component / 40)
+	DebugDraw3D.draw_line(BODY.global_position + Vector3.UP*0.3, BODY.global_position + Vector3.UP*0.3 + moment_direction * moment_component / 40)
 	BODY.apply_central_force(moment_component * moment_direction)
+	
+	#This torqic application may be unnecessary and glitzy
+	var torque_direction := moment_direction.rotated(Vector3.UP, PI/2)
+	BODY.apply_torque(torque_direction * moment_component / 40)
 	
 
 #Where pos = global offset from Body origin (irrespective of current rotation/basis).

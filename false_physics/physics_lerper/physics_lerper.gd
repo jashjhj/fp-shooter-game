@@ -50,7 +50,6 @@ func apply_forces_from_pos(delta:float, pos:Vector3) -> Vector3:
 	
 	return force
 
-
 ##Pos is global
 func calculate_forces_from_pos(delta:float, pos:Vector3) -> Vector3:
 	#Creates new target temporarily at position in order to calculate from there.

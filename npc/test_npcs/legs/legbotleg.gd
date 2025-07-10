@@ -17,6 +17,8 @@ class_name LegBotLeg extends Node3D
 @onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
 #@onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 
+@export var VERT_IMPULSE_TO_UPROOT:float = 1.0;
+
 @export var logging:bool = false;
 
 ##Denotes as to whether it is being fully-physically-simulated or locked and stable.
@@ -32,6 +34,8 @@ var is_physical:bool = true:
 			FOOT.freeze = true
 			FOOT_PHYSLERP.enabled = false;
 
+
+# If stable, attached to floor UNTIl pushed up. If not stable, attached to body and any deltas will be appliead appropriately
 
 var is_stable:bool = false;
 
@@ -68,6 +72,61 @@ func _ready() -> void:
 	
 	TARGET.reparent(BODY)
 	TARGET.top_level = true
+
+
+
+
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	
+	update_leg()
+
+func update_leg() -> void:
+	
+	var global_target_delta:Vector3 = FOOT.global_position - global_position
+	var local_target_delta:Vector3 = global_basis.inverse()*global_target_delta
+	
+	#if(!is_stable): return
+	
+	var ik = IKCALC.calculate_IK_nodes(local_target_delta, Vector3.DOWN)
+	UPPER.transform = ik.upper.transform
+	LOWER.transform = ik.lower.transform
+	#FOOT.transform = ik.end.transform
+
+
+
+
+func _physics_process(delta: float) -> void:
+	
+	if(is_physical):
+		
+		
+		
+		if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is stable
+			is_stable = true
+			#print("landed")
+			#is_physical = false;
+			pass
+		else:# Physical, flailing
+			var foot_forces:Vector3 = FOOT_PHYSLERP.calculate_forces(delta)
+			apply_foot_force(foot_forces)
+			BODY.apply_force(-foot_forces, global_position - BODY.global_position);
+			pass
+	
+	#if(!is_on_floor()):print("n")
+	
+	#if(logging): print(is_stable)
+	
+	var foot_vector = FOOT.global_position - global_position
+	if(foot_vector.length() > UPPER_LENGTH + LOWER_LENGTH): # If foot trying to escape
+		FOOT.global_position = global_position + foot_vector.normalized() * (UPPER_LENGTH + LOWER_LENGTH)
+		FOOT.linear_velocity += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + 0.4); # Rebound. Here, e=0.4
+	
+
+
+
+
+
 
 
 #------------ IMPLUSE REDISTRIBUTION -------------#
@@ -120,7 +179,7 @@ func distribute_impulse(impulse:Vector3, along:float):
 	
 	#APPLY
 	BODY.apply_impulse(resultant_top, global_position - BODY.global_position)
-	FOOT.apply_impulse(resultant_bottom)
+	apply_foot_impulse(resultant_bottom)
 	
 
 
@@ -128,6 +187,22 @@ func distribute_impulse(impulse:Vector3, along:float):
 func generic_hit():
 	is_physical = true
 
+##Force is in global coords. Applies foot force if it would 'uproot the foot.
+func apply_foot_force(force:Vector3):
+	if(is_stable):
+		FOOT.apply_central_force(force)
+	
+	else:
+		FOOT.apply_central_force(force)
+
+func apply_foot_impulse(impulse:Vector3):
+	if(is_stable):
+		if(impulse.y > VERT_IMPULSE_TO_UPROOT or true):
+			is_stable = false;
+			FOOT.apply_central_impulse(impulse)
+	
+	else:
+		FOOT.apply_central_impulse(impulse)
 
 
 func is_on_floor() -> bool:
@@ -137,49 +212,3 @@ func is_on_floor() -> bool:
 			return true;
 	#Else, no staticbody in contact
 	return false;
-
-
-func update_leg() -> void:
-	
-	var global_target_delta:Vector3 = FOOT.global_position - global_position
-	var local_target_delta:Vector3 = global_basis.inverse()*global_target_delta
-	
-	#if(!is_stable): return
-	
-	var ik = IKCALC.calculate_IK_nodes(local_target_delta, Vector3.DOWN)
-	UPPER.transform = ik.upper.transform
-	LOWER.transform = ik.lower.transform
-	#FOOT.transform = ik.end.transform
-
-
-
-
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	
-	update_leg()
-
-
-func _physics_process(delta: float) -> void:
-	
-	if(is_physical):
-		
-		is_stable = is_on_floor()
-		
-		if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is stable
-			#print("landed")
-			#is_physical = false;
-			pass
-		else:# Physical, flailing
-			var foot_forces:Vector3 = FOOT_PHYSLERP.apply_forces(delta)
-			#BODY.apply_force(-foot_forces, global_position - BODY.global_position);
-	
-	#if(!is_on_floor()):print("n")
-	
-	
-	
-	var foot_vector = FOOT.global_position - global_position
-	if(foot_vector.length() > UPPER_LENGTH + LOWER_LENGTH): # If foot trying to escape
-		FOOT.global_position = global_position + foot_vector.normalized() * (UPPER_LENGTH + LOWER_LENGTH)
-		FOOT.linear_velocity += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + 0.4);
-	

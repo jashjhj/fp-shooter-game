@@ -146,6 +146,6 @@ mesh = SubResource("CylinderMesh_shbhd")
 script = ExtResource("5_se5qo")
 RIGIDBODY = NodePath("../Foot")
 TARGET = NodePath("../Target")
-FORCE = 12.0
+FORCE = 2.0
 RESERVE_FORCE = 0.0
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"
