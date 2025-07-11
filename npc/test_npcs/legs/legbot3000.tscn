@@ -26,7 +26,7 @@ top_radius = 0.2
 bottom_radius = 0.2
 height = 0.5
 
-[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "BODY_HITTABLE", "LEG1", "LEG2", "LEG3", "TARGET", "DOWN_RAY")]
+[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "BODY_HITTABLE", "LEG1", "LEG2", "LEG3", "TARGET", "DOWN_RAY", "ANGLE_HELPER")]
 script = ExtResource("1_yr67n")
 BODY = NodePath("Body")
 BODY_HITTABLE = NodePath("Body/Hit_Component")
@@ -35,6 +35,7 @@ LEG2 = NodePath("Body/Legbotleg2")
 LEG3 = NodePath("Body/Legbotleg3")
 TARGET = NodePath("Target")
 DOWN_RAY = NodePath("Body/DownRay")
+ANGLE_HELPER = NodePath("Body/Angle_Helper")
 
 [node name="Body" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99483, 0)

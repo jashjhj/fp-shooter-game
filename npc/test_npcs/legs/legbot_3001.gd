@@ -12,6 +12,8 @@ extends Node3D
 @export var TARGET:Node3D;
 
 @export var DOWN_RAY:RayCast3D
+
+@export var ANGLE_HELPER:Angular_Damper;
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
 @onready var L1Delta:Vector3 = LEG1.position - BODY.position
@@ -37,16 +39,8 @@ func _ready() -> void:
 var first = true
 func _physics_process(delta: float) -> void:
 	
-	var stable_area := calculate_stable_area()
-	var stable_legs := len(stable_area)
+	apply_self_forces(delta)
 	
-	
-	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * 1.5
-	
-	PHYSLERP.FORCE = 8 * stable_legs
-	PHYSLERP.RESERVE_FORCE = 16 * stable_legs
-	
-	PHYSLERP.apply_forces(delta)
 	
 	if (Time.get_ticks_msec() < 2000 or true):
 		
@@ -58,15 +52,44 @@ func _physics_process(delta: float) -> void:
 	
 	first = false
 
-
-#func _process(delta: float) -> void:
+func apply_self_forces(delta):
+	var stable_area := calculate_stable_area()
+	var stable_legs:float = len(stable_area)
 	
-	#call_deferred("update_legs")
+	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * 1.5
+	PHYSLERP.FORCE = 8 * stable_legs
+	PHYSLERP.RESERVE_FORCE = 16 * stable_legs
+	var force_goal = PHYSLERP.calculate_forces(delta)
+	
+	
+	#Capacity for forces.
+	var force_capacity:Vector3 = Vector3.ZERO;
+	
+	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
+	for leg in legs:
+		var leg_through:Vector3 = (leg.global_position - leg.FOOT.global_position).normalized()
+		var leg_perp:Vector3 = Vector3.ONE - abs(leg_through)
+		leg_perp = leg_perp.normalized();
+		
+		force_capacity += 30*abs(leg_through) # Maximum 'through' force that can be applied per leg
+		force_capacity += 8*abs(leg_perp)     # Maximum 'lateral' force that can be applied per leg
+	
+	#print("Goal force: ", force_goal, ". Capacity: ", force_capacity)
+	
+	# Calculate the force to apply, being the direction intended and the maximum magnitude we want / can enforce
+	var force_to_apply:Vector3 = Vector3(\
+		sign(force_goal.x) * min(abs(force_goal.x), force_capacity.x),\
+		sign(force_goal.y) * min(abs(force_goal.y), force_capacity.y),\
+		sign(force_goal.z) * min(abs(force_goal.z), force_capacity.z),\
+	)
+	
+	BODY.apply_central_force(force_to_apply)
+	
+	## -- Moments --
+	ANGLE_HELPER.STIFFNESS = stable_legs * 3
+	ANGLE_HELPER.DAMPING = stable_legs * 0.66 - 1
 
-#func update_legs():
-	#LEG1.update_leg()
-	#LEG2.update_leg()
-	#LEG3.update_leg()
+
 
 func body_hit():
 	var impulse = BODY_HITTABLE.last_impulse
