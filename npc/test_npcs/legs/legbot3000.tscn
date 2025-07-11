@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://kfamnabyuul1"]
+[gd_scene load_steps=11 format=3 uid="uid://kfamnabyuul1"]
 
 [ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="1_lc2cb"]
 [ext_resource type="Script" uid="uid://b5ipcbyyx3hkv" path="res://npc/test_npcs/legs/legbot_3001.gd" id="1_yr67n"]
 [ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/test_npcs/legs/legbotleg.tscn" id="2_iv3ci"]
+[ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittable_RB.gd" id="2_m27ph"]
 [ext_resource type="Script" uid="uid://dnpmmrwqk78q4" path="res://false_physics/physics_lerper/angle_helper.gd" id="4_62c5f"]
+[ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="6_i21b0"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_iv3ci"]
 top_radius = 0.25
@@ -24,19 +26,22 @@ top_radius = 0.2
 bottom_radius = 0.2
 height = 0.5
 
-[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "LEG1", "LEG2", "LEG3", "TARGET", "DOWN_RAY")]
+[node name="Legbot3000" type="Node3D" node_paths=PackedStringArray("BODY", "BODY_HITTABLE", "LEG1", "LEG2", "LEG3", "TARGET", "DOWN_RAY")]
 script = ExtResource("1_yr67n")
 BODY = NodePath("Body")
+BODY_HITTABLE = NodePath("Body/Hit_Component")
 LEG1 = NodePath("Body/Legbotleg1")
 LEG2 = NodePath("Body/Legbotleg2")
 LEG3 = NodePath("Body/Legbotleg3")
 TARGET = NodePath("Target")
 DOWN_RAY = NodePath("Body/DownRay")
 
-[node name="Body" type="RigidBody3D" parent="."]
+[node name="Body" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99483, 0)
 collision_layer = 64
 mass = 4.0
+script = ExtResource("2_m27ph")
+HITTABLE = [NodePath("Hit_Component")]
 
 [node name="Legbotleg1" parent="Body" node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
 transform = Transform3D(-1, 0, -8.74228e-08, -3.55271e-15, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.229486)
@@ -88,6 +93,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00516999, 0)
 target_position = Vector3(0, -5, 0)
 hit_from_inside = true
 collide_with_areas = true
+
+[node name="Hit_Component" type="Node" parent="Body"]
+script = ExtResource("6_i21b0")
+MAX_HP = 0.0
+MINIMUM_DAMAGE_THRESHOLD = 0.0
+metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, 0.0339408)
