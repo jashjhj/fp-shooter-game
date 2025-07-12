@@ -30,10 +30,8 @@ var is_physical:bool = true:
 		is_physical = value;
 		if(is_physical):
 			FOOT.freeze = false;
-			FOOT_PHYSLERP.enabled = true;
 		else:
 			FOOT.freeze = true
-			FOOT_PHYSLERP.enabled = false;
 
 
 # If stable, attached to floor UNTIl pushed up. If not stable, attached to body and any deltas will be appliead appropriately
@@ -53,6 +51,7 @@ var step_state:int = 0:
 			return
 		step_state = v
 var step_start:int;
+var step_height:float = 0;
 @onready var STEP_TARGET:Node3D = Node3D.new()
 
 @export var TARGET:Node3D;
@@ -94,6 +93,7 @@ func _ready() -> void:
 	
 	add_child(STEP_TARGET)
 	FOOT_PHYSLERP.TARGET = STEP_TARGET
+	STEP_TARGET.global_position = TARGET.global_position
 
 
 
@@ -119,55 +119,56 @@ func update_leg() -> void:
 func begin_step(pos:Vector3 = TARGET.global_position):
 	step_state = 1;
 	step_start = Time.get_ticks_msec()
-	
-	FOOT_PHYSLERP.enabled = true;
+	step_height = tanh((pos - FOOT.global_position).length())
 
 func _physics_process(delta: float) -> void:
 	
 	#print(step_state)
-	if(is_physical):
+	if(!is_physical): return # used to disable, for optimisation.
+	
+	
+	
+	if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is now stable
+		#step_state = 0;
+		is_stable = true
+		#print("landed")
+		#is_physical = false;
 		
+	else:
+		is_stable = false
+	
+	# Physical, flailing, stepping
+	
+	#Stepping computation
+	#print("m")
+	if(step_state == 1):
+		STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * 0.3
+		var dist_to_target:float = ((FOOT.global_position - STEP_TARGET.global_position) * Vector3(1,0,1)).length()
+		 # State exits
+		if(dist_to_target < 0.04):
+			step_state = 2
+		elif (Time.get_ticks_msec() - step_start > 400): # >400ms have passed
+			step_state = 0;
 		
-		
-		if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is now stable
-			is_stable = true
-			#print("landed")
-			#is_physical = false;
-			
-			pass
-		else:# Physical, flailing, stepping
-			
-			#Stepping computation
-			if(step_state == 1):
-				STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * 0.2
-				var dist_to_target:float = ((FOOT.global_position - STEP_TARGET.global_position) * Vector3(1,0,1)).length()
-				
-				if(dist_to_target < 0.04):
-					step_state = 2
-					
-				elif (Time.get_ticks_msec() - step_start > 400): # >400ms have passed
-					step_state = 0;
-			
-			elif step_state == 2:
-
-				STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * -0.35
-				if(is_stable):
-					step_state = 0;
-				
-			
-			
-			pass
+	elif step_state == 2:
+		STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * -0.35
+		if(is_stable):
+			step_state = 0;
+		pass
+	else:
+		STEP_TARGET.global_position = TARGET.global_position
 	
 	
 	propagate_motion(!is_stable and is_physical)
 	
-	
-	#if(logging): print(is_stable)
+	if(logging):
+		FOOT_PHYSLERP.enabled
 	
 	var foot_vector = FOOT.global_position - global_position
 	if(foot_vector.length() > UPPER_LENGTH + LOWER_LENGTH): # If foot trying to escape
 		FOOT.global_position = global_position + foot_vector.normalized() * (UPPER_LENGTH + LOWER_LENGTH)
 		FOOT.linear_velocity += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + 0.4); # Rebound. Here, e=0.4
+	
 	
 
 

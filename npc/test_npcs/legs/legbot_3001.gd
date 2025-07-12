@@ -69,8 +69,8 @@ func apply_self_forces(delta):
 		var leg_perp:Vector3 = Vector3.ONE - abs(leg_through)
 		leg_perp = leg_perp.normalized();
 		
-		force_capacity += 30*abs(leg_through) # Maximum 'through' force that can be applied per leg
-		force_capacity += 8*abs(leg_perp)     # Maximum 'lateral' force that can be applied per leg
+		force_capacity += 40*abs(leg_through) # Maximum 'through' force that can be applied per leg
+		force_capacity += 10*abs(leg_perp)     # Maximum 'lateral' force that can be applied per leg
 	
 	#print("Goal force: ", force_goal, ". Capacity: ", force_capacity)
 	
@@ -144,30 +144,49 @@ func get_centre_of_stable_area(arr:Array[Vector3]) -> Vector3:
 	#Completely unstable
 	return Vector3.ZERO
 
+
 var last_leg_movement:int;
+var percieved_stability:float = 0.0;
 func consider_step():
+	var stable_area := calculate_stable_area()
+	var stable_legs:float = len(stable_area)
+	
+	#calculate percieved stability
+	if(stable_legs != 3):
+		percieved_stability = lerp(percieved_stability, 0.0, 0.01)
+	else:
+		percieved_stability  = lerp(percieved_stability, 1.0, 0.01)
+	
+	percieved_stability -= BODY.linear_velocity.length() * 0.01
+	
 	if Time.get_ticks_msec() - last_leg_movement > 1500:
 		last_leg_movement = Time.get_ticks_msec()
-		var leg_to_move := pick_leg_to_move()
+		var leg_to_move := pick_leg_to_move(percieved_stability)
 		if(leg_to_move != null):
 			leg_to_move.begin_step()
 	
 	
 
-func pick_leg_to_move() -> LegBotLeg:
+func pick_leg_to_move(stability:float = 0.5) -> LegBotLeg:
 	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
+	var i = len(legs) - 1;
+	while i >= 0:
+		if(legs[i].is_stable == false):
+			legs.remove_at(i)
+		i -= 1
+	if(len(legs) == 0): return null # If all legs are unstable
+	
 	var best_leg:int = 0;
 	var best_leg_score:float = -INF
 	
-	for i in range(0, len(legs)):
-		var leg_goal_delta = legs[i].TARGET.global_position - legs[i].FOOT.global_position
-		var score = leg_goal_delta.length() + leg_goal_delta.dot(get_point_velocity(legs[i].global_position - BODY.global_position))
+	for j in range(0, len(legs)):
+		var leg_goal_delta = legs[j].TARGET.global_position - legs[j].FOOT.global_position
+		var score = leg_goal_delta.length() + leg_goal_delta.dot(get_point_velocity(legs[j].global_position - BODY.global_position))
 		if score > best_leg_score:
 			best_leg_score = score
-			best_leg = i
+			best_leg = j
 	
 	#Best leg si the one in the worst position and needs moving next.
-	
 	if(best_leg_score > 0.2): # Minimum score to require moving
 		return legs[best_leg]
 	else:
