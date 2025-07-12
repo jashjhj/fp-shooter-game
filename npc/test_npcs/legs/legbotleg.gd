@@ -16,6 +16,7 @@ class_name LegBotLeg extends Node3D
 
 @onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
 #@onready var DOWN_RAY:RayCast3D = RayCast3D.new()
+@onready var PROPAGATION_HELPER:Node3D = Node3D.new()
 
 @export var VERT_IMPULSE_TO_UPROOT:float = 1.0;
 
@@ -38,6 +39,21 @@ var is_physical:bool = true:
 # If stable, attached to floor UNTIl pushed up. If not stable, attached to body and any deltas will be appliead appropriately
 
 var is_stable:bool = false;
+## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
+var step_state:int = 0:
+	set(v):
+		if(v == 0):
+			FOOT_PHYSLERP.enabled = false
+		elif v == 1:
+			FOOT_PHYSLERP.enabled = true
+		elif v == 2:
+			FOOT_PHYSLERP.enabled = true
+		else:
+			push_error("Attempted tos et step_state of a leg to a value not in the range 0,1,2")
+			return
+		step_state = v
+var step_start:int;
+@onready var STEP_TARGET:Node3D = Node3D.new()
 
 @export var TARGET:Node3D;
 
@@ -72,6 +88,12 @@ func _ready() -> void:
 	
 	TARGET.reparent(BODY)
 	TARGET.top_level = true
+	
+	add_child(PROPAGATION_HELPER)
+	propagate_motion(false)
+	
+	add_child(STEP_TARGET)
+	FOOT_PHYSLERP.TARGET = STEP_TARGET
 
 
 
@@ -94,26 +116,50 @@ func update_leg() -> void:
 	#FOOT.transform = ik.end.transform
 
 
-
+func begin_step(pos:Vector3 = TARGET.global_position):
+	step_state = 1;
+	step_start = Time.get_ticks_msec()
+	STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * 0.2
+	FOOT_PHYSLERP.enabled = true;
 
 func _physics_process(delta: float) -> void:
 	
+	#print(step_state)
 	if(is_physical):
 		
 		
 		
-		if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is stable
+		if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is now stable
 			is_stable = true
 			#print("landed")
 			#is_physical = false;
+			
 			pass
-		else:# Physical, flailing
-			var foot_forces:Vector3 = FOOT_PHYSLERP.calculate_forces(delta)
-			apply_foot_force(foot_forces)
-			BODY.apply_force(-foot_forces, global_position - BODY.global_position);
+		else:# Physical, flailing, stepping
+			
+			#Stepping computation
+			if(step_state == 1):
+				
+				var dist_to_target:float = ((FOOT.global_position - STEP_TARGET.global_position) * Vector3(1,0,1)).length()
+				
+				if(dist_to_target < 0.02):
+					step_state == 2
+					STEP_TARGET.global_position = STEP_TARGET.global_position + Vector3.UP * -0.35
+				elif (Time.get_ticks_msec() - step_start > 400): # >400ms have passed
+					step_state = 0;
+			
+			elif step_state == 2:
+				
+				if(is_stable):
+					step_state = 0;
+				
+			
+			
 			pass
 	
-	#if(!is_on_floor()):print("n")
+	
+	propagate_motion(!is_stable and is_physical)
+	
 	
 	#if(logging): print(is_stable)
 	
@@ -212,3 +258,18 @@ func is_on_floor() -> bool:
 			return true;
 	#Else, no staticbody in contact
 	return false;
+
+
+var prop_old_pos:Vector3;
+##Must be called each 'tick' to get accurate deltas. if arg == true, actually updates position.
+func propagate_motion(propagating:bool = true):
+	if(!propagating):
+		prop_old_pos = PROPAGATION_HELPER.global_position
+		return
+	
+	
+	var delta_pos:Vector3 = PROPAGATION_HELPER.global_position - prop_old_pos
+	
+	FOOT.global_position += delta_pos
+	
+	prop_old_pos = PROPAGATION_HELPER.global_position

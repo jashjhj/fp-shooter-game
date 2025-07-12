@@ -36,7 +36,6 @@ func _ready() -> void:
 	BODY_HITTABLE.on_hit.connect(body_hit)
 
 
-var first = true
 func _physics_process(delta: float) -> void:
 	
 	apply_self_forces(delta)
@@ -49,8 +48,7 @@ func _physics_process(delta: float) -> void:
 		set_leg_target(LEG3)
 	
 	apply_offbalance_force(delta)
-	
-	first = false
+	consider_step()
 
 func apply_self_forces(delta):
 	var stable_area := calculate_stable_area()
@@ -98,7 +96,7 @@ func body_hit():
 func set_leg_target(leg:LegBotLeg) -> void:
 	var target_pos = calculate_leg_target(leg)
 	if target_pos == Vector3.ZERO: return # If no readings, stay as was
-	leg.TARGET.global_position = target_pos
+	leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.4)
 
 func calculate_leg_target(leg:LegBotLeg) -> Vector3:
 	var leg_delta:Vector3 = leg.position # Leg must be a direct child
@@ -146,8 +144,17 @@ func get_centre_of_stable_area(arr:Array[Vector3]) -> Vector3:
 	#Completely unstable
 	return Vector3.ZERO
 
+var last_leg_movement:int;
+func consider_step():
+	if Time.get_ticks_msec() - last_leg_movement > 1000:
+		last_leg_movement = Time.get_ticks_msec()
+		var leg_to_move := pick_leg_to_move()
+		if(leg_to_move != null):
+			leg_to_move.begin_step()
+		
+		
 
-func pick_leg_to_move():
+func pick_leg_to_move() -> LegBotLeg:
 	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
 	var best_leg:int = 0;
 	var best_leg_score:float = -INF
@@ -160,6 +167,11 @@ func pick_leg_to_move():
 			best_leg = i
 	
 	#Best leg si the one in the worst position and needs moving next.
+	
+	if(best_leg_score > 0.2): # Minimum score to require moving
+		return legs[best_leg]
+	else:
+		return null
 
 
 ##S = start of line, D = delta. Considers X,Z. returns component lambda of 1 as x and 2 as y. |     Simple mathematical solver.

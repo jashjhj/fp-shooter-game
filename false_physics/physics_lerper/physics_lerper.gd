@@ -19,10 +19,6 @@ class_name Physics_Lerper extends Node
 
 
 
-#TODO Known issues:
-#Orbiting when given right scenarios
-#  - maybe act goal_force agaisnt it, rather than towards goal?
-#
 
 
 var corrective_force:Vector3;

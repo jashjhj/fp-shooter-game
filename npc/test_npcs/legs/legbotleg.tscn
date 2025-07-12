@@ -145,7 +145,8 @@ mesh = SubResource("CylinderMesh_shbhd")
 [node name="Foot_Physlerp" type="Node" parent="." node_paths=PackedStringArray("RIGIDBODY", "TARGET")]
 script = ExtResource("5_se5qo")
 RIGIDBODY = NodePath("../Foot")
+enabled = false
 TARGET = NodePath("../Target")
-FORCE = 2.0
+FORCE = 10.0
 RESERVE_FORCE = 0.0
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"
