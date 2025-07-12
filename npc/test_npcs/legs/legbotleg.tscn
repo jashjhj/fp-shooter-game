@@ -147,6 +147,6 @@ script = ExtResource("5_se5qo")
 RIGIDBODY = NodePath("../Foot")
 enabled = false
 TARGET = NodePath("../Target")
-FORCE = 10.0
+FORCE = 15.0
 RESERVE_FORCE = 4.0
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"

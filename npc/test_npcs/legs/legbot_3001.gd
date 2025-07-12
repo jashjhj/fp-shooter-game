@@ -24,9 +24,11 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	LEG1.BODY = BODY
-	LEG2.BODY = BODY
-	LEG3.BODY = BODY
+	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
+	
+	for leg in legs:
+		leg.BODY = BODY
+		leg.hit_limit.connect(leg_hit_limit)
 	
 	PHYSLERP.RIGIDBODY = BODY
 	PHYSLERP.TARGET = TARGET
@@ -159,13 +161,13 @@ func consider_step():
 	
 	percieved_stability -= BODY.linear_velocity.length() * 0.01
 	
-	if Time.get_ticks_msec() - last_leg_movement > 1500:
+	if Time.get_ticks_msec() - last_leg_movement > 1500: # TODO: Add better criteria for when stepping.
 		last_leg_movement = Time.get_ticks_msec()
 		var leg_to_move := pick_leg_to_move(percieved_stability)
 		if(leg_to_move != null):
 			leg_to_move.begin_step()
-	
-	
+
+
 
 func pick_leg_to_move(stability:float = 0.5) -> LegBotLeg:
 	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
@@ -330,6 +332,10 @@ func apply_dv_to_feet(dv:Vector3):
 		#print(foot_dv)
 	
 
+func leg_hit_limit(impulse:Vector3, pos:Vector3):
+	#BODY.apply_impulse(impulse, pos - BODY.global_position)
+	#apply_dv_to_feet(impulse) #TODO: IDK the maths to apply this correctly to the other feet.
+	pass
 
 #Where pos = global offset from Body origin (irrespective of current rotation/basis).
 func get_point_velocity(pos:Vector3) -> Vector3:

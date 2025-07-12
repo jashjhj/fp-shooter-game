@@ -80,6 +80,7 @@ func calculate_IK_nodes(delta:Vector3, forwards:Vector3 = Vector3.DOWN) -> IKRes
 	out.upper.basis.y = up.rotated(right, angles.hippitch)
 	out.upper.basis.x = right;
 	
+	
 	out.upper.rotate(up, angles.hipyaw)
 	
 	
