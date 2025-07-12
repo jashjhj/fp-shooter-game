@@ -96,7 +96,7 @@ func body_hit():
 func set_leg_target(leg:LegBotLeg) -> void:
 	var target_pos = calculate_leg_target(leg)
 	if target_pos == Vector3.ZERO: return # If no readings, stay as was
-	leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.4)
+	leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.2)
 
 func calculate_leg_target(leg:LegBotLeg) -> Vector3:
 	var leg_delta:Vector3 = leg.position # Leg must be a direct child
@@ -104,7 +104,7 @@ func calculate_leg_target(leg:LegBotLeg) -> Vector3:
 	var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
 	
 	#1.5 is a measure of Splay. Should eb standardised.
-	var leg_prospective_xz = leg_delta_xz*1.5 + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1) # Calculates prospective pos. Needs work
+	var leg_prospective_xz = leg_delta_xz*3.0 + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1)*0.2 # Calculates prospective pos. Needs work
 	
 	DOWN_RAY.position = leg_prospective_xz
 	DOWN_RAY.force_raycast_update()
@@ -146,13 +146,13 @@ func get_centre_of_stable_area(arr:Array[Vector3]) -> Vector3:
 
 var last_leg_movement:int;
 func consider_step():
-	if Time.get_ticks_msec() - last_leg_movement > 1000:
+	if Time.get_ticks_msec() - last_leg_movement > 1500:
 		last_leg_movement = Time.get_ticks_msec()
 		var leg_to_move := pick_leg_to_move()
 		if(leg_to_move != null):
 			leg_to_move.begin_step()
-		
-		
+	
+	
 
 func pick_leg_to_move() -> LegBotLeg:
 	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]

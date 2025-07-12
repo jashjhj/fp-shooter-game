@@ -119,7 +119,7 @@ func update_leg() -> void:
 func begin_step(pos:Vector3 = TARGET.global_position):
 	step_state = 1;
 	step_start = Time.get_ticks_msec()
-	STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * 0.2
+	
 	FOOT_PHYSLERP.enabled = true;
 
 func _physics_process(delta: float) -> void:
@@ -139,17 +139,18 @@ func _physics_process(delta: float) -> void:
 			
 			#Stepping computation
 			if(step_state == 1):
-				
+				STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * 0.2
 				var dist_to_target:float = ((FOOT.global_position - STEP_TARGET.global_position) * Vector3(1,0,1)).length()
 				
-				if(dist_to_target < 0.02):
-					step_state == 2
-					STEP_TARGET.global_position = STEP_TARGET.global_position + Vector3.UP * -0.35
+				if(dist_to_target < 0.04):
+					step_state = 2
+					
 				elif (Time.get_ticks_msec() - step_start > 400): # >400ms have passed
 					step_state = 0;
 			
 			elif step_state == 2:
-				
+
+				STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * -0.35
 				if(is_stable):
 					step_state = 0;
 				
