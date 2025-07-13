@@ -4,9 +4,7 @@ extends Node3D
 @export var BODY_HITTABLE:Hit_Component;
 
 ##Legs should be direct children of BODY
-@export var LEG1:LegBotLeg;
-@export var LEG2:LegBotLeg;
-@export var LEG3:LegBotLeg;
+@export var LEGS:Array[BotLeg]
 
 
 @export var TARGET:Node3D;
@@ -16,17 +14,13 @@ extends Node3D
 @export var ANGLE_HELPER:Angular_Damper;
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
-@onready var L1Delta:Vector3 = LEG1.position - BODY.position
-@onready var L2Delta:Vector3 = LEG2.position - BODY.position
-@onready var L3Delta:Vector3 = LEG3.position - BODY.position
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
 	
-	for leg in legs:
+	for leg in LEGS:
 		leg.BODY = BODY
 		leg.hit_limit.connect(leg_hit_limit)
 	
@@ -43,11 +37,9 @@ func _physics_process(delta: float) -> void:
 	apply_self_forces(delta)
 	
 	
-	if (Time.get_ticks_msec() < 2000 or true):
-		
-		set_leg_target(LEG1)
-		set_leg_target(LEG2)
-		set_leg_target(LEG3)
+	for leg in LEGS:
+		set_leg_target(leg)
+	
 	
 	apply_offbalance_force(delta)
 	consider_step()
@@ -65,8 +57,7 @@ func apply_self_forces(delta):
 	#Capacity for forces.
 	var force_capacity:Vector3 = Vector3.ZERO;
 	
-	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
-	for leg in legs:
+	for leg in LEGS:
 		var leg_through:Vector3 = (leg.global_position - leg.FOOT.global_position).normalized()
 		var leg_perp:Vector3 = Vector3.ONE - abs(leg_through)
 		leg_perp = leg_perp.normalized();
@@ -95,12 +86,12 @@ func body_hit():
 	var impulse = BODY_HITTABLE.last_impulse
 	apply_dv_to_feet(impulse/BODY.mass)
 
-func set_leg_target(leg:LegBotLeg) -> void:
+func set_leg_target(leg:BotLeg) -> void:
 	var target_pos = calculate_leg_target(leg)
 	if target_pos == Vector3.ZERO: return # If no readings, stay as was
 	leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.2)
 
-func calculate_leg_target(leg:LegBotLeg) -> Vector3:
+func calculate_leg_target(leg:BotLeg) -> Vector3:
 	var leg_delta:Vector3 = leg.position # Leg must be a direct child
 	#leg_delta *= global_basis.inverse()
 	var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
@@ -125,12 +116,9 @@ func calculate_stable_area() -> Array[Vector3]:
 	
 	var out:Array[Vector3] = [];
 	
-	if(LEG1.is_stable):
-		out.append(LEG1.FOOT.global_position)
-	if(LEG2.is_stable):
-		out.append(LEG2.FOOT.global_position)
-	if(LEG3.is_stable):
-		out.append(LEG3.FOOT.global_position)
+	for leg in LEGS:
+		if(leg.is_stable):
+			out.append(leg.FOOT.global_position)
 	
 	return out
 
@@ -153,13 +141,13 @@ func consider_step():
 	var stable_area := calculate_stable_area()
 	var stable_legs:float = len(stable_area)
 	
-	#calculate percieved stability
-	if(stable_legs != 3):
-		percieved_stability = lerp(percieved_stability, 0.0, 0.01)
-	else:
-		percieved_stability  = lerp(percieved_stability, 1.0, 0.01)
-	
-	percieved_stability -= BODY.linear_velocity.length() * 0.01
+	##calculate percieved stability
+	#if(stable_legs != len(LEGS)):
+		#percieved_stability = lerp(percieved_stability, 0.0, 0.01)
+	#else:
+		#percieved_stability  = lerp(percieved_stability, 1.0, 0.01)
+	#
+	#percieved_stability -= BODY.linear_velocity.length() * 0.01
 	
 	if Time.get_ticks_msec() - last_leg_movement > 1500: # TODO: Add better criteria for when stepping.
 		last_leg_movement = Time.get_ticks_msec()
@@ -169,8 +157,8 @@ func consider_step():
 
 
 
-func pick_leg_to_move(stability:float = 0.5) -> LegBotLeg:
-	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
+func pick_leg_to_move(stability:float = 0.5) -> BotLeg:
+	var legs := LEGS.duplicate()
 	var i = len(legs) - 1;
 	while i >= 0:
 		if(legs[i].is_stable == false):
@@ -183,7 +171,7 @@ func pick_leg_to_move(stability:float = 0.5) -> LegBotLeg:
 	
 	for j in range(0, len(legs)):
 		var leg_goal_delta = legs[j].TARGET.global_position - legs[j].FOOT.global_position
-		var score = leg_goal_delta.length() + leg_goal_delta.dot(get_point_velocity(legs[j].global_position - BODY.global_position))
+		var score = leg_goal_delta.length() + leg_goal_delta.dot(get_point_velocity(legs[j].global_position - BODY.global_position)) * 2 # COnsiders rate at which moving away more.
 		if score > best_leg_score:
 			best_leg_score = score
 			best_leg = j
@@ -321,8 +309,7 @@ func apply_dv_to_feet(dv:Vector3):
 	var delta_dv:float = dv.dot(-pivot_axis.cross(com_delta)) / com_delta.length()
 	
 	
-	var legs:Array[LegBotLeg] = [LEG1, LEG2, LEG3]
-	for leg in legs:
+	for leg in LEGS:
 		var foot_pivot_delta := leg.FOOT.global_position - pivot_pos
 		var foot_dv_dir:Vector3 = foot_pivot_delta.cross(pivot_axis).normalized()
 		var foot_dv = delta_dv * foot_pivot_delta.length()

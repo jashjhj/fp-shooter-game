@@ -1,4 +1,4 @@
-class_name LegBotLeg extends Node3D
+class_name BotLeg extends Node3D
 
 #Rigidbody sibling to attach to - Must be set at runtime by parent.
 @export var BODY:RigidBody3D;
