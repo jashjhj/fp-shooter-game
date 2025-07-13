@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_uyhpc"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="2_kpkau"]
 [ext_resource type="PackedScene" uid="uid://6iwvem2ecddd" path="res://maps/map_resources/environment.tscn" id="3_ncl7n"]
-[ext_resource type="PackedScene" uid="uid://kfamnabyuul1" path="res://npc/test_npcs/legs/legbot3000.tscn" id="4_kpkau"]
+[ext_resource type="PackedScene" uid="uid://kfamnabyuul1" path="res://npc/test_npcs/legs/legbot3001.tscn" id="4_kpkau"]
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="4_mvpoq"]
 [ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="5_ncl7n"]
 
@@ -79,7 +79,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93235, 0.963371, 6.19646)
 use_collision = true
 size = Vector3(2.68164, 2.92674, 1)
 
-[node name="Legbot3000" parent="." instance=ExtResource("4_kpkau")]
+[node name="Legbot3001" parent="." instance=ExtResource("4_kpkau")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26342, 0.0682698, -24.652)
 
 [node name="Camera" parent="." instance=ExtResource("5_ncl7n")]
