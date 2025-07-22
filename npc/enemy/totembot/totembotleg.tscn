@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dljqaqcx7cptb"]
+
+[ext_resource type="ArrayMesh" uid="uid://4sdhopv0l4ds" path="res://npc/enemy/totembot/assets/leg_foot.obj" id="1_1nd10"]
+[ext_resource type="Script" uid="uid://bbqoq87idvyqs" path="res://npc/tests_primitives/legs/botleg.gd" id="1_r5lsd"]
+[ext_resource type="ArrayMesh" uid="uid://d02a6oli4b3re" path="res://npc/enemy/totembot/assets/leg_hip.obj" id="2_r5lsd"]
+[ext_resource type="ArrayMesh" uid="uid://676shaw0n7e1" path="res://npc/enemy/totembot/assets/leg_lower.obj" id="3_aqqmv"]
+[ext_resource type="ArrayMesh" uid="uid://rlobttak3vva" path="res://npc/enemy/totembot/assets/leg_upper.obj" id="4_mciut"]
+
+[node name="TotemBotLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER")]
+script = ExtResource("1_r5lsd")
+UPPER = NodePath("LegUpper")
+LOWER = NodePath("LegLower")
+
+[node name="LegFoot" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -1.77835, 0.19196)
+mesh = ExtResource("1_1nd10")
+
+[node name="LegHip" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -0.0447712)
+mesh = ExtResource("2_r5lsd")
+
+[node name="LegLower" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.778478, 0.196219)
+mesh = ExtResource("3_aqqmv")
+
+[node name="LegUpper" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.196219)
+mesh = ExtResource("4_mciut")
