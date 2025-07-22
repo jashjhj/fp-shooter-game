@@ -24,6 +24,10 @@ func _ready() -> void:
 	update_stiffness(STIFFNESS)
 	set_spring(enabled)
 	set_locked(locked)
+	
+	set("linear_limit_x/enabled", false)
+	set("linear_limit_y/enabled", false)
+	set("linear_limit_z/enabled", false)
 
 
 

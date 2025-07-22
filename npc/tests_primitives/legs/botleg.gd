@@ -1,29 +1,42 @@
 class_name BotLeg extends Node3D
 
-#Rigidbody sibling to attach to - Must be set at runtime by parent.
-@export var BODY:RigidBody3D;
+##Rigidbody sibling to attach to - Must be set at runtime by parent.
+var BODY:RigidBody3D:
+	set(v):
+		BODY = v;
+		TARGET.reparent(BODY)
 
 @export var UPPER:Node3D;
 @export var LOWER:Node3D;
 @export var UPPER_LENGTH:float = 1.0;
 @export var LOWER_LENGTH:float = 1.0;
 
+@export var INVERT_KNEE:bool = false
+
 @export var FOOT:RigidBody3D;
-@export var FOOT_PHYSLERP:Physics_Lerper;
+
 
 @export var LOWER_HIT:Hit_Component;
 @export var UPPER_HIT:Hit_Component;
 
-@onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
-#@onready var DOWN_RAY:RayCast3D = RayCast3D.new()
-@onready var PROPAGATION_HELPER:Node3D = Node3D.new()
-
 
 @export var logging:bool = false;
 
+
+@onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
+@onready var FOOT_PHYSLERP:Physics_Lerper = Physics_Lerper.new()
+@onready var PROPAGATION_HELPER:Node3D = Node3D.new()
+
+
+
+
+@onready var STEP_TARGET:Node3D = Node3D.new()
+
+@onready var TARGET:Node3D = Node3D.new();
+
+
+
 ##Denotes as to whether it is being fully-physically-simulated or locked and stable.
-
-
 var is_physical:bool = true:
 	set(value):
 		is_physical = value;
@@ -52,9 +65,7 @@ var step_state:int = 0:
 		step_state = v
 var step_start:int;
 var step_height:float = 0;
-@onready var STEP_TARGET:Node3D = Node3D.new()
 
-@export var TARGET:Node3D;
 
 
 #enum CurrentState{
@@ -70,22 +81,43 @@ signal became_stable
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	add_child(TARGET)
+	add_child(FOOT_PHYSLERP)
+	TARGET.global_position = FOOT.global_position
+	
 	IKCALC.UPPER_LENGTH = UPPER_LENGTH;
 	IKCALC.LOWER_LENGTH = LOWER_LENGTH;
-	IKCALC.ELBOW_IN = true
+	IKCALC.ELBOW_IN = !INVERT_KNEE
 	
+	FOOT_PHYSLERP.FORCE = 15;
+	FOOT_PHYSLERP.RESERVE_FORCE = 4;
+	FOOT_PHYSLERP.RIGIDBODY = FOOT
+	FOOT_PHYSLERP.TARGET = TARGET
 	
-	#DOWN_RAY.target_position = Vector3(0, -2.5, 0)
-	
-	await get_parent().ready
+	#parent's parent = RIGIDBODy's Controller
+	#await get_parent().get_parent().ready
 	
 	FOOT.top_level = true
-	UPPER_HIT.on_hit.connect(upper_hit)
-	LOWER_HIT.on_hit.connect(lower_hit)
-	UPPER_HIT.on_hit.connect(generic_hit)
-	LOWER_HIT.on_hit.connect(generic_hit)
+	FOOT.collision_layer = 64
+	FOOT.collision_mask = 1
+	FOOT.contact_monitor = true
+	FOOT.max_contacts_reported = 3;
 	
-	TARGET.reparent(BODY)
+	
+	if(UPPER_HIT == null):
+		push_warning("No upper-leg hit-component set")
+	else:
+		UPPER_HIT.on_hit.connect(upper_hit)
+		UPPER_HIT.on_hit.connect(generic_hit)
+	
+	if(LOWER_HIT == null):
+		push_warning("No lower-leg hit-componennt set")
+	else:
+		LOWER_HIT.on_hit.connect(lower_hit)
+		LOWER_HIT.on_hit.connect(generic_hit)
+	
+	#add_child(TARGET) # Reparented when BODy is set
 	TARGET.top_level = true
 	
 	add_child(PROPAGATION_HELPER)

@@ -1,24 +1,31 @@
 class_name LegBot extends Node3D
 
-@export var BODY:RigidBody3D
-@export var BODY_HITTABLE:Hit_Component;
+@export var BODY:Hittable_RB
+
 
 ##Legs should be direct children of BODY
 @export var LEGS:Array[BotLeg]
 
 
-@export var TARGET:Node3D;
-
-@export var DOWN_RAY:RayCast3D
-
 @export var ANGLE_HELPER:Angular_Damper;
-@onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
+@export_group("Gait Settings")
+@export var IDLE_HEIGHT:float = 1.5;
+@export var FOOT_PLANT_RADIUS:float = 1.0;
+
+@onready var TARGET:Node3D = Node3D.new()
+@onready var DOWN_RAY:RayCast3D = RayCast3D.new()
+@onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
+@onready var BODY_HITTABLE:Hit_Component = BODY.inbuilt_hit_component
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	BODY.collision_layer = 64
+	BODY.collision_mask = 1;
+	
+	add_child(TARGET)
 	
 	for leg in LEGS:
 		leg.BODY = BODY
@@ -30,6 +37,13 @@ func _ready() -> void:
 	PHYSLERP.RESERVE_FORCE = 40;
 	
 	BODY_HITTABLE.on_hit.connect(body_hit)
+	
+	#Init dow-ray
+	add_child(DOWN_RAY)
+	DOWN_RAY.hit_from_inside = true
+	DOWN_RAY.target_position = Vector3.DOWN * 5;
+	DOWN_RAY.collide_with_areas = true
+
 
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +62,7 @@ func apply_self_forces(delta):
 	var stable_area := calculate_stable_area()
 	var stable_legs:float = len(stable_area)
 	
-	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * 1.5
+	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * IDLE_HEIGHT
 	PHYSLERP.FORCE = 8 * stable_legs
 	PHYSLERP.RESERVE_FORCE = 16 * stable_legs
 	var force_goal = PHYSLERP.calculate_forces(delta)
@@ -96,8 +110,10 @@ func calculate_leg_target(leg:BotLeg) -> Vector3:
 	#leg_delta *= global_basis.inverse()
 	var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
 	
-	#1.5 is a measure of Splay. Should eb standardised.
-	var leg_prospective_xz = leg_delta_xz*3.0 + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1)*0.2 # Calculates prospective pos. Needs work
+	##Pre-muddied by velocity
+	var leg_idle_goal_xz:Vector3 = leg_delta_xz.normalized() * FOOT_PLANT_RADIUS
+	
+	var leg_prospective_xz = leg_idle_goal_xz + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1)*0.2 # Calculates prospective pos. Needs work
 	
 	DOWN_RAY.position = leg_prospective_xz
 	DOWN_RAY.force_raycast_update()
@@ -247,7 +263,7 @@ func get_closest_stable_point_to(pos:Vector3) -> Vector3:
 	var pivot_point:Vector3;
 	if(len(stable_area) == 0):
 		
-		push_warning("attempted to calculate Closest-Stable-Point when there is no stable area at all.")
+		#push_warning("attempted to calculate Closest-Stable-Point when there is no stable area at all.")
 		return Vector3.INF # Returns this as warning, failure
 		
 		
@@ -299,22 +315,31 @@ func get_closest_stable_point_to(pos:Vector3) -> Vector3:
 	return pivot_point
 
 
+##TODO REDO THIS FUNCTION idk how it works
 ##All global space, applies a delta velocity around the moment of stability to feet. Takes the DV @ com
 func apply_dv_to_feet(dv:Vector3):
 	var com_global := BODY.global_position + BODY.global_basis*BODY.center_of_mass
 	var pivot_pos:Vector3 = get_closest_stable_point_to(com_global + dv * 100)
-	var com_delta := com_global - pivot_pos
-	var pivot_axis:Vector3 = dv.cross(com_delta).normalized();
+	if(pivot_pos == Vector3.INF):#No stable area whatsoever
+		for leg in LEGS:
+			leg.apply_foot_impulse(leg.FOOT.mass * dv)
 	
-	var delta_dv:float = dv.dot(-pivot_axis.cross(com_delta)) / com_delta.length()
+	
+	var com_delta := com_global - pivot_pos
+	var pivot_axis:Vector3 = Vector3.UP.cross(com_delta).normalized();
+	
+	var delta_dv:float = dv.dot(-pivot_axis.cross(com_delta.normalized()))
 	
 	
 	for leg in LEGS:
-		var foot_pivot_delta := leg.FOOT.global_position - pivot_pos
-		var foot_dv_dir:Vector3 = foot_pivot_delta.cross(pivot_axis).normalized()
-		var foot_dv = delta_dv * foot_pivot_delta.length()
-		
-		leg.apply_foot_impulse(foot_dv * foot_dv_dir * leg.FOOT.mass)
+		if(leg.is_stable):
+			var foot_pivot_delta := leg.FOOT.global_position - pivot_pos
+			var foot_dv_dir:Vector3 = foot_pivot_delta.cross(pivot_axis).normalized()
+			var foot_dv = delta_dv * foot_pivot_delta.length()
+			
+			leg.apply_foot_impulse(foot_dv * foot_dv_dir * leg.FOOT.mass) # Does this only consider pivotal forces?
+		else:
+			leg.apply_foot_impulse(leg.FOOT.mass * dv) # If ungrounded, simply propagate
 		
 		#print(foot_dv)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kfamnabyuul1"]
+[gd_scene load_steps=9 format=3 uid="uid://kfamnabyuul1"]
 
 [ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="1_lc2cb"]
 [ext_resource type="Script" uid="uid://b5ipcbyyx3hkv" path="res://npc/tests_primitives/legs/legbot_3001.gd" id="1_yr67n"]
@@ -16,23 +16,10 @@ height = 0.3
 height = 0.3
 radius = 0.25
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yr67n"]
-transparency = 1
-albedo_color = Color(0.856, 1, 0.64, 0.360784)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_62c5f"]
-material = SubResource("StandardMaterial3D_yr67n")
-top_radius = 0.2
-bottom_radius = 0.2
-height = 0.5
-
-[node name="Legbot3001" type="Node3D" node_paths=PackedStringArray("BODY", "BODY_HITTABLE", "LEGS", "TARGET", "DOWN_RAY", "ANGLE_HELPER")]
+[node name="Legbot3001" type="Node3D" node_paths=PackedStringArray("BODY", "LEGS", "ANGLE_HELPER")]
 script = ExtResource("1_yr67n")
 BODY = NodePath("Body")
-BODY_HITTABLE = NodePath("Body/Hit_Component")
 LEGS = [NodePath("Body/Legbotleg1"), NodePath("Body/Legbotleg2"), NodePath("Body/Legbotleg3")]
-TARGET = NodePath("Target")
-DOWN_RAY = NodePath("Body/DownRay")
 ANGLE_HELPER = NodePath("Body/Angle_Helper")
 
 [node name="Body" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
@@ -42,18 +29,15 @@ mass = 4.0
 script = ExtResource("2_m27ph")
 HITTABLE = [NodePath("Hit_Component")]
 
-[node name="Legbotleg1" parent="Body" node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+[node name="Legbotleg1" parent="Body" instance=ExtResource("2_iv3ci")]
 transform = Transform3D(-1, 0, -8.74228e-08, -3.55271e-15, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.229486)
-BODY = NodePath("..")
 logging = true
 
-[node name="Legbotleg2" parent="Body" node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+[node name="Legbotleg2" parent="Body" instance=ExtResource("2_iv3ci")]
 transform = Transform3D(0.573576, 5.167e-10, 0.819152, 0, 1, -1.49012e-08, -0.819152, 0, 0.573576, -0.173183, 0, -0.143536)
-BODY = NodePath("..")
 
-[node name="Legbotleg3" parent="Body" node_paths=PackedStringArray("BODY") instance=ExtResource("2_iv3ci")]
+[node name="Legbotleg3" parent="Body" instance=ExtResource("2_iv3ci")]
 transform = Transform3D(0.573576, -5.167e-10, -0.819152, 0, 1, -1.49012e-08, 0.819152, 0, 0.573576, 0.18834, 0, -0.151752)
-BODY = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
 mesh = SubResource("CylinderMesh_iv3ci")
@@ -98,9 +82,3 @@ script = ExtResource("6_i21b0")
 MAX_HP = 0.0
 MINIMUM_DAMAGE_THRESHOLD = 0.0
 metadata/_custom_type_script = "uid://kaqwxa5dtqay"
-
-[node name="Target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64222, 0.0339408)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Target"]
-mesh = SubResource("CylinderMesh_62c5f")

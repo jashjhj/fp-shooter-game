@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dljqaqcx7cptb"]
+[gd_scene load_steps=8 format=3 uid="uid://dljqaqcx7cptb"]
 
 [ext_resource type="ArrayMesh" uid="uid://4sdhopv0l4ds" path="res://npc/enemy/totembot/assets/leg_foot.obj" id="1_1nd10"]
 [ext_resource type="Script" uid="uid://bbqoq87idvyqs" path="res://npc/tests_primitives/legs/botleg.gd" id="1_r5lsd"]
@@ -6,23 +6,50 @@
 [ext_resource type="ArrayMesh" uid="uid://676shaw0n7e1" path="res://npc/enemy/totembot/assets/leg_lower.obj" id="3_aqqmv"]
 [ext_resource type="ArrayMesh" uid="uid://rlobttak3vva" path="res://npc/enemy/totembot/assets/leg_upper.obj" id="4_mciut"]
 
-[node name="TotemBotLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER")]
-script = ExtResource("1_r5lsd")
-UPPER = NodePath("LegUpper")
-LOWER = NodePath("LegLower")
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r5lsd"]
+rough = true
 
-[node name="LegFoot" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -1.77835, 0.19196)
-mesh = ExtResource("1_1nd10")
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r5lsd"]
+points = PackedVector3Array(0.081851, -0.0265561, -0.100361, 0.081851, -0.0334074, -0.100361, -0.081867, -0.0265561, -0.100361, 0.0143123, 0.0487558, -0.0159109, 0.0143123, 0.051878, 0.00971945, 0.0143123, 0.0428719, 0.0310554, 0.0399879, -0.0265561, 0.0420732, 0.0372312, -0.037972, -0.0411332, -0.081867, -0.0334074, -0.100361, 0.0399879, -0.0334074, 0.0420732, 0.0249063, -0.037972, 0.0171423, -0.0400039, -0.0265561, 0.0420732, -0.0143283, 0.0428719, 0.0310554, -0.0143283, 0.051878, 0.00971945, -0.0143283, 0.0487558, -0.0159109, 0.00809375, -0.0259668, 0.098153, 0.0180146, -0.0261691, 0.0897391, -0.0372472, -0.037972, -0.0411332, -0.0249223, -0.037972, 0.0171423, -0.0400039, -0.0334074, 0.0420732, 0.0180146, -0.030461, 0.0897391, 0.00902333, -0.0358964, 0.0777109, -0.0180306, -0.0261691, 0.0897391, -0.00810976, -0.0259668, 0.098153, 0.00809375, -0.0298806, 0.098153, -0.00903934, -0.0358964, 0.0777109, -0.0180306, -0.030461, 0.0897391, -0.00810976, -0.0298806, 0.098153)
+
+[node name="TotemBotLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT")]
+script = ExtResource("1_r5lsd")
+UPPER = NodePath("Upper")
+LOWER = NodePath("Lower")
+UPPER_LENGTH = 0.8
+INVERT_KNEE = true
+FOOT = NodePath("Foot")
 
 [node name="LegHip" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -0.0447712)
 mesh = ExtResource("2_r5lsd")
 
-[node name="LegLower" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.778478, 0.196219)
-mesh = ExtResource("3_aqqmv")
+[node name="Foot" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.76207, -0.00915508)
+physics_material_override = SubResource("PhysicsMaterial_r5lsd")
+lock_rotation = true
 
-[node name="LegUpper" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.196219)
+[node name="LegFoot" type="MeshInstance3D" parent="Foot"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.029582, 0)
+mesh = ExtResource("1_1nd10")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Foot"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.029582, 0)
+shape = SubResource("ConvexPolygonShape3D_r5lsd")
+
+[node name="Upper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="LegUpper" type="MeshInstance3D" parent="Upper"]
+transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0, 0)
 mesh = ExtResource("4_mciut")
+skeleton = NodePath("../..")
+
+[node name="Lower" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.795836, 0)
+
+[node name="LegLower" type="MeshInstance3D" parent="Lower"]
+transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, -1.10081e-09, 0.0251835)
+mesh = ExtResource("3_aqqmv")
+skeleton = NodePath("../..")

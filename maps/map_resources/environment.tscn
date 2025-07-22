@@ -14,11 +14,13 @@ process_mode = 1
 background_mode = 2
 sky = SubResource("Sky_sab5y")
 ssao_enabled = true
+sdfgi_enabled = true
 
 [node name="Environment" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.965926, -0.24321, -0.0885213, -0.0449434, -0.49444, 0.868049, -0.254887, -0.834493, -0.488523, 0, 0, 0)
+light_color = Color(0.87, 0.965333, 1, 1)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
