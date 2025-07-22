@@ -18,7 +18,6 @@ class_name BotLeg extends Node3D
 #@onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PROPAGATION_HELPER:Node3D = Node3D.new()
 
-@export var VERT_IMPULSE_TO_UPROOT:float = 1.0;
 
 @export var logging:bool = false;
 
@@ -36,7 +35,8 @@ var is_physical:bool = true:
 
 # If stable, attached to floor UNTIl pushed up. If not stable, attached to body and any deltas will be appliead appropriately
 
-var is_stable:bool = false;
+var is_stable:bool = false
+
 ## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
 var step_state:int = 0:
 	set(v):
@@ -47,7 +47,7 @@ var step_state:int = 0:
 		elif v == 2:
 			FOOT_PHYSLERP.enabled = true
 		else:
-			push_error("Attempted tos et step_state of a leg to a value not in the range 0,1,2")
+			push_error("Attempted to set step_state of a leg to a value not in the range 0,1,2")
 			return
 		step_state = v
 var step_start:int;
@@ -250,8 +250,6 @@ func distribute_impulse(impulse:Vector3, along:float):
 	#APPLY
 	BODY.apply_impulse(resultant_top, global_position - BODY.global_position)
 	apply_foot_impulse(resultant_bottom)
-	
-
 
 ##Called upon any hit
 func generic_hit():
@@ -260,19 +258,25 @@ func generic_hit():
 ##Force is in global coords. Applies foot force if it would 'uproot the foot.
 func apply_foot_force(force:Vector3):
 	if(is_stable):
-		FOOT.apply_central_force(force)
-	
+		var VERT_FORCE_TO_UPROOT:float = FOOT.mass * abs(ProjectSettings.get_setting("physics/3d/default_gravity"));
+		if(force.y > VERT_FORCE_TO_UPROOT):
+			FOOT.apply_central_force(force)
+			
 	else:
 		FOOT.apply_central_force(force)
 
 func apply_foot_impulse(impulse:Vector3):
 	if(is_stable):
-		if(impulse.y > VERT_IMPULSE_TO_UPROOT or true):
+		var VERT_IMPULSE_TO_UPROOT:float = FOOT.mass * abs(ProjectSettings.get_setting("physics/3d/default_gravity")) * (1/60); # Divided by expected 'delta' as impulse is Ns
+		if(impulse.y > VERT_IMPULSE_TO_UPROOT):
 			is_stable = false;
 			FOOT.apply_central_impulse(impulse)
 	
 	else:
 		FOOT.apply_central_impulse(impulse)
+
+
+
 
 
 func is_on_floor() -> bool:
