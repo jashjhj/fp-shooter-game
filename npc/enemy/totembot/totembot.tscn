@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c601y42ahg3h1"]
+
+[ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
+[ext_resource type="ArrayMesh" uid="uid://dx0782muv6m4d" path="res://npc/enemy/totembot/assets/abdomen_frame.obj" id="2_avg8m"]
+
+[node name="Totembot" type="Node3D" node_paths=PackedStringArray("BODY")]
+script = ExtResource("1_rx6h4")
+BODY = NodePath("Body")
+
+[node name="Body" type="RigidBody3D" parent="."]
+
+[node name="AbdomenFrame" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_avg8m")

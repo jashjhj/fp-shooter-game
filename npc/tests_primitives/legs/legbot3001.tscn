@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://kfamnabyuul1"]
 
 [ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="1_lc2cb"]
-[ext_resource type="Script" uid="uid://b5ipcbyyx3hkv" path="res://npc/test_npcs/legs/legbot_3001.gd" id="1_yr67n"]
-[ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/test_npcs/legs/legbotleg.tscn" id="2_iv3ci"]
+[ext_resource type="Script" uid="uid://b5ipcbyyx3hkv" path="res://npc/tests_primitives/legs/legbot_3001.gd" id="1_yr67n"]
+[ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/tests_primitives/legs/legbotleg.tscn" id="2_iv3ci"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittable_RB.gd" id="2_m27ph"]
 [ext_resource type="Script" uid="uid://dnpmmrwqk78q4" path="res://false_physics/physics_lerper/angle_helper.gd" id="4_62c5f"]
 [ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="6_i21b0"]
