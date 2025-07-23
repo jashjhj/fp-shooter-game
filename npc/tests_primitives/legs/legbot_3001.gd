@@ -18,8 +18,12 @@ class_name LegBot extends Node3D
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
-@onready var BODY_HITTABLE:Hit_Component = BODY.inbuilt_hit_component
 
+##Set this to the body's hit-component.
+@export var BODY_HITTABLE:Hit_Component;
+
+
+@onready var LEGS_INITIAL:int = len(LEGS)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,6 +40,7 @@ func _ready() -> void:
 	PHYSLERP.RIGIDBODY = BODY
 	PHYSLERP.TARGET = TARGET
 	
+	assert(BODY_HITTABLE != null, "No Body hittable set")
 	BODY_HITTABLE.on_hit.connect(body_hit)
 	
 	#Init dow-ray
@@ -177,6 +182,13 @@ func consider_step():
 		#percieved_stability  = lerp(percieved_stability, 1.0, 0.01)
 	#
 	#percieved_stability -= BODY.linear_velocity.length() * 0.01
+	
+	#Special case - 1 leg is unstable: Make it take a step
+	if(stable_legs == LEGS_INITIAL - 1): # If one elg unstable
+		for leg in LEGS:
+			if(!leg.is_stable and !leg.is_stepping):
+				leg.begin_step()
+				return
 	
 	if Time.get_ticks_msec() - last_leg_movement > 1500: # TODO: Add better criteria for when stepping.
 		last_leg_movement = Time.get_ticks_msec()

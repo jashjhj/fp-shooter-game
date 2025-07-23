@@ -16,8 +16,8 @@ var BODY:RigidBody3D:
 @export var FOOT:RigidBody3D;
 
 
-@export var LOWER_HIT:Hit_Component;
-@export var UPPER_HIT:Hit_Component;
+@export var LOWER_HITCMP:Hit_Component;
+@export var UPPER_HITCMP:Hit_Component;
 
 
 @export var logging:bool = false;
@@ -51,10 +51,13 @@ var is_physical:bool = true:
 var is_stable:bool = false
 
 ## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
+var is_stepping:bool = false
 var step_state:int = 0:
 	set(v):
+		is_stepping = true
 		if(v == 0):
 			FOOT_PHYSLERP.enabled = false
+			is_stepping = false
 		elif v == 1:
 			FOOT_PHYSLERP.enabled = true
 		elif v == 2:
@@ -105,17 +108,17 @@ func _ready() -> void:
 	FOOT.max_contacts_reported = 3;
 	
 	
-	if(UPPER_HIT == null):
+	if(UPPER_HITCMP == null):
 		push_warning("No upper-leg hit-component set")
 	else:
-		UPPER_HIT.on_hit.connect(upper_hit)
-		UPPER_HIT.on_hit.connect(generic_hit)
+		UPPER_HITCMP.on_hit.connect(upper_hit)
+		UPPER_HITCMP.on_hit.connect(generic_hit)
 	
-	if(LOWER_HIT == null):
+	if(LOWER_HITCMP == null):
 		push_warning("No lower-leg hit-componennt set")
 	else:
-		LOWER_HIT.on_hit.connect(lower_hit)
-		LOWER_HIT.on_hit.connect(generic_hit)
+		LOWER_HITCMP.on_hit.connect(lower_hit)
+		LOWER_HITCMP.on_hit.connect(generic_hit)
 	
 	#add_child(TARGET) # Reparented when BODy is set
 	TARGET.top_level = true
@@ -158,6 +161,7 @@ func _physics_process(delta: float) -> void:
 	#print(step_state)
 	if(!is_physical): return # used to disable, for optimisation.
 	
+	DebugDraw3D.draw_text(FOOT.global_position + Vector3.UP * 0.1, str(is_stable))
 	
 	
 	if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is now stable
@@ -235,18 +239,18 @@ func impose_footpos_limits():
 
 #------------ IMPLUSE REDISTRIBUTION -------------#
 func upper_hit():
-	var pos = UPPER_HIT.last_impulse_pos
+	var pos = UPPER_HITCMP.last_impulse_pos
 	var along = pos.dot(-UPPER.global_basis.z) / UPPER_LENGTH
 	along = min(1.0, max(0.0, along))
 	#Along is in the range 0 @ hip -> 1 at knee
 	along -= 1.0;
-	distribute_impulse(UPPER_HIT.last_impulse, along)
+	distribute_impulse(UPPER_HITCMP.last_impulse, along)
 func lower_hit():
-	var pos = LOWER_HIT.last_impulse_pos
+	var pos = LOWER_HITCMP.last_impulse_pos
 	var along = pos.dot(-LOWER.global_basis.z) / LOWER_LENGTH
 	along = min(1.0, max(0.0, along))
 	#Along is in the range 0 @ knee -> 1 at toes
-	distribute_impulse(LOWER_HIT.last_impulse, along)
+	distribute_impulse(LOWER_HITCMP.last_impulse, along)
 
 ##Along is a measure of hwo far along the impulse is: -1:Hip, 0:Knee, 1:Toes
 func distribute_impulse(impulse:Vector3, along:float):

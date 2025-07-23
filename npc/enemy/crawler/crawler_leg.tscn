@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://sel62qjtekyj" path="res://npc/enemy/crawler/abstract/crawler_leg.gd" id="1_42w6q"]
 [ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="2_4qeov"]
-[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="2_pmr1i"]
+[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="2_pmr1i"]
 [ext_resource type="AudioStream" uid="uid://b8f51he6jfdh1" path="res://assets/sfx/metal_tap.wav" id="5_4qeov"]
 [ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="5_kssld"]
 

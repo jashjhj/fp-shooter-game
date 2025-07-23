@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://wj3o5lh1ipji"]
 
 [ext_resource type="Script" uid="uid://bbqoq87idvyqs" path="res://npc/tests_primitives/legs/botleg.gd" id="1_gcapg"]
-[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="2_qsgas"]
+[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="2_qsgas"]
 [ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="3_jrlnb"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5mru"]
@@ -35,13 +35,11 @@ radius = 0.06
 radius = 0.05
 height = 0.1
 
-[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT", "LOWER_HIT", "UPPER_HIT")]
+[node name="Legbotleg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT")]
 script = ExtResource("1_gcapg")
 UPPER = NodePath("Upper")
 LOWER = NodePath("Lower")
 FOOT = NodePath("Foot")
-LOWER_HIT = NodePath("Lower/Lower_Hit_Component")
-UPPER_HIT = NodePath("Upper/Upper_Hit_Component")
 
 [node name="Upper" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -70,7 +68,6 @@ shape = SubResource("CylinderShape3D_gcapg")
 [node name="Upper_Hit_Component" type="Node" parent="Upper"]
 script = ExtResource("3_jrlnb")
 MAX_HP = 0.0
-MINIMUM_DAMAGE_THRESHOLD = 0.0
 metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="Lower" type="Node3D" parent="."]
@@ -95,7 +92,6 @@ shape = SubResource("CylinderShape3D_c5mru")
 [node name="Lower_Hit_Component" type="Node" parent="Lower"]
 script = ExtResource("3_jrlnb")
 MAX_HP = 0.0
-MINIMUM_DAMAGE_THRESHOLD = 0.0
 metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="Foot" type="RigidBody3D" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://nsu34clptgvc"]
 
 [ext_resource type="Script" uid="uid://c1dm3ulo2f65r" path="res://gameobjects/security_cameras/breakable_camera.gd" id="1_ht5pv"]
-[ext_resource type="Script" uid="uid://bvtqkpk4hvu82" path="res://gameobjects/world_interactive/hit_effects/Hittable_StaticBody.gd" id="2_gkdp5"]
+[ext_resource type="Script" uid="uid://bvtqkpk4hvu82" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_StaticBody.gd" id="2_gkdp5"]
 [ext_resource type="Material" uid="uid://dhi0e7f0jfjyb" path="res://assets/models/cameras/securitycam1/Camera_Body_Mat.tres" id="2_ht5pv"]
 [ext_resource type="Script" uid="uid://d1e5hxhy5da8u" path="res://gameobjects/world_interactive/hit_effects/Hit_Rotate.gd" id="3_dnm3r"]
 [ext_resource type="ArrayMesh" uid="uid://b3g0ep1q8inlt" path="res://assets/models/cameras/securitycam1/Stand.obj" id="3_icqcf"]
@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://fdw7r64vxnq5" path="res://assets/models/cameras/securitycam1/Camera_Top_Mat.tres" id="6_dnm3r"]
 [ext_resource type="Material" uid="uid://du2mqnkqk6ebm" path="res://assets/models/cameras/securitycam1/Camera_Lens_Mat.tres" id="7_4y5qw"]
 [ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="8_e6fgj"]
-[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittable_Collider.gd" id="9_gkdp5"]
+[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="9_gkdp5"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dnm3r"]
 points = PackedVector3Array(-0.019087, -0.097897, 0.00850295, -0.019087, -0.097897, -0.00850793, -0.018326, -0.103423, 0.00662891, -0.0155241, -0.123248, 0.00850295, 0.157587, -0.150226, 0.025454, 0.157587, -0.099305, 0.025454, 0.0200701, -0.0980105, 0.00852288, -0.0155241, -0.123248, -0.00850793, -0.018326, -0.103423, -0.00663389, 0.0200701, -0.0980105, -0.00848799, 0.157587, -0.099305, -0.025459, 0.157587, -0.150226, -0.025459, 0.157587, -0.175229, -4.98258e-06)
