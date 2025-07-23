@@ -198,6 +198,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		STEP_TARGET.global_position = TARGET.global_position
 	
+	Debug.point(TARGET.global_position)
 	
 	propagate_motion(!is_stable and is_physical)
 	
