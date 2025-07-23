@@ -292,13 +292,12 @@ func distribute_impulse(impulse:Vector3, impulse_pos:Vector3, along:float):
 	resultant_bottom += cmp_vert * (1-proportion_top)
 	
 	#Forwards
-
 	
 	resultant_top += cmp_forward * proportion_top
 	resultant_bottom += cmp_forward * (1-proportion_top)
 	
 	#+ is into knee, - is down (push body up)
-	var vert_cmp = impulse.dot(forwards)
+	var vert_cmp = impulse.dot(forwards) * 3
 	var extend_cmp:float = 1-(proportion_top**2)
 	resultant_top += vert_cmp * -vert * extend_cmp# Push it down too
 	resultant_bottom -= vert_cmp * -vert * extend_cmp  # Push it up because impulse, can cause leg to jolt interestingly
