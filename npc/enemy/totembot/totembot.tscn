@@ -45,8 +45,9 @@ LEGS = [NodePath("Body/TotemBotLeg"), NodePath("Body/TotemBotLeg2"), NodePath("B
 ANGLE_HELPER = NodePath("Body/Angular_Damper")
 IDLE_HEIGHT = 1.7
 FOOT_PLANT_RADIUS = 0.7
-LEG_FORCE_THROUGH = 50.0
+LEG_FORCE_THROUGH = 70.0
 LEG_FORCE_LATERAL = 40.0
+IMAGINED_FORCE = 100.0
 BODY_HITTABLE = NodePath("Body/Hittable_Collider/Hit_Transfer_Impusle")
 
 [node name="Body" type="RigidBody3D" parent="."]
@@ -56,13 +57,13 @@ mass = 20.0
 script = ExtResource("2_8nbuu")
 
 [node name="TotemBotLeg" parent="Body" instance=ExtResource("20_heqxd")]
-transform = Transform3D(0.5, -1.19783e-08, -0.866025, 2.39565e-08, 1, 0, 0.866025, -2.07469e-08, 0.5, -0.183934, -0.191966, 0.10007)
+transform = Transform3D(0.5, -1.19783e-08, -0.866025, 2.39565e-08, 1, 0, 0.866025, -2.07469e-08, 0.5, -0.404716, -0.191966, 0.224388)
 
 [node name="TotemBotLeg2" parent="Body" instance=ExtResource("20_heqxd")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.185036, -0.219095)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.185036, -0.42524)
 
 [node name="TotemBotLeg3" parent="Body" instance=ExtResource("20_heqxd")]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, 0.131448, -0.191966, 0.0911162)
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, 0.377562, -0.191966, 0.245469)
 
 [node name="Angular_Damper" type="Generic6DOFJoint3D" parent="Body"]
 node_a = NodePath("..")
@@ -70,22 +71,19 @@ linear_limit_x/enabled = false
 linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 angular_limit_x/enabled = false
-angular_limit_x/damping = 10.0
 angular_limit_y/enabled = false
-angular_limit_y/damping = 10.0
 angular_limit_z/enabled = false
-angular_limit_z/damping = 10.0
 angular_spring_x/enabled = true
-angular_spring_x/stiffness = 22.0
+angular_spring_x/stiffness = 18.0
 angular_spring_x/damping = 2.0
 angular_spring_y/enabled = true
-angular_spring_y/stiffness = 22.0
+angular_spring_y/stiffness = 18.0
 angular_spring_y/damping = 2.0
 angular_spring_z/enabled = true
-angular_spring_z/stiffness = 22.0
+angular_spring_z/stiffness = 18.0
 angular_spring_z/damping = 2.0
 script = ExtResource("2_68ihi")
-STIFFNESS = 22.0
+STIFFNESS = 18.0
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 
 [node name="AbdomenFrame" type="MeshInstance3D" parent="Body"]

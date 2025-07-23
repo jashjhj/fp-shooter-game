@@ -12,8 +12,12 @@ class_name LegBot extends Node3D
 @export_group("Gait Settings")
 @export var IDLE_HEIGHT:float = 1.5;
 @export var FOOT_PLANT_RADIUS:float = 1.0;
+##The full force that can be put 'through' a leg of the robot. Consider gravity when setting this value.
+##These default values are for an object of 4Kg with 3 Legs
 @export var LEG_FORCE_THROUGH:float = 20;
 @export var LEG_FORCE_LATERAL:float = 8;
+##Amount fo force the physlerper imagiens it has, at full capacity. Disregarding Gravity.
+@export var IMAGINED_FORCE:float = 60;
 
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
@@ -87,7 +91,7 @@ func apply_self_forces(delta):
 		force_capacity += LEG_FORCE_LATERAL*abs(leg_perp)     # Maximum 'lateral' force that can be applied per leg
 	
 	
-	PHYSLERP.FORCE = force_capacity.length()
+	PHYSLERP.FORCE = IMAGINED_FORCE
 	PHYSLERP.RESERVE_FORCE = BODY.mass * 11;
 	var force_goal = PHYSLERP.calculate_forces(delta)
 	
@@ -218,7 +222,7 @@ func pick_leg_to_move(stability:float = 0.5) -> BotLeg:
 			best_leg = j
 	
 	#Best leg si the one in the worst position and needs moving next.
-	if(best_leg_score > 0.2): # Minimum score to require moving
+	if(best_leg_score > 0.33): # Minimum score to require moving - basically  1/3m unless velocity is involved.
 		return legs[best_leg]
 	else:
 		return null
@@ -358,12 +362,17 @@ func apply_dv_to_feet(dv:Vector3):
 	
 	for leg in LEGS:
 		if(leg.is_stable):
+			
+			#This is unreliable - ignore it. Meant to lift up opposite leg when losing balance. - Inr eality causes everythign to fall
+			
 			var foot_pivot_delta := leg.FOOT.global_position - pivot_pos
 			var foot_dv_dir:Vector3 = foot_pivot_delta.cross(pivot_axis).normalized()
 			var foot_dv = delta_dv * foot_pivot_delta.length()
 			
-			#This is unreliable
 			#leg.apply_foot_impulse(foot_dv * foot_dv_dir * leg.FOOT.mass) # Does this only consider pivotal forces?
+			
+			
+			pass
 		else:
 			leg.apply_foot_impulse(leg.FOOT.mass * dv) # If ungrounded, simply propagate
 		

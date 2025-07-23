@@ -35,7 +35,7 @@ LOWER_HITCMP = NodePath("Lower/Lower_Hittable/Hit_Component")
 UPPER_HITCMP = NodePath("Upper/Upper_Hittable/Hit_Component")
 
 [node name="LegHip" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -0.0447712)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -0.247771)
 mesh = ExtResource("2_r5lsd")
 
 [node name="Foot" type="RigidBody3D" parent="."]
@@ -101,14 +101,13 @@ mesh = ExtResource("3_aqqmv")
 skeleton = NodePath("../..")
 
 [node name="Lower_Hittable" type="Area3D" parent="Lower"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.47871e-08, 0.795836)
 collision_layer = 128
 collision_mask = 0
 script = ExtResource("4_aqqmv")
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lower/Lower_Hittable"]
-transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 3.36863e-08, -0.770652)
+transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, -1.07652e-09, 0.0246279)
 shape = SubResource("ConcavePolygonShape3D_uogsf")
 
 [node name="Hit_Component" type="Node" parent="Lower/Lower_Hittable"]

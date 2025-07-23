@@ -14,9 +14,10 @@ signal on_hit
 signal on_hp_becomes_negative
 
 var last_impulse:Vector3 = Vector3.ZERO
-##Global Delta
+##Impulse pos = IMPULSE_GLOBAL_POS - COLLIDER_GLOBAL_POS == Offet from colldier in global space
 var last_impulse_pos:Vector3 = Vector3.ZERO
 
+##Impulse pos = IMPULSE_GLOBAL_POS - COLLIDER_GLOBAL_POS == Offet from colldier in global space
 func _hit(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 = Vector3.ZERO) -> void:
 	last_impulse = impulse
 	last_impulse_pos = impulse_pos

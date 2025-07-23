@@ -96,7 +96,7 @@ func _ready() -> void:
 	IKCALC.ELBOW_IN = !INVERT_KNEE
 	
 	FOOT_PHYSLERP.FORCE = 15;
-	FOOT_PHYSLERP.RESERVE_FORCE = 4;
+	FOOT_PHYSLERP.RESERVE_FORCE = 15;
 	FOOT_PHYSLERP.RIGIDBODY = FOOT
 	FOOT_PHYSLERP.TARGET = TARGET
 	
@@ -188,7 +188,7 @@ func _physics_process(delta: float) -> void:
 		if(dist_to_target < 0.04):
 			step_state = 2
 		elif (Time.get_ticks_msec() - step_start > 400): # >400ms have passed
-			step_state = 0;
+			step_state = 2;
 		
 	elif step_state == 2:
 		STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * -0.35
@@ -248,22 +248,28 @@ func upper_hit():
 	var pos = UPPER_HITCMP.last_impulse_pos
 	var along = pos.dot(-UPPER.global_basis.z) / UPPER_LENGTH
 	along = min(1.0, max(0.0, along))
-	#Along is in the range 0 @ hip -> 1 at knee
+	#Along is in the range -1 @ hip -> 0 at knee
 	along -= 1.0;
-	distribute_impulse(UPPER_HITCMP.last_impulse, along)
+	var impulse_pos := LOWER.global_position - BODY.global_position + UPPER_HITCMP.last_impulse_pos
+	distribute_impulse(UPPER_HITCMP.last_impulse, impulse_pos, along)
+
+	
 func lower_hit():
 	var pos = LOWER_HITCMP.last_impulse_pos
 	var along = pos.dot(-LOWER.global_basis.z) / LOWER_LENGTH
 	along = min(1.0, max(0.0, along))
 	#Along is in the range 0 @ knee -> 1 at toes
-	distribute_impulse(LOWER_HITCMP.last_impulse, along)
+	var impulse_pos := LOWER.global_position - BODY.global_position + LOWER_HITCMP.last_impulse_pos
+	distribute_impulse(LOWER_HITCMP.last_impulse, impulse_pos, along)
+
 
 ##Along is a measure of hwo far along the impulse is: -1:Hip, 0:Knee, 1:Toes
-func distribute_impulse(impulse:Vector3, along:float):
+func distribute_impulse(impulse:Vector3, impulse_pos:Vector3, along:float):
 	#Lines: Vert is through foot to hip, Forward is into the crux of the knee, (ie. would buckle it), perpendicular is the axis by which the knee rotates
 	var vert:Vector3 = (global_position - FOOT.global_position).normalized()
+	##Perpendicular to knee.
 	var perpendicular:Vector3 = LOWER.global_basis.x
-	var forwards:Vector3 = UPPER.global_basis.y.slerp(LOWER.global_basis.y, 0.5) # Middle angle is into crux of knee
+	var forwards:Vector3 = UPPER.global_basis.y.slerp(LOWER.global_basis.y, 0.5) # Middle angle is into crux of knee, hence forwards
 	
 	var cmp_vert:Vector3 = impulse.dot(vert) * vert
 	var cmp_forward:Vector3 = impulse.dot(forwards) * forwards
@@ -274,22 +280,28 @@ func distribute_impulse(impulse:Vector3, along:float):
 	var resultant_bottom:Vector3 = Vector3.ZERO
 	
 	#PERPENDICULAR
-	var proportion_top:float = 1.0 - (along + 1.0) / 2.0
+	var proportion_top:float = sin(-PI*along/2) * 0.5 + 0.5 # Sin function where top = 1 and bottom = 0
 	
-	resultant_top += cmp_perp * proportion_top
-	resultant_bottom += cmp_perp * (1-proportion_top)
+	var hoz_distance_to_hit_pos = (impulse_pos * Vector3(1, 0, 1)).length()
+	
+	resultant_top += cmp_perp * hoz_distance_to_hit_pos**2 * proportion_top
+	resultant_bottom += cmp_perp * hoz_distance_to_hit_pos * (1-proportion_top)
 	
 	#VERTICAL
 	resultant_top += cmp_vert * proportion_top
 	resultant_bottom += cmp_vert * (1-proportion_top)
 	
 	#Forwards
+
+	
 	resultant_top += cmp_forward * proportion_top
 	resultant_bottom += cmp_forward * (1-proportion_top)
 	
-	var distance_to_knee = (1-abs(along));
-	resultant_top += cmp_forward.length() * -vert * distance_to_knee * 3 # Push it down too
-	resultant_bottom -= cmp_forward.length() * -vert * distance_to_knee  # Push it up because impulse, can cause leg to jolt interestingly
+	#+ is into knee, - is down (push body up)
+	var vert_cmp = impulse.dot(forwards)
+	var extend_cmp:float = 1-(proportion_top**2)
+	resultant_top += vert_cmp * -vert * extend_cmp# Push it down too
+	resultant_bottom -= vert_cmp * -vert * extend_cmp  # Push it up because impulse, can cause leg to jolt interestingly
 	
 	#APPLY
 	BODY.apply_impulse(resultant_top, global_position - BODY.global_position)
@@ -307,7 +319,7 @@ func apply_foot_force(force:Vector3):
 			FOOT.apply_central_force(force)
 			
 	else:
-		FOOT.apply_central_force(force)
+		FOOT.apply_central_force(force * Vector3(1, 0, 1))
 
 func apply_foot_impulse(impulse:Vector3):
 	if(is_stable):
@@ -315,7 +327,9 @@ func apply_foot_impulse(impulse:Vector3):
 		if(impulse.y > VERT_IMPULSE_TO_UPROOT):
 			is_stable = false;
 			FOOT.apply_central_impulse(impulse)
-	
+			step_state = 2 # try to stamp down
+		else:
+			FOOT.apply_central_impulse(impulse * Vector3(1, 0, 1))
 	else:
 		FOOT.apply_central_impulse(impulse)
 
