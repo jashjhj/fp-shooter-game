@@ -90,3 +90,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.14506, 2.75763, -8.44259)
 
 [node name="Totembot" parent="." instance=ExtResource("6_mvpoq")]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 4.00944, 2.04264, -23.5369)
+
+[node name="Totembot2" parent="." instance=ExtResource("6_mvpoq")]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 4.00944, 2.04264, -25.4386)
+
+[node name="Totembot3" parent="." instance=ExtResource("6_mvpoq")]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 4.00944, 2.04264, -27.4359)
+
+[node name="Totembot4" parent="." instance=ExtResource("6_mvpoq")]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 4.00944, 2.04264, -29.9573)

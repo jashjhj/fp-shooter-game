@@ -25,7 +25,6 @@ var BODY:RigidBody3D:
 
 @onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
 @onready var FOOT_PHYSLERP:Physics_Lerper = Physics_Lerper.new()
-@onready var PROPAGATION_HELPER:Node3D = Node3D.new()
 
 
 
@@ -125,7 +124,6 @@ func _ready() -> void:
 	#add_child(TARGET) # Reparented when BODy is set
 	TARGET.top_level = true
 	
-	add_child(PROPAGATION_HELPER)
 	propagate_motion(false)
 	
 	add_child(STEP_TARGET)
@@ -253,7 +251,6 @@ func upper_hit():
 	var impulse_pos := LOWER.global_position - BODY.global_position + UPPER_HITCMP.last_impulse_pos
 	distribute_impulse(UPPER_HITCMP.last_impulse, impulse_pos, along)
 
-	
 func lower_hit():
 	var pos = LOWER_HITCMP.last_impulse_pos
 	var along = pos.dot(-LOWER.global_basis.z) / LOWER_LENGTH
@@ -261,7 +258,6 @@ func lower_hit():
 	#Along is in the range 0 @ knee -> 1 at toes
 	var impulse_pos := LOWER.global_position - BODY.global_position + LOWER_HITCMP.last_impulse_pos
 	distribute_impulse(LOWER_HITCMP.last_impulse, impulse_pos, along)
-
 
 ##Along is a measure of hwo far along the impulse is: -1:Hip, 0:Knee, 1:Toes
 func distribute_impulse(impulse:Vector3, impulse_pos:Vector3, along:float):
@@ -346,15 +342,26 @@ func is_on_floor() -> bool:
 
 
 var prop_old_pos:Vector3;
+var prop_foot_old_pos:Vector3
+var prop_old_basis:Basis = Basis.IDENTITY
 ##Must be called each 'tick' to get accurate deltas. if arg == true, actually updates position.
+
 func propagate_motion(propagating:bool = true):
-	if(!propagating):
-		prop_old_pos = PROPAGATION_HELPER.global_position
-		return
+	if(propagating):
+		
+		
+		
+		var delta_pos:Vector3 = global_position - prop_old_pos
+		
+		
+		var delta_basis:Basis = prop_old_basis * global_basis.inverse()
+		
+		#Evil fucked up maths to apply a delta-position based on Basis change (Applies rotation)
+		#TODO not convicned this works
+		var delta_basis_pos = (FOOT.global_position - global_position) - (prop_foot_old_pos - prop_old_pos) * prop_old_basis.inverse() * global_basis
+		#print(delta_basis_pos)
+		FOOT.global_position += delta_pos + delta_basis_pos
 	
-	
-	var delta_pos:Vector3 = PROPAGATION_HELPER.global_position - prop_old_pos
-	
-	FOOT.global_position += delta_pos
-	
-	prop_old_pos = PROPAGATION_HELPER.global_position
+	prop_old_pos = global_position
+	prop_foot_old_pos = FOOT.global_position
+	prop_old_basis = global_basis
