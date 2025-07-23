@@ -206,24 +206,26 @@ func impose_footpos_limits():
 	var foot_vector = FOOT.global_position - global_position
 	var rebound_coefficient:float = 0.4
 	
+	var foot_dv:Vector3;
+	
 	#Outer limit
 	var max_extension:float = UPPER_LENGTH + LOWER_LENGTH
-	if(foot_vector.length() > max_extension): # If foot trying to escape
+	if(foot_vector.length() > max_extension + 0.05): # If foot trying to escape
 		FOOT.global_position = global_position + foot_vector.normalized() * (max_extension)
 		
 		hit_limit.emit(FOOT.linear_velocity * -(1+rebound_coefficient) * FOOT.mass, FOOT.global_position)
-		FOOT.linear_velocity += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + rebound_coefficient); # Rebound. Here, e=0.4
+		foot_dv += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + rebound_coefficient); # Rebound. Here, e=0.4
 	
 	
 	#Inner Limit
 	var min_extension:float = 0.08 * (UPPER_LENGTH + LOWER_LENGTH)
-	if(foot_vector.length() < min_extension): # If foot trying to escape
+	if(foot_vector.length() < min_extension - 0.05): # If foot trying to escape
 		#FOOT.global_position = global_position + foot_vector.normalized() * (min_extension)
 		
 		hit_limit.emit(FOOT.linear_velocity * -(1+rebound_coefficient) * FOOT.mass, FOOT.global_position)
-		FOOT.linear_velocity += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + rebound_coefficient); # Rebound. Here, e=0.4
+		foot_dv += FOOT.linear_velocity.dot(foot_vector.normalized()) * foot_vector.normalized() * -(1 + rebound_coefficient); # Rebound. Here, e=0.4
 	
-	
+	apply_foot_impulse(FOOT.mass * foot_dv)
 	
 
 

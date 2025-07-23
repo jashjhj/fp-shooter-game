@@ -35,6 +35,10 @@ func update_damping(d):
 	set("angular_spring_z/damping", d)
 	set("angular_spring_y/damping", d)
 	set("angular_spring_x/damping", d)
+	
+	#set("angular_limit_z/damping", d) # Not supported by physics, relies only on spring
+	#set("angular_limit_y/damping", d)
+	#set("angular_limit_x/damping", d)
 
 func update_stiffness(s):
 	set("angular_spring_z/stiffness", s)

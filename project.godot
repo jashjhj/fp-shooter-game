@@ -99,6 +99,7 @@ aim_down_sights={
 3d_physics/layer_5="Player"
 3d_physics/layer_6="NPC"
 3d_physics/layer_7="NPC_Physics"
+3d_physics/layer_8="NPC_Hittables"
 3d_physics/layer_9="Player_Hurtbox"
 3d_physics/layer_13="Debris_Small"
 3d_physics/layer_14="Debris_Medium"
@@ -120,6 +121,7 @@ common/physics_ticks_per_second=120
 3d/physics_engine="Jolt Physics"
 jolt_physics_3d/simulation/penetration_slop=0.001
 jolt_physics_3d/simulation/speculative_contact_distance=0.03
+3d/solver/solver_iterations=20
 
 [rendering]
 

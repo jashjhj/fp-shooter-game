@@ -12,6 +12,8 @@ class_name LegBot extends Node3D
 @export_group("Gait Settings")
 @export var IDLE_HEIGHT:float = 1.5;
 @export var FOOT_PLANT_RADIUS:float = 1.0;
+@export var LEG_FORCE_THROUGH:float = 20;
+@export var LEG_FORCE_LATERAL:float = 8;
 
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
@@ -33,8 +35,6 @@ func _ready() -> void:
 	
 	PHYSLERP.RIGIDBODY = BODY
 	PHYSLERP.TARGET = TARGET
-	PHYSLERP.FORCE = 10;
-	PHYSLERP.RESERVE_FORCE = 40;
 	
 	BODY_HITTABLE.on_hit.connect(body_hit)
 	
@@ -57,43 +57,56 @@ func _physics_process(delta: float) -> void:
 	
 	apply_offbalance_force(delta)
 	consider_step()
+	
+	
 
+var last_force_applied:Vector3 = Vector3.ZERO # Logging
 func apply_self_forces(delta):
 	var stable_area := calculate_stable_area()
 	var stable_legs:float = len(stable_area)
 	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * IDLE_HEIGHT
-	PHYSLERP.FORCE = 8 * stable_legs
-	PHYSLERP.RESERVE_FORCE = 16 * stable_legs
-	var force_goal = PHYSLERP.calculate_forces(delta)
+	
 	
 	
 	#Capacity for forces.
 	var force_capacity:Vector3 = Vector3.ZERO;
 	
 	for leg in LEGS:
+		if(!leg.is_stable): continue
 		var leg_through:Vector3 = (leg.global_position - leg.FOOT.global_position).normalized()
 		var leg_perp:Vector3 = Vector3.ONE - abs(leg_through)
 		leg_perp = leg_perp.normalized();
 		
-		force_capacity += 40*abs(leg_through) # Maximum 'through' force that can be applied per leg
-		force_capacity += 10*abs(leg_perp)     # Maximum 'lateral' force that can be applied per leg
+		force_capacity += LEG_FORCE_THROUGH*abs(leg_through) * 3 # Maximum 'through' force that can be applied per leg
+		force_capacity += LEG_FORCE_LATERAL*abs(leg_perp)     # Maximum 'lateral' force that can be applied per leg
 	
-	#print("Goal force: ", force_goal, ". Capacity: ", force_capacity)
+	
+	PHYSLERP.FORCE = force_capacity.length()
+	PHYSLERP.RESERVE_FORCE = BODY.mass * 11;
+	var force_goal = PHYSLERP.calculate_forces(delta)
+	
+	
 	
 	# Calculate the force to apply, being the direction intended and the maximum magnitude we want / can enforce
-	var force_to_apply:Vector3 = Vector3(\
-		sign(force_goal.x) * min(abs(force_goal.x), force_capacity.x),\
-		sign(force_goal.y) * min(abs(force_goal.y), force_capacity.y),\
-		sign(force_goal.z) * min(abs(force_goal.z), force_capacity.z),\
+	var force_to_apply:Vector3 = Vector3(                               \
+		sign(force_goal.x) * min(abs(force_goal.x), force_capacity.x),  \
+		sign(force_goal.y) * min(abs(force_goal.y), force_capacity.y),  \
+		sign(force_goal.z) * min(abs(force_goal.z), force_capacity.z),  \
 	)
 	
 	BODY.apply_central_force(force_to_apply)
 	
 	## -- Moments --
-	ANGLE_HELPER.STIFFNESS = stable_legs * 3
-	ANGLE_HELPER.DAMPING = stable_legs * 0.66 - 1
-
+	#ANGLE_HELPER.STIFFNESS = stable_legs * 3
+	#ANGLE_HELPER.DAMPING = stable_legs * 0.66 - 1
+	
+	#Logging for fixing settings - useful for setting values intiially
+	#If the force i want is the same,                  and  nothing is happening                 and its not just being intitialised
+	#if((PHYSLERP.last_force - force_goal).length() < 1.0 and BODY.linear_velocity.length() < 0.2 and Time.get_ticks_msec() > 1000):
+		#print("Percieved under-powered force: ", force_to_apply, "Applied out of", force_goal)
+	
+	last_force_applied = force_to_apply
 
 
 func body_hit():
