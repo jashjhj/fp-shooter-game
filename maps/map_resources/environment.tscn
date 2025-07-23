@@ -14,7 +14,9 @@ process_mode = 1
 background_mode = 2
 sky = SubResource("Sky_sab5y")
 ssao_enabled = true
+ssil_enabled = true
 sdfgi_enabled = true
+glow_enabled = true
 
 [node name="Environment" type="Node3D"]
 

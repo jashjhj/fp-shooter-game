@@ -121,83 +121,112 @@ script = ExtResource("7_5jvjh")
 TRANSFER_RB = NodePath("../..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
-[node name="Centrifuge0" type="MeshInstance3D" parent="."]
+[node name="Model" type="Node3D" parent="Body"]
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Body/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.084007, 0.0895553, -1.19209e-07)
+light_color = Color(1, 0.45, 0.45, 1)
+light_energy = 0.01
+shadow_enabled = true
+omni_range = 0.5
+omni_attenuation = 2.0
+
+[node name="Centrifuge0" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("3_hdgws")
-skeleton = NodePath("../Body")
+skeleton = NodePath("../..")
 
-[node name="Centrifuge1" type="MeshInstance3D" parent="."]
+[node name="Centrifuge1" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("4_heqxd")
-skeleton = NodePath("../Body")
+skeleton = NodePath("../..")
 
-[node name="Centrifuge2" type="MeshInstance3D" parent="."]
+[node name="Centrifuge2" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("5_68ihi")
-skeleton = NodePath("../Body")
+skeleton = NodePath("../..")
 
-[node name="Planetary_Gears" type="Node3D" parent="."]
+[node name="Planetary_Gears" type="Node3D" parent="Body/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.229805, 0)
 
-[node name="Planetary0" type="MeshInstance3D" parent="Planetary_Gears"]
+[node name="Planetary0" type="MeshInstance3D" parent="Body/Model/Planetary_Gears"]
 mesh = ExtResource("6_8nbuu")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 
-[node name="Planetary1" type="MeshInstance3D" parent="Planetary_Gears"]
+[node name="Planetary1" type="MeshInstance3D" parent="Body/Model/Planetary_Gears"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172501, 2.98023e-08, -0.00242019)
 mesh = ExtResource("7_gc2rj")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 
-[node name="Planetary_Gears2" type="Node3D" parent="."]
+[node name="Planetary_Gears2" type="Node3D" parent="Body/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.550809, 0)
 
-[node name="Planetary0" type="MeshInstance3D" parent="Planetary_Gears2"]
+[node name="Planetary0" type="MeshInstance3D" parent="Body/Model/Planetary_Gears2"]
 mesh = ExtResource("6_8nbuu")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 
-[node name="Planetary1" type="MeshInstance3D" parent="Planetary_Gears2"]
+[node name="Planetary1" type="MeshInstance3D" parent="Body/Model/Planetary_Gears2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172501, 2.98023e-08, -0.00242019)
 mesh = ExtResource("7_gc2rj")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 
-[node name="Shaft" type="MeshInstance3D" parent="."]
+[node name="Shaft" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("8_5jvjh")
+skeleton = NodePath("../../..")
 
-[node name="Shield0" type="MeshInstance3D" parent="."]
+[node name="Shield0" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("9_mv043")
+skeleton = NodePath("../../..")
 
-[node name="Shield1" type="MeshInstance3D" parent="."]
+[node name="Shield1" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("10_lqwa8")
+skeleton = NodePath("../../..")
 
-[node name="Shield1_1" type="MeshInstance3D" parent="."]
+[node name="Shield1_1" type="MeshInstance3D" parent="Body/Model"]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0, 0)
 mesh = ExtResource("10_lqwa8")
+skeleton = NodePath("../../..")
 
-[node name="Shield2" type="MeshInstance3D" parent="."]
+[node name="Shield2" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("11_bcabd")
+skeleton = NodePath("../../..")
 
-[node name="Gun" type="Node3D" parent="."]
+[node name="Gun" type="Node3D" parent="Body/Model"]
 
-[node name="GunHolder" type="MeshInstance3D" parent="Gun"]
+[node name="GunHolder" type="MeshInstance3D" parent="Body/Model/Gun"]
 mesh = ExtResource("12_v7ac7")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 
-[node name="Barrel" type="MeshInstance3D" parent="Gun"]
+[node name="Barrel" type="MeshInstance3D" parent="Body/Model/Gun"]
 mesh = ExtResource("13_mgybp")
 
-[node name="AmmoBox" type="MeshInstance3D" parent="."]
+[node name="AmmoBox" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("14_iweeg")
+skeleton = NodePath("../../..")
 
-[node name="AmmoHolder" type="MeshInstance3D" parent="."]
+[node name="AmmoHolder" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("15_0mgnh")
+skeleton = NodePath("../../..")
 
-[node name="AmmoWheel" type="MeshInstance3D" parent="."]
+[node name="AmmoWheel" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("16_72w42")
+skeleton = NodePath("../../..")
 
-[node name="Camera" type="MeshInstance3D" parent="."]
+[node name="Camera" type="MeshInstance3D" parent="Body/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0248861, 0.73388, 0)
 mesh = ExtResource("17_jvoay")
+skeleton = NodePath("../../..")
 
-[node name="DomeGlass" type="MeshInstance3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="Body/Model/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0799327, 0.00593537, -1.19209e-07)
+light_color = Color(1, 0.45, 0.45, 1)
+light_energy = 0.01
+shadow_enabled = true
+omni_range = 0.5
+omni_attenuation = 2.0
+
+[node name="DomeGlass" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("18_wi7e8")
+skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hdgws")
 
-[node name="DomeTop" type="MeshInstance3D" parent="."]
+[node name="DomeTop" type="MeshInstance3D" parent="Body/Model"]
 mesh = ExtResource("19_d4x4b")
+skeleton = NodePath("../../..")

@@ -82,6 +82,8 @@ var step_height:float = 0;
 signal became_stable
 
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -156,10 +158,12 @@ func begin_step(pos:Vector3 = TARGET.global_position):
 	step_start = Time.get_ticks_msec()
 	step_height = tanh((pos - FOOT.global_position).length())
 
+
 func _physics_process(delta: float) -> void:
 	
 	#print(step_state)
 	if(!is_physical): return # used to disable, for optimisation.
+	
 	
 	DebugDraw3D.draw_text(FOOT.global_position + Vector3.UP * 0.1, str(is_stable))
 	
@@ -202,6 +206,7 @@ func _physics_process(delta: float) -> void:
 	
 	impose_footpos_limits()
 	
+
 
 ##Impulse; global position at which hit-limit occured.
 signal hit_limit(impulse, pos)

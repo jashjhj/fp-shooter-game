@@ -362,7 +362,8 @@ func apply_dv_to_feet(dv:Vector3):
 			var foot_dv_dir:Vector3 = foot_pivot_delta.cross(pivot_axis).normalized()
 			var foot_dv = delta_dv * foot_pivot_delta.length()
 			
-			leg.apply_foot_impulse(foot_dv * foot_dv_dir * leg.FOOT.mass) # Does this only consider pivotal forces?
+			#This is unreliable
+			#leg.apply_foot_impulse(foot_dv * foot_dv_dir * leg.FOOT.mass) # Does this only consider pivotal forces?
 		else:
 			leg.apply_foot_impulse(leg.FOOT.mass * dv) # If ungrounded, simply propagate
 		
