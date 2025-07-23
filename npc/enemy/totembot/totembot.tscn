@@ -46,7 +46,7 @@ ANGLE_HELPER = NodePath("Body/Angular_Damper")
 IDLE_HEIGHT = 1.7
 FOOT_PLANT_RADIUS = 0.7
 LEG_FORCE_THROUGH = 70.0
-LEG_FORCE_LATERAL = 40.0
+LEG_FORCE_LATERAL = 45.0
 IMAGINED_FORCE = 100.0
 BODY_HITTABLE = NodePath("Body/Hittable_Collider/Hit_Transfer_Impusle")
 

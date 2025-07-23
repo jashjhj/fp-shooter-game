@@ -38,13 +38,13 @@ func get_angles(delta:Vector3, forwards:Vector3 = Vector3.FORWARD) -> IKAngles:
 func up_from_forwards(forwards:Vector3) -> Vector3:
 	var up:Vector3 = Vector3.UP  # Initialise perpendicular vectors
 	var right:Vector3 = Vector3.RIGHT
-	if(abs(up.dot(forwards)) < 0.9):# forwards is pointed towards up
+	if(abs(up.dot(forwards)) < 0.9 ):# forwards isnt pointed towards up
 		right = up.cross(forwards)
 		up = -right.cross(forwards)
 	else: # Forwards is flatter
 		up = -right.cross(forwards)
 		right = up.cross(forwards)
-	return up
+	return up.normalized()
 
 ##Helper: Calculates an appropriate right-vector from a forwards-vector
 func right_from_forwards(forwards:Vector3) -> Vector3:
@@ -52,18 +52,18 @@ func right_from_forwards(forwards:Vector3) -> Vector3:
 	var right:Vector3 = Vector3.RIGHT
 	
 	
-	if(abs(up.dot(forwards)) < 0.9):# forwards is pointed towards up
+	if(abs(up.dot(forwards)) < 0.9 ):# forwards isnt pointed towards up
 		right = up.cross(forwards)
 		up = -right.cross(forwards)
 	else: # Forwards is flatter
 		up = -right.cross(forwards)
 		right = up.cross(forwards)
-	return right
+	return right.normalized()
 
 ##Forcibly set positions of UPPER and LOWER segments to conform to the IK. Forwards is usual forwards vector, ie. z-
-func calculate_IK_nodes(delta:Vector3, forwards:Vector3 = Vector3.DOWN) -> IKResults:
+func calculate_IK_nodes(delta:Vector3, forwards:Vector3 = Vector3.FORWARD) -> IKResults:
 	
-	forwards = -forwards; # As z- is forwards in gdot, but param is true forwards vector.
+	forwards = -forwards.normalized(); # As z- is forwards in gdot, but param is true forwards vector.
 	
 	
 	var angles:IKAngles = get_angles(delta, forwards);

@@ -144,8 +144,13 @@ func update_leg() -> void:
 	var local_target_delta:Vector3 = global_basis.inverse()*global_target_delta
 	
 	#if(!is_stable): return
+	#if(logging or true):
 	
-	var ik = IKCALC.calculate_IK_nodes(local_target_delta, Vector3.DOWN)
+	DebugDraw3D.draw_line(global_position, global_position + global_target_delta)
+	DebugDraw3D.draw_line(global_position, global_position + local_target_delta, Color(0, 1, 0))
+	DebugDraw3D.draw_line(global_position, global_position + -global_basis.y, Color(0, 0, 1))
+	
+	var ik = IKCALC.calculate_IK_nodes(local_target_delta, -global_basis.y)
 	UPPER.transform = ik.upper.transform
 	LOWER.transform = ik.lower.transform
 	#FOOT.transform = ik.end.transform
@@ -196,18 +201,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		STEP_TARGET.global_position = TARGET.global_position
 	
-	Debug.point(TARGET.global_position)
+	#Debug.point(TARGET.global_position)
 	
 	propagate_motion(!is_stable and is_physical)
 	
-	if(logging):
-		FOOT_PHYSLERP.enabled
+	if(logging): # Set to output info
+		pass
 	
 	impose_footpos_limits()
-	
+	global_basis = global_basis.orthonormalized()
 
 
-##Impulse; global position at which hit-limit occured.
+##Impulse; global position at which hit-limit occured. May be necessary
+#Currently no use
 signal hit_limit(impulse, pos)
 
 func impose_footpos_limits():
@@ -345,7 +351,6 @@ var prop_old_pos:Vector3;
 var prop_foot_old_pos:Vector3
 var prop_old_basis:Basis = Basis.IDENTITY
 ##Must be called each 'tick' to get accurate deltas. if arg == true, actually updates position.
-
 func propagate_motion(propagating:bool = true):
 	if(propagating):
 		
