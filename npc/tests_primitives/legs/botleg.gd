@@ -5,6 +5,9 @@ var BODY:RigidBody3D:
 	set(v):
 		BODY = v;
 		TARGET.reparent(BODY)
+		
+		$Generic6DOFJoint3D.node_a = v.get_path()
+		#$SliderJoint3D.node_a = v.get_path()
 
 @export var UPPER:Node3D;
 @export var LOWER:Node3D;
@@ -129,6 +132,8 @@ func _ready() -> void:
 	add_child(STEP_TARGET)
 	FOOT_PHYSLERP.TARGET = STEP_TARGET
 	STEP_TARGET.global_position = TARGET.global_position
+	
+	
 
 
 
@@ -146,9 +151,9 @@ func update_leg() -> void:
 	#if(!is_stable): return
 	#if(logging or true):
 	
-	DebugDraw3D.draw_line(global_position, global_position + global_target_delta)
-	DebugDraw3D.draw_line(global_position, global_position + local_target_delta, Color(0, 1, 0))
-	DebugDraw3D.draw_line(global_position, global_position + -global_basis.y, Color(0, 0, 1))
+	#DebugDraw3D.draw_line(global_position, global_position + global_target_delta)
+	#DebugDraw3D.draw_line(global_position, global_position + local_target_delta, Color(0, 1, 0))
+	#DebugDraw3D.draw_line(global_position, global_position + -global_basis.y, Color(0, 0, 1))
 	
 	var ik = IKCALC.calculate_IK_nodes(local_target_delta, -global_basis.y)
 	UPPER.transform = ik.upper.transform
@@ -217,6 +222,8 @@ func _physics_process(delta: float) -> void:
 signal hit_limit(impulse, pos)
 
 func impose_footpos_limits():
+	#return # Function disabled temporaily
+	
 	var foot_vector = FOOT.global_position - global_position
 	var rebound_coefficient:float = 0.4
 	
