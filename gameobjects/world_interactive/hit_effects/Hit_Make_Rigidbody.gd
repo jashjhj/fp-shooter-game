@@ -1,4 +1,4 @@
-class_name Hit_Make_Rigidbody extends Hit_Component
+class_name Hit_Make_Rigidbody extends Hit_HP_Tracker
 
 @export var RIGIDBODY:RigidBody3D
 @export var RIGIDBODY_BASIS_CLONE:Node3D;

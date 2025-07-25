@@ -1,4 +1,4 @@
-class_name Hit_Free extends Hit_Component
+class_name Hit_Free extends Hit_HP_Tracker
 
 
 @export var FREE_ON_THRESHOLD:Array[Node];

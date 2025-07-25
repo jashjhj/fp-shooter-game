@@ -132,12 +132,15 @@ func hit_object() -> int:
 	
 	if(collider is RigidBody3D):
 		
-		collider.apply_impulse(impulse, impulse_pos - collider.global_position)
+
 		
 		if(collider is Hittable_RB):
 			for hittable in collider.HITTABLE:
 				if(hittable != null):
 					hittable._hit(damage, impulse, impulse_pos - collider.global_position);
+		
+		else: # Just a plain RB3D no Hittable
+			collider.apply_impulse(impulse, impulse_pos - collider.global_position)
 	
 	if(collider is Hittable_Collider):
 		for hittable in collider.HITTABLE:
