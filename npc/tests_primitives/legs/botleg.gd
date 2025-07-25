@@ -6,8 +6,6 @@ var BODY:RigidBody3D:
 		BODY = v;
 		TARGET.reparent(BODY)
 		
-		$Generic6DOFJoint3D.node_a = v.get_path()
-		#$SliderJoint3D.node_a = v.get_path()
 
 @export var UPPER:Node3D;
 @export var LOWER:Node3D;
@@ -222,7 +220,7 @@ func _physics_process(delta: float) -> void:
 signal hit_limit(impulse, pos)
 
 func impose_footpos_limits():
-	#return # Function disabled temporaily
+	# Function disabled temporaily
 	
 	var foot_vector = FOOT.global_position - global_position
 	var rebound_coefficient:float = 0.4

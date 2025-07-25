@@ -113,15 +113,3 @@ shape = SubResource("ConcavePolygonShape3D_mciut")
 script = ExtResource("5_uogsf")
 TRANSFER_RB = NodePath("../..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
-
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
-node_b = NodePath("../Foot")
-linear_limit_x/enabled = false
-linear_limit_y/enabled = false
-linear_limit_z/enabled = false
-angular_limit_x/upper_angle = 1.48353
-angular_limit_x/lower_angle = -1.48353
-angular_limit_y/upper_angle = 1.48353
-angular_limit_y/lower_angle = -1.48353
-angular_limit_z/upper_angle = 1.48353
-angular_limit_z/lower_angle = -1.48353
