@@ -41,6 +41,7 @@ var BODY:RigidBody3D:
 @export var DISMEMBER_HIP_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_KNEE_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_ANKLE_TRIGGER:Hit_HP_Tracker;
+@export var DISMEMBER_FOOT_RB_MAKER:Make_Rigidbody;
 
 class Intactity:
 	var hip:bool = true;
@@ -151,7 +152,9 @@ func _ready() -> void:
 	if(DISMEMBER_ENABLED):
 		if(DISMEMBER_HIP_TRIGGER != null): DISMEMBER_HIP_TRIGGER.on_hp_becomes_negative.connect(break_hip)
 		if(DISMEMBER_KNEE_TRIGGER != null): DISMEMBER_KNEE_TRIGGER.on_hp_becomes_negative.connect(break_knee)
-		if(DISMEMBER_ANKLE_TRIGGER != null): DISMEMBER_ANKLE_TRIGGER.on_hp_becomes_negative.connect(break_ankle)
+		if(DISMEMBER_ANKLE_TRIGGER != null):
+			DISMEMBER_ANKLE_TRIGGER.on_hp_becomes_negative.connect(break_ankle)
+			assert(DISMEMBER_FOOT_RB_MAKER != null, "No dismember Rb maker set for foot.")
 
 
 
@@ -191,7 +194,7 @@ func _physics_process(delta: float) -> void:
 	if(!is_physical): return # used to disable, for optimisation.
 	
 	
-	DebugDraw3D.draw_text(FOOT.global_position + Vector3.UP * 0.1, str(is_stable))
+	#DebugDraw3D.draw_text(FOOT.global_position + Vector3.UP * 0.1, str(is_stable))
 	
 	
 	if(is_on_floor() and FOOT.linear_velocity.length() < 0.001): # If foot is now stable
@@ -414,6 +417,14 @@ func break_ankle():
 	if(intactity.ankle == false): return
 	intactity.ankle = true;
 	
+	
+	
+
+	
+	
+	DISMEMBER_FOOT_RB_MAKER.add_impulse(DISMEMBER_ANKLE_TRIGGER.last_impulse, DISMEMBER_ANKLE_TRIGGER.last_impulse_pos)
+	DISMEMBER_FOOT_RB_MAKER.trigger()
+	#DISMEMBER_FOOT_RB_MAKER.RIGIDBODY.global_position += Vector3.UP * 0.5
 	
 	
 	
