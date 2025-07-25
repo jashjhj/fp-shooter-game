@@ -67,7 +67,6 @@ shape = SubResource("CylinderShape3D_gcapg")
 
 [node name="Upper_Hit_Component" type="Node" parent="Upper"]
 script = ExtResource("3_jrlnb")
-MAX_HP = 0.0
 metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="Lower" type="Node3D" parent="."]
@@ -91,7 +90,6 @@ shape = SubResource("CylinderShape3D_c5mru")
 
 [node name="Lower_Hit_Component" type="Node" parent="Lower"]
 script = ExtResource("3_jrlnb")
-MAX_HP = 0.0
 metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="Foot" type="RigidBody3D" parent="."]

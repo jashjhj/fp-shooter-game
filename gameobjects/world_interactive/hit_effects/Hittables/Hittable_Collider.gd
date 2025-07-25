@@ -9,8 +9,6 @@ var inbuilt_hit_component:Hit_Component;
 
 func _ready() -> void:
 	HITTABLE.insert(0, Hit_Component.new())
-	HITTABLE[0].MAX_HP = 0;
-	HITTABLE[0].MINIMUM_DAMAGE_THRESHOLD = 0;
 	
 	inbuilt_hit_component = HITTABLE[0]
 	

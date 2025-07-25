@@ -130,27 +130,28 @@ func hit_object() -> int:
 	var impulse = -delta_v*data.mass
 	var impulse_pos = FORWARDS_RAY.get_collision_point()
 	
-	if(collider is RigidBody3D):
-		
-
-		
-		if(collider is Hittable_RB):
-			for hittable in collider.HITTABLE:
-				if(hittable != null):
-					hittable._hit(damage, impulse, impulse_pos - collider.global_position);
-		
-		else: # Just a plain RB3D no Hittable
-			collider.apply_impulse(impulse, impulse_pos - collider.global_position)
-	
-	if(collider is Hittable_Collider):
-		for hittable in collider.HITTABLE:
-			if(hittable != null):
-				hittable._hit(damage, impulse, impulse_pos - collider.global_position);
 	
 	if(collider is Hittable_StaticBody):
 		for hittable in collider.HITTABLE:
 			if(hittable != null):
-				hittable._hit(damage, impulse, impulse_pos - collider.global_position);
+				hittable.trigger(damage, impulse, impulse_pos - collider.global_position);
+	
+	elif(collider is Hittable_Collider):
+		for hittable in collider.HITTABLE:
+			if(hittable != null):
+				hittable.trigger(damage, impulse, impulse_pos - collider.global_position);
+	
+	elif(collider is RigidBody3D):
+		if(collider is Hittable_RB):
+			for hittable in collider.HITTABLE:
+				if(hittable != null):
+					hittable.trigger(damage, impulse, impulse_pos - collider.global_position);
+		
+		else: # Just a plain RB3D no Hittable
+			collider.apply_impulse(impulse, impulse_pos - collider.global_position)
+
+	
+
 	
 	
 	
