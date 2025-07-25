@@ -6,7 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://676shaw0n7e1" path="res://npc/enemy/totembot/assets/leg_lower.obj" id="3_aqqmv"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="4_aqqmv"]
 [ext_resource type="ArrayMesh" uid="uid://rlobttak3vva" path="res://npc/enemy/totembot/assets/leg_upper.obj" id="4_mciut"]
-[ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Transfer_Impulse.gd" id="5_uogsf"]
+[ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="5_uogsf"]
 [ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="6_mciut"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_aqqmv"]
@@ -109,7 +109,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Foot/Hittable_Collider"]
 shape = SubResource("ConcavePolygonShape3D_mciut")
 
-[node name="Hit_Transfer_Impusle" type="Node" parent="Foot/Hittable_Collider" node_paths=PackedStringArray("TRANSFER_RB")]
+[node name="Hit_Impulse" type="Node" parent="Foot/Hittable_Collider" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("5_uogsf")
-TRANSFER_RB = NodePath("../..")
+IMPULSE_TO = NodePath("../..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"

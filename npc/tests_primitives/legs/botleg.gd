@@ -370,7 +370,9 @@ func propagate_motion(propagating:bool = true):
 		#TODO not convicned this works
 		var delta_basis_pos = (FOOT.global_position - global_position) - (prop_foot_old_pos - prop_old_pos) * prop_old_basis.inverse() * global_basis
 		#print(delta_basis_pos)
-		FOOT.global_position += delta_pos + delta_basis_pos
+		
+		#if this is funny, check the .psotion/global
+		FOOT.position += delta_pos + delta_basis_pos
 	
 	prop_old_pos = global_position
 	prop_foot_old_pos = FOOT.global_position
