@@ -35,6 +35,22 @@ var BODY:RigidBody3D:
 @onready var TARGET:Node3D = Node3D.new();
 
 
+#DISMEMBERMENT
+@export_group("Dismemberment", "DISMEMBER")
+@export var DISMEMBER_ENABLED:bool = true;
+@export var DISMEMBER_HIP_TRIGGER:Hit_HP_Tracker;
+@export var DISMEMBER_KNEE_TRIGGER:Hit_HP_Tracker;
+@export var DISMEMBER_ANKLE_TRIGGER:Hit_HP_Tracker;
+
+class Intactity:
+	var hip:bool = true;
+	var knee:bool = true;
+	var ankle:bool = true;
+
+var intactity:Intactity = Intactity.new()
+
+
+
 
 ##Denotes as to whether it is being fully-physically-simulated or locked and stable.
 var is_physical:bool = true:
@@ -131,7 +147,11 @@ func _ready() -> void:
 	FOOT_PHYSLERP.TARGET = STEP_TARGET
 	STEP_TARGET.global_position = TARGET.global_position
 	
-	
+	# --- Dismemberment:
+	if(DISMEMBER_ENABLED):
+		if(DISMEMBER_HIP_TRIGGER != null): DISMEMBER_HIP_TRIGGER.on_hp_becomes_negative.connect(break_hip)
+		if(DISMEMBER_KNEE_TRIGGER != null): DISMEMBER_KNEE_TRIGGER.on_hp_becomes_negative.connect(break_knee)
+		if(DISMEMBER_ANKLE_TRIGGER != null): DISMEMBER_ANKLE_TRIGGER.on_hp_becomes_negative.connect(break_ankle)
 
 
 
@@ -377,3 +397,28 @@ func propagate_motion(propagating:bool = true):
 	prop_old_pos = global_position
 	prop_foot_old_pos = FOOT.global_position
 	prop_old_basis = global_basis
+
+
+
+# -------- DISMEMBERMENT ---------
+##Cripples The leg. Whoops!
+func break_hip():
+	pass
+
+## owie
+func break_knee():
+	pass
+
+##Breaking the ankle will ideally allow the robot to still walk, however with no shoes on. Effectively shorten the FOOT hitbox (or raise it)
+func break_ankle():
+	if(intactity.ankle == false): return
+	intactity.ankle = true;
+	
+	
+	
+	
+	#Shortens leg - TODO Check that leg is still. exists.
+	for child in FOOT.get_children():
+		if(child is CollisionShape3D):
+			child.position += Vector3.UP * 0.1 # Raises collider by 0.05, making leg shorter.
+	LOWER_LENGTH -= 0.1

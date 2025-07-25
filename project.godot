@@ -96,6 +96,7 @@ aim_down_sights={
 [layer_names]
 
 3d_render/layer_6="Particles"
+3d_physics/layer_1="Floor"
 3d_physics/layer_5="Player"
 3d_physics/layer_6="NPC"
 3d_physics/layer_7="NPC_Physics"
@@ -103,7 +104,7 @@ aim_down_sights={
 3d_physics/layer_9="Player_Hurtbox"
 3d_physics/layer_13="Debris_Small"
 3d_physics/layer_14="Debris_Medium"
-3d_physics/layer_15="Debris_Physical"
+3d_physics/layer_15="Debris_Large"
 3d_physics/layer_17="Gun_Begin_Interaction"
 3d_physics/layer_18="Gun_Part_Interaction_Plane"
 3d_physics/layer_19="Gun_Use_Element"
