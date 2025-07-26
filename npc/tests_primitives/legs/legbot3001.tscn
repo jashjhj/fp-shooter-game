@@ -23,12 +23,11 @@ LEGS = [NodePath("Body/Legbotleg1"), NodePath("Body/Legbotleg2"), NodePath("Body
 ANGLE_HELPER = NodePath("Body/Angle_Helper")
 BODY_HITTABLE = NodePath("Body/Hit_Component")
 
-[node name="Body" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
+[node name="Body" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99483, 0)
 collision_layer = 64
 mass = 4.0
 script = ExtResource("2_m27ph")
-HITTABLE = [NodePath("Hit_Component")]
 
 [node name="Legbotleg1" parent="Body" instance=ExtResource("2_iv3ci")]
 transform = Transform3D(-1, 0, -8.74228e-08, -3.55271e-15, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.229486)

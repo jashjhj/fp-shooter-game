@@ -46,16 +46,15 @@ ANGLE_HELPER = NodePath("Body/Angular_Damper")
 IDLE_HEIGHT = 1.7
 FOOT_PLANT_RADIUS = 0.7
 LEG_FORCE_THROUGH = 70.0
-LEG_FORCE_LATERAL = 45.0
+LEG_FORCE_LATERAL = 55.0
 IMAGINED_FORCE = 100.0
 BODY_HITTABLE = NodePath("Body/Hittable_Collider/Hit_Transfer_Impusle")
 
-[node name="Body" type="RigidBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
+[node name="Body" type="RigidBody3D" parent="."]
 collision_layer = 64
 collision_mask = 65
 mass = 20.0
 script = ExtResource("2_8nbuu")
-HITTABLE = [NodePath("Hittable_Collider/Hit_Impulse")]
 
 [node name="TotemBotLeg" parent="Body" instance=ExtResource("20_heqxd")]
 transform = Transform3D(0.5, -1.19783e-08, -0.866025, 2.39565e-08, 1, 0, 0.866025, -2.07469e-08, 0.5, -0.334, -0.2648, 0.2011)

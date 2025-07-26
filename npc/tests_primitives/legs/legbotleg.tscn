@@ -54,12 +54,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0
 mesh = SubResource("BoxMesh_gcapg")
 skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="Upper" node_paths=PackedStringArray("HITTABLE")]
+[node name="Area3D" type="Area3D" parent="Upper"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0021942, -0.00203744)
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("2_qsgas")
-HITTABLE = [NodePath("../Upper_Hit_Component")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Upper/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -77,12 +76,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 mesh = SubResource("CylinderMesh_qsgas")
 skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="Lower" node_paths=PackedStringArray("HITTABLE")]
+[node name="Area3D" type="Area3D" parent="Lower"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2.18557e-08, 0)
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("2_qsgas")
-HITTABLE = [NodePath("../Lower_Hit_Component")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lower/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.37114e-08)

@@ -27,7 +27,7 @@ bounce = 0.1
 
 [node name="Camera" type="Node3D" node_paths=PackedStringArray("HIT_CMP", "MESH_TO_DISABLE_EMISSION", "CAMERA", "HINGE_X", "HINGE_Y")]
 script = ExtResource("1_ht5pv")
-HIT_CMP = NodePath("Hittable_StaticBody/Pivot/Head/Hit_Make_Rigidbody")
+HIT_CMP = NodePath("Hittable_StaticBody/Pivot/Head/Hittable_Collider/Hit_Make_Rigidbody")
 MESH_TO_DISABLE_EMISSION = NodePath("Hittable_StaticBody/Pivot/Head/MeshInstance3D")
 CAMERA = NodePath("Hittable_StaticBody/Pivot/Head/Camera")
 camera_fov_y = 1.5708
@@ -41,9 +41,8 @@ min_hinge_y = -1.0472
 HINGE_SPEED_Y = 0.5
 IS_HINGE_SPEED_LINEAR = true
 
-[node name="Hittable_StaticBody" type="StaticBody3D" parent="." node_paths=PackedStringArray("HITTABLE")]
+[node name="Hittable_StaticBody" type="StaticBody3D" parent="."]
 script = ExtResource("2_gkdp5")
-HITTABLE = [NodePath("Hit_Rotate")]
 metadata/_custom_type_script = "uid://bvtqkpk4hvu82"
 
 [node name="Hit_Rotate" type="Node" parent="Hittable_StaticBody" node_paths=PackedStringArray("OBJECT")]
@@ -87,26 +86,27 @@ surface_material_override/2 = ExtResource("7_4y5qw")
 [node name="Camera" type="Node3D" parent="Hittable_StaticBody/Pivot/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00784867, 0.0625376, -0.124781)
 
-[node name="Hit_Make_Rigidbody" type="Node" parent="Hittable_StaticBody/Pivot/Head"]
-script = ExtResource("8_e6fgj")
-metadata/_custom_type_script = "uid://hhosnxuj45ad"
-
-[node name="Make_Rigidbody" type="Node" parent="Hittable_StaticBody/Pivot/Head/Hit_Make_Rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
-script = ExtResource("11_4y5qw")
-RIGIDBODY = NodePath("../../../../../Camera_Rigidbody")
-RIGIDBODY_BASIS_CLONE = NodePath("../..")
-NEW_CHILDREN = Array[NodePath]([NodePath("../../MeshInstance3D"), NodePath("../../Hittable_Collider/CollisionShape3D")])
-TO_BE_REMOVED = Array[NodePath]([NodePath("../../Hittable_Collider")])
-metadata/_custom_type_script = "uid://dpx3j3228uj6a"
-
-[node name="Hittable_Collider" type="Area3D" parent="Hittable_StaticBody/Pivot/Head" node_paths=PackedStringArray("HITTABLE")]
+[node name="Hittable_Collider" type="Area3D" parent="Hittable_StaticBody/Pivot/Head" node_paths=PackedStringArray("HIT_COMPONENTS")]
 script = ExtResource("9_gkdp5")
-HITTABLE = [NodePath("../Hit_Make_Rigidbody")]
+HIT_COMPONENTS = [NodePath("Hit_Make_Rigidbody")]
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hittable_StaticBody/Pivot/Head/Hittable_Collider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06427, -0.00482176)
 shape = SubResource("BoxShape3D_dnm3r")
+
+[node name="Hit_Make_Rigidbody" type="Node" parent="Hittable_StaticBody/Pivot/Head/Hittable_Collider" node_paths=PackedStringArray("MAKE_RIGIDBODY")]
+script = ExtResource("8_e6fgj")
+MAKE_RIGIDBODY = NodePath("Make_Rigidbody")
+metadata/_custom_type_script = "uid://hhosnxuj45ad"
+
+[node name="Make_Rigidbody" type="Node" parent="Hittable_StaticBody/Pivot/Head/Hittable_Collider/Hit_Make_Rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
+script = ExtResource("11_4y5qw")
+RIGIDBODY = NodePath("../../../../../../Camera_Rigidbody")
+RIGIDBODY_BASIS_CLONE = NodePath("../../..")
+NEW_CHILDREN = Array[NodePath]([NodePath("../../../MeshInstance3D"), NodePath("../../CollisionShape3D")])
+TO_BE_REMOVED = Array[NodePath]([NodePath("../..")])
+metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Camera_Rigidbody" type="RigidBody3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.00360112, 0.096268, -0.230624)

@@ -277,20 +277,20 @@ func impose_footpos_limits():
 
 #------------ IMPLUSE REDISTRIBUTION -------------#
 func upper_hit():
-	var pos = UPPER_HITCMP.last_impulse_pos
-	var along = pos.dot(-UPPER.global_basis.z) / UPPER_LENGTH
+	var pos := UPPER_HITCMP.last_impulse_pos - UPPER.global_position
+	var along := pos.dot(-UPPER.global_basis.z) / UPPER_LENGTH
 	along = min(1.0, max(0.0, along))
 	#Along is in the range -1 @ hip -> 0 at knee
 	along -= 1.0;
-	var impulse_pos := LOWER.global_position - BODY.global_position + UPPER_HITCMP.last_impulse_pos
+	var impulse_pos:Vector3 = LOWER.global_position - BODY.global_position + pos
 	distribute_impulse(UPPER_HITCMP.last_impulse, impulse_pos, along)
 
 func lower_hit():
-	var pos = LOWER_HITCMP.last_impulse_pos
-	var along = pos.dot(-LOWER.global_basis.z) / LOWER_LENGTH
+	var pos := LOWER_HITCMP.last_impulse_pos - LOWER.global_position
+	var along := pos.dot(-LOWER.global_basis.z) / LOWER_LENGTH
 	along = min(1.0, max(0.0, along))
 	#Along is in the range 0 @ knee -> 1 at toes
-	var impulse_pos := LOWER.global_position - BODY.global_position + LOWER_HITCMP.last_impulse_pos
+	var impulse_pos:Vector3 = LOWER.global_position - BODY.global_position + pos
 	distribute_impulse(LOWER_HITCMP.last_impulse, impulse_pos, along)
 
 ##Along is a measure of hwo far along the impulse is: -1:Hip, 0:Knee, 1:Toes
@@ -321,13 +321,13 @@ func distribute_impulse(impulse:Vector3, impulse_pos:Vector3, along:float):
 	resultant_top += cmp_vert * proportion_top
 	resultant_bottom += cmp_vert * (1-proportion_top)
 	
-	#Forwards
+	#FORWARDS (INTO/OUT OF KNEE)
 	
 	resultant_top += cmp_forward * proportion_top
 	resultant_bottom += cmp_forward * (1-proportion_top)
 	
 	#+ is into knee, - is down (push body up)
-	var vert_cmp = impulse.dot(forwards) * 3
+	var vert_cmp = impulse.dot(forwards)# * 3
 	var extend_cmp:float = 1-(proportion_top**2)
 	resultant_top += vert_cmp * -vert * extend_cmp# Push it down too
 	resultant_bottom -= vert_cmp * -vert * extend_cmp  # Push it up because impulse, can cause leg to jolt interestingly

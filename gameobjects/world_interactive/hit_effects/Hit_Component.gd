@@ -7,10 +7,10 @@ var previous_damage:float = 0;
 signal on_hit
 
 var last_impulse:Vector3 = Vector3.ZERO
-##Impulse pos = IMPULSE_GLOBAL_POS - COLLIDER_GLOBAL_POS == Offet from colldier in global space
+##Impulse pos = IMPULSE_GLOBAL_POS
 var last_impulse_pos:Vector3 = Vector3.ZERO
 
-##Impulse pos = IMPULSE_GLOBAL_POS - COLLIDER_GLOBAL_POS == Offet from colldier in global space
+##Impulse pos = IMPULSE_GLOBAL_POS
 func trigger(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 = Vector3.ZERO) -> void:
 	last_impulse = impulse
 	last_impulse_pos = impulse_pos

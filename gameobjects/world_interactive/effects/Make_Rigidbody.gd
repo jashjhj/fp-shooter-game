@@ -41,7 +41,7 @@ func trigger():
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	for i in range(0, len(impulses)):
-		RIGIDBODY.apply_impulse(impulses[i], impulses_pos[i])
+		RIGIDBODY.apply_impulse(impulses[i], impulses_pos[i] - RIGIDBODY.global_position)
 
 
 #Impulses handling
@@ -49,10 +49,11 @@ func trigger():
 var impulses:Array[Vector3]
 var impulses_pos:Array[Vector3]
 
-##If called before freeing the RB, it queues the impulse. Pos is in a global offset
+##If called before freeing the RB, it queues the impulse. Pos is in global positions, as does not yet know where the part will gib to.
+
 func add_impulse(impulse:Vector3, pos:Vector3):
 	if(is_rb_active):
-		RIGIDBODY.apply_impulse(impulse, pos)
+		RIGIDBODY.apply_impulse(impulse, pos - RIGIDBODY.global_position)
 		return
 	else:
 		impulses.append(impulse) # If not active, queues.

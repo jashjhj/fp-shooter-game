@@ -6,5 +6,5 @@ class_name Hit_Impulse extends Hit_Component
 func hit(damage:float):
 	if IMPULSE_TO == null: return
 	
-	IMPULSE_TO.apply_impulse(last_impulse, last_impulse_pos)
+	IMPULSE_TO.apply_impulse(last_impulse, last_impulse_pos - IMPULSE_TO.global_position)
 	
