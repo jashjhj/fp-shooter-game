@@ -177,10 +177,14 @@ func update_leg() -> void:
 	#DebugDraw3D.draw_line(global_position, global_position + local_target_delta, Color(0, 1, 0))
 	#DebugDraw3D.draw_line(global_position, global_position + -global_basis.y, Color(0, 0, 1))
 	
-	var ik = IKCALC.calculate_IK_nodes(local_target_delta, -global_basis.y)
-	UPPER.transform = ik.upper.transform
-	LOWER.transform = ik.lower.transform
-	#FOOT.transform = ik.end.transform
+	if(LOWER_LENGTH > 0.02):
+		
+		var ik = IKCALC.calculate_IK_nodes(local_target_delta, -global_basis.y)
+		UPPER.transform = ik.upper.transform
+		LOWER.transform = ik.lower.transform
+		#FOOT.transform = ik.end.transform
+	else:
+		UPPER.look_at(UPPER.global_position + global_target_delta)
 
 
 func begin_step(pos:Vector3 = TARGET.global_position):
@@ -422,6 +426,7 @@ func break_knee():
 	DISMEMBER_LOWER_RB_MAKER.add_impulse(DISMEMBER_KNEE_TRIGGER.last_impulse, DISMEMBER_KNEE_TRIGGER.last_impulse_pos)
 	DISMEMBER_LOWER_RB_MAKER.trigger()
 	
+	LOWER_LENGTH = 0;
 	
 
 ##Breaking the ankle will ideally allow the robot to still walk, however with no shoes on. Effectively shorten the FOOT hitbox (or raise it)

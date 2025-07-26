@@ -127,6 +127,7 @@ metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Body/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.084007, 0.0895553, -1.19209e-07)
+visible = false
 light_color = Color(1, 0.45, 0.45, 1)
 light_energy = 0.01
 shadow_enabled = true
@@ -218,6 +219,7 @@ skeleton = NodePath("../../..")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Body/Model/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0799327, 0.00593537, -1.19209e-07)
+visible = false
 light_color = Color(1, 0.45, 0.45, 1)
 light_energy = 0.01
 shadow_enabled = true

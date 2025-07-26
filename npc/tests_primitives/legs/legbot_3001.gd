@@ -74,7 +74,12 @@ func apply_self_forces(delta):
 	var stable_area := calculate_stable_area()
 	var stable_legs:float = len(stable_area)
 	
-	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * IDLE_HEIGHT
+	#Calculate IDLE_HEIGHT Actual
+	var ideal_height = IDLE_HEIGHT
+	for leg in LEGS:
+		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 1.0) # TODO needs better work
+	
+	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
 	
 	
 	
