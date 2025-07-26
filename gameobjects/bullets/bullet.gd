@@ -148,6 +148,7 @@ func hit_object() -> int:
 					hittable.trigger(damage, impulse, impulse_pos);
 		
 		else: # Just a plain RB3D no Hittable
+			
 			collider.apply_impulse(impulse, impulse_pos - collider.global_position)
 
 	

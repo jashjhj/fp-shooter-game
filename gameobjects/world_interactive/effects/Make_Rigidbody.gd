@@ -5,7 +5,7 @@ class_name Make_Rigidbody extends Node
 @export var NEW_CHILDREN:Array[NodePath]
 @export var TO_BE_REMOVED:Array[NodePath]
 
-@export_enum("Small debris:4096", "Medium Debris:8192", "Large Debris:16384") var collision_layer:int = 8192;
+@export_enum("Small debris:4096", "Medium Debris:8192", "Large Debris:16384", "Small debris NoHit:256", "Medium Debris NoHit:512", "Large Debris NoHit:1024") var collision_layer:int = 8192;
 
 var is_rb_active:bool = false;
 
@@ -13,7 +13,7 @@ func  _ready() -> void:
 	assert(RIGIDBODY != null, "No rigidbody set.")
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_DISABLED
 	RIGIDBODY.collision_layer = collision_layer;
-	RIGIDBODY.collision_mask = 1 + 8192 + 16384;
+	RIGIDBODY.collision_mask = 1 + 512 + 1028 + 8192 + 16384;
 
 func trigger():
 	
@@ -49,8 +49,8 @@ func trigger():
 var impulses:Array[Vector3]
 var impulses_pos:Array[Vector3]
 
-##If called before freeing the RB, it queues the impulse. Pos is in global positions, as does not yet know where the part will gib to.
 
+##If called before freeing the RB, it queues the impulse. Pos is in global positions, as does not yet know where the part will gib to.
 func add_impulse(impulse:Vector3, pos:Vector3):
 	if(is_rb_active):
 		RIGIDBODY.apply_impulse(impulse, pos - RIGIDBODY.global_position)

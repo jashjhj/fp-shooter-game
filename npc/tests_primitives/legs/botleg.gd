@@ -41,6 +41,7 @@ var BODY:RigidBody3D:
 @export var DISMEMBER_HIP_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_KNEE_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_ANKLE_TRIGGER:Hit_HP_Tracker;
+@export var DISMEMBER_LOWER_RB_MAKER:Make_Rigidbody
 @export var DISMEMBER_FOOT_RB_MAKER:Make_Rigidbody;
 
 class Intactity:
@@ -413,6 +414,15 @@ func break_knee():
 	if(intactity.knee == false): return
 	intactity.knee = false
 	
+	
+	if(intactity.ankle):#If ankle is intact, make ankle rb too
+		DISMEMBER_FOOT_RB_MAKER.trigger()
+		intactity.ankle = false
+	
+	DISMEMBER_LOWER_RB_MAKER.add_impulse(DISMEMBER_KNEE_TRIGGER.last_impulse, DISMEMBER_KNEE_TRIGGER.last_impulse_pos)
+	DISMEMBER_LOWER_RB_MAKER.trigger()
+	
+	
 
 ##Breaking the ankle will ideally allow the robot to still walk, however with no shoes on. Effectively shorten the FOOT hitbox (or raise it)
 func break_ankle():
@@ -421,7 +431,7 @@ func break_ankle():
 	
 	
 	
-
+	
 	
 	
 	DISMEMBER_FOOT_RB_MAKER.add_impulse(DISMEMBER_ANKLE_TRIGGER.last_impulse, DISMEMBER_ANKLE_TRIGGER.last_impulse_pos)
