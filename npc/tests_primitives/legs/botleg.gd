@@ -410,12 +410,14 @@ func break_hip():
 
 ## owie
 func break_knee():
-	pass
+	if(intactity.knee == false): return
+	intactity.knee = false
+	
 
 ##Breaking the ankle will ideally allow the robot to still walk, however with no shoes on. Effectively shorten the FOOT hitbox (or raise it)
 func break_ankle():
 	if(intactity.ankle == false): return
-	intactity.ankle = true;
+	intactity.ankle = false;
 	
 	
 	

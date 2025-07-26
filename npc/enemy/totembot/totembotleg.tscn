@@ -40,12 +40,12 @@ point_count = 3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r5lsd"]
 friction = 0.7
-bounce = 0.5
+bounce = 0.2
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oebdh"]
 points = PackedVector3Array(0.081851, -0.0265561, -0.100361, 0.081851, -0.0334074, -0.100361, -0.081867, -0.0265561, -0.100361, 0.0143123, 0.0487558, -0.0159109, 0.0143123, 0.051878, 0.00971945, 0.0143123, 0.0428719, 0.0310554, 0.0399879, -0.0265561, 0.0420732, 0.0372312, -0.037972, -0.0411332, -0.081867, -0.0334074, -0.100361, 0.0399879, -0.0334074, 0.0420732, 0.0249063, -0.037972, 0.0171423, -0.0400039, -0.0265561, 0.0420732, -0.0143283, 0.0428719, 0.0310554, -0.0143283, 0.051878, 0.00971945, -0.0143283, 0.0487558, -0.0159109, 0.00809375, -0.0259668, 0.098153, 0.0180146, -0.0261691, 0.0897391, -0.0372472, -0.037972, -0.0411332, -0.0249223, -0.037972, 0.0171423, -0.0400039, -0.0334074, 0.0420732, 0.0180146, -0.030461, 0.0897391, 0.00902333, -0.0358964, 0.0777109, -0.0180306, -0.0261691, 0.0897391, -0.00810976, -0.0259668, 0.098153, 0.00809375, -0.0298806, 0.098153, -0.00903934, -0.0358964, 0.0777109, -0.0180306, -0.030461, 0.0897391, -0.00810976, -0.0298806, 0.098153)
 
-[node name="TotemBotLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT", "LOWER_HITCMP", "UPPER_HITCMP", "DISMEMBER_ANKLE_TRIGGER", "DISMEMBER_FOOT_RB_MAKER")]
+[node name="TotemBotLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT", "LOWER_HITCMP", "UPPER_HITCMP", "DISMEMBER_KNEE_TRIGGER", "DISMEMBER_ANKLE_TRIGGER", "DISMEMBER_FOOT_RB_MAKER")]
 script = ExtResource("1_r5lsd")
 UPPER = NodePath("Upper")
 LOWER = NodePath("Lower")
@@ -54,7 +54,8 @@ INVERT_KNEE = true
 FOOT = NodePath("Foot")
 LOWER_HITCMP = NodePath("Lower/Lower_Hittable/Hit_Component")
 UPPER_HITCMP = NodePath("Upper/Upper_Hittable/Hit_Component")
-DISMEMBER_ANKLE_TRIGGER = NodePath("Foot/Weakpoint/Hit_HP_Tracker-GIB")
+DISMEMBER_KNEE_TRIGGER = NodePath("Upper/Knee_Weakpoint/Hit_HP_Tracker-GIB")
+DISMEMBER_ANKLE_TRIGGER = NodePath("Foot/Ankle_Weakpoint/Hit_HP_Tracker-GIB")
 DISMEMBER_FOOT_RB_MAKER = NodePath("Foot/Make_Rigidbody")
 
 [node name="LegHip" type="MeshInstance3D" parent="."]
@@ -85,14 +86,20 @@ metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="Hit_Weakpoint" type="Node" parent="Upper/Upper_Hittable" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../Weak_Point")
+WEAKPOINT = NodePath("../../Knee_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
-[node name="Weak_Point" type="Node3D" parent="Upper"]
+[node name="Knee_Weakpoint" type="Node3D" parent="Upper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.48148e-08, -0.796469)
 script = ExtResource("6_246fb")
 DAMAGE_CURVE = SubResource("Curve_246fb")
 metadata/_custom_type_script = "uid://dcbvai1bpx5br"
+
+[node name="Hit_HP_Tracker-GIB" type="Node" parent="Upper/Knee_Weakpoint"]
+script = ExtResource("9_rnmof")
+MAX_HP = 12.0
+MINIMUM_DAMAGE_THRESHOLD = 2.0
+metadata/_custom_type_script = "uid://bk1iff825dehg"
 
 [node name="Lower" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.795836, 0)
@@ -118,12 +125,12 @@ metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="Hit_Weakpoint_Knee" type="Node" parent="Lower/Lower_Hittable" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../../Upper/Weak_Point")
+WEAKPOINT = NodePath("../../../Upper/Knee_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Hit_Weakpoint_Ankle" type="Node" parent="Lower/Lower_Hittable" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../../Foot/Weakpoint")
+WEAKPOINT = NodePath("../../../Foot/Ankle_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Foot" type="RigidBody3D" parent="."]
@@ -160,52 +167,54 @@ metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
 [node name="Hit_Weakpoint_Ankle" type="Node" parent="Foot/Hittable_Collider" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../Weakpoint")
+WEAKPOINT = NodePath("../../Ankle_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Make_Rigidbody" type="Node" parent="Foot" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
 script = ExtResource("10_oebdh")
-RIGIDBODY = NodePath("../../Foot_Gib")
+RIGIDBODY = NodePath("../../Dismemberment/Foot_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
 NEW_CHILDREN = Array[NodePath]([NodePath("../LegFoot")])
 TO_BE_REMOVED = Array[NodePath]([NodePath("../Hittable_Collider")])
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
-[node name="Weakpoint" type="Node3D" parent="Foot"]
+[node name="Ankle_Weakpoint" type="Node3D" parent="Foot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045724, 0)
 script = ExtResource("6_246fb")
 DAMAGE_CURVE = SubResource("Curve_na25b")
 metadata/_custom_type_script = "uid://dcbvai1bpx5br"
 
-[node name="Hit_HP_Tracker-GIB" type="Node" parent="Foot/Weakpoint"]
+[node name="Hit_HP_Tracker-GIB" type="Node" parent="Foot/Ankle_Weakpoint"]
 script = ExtResource("9_rnmof")
 MAX_HP = 12.0
 MINIMUM_DAMAGE_THRESHOLD = 4.0
 metadata/_custom_type_script = "uid://bk1iff825dehg"
 
-[node name="Foot_Gib" type="RigidBody3D" parent="."]
+[node name="Dismemberment" type="Node" parent="."]
+
+[node name="Foot_Gib" type="RigidBody3D" parent="Dismemberment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
 physics_material_override = SubResource("PhysicsMaterial_r5lsd")
 lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 3
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Foot_Gib"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Dismemberment/Foot_Gib"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.00834799, -0.00915508)
 shape = SubResource("ConvexPolygonShape3D_oebdh")
 debug_color = Color(3.27289e-06, 0.594511, 0.730556, 0.42)
 
-[node name="Hittable_Collider2" type="Area3D" parent="Foot_Gib"]
+[node name="Hittable_Collider2" type="Area3D" parent="Dismemberment/Foot_Gib"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.0083499, -0.00915508)
 collision_layer = 128
 collision_mask = 0
 script = ExtResource("4_aqqmv")
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Foot_Gib/Hittable_Collider2"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Dismemberment/Foot_Gib/Hittable_Collider2"]
 shape = SubResource("ConcavePolygonShape3D_mciut")
 
-[node name="Hit_Impulse" type="Node" parent="Foot_Gib/Hittable_Collider2" node_paths=PackedStringArray("IMPULSE_TO")]
+[node name="Hit_Impulse" type="Node" parent="Dismemberment/Foot_Gib/Hittable_Collider2" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("5_uogsf")
 IMPULSE_TO = NodePath("../..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
