@@ -9,6 +9,8 @@ class_name LegBot extends Node3D
 
 @export var ANGLE_HELPER:Angular_Damper;
 
+@export var PATHFINDER:NavigationAgent3D
+
 @export_group("Gait Settings")
 @export var IDLE_HEIGHT:float = 1.5;
 @export var FOOT_PLANT_RADIUS:float = 1.0;
@@ -28,6 +30,11 @@ class_name LegBot extends Node3D
 
 
 @onready var LEGS_INITIAL:int = len(LEGS)
+
+
+var is_pathfinding:bool = true;
+var stability:float = 0.0;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,7 +63,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	update_stability(delta)
 	
+	update_target()
 	apply_self_forces(delta)
 	
 	
@@ -67,10 +76,30 @@ func _physics_process(delta: float) -> void:
 	apply_offbalance_force(delta)
 	consider_step()
 	
-	
 
-var last_force_applied:Vector3 = Vector3.ZERO # Logging
-func apply_self_forces(delta):
+
+func update_stability(delta:float):
+	
+	var stable_legs:int = 0;
+	for leg in LEGS:
+		if leg.is_stable:
+			stable_legs += 1;
+	
+	if(stable_legs >= 3):
+		stability = lerp(stability, 1.0, min(1.0, 0.5*delta))
+	else:
+		stability = lerp(stability, 0.0, min(1.0, 1.0*delta))
+	
+	stability -= BODY.linear_velocity.length() ** 3 * 0.001
+	stability -= BODY.angular_velocity.length() ** 3 * 0.001
+	
+	stability = min(1.0, max(0.0, stability))
+	DebugDraw3D.draw_text(BODY.global_position + Vector3.UP * 0.8, str(stability))
+
+
+
+
+func update_target():
 	var stable_area := calculate_stable_area()
 	var stable_legs:float = len(stable_area)
 	
@@ -79,8 +108,34 @@ func apply_self_forces(delta):
 	for leg in LEGS:
 		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 1.0) # TODO needs better work
 	
+	
+	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
 	
+	
+	if(is_pathfinding): ### ---------------- PATHFINDIUNG CODE
+		
+		PATHFINDER.target_position = Globals.PLAYER.global_position
+		
+		var path_step_dist:float = stability;
+		
+		var next_pos:Vector3 = PATHFINDER.get_next_path_position()
+		var next_pos_delta_xz:Vector3 = (next_pos - BODY.global_position) * Vector3(1, 0, 1)
+		
+		
+		if(next_pos_delta_xz.length() > path_step_dist):
+			next_pos_delta_xz = next_pos_delta_xz.normalized() * path_step_dist
+		
+		TARGET.global_position += next_pos_delta_xz
+		
+		#Doesnt work
+		#Need to reconsider 'Facingness'
+		#ANGLE_HELPER.look_at(ANGLE_HELPER.global_position + next_pos_delta_xz)
+
+
+
+var last_force_applied:Vector3 = Vector3.ZERO # Logging
+func apply_self_forces(delta):
 	
 	
 	#Capacity for forces.
@@ -115,7 +170,7 @@ func apply_self_forces(delta):
 	#ANGLE_HELPER.STIFFNESS = stable_legs * 3
 	#ANGLE_HELPER.DAMPING = stable_legs * 0.66 - 1
 	
-	#Logging for fixing settings - useful for setting values intiially
+	#Logging for fixing settings - useful for setting values intiially // Not 100% functional code
 	#If the force i want is the same,                  and  nothing is happening                 and its not just being intitialised
 	#if((PHYSLERP.last_force - force_goal).length() < 1.0 and BODY.linear_velocity.length() < 0.2 and Time.get_ticks_msec() > 1000):
 		#print("Percieved under-powered force: ", force_to_apply, "Applied out of", force_goal)
@@ -129,11 +184,12 @@ func body_hit():
 
 func set_leg_target(leg:BotLeg) -> void:
 	var target_pos = calculate_leg_target(leg)
+	Debug.point(target_pos)
 	if target_pos == Vector3.ZERO: return # If no readings, stay as was
 	leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.2)
 
 func calculate_leg_target(leg:BotLeg) -> Vector3:
-	var leg_delta:Vector3 = leg.position # Leg must be a direct child
+	var leg_delta:Vector3 = leg.global_position - BODY.global_position # Leg must be a direct child 
 	#leg_delta *= global_basis.inverse()
 	var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
 	
@@ -142,11 +198,11 @@ func calculate_leg_target(leg:BotLeg) -> Vector3:
 	
 	var leg_prospective_xz = leg_idle_goal_xz + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1)*0.2 # Calculates prospective pos. Needs work
 	
-	DOWN_RAY.position = leg_prospective_xz
+	DOWN_RAY.global_position = BODY.global_position + leg_prospective_xz
 	DOWN_RAY.force_raycast_update()
 	if(DOWN_RAY.is_colliding()):
 		var collision:Vector3 = DOWN_RAY.get_collision_point()
-		if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)):
+		if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
 			return collision
 	
 	else:#No collision

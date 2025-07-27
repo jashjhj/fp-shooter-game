@@ -140,7 +140,7 @@ metadata/_custom_type_script = "uid://bk1iff825dehg"
 
 [node name="KneeJoint_Freer" type="Node" parent="Upper/Knee_Weakpoint" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 script = ExtResource("13_p0hln")
-FREE_ON_THRESHOLD = [NodePath("../../../Upper_Gib/Knee")]
+FREE_ON_THRESHOLD = [NodePath("../../../Gibs/Upper_Gib/Knee")]
 THRESHOLDS = Array[float]([0.0])
 MAX_HP = 20.0
 MINIMUM_DAMAGE_THRESHOLD = 3.0
@@ -159,7 +159,7 @@ metadata/_custom_type_script = "uid://bk1iff825dehg"
 
 [node name="Upper_RB_Maker" type="Node" parent="Upper" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
 script = ExtResource("10_oebdh")
-RIGIDBODY = NodePath("../../Upper_Gib")
+RIGIDBODY = NodePath("../../Gibs/Upper_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
 NEW_CHILDREN = Array[NodePath]([NodePath("../LegUpper"), NodePath("../Knee_Weakpoint")])
 TO_BE_REMOVED = Array[NodePath]([NodePath("../Upper_Hittable"), NodePath("../Hip_Weakpoint")])
@@ -199,7 +199,7 @@ metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Lower_RB_Maker" type="Node" parent="Lower" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
 script = ExtResource("10_oebdh")
-RIGIDBODY = NodePath("../../Lower_Gib")
+RIGIDBODY = NodePath("../../Gibs/Lower_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
 NEW_CHILDREN = Array[NodePath]([NodePath("../LegLower"), NodePath("../../Foot/Ankle_Weakpoint")])
 TO_BE_REMOVED = Array[NodePath]([NodePath("../Lower_Hittable"), NodePath("../../Foot/Ankle_Weakpoint/Hit_HP_Tracker-GIB")])
@@ -244,7 +244,7 @@ metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Foot_RB_Maker" type="Node" parent="Foot" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
 script = ExtResource("10_oebdh")
-RIGIDBODY = NodePath("../../Foot_Gib")
+RIGIDBODY = NodePath("../../Gibs/Foot_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
 NEW_CHILDREN = Array[NodePath]([NodePath("../LegFoot")])
 TO_BE_REMOVED = Array[NodePath]([NodePath("../Hittable_Collider")])
@@ -265,22 +265,25 @@ metadata/_custom_type_script = "uid://bk1iff825dehg"
 
 [node name="Ankle_Freer" type="Node" parent="Foot/Ankle_Weakpoint" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
 script = ExtResource("13_p0hln")
-FREE_ON_THRESHOLD = [NodePath("../../../Lower_Gib/Ankle")]
+FREE_ON_THRESHOLD = [NodePath("../../../Gibs/Lower_Gib/Ankle")]
 THRESHOLDS = Array[float]([0.0])
 MAX_HP = 8.0
 MINIMUM_DAMAGE_THRESHOLD = 4.0
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
-[node name="Foot_Gib" type="RigidBody3D" parent="."]
+[node name="Gibs" type="Node" parent="."]
+
+[node name="Foot_Gib" type="RigidBody3D" parent="Gibs"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
 top_level = true
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Foot_Gib"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Gibs/Foot_Gib"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.00834799, -0.00915508)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_oebdh")
 debug_color = Color(3.27289e-06, 0.594511, 0.730556, 0.42)
 
-[node name="Hittable_Collider2" type="Area3D" parent="Foot_Gib"]
+[node name="Hittable_Collider2" type="Area3D" parent="Gibs/Foot_Gib"]
 editor_description = "Need complex hit collider as it i a complex shape."
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.0083499, -0.00915508)
 collision_layer = 8192
@@ -288,26 +291,27 @@ collision_mask = 0
 script = ExtResource("4_aqqmv")
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Foot_Gib/Hittable_Collider2"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Gibs/Foot_Gib/Hittable_Collider2"]
+visible = false
 shape = SubResource("ConcavePolygonShape3D_mciut")
 
-[node name="Hit_Weakpoint" type="Node" parent="Foot_Gib/Hittable_Collider2" node_paths=PackedStringArray("WEAKPOINT")]
+[node name="Hit_Weakpoint" type="Node" parent="Gibs/Foot_Gib/Hittable_Collider2" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../../Foot/Ankle_Weakpoint")
+WEAKPOINT = NodePath("../../../../Foot/Ankle_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
-[node name="Hit_Impulse" type="Node" parent="Foot_Gib/Hittable_Collider2" node_paths=PackedStringArray("IMPULSE_TO")]
+[node name="Hit_Impulse" type="Node" parent="Gibs/Foot_Gib/Hittable_Collider2" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("5_uogsf")
 IMPULSE_TO = NodePath("../..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
-[node name="Lower_Gib" type="RigidBody3D" parent="."]
+[node name="Lower_Gib" type="RigidBody3D" parent="Gibs"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.7958, 0)
 top_level = true
 script = ExtResource("13_y2jxi")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
-[node name="Ankle" type="HingeJoint3D" parent="Lower_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
+[node name="Ankle" type="HingeJoint3D" parent="Gibs/Lower_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
 transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 0, 4.17999e-08, -0.95627)
 angular_limit/enable = true
 angular_limit/upper = 1.0472
@@ -316,32 +320,33 @@ script = ExtResource("15_etld6")
 NODE_A = NodePath("../../Foot_Gib")
 NODE_B = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lower_Gib"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gibs/Lower_Gib"]
 transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_na25b")
 
-[node name="Hit_Weakpoint" type="Node" parent="Lower_Gib" node_paths=PackedStringArray("WEAKPOINT")]
+[node name="Hit_Weakpoint" type="Node" parent="Gibs/Lower_Gib" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../Foot/Ankle_Weakpoint")
+WEAKPOINT = NodePath("../../../Foot/Ankle_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
-[node name="Hit_Impulse" type="Node" parent="Lower_Gib" node_paths=PackedStringArray("IMPULSE_TO")]
+[node name="Hit_Impulse" type="Node" parent="Gibs/Lower_Gib" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("5_uogsf")
 IMPULSE_TO = NodePath("..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
-[node name="Hit_Weakpoint2" type="Node" parent="Lower_Gib" node_paths=PackedStringArray("WEAKPOINT")]
+[node name="Hit_Weakpoint2" type="Node" parent="Gibs/Lower_Gib" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../Upper/Knee_Weakpoint")
+WEAKPOINT = NodePath("../../../Upper/Knee_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
-[node name="Upper_Gib" type="RigidBody3D" parent="."]
+[node name="Upper_Gib" type="RigidBody3D" parent="Gibs"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 top_level = true
 script = ExtResource("13_y2jxi")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
-[node name="Knee" type="HingeJoint3D" parent="Upper_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
+[node name="Knee" type="HingeJoint3D" parent="Gibs/Upper_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, 3.4239e-08, -0.783296)
 angular_limit/enable = true
 angular_limit/upper = 0.0872665
@@ -351,16 +356,17 @@ NODE_A = NodePath("../../Lower_Gib")
 NODE_B = NodePath("..")
 metadata/_custom_type_script = "uid://c82vodcg2hnt"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Upper_Gib"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gibs/Upper_Gib"]
 transform = Transform3D(1.5, 0, 0, 0, 1.96701e-07, -1.5, 0, 1.5, 1.96701e-07, 0, 0, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_etld6")
 
-[node name="Hit_Weakpoint" type="Node" parent="Upper_Gib" node_paths=PackedStringArray("WEAKPOINT")]
+[node name="Hit_Weakpoint" type="Node" parent="Gibs/Upper_Gib" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../Upper/Knee_Weakpoint")
+WEAKPOINT = NodePath("../../../Upper/Knee_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
-[node name="Hit_Impulse" type="Node" parent="Upper_Gib" node_paths=PackedStringArray("IMPULSE_TO")]
+[node name="Hit_Impulse" type="Node" parent="Gibs/Upper_Gib" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("5_uogsf")
 IMPULSE_TO = NodePath("..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"

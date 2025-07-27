@@ -19,6 +19,10 @@ class_name Angular_Damper extends Generic6DOFJoint3D
 		locked = v
 		set_locked(locked)
 
+var offset:Vector3;
+var parent:Node3D
+var initial_angles:Vector3;
+
 func _ready() -> void:
 	update_damping(DAMPING)
 	update_stiffness(STIFFNESS)
@@ -28,7 +32,24 @@ func _ready() -> void:
 	set("linear_limit_x/enabled", false)
 	set("linear_limit_y/enabled", false)
 	set("linear_limit_z/enabled", false)
+	
+	top_level = true;
+	transform.basis = Basis.IDENTITY
+	
+	if not Engine.is_editor_hint(): # At runtime
+		parent = get_parent()
+		offset = global_position - parent.global_position
 
+func _physics_process(delta: float) -> void:
+	global_position = parent.global_position + offset
+
+##Uses a global delta, i.e. (0, 0, -1) looks towards -Z
+func set_forward(v:Vector3):
+	#set("angular_spring_x/equilibrium_point", atan2(v.y,v.z))
+	#set("angular_spring_y/equilibrium_point", atan2(v.z,v.x))
+	#print(atan2(v.z,v.x))
+	#set("angular_spring_z/equilibrium_point", atan2(v.x,v.y))
+	pass
 
 
 func update_damping(d):
