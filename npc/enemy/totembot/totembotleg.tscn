@@ -157,12 +157,12 @@ MAX_HP = 15.0
 MINIMUM_DAMAGE_THRESHOLD = 3.0
 metadata/_custom_type_script = "uid://bk1iff825dehg"
 
-[node name="Upper_RB_Maker" type="Node" parent="Upper" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
+[node name="Upper_RB_Maker" type="Node" parent="Upper" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
 script = ExtResource("10_oebdh")
 RIGIDBODY = NodePath("../../Gibs/Upper_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
-NEW_CHILDREN = Array[NodePath]([NodePath("../LegUpper"), NodePath("../Knee_Weakpoint")])
-TO_BE_REMOVED = Array[NodePath]([NodePath("../Upper_Hittable"), NodePath("../Hip_Weakpoint")])
+NEW_CHILDREN = [NodePath("../LegUpper"), NodePath("../Knee_Weakpoint")]
+TO_BE_REMOVED = [NodePath("../Upper_Hittable"), NodePath("../Hip_Weakpoint")]
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Lower" type="Node3D" parent="."]
@@ -197,12 +197,12 @@ script = ExtResource("6_na25b")
 WEAKPOINT = NodePath("../../../Foot/Ankle_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
-[node name="Lower_RB_Maker" type="Node" parent="Lower" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
+[node name="Lower_RB_Maker" type="Node" parent="Lower" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
 script = ExtResource("10_oebdh")
 RIGIDBODY = NodePath("../../Gibs/Lower_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
-NEW_CHILDREN = Array[NodePath]([NodePath("../LegLower"), NodePath("../../Foot/Ankle_Weakpoint")])
-TO_BE_REMOVED = Array[NodePath]([NodePath("../Lower_Hittable"), NodePath("../../Foot/Ankle_Weakpoint/Hit_HP_Tracker-GIB")])
+NEW_CHILDREN = [NodePath("../LegLower"), NodePath("../../Foot/Ankle_Weakpoint")]
+TO_BE_REMOVED = [NodePath("../Lower_Hittable"), NodePath("../../Foot/Ankle_Weakpoint/Hit_HP_Tracker-GIB")]
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Foot" type="RigidBody3D" parent="."]
@@ -242,12 +242,12 @@ script = ExtResource("6_na25b")
 WEAKPOINT = NodePath("../../Ankle_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
-[node name="Foot_RB_Maker" type="Node" parent="Foot" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
+[node name="Foot_RB_Maker" type="Node" parent="Foot" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
 script = ExtResource("10_oebdh")
 RIGIDBODY = NodePath("../../Gibs/Foot_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
-NEW_CHILDREN = Array[NodePath]([NodePath("../LegFoot")])
-TO_BE_REMOVED = Array[NodePath]([NodePath("../Hittable_Collider")])
+NEW_CHILDREN = [NodePath("../LegFoot")]
+TO_BE_REMOVED = [NodePath("../Hittable_Collider")]
 collision_layer = 512
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 

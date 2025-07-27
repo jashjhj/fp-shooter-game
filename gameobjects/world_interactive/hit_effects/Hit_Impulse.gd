@@ -4,8 +4,7 @@ class_name Hit_Impulse extends Hit_Component
 ##Can be Owning Hittable_RB or otherwise. Auto-sets to parent if it is Rigidbody3D
 @export var IMPULSE_TO:RigidBody3D;
 
-
-func _ready() -> void:
+func _enter_tree() -> void:
 	if(get_parent() is RigidBody3D):
 		IMPULSE_TO = get_parent()
 

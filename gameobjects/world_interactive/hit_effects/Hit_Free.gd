@@ -9,6 +9,7 @@ var number_of_thresholds:int;
 
 
 func _ready() -> void:
+	super._ready()
 	for i in range(0, len(THRESHOLDS)):
 		assert(len(FREE_ON_THRESHOLD) >= i, "Threshold set for unset node.")
 		assert(FREE_ON_THRESHOLD[i] != null, "Threshold set for unset node.")

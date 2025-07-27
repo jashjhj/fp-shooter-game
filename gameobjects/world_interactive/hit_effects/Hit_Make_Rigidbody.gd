@@ -6,6 +6,7 @@ class_name Hit_Make_Rigidbody extends Hit_HP_Tracker
 @export var AT_THRESHOLD:float = 0;
 
 func  _ready() -> void:
+	super._ready()
 	if(MAKE_RIGIDBODY == null):
 		for child in get_children():
 			if(child is Make_Rigidbody):

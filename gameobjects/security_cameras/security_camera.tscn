@@ -100,12 +100,12 @@ script = ExtResource("8_e6fgj")
 MAKE_RIGIDBODY = NodePath("Make_Rigidbody")
 metadata/_custom_type_script = "uid://hhosnxuj45ad"
 
-[node name="Make_Rigidbody" type="Node" parent="Hittable_StaticBody/Pivot/Head/Hittable_Collider/Hit_Make_Rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE")]
+[node name="Make_Rigidbody" type="Node" parent="Hittable_StaticBody/Pivot/Head/Hittable_Collider/Hit_Make_Rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
 script = ExtResource("11_4y5qw")
 RIGIDBODY = NodePath("../../../../../../Camera_Rigidbody")
 RIGIDBODY_BASIS_CLONE = NodePath("../../..")
-NEW_CHILDREN = Array[NodePath]([NodePath("../../../MeshInstance3D"), NodePath("../../CollisionShape3D")])
-TO_BE_REMOVED = Array[NodePath]([NodePath("../..")])
+NEW_CHILDREN = [NodePath("../../../MeshInstance3D"), NodePath("../../CollisionShape3D")]
+TO_BE_REMOVED = [NodePath("../..")]
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Camera_Rigidbody" type="RigidBody3D" parent="."]

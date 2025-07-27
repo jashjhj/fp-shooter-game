@@ -9,6 +9,7 @@ class_name LegBot extends Node3D
 
 @export var ANGLE_HELPER:Angular_Damper;
 
+@export var is_pathfinding:bool = true;
 @export var PATHFINDER:NavigationAgent3D
 
 @export_group("Gait Settings")
@@ -32,7 +33,6 @@ class_name LegBot extends Node3D
 @onready var LEGS_INITIAL:int = len(LEGS)
 
 
-var is_pathfinding:bool = true;
 var stability:float = 0.0;
 
 

@@ -2,9 +2,10 @@ class_name Make_Rigidbody extends Node
 
 @export var RIGIDBODY:RigidBody3D
 @export var RIGIDBODY_BASIS_CLONE:Node3D;
-@export var NEW_CHILDREN:Array[NodePath]
-@export var TO_BE_REMOVED:Array[NodePath]
+@export var NEW_CHILDREN:Array[Node]
+@export var TO_BE_REMOVED:Array[Node]
 
+@export var AUTO_SET_COLLISION:bool = true;
 @export_enum("Small debris:4096", "Medium Debris:8192", "Large Debris:16384", "Small debris NoHit:256", "Medium Debris NoHit:512", "Large Debris NoHit:1024") var collision_layer:int = 8192;
 
 var is_rb_active:bool = false;
@@ -12,8 +13,10 @@ var is_rb_active:bool = false;
 func  _ready() -> void:
 	assert(RIGIDBODY != null, "No rigidbody set.")
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_DISABLED
-	RIGIDBODY.collision_layer = collision_layer;
-	RIGIDBODY.collision_mask = 1 + 512 + 1028 + 8192 + 16384;
+	
+	if(AUTO_SET_COLLISION):
+		RIGIDBODY.collision_layer = collision_layer;
+		RIGIDBODY.collision_mask = 1 + 512 + 1028 + 8192 + 16384;
 
 func trigger():
 	
@@ -28,12 +31,8 @@ func trigger():
 	
 	RIGIDBODY.reparent(Globals.RUBBISH_COLLECTOR)
 	
-	for removable in TO_BE_REMOVED:
-		var c = get_node(removable)
-		if(c != null):
-			c.queue_free()
-	for new_child in NEW_CHILDREN:
-		var c = get_node(new_child)
+
+	for c in NEW_CHILDREN:
 		if(c != null):
 			c.reparent(RIGIDBODY)
 	
@@ -42,6 +41,12 @@ func trigger():
 	
 	for i in range(0, len(impulses)):
 		RIGIDBODY.apply_impulse(impulses[i], impulses_pos[i] - RIGIDBODY.global_position)
+	
+	
+	#Clears removables finally
+	for c in TO_BE_REMOVED:
+		if(c != null):
+			c.queue_free()
 
 
 #Impulses handling
