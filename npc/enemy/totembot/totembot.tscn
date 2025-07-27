@@ -57,10 +57,10 @@ mass = 20.0
 script = ExtResource("2_8nbuu")
 
 [node name="TotemBotLeg" parent="Body" instance=ExtResource("20_heqxd")]
-transform = Transform3D(0.5, -1.19783e-08, -0.866025, 2.39565e-08, 1, 0, 0.866025, -2.07469e-08, 0.5, -0.334, -0.2648, 0.2011)
+transform = Transform3D(0.5, -1.19783e-08, -0.866025, 2.39565e-08, 1, 0, 0.866025, -2.07469e-08, 0.5, -0.337772, -0.2648, 0.192719)
 
 [node name="TotemBotLeg2" parent="Body" instance=ExtResource("20_heqxd")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.19209e-07, -0.253009, -0.372688)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00760871, -0.253009, -0.372688)
 
 [node name="TotemBotLeg3" parent="Body" instance=ExtResource("20_heqxd")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, 0.333966, -0.264801, 0.201085)
@@ -94,11 +94,11 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_8nbuu")
 
 [node name="Hip_Colldier" type="CollisionShape3D" parent="Body"]
-transform = Transform3D(1.5, 0, 0, 0, -1.37559, -0.598124, 0, 0.598124, -1.37559, 0, -0.152463, -0.153565)
+transform = Transform3D(1.5, 0, 0, 0, -1.37559, -0.598124, 0, 0.598124, -1.37559, -0.00760859, -0.152463, -0.153565)
 shape = SubResource("ConvexPolygonShape3D_gc2rj")
 
 [node name="Hip_Colldier2" type="CollisionShape3D" parent="Body"]
-transform = Transform3D(-0.750001, 0.517991, -1.19129, -1.20258e-07, -1.37559, -0.598122, -1.29904, -0.299062, 0.687793, -0.163232, -0.169509, 0.106425)
+transform = Transform3D(-0.750001, 0.517991, -1.19129, -1.20258e-07, -1.37559, -0.598122, -1.29904, -0.299062, 0.687793, -0.167004, -0.169509, 0.0980444)
 shape = SubResource("ConvexPolygonShape3D_gc2rj")
 
 [node name="Hip_Colldier3" type="CollisionShape3D" parent="Body"]

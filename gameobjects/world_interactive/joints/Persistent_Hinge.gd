@@ -23,5 +23,5 @@ func _ready() -> void:
 
 
 func update_nodes():
-	node_a = NODE_A.get_path()
-	node_b = NODE_B.get_path()
+	node_a = get_path_to(NODE_A)
+	node_b = get_path_to(NODE_B)
