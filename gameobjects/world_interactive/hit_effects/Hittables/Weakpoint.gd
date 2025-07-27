@@ -33,6 +33,13 @@ func _ready() -> void:
 func trigger(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 = Vector3.INF):
 	damage *= DAMAGE_CURVE.sample((impulse_pos - global_position).length()) # Samples the distance for the multiplier.
 	
-	for hit_comp in HIT_COMPONENTS:
-		hit_comp.trigger(damage, impulse, impulse_pos)
+	var i:int = 0;
+	while i < len(HIT_COMPONENTS):
+		var hit_comp = HIT_COMPONENTS[i]
+		
+		if(hit_comp == null): # If hit component has been freed for any reason
+			HIT_COMPONENTS.remove_at(i)
+		else:
+			hit_comp.trigger(damage, impulse, impulse_pos)
+			i+=1;
 	

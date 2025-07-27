@@ -41,7 +41,8 @@ var BODY:RigidBody3D:
 @export var DISMEMBER_HIP_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_KNEE_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_ANKLE_TRIGGER:Hit_HP_Tracker;
-@export var DISMEMBER_LOWER_RB_MAKER:Make_Rigidbody
+@export var DISMEMBER_UPPER_RB_MAKER:Make_Rigidbody;
+@export var DISMEMBER_LOWER_RB_MAKER:Make_Rigidbody;
 @export var DISMEMBER_FOOT_RB_MAKER:Make_Rigidbody;
 
 class Intactity:
@@ -411,7 +412,15 @@ func propagate_motion(propagating:bool = true):
 # -------- DISMEMBERMENT ---------
 ##Cripples The leg. Whoops!
 func break_hip():
-	pass
+	if(intactity.hip == false): return
+	intactity.hip = false
+	
+	UPPER_LENGTH = 0.2;
+	DISMEMBER_UPPER_RB_MAKER.add_impulse(DISMEMBER_HIP_TRIGGER.last_impulse, DISMEMBER_HIP_TRIGGER.last_impulse_pos)
+	DISMEMBER_UPPER_RB_MAKER.trigger()
+	
+	break_knee()
+	
 
 ## owie
 func break_knee():
@@ -433,9 +442,6 @@ func break_knee():
 func break_ankle():
 	if(intactity.ankle == false): return
 	intactity.ankle = false;
-	
-	
-	
 	
 	
 	
