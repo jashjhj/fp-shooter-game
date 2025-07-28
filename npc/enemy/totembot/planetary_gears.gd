@@ -10,6 +10,9 @@ class_name Planetary_Gears extends Node3D
 ##Decides whether inside is stationary, or outside.
 @export var FROM_INNER:bool = false;
 
+@export var ATTACHED_RB:RigidBody3D;
+@export var SIMULATED_MASS_ABOVE:float = 0.0;
+
 @export_group("Components")
 @export var OUTER_RING:Node3D
 ##Inside
@@ -45,6 +48,8 @@ func _process(delta: float) -> void:
 	var angle_to_turn = sign(angle) * min(abs(angle), TURN_SPEED*delta)
 	
 	
+	angle_to_turn = TURN_SPEED * delta
+	
 	rotate(basis.y, angle_to_turn)
 	
 	
@@ -69,3 +74,6 @@ func _process(delta: float) -> void:
 		OUTER_RING.global_basis = get_parent_node_3d().global_basis
 	if(SUN != null and FROM_INNER):
 		SUN.global_basis = get_parent_node_3d().global_basis
+	
+	if(ATTACHED_RB != null): # Equal and opposite type stuff
+		ATTACHED_RB.apply_torque(-angle_to_turn * Vector3.UP * SIMULATED_MASS_ABOVE)

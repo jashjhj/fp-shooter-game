@@ -173,8 +173,10 @@ ATTACHED_TO = NodePath("..")
 transform = Transform3D(-0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, -0.5, 0.00478914, 0, 0.00154808)
 ATTACHED_TO = NodePath("..")
 
-[node name="PlanetaryGears" parent="Body" instance=ExtResource("11_v7ac7")]
+[node name="PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2267, 0)
+ATTACHED_RB = NodePath("..")
+SIMULATED_MASS_ABOVE = 10.0
 
 [node name="Model" type="Node3D" parent="Body/PlanetaryGears"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2267, 0)
