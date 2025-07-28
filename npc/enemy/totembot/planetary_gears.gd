@@ -5,12 +5,15 @@ class_name Planetary_Gears extends Node3D
 #Inside can be rotated
 
 
-@export_group("Settings")
 ##Maximum degrees/Second
 @export_range(0, 360, 0.1, "radians_as_degrees") var TURN_SPEED:float = 1.0;
+##Decides whether inside is stationary, or outside.
+@export var FROM_INNER:bool = false;
 
 @export_group("Components")
 @export var OUTER_RING:Node3D
+##Inside
+@export var SUN:Node3D
 @export var GEAR:Node3D
 @export var GEARS_NUM:int = 6;
 ##Ratio of Circumference/Radius of Planet gears TO Sun gear
@@ -48,10 +51,22 @@ func _process(delta: float) -> void:
 	
 	
 	for gear in GEARS:
-		gear.rotate_object_local(Vector3.UP, -angle_to_turn)
+		
+		gear.rotate_object_local(Vector3.UP, -angle_to_turn) # First undo local rotation
 		gear.position = gear.position.rotated(Vector3.UP, -angle_to_turn)
 		
-		gear.rotate_object_local(Vector3.UP, -angle_to_turn / GEAR_RATIO)
-		gear.position = gear.position.rotated(Vector3.UP, angle_to_turn *  GEAR_RATIO / (PI))
+		if(!FROM_INNER):
+			
+			gear.rotate_object_local(Vector3.UP, -angle_to_turn / GEAR_RATIO)
+			gear.position = gear.position.rotated(Vector3.UP, angle_to_turn *  GEAR_RATIO / (PI))
+		
+		else:
+			
+			gear.rotate_object_local(Vector3.UP, angle_to_turn / GEAR_RATIO)
+			gear.position = gear.position.rotated(Vector3.UP, angle_to_turn *  GEAR_RATIO / (PI))
 	
-	OUTER_RING.global_basis = get_parent_node_3d().global_basis
+	
+	if(OUTER_RING != null and !FROM_INNER):
+		OUTER_RING.global_basis = get_parent_node_3d().global_basis
+	if(SUN != null and FROM_INNER):
+		SUN.global_basis = get_parent_node_3d().global_basis

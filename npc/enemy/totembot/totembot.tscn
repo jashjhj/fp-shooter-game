@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c601y42ahg3h1"]
+[gd_scene load_steps=32 format=3 uid="uid://c601y42ahg3h1"]
 
 [ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="2_8nbuu"]
@@ -7,10 +7,8 @@
 [ext_resource type="ArrayMesh" uid="uid://vcljykjci00t" path="res://npc/enemy/totembot/assets/centrifuge_0.obj" id="3_hdgws"]
 [ext_resource type="ArrayMesh" uid="uid://d2es6etbnscdk" path="res://npc/enemy/totembot/assets/centrifuge_1.obj" id="4_heqxd"]
 [ext_resource type="ArrayMesh" uid="uid://c4hbr41ln06le" path="res://npc/enemy/totembot/assets/centrifuge_2.obj" id="5_68ihi"]
-[ext_resource type="ArrayMesh" uid="uid://di4ktjxriujhh" path="res://npc/enemy/totembot/assets/Planetary_0.obj" id="6_8nbuu"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="6_gc2rj"]
 [ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="7_5jvjh"]
-[ext_resource type="ArrayMesh" uid="uid://bcwnx7vhvm0nd" path="res://npc/enemy/totembot/assets/Planetary_1.obj" id="7_gc2rj"]
 [ext_resource type="ArrayMesh" uid="uid://blpf05yv67uvd" path="res://npc/enemy/totembot/assets/Shaft.obj" id="8_5jvjh"]
 [ext_resource type="Script" uid="uid://cbqh0dj1yt51l" path="res://gameobjects/world_interactive/hit_effects/Hit_Gib.gd" id="9_bcabd"]
 [ext_resource type="ArrayMesh" uid="uid://cesyqctqn6koh" path="res://npc/enemy/totembot/assets/shield_0.obj" id="9_mv043"]
@@ -194,18 +192,6 @@ skeleton = NodePath("../../..")
 mesh = ExtResource("5_68ihi")
 skeleton = NodePath("../../..")
 
-[node name="Planetary_Gears2" type="Node3D" parent="Body/PlanetaryGears/Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.550809, 0)
-
-[node name="Planetary0" type="MeshInstance3D" parent="Body/PlanetaryGears/Model/Planetary_Gears2"]
-mesh = ExtResource("6_8nbuu")
-skeleton = NodePath("../../../../..")
-
-[node name="Planetary1" type="MeshInstance3D" parent="Body/PlanetaryGears/Model/Planetary_Gears2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172501, 2.98023e-08, -0.00242019)
-mesh = ExtResource("7_gc2rj")
-skeleton = NodePath("../../../../..")
-
 [node name="Shaft" type="MeshInstance3D" parent="Body/PlanetaryGears/Model"]
 mesh = ExtResource("8_5jvjh")
 skeleton = NodePath("../../../..")
@@ -248,12 +234,19 @@ skeleton = NodePath("../../../..")
 mesh = ExtResource("16_72w42")
 skeleton = NodePath("../../../..")
 
-[node name="Camera" type="MeshInstance3D" parent="Body/PlanetaryGears/Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0248861, 0.73388, 0)
-mesh = ExtResource("17_jvoay")
-skeleton = NodePath("../../../..")
+[node name="PlanetaryGears" parent="Body/PlanetaryGears/Model" instance=ExtResource("11_v7ac7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545265, 0)
+FROM_INNER = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Body/PlanetaryGears/Model/Camera"]
+[node name="Top" type="Node3D" parent="Body/PlanetaryGears/Model/PlanetaryGears"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.019224, 0)
+
+[node name="Camera" type="MeshInstance3D" parent="Body/PlanetaryGears/Model/PlanetaryGears/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0248861, 0.162368, 0)
+mesh = ExtResource("17_jvoay")
+skeleton = NodePath("../../../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Body/PlanetaryGears/Model/PlanetaryGears/Top/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0799327, 0.00593537, -1.19209e-07)
 visible = false
 light_color = Color(1, 0.45, 0.45, 1)
@@ -262,14 +255,16 @@ shadow_enabled = true
 omni_range = 0.5
 omni_attenuation = 2.0
 
-[node name="DomeGlass" type="MeshInstance3D" parent="Body/PlanetaryGears/Model"]
+[node name="DomeGlass" type="MeshInstance3D" parent="Body/PlanetaryGears/Model/PlanetaryGears/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106911, -0.571512, 0)
 mesh = ExtResource("18_wi7e8")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hdgws")
 
-[node name="DomeTop" type="MeshInstance3D" parent="Body/PlanetaryGears/Model"]
+[node name="DomeTop" type="MeshInstance3D" parent="Body/PlanetaryGears/Model/PlanetaryGears/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106911, -0.571512, 0)
 mesh = ExtResource("19_d4x4b")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../../../../../..")
 
 [node name="Hittable_Collider" type="Area3D" parent="Body"]
 collision_layer = 128
