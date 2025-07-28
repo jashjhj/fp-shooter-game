@@ -123,8 +123,10 @@ aim_down_sights={
 
 common/physics_ticks_per_second=120
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/position_steps=3
 jolt_physics_3d/simulation/penetration_slop=0.001
 jolt_physics_3d/simulation/speculative_contact_distance=0.03
+jolt_physics_3d/simulation/baumgarte_stabilization_factor=0.33
 3d/solver/solver_iterations=20
 
 [rendering]

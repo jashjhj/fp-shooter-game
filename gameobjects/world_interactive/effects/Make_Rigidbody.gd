@@ -18,6 +18,7 @@ func  _ready() -> void:
 		RIGIDBODY.collision_layer = collision_layer;
 		RIGIDBODY.collision_mask = 1 + 512 + 1028 + 8192 + 16384;
 
+
 func trigger():
 	
 	is_rb_active = true
@@ -37,7 +38,7 @@ func trigger():
 			c.reparent(RIGIDBODY)
 	
 	Globals.RUBBISH_COLLECTOR.add_rubbish(RIGIDBODY)
-	RIGIDBODY.process_mode = Node.PROCESS_MODE_INHERIT
+	enable_rb_processing()
 	
 	for i in range(0, len(impulses)):
 		RIGIDBODY.apply_impulse(impulses[i], impulses_pos[i] - RIGIDBODY.global_position)
@@ -47,7 +48,10 @@ func trigger():
 	for c in TO_BE_REMOVED:
 		if(c != null):
 			c.queue_free()
+	
 
+func enable_rb_processing():
+	RIGIDBODY.process_mode = Node.PROCESS_MODE_INHERIT
 
 #Impulses handling
 
