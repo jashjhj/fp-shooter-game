@@ -45,7 +45,6 @@ func _process(delta: float) -> void:
 	var angle_to_turn = sign(angle) * min(abs(angle), TURN_SPEED*delta)
 	
 	
-	angle_to_turn = TURN_SPEED * delta
 	rotate(basis.y, angle_to_turn)
 	
 	

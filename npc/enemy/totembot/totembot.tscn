@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c601y42ahg3h1"]
+[gd_scene load_steps=33 format=3 uid="uid://c601y42ahg3h1"]
 
 [ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="2_8nbuu"]
@@ -12,6 +12,7 @@
 [ext_resource type="ArrayMesh" uid="uid://blpf05yv67uvd" path="res://npc/enemy/totembot/assets/Shaft.obj" id="8_5jvjh"]
 [ext_resource type="Script" uid="uid://cbqh0dj1yt51l" path="res://gameobjects/world_interactive/hit_effects/Hit_Gib.gd" id="9_bcabd"]
 [ext_resource type="ArrayMesh" uid="uid://cesyqctqn6koh" path="res://npc/enemy/totembot/assets/shield_0.obj" id="9_mv043"]
+[ext_resource type="Script" uid="uid://bd3thw0v5baaj" path="res://gameobjects/world_interactive/hit_effects/Hit_Translate.gd" id="10_bcabd"]
 [ext_resource type="ArrayMesh" uid="uid://0lo60yv28p3k" path="res://npc/enemy/totembot/assets/shield_1.obj" id="10_lqwa8"]
 [ext_resource type="ArrayMesh" uid="uid://cq5dontnrxw32" path="res://npc/enemy/totembot/assets/shield_2.obj" id="11_bcabd"]
 [ext_resource type="PackedScene" uid="uid://uq1kxfr5cho" path="res://npc/enemy/totembot/planetary_gears.tscn" id="11_v7ac7"]
@@ -152,6 +153,13 @@ script = ExtResource("9_bcabd")
 GIBBABLE = NodePath("../../../TotembotHatch3")
 MAX_HP = 1.0
 metadata/_custom_type_script = "uid://cbqh0dj1yt51l"
+
+[node name="Hit_Translate" type="Node" parent="Body/Hatches_Button/Hittable_Collider" node_paths=PackedStringArray("TRANSLATE_NODE")]
+script = ExtResource("10_bcabd")
+TRANSLATE_NODE = NodePath("../..")
+TRANSLATION = Vector3(0, 0.022, 0)
+MAX_HP = 1.0
+metadata/_custom_type_script = "uid://bd3thw0v5baaj"
 
 [node name="TotembotHatch" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.64562e-05, 0, -0.00343504)
