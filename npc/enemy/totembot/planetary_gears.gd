@@ -1,12 +1,10 @@
-class_name Planetary_Gears extends Node3D
+class_name Planetary_Gears extends Rotator_1D
 
 
 #Planetary gears: outside is stationary
 #Inside can be rotated
 
 
-##Maximum degrees/Second
-@export_range(0, 360, 0.1, "radians_as_degrees") var TURN_SPEED:float = 1.0;
 ##Decides whether inside is stationary, or outside.
 @export var FROM_INNER:bool = false;
 
@@ -25,8 +23,6 @@ class_name Planetary_Gears extends Node3D
 
 var GEARS:Array[Node3D]
 
-##A vector representing which way the SUBJECT should look towards (-z) || In GLOBAL Space
-var target:Vector3 = Vector3(0, 0, -1);
 
 
 
@@ -40,12 +36,8 @@ func _ready() -> void:
 		GEARS[i].position = GEARS[i].position.rotated(Vector3.UP, i*(2.0*PI)/GEARS_NUM)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func spin(angle_to_turn: float) -> void:
 	
-	var angle = global_basis.z.signed_angle_to(target, global_basis.y)
-	
-	var angle_to_turn = sign(angle) * min(abs(angle), TURN_SPEED*delta)
 	
 	
 	#angle_to_turn = TURN_SPEED * delta
