@@ -6,6 +6,8 @@ var BODY:RigidBody3D:
 		BODY = v;
 		TARGET.reparent(BODY)
 		
+		for i in IMPULSE_TO_BODY: # Updates target
+			i.IMPULSE_TO = BODY
 
 @export var UPPER:Node3D;
 @export var LOWER:Node3D;
@@ -44,6 +46,14 @@ var BODY:RigidBody3D:
 @export var DISMEMBER_UPPER_RB_MAKER:Make_Rigidbody;
 @export var DISMEMBER_LOWER_RB_MAKER:Make_Rigidbody;
 @export var DISMEMBER_FOOT_RB_MAKER:Make_Rigidbody;
+
+
+@export_group("Extras")
+## Each <Hit_Impulse> In this array will be set to the parent body.
+@export var IMPULSE_TO_BODY:Array[Hit_Impulse]
+
+
+
 
 class Intactity:
 	var hip:bool = true;

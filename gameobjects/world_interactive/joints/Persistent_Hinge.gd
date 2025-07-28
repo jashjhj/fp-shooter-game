@@ -36,6 +36,10 @@ func _ready() -> void:
 func update_nodes():
 	#if(!is_inside_tree()): return # - if in the middle of reparenting an object, <tree_entered> is called multiple times - SO only do it on final (When THIS node is in the tree with it)
 	#print("updating")
+	#
+	#node_a = ""
+	#node_b = ""
+	#
 	##Resets transform positions to re-apply the 
 	#var natrans = NODE_A.global_transform
 	#var nbtrans = NODE_B.global_transform
@@ -44,7 +48,7 @@ func update_nodes():
 	#NODE_A.global_transform = node_a_start_trans
 	#NODE_B.global_transform = node_b_start_trans
 	#global_transform = my_start_trans
-	
+	#
 	
 	node_a = get_path_to(NODE_A)
 	node_b = get_path_to(NODE_B)

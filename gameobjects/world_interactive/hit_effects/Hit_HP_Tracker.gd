@@ -19,6 +19,7 @@ var HP:float:
 ##Emitted after a hit which reduces HP to <0
 signal on_hp_becomes_negative
 
+##Remember to call super._ready
 func _ready() -> void:
 	HP = MAX_HP
 

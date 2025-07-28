@@ -104,15 +104,15 @@ skeleton = NodePath("../..")
 visible = false
 shape = SubResource("ConvexPolygonShape3D_8nbuu")
 
-[node name="Hip_Colldier" type="CollisionShape3D" parent="Body"]
+[node name="Hip_Collider" type="CollisionShape3D" parent="Body"]
 transform = Transform3D(1.5, 0, 0, 0, -1.37559, -0.598124, 0, 0.598124, -1.37559, -0.00760859, -0.152463, -0.153565)
 shape = SubResource("ConvexPolygonShape3D_gc2rj")
 
-[node name="Hip_Colldier2" type="CollisionShape3D" parent="Body"]
+[node name="Hip_Collider2" type="CollisionShape3D" parent="Body"]
 transform = Transform3D(-0.750001, 0.517991, -1.19129, -1.20258e-07, -1.37559, -0.598122, -1.29904, -0.299062, 0.687793, -0.167004, -0.169509, 0.0980444)
 shape = SubResource("ConvexPolygonShape3D_gc2rj")
 
-[node name="Hip_Colldier3" type="CollisionShape3D" parent="Body"]
+[node name="Hip_Collider3" type="CollisionShape3D" parent="Body"]
 transform = Transform3D(0.750001, 0.517992, 1.1913, 0, 1.37559, -0.598125, -1.29904, 0.299063, 0.687796, 0.150884, -0.162479, 0.099291)
 shape = SubResource("ConvexPolygonShape3D_gc2rj")
 

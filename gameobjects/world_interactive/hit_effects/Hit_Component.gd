@@ -10,6 +10,9 @@ var last_impulse:Vector3 = Vector3.ZERO
 ##Impulse pos = IMPULSE_GLOBAL_POS
 var last_impulse_pos:Vector3 = Vector3.ZERO
 
+func _ready() -> void:
+	pass;
+
 ##Impulse pos = IMPULSE_GLOBAL_POS
 func trigger(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 = Vector3.ZERO) -> void:
 	last_impulse = impulse

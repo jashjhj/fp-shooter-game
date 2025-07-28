@@ -43,3 +43,5 @@ func trigger(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 =
 			hit_comp.trigger(damage, impulse, impulse_pos)
 			i+=1;
 	
+	#print("Weakpoint hit for ", damage, " HP")
+	

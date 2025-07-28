@@ -58,7 +58,7 @@ points = PackedVector3Array(0.00786641, -0.6049, 0.018624, -0.00787005, -0.6049,
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_etld6"]
 points = PackedVector3Array(-0.027716, -0.479117, -0.0114814, -0.0114814, -0.479117, -0.027716, -0.00436793, -0.557394, -0.027716, -0.00436793, -0.574668, -0.0114814, -0.027716, -0.479117, 0.011476, -0.027716, 0.069841, -0.0114814, -0.0114814, 0.069841, -0.027716, 0.00539344, -0.557394, -0.027716, -0.00436793, -0.574668, 0.011476, 0.00539344, -0.574668, -0.0114814, -0.00436793, -0.557394, 0.027716, -0.0114814, -0.479117, 0.027716, -0.027716, 0.069841, 0.011476, -0.011693, 0.0764703, -0.00484542, -0.00484542, 0.0764703, -0.011693, 0.011476, 0.069841, -0.027716, 0.011476, -0.479117, -0.027716, 0.027716, -0.479117, -0.0114814, 0.00539344, -0.574668, 0.011476, 0.00539344, -0.557394, 0.027716, -0.0114814, 0.069841, 0.027716, -0.011693, 0.0764703, 0.00483999, 0.00483999, 0.0764703, -0.011693, 0.027716, 0.069841, -0.0114814, 0.027716, -0.479117, 0.011476, 0.011476, -0.479117, 0.027716, 0.011476, 0.069841, 0.027716, -0.00484542, 0.0764703, 0.0116876, 0.0116876, 0.0764703, -0.00484542, 0.027716, 0.069841, 0.011476, 0.00483999, 0.0764703, 0.0116876, 0.0116876, 0.0764703, 0.00483999)
 
-[node name="TotemBotLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT", "LOWER_HITCMP", "UPPER_HITCMP", "DISMEMBER_HIP_TRIGGER", "DISMEMBER_KNEE_TRIGGER", "DISMEMBER_ANKLE_TRIGGER", "DISMEMBER_UPPER_RB_MAKER", "DISMEMBER_LOWER_RB_MAKER", "DISMEMBER_FOOT_RB_MAKER")]
+[node name="TotemBotLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT", "LOWER_HITCMP", "UPPER_HITCMP", "DISMEMBER_HIP_TRIGGER", "DISMEMBER_KNEE_TRIGGER", "DISMEMBER_ANKLE_TRIGGER", "DISMEMBER_UPPER_RB_MAKER", "DISMEMBER_LOWER_RB_MAKER", "DISMEMBER_FOOT_RB_MAKER", "IMPULSE_TO_BODY")]
 script = ExtResource("1_r5lsd")
 UPPER = NodePath("Upper")
 LOWER = NodePath("Lower")
@@ -73,6 +73,7 @@ DISMEMBER_ANKLE_TRIGGER = NodePath("Lower/Ankle_Weakpoint/Hit_HP_Tracker-GIB")
 DISMEMBER_UPPER_RB_MAKER = NodePath("Upper/Upper_RB_Maker")
 DISMEMBER_LOWER_RB_MAKER = NodePath("Lower/Lower_RB_Maker")
 DISMEMBER_FOOT_RB_MAKER = NodePath("Foot/Foot_RB_Maker")
+IMPULSE_TO_BODY = [NodePath("Hip/Hit_Impulse")]
 
 [node name="Hip" type="Area3D" parent="."]
 collision_layer = 128
@@ -93,6 +94,10 @@ shape = SubResource("ConcavePolygonShape3D_etld6")
 script = ExtResource("6_na25b")
 WEAKPOINT = NodePath("../../Upper/Hip_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
+
+[node name="Hit_Impulse" type="Node" parent="Hip"]
+script = ExtResource("5_uogsf")
+metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
 [node name="Upper" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -133,10 +138,9 @@ HIT_COMPONENTS = [NodePath("KneeJoint_Freer"), NodePath("Hit_HP_Tracker-GIB")]
 DAMAGE_CURVE = SubResource("Curve_246fb")
 metadata/_custom_type_script = "uid://dcbvai1bpx5br"
 
-[node name="KneeJoint_Freer" type="Node" parent="Upper/Knee_Weakpoint" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="KneeJoint_Freer" type="Node" parent="Upper/Knee_Weakpoint" node_paths=PackedStringArray("TO_FREE")]
 script = ExtResource("13_p0hln")
-FREE_ON_THRESHOLD = [NodePath("../../../Gibs/Lower_Gib/Knee")]
-THRESHOLDS = Array[float]([0.0])
+TO_FREE = NodePath("../../../Gibs/Lower_Gib/Knee")
 MAX_HP = 12.0
 MINIMUM_DAMAGE_THRESHOLD = 2.0
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
@@ -219,10 +223,9 @@ MAX_HP = 10.0
 MINIMUM_DAMAGE_THRESHOLD = 3.0
 metadata/_custom_type_script = "uid://bk1iff825dehg"
 
-[node name="Ankle_Freer" type="Node" parent="Lower/Ankle_Weakpoint" node_paths=PackedStringArray("FREE_ON_THRESHOLD")]
+[node name="Ankle_Freer" type="Node" parent="Lower/Ankle_Weakpoint" node_paths=PackedStringArray("TO_FREE")]
 script = ExtResource("13_p0hln")
-FREE_ON_THRESHOLD = [NodePath("../../../Gibs/Foot_Gib/Ankle")]
-THRESHOLDS = Array[float]([0.0])
+TO_FREE = NodePath("../../../Gibs/Foot_Gib/Ankle")
 MAX_HP = 10.0
 MINIMUM_DAMAGE_THRESHOLD = 3.0
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
