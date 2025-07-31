@@ -29,6 +29,8 @@ var GEARS:Array[Node3D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready();
+	
 	GEARS.append(GEAR)
 	for i in range(1, GEARS_NUM):
 		GEARS.append(GEAR.duplicate())
@@ -40,9 +42,9 @@ func spin(angle_to_turn: float) -> void:
 	
 	
 	
-	#angle_to_turn = TURN_SPEED * delta
 	
-	rotate(basis.y, angle_to_turn)
+	#Done by parent func:
+	#rotate(basis.y, angle_to_turn)
 	
 	
 	

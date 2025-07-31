@@ -94,7 +94,8 @@ func update_stability(delta:float):
 	stability -= BODY.angular_velocity.length() ** 3 * 0.001
 	
 	stability = min(1.0, max(0.0, stability))
-	DebugDraw3D.draw_text(BODY.global_position + Vector3.UP * 0.8, str(stability))
+	
+	#DebugDraw3D.draw_text(BODY.global_position + Vector3.UP * 0.8, str(stability))
 
 
 
