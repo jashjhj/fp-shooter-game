@@ -1,4 +1,4 @@
-class_name Breakable_Camera extends Seeking_Camera
+class_name Breakable_Camera extends Hard_Seeking_Camera
 
 @export var HIT_CMP:Hit_Component;
 @export var MESH_TO_DISABLE_EMISSION:MeshInstance3D;

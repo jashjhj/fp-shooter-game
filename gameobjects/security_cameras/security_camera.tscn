@@ -25,13 +25,10 @@ size = Vector3(0.100586, 0.083374, 0.255737)
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkdp5"]
 bounce = 0.1
 
-[node name="Camera" type="Node3D" node_paths=PackedStringArray("HIT_CMP", "MESH_TO_DISABLE_EMISSION", "CAMERA", "HINGE_X", "HINGE_Y")]
+[node name="Camera" type="Node3D" node_paths=PackedStringArray("HIT_CMP", "MESH_TO_DISABLE_EMISSION", "HINGE_X", "HINGE_Y", "CAMERA")]
 script = ExtResource("1_ht5pv")
 HIT_CMP = NodePath("Hittable_StaticBody/Pivot/Head/Hittable_Collider/Hit_Make_Rigidbody")
 MESH_TO_DISABLE_EMISSION = NodePath("Hittable_StaticBody/Pivot/Head/MeshInstance3D")
-CAMERA = NodePath("Hittable_StaticBody/Pivot/Head/Camera")
-camera_fov_y = 1.5708
-SIGHT_DISTANCE = 5.0
 HINGE_X = NodePath("Hittable_StaticBody/Pivot")
 min_hinge_x = -1.5708
 max_hinge_x = 1.5708
@@ -40,6 +37,9 @@ HINGE_Y = NodePath("Hittable_StaticBody/Pivot/Head")
 min_hinge_y = -1.0472
 HINGE_SPEED_Y = 0.5
 IS_HINGE_SPEED_LINEAR = true
+CAMERA = NodePath("Hittable_StaticBody/Pivot/Head/Camera")
+camera_fov_y = 1.5708
+SIGHT_DISTANCE = 5.0
 
 [node name="Hittable_StaticBody" type="StaticBody3D" parent="."]
 script = ExtResource("2_gkdp5")
