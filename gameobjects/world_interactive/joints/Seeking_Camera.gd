@@ -2,6 +2,7 @@ class_name Seeking_Camera extends Node
 
 ##The actual position that the viewport is generated from (-z is forwards)
 @export var CAMERA:Node3D;
+##FOV is in 
 @export_range(-180, 180, 1.0, "radians_as_degrees") var camera_fov_x = PI/2;
 @export_range(-180, 180, 1.0, "radians_as_degrees") var camera_fov_y = PI/3;
 @export var SIGHT_DISTANCE:float = 10;
@@ -15,7 +16,8 @@ class_name Seeking_Camera extends Node
 var can_see_player:bool = false;
 
 ##Global position of target to look at, Vector3.INF IF cannot see.
-var target_pos:Vector3;
+var target_pos:Vector3 = Vector3.INF;
+var last_target_pos:Vector3 = Vector3.INF;
 var target_pos_local:Vector3
 
 
@@ -34,6 +36,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	target_pos = check_for_player()
+	if(can_see_player):
+		last_target_pos = target_pos
+	
+	
 	if(AIM_THIS_TOWARDS_TARGET != null):
 		target_pos_local = AIM_THIS_TOWARDS_TARGET.to_local(target_pos)
 	else:
@@ -44,21 +50,23 @@ func _physics_process(delta: float) -> void:
 
 func check_for_player() -> Vector3:
 	can_see_player = false;
-	if(CAMERA == null): return Vector3.ZERO
-
-	CAMERA_RAY.target_position = (CAMERA_RAY.to_local(Globals.PLAYER.TORSO.global_position) * SIGHT_DISTANCE) # Roughly COM
+	if(CAMERA == null): return Vector3.INF
+	
+	CAMERA_RAY.target_position = (CAMERA_RAY.to_local(Globals.PLAYER.TORSO.global_position).normalized() * SIGHT_DISTANCE) # Roughly COM
 	
 	if(CAMERA_RAY.is_colliding() and CAMERA_RAY.get_collider() is Player):
 		var ray_vector := CAMERA_RAY.get_collision_point() - CAMERA_RAY.global_position
 		
-		#                 not Y segment
-		var angle_x := acos((ray_vector * (Vector3(1, 0, 1))).normalized().dot(-CAMERA.global_basis.z))
-		var angle_y:float = abs(atan((ray_vector * (CAMERA.global_basis*Vector3(0, 1, 0))).length()/(ray_vector * Vector3(1, 0, 1)).length()))
+		
+		var angle_x := ray_vector.signed_angle_to(-CAMERA_RAY.global_basis.z, CAMERA_RAY.global_basis.y)
+		var angle_y := ray_vector.signed_angle_to(-CAMERA_RAY.global_basis.z, CAMERA_RAY.global_basis.x)
+		#var angle_x:float = acos((ray_vector * (Vector3(1, 0, 1))).normalized().dot(-CAMERA.global_basis.z)) # Commented out abd formulae
+		#var angle_y:float = abs(atan((ray_vector * (CAMERA.global_basis*Vector3(0, 1, 0))).length()/(ray_vector * Vector3(1, 0, 1)).length()))
 		
 		
-		if(angle_x > camera_fov_x):
+		if(angle_x > camera_fov_x/2.0):
 			return Vector3.INF
-		if(angle_y > camera_fov_y):
+		if(angle_y > camera_fov_y/2.0):
 			return Vector3.INF
 		#Else: It okay 👍
 		can_see_player = true
