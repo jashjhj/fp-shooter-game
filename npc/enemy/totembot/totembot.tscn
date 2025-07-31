@@ -267,7 +267,9 @@ skeleton = NodePath("../../../..")
 transform = Transform3D(-8.54384e-08, -1.98439e-09, 1, -1, 3.55271e-15, -8.54384e-08, -1.23739e-17, -1, -1.98439e-09, 0.209837, 0.382504, 8.75586e-09)
 script = ExtResource("25_mgybp")
 ROTATION_SPEED = 0.174533
-DEBUG_AXES = true
+ANGLE_LIMITS_ENABLED = true
+MIN_ANGLE = -0.436332
+MAX_ANGLE = 0.436332
 metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 
 [node name="Bullet_Source" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
@@ -300,9 +302,10 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0
 [node name="Camera_hinge" type="Node3D" parent="Body/Top_PlanetaryGears/Top"]
 transform = Transform3D(8.9407e-08, -1.7683e-07, 1, -1, 3.82137e-15, 8.9407e-08, -1.19017e-14, -1, -1.7683e-07, 0.0393611, 0.165348, -5.23968e-09)
 script = ExtResource("25_mgybp")
-ROTATION_SPEED = 1.98968
-IS_HINGE_SPEED_LINEAR = false
-DEBUG_AXES = true
+ROTATION_SPEED = 5.23599
+ANGLE_LIMITS_ENABLED = true
+MIN_ANGLE = -1.5708
+MAX_ANGLE = 0.0872665
 metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 
 [node name="Camera" type="MeshInstance3D" parent="Body/Top_PlanetaryGears/Top/Camera_hinge"]
