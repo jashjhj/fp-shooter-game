@@ -41,19 +41,22 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if(!IS_ACTIVE or target == Vector3.INF): return
 	
-	if(DEBUG_AXES):
-		DebugDraw3D.draw_position(global_transform)
-	
 	#                                           target component that is perpendiculr to basis.y
 	var angle = global_basis.z.signed_angle_to(target - global_basis.y* target.dot(global_basis.y), global_basis.y)
 	
 	var angle_to_turn;
 	
+	
+	if(DEBUG_AXES):
+		DebugDraw3D.draw_position(global_transform)
+		print(abs(angle), " = angle, speed = ", ROTATION_SPEED * delta)
+	
+	
 	if(IS_HINGE_SPEED_LINEAR):
 		
 		angle_to_turn = sign(angle) * min(abs(angle), ROTATION_SPEED*delta)
 		
-		print(abs(angle), " = angle, speed = ", ROTATION_SPEED * delta)
+		
 		
 		
 		if(abs(angle) < SLOP):
