@@ -1,4 +1,4 @@
-class_name Make_Rigidbody extends Node
+class_name Make_Rigidbody extends Triggerable
 
 @export var RIGIDBODY:RigidBody3D
 @export var RIGIDBODY_BASIS_CLONE:Node3D;
@@ -11,6 +11,8 @@ class_name Make_Rigidbody extends Node
 var is_rb_active:bool = false;
 
 func  _ready() -> void:
+	super._ready()
+	
 	assert(RIGIDBODY != null, "No rigidbody set.")
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_DISABLED
 	
@@ -20,6 +22,7 @@ func  _ready() -> void:
 
 
 func trigger():
+	super.trigger()
 	
 	is_rb_active = true
 	

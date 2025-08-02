@@ -11,7 +11,7 @@
 [ext_resource type="Material" uid="uid://du2mqnkqk6ebm" path="res://assets/models/cameras/securitycam1/Camera_Lens_Mat.tres" id="7_4y5qw"]
 [ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="8_e6fgj"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="9_gkdp5"]
-[ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://gameobjects/world_interactive/effects/Make_Rigidbody.gd" id="11_4y5qw"]
+[ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="11_4y5qw"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dnm3r"]
 points = PackedVector3Array(-0.019087, -0.097897, 0.00850295, -0.019087, -0.097897, -0.00850793, -0.018326, -0.103423, 0.00662891, -0.0155241, -0.123248, 0.00850295, 0.157587, -0.150226, 0.025454, 0.157587, -0.099305, 0.025454, 0.0200701, -0.0980105, 0.00852288, -0.0155241, -0.123248, -0.00850793, -0.018326, -0.103423, -0.00663389, 0.0200701, -0.0980105, -0.00848799, 0.157587, -0.099305, -0.025459, 0.157587, -0.150226, -0.025459, 0.157587, -0.175229, -4.98258e-06)

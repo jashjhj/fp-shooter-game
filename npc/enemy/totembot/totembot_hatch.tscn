@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="1_p0kae"]
 [ext_resource type="ArrayMesh" uid="uid://btf0nccu13lm" path="res://npc/enemy/totembot/assets/Hatch.obj" id="2_3kx6f"]
 [ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="3_au1bk"]
-[ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://gameobjects/world_interactive/effects/Make_Rigidbody.gd" id="4_ynlx0"]
+[ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="4_ynlx0"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="5_1gjxu"]
 [ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="6_3kx6f"]
 [ext_resource type="Script" uid="uid://bcbbkvbeuuxin" path="res://gameobjects/world_interactive/hit_effects/Hit_Reduce_Mass.gd" id="7_ynlx0"]
