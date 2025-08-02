@@ -96,6 +96,7 @@ func process_bullet_step(delta:float, draw_trail:bool = false) -> void:
 		
 		if(draw_trail):
 			draw_trail(prev_bullet_trail_pos, global_position)
+			prev_bullet_trail_pos = global_position
 		
 		
 		#calculate next frames data
@@ -194,14 +195,14 @@ func draw_trail(origin:Vector3, end:Vector3):
 	if dist_2_to_player > 2500: #>50m away, dont render mesh
 		return;
 	
-	if(dist_2_to_player < 16): # < 4m
-		quality = 8
-	elif(dist_2_to_player < 64): # < 8m 
-		quality = 4
-	else:
-		quality = 2;
+	if(dist_2_to_player < 64): # < 4m
+		quality = 4 # unstable really
+	#elif(dist_2_to_player < 64): # < 8m 
+		#quality = 4
+	#else:
+		#quality = 2;
 	
-	print(quality)
+	
 	
 	for i in range(0, quality):
 		var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
@@ -212,7 +213,7 @@ func draw_trail(origin:Vector3, end:Vector3):
 		
 		trail.material = data.trail_material;
 		
-		trail.up = Vector3.UP.rotated((end - origin).normalized(), ((PI) / float(quality)) * (i));
+		trail.up = Vector3.UP.rotated((end - origin).normalized(), ((PI) / float(quality)) * (i) + PI/4);
 		get_tree().get_current_scene().add_child(trail);
 		trail.global_position = origin
 	#
