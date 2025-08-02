@@ -94,7 +94,7 @@ func collect(slot:Slot):
 		slot.is_fired = false
 
 func fire(slot:Slot):
-	print(slot)
+	
 	
 	if(TRIGGERABLE_CLICK != null):
 		if(TRIGGERABLE_CLICK is Triggerable_Sound_Effect):
@@ -102,11 +102,11 @@ func fire(slot:Slot):
 			TRIGGERABLE_CLICK.PITCH_ORIGIN = 0.8 + log(1+rotation_speed) * 0.1
 		TRIGGERABLE_CLICK.trigger() # Always click
 	
-	if(clicks < CLICKS_BEFORE_FIRE and is_spinning): ## If not yet ready to fire
+	if(clicks < CLICKS_BEFORE_FIRE): ## If not yet ready to fire
 		clicks += 1;
 		return
 	
-	if(slot.contents != null and !slot.is_fired):
+	if(slot.contents != null and !slot.is_fired and is_spinning):
 		
 		if(TRIGGERABLE_FIRE != null): TRIGGERABLE_FIRE.trigger()
 		

@@ -43,9 +43,9 @@ var BODY:RigidBody3D:
 @export var DISMEMBER_HIP_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_KNEE_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_ANKLE_TRIGGER:Hit_HP_Tracker;
-@export var DISMEMBER_UPPER_RB_MAKER:Make_Rigidbody;
-@export var DISMEMBER_LOWER_RB_MAKER:Make_Rigidbody;
-@export var DISMEMBER_FOOT_RB_MAKER:Make_Rigidbody;
+@export var DISMEMBER_UPPER_RB_MAKER:Trig_Make_Rigidbody;
+@export var DISMEMBER_LOWER_RB_MAKER:Trig_Make_Rigidbody;
+@export var DISMEMBER_FOOT_RB_MAKER:Trig_Make_Rigidbody;
 
 
 @export_group("Extras")

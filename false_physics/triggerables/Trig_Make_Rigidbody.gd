@@ -1,4 +1,4 @@
-class_name Make_Rigidbody extends Triggerable
+class_name Trig_Make_Rigidbody extends Triggerable
 
 @export var RIGIDBODY:RigidBody3D
 @export var RIGIDBODY_BASIS_CLONE:Node3D;
