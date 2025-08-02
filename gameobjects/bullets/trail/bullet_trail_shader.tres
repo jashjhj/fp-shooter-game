@@ -70,7 +70,7 @@ default_input_values = [0, 0.0, 1, 1.0]
 operator = 2
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_u2f7m"]
-default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0.1, 0.1, 0.1)]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0.1, 0.5, 0.5)]
 operator = 2
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_pd0do"]
@@ -170,7 +170,7 @@ void fragment() {
 
 
 // VectorOp:22
-	vec3 n_in22p1 = vec3(0.10000, 0.10000, 0.10000);
+	vec3 n_in22p1 = vec3(0.10000, 0.50000, 0.50000);
 	vec3 n_out22p0 = n_out20p0 * n_in22p1;
 
 
@@ -195,7 +195,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(809.35, 866.46)
 modes/blend = 1
 modes/cull = 2
 modes/specular = 2

@@ -36,6 +36,8 @@ IMPULSE_REDISTS = [NodePath("Hittable_Collider/Hit_Impulse")]
 MASS_REDUCERS = [NodePath("Hittable_Collider/Hit_Reduce_Mass")]
 
 [node name="Hittable_Collider" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 0
 script = ExtResource("1_p0kae")
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 

@@ -14,7 +14,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c0cguakswbqnw" path="res://assets/models/npcs/turret/gun.obj" id="10_3f3ei"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="10_ah1fg"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="10_yqngf"]
-[ext_resource type="Script" uid="uid://dn68rquobbhe6" path="res://gameobjects/world_interactive/debris_spawner.gd" id="11_igmkq"]
+[ext_resource type="Script" uid="uid://dn68rquobbhe6" path="res://false_physics/triggerables/Trig_Debris_Spawner.gd" id="11_igmkq"]
 [ext_resource type="ArrayMesh" uid="uid://dgierqv5cjwto" path="res://assets/models/npcs/turret/camera.obj" id="11_n3noi"]
 [ext_resource type="PackedScene" uid="uid://b55e6r42cmrnt" path="res://npc/enemy/turret/Turret_ejected_cartridge.tscn" id="12_morib"]
 [ext_resource type="Script" uid="uid://do4am13na3svu" path="res://gameobjects/bullets/Bullet_Source.gd" id="12_ro2dr"]

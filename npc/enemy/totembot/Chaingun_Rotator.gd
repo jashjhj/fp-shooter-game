@@ -3,7 +3,8 @@ class_name Chaingun_Rotator extends Node3D
 ##Axis to rotate around, locally. Flip to change direction.
 @export var ROTATE_AROUND:Vector3 = Vector3.FORWARD
 
-@export var AMMO_INSTANCE:Node3D
+##Also acts as the 'pickup' point
+@export var AMMO_INSTANCE:Node
 
 ##Numebr of slots
 @export var SLOTS_NUM:int = 4;
@@ -13,9 +14,11 @@ class_name Chaingun_Rotator extends Node3D
 @export var ANGLE_TO_EJECT:float = 3*PI/2
 
 @export var TRIGGERABLE_FIRE:Triggerable
+
 @export var TRIGGERABLE_EJECT:Triggerable
-##Called every time the rotator rotates one slot.
+##Called every time the rotator rotates one slot.   Hardcoded work for sound Player
 @export var TRIGGERABLE_CLICK:Triggerable
+
 
 ##Radians/second^2
 @export var ROT_ACCELERATION:float = 3.2;
@@ -31,6 +34,14 @@ var clicks:int = 0;
 
 class Slot:
 	var contents:Node3D
+	var is_populated:float:
+		set(v):
+			is_populated = v
+			if(contents != null):
+				if(is_populated):
+					contents.visible = true
+				else:
+					contents.visible = false;
 	var is_fired:bool = false;
 
 var SLOTS:Array[Slot]
@@ -39,16 +50,29 @@ var SLOTS:Array[Slot]
 var rotation_speed:float = 0.0;
 var angle:float = 0.0;
 
-
+var new;
 
 func _ready() -> void:
-	AMMO_INSTANCE.visible = false
-	AMMO_INSTANCE.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	
+	
 	for i in range(0, SLOTS_NUM):
 		SLOTS.append(Slot.new())
+		SLOTS[i].contents = AMMO_INSTANCE.duplicate()
+		
+		add_child(SLOTS[i].contents)
+		SLOTS[i].contents.global_transform = AMMO_INSTANCE.global_transform
+		SLOTS[i].contents.position = SLOTS[i].contents.position.rotated(ROTATE_AROUND, 2*PI/SLOTS_NUM * i)
+		
+		SLOTS[i].is_populated = false
+	
+	AMMO_INSTANCE.visible = false
 
 #manager to trigger funcs when each slot passes thing
 func _physics_process(delta: float) -> void:
+	
+	#get_tree().root.add_child.call_deferred(new)
+	
 	
 	#calc rot speed
 	if(is_spinning):
@@ -76,7 +100,7 @@ func _physics_process(delta: float) -> void:
 			eject(SLOTS[i])
 	
 	
-	
+	rotate_object_local(ROTATE_AROUND, next_rotation)
 	angle += next_rotation
 	angle = fmod(angle, 2*PI) # Loop back down
 
@@ -88,9 +112,9 @@ func is_angle_between(angle:float, lower:float, higher:float) -> bool:
 
 
 func collect(slot:Slot):
-	if(slot.contents == null):
-		slot.contents = AMMO_INSTANCE.duplicate()
-		add_child(slot.contents)
+	if(!slot.is_populated):
+		slot.is_populated = true
+		
 		slot.is_fired = false
 
 func fire(slot:Slot):
@@ -106,19 +130,21 @@ func fire(slot:Slot):
 		clicks += 1;
 		return
 	
-	if(slot.contents != null and !slot.is_fired and is_spinning):
+	if(slot.is_populated and !slot.is_fired and is_spinning):
 		
 		if(TRIGGERABLE_FIRE != null): TRIGGERABLE_FIRE.trigger()
 		
 		slot.is_fired = true
 
 func eject(slot:Slot):
-	if(slot.contents != null):
+	if(slot.is_populated and slot.is_fired):
 		
-		if(TRIGGERABLE_EJECT != null): TRIGGERABLE_EJECT.trigger()
+		if(TRIGGERABLE_EJECT != null):
+			
+			
+			TRIGGERABLE_EJECT.trigger()
 		
-		slot.contents.free()
-		slot.contents = null
+		slot.is_populated = false
 
 
 #funcs that tkae a slot and then perform functions ie Fire then make not live.

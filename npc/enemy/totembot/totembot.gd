@@ -23,6 +23,7 @@ func _physics_process(delta: float) -> void:
 		GUN_PITCH.target_global = SEEKING_CAMERA_GUN.last_target_pos
 	
 	
+	
 	if(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) > 0.95 and !GUN_CHAINGUN.is_spinning): # if gun is msotly aimed at its target
 		GUN_CHAINGUN.start_firing()
 	elif(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) < 0.95 and GUN_CHAINGUN.is_spinning):

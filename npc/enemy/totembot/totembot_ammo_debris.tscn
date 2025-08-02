@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bro7feroy3qeq"]
+
+[ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="1_6no0d"]
+[ext_resource type="ArrayMesh" uid="uid://yepxack6c2nv" path="res://npc/enemy/totembot/assets/round.obj" id="2_ltab7"]
+[ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="3_ukv3p"]
+[ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="4_ltab7"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xy2hy"]
+points = PackedVector3Array(0.0149861, 0.011178, 0.011178, 0.0149861, 0.011178, -0.011178, -0.014989, 0.011178, 0.011178, 0.0149861, -0.011178, 0.011178, 0.0149861, -0.011178, -0.011178, -0.014989, 0.011178, -0.011178, -0.014989, -0.011178, 0.011178, -0.014989, -0.011178, -0.011178)
+
+[node name="Totembot_Ammo" type="RigidBody3D" node_paths=PackedStringArray("HIT_COMPONENTS")]
+collision_layer = 4096
+collision_mask = 26113
+mass = 0.06
+script = ExtResource("1_6no0d")
+HIT_COMPONENTS = [NodePath("Hit_Impulse")]
+metadata/_custom_type_script = "uid://2go7fdnv41nr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3.97426e-08, 8.74228e-08, -1, 8.74228e-08, -1, -8.74228e-08, -1, -8.74228e-08, -3.97426e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_xy2hy")
+
+[node name="Hit_Impulse" type="Node" parent="." node_paths=PackedStringArray("IMPULSE_TO")]
+script = ExtResource("4_ltab7")
+IMPULSE_TO = NodePath("..")
+metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+material_override = ExtResource("3_ukv3p")
+mesh = ExtResource("2_ltab7")
