@@ -14,7 +14,9 @@ class_name Bullet extends Node3D
 const BULLET_HIT_MASK = 1+ + 32 + 0 + 128 + 8192 + 16384 
 
 var lifetime_start:int;
-#var speed:float;
+
+var prev_bullet_trail_pos:Vector3;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,16 +36,19 @@ func _ready() -> void:
 	FORWARDS_RAY.target_position = Vector3(0,0,data.speed*1.5);
 	FORWARDS_RAY.collision_mask = BULLET_HIT_MASK
 	FORWARDS_RAY.collide_with_areas = true
+	
+	prev_bullet_trail_pos = global_position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 
+
+
 var tick_number = -0;
 func _physics_process(delta: float) -> void:
-
-
+	
 	var time_passed = float(Time.get_ticks_msec() - lifetime_start) / 1000 / float(data.lifetime)
 	
 	if(time_passed > 1.0): # time_passed is proportional
@@ -52,36 +57,46 @@ func _physics_process(delta: float) -> void:
 	tick_number += 1;
 	if(tick_number % ticks_per_process != 0): # Only operate per nth tick
 		delta *= ticks_per_process;
-		process_bullet_step(delta)
-	
-	
-	
+		process_bullet_step(delta, true)
+	else:
+		process_bullet_step(delta, false)
 	
 
-func process_bullet_step(delta:float) -> void:
+
+
+
+
+func process_bullet_step(delta:float, draw_trail:bool = false) -> void:
 	
 	
 	FORWARDS_RAY.look_at(global_position - velocity*delta) # because forwards is -Z
 	FORWARDS_RAY.force_raycast_update()
 	if(FORWARDS_RAY.get_collider() != null): # Going to hit an object.
 		var hit_result = hit_object()
+		
 		if(hit_result == 1):#Ricochet
 			
-			var elapsed_time:float = (FORWARDS_RAY.get_collision_point() - global_position).length()/velocity.length()
-			draw_trail(FORWARDS_RAY.get_collision_point() - global_position)
+			
 			global_position = FORWARDS_RAY.get_collision_point()
 			
-			process_bullet_step(delta - elapsed_time) # Recurse
+			draw_trail(prev_bullet_trail_pos, FORWARDS_RAY.get_collision_point())
+			prev_bullet_trail_pos = global_position
+			
+			var elapsed_time:float = (FORWARDS_RAY.get_collision_point() - global_position).length()/velocity.length()
+			process_bullet_step(delta - elapsed_time, false) # Recurse
 			
 			
 		elif hit_result == 2:#Terminate
-			draw_trail(FORWARDS_RAY.get_collision_point() - global_position) # draws it only to the object
+			draw_trail(prev_bullet_trail_pos, FORWARDS_RAY.get_collision_point()) # draws it only to the object
 			queue_free() # Final escape
 		
 	else: #Normal procession
-		draw_trail(velocity*delta)
 		
 		position += velocity*delta;
+		
+		if(draw_trail):
+			draw_trail(prev_bullet_trail_pos, global_position)
+		
 		
 		#calculate next frames data
 		velocity.y -= data.gravity*delta; # grav
@@ -175,30 +190,31 @@ func hit_object() -> int:
 
 
 
-
-func draw_trail(vector):
+##vector is from current pos
+func draw_trail(origin, end):
 	if(global_position - Globals.PLAYER.global_position).length_squared() > 2500: #>50m away, dont render mesh
 		return;
 	
+	
 	var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
 	trail.lifetime = 0.1;
-	trail.segment_origin = global_position;
-	trail.segment_end = global_position + vector;
+	trail.segment_origin = origin;
+	trail.segment_end = end;
 	
 	trail.material = data.trail_material;
 	
 	trail.up = Vector3.UP;
 	get_tree().get_current_scene().add_child(trail);
-	trail.global_position = global_position
+	trail.global_position = origin
 
 	
 	var trail2 = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
 	trail2.lifetime = 0.1;
-	trail2.segment_origin = global_position;
-	trail2.segment_end = global_position + vector;
+	trail2.segment_origin = origin;
+	trail2.segment_end = end;
 	
 	trail2.material = data.trail_material;
 	
-	trail2.up = Vector3.UP.cross(vector)
+	trail2.up = Vector3.UP.cross(end - origin)
 	get_tree().get_current_scene().add_child(trail2);
-	trail2.global_position = global_position;
+	trail2.global_position = origin;
