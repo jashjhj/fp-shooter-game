@@ -165,10 +165,6 @@ func hit_object() -> int:
 		else: # Just a plain RB3D no Hittable
 			
 			collider.apply_impulse(impulse, impulse_pos - collider.global_position)
-
-	
-
-	
 	
 	
 	#add bullet hole
@@ -191,30 +187,42 @@ func hit_object() -> int:
 
 
 ##vector is from current pos
-func draw_trail(origin, end):
-	if(global_position - Globals.PLAYER.global_position).length_squared() > 2500: #>50m away, dont render mesh
+func draw_trail(origin:Vector3, end:Vector3):
+	var quality = 2;
+	
+	var dist_2_to_player = (origin - Globals.PLAYER.global_position).length_squared()
+	if dist_2_to_player > 2500: #>50m away, dont render mesh
 		return;
 	
+	if(dist_2_to_player < 16): # < 4m
+		quality = 8
+	elif(dist_2_to_player < 64): # < 8m 
+		quality = 4
+	else:
+		quality = 2;
 	
-	var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
-	trail.lifetime = 0.1;
-	trail.segment_origin = origin;
-	trail.segment_end = end;
+	print(quality)
 	
-	trail.material = data.trail_material;
-	
-	trail.up = Vector3.UP;
-	get_tree().get_current_scene().add_child(trail);
-	trail.global_position = origin
-
-	
-	var trail2 = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
-	trail2.lifetime = 0.1;
-	trail2.segment_origin = origin;
-	trail2.segment_end = end;
-	
-	trail2.material = data.trail_material;
-	
-	trail2.up = Vector3.UP.cross(end - origin)
-	get_tree().get_current_scene().add_child(trail2);
-	trail2.global_position = origin;
+	for i in range(0, quality):
+		var trail = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
+		
+		trail.lifetime = 0.1;
+		trail.segment_origin = origin;
+		trail.segment_end = end;
+		
+		trail.material = data.trail_material;
+		
+		trail.up = Vector3.UP.rotated((end - origin).normalized(), ((PI) / float(quality)) * (i));
+		get_tree().get_current_scene().add_child(trail);
+		trail.global_position = origin
+	#
+	#var trail2 = preload("res://gameobjects/bullets/trail/bullet_trail.tscn").instantiate()
+	#trail2.lifetime = 0.1;
+	#trail2.segment_origin = origin;
+	#trail2.segment_end = end;
+	#
+	#trail2.material = data.trail_material;
+	#
+	#trail2.up = Vector3.UP.cross(end - origin)
+	#get_tree().get_current_scene().add_child(trail2);
+	#trail2.global_position = origin;
