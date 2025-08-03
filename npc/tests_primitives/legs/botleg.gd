@@ -123,6 +123,7 @@ func _ready() -> void:
 	IKCALC.UPPER_LENGTH = UPPER_LENGTH;
 	IKCALC.LOWER_LENGTH = LOWER_LENGTH;
 	IKCALC.ELBOW_IN = !INVERT_KNEE
+	add_child(IKCALC)
 	
 	FOOT_PHYSLERP.FORCE = 15;
 	FOOT_PHYSLERP.RESERVE_FORCE = 15;
@@ -190,9 +191,12 @@ func update_leg() -> void:
 	
 	if(LOWER_LENGTH > 0.02):
 		
-		var ik = IKCALC.calculate_IK_nodes(local_target_delta, -global_basis.y)
+		var ik = IKCALC.calculate_IK_nodes(local_target_delta, Vector3.RIGHT)
+		
 		UPPER.transform = ik.upper.transform
 		LOWER.transform = ik.lower.transform
+		
+		
 		#FOOT.transform = ik.end.transform
 	else:
 		UPPER.look_at(UPPER.global_position + global_target_delta)
