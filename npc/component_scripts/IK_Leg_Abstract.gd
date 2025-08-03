@@ -35,31 +35,6 @@ func get_angles(delta:Vector3, axis:Vector3) -> IKAngles:
 	
 	return out
 
-###Helper: Calculates an appropriate up-vector from a forwards-vector
-#func up_from_forwards(forwards:Vector3) -> Vector3:
-	#var up:Vector3 = Vector3.UP  # Initialise perpendicular vectors
-	#var right:Vector3 = Vector3.RIGHT
-	#if(abs(up.dot(forwards)) < 0.9 ):# forwards isnt pointed towards up
-		#right = up.cross(forwards)
-		#up = -right.cross(forwards)
-	#else: # Forwards is flatter
-		#up = -right.cross(forwards)
-		#right = up.cross(forwards)
-	#return up.normalized()
-#
-###Helper: Calculates an appropriate right-vector from a forwards-vector
-#func right_from_forwards(forwards:Vector3) -> Vector3:
-	#var up:Vector3 = Vector3.UP  # Initialise perpendicular vectors
-	#var right:Vector3 = Vector3.RIGHT
-	#
-	#
-	#if(abs(up.dot(forwards)) < 0.9 ):# forwards isnt pointed towards up
-		#right = up.cross(forwards)
-		#up = -right.cross(forwards)
-	#else: # Forwards is flatter
-		#up = -right.cross(forwards)
-		#right = up.cross(forwards)
-	#return right.normalized()
 
 ##Forcibly set positions of UPPER and LOWER segments to conform to the IK. Forwards is usual forwards vector, ie. z-
 func calculate_IK_nodes(delta:Vector3, axis:Vector3) -> IKResults:
@@ -73,14 +48,13 @@ func calculate_IK_nodes(delta:Vector3, axis:Vector3) -> IKResults:
 	var up:Vector3 = delta.cross(axis).normalized()
 	var forwards:Vector3 = up.cross(axis)  # Initialise perpendicular vectors
 	
-	#print("f", forwards, "- u", up, "- r", right)
 	
 	var out:IKResults = IKResults.new()
 	
-	DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + -forwards)
-	DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + delta, Color(0, 1, 0))
-	DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + up, Color(0, 0, 1))
-	DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + axis, Color(1, 0, 1))
+	#DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + -forwards)
+	#DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + delta, Color(0, 1, 0))
+	#DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + up, Color(0, 0, 1))
+	#DebugDraw3D.draw_line(get_parent().global_position, get_parent().global_position + axis, Color(1, 0, 1))
 	
 	out.upper.basis.z = forwards
 	out.upper.basis.y = up
@@ -97,9 +71,6 @@ func calculate_IK_nodes(delta:Vector3, axis:Vector3) -> IKResults:
 	out.lower.rotate(axis.rotated(up, -angles.hipyaw), angles.knee)
 	
 	
-	#out.lower.basis.z = forwards.rotated(axis, angles.knee)
-	#out.lower.basis.y = up.rotated(axis, angles.knee)
-	#out.lower.basis.x = axis;
 	
 	#out.lower.rotate(up, angles.hipyaw)
 	
@@ -127,9 +98,7 @@ func calculate_second_angle(distance_squared:float) -> float:
 
 ##In radians
 func calculate_first_angle(distance:float, second_angle:float) -> float:
-	#Also cosine rule, resolved for other angle
-	#var angle = acos((LOWER_LENGTH*LOWER_LENGTH - UPPER_LENGTH*UPPER_LENGTH + distance_squared)/(2*sqrt(distance_squared) * UPPER_LENGTH))
+	#Resolved angle for fuirst.
 	var angle = acos((UPPER_LENGTH + LOWER_LENGTH*cos(second_angle)) / distance)
-	#var angle = acos(sqrt(distance_squared) / (LOWER_LENGTH*cos(second_angle) + UPPER_LENGTH))
 	
 	return angle;
