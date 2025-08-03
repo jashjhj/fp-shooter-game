@@ -76,7 +76,7 @@ metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_klcti"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.281532
+shader_parameter/color_seed = 0.913688
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -84,7 +84,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hufde"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.969867
+shader_parameter/color_seed = 0.99671
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -92,7 +92,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5bgyk"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.41246
+shader_parameter/color_seed = 0.727524
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -100,7 +100,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fk2tk"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.702206
+shader_parameter/color_seed = 0.0745546
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -108,7 +108,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tboyw"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.96514
+shader_parameter/color_seed = 0.588073
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -120,7 +120,7 @@ albedo_color = Color(1, 1, 1, 0.298039)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ppg2p"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.828652
+shader_parameter/color_seed = 0.757331
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -128,7 +128,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m8d25"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.535919
+shader_parameter/color_seed = 0.054009
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -136,7 +136,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pb8f1"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.473927
+shader_parameter/color_seed = 0.137778
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -144,7 +144,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k4geb"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.892015
+shader_parameter/color_seed = 0.161119
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
