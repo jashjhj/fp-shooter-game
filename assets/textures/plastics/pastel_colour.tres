@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bikvqapju5fyp"]
 
-[ext_resource type="Shader" uid="uid://ubvrpmc35j5x" path="res://assets/textures/plastics/plastic_shader.tres" id="1_jmmcu"]
+[ext_resource type="Shader" uid="uid://ubvrpmc35j5x" path="res://assets/textures/plastics/pastel_shader.tres" id="1_jmmcu"]
 
 [resource]
 render_priority = 0
