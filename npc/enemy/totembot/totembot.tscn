@@ -94,16 +94,16 @@ is_pathfinding = false
 PATHFINDER = NodePath("Body/NavigationAgent3D")
 IDLE_HEIGHT = 1.7
 FOOT_PLANT_RADIUS = 0.7
-LEG_FORCE_THROUGH = 70.0
-LEG_FORCE_LATERAL = 55.0
-IMAGINED_FORCE = 100.0
+LEG_FORCE_THROUGH = 120.0
+LEG_FORCE_LATERAL = 100.0
+IMAGINED_FORCE = 180.0
 BODY_HITTABLE = NodePath("Body/Hittable_Collider/Hit_Impulse")
 
 [node name="Body" type="RigidBody3D" parent="."]
 transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 0, 0)
 collision_layer = 64
 collision_mask = 65
-mass = 20.0
+mass = 35.0
 script = ExtResource("2_8nbuu")
 
 [node name="Centrifuge" type="Node3D" parent="Body"]
@@ -147,16 +147,17 @@ angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
 angular_spring_x/enabled = true
-angular_spring_x/stiffness = 18.0
-angular_spring_x/damping = 2.0
+angular_spring_x/stiffness = 30.0
+angular_spring_x/damping = 4.0
 angular_spring_y/enabled = true
-angular_spring_y/stiffness = 18.0
-angular_spring_y/damping = 2.0
+angular_spring_y/stiffness = 30.0
+angular_spring_y/damping = 4.0
 angular_spring_z/enabled = true
-angular_spring_z/stiffness = 18.0
-angular_spring_z/damping = 2.0
+angular_spring_z/stiffness = 30.0
+angular_spring_z/damping = 4.0
 script = ExtResource("2_68ihi")
-STIFFNESS = 18.0
+STIFFNESS = 30.0
+DAMPING = 4.0
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 
 [node name="AbdomenFrame" type="MeshInstance3D" parent="Body"]
@@ -286,10 +287,12 @@ MIN_ANGLE = -0.436332
 MAX_ANGLE = 0.436332
 metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 
-[node name="Bullet_Source" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
+[node name="Bullet_Source" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge" node_paths=PackedStringArray("RECOIL_SUBJECT")]
 transform = Transform3D(1, -1.45747e-14, 1.70877e-07, 3.63842e-16, -1, -8.74228e-08, 1.70877e-07, 8.74228e-08, -1, -0.00321642, 0.000521378, 0.320782)
 script = ExtResource("26_iweeg")
 bullet_data = SubResource("Resource_72w42")
+RECOIL_ENABLED = true
+RECOIL_SUBJECT = NodePath("../../../..")
 metadata/_custom_type_script = "uid://do4am13na3svu"
 
 [node name="GunHolder" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]

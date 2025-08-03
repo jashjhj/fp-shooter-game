@@ -167,7 +167,7 @@ func apply_self_forces(delta):
 	
 	
 	var COM = get_centre_of_stable_area(calculate_stable_area())
-	Debug.point(COM)
+	#Debug.point(COM)
 	
 	BODY.apply_central_force(force_to_apply)
 	#BODY.apply_force(force_to_apply, Vector3.ZERO)#-COM -- global_position)

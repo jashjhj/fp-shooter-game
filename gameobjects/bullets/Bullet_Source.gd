@@ -4,6 +4,11 @@ class_name Bullet_Source extends Node3D
 @export var SHOOT_VECTOR:Vector3 = Vector3.FORWARD
 @export var bullet_data:BulletData;
 
+@export_group("Recoil", "RECOIL_")
+@export var RECOIL_ENABLED:bool = false
+@export var RECOIL_SUBJECT:RigidBody3D
+@export var RECOIL_IMPULSE_MULT:float = 0.33;
+
 var bullet:PackedScene = preload("res://gameobjects/bullets/bullet.tscn");
 
 signal shoot
@@ -49,3 +54,7 @@ func fire_bullet(supplementary_velocity := Vector3.ZERO):
 		return
 	
 	bullet_inst.velocity += supplementary_velocity;
+	
+	if(RECOIL_ENABLED):
+		if(RECOIL_SUBJECT != null):
+			RECOIL_SUBJECT.apply_impulse(-bullet_data.mass * bullet_inst.velocity * RECOIL_IMPULSE_MULT, global_position - RECOIL_SUBJECT.global_position)
