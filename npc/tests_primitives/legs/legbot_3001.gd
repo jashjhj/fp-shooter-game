@@ -165,7 +165,12 @@ func apply_self_forces(delta):
 		sign(force_goal.z) * min(abs(force_goal.z), force_capacity.z),  \
 	)
 	
+	
+	var COM = get_centre_of_stable_area(calculate_stable_area())
+	Debug.point(COM)
+	
 	BODY.apply_central_force(force_to_apply)
+	#BODY.apply_force(force_to_apply, Vector3.ZERO)#-COM -- global_position)
 	
 	## -- Moments --
 	#ANGLE_HELPER.STIFFNESS = stable_legs * 3
@@ -185,7 +190,7 @@ func body_hit():
 
 func set_leg_target(leg:BotLeg) -> void:
 	var target_pos = calculate_leg_target(leg)
-	Debug.point(target_pos)
+	#Debug.point(target_pos)
 	if target_pos == Vector3.ZERO: return # If no readings, stay as was
 	leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.2)
 
