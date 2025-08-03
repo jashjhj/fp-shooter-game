@@ -20,6 +20,9 @@ func gib():
 	for c in get_all_children():
 		if c is Hit_HP_Tracker:
 			c.HP = 0; # Triggers on_hp_becomes_negative, runs gibs etc.
+		
+		if c is Pastel_Colour_Mesh:
+			c.health = 0.0
 
 func get_all_children(from:Node = self):
 	var children:Array[Node];

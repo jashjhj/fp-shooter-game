@@ -3,7 +3,7 @@ class_name Pastel_Colour_Mesh extends MeshInstance3D
 
 
 ## float between 0 and 1
-@export var health:float = 1.0:
+@export_range(0.0, 1.0, 0.001) var health:float = 1.0:
 	set(v):
 		health = v
 		for i in range(0,get_surface_override_material_count()):
