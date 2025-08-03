@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bikvqapju5fyp"]
+
+[ext_resource type="Shader" uid="uid://ubvrpmc35j5x" path="res://assets/textures/plastics/plastic_shader.tres" id="1_jmmcu"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jmmcu")
+shader_parameter/color_seed = 0.0
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
