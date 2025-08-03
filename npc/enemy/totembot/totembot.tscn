@@ -266,7 +266,6 @@ mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../..")
 
 [node name="Shield2" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = ExtResource("11_bcabd")
 skeleton = NodePath("../../../..")
 
