@@ -26,7 +26,7 @@ func _ready() -> void:
 func randomise_colours():
 	for i in range(0,get_surface_override_material_count()):
 		
-		var MAT:ShaderMaterial = load("res://assets/textures/plastics/pastel_colour.tres").duplicate()
+		var MAT:ShaderMaterial = load("res://assets/textures/pastels/pastel_colour.tres").duplicate()
 		
 		#MAT.resource_local_to_scene = true
 		MAT.set_shader_parameter("color_seed", randf())

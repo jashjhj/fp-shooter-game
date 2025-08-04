@@ -313,7 +313,7 @@ STIFFNESS = 30.0
 DAMPING = 4.0
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 
-[node name="AbdomenFrame" type="MeshInstance3D" parent="Body" node_paths=PackedStringArray("WEAKPOINTS")]
+[node name="AbdomenFrame" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154252, 0, 0)
 mesh = ExtResource("2_avg8m")
 skeleton = NodePath("../..")
@@ -323,7 +323,6 @@ surface_material_override/2 = SubResource("ShaderMaterial_0by5d")
 surface_material_override/3 = SubResource("ShaderMaterial_gbbtt")
 surface_material_override/4 = SubResource("ShaderMaterial_1t62q")
 script = ExtResource("41_hufde")
-WEAKPOINTS = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
 visible = false
@@ -507,12 +506,12 @@ sync_to_physics = false
 mesh = ExtResource("9_mv043")
 skeleton = NodePath("../../../../../..")
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
+[node name="Generic6DOFJoint3D_L" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.068006, 0.392729, -0.116595)
 node_a = NodePath("..")
 node_b = NodePath("../../Shield_Support_Left")
 
-[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
+[node name="Generic6DOFJoint3D_R" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.068006, 0.392729, 0.134567)
 node_a = NodePath("..")
 node_b = NodePath("../../Shield_Support_Right")
@@ -523,12 +522,11 @@ collision_mask = 65
 script = ExtResource("35_hufde")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
-[node name="Shield1" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right" node_paths=PackedStringArray("WEAKPOINTS")]
+[node name="Shield1" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
 mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_eqw71")
 script = ExtResource("41_hufde")
-WEAKPOINTS = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
 shape = SubResource("ConvexPolygonShape3D_klcti")
@@ -552,7 +550,7 @@ metadata/_custom_type_script = "uid://xruf68qvcqcm"
 
 [node name="Triggerable_Free" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right/Hit_Trigger_On_HP0" node_paths=PackedStringArray("TO_FREE")]
 script = ExtResource("41_tboyw")
-TO_FREE = [NodePath("../../../Shield/Generic6DOFJoint3D_L"), NodePath("../../../Shield/Generic6DOFJoint3D_R")]
+TO_FREE = [NodePath("../../../Shaft/Generic6DOFJoint3D_R"), NodePath("../../../Shield/Generic6DOFJoint3D_R")]
 metadata/_custom_type_script = "uid://dsjmnf5wst7es"
 
 [node name="Trig_Depropogate_Impulse" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right/Hit_Trigger_On_HP0" node_paths=PackedStringArray("IMPULSE_TO_DEPROPOGATE", "IMPULSE_PROPOGATOR")]
@@ -568,13 +566,12 @@ collision_mask = 65
 script = ExtResource("35_hufde")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
-[node name="Shield1_1" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left" node_paths=PackedStringArray("WEAKPOINTS")]
+[node name="Shield1_1" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left"]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -0.117623, -0.391669, 0.186677)
 mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_0adce")
 script = ExtResource("41_hufde")
-WEAKPOINTS = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left"]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -0.117623, -0.391669, 0.186677)
@@ -600,7 +597,7 @@ metadata/_custom_type_script = "uid://xruf68qvcqcm"
 
 [node name="Triggerable_Free" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left/Hit_Trigger_On_HP0" node_paths=PackedStringArray("TO_FREE")]
 script = ExtResource("41_tboyw")
-TO_FREE = [NodePath("../../../Shield/Generic6DOFJoint3D_L")]
+TO_FREE = [NodePath("../../../Shield/Generic6DOFJoint3D_L"), NodePath("../../../Shaft/Generic6DOFJoint3D_L")]
 metadata/_custom_type_script = "uid://dsjmnf5wst7es"
 
 [node name="Trig_Depropogate_Impulse" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left/Hit_Trigger_On_HP0" node_paths=PackedStringArray("IMPULSE_TO_DEPROPOGATE", "IMPULSE_PROPOGATOR")]
@@ -617,7 +614,7 @@ script = ExtResource("35_hufde")
 HIT_COMPONENTS = [null]
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
-[node name="Shield2" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield" node_paths=PackedStringArray("WEAKPOINTS")]
+[node name="Shield2" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196112, -0.365091, -8.18315e-09)
 mesh = ExtResource("11_bcabd")
 skeleton = NodePath("../../../../../..")
@@ -625,7 +622,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_1hdur")
 surface_material_override/1 = SubResource("ShaderMaterial_ealnf")
 surface_material_override/2 = SubResource("ShaderMaterial_ily6p")
 script = ExtResource("41_hufde")
-WEAKPOINTS = []
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196112, -0.365091, -8.18315e-09)
@@ -652,14 +648,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196112, -0.365091, -8.1831
 shape = SubResource("ConvexPolygonShape3D_pb8f1")
 
 [node name="Generic6DOFJoint3D_L" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0634821, 0, -0.266397)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0308083, 0, -0.262938)
 node_a = NodePath("../../Shield_Support_Left")
 node_b = NodePath("..")
 angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 
 [node name="Generic6DOFJoint3D_R" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0634821, 0, 0.266384)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0508682, 0, 0.270933)
 node_a = NodePath("../../Shield_Support_Right")
 node_b = NodePath("..")
 angular_limit_x/enabled = false
@@ -727,7 +723,7 @@ mesh = ExtResource("18_wi7e8")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hdgws")
 
-[node name="DomeTop" type="MeshInstance3D" parent="Body/Top_PlanetaryGears/Top" node_paths=PackedStringArray("WEAKPOINTS")]
+[node name="DomeTop" type="MeshInstance3D" parent="Body/Top_PlanetaryGears/Top"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106911, -0.571512, 0)
 mesh = ExtResource("19_d4x4b")
 skeleton = NodePath("../../../..")
@@ -736,7 +732,6 @@ surface_material_override/1 = SubResource("ShaderMaterial_8uadq")
 surface_material_override/2 = SubResource("ShaderMaterial_f41kg")
 surface_material_override/3 = SubResource("ShaderMaterial_luvdn")
 script = ExtResource("41_hufde")
-WEAKPOINTS = []
 
 [node name="Seeking_Gun" type="Node" parent="Body/Top_PlanetaryGears/Top" node_paths=PackedStringArray("CAMERA", "AIM_THIS_TOWARDS_TARGET")]
 script = ExtResource("28_v7ac7")
