@@ -73,10 +73,9 @@ metadata/_custom_type_script = "uid://2go7fdnv41nr"
 script = ExtResource("8_osnwx")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
-[node name="Planet" type="Area3D" parent="." node_paths=PackedStringArray("HIT_COMPONENTS")]
+[node name="Planet" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172472, 0, -0.00197557)
 script = ExtResource("7_lyahv")
-HIT_COMPONENTS = [NodePath("../Hit_Impulse_Propogate")]
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
 [node name="Mesh" type="MeshInstance3D" parent="Planet"]
@@ -114,3 +113,9 @@ script = ExtResource("12_cdoda")
 RB_MAKER = NodePath("../HP_component/Trig_Make_Rigidbody")
 IMPULSE_MULTIPLIER = 0.1
 metadata/_custom_type_script = "uid://bratjbglam8oe"
+
+[node name="Hit_Impulse_Propogate" type="Node" parent="Planet" node_paths=PackedStringArray("IMPULSE_UPSTREAMS")]
+script = ExtResource("13_fo7uh")
+IMPULSE_UPSTREAMS = [NodePath("../../Hit_Impulse_Propogate")]
+IMPULSE_MULTIPLIER = 0.5
+metadata/_custom_type_script = "uid://dq4im1txeg8kn"
