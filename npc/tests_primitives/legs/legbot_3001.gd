@@ -153,7 +153,7 @@ func apply_self_forces(delta):
 	
 	
 	PHYSLERP.FORCE = IMAGINED_FORCE
-	PHYSLERP.RESERVE_FORCE = BODY.mass * 11;
+	PHYSLERP.RESERVE_FORCE = BODY.mass * 12;
 	var force_goal = PHYSLERP.calculate_forces(delta)
 	
 	
@@ -166,11 +166,12 @@ func apply_self_forces(delta):
 	)
 	
 	
-	var COM = get_centre_of_stable_area(calculate_stable_area())
-	#Debug.point(COM)
+	#var stable_centre = get_centre_of_stable_area(calculate_stable_area())
+	#var closest = get_closest_stable_point_to(BODY.global_position + BODY.center_of_mass)
+	#Debug.point(stable_centre)
 	
-	BODY.apply_central_force(force_to_apply)
-	#BODY.apply_force(force_to_apply, Vector3.ZERO)#-COM -- global_position)
+	BODY.apply_central_force(force_to_apply * Vector3(1, 1, 1))
+	#BODY.apply_force(force_to_apply * Vector3(0, 1, 0), closest - BODY.global_position)
 	
 	## -- Moments --
 	#ANGLE_HELPER.STIFFNESS = stable_legs * 3

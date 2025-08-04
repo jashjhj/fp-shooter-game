@@ -38,7 +38,7 @@ default_input_values = [0, 0.0, 1, 0.5, 2, 1.0]
 constant = 0.3
 
 [sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_4a678"]
-default_input_values = [1, 0.0, 2, 1.0, 3, 0.2, 4, 0.8]
+default_input_values = [1, 0.0, 2, 1.0, 3, 0.15, 4, 0.6]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_2rufj"]
 input_name = "vertex"
@@ -103,8 +103,8 @@ void fragment() {
 // Remap:9
 	float n_in9p1 = 0.00000;
 	float n_in9p2 = 1.00000;
-	float n_in9p3 = 0.20000;
-	float n_in9p4 = 0.80000;
+	float n_in9p3 = 0.15000;
+	float n_in9p4 = 0.60000;
 	{
 		float __input_range = n_in9p2 - n_in9p1;
 		float __output_range = n_in9p4 - n_in9p3;
@@ -142,6 +142,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-634.042, 494.413)
 varyings/life = "0,0"
 varyings/color_seed = "0,0"
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_2rufj")

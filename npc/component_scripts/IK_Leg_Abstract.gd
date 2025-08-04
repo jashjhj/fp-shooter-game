@@ -30,8 +30,12 @@ func get_angles(delta:Vector3, axis:Vector3) -> IKAngles:
 	out.hipyaw = delta.signed_angle_to(-forwards, up)# atan2(delta.dot(axis), delta.dot(forwards))
 	
 	out.knee = -calculate_second_angle(delta.length_squared())
+	
 	out.hippitch = -calculate_first_angle(delta.length(), out.knee); #calculate_first_angle(Vector2(delta.dot(forwards), delta.dot(up)), out.knee);
 	
+	if(delta.length() < UPPER_LENGTH - LOWER_LENGTH): # if its tooo close
+		pass
+		#out.hippitch = PI - out.hippitch
 	
 	return out
 

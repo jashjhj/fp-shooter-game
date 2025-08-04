@@ -11,8 +11,19 @@ var BODY:RigidBody3D:
 
 @export var UPPER:Node3D;
 @export var LOWER:Node3D;
-@export var UPPER_LENGTH:float = 1.0;
-@export var LOWER_LENGTH:float = 1.0;
+
+
+
+@export var UPPER_LENGTH:float = 1.0:
+	set(v):
+		UPPER_LENGTH = v
+		if(IKCALC != null):
+			IKCALC.UPPER_LENGTH = v
+@export var LOWER_LENGTH:float = 1.0:
+	set(v):
+		LOWER_LENGTH = v
+		if(IKCALC != null):
+			IKCALC.LOWER_LENGTH = v
 
 @export var INVERT_KNEE:bool = false
 
@@ -199,7 +210,8 @@ func update_leg() -> void:
 		
 		#FOOT.transform = ik.end.transform
 	else:
-		UPPER.look_at(UPPER.global_position + global_target_delta)
+		##This si the case where it breaks
+		UPPER.look_at(UPPER.global_position - global_target_delta)
 
 
 func begin_step(pos:Vector3 = TARGET.global_position):
@@ -449,7 +461,8 @@ func break_knee():
 	DISMEMBER_LOWER_RB_MAKER.add_impulse(DISMEMBER_KNEE_TRIGGER.last_impulse, DISMEMBER_KNEE_TRIGGER.last_impulse_pos)
 	DISMEMBER_LOWER_RB_MAKER.trigger()
 	
-	LOWER_LENGTH = 0;
+	LOWER_LENGTH = 0.01;
+	IKCALC.LOWER_LENGTH = 0.01
 	
 
 ##Breaking the ankle will ideally allow the robot to still walk, however with no shoes on. Effectively shorten the FOOT hitbox (or raise it)
