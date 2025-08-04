@@ -4,7 +4,9 @@ class_name RB_Mass_Source extends Node3D
 @export var MASS:float = 1.0;
 @export var BODY:RigidBody3D;
 
-@export var ADD_ON_READY:bool = true
+@export var IS_ADDED:bool = true
+##If true, can change COM each physics tick if moved.
+@export var DYNAMIC:bool = false
 
 
 func _ready() -> void:
@@ -12,15 +14,26 @@ func _ready() -> void:
 	await BODY.ready
 	BODY.center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 	
-	if(ADD_ON_READY):
+	if(IS_ADDED):
 		add_mass()
 	
 	#Shift COM correctly
 
-##Adds mass (default to what is set) to associated rigidbody
-func add_mass(mass_to_add:float = MASS):
-	BODY.center_of_mass = (BODY.center_of_mass * BODY.mass + BODY.to_local(global_position) * mass_to_add) / (BODY.mass + mass_to_add)
-	BODY.mass += mass_to_add
+var prev_pos:Vector3
+func _physics_process(delta: float) -> void:
+	if(DYNAMIC and IS_ADDED):
+		remove_mass(MASS, prev_pos)
+		add_mass()
+	
+	
+	prev_pos = global_position
 
-func remove_mass(mass:float = MASS):
+##Adds mass (default to what is set) to associated rigidbody
+func add_mass(mass_to_add:float = MASS, at:Vector3 = global_position):
+	BODY.center_of_mass = (BODY.center_of_mass * BODY.mass + BODY.to_local(at) * mass_to_add) / (BODY.mass + mass_to_add)
+	BODY.mass += mass_to_add
+	IS_ADDED = true
+
+func remove_mass(mass:float = MASS, at:Vector3 = global_position):
 	add_mass(-mass)
+	IS_ADDED = false
