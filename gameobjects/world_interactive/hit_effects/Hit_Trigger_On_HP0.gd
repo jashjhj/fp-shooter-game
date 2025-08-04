@@ -1,7 +1,13 @@
 class_name Hit_Trigger_On_HP0 extends Hit_HP_Tracker
 
-@export var TRIGGERABLE:Triggerable
+##Auto-adds children that are triggerables.
+@export var TRIGGERABLES:Array[Triggerable]
 
 func _ready() -> void:
 	super._ready()
-	on_hp_becomes_negative.connect(TRIGGERABLE.trigger)
+	for c in get_children(): # Auto-adds relevant children
+		if(c is Triggerable and !TRIGGERABLES.has(c)):
+			TRIGGERABLES.append(c)
+	
+	for t in TRIGGERABLES:
+		on_hp_becomes_negative.connect(t.trigger)

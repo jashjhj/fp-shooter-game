@@ -9,7 +9,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_les2h"]
 render_priority = 0
 shader = ExtResource("3_5y201")
-shader_parameter/color_seed = 0.24439
+shader_parameter/color_seed = 0.287741
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -17,7 +17,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5y201"]
 render_priority = 0
 shader = ExtResource("3_5y201")
-shader_parameter/color_seed = 0.234481
+shader_parameter/color_seed = 0.482848
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0

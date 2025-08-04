@@ -1,4 +1,4 @@
-class_name Triggerable_Sound_Effect extends Triggerable
+class_name Trig_Sound_Effect extends Triggerable
 
 @export var SFX:AudioStreamPlayer3D
 

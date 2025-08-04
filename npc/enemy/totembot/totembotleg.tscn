@@ -232,7 +232,7 @@ metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
 [node name="Foot" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79731, -0.00915508)
-collision_layer = 64
+collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_oebdh")
 lock_rotation = true
 contact_monitor = true

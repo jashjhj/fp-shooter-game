@@ -121,7 +121,7 @@ func fire(slot:Slot):
 	
 	
 	if(TRIGGERABLE_CLICK != null):
-		if(TRIGGERABLE_CLICK is Triggerable_Sound_Effect):
+		if(TRIGGERABLE_CLICK is Trig_Sound_Effect):
 			TRIGGERABLE_CLICK.PITCH_OFFSET = 0.033
 			TRIGGERABLE_CLICK.PITCH_ORIGIN = 0.7 + log(1+rotation_speed) * 0.125
 		TRIGGERABLE_CLICK.trigger() # Always click

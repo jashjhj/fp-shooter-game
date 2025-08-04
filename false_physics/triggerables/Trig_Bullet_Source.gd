@@ -1,4 +1,4 @@
-class_name Triggerable_Bullet_Source extends Triggerable
+class_name Trig_Bullet_Source extends Triggerable
 
 @export var BULLET_SOURCE:Bullet_Source;
 

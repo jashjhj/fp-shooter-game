@@ -1,4 +1,4 @@
-class_name Triggerable_More extends Triggerable
+class_name Trig_More extends Triggerable
 
 @export var TRIGGERS:Array[Triggerable];
 
