@@ -10,8 +10,8 @@
 [ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel_Shade.gd" id="7_osnwx"]
 [ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="8_osnwx"]
 [ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="10_cdoda"]
-[ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="11_cdoda"]
 [ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="11_fo7uh"]
+[ext_resource type="Script" uid="uid://bratjbglam8oe" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_RB_Impulse.gd" id="12_cdoda"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_les2h"]
 render_priority = 0
@@ -82,17 +82,16 @@ MAX_HP = 1.0
 MINIMUM_DAMAGE_THRESHOLD = 3.0
 metadata/_custom_type_script = "uid://xruf68qvcqcm"
 
-[node name="Hit_Make_Rigidbody" type="Node" parent="Planet" node_paths=PackedStringArray("MAKE_RIGIDBODY")]
-script = ExtResource("11_cdoda")
-MAKE_RIGIDBODY = NodePath("Trig_Make_Rigidbody")
-MAX_HP = 1.0
-MINIMUM_DAMAGE_THRESHOLD = 3.0
-metadata/_custom_type_script = "uid://hhosnxuj45ad"
-
-[node name="Trig_Make_Rigidbody" type="Node" parent="Planet/Hit_Make_Rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
+[node name="Trig_Make_Rigidbody" type="Node" parent="Planet/HP_component" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
 script = ExtResource("11_fo7uh")
 RIGIDBODY = NodePath("../../../Planet_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("../..")
 NEW_CHILDREN = [NodePath("../../CollisionShape3D"), NodePath("../../Mesh")]
 TO_BE_REMOVED = [NodePath("../../Hit_Pastel_Shade"), NodePath("../..")]
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
+
+[node name="Hit_Make_RB_Impulse" type="Node" parent="Planet" node_paths=PackedStringArray("RB_MAKER")]
+script = ExtResource("12_cdoda")
+RB_MAKER = NodePath("../HP_component/Trig_Make_Rigidbody")
+IMPULSE_MULTIPLIER = 0.1
+metadata/_custom_type_script = "uid://bratjbglam8oe"

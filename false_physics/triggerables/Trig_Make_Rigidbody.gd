@@ -18,7 +18,7 @@ func  _ready() -> void:
 	
 	if(AUTO_SET_COLLISION):
 		RIGIDBODY.collision_layer = collision_layer;
-		RIGIDBODY.collision_mask = 1 + 512 + 1028 + 8192 + 16384;
+		RIGIDBODY.collision_mask = 1 + 64 + 512 + 1028 + 8192 + 16384;
 
 
 func trigger():
