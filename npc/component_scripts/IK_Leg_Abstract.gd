@@ -87,7 +87,6 @@ func calculate_IK_nodes(delta:Vector3, axis:Vector3) -> IKResults:
 func calculate_second_angle(distance_squared:float) -> float:
 	var cos_angle = ((distance_squared - UPPER_LENGTH*UPPER_LENGTH - LOWER_LENGTH*LOWER_LENGTH)/(2*UPPER_LENGTH*LOWER_LENGTH))
 	
-	#if(abs(cos_angle) > 1): print("TOO FAR") # Its fine though, just stretches
 	var angle = acos(cos_angle)
 	
 	if(!ELBOW_IN):
