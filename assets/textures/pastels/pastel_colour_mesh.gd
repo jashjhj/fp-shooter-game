@@ -2,9 +2,6 @@
 class_name Pastel_Colour_Mesh extends MeshInstance3D
 
 
-@export var WEAKPOINTS:Array[Weakpoint]
-
-
 
 ## float between 0 and 1
 @export_range(0.0, 1.0, 0.001) var health:float = 1.0:
