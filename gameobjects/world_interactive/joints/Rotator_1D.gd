@@ -1,4 +1,4 @@
-class_name Rotator_1D extends Node3D
+class_name Rotator_1D extends Body_Segment
 
 @export_category("Rotation axis = around the local Y+")
 
@@ -35,6 +35,7 @@ var target_global:Vector3:
 		target = v - global_position
 
 func _ready() -> void:
+	super()
 	target = Vector3.INF
 
 

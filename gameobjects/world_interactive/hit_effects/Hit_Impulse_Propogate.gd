@@ -4,7 +4,7 @@ class_name Hit_Impulse_Propogate extends Hit_Impulse
 ##if cannot find this, resort to IMPULSE_TO. Array: Spreads out the impulse evenly between all that apply.  | If this array6 is blank, resorts to IMPUSLE_TO
 @export var IMPULSE_UPSTREAMS:Array[Hit_Impulse];
 
-##Toggle this to true to enforce not going upstream
+##Toggle this to true to enforce not going upstream. If wanting to enforce upstream (upstream or nothing), set no LOCAL.
 @export var DISABLE_UPSTREAM:bool = false
 
 func hit(damage:float):
