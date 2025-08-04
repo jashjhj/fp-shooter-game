@@ -49,7 +49,7 @@ func spin(angle_to_turn: float) -> void:
 	
 	
 	for gear in GEARS:
-		
+		if(gear == null) : continue
 		gear.rotate_object_local(Vector3.UP, -angle_to_turn) # First undo local rotation
 		gear.position = gear.position.rotated(Vector3.UP, -angle_to_turn)
 		

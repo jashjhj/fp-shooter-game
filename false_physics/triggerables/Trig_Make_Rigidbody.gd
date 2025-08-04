@@ -38,7 +38,7 @@ func trigger():
 
 	for c in NEW_CHILDREN:
 		if(c != null):
-			c.reparent(RIGIDBODY)
+			c.call_deferred("reparent", RIGIDBODY)
 	
 	Globals.RUBBISH_COLLECTOR.add_rubbish(RIGIDBODY)
 	enable_rb_processing()

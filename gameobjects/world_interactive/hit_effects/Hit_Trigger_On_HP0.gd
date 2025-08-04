@@ -11,3 +11,12 @@ func _ready() -> void:
 	
 	for t in TRIGGERABLES:
 		on_hp_becomes_negative.connect(t.trigger)
+	
+	on_hp_becomes_negative.connect(call_triggers)
+
+func hit(damage):
+	super.hit(damage)
+
+func call_triggers():
+	for t in TRIGGERABLES:
+		t.trigger()

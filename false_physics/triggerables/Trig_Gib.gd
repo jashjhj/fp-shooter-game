@@ -5,9 +5,17 @@ class_name Trig_Gib extends Triggerable
 func trigger():
 	super()
 	
+	#print(len(get_all_children(TO_GIB)))
 	for child in get_all_children(TO_GIB):
 		if child is Hit_HP_Tracker:
 			child.HP = 0;
+			pass
+			#child.trigger(9999, Vector3.ZERO, Vector3.INF)
+		
+		
+		#Bit too extreme, but funny 
+		elif child is Triggerable:
+			child.trigger()
 		
 
 
