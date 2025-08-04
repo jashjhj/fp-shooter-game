@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://ubvrpmc35j5x"]
+[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://ubvrpmc35j5x"]
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_lvvuv"]
 
@@ -28,6 +28,12 @@ parameter_name = "roughness"
 hint = 1
 default_value_enabled = true
 default_value = 1.0
+
+[sub_resource type="VisualShaderNodeVec3Parameter" id="VisualShaderNodeVec3Parameter_l1pcu"]
+parameter_name = "Vector3Parameter"
+
+[sub_resource type="VisualShaderNodeTexture2DArrayParameter" id="VisualShaderNodeTexture2DArrayParameter_00ggg"]
+parameter_name = "Texture2DArrayParameter"
 
 [sub_resource type="VisualShaderNodeRandomRange" id="VisualShaderNodeRandomRange_h2bi2"]
 
@@ -142,6 +148,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-1205.33, 532)
 varyings/life = "0,0"
 varyings/color_seed = "0,0"
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_2rufj")
@@ -170,4 +177,8 @@ nodes/fragment/23/node = SubResource("VisualShaderNodeFloatParameter_lvvuv")
 nodes/fragment/23/position = Vector2(20, 420)
 nodes/fragment/24/node = SubResource("VisualShaderNodeFloatParameter_icnu7")
 nodes/fragment/24/position = Vector2(20, 680)
+nodes/fragment/25/node = SubResource("VisualShaderNodeVec3Parameter_l1pcu")
+nodes/fragment/25/position = Vector2(-700, 760)
+nodes/fragment/26/node = SubResource("VisualShaderNodeTexture2DArrayParameter_00ggg")
+nodes/fragment/26/position = Vector2(-580, 940)
 nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 4, 0, 2, 0, 7, 0, 4, 1, 9, 0, 4, 2, 3, 0, 4, 0, 21, 0, 3, 0, 22, 0, 9, 0, 23, 0, 0, 2, 24, 0, 0, 3)

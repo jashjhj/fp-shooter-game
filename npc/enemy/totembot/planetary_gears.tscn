@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dav2mqcewdcge" path="res://npc/enemy/totembot/planetary_gears.gd" id="1_5gokx"]
 [ext_resource type="ArrayMesh" uid="uid://di4ktjxriujhh" path="res://npc/enemy/totembot/assets/Planetary_0.obj" id="2_2web4"]
 [ext_resource type="ArrayMesh" uid="uid://bcwnx7vhvm0nd" path="res://npc/enemy/totembot/assets/Planetary_1.obj" id="3_4cpku"]
-[ext_resource type="Shader" uid="uid://ubvrpmc35j5x" path="res://assets/textures/plastics/pastel_shader.tres" id="3_5y201"]
-[ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/plastics/pastel_colour_mesh.gd" id="3_les2h"]
+[ext_resource type="Shader" uid="uid://ubvrpmc35j5x" path="res://assets/textures/pastels/pastel_shader.tres" id="3_5y201"]
+[ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="3_les2h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_les2h"]
 render_priority = 0
