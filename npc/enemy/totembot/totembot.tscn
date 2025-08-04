@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://c601y42ahg3h1"]
+[gd_scene load_steps=73 format=3 uid="uid://c601y42ahg3h1"]
 
 [ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="2_8nbuu"]
@@ -43,6 +43,7 @@
 [ext_resource type="Script" uid="uid://dn68rquobbhe6" path="res://false_physics/triggerables/Trig_Debris_Spawner.gd" id="35_kc2pp"]
 [ext_resource type="PackedScene" uid="uid://bro7feroy3qeq" path="res://npc/enemy/totembot/totembot_ammo_debris.tscn" id="36_il53q"]
 [ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="40_fk2tk"]
+[ext_resource type="Script" uid="uid://qb3qx5r7xsth" path="res://false_physics/RB_Mass_Source.gd" id="40_m8d25"]
 [ext_resource type="Script" uid="uid://dq4im1txeg8kn" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse_Propogate.gd" id="41_fk2tk"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/plastics/pastel_colour_mesh.gd" id="41_hufde"]
 [ext_resource type="Script" uid="uid://dsjmnf5wst7es" path="res://false_physics/triggerables/Trig_Free.gd" id="41_tboyw"]
@@ -78,10 +79,10 @@ trail_material = SubResource("ShaderMaterial_ox312")
 lifetime = 2.0
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppg2p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pb8f1"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.246958
+shader_parameter/color_seed = 0.742197
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -89,10 +90,10 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_klcti"]
 points = PackedVector3Array(0.138854, 0.483845, 0.278528, 0.153376, 0.483845, 0.270142, 0.0608459, 0.523811, 0.109885, 0.046334, 0.523811, 0.118254, 0.0859089, 0.486254, 0.186811, 0.138854, 0.280801, 0.278528, 0.100431, 0.486254, 0.178442, 0.153376, 0.280801, 0.270142, 0.0608459, 0.240862, 0.109885, 0.046334, 0.240862, 0.118254, 0.0859089, 0.278391, 0.186811, 0.100431, 0.278391, 0.178442)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m8d25"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4geb"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.407981
+shader_parameter/color_seed = 0.351887
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -100,26 +101,26 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hufde"]
 points = PackedVector3Array(0.138854, 0.483845, 0.278528, 0.153376, 0.483845, 0.270142, 0.0608459, 0.523811, 0.109885, 0.046334, 0.523811, 0.118254, 0.0859089, 0.486254, 0.186811, 0.138854, 0.280801, 0.278528, 0.100431, 0.486254, 0.178442, 0.153376, 0.280801, 0.270142, 0.0608459, 0.240862, 0.109885, 0.046334, 0.240862, 0.118254, 0.0859089, 0.278391, 0.186811, 0.100431, 0.278391, 0.178442)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pb8f1"]
-render_priority = 0
-shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.753023
-shader_parameter/life = 1.0
-shader_parameter/metallicity = 0.0
-shader_parameter/roughness = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4geb"]
-render_priority = 0
-shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.645699
-shader_parameter/life = 1.0
-shader_parameter/metallicity = 0.0
-shader_parameter/roughness = 1.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kms4a"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.8358
+shader_parameter/color_seed = 0.105955
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0by5d"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.732818
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbbtt"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.169457
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -146,26 +147,10 @@ points = PackedVector3Array(0.0937808, 0.218779, -0.29866, 0.0880278, 0.55065, -
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.298039)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0by5d"]
-render_priority = 0
-shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.960533
-shader_parameter/life = 1.0
-shader_parameter/metallicity = 0.0
-shader_parameter/roughness = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbbtt"]
-render_priority = 0
-shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.950029
-shader_parameter/life = 1.0
-shader_parameter/metallicity = 0.0
-shader_parameter/roughness = 1.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1t62q"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.563756
+shader_parameter/color_seed = 0.0743576
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -173,7 +158,23 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eqw71"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.600924
+shader_parameter/color_seed = 0.554394
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0adce"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.940974
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1hdur"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.921332
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -206,7 +207,9 @@ BODY_HITTABLE = NodePath("Body/Hittable_Collider/Hit_Impulse")
 transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 0, 0)
 collision_layer = 64
 collision_mask = 65
-mass = 35.0
+mass = 25.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.1, 0)
 script = ExtResource("2_8nbuu")
 
 [node name="Hit_Impulse" type="Node" parent="Body" node_paths=PackedStringArray("IMPULSE_TO")]
@@ -474,7 +477,7 @@ metadata/_custom_type_script = "uid://2go7fdnv41nr"
 [node name="Shield1" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
 mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ppg2p")
+surface_material_override/0 = SubResource("ShaderMaterial_pb8f1")
 script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
@@ -485,6 +488,12 @@ script = ExtResource("41_fk2tk")
 IMPULSE_UPSTREAMS = [NodePath("../../../../../Hit_Impulse")]
 IMPULSE_TO = NodePath("..")
 metadata/_custom_type_script = "uid://dq4im1txeg8kn"
+
+[node name="RB_Mass_Source2" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right" node_paths=PackedStringArray("BODY")]
+transform = Transform3D(-4.1727e-08, 0, -1, 0, 1, 0, 1, 0, -4.1727e-08, 0.1003, 0.3787, 0.207)
+script = ExtResource("40_m8d25")
+BODY = NodePath("../../../../..")
+metadata/_custom_type_script = "uid://qb3qx5r7xsth"
 
 [node name="Hit_Trigger_On_HP0" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
 script = ExtResource("40_fk2tk")
@@ -513,7 +522,7 @@ metadata/_custom_type_script = "uid://2go7fdnv41nr"
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -0.117623, -0.391669, 0.186677)
 mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_m8d25")
+surface_material_override/0 = SubResource("ShaderMaterial_k4geb")
 script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left"]
@@ -525,6 +534,12 @@ script = ExtResource("41_fk2tk")
 IMPULSE_UPSTREAMS = [NodePath("../../../../../Hit_Impulse")]
 IMPULSE_TO = NodePath("..")
 metadata/_custom_type_script = "uid://dq4im1txeg8kn"
+
+[node name="RB_Mass_Source" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left" node_paths=PackedStringArray("BODY")]
+transform = Transform3D(-4.1727e-08, 0, -1, 0, 1, 0, 1, 0, -4.1727e-08, -0.0172919, -0.0129337, -0.0203597)
+script = ExtResource("40_m8d25")
+BODY = NodePath("../../../../..")
+metadata/_custom_type_script = "uid://qb3qx5r7xsth"
 
 [node name="Hit_Trigger_On_HP0" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left"]
 script = ExtResource("40_fk2tk")
@@ -554,9 +569,9 @@ metadata/_custom_type_script = "uid://2go7fdnv41nr"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196112, -0.365091, -8.18315e-09)
 mesh = ExtResource("11_bcabd")
 skeleton = NodePath("../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_pb8f1")
-surface_material_override/1 = SubResource("ShaderMaterial_k4geb")
-surface_material_override/2 = SubResource("ShaderMaterial_kms4a")
+surface_material_override/0 = SubResource("ShaderMaterial_kms4a")
+surface_material_override/1 = SubResource("ShaderMaterial_0by5d")
+surface_material_override/2 = SubResource("ShaderMaterial_gbbtt")
 script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield"]
@@ -647,10 +662,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hdgws")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106911, -0.571512, 0)
 mesh = ExtResource("19_d4x4b")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_0by5d")
-surface_material_override/1 = SubResource("ShaderMaterial_gbbtt")
-surface_material_override/2 = SubResource("ShaderMaterial_1t62q")
-surface_material_override/3 = SubResource("ShaderMaterial_eqw71")
+surface_material_override/0 = SubResource("ShaderMaterial_1t62q")
+surface_material_override/1 = SubResource("ShaderMaterial_eqw71")
+surface_material_override/2 = SubResource("ShaderMaterial_0adce")
+surface_material_override/3 = SubResource("ShaderMaterial_1hdur")
 script = ExtResource("41_hufde")
 
 [node name="Seeking_Gun" type="Node" parent="Body/Top_PlanetaryGears/Top" node_paths=PackedStringArray("CAMERA", "AIM_THIS_TOWARDS_TARGET")]
