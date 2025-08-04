@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://uq1kxfr5cho"]
+[gd_scene load_steps=16 format=3 uid="uid://uq1kxfr5cho"]
 
-[ext_resource type="Script" uid="uid://dav2mqcewdcge" path="res://npc/enemy/totembot/planetary_gears.gd" id="1_5gokx"]
+[ext_resource type="Script" uid="uid://tee5lmviw6f0" path="res://npc/enemy/totembot/planetary_gears_breakable.gd" id="1_les2h"]
 [ext_resource type="ArrayMesh" uid="uid://di4ktjxriujhh" path="res://npc/enemy/totembot/assets/Planetary_0.obj" id="2_2web4"]
 [ext_resource type="ArrayMesh" uid="uid://bcwnx7vhvm0nd" path="res://npc/enemy/totembot/assets/Planetary_1.obj" id="3_4cpku"]
 [ext_resource type="Shader" uid="uid://ubvrpmc35j5x" path="res://assets/textures/pastels/pastel_shader.tres" id="3_5y201"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="3_les2h"]
+[ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="5_cklbe"]
+[ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="7_lyahv"]
+[ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel_Shade.gd" id="7_osnwx"]
+[ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="8_osnwx"]
+[ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="10_cdoda"]
+[ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="11_cdoda"]
+[ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="11_fo7uh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_les2h"]
 render_priority = 0
@@ -22,18 +29,70 @@ shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
 
-[node name="PlanetaryGears" type="Node3D" node_paths=PackedStringArray("OUTER_RING", "GEAR")]
-script = ExtResource("1_5gokx")
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i5qaf"]
+points = PackedVector3Array(0.0738035, 0.00383062, 0.00548578, 0.0738035, -0.00383262, 0.00548578, 0.0738035, 0.00383062, -0.00511533, 0.0676813, 0.00567899, 0.000192501, 0.049693, 0.010207, 0.000192501, 0.0665034, 0.00383062, 0.0327375, 0.049693, -0.010207, 0.000192501, 0.0676813, -0.00568099, 0.000192501, 0.0738035, -0.00383262, -0.00511533, 0.0665034, -0.00383262, 0.0327375, 0.0665034, 0.00383062, -0.032367, 0.0429746, 0.010207, -0.0248924, 0.0429746, 0.010207, 0.0252629, 0.058549, 0.00567899, 0.0342644, 0.0612102, 0.00383062, 0.0419135, 0.0429746, -0.010207, 0.0252629, 0.0429746, -0.010207, -0.0248924, 0.0665034, -0.00383262, -0.032367, 0.0612102, -0.00383262, 0.0419135, 0.058549, -0.00568099, 0.0342644, 0.0612102, 0.00383062, -0.041543, 0.058549, 0.00567899, -0.0338939, 0.0246082, 0.010207, -0.043259, 0.0246082, 0.010207, 0.0436294, 0.0412587, 0.00383062, 0.0618651, 0.0246082, -0.010207, 0.0436294, 0.0246082, -0.010207, -0.043259, 0.0612102, -0.00383262, -0.041543, 0.058549, -0.00568099, -0.0338939, 0.0412587, -0.00383262, 0.0618651, 0.0412587, 0.00383062, -0.0614946, 0.0336097, 0.00567899, -0.0588335, 0.0320828, 0.00383062, -0.0667879, 0.00483125, 0.00383062, -0.074088, -0.000476539, 0.010207, -0.0499774, -0.000476539, 0.010207, 0.0503478, 0.00483125, 0.00383062, 0.074473, 0.0320828, 0.00383062, 0.0671584, 0.0336097, 0.00567899, 0.0592039, 0.0336097, -0.00568099, 0.0592039, 0.0320828, -0.00383262, 0.0671584, 0.00483125, -0.00383262, 0.074473, -0.000476539, -0.010207, 0.0503478, -0.000476539, -0.010207, -0.0499774, 0.00483125, -0.00383262, -0.074088, 0.0320828, -0.00383262, -0.0667879, 0.0336097, -0.00568099, -0.0588335, 0.0412587, -0.00383262, -0.0614946, -0.00576979, 0.00383062, -0.074088, -0.000476539, 0.00567899, -0.0679658, -0.0255468, 0.010207, -0.043259, -0.0330213, 0.00383062, -0.0667879, -0.0255468, 0.010207, 0.0436294, -0.00576979, 0.00383062, 0.074473, -0.000476539, 0.00567899, 0.0683363, -0.00576979, -0.00383262, 0.074473, -0.000476539, -0.00568099, 0.0683363, -0.0255468, -0.010207, 0.0436294, -0.0255468, -0.010207, -0.043259, -0.0330213, -0.00383262, -0.0667879, -0.00576979, -0.00383262, -0.074088, -0.000476539, -0.00568099, -0.0679658, -0.0345482, 0.00567899, -0.0588335, -0.0421972, 0.00383062, -0.0614946, -0.0439132, 0.010207, -0.0248924, -0.0421972, 0.00383062, 0.0618651, -0.0345482, 0.00567899, 0.0592039, -0.0330213, 0.00383062, 0.0671584, -0.0439132, 0.010207, 0.0252629, -0.0330213, -0.00383262, 0.0671584, -0.0345482, -0.00568099, 0.0592039, -0.0421972, -0.00383262, 0.0618651, -0.0439132, -0.010207, 0.0252629, -0.0421972, -0.00383262, -0.0614946, -0.0345482, -0.00568099, -0.0588335, -0.0439132, -0.010207, -0.0248924, -0.0621487, 0.00383062, -0.041543, -0.0594875, 0.00567899, -0.0338939, -0.067442, 0.00383062, -0.032367, -0.074742, 0.00383062, -0.00511533, -0.0506315, 0.010207, 0.000192501, -0.0621487, 0.00383062, 0.0419135, -0.067442, 0.00383062, 0.0327375, -0.0594875, 0.00567899, 0.0342644, -0.0621487, -0.00383262, 0.0419135, -0.0594875, -0.00568099, 0.0342644, -0.067442, -0.00383262, 0.0327375, -0.0506315, -0.010207, 0.000192501, -0.0621487, -0.00383262, -0.041543, -0.074742, -0.00383262, -0.00511533, -0.067442, -0.00383262, -0.032367, -0.0594875, -0.00568099, -0.0338939, -0.0686199, 0.00567899, 0.000192501, -0.074742, 0.00383062, 0.00548578, -0.074742, -0.00383262, 0.00548578, -0.0686199, -0.00568099, 0.000192501)
+
+[node name="PlanetaryGears" type="Node3D" node_paths=PackedStringArray("PLANET_HP_COMPONENT", "OUTER_RING", "GEAR")]
+script = ExtResource("1_les2h")
+PLANET_HP_COMPONENT = NodePath("Planet/HP_component")
 OUTER_RING = NodePath("Outer_Ring")
-GEAR = NodePath("Planetary1")
+GEAR = NodePath("Planet")
 
 [node name="Outer_Ring" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_2web4")
 surface_material_override/0 = SubResource("ShaderMaterial_les2h")
 script = ExtResource("3_les2h")
 
-[node name="Planetary1" type="MeshInstance3D" parent="."]
+[node name="Planet_Gib" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172472, 0, -0.00197557)
+collision_layer = 8384
+collision_mask = 24705
+mass = 0.3
+script = ExtResource("5_cklbe")
+metadata/_custom_type_script = "uid://2go7fdnv41nr"
+
+[node name="Hit_Impulse" type="Node" parent="Planet_Gib"]
+script = ExtResource("8_osnwx")
+metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
+
+[node name="Planet" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172472, 0, -0.00197557)
+script = ExtResource("7_lyahv")
+metadata/_custom_type_script = "uid://c5uhnese0dn4n"
+
+[node name="Mesh" type="MeshInstance3D" parent="Planet"]
 mesh = ExtResource("3_4cpku")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_5y201")
 script = ExtResource("3_les2h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet"]
+shape = SubResource("ConvexPolygonShape3D_i5qaf")
+
+[node name="Hit_Pastel_Shade" type="Node" parent="Planet" node_paths=PackedStringArray("PASTEL")]
+script = ExtResource("7_osnwx")
+PASTEL = NodePath("../Mesh")
+MAX_HP = 1.0
+MINIMUM_DAMAGE_THRESHOLD = 3.0
+metadata/_custom_type_script = "uid://cijq708jlfumq"
+
+[node name="HP_component" type="Node" parent="Planet"]
+script = ExtResource("10_cdoda")
+MAX_HP = 1.0
+MINIMUM_DAMAGE_THRESHOLD = 3.0
+metadata/_custom_type_script = "uid://xruf68qvcqcm"
+
+[node name="Hit_Make_Rigidbody" type="Node" parent="Planet" node_paths=PackedStringArray("MAKE_RIGIDBODY")]
+script = ExtResource("11_cdoda")
+MAKE_RIGIDBODY = NodePath("Trig_Make_Rigidbody")
+MAX_HP = 1.0
+MINIMUM_DAMAGE_THRESHOLD = 3.0
+metadata/_custom_type_script = "uid://hhosnxuj45ad"
+
+[node name="Trig_Make_Rigidbody" type="Node" parent="Planet/Hit_Make_Rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
+script = ExtResource("11_fo7uh")
+RIGIDBODY = NodePath("../../../Planet_Gib")
+RIGIDBODY_BASIS_CLONE = NodePath("../..")
+NEW_CHILDREN = [NodePath("../../CollisionShape3D"), NodePath("../../Mesh")]
+TO_BE_REMOVED = [NodePath("../../Hit_Pastel_Shade"), NodePath("../..")]
+metadata/_custom_type_script = "uid://dpx3j3228uj6a"

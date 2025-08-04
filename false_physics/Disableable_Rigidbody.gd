@@ -1,4 +1,4 @@
-class_name Disableable_Rigidbody extends RigidBody3D
+class_name Disableable_Rigidbody extends Hittable_RB
 
 @export var DISABLE_LINKED:Array[Node];
 
