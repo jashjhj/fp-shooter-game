@@ -50,6 +50,7 @@ var target_global:Vector3:
 func _ready() -> void:
 	super()
 	target = Vector3.INF
+	if(IMPULSE_PROPOGATOR != null): IMPULSE_PROPOGATOR.on_hit.connect(take_torque_impulse)
 
 
 func _process(delta: float) -> void:
@@ -134,3 +135,13 @@ func _physics_process(delta: float) -> void:
 func spin(angle_to_turn:float):
 	pass
 	
+
+func take_torque_impulse():
+	var impulse_offset:Vector3 = IMPULSE_PROPOGATOR.last_impulse_pos - global_position
+	var impulse_component:float = IMPULSE_PROPOGATOR.last_impulse.dot(global_basis.y.cross(impulse_offset).normalized())
+	#perp-to-axis length component
+	var impulse_perp_dist:float = (impulse_offset - global_basis.y * impulse_offset.dot(global_basis.y)).length()
+	
+	var dv_to_apply = impulse_perp_dist * impulse_component / SIMULATED_MASS_ABOVE
+	var angular_velocity = dv_to_apply / impulse_perp_dist
+	current_speed += angular_velocity

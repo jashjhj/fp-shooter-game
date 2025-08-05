@@ -416,13 +416,18 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
 mesh = ExtResource("8_5jvjh")
 skeleton = NodePath("../..")
 
-[node name="Mid_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
+[node name="Mid_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_UPSTREAMS", "IMPULSE_PROPOGATOR") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2267, 0)
 ROTATION_MAX_SPEED = 0.785398
 ROTATION_ACCELERATION = 1.309
 ATTACHED_RB = NodePath("..")
 SIMULATED_MASS_ABOVE = 10.0
 IMPULSE_UPSTREAMS = [NodePath("../Hit_Impulse")]
+IMPULSE_PROPOGATOR = NodePath("Propogate_hit_out")
+
+[node name="Propogate_hit_out" type="Node" parent="Body/Mid_PlanetaryGears"]
+script = ExtResource("41_fk2tk")
+metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
 [node name="Model" type="Node3D" parent="Body/Mid_PlanetaryGears"]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, -0.2267, 0)
@@ -550,7 +555,7 @@ shape = SubResource("ConvexPolygonShape3D_klcti")
 
 [node name="Hit_Impulse_Propogate" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right" node_paths=PackedStringArray("IMPULSE_UPSTREAMS", "IMPULSE_TO")]
 script = ExtResource("41_fk2tk")
-IMPULSE_UPSTREAMS = [NodePath("../../../../../Hit_Impulse")]
+IMPULSE_UPSTREAMS = [NodePath("../../../../Propogate_hit_out")]
 IMPULSE_TO = NodePath("..")
 metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
@@ -596,7 +601,7 @@ shape = SubResource("ConvexPolygonShape3D_hufde")
 
 [node name="Hit_Impulse_Propogate" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left" node_paths=PackedStringArray("IMPULSE_UPSTREAMS", "IMPULSE_TO")]
 script = ExtResource("41_fk2tk")
-IMPULSE_UPSTREAMS = [NodePath("../../../../../Hit_Impulse")]
+IMPULSE_UPSTREAMS = [NodePath("../../../../Propogate_hit_out")]
 IMPULSE_TO = NodePath("..")
 metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
@@ -700,7 +705,7 @@ script = ExtResource("46_kms4a")
 MASS_SOURCE = NodePath("../../RB_Mass_Source")
 metadata/_custom_type_script = "uid://3lvqktg8vc62"
 
-[node name="Top_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
+[node name="Top_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_UPSTREAMS", "IMPULSE_PROPOGATOR") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545265, 0)
 FROM_INNER = true
 ROTATION_MAX_SPEED = 1.39626
@@ -708,6 +713,11 @@ ROTATION_ACCELERATION = 10.1229
 ATTACHED_RB = NodePath("..")
 SIMULATED_MASS_ABOVE = 2.0
 IMPULSE_UPSTREAMS = [NodePath("../Hit_Impulse")]
+IMPULSE_PROPOGATOR = NodePath("Propogate_Hit_Out")
+
+[node name="Propogate_Hit_Out" type="Node" parent="Body/Top_PlanetaryGears"]
+script = ExtResource("41_fk2tk")
+metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
 [node name="Top" type="Node3D" parent="Body/Top_PlanetaryGears"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.019224, 0)
@@ -758,6 +768,11 @@ script = ExtResource("49_0by5d")
 TO_FREE = NodePath("..")
 metadata/_custom_type_script = "uid://0vp01sycjj0a"
 
+[node name="Hit_Impulse_Propogate" type="Node" parent="Body/Top_PlanetaryGears/Top/Dome_Glass" node_paths=PackedStringArray("IMPULSE_UPSTREAMS")]
+script = ExtResource("41_fk2tk")
+IMPULSE_UPSTREAMS = [NodePath("../../../Propogate_Hit_Out")]
+metadata/_custom_type_script = "uid://dq4im1txeg8kn"
+
 [node name="DomeTop" type="MeshInstance3D" parent="Body/Top_PlanetaryGears/Top"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106911, -0.571512, 0)
 mesh = ExtResource("19_d4x4b")
@@ -798,11 +813,6 @@ shape = SubResource("ConvexPolygonShape3D_rbiss")
 script = ExtResource("6_gc2rj")
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
-[node name="Hit_Impulse" type="Node" parent="Body/Top_PlanetaryGears/Top/Top_hittable" node_paths=PackedStringArray("IMPULSE_TO")]
-script = ExtResource("7_5jvjh")
-IMPULSE_TO = NodePath("../../../..")
-metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Top_PlanetaryGears/Top/Top_hittable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106911, -0.571512, 0)
 shape = SubResource("ConcavePolygonShape3D_0by5d")
@@ -812,6 +822,11 @@ script = ExtResource("51_kms4a")
 PASTEL = NodePath("../../DomeTop")
 MAX_HP = 50.0
 metadata/_custom_type_script = "uid://cijq708jlfumq"
+
+[node name="Hit_Impulse_Propogate" type="Node" parent="Body/Top_PlanetaryGears/Top/Top_hittable" node_paths=PackedStringArray("IMPULSE_UPSTREAMS")]
+script = ExtResource("41_fk2tk")
+IMPULSE_UPSTREAMS = [NodePath("../../../Propogate_Hit_Out")]
+metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
 [node name="Hittable_Collider" type="Area3D" parent="Body"]
 collision_layer = 128
