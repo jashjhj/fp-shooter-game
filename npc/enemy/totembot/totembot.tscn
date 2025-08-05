@@ -702,6 +702,8 @@ metadata/_custom_type_script = "uid://3lvqktg8vc62"
 [node name="Top_PlanetaryGears" parent="Body" node_paths=PackedStringArray("IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545265, 0)
 FROM_INNER = true
+ROTATION_MAX_SPEED = 1.39626
+ROTATION_ACCELERATION = 3.14159
 IMPULSE_UPSTREAMS = [NodePath("../Hit_Impulse")]
 
 [node name="Top" type="Node3D" parent="Body/Top_PlanetaryGears"]

@@ -5,8 +5,8 @@ class_name Rotator_1D extends Body_Segment
 @export_group("Rotation Settings")
 ##Maximum degrees/Second
 @export_range(0, 360, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = 1.0;
-##In rads/second/second
-@export var ROTATION_ACCELERATION:float = 1.0;
+##In degrees/second/second
+@export_range(0, 360, 0.1, "radians_as_degrees") var ROTATION_ACCELERATION:float = 1.0;
 
 @export var ANGLE_LIMITS_ENABLED:bool = false
 @export_range(-180, 180, 1.0, "radians_as_degrees") var MIN_ANGLE = -PI/4; 
@@ -72,7 +72,9 @@ func _physics_process(delta: float) -> void:
 	
 	#ROTATION CODE
 	
-	var max_speed:float = sqrt(abs(2*angle * ROTATION_ACCELERATION * delta)) * 0.8
+	var max_speed:float = sqrt(abs(2*angle * ROTATION_ACCELERATION)) * 0.8
+	print(ROTATION_MAX_SPEED )
+	max_speed = min(max_speed, ROTATION_MAX_SPEED)
 	var projected_delta_speed:float = ROTATION_ACCELERATION * delta * sign(angle);
 	
 	if(abs(current_speed + projected_delta_speed) > max_speed):
@@ -80,16 +82,17 @@ func _physics_process(delta: float) -> void:
 		var goal_dv = sign(angle)*max_speed - (current_speed)
 		projected_delta_speed = sign(goal_dv) * min(abs(goal_dv), ROTATION_ACCELERATION * delta) # accel to get it back to right speed
 		
+		#projected_delta_speed = goal_dv
 		#current_speed = sign(angle)*max_speed
 		#projected_delta_speed = 0
 		#Limit it abck down to max accel
-		projected_delta_speed = sign(projected_delta_speed) * min(ROTATION_ACCELERATION * delta, abs(projected_delta_speed))
+		#projected_delta_speed = sign(projected_delta_speed) * min(ROTATION_ACCELERATION * delta, abs(projected_delta_speed))
 	
 	current_speed += projected_delta_speed
+	#current_speed = max_speed * sign(angle)
 	
 	
-	
-	angle_to_turn = current_speed
+	angle_to_turn = current_speed * delta
 	
 	
 	
