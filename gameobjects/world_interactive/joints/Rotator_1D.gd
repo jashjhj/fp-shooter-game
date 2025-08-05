@@ -73,10 +73,11 @@ func _physics_process(delta: float) -> void:
 	
 	#ROTATION CODE
 	
-	if(current_angle + angle > MAX_ANGLE): # Add limits
+	if(current_angle + angle > MAX_ANGLE+0.01): # Add limits
 		angle = MAX_ANGLE - current_angle
-	elif current_angle - angle < MIN_ANGLE:
+	elif current_angle - angle < MIN_ANGLE - 0.01:
 		angle = MIN_ANGLE - current_angle
+	
 	
 	var max_speed:float = sqrt(abs(2*angle * ROTATION_ACCELERATION)) * 0.8
 	
