@@ -56,7 +56,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0by5d"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.794799
+shader_parameter/color_seed = 0.231282
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -64,7 +64,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbbtt"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.863533
+shader_parameter/color_seed = 0.527324
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -72,7 +72,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1t62q"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.94722
+shader_parameter/color_seed = 0.241816
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -80,7 +80,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eqw71"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.205333
+shader_parameter/color_seed = 0.0222941
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -88,7 +88,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0adce"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.188373
+shader_parameter/color_seed = 0.139889
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -126,7 +126,7 @@ metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1hdur"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.894532
+shader_parameter/color_seed = 0.935862
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -137,7 +137,7 @@ points = PackedVector3Array(0.138854, 0.483845, 0.278528, 0.153376, 0.483845, 0.
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ealnf"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.511119
+shader_parameter/color_seed = 0.279778
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -148,7 +148,7 @@ points = PackedVector3Array(0.138854, 0.483845, 0.278528, 0.153376, 0.483845, 0.
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ily6p"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.590928
+shader_parameter/color_seed = 0.959066
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -156,7 +156,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1vp5"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.538801
+shader_parameter/color_seed = 0.409639
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -164,7 +164,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8uadq"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.37249
+shader_parameter/color_seed = 0.422202
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -197,7 +197,7 @@ data = PackedVector3Array(-0.0124, 0.798, 0.1047, -0.0124, 0.8113, 0.0532, 0.034
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f41kg"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.47612
+shader_parameter/color_seed = 0.452736
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -205,7 +205,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_luvdn"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.234077
+shader_parameter/color_seed = 0.882162
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -213,7 +213,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wvxuj"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.437978
+shader_parameter/color_seed = 0.616256
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -221,7 +221,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rbiss"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.997897
+shader_parameter/color_seed = 0.876865
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -314,16 +314,16 @@ angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
 angular_spring_x/enabled = true
-angular_spring_x/stiffness = 30.0
+angular_spring_x/stiffness = 60.0
 angular_spring_x/damping = 4.0
 angular_spring_y/enabled = true
-angular_spring_y/stiffness = 30.0
+angular_spring_y/stiffness = 60.0
 angular_spring_y/damping = 4.0
 angular_spring_z/enabled = true
-angular_spring_z/stiffness = 30.0
+angular_spring_z/stiffness = 60.0
 angular_spring_z/damping = 4.0
 script = ExtResource("2_68ihi")
-STIFFNESS = 30.0
+STIFFNESS = 60.0
 DAMPING = 4.0
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 
@@ -418,9 +418,9 @@ skeleton = NodePath("../..")
 
 [node name="Mid_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2267, 0)
+ROTATION_ACCELERATION = 0.01
 ATTACHED_RB = NodePath("..")
 SIMULATED_MASS_ABOVE = 10.0
-ROTATION_SPEED = 0.575959
 IMPULSE_UPSTREAMS = [NodePath("../Hit_Impulse")]
 
 [node name="Model" type="Node3D" parent="Body/Mid_PlanetaryGears"]
@@ -437,14 +437,9 @@ skeleton = NodePath("../../../..")
 [node name="Gun_Hinge" type="Node3D" parent="Body/Mid_PlanetaryGears/Model"]
 transform = Transform3D(-8.54384e-08, -1.98439e-09, 1, -1, 3.55271e-15, -8.54384e-08, -1.23739e-17, -1, -1.98439e-09, 0.209837, 0.382504, 8.75586e-09)
 script = ExtResource("25_mgybp")
-ROTATION_SPEED = 0.349066
 ANGLE_LIMITS_ENABLED = true
 MIN_ANGLE = -0.436332
 MAX_ANGLE = 0.436332
-SLOP = null
-IS_HINGE_SPEED_LINEAR = null
-IS_ACTIVE = null
-DEBUG_AXES = null
 metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 
 [node name="Bullet_Source" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge" node_paths=PackedStringArray("RECOIL_SUBJECT")]
@@ -707,7 +702,6 @@ metadata/_custom_type_script = "uid://3lvqktg8vc62"
 [node name="Top_PlanetaryGears" parent="Body" node_paths=PackedStringArray("IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545265, 0)
 FROM_INNER = true
-ROTATION_SPEED = 1.39626
 IMPULSE_UPSTREAMS = [NodePath("../Hit_Impulse")]
 
 [node name="Top" type="Node3D" parent="Body/Top_PlanetaryGears"]
@@ -716,14 +710,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0
 [node name="Camera_hinge" type="Node3D" parent="Body/Top_PlanetaryGears/Top"]
 transform = Transform3D(8.9407e-08, -1.7683e-07, 1, -1, 3.82137e-15, 8.9407e-08, -1.19017e-14, -1, -1.7683e-07, 0.0393611, 0.165348, -5.23968e-09)
 script = ExtResource("25_mgybp")
-ROTATION_SPEED = 5.23599
 ANGLE_LIMITS_ENABLED = true
 MIN_ANGLE = -1.5708
 MAX_ANGLE = 0.0872665
-SLOP = null
-IS_HINGE_SPEED_LINEAR = null
-IS_ACTIVE = null
-DEBUG_AXES = null
 metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 
 [node name="Camera" type="MeshInstance3D" parent="Body/Top_PlanetaryGears/Top/Camera_hinge"]

@@ -8,8 +8,7 @@ class_name Planetary_Gears extends Rotator_1D
 ##Decides whether inside is stationary, or outside.
 @export var FROM_INNER:bool = false;
 
-@export var ATTACHED_RB:RigidBody3D;
-@export var SIMULATED_MASS_ABOVE:float = 0.0;
+
 
 @export_group("Components")
 @export var OUTER_RING:Node3D
@@ -25,8 +24,6 @@ var GEARS:Array[Node3D]
 
 
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready();
@@ -39,7 +36,7 @@ func _ready() -> void:
 
 
 func spin(angle_to_turn: float) -> void:
-	
+	super.spin(angle_to_turn)
 	
 	
 	
@@ -69,5 +66,3 @@ func spin(angle_to_turn: float) -> void:
 	if(SUN != null and FROM_INNER):
 		SUN.global_basis = get_parent_node_3d().global_basis
 	
-	if(ATTACHED_RB != null): # Equal and opposite type stuff
-		ATTACHED_RB.apply_torque(-angle_to_turn * Vector3.UP * SIMULATED_MASS_ABOVE)

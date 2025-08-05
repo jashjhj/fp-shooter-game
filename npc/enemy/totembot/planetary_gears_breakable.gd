@@ -5,7 +5,7 @@ class_name Planetary_Gears_Breakable extends Planetary_Gears
 var working_gears:int:
 	set(v):
 		working_gears = v;
-		ROTATION_SPEED = initial_rot_speed * float(working_gears) / float(GEARS_NUM)
+		ROTATION_MAX_SPEED = initial_rot_speed * float(working_gears) / float(GEARS_NUM)
 
 var initial_rot_speed:float;
 
@@ -13,7 +13,7 @@ var planet_hp_path:NodePath;
 
 func _ready() -> void:
 	super()
-	initial_rot_speed = ROTATION_SPEED
+	initial_rot_speed = ROTATION_MAX_SPEED
 	working_gears = GEARS_NUM
 	
 	
