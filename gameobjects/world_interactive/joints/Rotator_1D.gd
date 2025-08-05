@@ -4,7 +4,7 @@ class_name Rotator_1D extends Body_Segment
 
 @export_group("Rotation Settings")
 ##Maximum degrees/Second
-@export_range(0, 360, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = 1.0;
+@export_range(0, 360, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = PI/3;
 ##In degrees/second/second
 @export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_ACCELERATION:float = PI;
 
