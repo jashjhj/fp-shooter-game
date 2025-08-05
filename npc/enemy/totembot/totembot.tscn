@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://c601y42ahg3h1"]
+[gd_scene load_steps=96 format=3 uid="uid://c601y42ahg3h1"]
 
 [ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="2_8nbuu"]
@@ -99,8 +99,32 @@ points = PackedVector3Array(-0.0124932, -0.127013, -0.306597, -0.0633438, -0.129
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gc2rj"]
 points = PackedVector3Array(0, -0.06547, 0.0158788, -0.0492307, -0.0112406, 0.011046, 0.0492179, -0.0112406, 0.011046, 0.0636372, -0.06365, 0.0158788, 0, -0.06547, 0.0207116, -0.06365, -0.06365, 0.0158788, -0.0506406, -1.28075e-05, 0.011046, 0.0506277, -1.28075e-05, 0.011046, 0.06547, -1.28075e-05, 0.0158788, 0.0636372, -0.06365, 0.0207116, -0.06365, -0.06365, 0.0207116, 0.0162393, -0.0266469, 0.177651, -0.0162521, -0.0266469, 0.177651, -0.06547, -1.28075e-05, 0.0158788, -0.0492307, 0.0112278, 0.011046, -0.06365, 0.0636372, 0.0158788, 0.0492179, 0.0112278, 0.011046, 0.0636372, 0.0636372, 0.0158788, 0.06547, -1.28075e-05, 0.0207116, 0.0299921, -1.28075e-05, 0.177651, 0.0258394, -0.0258522, 0.177651, -0.06547, -1.28075e-05, 0.0207116, -0.0258522, -0.0258522, 0.177651, -0.0300049, -1.28075e-05, 0.177651, 0.0136246, -0.0223531, 0.184281, -0.0136374, -0.0223531, 0.184281, 0, 0.0654572, 0.0158788, -0.06365, 0.0636372, 0.0207116, 0.0636372, 0.0636372, 0.0207116, 0.0258394, 0.0258394, 0.177651, 0.0251601, -1.28075e-05, 0.184281, 0.0216738, -0.0216866, 0.184281, -0.0216866, -0.0216866, 0.184281, -0.0251729, -1.28075e-05, 0.184281, -0.0258522, 0.0258394, 0.177651, 0, 0.0654572, 0.0207116, -0.0162521, 0.026634, 0.177651, 0.0162393, 0.026634, 0.177651, 0.0136246, 0.0223403, 0.184281, 0.0216738, 0.0216738, 0.184281, -0.0216866, 0.0216738, 0.184281, -0.0136374, 0.0223403, 0.184281)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbaow"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.261429
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lqwa8"]
 data = PackedVector3Array(0, 0.0211, -0.0152, 0, -0.0205, -0.0152, 0.0107, 0.0211, -0.0107, 0.0107, 0.0211, -0.0107, 0, -0.0205, -0.0152, 0.0107, -0.0205, -0.0107, 0.0107, 0.0211, -0.0107, 0.0107, -0.0205, -0.0107, 0.0152, 0.0211, 0, 0.0152, 0.0211, 0, 0.0107, -0.0205, -0.0107, 0.0152, -0.0205, 0, 0.0152, 0.0211, 0, 0.0152, -0.0205, 0, 0.0107, 0.0211, 0.0107, 0.0107, 0.0211, 0.0107, 0.0152, -0.0205, 0, 0.0107, -0.0205, 0.0107, 0.0107, 0.0211, 0.0107, 0.0107, -0.0205, 0.0107, 0, 0.0211, 0.0152, 0, 0.0211, 0.0152, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, 0, 0.0211, 0.0152, 0, -0.0205, 0.0152, -0.0107, 0.0211, 0.0107, -0.0107, 0.0211, 0.0107, 0, -0.0205, 0.0152, -0.0107, -0.0205, 0.0107, -0.0107, 0.0211, 0.0107, -0.0107, -0.0205, 0.0107, -0.0152, 0.0211, 0, -0.0152, 0.0211, 0, -0.0107, -0.0205, 0.0107, -0.0152, -0.0205, 0, 0, 0.0211, -0.0152, 0.0107, 0.0211, -0.0107, -0.0107, 0.0211, -0.0107, -0.0107, 0.0211, -0.0107, 0.0107, 0.0211, -0.0107, -0.0152, 0.0211, 0, -0.0152, 0.0211, 0, 0.0107, 0.0211, -0.0107, -0.0107, 0.0211, 0.0107, -0.0107, 0.0211, 0.0107, 0.0107, 0.0211, -0.0107, 0, 0.0211, 0.0152, 0, 0.0211, 0.0152, 0.0107, 0.0211, -0.0107, 0.0107, 0.0211, 0.0107, 0.0107, 0.0211, 0.0107, 0.0107, 0.0211, -0.0107, 0.0152, 0.0211, 0, -0.0152, 0.0211, 0, -0.0152, -0.0205, 0, -0.0107, 0.0211, -0.0107, -0.0107, 0.0211, -0.0107, -0.0152, -0.0205, 0, -0.0107, -0.0205, -0.0107, -0.0107, 0.0211, -0.0107, -0.0107, -0.0205, -0.0107, 0, 0.0211, -0.0152, 0, 0.0211, -0.0152, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0.0152, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0152, -0.0205, 0, 0.0152, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0107, -0.0205, -0.0107, 0.0152, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0247, -0.0205, 0, 0.0247, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0174, -0.0205, -0.0174, 0.0174, -0.0205, 0.0174, 0.0152, -0.0205, 0, 0.0247, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0.0174, -0.0205, -0.0174, 0.0174, -0.0205, -0.0174, 0, -0.0205, -0.0152, 0, -0.0205, -0.0247, 0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0.0107, -0.0205, -0.0107, 0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0, -0.0205, -0.0152, 0.0107, -0.0205, 0.0107, 0.0152, -0.0205, 0, 0.0174, -0.0205, 0.0174, 0.0107, -0.0205, 0.0107, 0.0152, -0.0205, 0, 0.0152, -0.0205, 0, 0.0107, -0.0205, 0.0107, 0.0152, -0.0205, 0, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0247, 0.0107, -0.0205, 0.0107, 0.0174, -0.0205, 0.0174, 0, -0.0205, 0.0152, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0247, 0, -0.0205, 0.0152, 0.0107, -0.0205, 0.0107, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, -0.0174, -0.0205, 0.0174, 0, -0.0205, 0.0152, 0, -0.0205, 0.0247, -0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, -0.0174, -0.0205, 0.0174, -0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, 0, -0.0205, 0.0152, -0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, -0.0107, -0.0205, 0.0107, -0.0247, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0174, -0.0205, 0.0174, -0.0152, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0247, -0.0205, 0, -0.0152, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0107, -0.0205, 0.0107, -0.0152, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0152, -0.0205, 0, -0.0174, -0.0205, -0.0174, -0.0152, -0.0205, 0, -0.0247, -0.0205, 0, -0.0107, -0.0205, -0.0107, -0.0152, -0.0205, 0, -0.0174, -0.0205, -0.0174, 0, -0.0205, -0.0247, -0.0107, -0.0205, -0.0107, -0.0174, -0.0205, -0.0174, -0.0107, -0.0205, -0.0107, -0.0152, -0.0205, 0, -0.0152, -0.0205, 0, -0.0107, -0.0205, -0.0107, -0.0152, -0.0205, 0, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0247, 0, -0.0205, -0.0152, -0.0107, -0.0205, -0.0107, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, -0.0174, -0.0205, -0.0174, -0.0174, -0.0317, -0.0174, 0, -0.0205, -0.0247, 0, -0.0205, -0.0247, -0.0174, -0.0317, -0.0174, 0, -0.0317, -0.0247, 0.0174, -0.0205, -0.0174, 0.0174, -0.0317, -0.0174, 0.0247, -0.0205, 0, 0.0247, -0.0205, 0, 0.0174, -0.0317, -0.0174, 0.0247, -0.0317, 0, -0.0247, -0.0205, 0, -0.0247, -0.0317, 0, -0.0174, -0.0205, -0.0174, -0.0174, -0.0205, -0.0174, -0.0247, -0.0317, 0, -0.0174, -0.0317, -0.0174, -0.0174, -0.0205, 0.0174, -0.0174, -0.0317, 0.0174, -0.0247, -0.0205, 0, -0.0247, -0.0205, 0, -0.0174, -0.0317, 0.0174, -0.0247, -0.0317, 0, 0, -0.0205, 0.0247, 0, -0.0317, 0.0247, -0.0174, -0.0205, 0.0174, -0.0174, -0.0205, 0.0174, 0, -0.0317, 0.0247, -0.0174, -0.0317, 0.0174, 0.0174, -0.0205, 0.0174, 0.0174, -0.0317, 0.0174, 0, -0.0205, 0.0247, 0, -0.0205, 0.0247, 0.0174, -0.0317, 0.0174, 0, -0.0317, 0.0247, 0.0247, -0.0205, 0, 0.0247, -0.0317, 0, 0.0174, -0.0205, 0.0174, 0.0174, -0.0205, 0.0174, 0.0247, -0.0317, 0, 0.0174, -0.0317, 0.0174, 0.0082, -0.0437, -0.0082, 0, -0.0437, -0.0117, 0.0117, -0.0437, 0, 0.0117, -0.0437, 0, 0, -0.0437, -0.0117, 0.0082, -0.0437, 0.0082, 0.0082, -0.0437, 0.0082, 0, -0.0437, -0.0117, 0, -0.0437, 0.0117, 0, -0.0437, 0.0117, 0, -0.0437, -0.0117, -0.0082, -0.0437, 0.0082, -0.0082, -0.0437, 0.0082, 0, -0.0437, -0.0117, -0.0117, -0.0437, 0, -0.0117, -0.0437, 0, 0, -0.0437, -0.0117, -0.0082, -0.0437, -0.0082, 0.0174, -0.0317, -0.0174, 0, -0.0317, -0.0247, 0.0147, -0.0402, -0.0147, 0.0147, -0.0402, -0.0147, 0, -0.0317, -0.0247, 0, -0.0402, -0.0209, 0.0147, -0.0402, -0.0147, 0, -0.0402, -0.0209, 0.0082, -0.0437, -0.0082, 0.0082, -0.0437, -0.0082, 0, -0.0402, -0.0209, 0, -0.0437, -0.0117, 0.0247, -0.0317, 0, 0.0174, -0.0317, -0.0174, 0.0209, -0.0402, 0, 0.0209, -0.0402, 0, 0.0174, -0.0317, -0.0174, 0.0147, -0.0402, -0.0147, 0.0209, -0.0402, 0, 0.0147, -0.0402, -0.0147, 0.0117, -0.0437, 0, 0.0117, -0.0437, 0, 0.0147, -0.0402, -0.0147, 0.0082, -0.0437, -0.0082, 0.0174, -0.0317, 0.0174, 0.0247, -0.0317, 0, 0.0147, -0.0402, 0.0147, 0.0147, -0.0402, 0.0147, 0.0247, -0.0317, 0, 0.0209, -0.0402, 0, 0.0147, -0.0402, 0.0147, 0.0209, -0.0402, 0, 0.0082, -0.0437, 0.0082, 0.0082, -0.0437, 0.0082, 0.0209, -0.0402, 0, 0.0117, -0.0437, 0, 0, -0.0317, 0.0247, 0.0174, -0.0317, 0.0174, 0, -0.0402, 0.0209, 0, -0.0402, 0.0209, 0.0174, -0.0317, 0.0174, 0.0147, -0.0402, 0.0147, 0, -0.0402, 0.0209, 0.0147, -0.0402, 0.0147, 0, -0.0437, 0.0117, 0, -0.0437, 0.0117, 0.0147, -0.0402, 0.0147, 0.0082, -0.0437, 0.0082, -0.0174, -0.0317, 0.0174, 0, -0.0317, 0.0247, -0.0147, -0.0402, 0.0147, -0.0147, -0.0402, 0.0147, 0, -0.0317, 0.0247, 0, -0.0402, 0.0209, -0.0147, -0.0402, 0.0147, 0, -0.0402, 0.0209, -0.0082, -0.0437, 0.0082, -0.0082, -0.0437, 0.0082, 0, -0.0402, 0.0209, 0, -0.0437, 0.0117, -0.0247, -0.0317, 0, -0.0174, -0.0317, 0.0174, -0.0209, -0.0402, 0, -0.0209, -0.0402, 0, -0.0174, -0.0317, 0.0174, -0.0147, -0.0402, 0.0147, -0.0209, -0.0402, 0, -0.0147, -0.0402, 0.0147, -0.0117, -0.0437, 0, -0.0117, -0.0437, 0, -0.0147, -0.0402, 0.0147, -0.0082, -0.0437, 0.0082, -0.0174, -0.0317, -0.0174, -0.0247, -0.0317, 0, -0.0147, -0.0402, -0.0147, -0.0147, -0.0402, -0.0147, -0.0247, -0.0317, 0, -0.0209, -0.0402, 0, -0.0147, -0.0402, -0.0147, -0.0209, -0.0402, 0, -0.0082, -0.0437, -0.0082, -0.0082, -0.0437, -0.0082, -0.0209, -0.0402, 0, -0.0117, -0.0437, 0, 0, -0.0317, -0.0247, -0.0174, -0.0317, -0.0174, 0, -0.0402, -0.0209, 0, -0.0402, -0.0209, -0.0174, -0.0317, -0.0174, -0.0147, -0.0402, -0.0147, 0, -0.0402, -0.0209, -0.0147, -0.0402, -0.0147, 0, -0.0437, -0.0117, 0, -0.0437, -0.0117, -0.0147, -0.0402, -0.0147, -0.0082, -0.0437, -0.0082, 0, -0.0205, -0.0247, 0, -0.0317, -0.0247, 0.0174, -0.0205, -0.0174, 0.0174, -0.0205, -0.0174, 0, -0.0317, -0.0247, 0.0174, -0.0317, -0.0174)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vio2m"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.194331
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adhtu"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.526605
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ox312"]
 render_priority = 0
@@ -122,6 +146,62 @@ ricochet_angle = 0.349066
 trail_material = SubResource("ShaderMaterial_ox312")
 lifetime = 2.0
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ib70c"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.456423
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mbg3f"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.892297
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_giirl"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.0963076
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5pcv"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.627563
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lvkp"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.682928
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4uh7c"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.283259
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aho8b"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.761498
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1hdur"]
 render_priority = 0
@@ -197,7 +277,7 @@ data = PackedVector3Array(-0.0124, 0.798, 0.1047, -0.0124, 0.8113, 0.0532, 0.034
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f41kg"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.452736
+shader_parameter/color_seed = 0.701291
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -205,7 +285,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_luvdn"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.882162
+shader_parameter/color_seed = 0.218194
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -213,7 +293,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wvxuj"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.616256
+shader_parameter/color_seed = 0.645113
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -221,7 +301,7 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rbiss"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.876865
+shader_parameter/color_seed = 0.717009
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -365,6 +445,8 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 [node name="HatchButton" type="MeshInstance3D" parent="Body/Hatches_Button/Hittable_Collider"]
 mesh = ExtResource("25_mv043")
 skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_tbaow")
+script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Hatches_Button/Hittable_Collider"]
 shape = SubResource("ConcavePolygonShape3D_lqwa8")
@@ -398,6 +480,12 @@ TRANSLATE_NODE = NodePath("../..")
 TRANSLATION = Vector3(0, 0.022, 0)
 MAX_HP = 1.0
 metadata/_custom_type_script = "uid://bd3thw0v5baaj"
+
+[node name="Hit_Pastel_Shade" type="Node" parent="Body/Hatches_Button/Hittable_Collider" node_paths=PackedStringArray("PASTEL")]
+script = ExtResource("51_kms4a")
+PASTEL = NodePath("../HatchButton")
+MAX_HP = 1.0
+metadata/_custom_type_script = "uid://cijq708jlfumq"
 
 [node name="TotembotHatch" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.64562e-05, 0, -0.00343504)
@@ -435,17 +523,21 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, -0.22
 [node name="AmmoBox" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model"]
 mesh = ExtResource("14_iweeg")
 skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_vio2m")
+script = ExtResource("41_hufde")
 
 [node name="AmmoHolder" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model"]
 mesh = ExtResource("15_0mgnh")
 skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_adhtu")
+script = ExtResource("41_hufde")
 
 [node name="Gun_Hinge" type="Node3D" parent="Body/Mid_PlanetaryGears/Model"]
 transform = Transform3D(-8.54384e-08, -1.98439e-09, 1, -1, 3.55271e-15, -8.54384e-08, -1.23739e-17, -1, -1.98439e-09, 0.209837, 0.397588, 8.75586e-09)
 script = ExtResource("25_mgybp")
 ANGLE_LIMITS_ENABLED = true
-MIN_ANGLE = -0.314159
-MAX_ANGLE = 0.593412
+MIN_ANGLE = -0.279253
+MAX_ANGLE = 0.488692
 metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 
 [node name="Bullet_Source" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge" node_paths=PackedStringArray("RECOIL_SUBJECT")]
@@ -460,11 +552,17 @@ metadata/_custom_type_script = "uid://do4am13na3svu"
 transform = Transform3D(-8.54384e-08, -1, 3.72226e-15, -1.98439e-09, -3.3708e-15, -1, 1, -8.54384e-08, -1.98439e-09, 0.379288, 0.000521401, -0.207521)
 mesh = ExtResource("12_v7ac7")
 skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_ib70c")
+surface_material_override/1 = SubResource("ShaderMaterial_mbg3f")
+script = ExtResource("41_hufde")
 
 [node name="Barrel" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
 transform = Transform3D(-8.54384e-08, -1, 3.72226e-15, -1.98439e-09, -3.3708e-15, -1, 1, -8.54384e-08, -1.98439e-09, 0.379288, 0.000521401, -0.207521)
 mesh = ExtResource("13_mgybp")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_giirl")
+surface_material_override/1 = SubResource("ShaderMaterial_v5pcv")
+script = ExtResource("41_hufde")
 
 [node name="Aim_At_target" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -4.37114e-08, -0.00360006, 0.000521386, 0.121401)
@@ -489,6 +587,7 @@ transform = Transform3D(-4.37114e-08, 1, -4.1727e-08, -1, -4.37114e-08, -4.1727e
 script = ExtResource("27_72w42")
 ROTATE_AROUND = Vector3(0, -1, 0)
 AMMO_INSTANCE = NodePath("../Ammo_Object")
+ANGLE_TO_FIRE = 3.0
 TRIGGERABLE_FIRE = NodePath("Triggerable_Bullet_Source")
 TRIGGERABLE_EJECT = NodePath("../Trig_Debris_Spawner")
 TRIGGERABLE_CLICK = NodePath("Click_triggerable")
@@ -498,6 +597,8 @@ metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 transform = Transform3D(-4.37114e-08, -1, -4.1727e-08, 1, -4.37114e-08, 4.1727e-08, -4.1727e-08, -4.1727e-08, 1, 0.397522, -0.156459, -0.0861752)
 mesh = ExtResource("16_72w42")
 skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_2lvkp")
+script = ExtResource("41_hufde")
 
 [node name="Click_triggerable" type="Node" parent="Body/Mid_PlanetaryGears/Model/Ammowheel_Rotator" node_paths=PackedStringArray("SFX")]
 script = ExtResource("30_6apot")
@@ -527,6 +628,9 @@ sync_to_physics = false
 [node name="Shaft" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
 mesh = ExtResource("9_mv043")
 skeleton = NodePath("../../../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4uh7c")
+surface_material_override/1 = SubResource("ShaderMaterial_aho8b")
+script = ExtResource("41_hufde")
 
 [node name="Generic6DOFJoint3D_L" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.068006, 0.392729, -0.116595)
@@ -537,6 +641,11 @@ node_b = NodePath("../../Shield_Support_Left")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.068006, 0.392729, 0.134567)
 node_a = NodePath("..")
 node_b = NodePath("../../Shield_Support_Right")
+
+[node name="Hit_Impulse_Propogate" type="Node" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft" node_paths=PackedStringArray("IMPULSE_UPSTREAMS")]
+script = ExtResource("41_fk2tk")
+IMPULSE_UPSTREAMS = [NodePath("../../../../Propogate_hit_out")]
+metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
 [node name="Shield_Support_Right" type="RigidBody3D" parent="Body/Mid_PlanetaryGears/Model/Shield"]
 collision_layer = 192
