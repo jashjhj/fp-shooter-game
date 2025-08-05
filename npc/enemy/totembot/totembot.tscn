@@ -418,7 +418,8 @@ skeleton = NodePath("../..")
 
 [node name="Mid_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2267, 0)
-ROTATION_ACCELERATION = 0.01
+ROTATION_MAX_SPEED = 0.785398
+ROTATION_ACCELERATION = 1.309
 ATTACHED_RB = NodePath("..")
 SIMULATED_MASS_ABOVE = 10.0
 IMPULSE_UPSTREAMS = [NodePath("../Hit_Impulse")]
@@ -699,11 +700,13 @@ script = ExtResource("46_kms4a")
 MASS_SOURCE = NodePath("../../RB_Mass_Source")
 metadata/_custom_type_script = "uid://3lvqktg8vc62"
 
-[node name="Top_PlanetaryGears" parent="Body" node_paths=PackedStringArray("IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
+[node name="Top_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_UPSTREAMS") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545265, 0)
 FROM_INNER = true
 ROTATION_MAX_SPEED = 1.39626
-ROTATION_ACCELERATION = 3.14159
+ROTATION_ACCELERATION = 10.1229
+ATTACHED_RB = NodePath("..")
+SIMULATED_MASS_ABOVE = 2.0
 IMPULSE_UPSTREAMS = [NodePath("../Hit_Impulse")]
 
 [node name="Top" type="Node3D" parent="Body/Top_PlanetaryGears"]

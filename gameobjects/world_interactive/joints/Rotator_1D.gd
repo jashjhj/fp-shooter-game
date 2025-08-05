@@ -6,7 +6,7 @@ class_name Rotator_1D extends Body_Segment
 ##Maximum degrees/Second
 @export_range(0, 360, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = 1.0;
 ##In degrees/second/second
-@export_range(0, 360, 0.1, "radians_as_degrees") var ROTATION_ACCELERATION:float = 1.0;
+@export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_ACCELERATION:float = PI;
 
 @export var ANGLE_LIMITS_ENABLED:bool = false
 @export_range(-180, 180, 1.0, "radians_as_degrees") var MIN_ANGLE = -PI/4; 
@@ -72,8 +72,13 @@ func _physics_process(delta: float) -> void:
 	
 	#ROTATION CODE
 	
+	if(current_angle + angle > MAX_ANGLE): # Add limits
+		angle = MAX_ANGLE - current_angle
+	elif current_angle - angle < MIN_ANGLE:
+		angle = MIN_ANGLE - current_angle
+	
 	var max_speed:float = sqrt(abs(2*angle * ROTATION_ACCELERATION)) * 0.8
-	print(ROTATION_MAX_SPEED )
+	
 	max_speed = min(max_speed, ROTATION_MAX_SPEED)
 	var projected_delta_speed:float = ROTATION_ACCELERATION * delta * sign(angle);
 	
@@ -121,7 +126,7 @@ func _physics_process(delta: float) -> void:
 	rotate(basis.y, angle_to_turn)
 	
 	if(ATTACHED_RB != null): # Equal and opposite type stuff
-		ATTACHED_RB.apply_torque(-projected_delta_speed * Vector3.UP * SIMULATED_MASS_ABOVE)
+		ATTACHED_RB.apply_torque(-projected_delta_speed * global_basis.y * SIMULATED_MASS_ABOVE)
 	
 	spin(angle_to_turn)
 
