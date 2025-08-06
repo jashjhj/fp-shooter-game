@@ -1,0 +1,237 @@
+[gd_scene load_steps=31 format=3 uid="uid://cfwnkxffdyvsp"]
+
+[ext_resource type="ArrayMesh" uid="uid://vcljykjci00t" path="res://npc/enemy/totembot/assets/centrifuge_0.obj" id="1_bnjpc"]
+[ext_resource type="Script" uid="uid://dw4ngkl1ratab" path="res://npc/enemy/totembot/centrifuge.gd" id="1_tgbsm"]
+[ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="2_fgn0f"]
+[ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="2_wo5lt"]
+[ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="3_tgbsm"]
+[ext_resource type="ArrayMesh" uid="uid://d2es6etbnscdk" path="res://npc/enemy/totembot/assets/centrifuge_1.obj" id="3_wo5lt"]
+[ext_resource type="ArrayMesh" uid="uid://c4hbr41ln06le" path="res://npc/enemy/totembot/assets/centrifuge_2.obj" id="4_tgbsm"]
+[ext_resource type="Script" uid="uid://bwo18jlxllnxw" path="res://gameobjects/world_interactive/joints/Rotator_1D.gd" id="6_qusij"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vw4s1"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gntev"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_vw4s1")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.903365
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7us8c"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2thkh"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_7us8c")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.572992
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yjju"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnh2d"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_6yjju")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.235596
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14nxl"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64ut6"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_14nxl")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.31425
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t70uu"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6ig8"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_t70uu")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.235979
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdqtr"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmfio"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_rdqtr")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.247903
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61wgc"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_546c6"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_61wgc")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.671149
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85kxx"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oql4u"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_85kxx")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.292015
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cpvug"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oiyqh"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_cpvug")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.968176
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1g4f1"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ife3o"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_1g4f1")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.802398
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qusij"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuclj"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_qusij")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.637759
+shader_parameter/life = 1.0
+
+[node name="Centrifuge" type="Node3D" node_paths=PackedStringArray("GIMBAL", "CORE")]
+script = ExtResource("1_tgbsm")
+GIMBAL = NodePath("Outer/Gimbal")
+CORE = NodePath("")
+
+[node name="Pastel_Colour_Mesh3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, 0)
+mesh = ExtResource("4_tgbsm")
+surface_material_override/0 = SubResource("ShaderMaterial_gntev")
+surface_material_override/1 = SubResource("ShaderMaterial_2thkh")
+surface_material_override/2 = SubResource("ShaderMaterial_wnh2d")
+surface_material_override/3 = SubResource("ShaderMaterial_64ut6")
+surface_material_override/4 = SubResource("ShaderMaterial_i6ig8")
+script = ExtResource("2_fgn0f")
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
+[node name="Outer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("6_qusij")
+MODE = 1
+ROTATION_MAX_SPEED = 6.28319
+ROTATION_ACCELERATION = 6.28319
+metadata/_custom_type_script = "uid://bwo18jlxllnxw"
+
+[node name="Pastel_Colour_Mesh2" type="MeshInstance3D" parent="Outer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0106923, -4.08282e-09, -0.093404)
+mesh = ExtResource("3_wo5lt")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_wmfio")
+surface_material_override/1 = SubResource("ShaderMaterial_546c6")
+surface_material_override/2 = SubResource("ShaderMaterial_oql4u")
+surface_material_override/3 = SubResource("ShaderMaterial_oiyqh")
+surface_material_override/4 = SubResource("ShaderMaterial_ife3o")
+script = ExtResource("2_fgn0f")
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
+[node name="Gimbal" type="Node3D" parent="Outer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("6_qusij")
+MODE = 1
+ROTATION_MAX_SPEED = 6.28319
+ROTATION_ACCELERATION = 6.28319
+
+[node name="Pastel_Colour_Mesh" type="MeshInstance3D" parent="Outer/Gimbal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, 0)
+mesh = ExtResource("1_bnjpc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_tuclj")
+script = ExtResource("2_fgn0f")
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"

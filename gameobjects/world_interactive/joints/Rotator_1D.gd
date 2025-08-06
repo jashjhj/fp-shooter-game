@@ -2,9 +2,18 @@ class_name Rotator_1D extends Body_Segment
 
 @export_category("Rotation axis = around the local Y+")
 
+enum ROTATOR_1D_MODE{
+	TARGETING,
+	MOTOR
+	
+}
+
+@export var MODE:ROTATOR_1D_MODE = ROTATOR_1D_MODE.TARGETING
+
+
 @export_group("Rotation Settings")
 ##Maximum degrees/Second
-@export_range(0, 360, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = PI/3;
+@export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = PI/3;
 ##In degrees/second/second
 @export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_ACCELERATION:float = PI;
 
@@ -59,81 +68,79 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if(!IS_ACTIVE or target == Vector3.INF): return
+	if(!IS_ACTIVE): return
+
+	var delta_angle:float;
+	var delta_angular_velocity:float;
 	
-	#                                           target component that is perpendiculr to basis.y
-	var angle = global_basis.z.signed_angle_to(target - global_basis.y* target.dot(global_basis.y), global_basis.y)
-	
-	var angle_to_turn:float;
-	
-	
-	if(DEBUG_AXES):
-		DebugDraw3D.draw_position(global_transform)
-		print(abs(angle), " = angle, speed = ", ROTATION_MAX_SPEED * delta)
-	
-	#ROTATION CODE
-	
-	if(current_angle + angle > MAX_ANGLE+0.01): # Add limits
-		angle = MAX_ANGLE - current_angle
-	elif current_angle - angle < MIN_ANGLE - 0.01:
-		angle = MIN_ANGLE - current_angle
-	
-	
-	var max_speed:float = sqrt(abs(2*angle * ROTATION_ACCELERATION)) * 0.8
-	
-	max_speed = min(max_speed, ROTATION_MAX_SPEED)
-	var projected_delta_speed:float = ROTATION_ACCELERATION * delta * sign(angle);
-	
-	if(abs(current_speed + projected_delta_speed) > max_speed):
+	if(MODE == ROTATOR_1D_MODE.TARGETING):
+		if(target == Vector3.INF): return
+		#                                           target component that is perpendiculr to basis.y
+		var angle = global_basis.z.signed_angle_to(target - global_basis.y* target.dot(global_basis.y), global_basis.y)
 		
-		var goal_dv = sign(angle)*max_speed - (current_speed)
-		projected_delta_speed = sign(goal_dv) * min(abs(goal_dv), ROTATION_ACCELERATION * delta) # accel to get it back to right speed
 		
-		#projected_delta_speed = goal_dv
-		#current_speed = sign(angle)*max_speed
-		#projected_delta_speed = 0
-		#Limit it abck down to max accel
-		#projected_delta_speed = sign(projected_delta_speed) * min(ROTATION_ACCELERATION * delta, abs(projected_delta_speed))
+		
+		if(DEBUG_AXES):
+			DebugDraw3D.draw_position(global_transform)
+			print(abs(angle), " = angle, speed = ", ROTATION_MAX_SPEED * delta)
+		
+		#ROTATION CODE
+		
+		if(current_angle + angle > MAX_ANGLE): # Add limits
+			angle = MAX_ANGLE - current_angle
+		elif current_angle - angle < MIN_ANGLE:
+			angle = MIN_ANGLE - current_angle
+		
+		
+		var max_speed:float = sqrt(abs(2*angle * ROTATION_ACCELERATION)) * 0.8
+		
+		max_speed = min(max_speed, ROTATION_MAX_SPEED)
+		delta_angular_velocity = ROTATION_ACCELERATION * delta * sign(angle);
+		
+		if(abs(current_speed + delta_angular_velocity) > max_speed):
+			
+			var goal_dv = sign(angle)*max_speed - (current_speed)
+			delta_angular_velocity = sign(goal_dv) * min(abs(goal_dv), ROTATION_ACCELERATION * delta) # accel to get it back to right speed
+			
+			#delta_angular_velocity = goal_dv
+			#current_speed = sign(angle)*max_speed
+			#delta_angular_velocity = 0
+			#Limit it abck down to max accel
+			#delta_angular_velocity = sign(delta_angular_velocity) * min(ROTATION_ACCELERATION * delta, abs(delta_angular_velocity))
+		
+		
+		print(get_path())
+	elif(MODE == ROTATOR_1D_MODE.MOTOR):
+		delta_angular_velocity = ROTATION_ACCELERATION * delta
+		if(abs(current_speed + delta_angular_velocity) > abs(ROTATION_MAX_SPEED)):
+			delta_angular_velocity = ROTATION_MAX_SPEED - current_speed
 	
-	current_speed += projected_delta_speed
-	#current_speed = max_speed * sign(angle)
 	
-	
-	angle_to_turn = current_speed * delta
-	
-	
-	
-	if(abs(angle) < SLOP):
-		angle_to_turn = 0;
-	#
-	#if(abs(angle) < ROTATION_MAX_SPEED * delta * 1.5): ## prevent jittering by not turning if close.
-		#angle_to_turn = 0;
-		#
-	#
-	
-	
-	#angle_to_turn = TURN_SPEED * delta
+	# Add speed and velocities
+	current_speed += delta_angular_velocity/2
+	delta_angle = current_speed * delta  # half either side for bad integration
+	current_speed += delta_angular_velocity/2
 	
 	if(ANGLE_LIMITS_ENABLED):
-		if(current_angle + angle_to_turn > MAX_ANGLE):
-			angle_to_turn = MAX_ANGLE - current_angle
+		if(current_angle + delta_angle > MAX_ANGLE):
+			delta_angle = MAX_ANGLE - current_angle
 			current_angle = MAX_ANGLE
 		
-		elif(current_angle + angle_to_turn < MIN_ANGLE):
-			angle_to_turn = MIN_ANGLE - current_angle
+		elif(current_angle + delta_angle < MIN_ANGLE):
+			delta_angle = MIN_ANGLE - current_angle
 			current_angle = MIN_ANGLE
 		else:
-			current_angle += angle_to_turn
+			current_angle += delta_angle
 	
-	rotate(basis.y, angle_to_turn)
+	rotate(basis.y, delta_angle)
 	
 	if(ATTACHED_RB != null): # Equal and opposite type stuff
-		ATTACHED_RB.apply_torque(-projected_delta_speed * global_basis.y * SIMULATED_MASS_ABOVE)
+		ATTACHED_RB.apply_torque(-delta_angular_velocity * global_basis.y * SIMULATED_MASS_ABOVE)
 	
-	spin(angle_to_turn)
+	spin(delta_angle)
 
 ##Called every frame _process()
-func spin(angle_to_turn:float):
+func spin(delta_angle:float):
 	pass
 	
 
