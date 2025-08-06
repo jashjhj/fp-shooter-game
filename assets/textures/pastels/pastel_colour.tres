@@ -1,11 +1,9 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bikvqapju5fyp"]
 
-[ext_resource type="Shader" uid="uid://ubvrpmc35j5x" path="res://assets/textures/pastels/pastel_shader.tres" id="1_jmmcu"]
+[ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="1_2aus5"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_jmmcu")
-shader_parameter/color_seed = 0.0
+shader = ExtResource("1_2aus5")
+shader_parameter/color_shade = 0.1
 shader_parameter/life = 1.0
-shader_parameter/metallicity = 0.0
-shader_parameter/roughness = 1.0
