@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://b3gb7jdoy1f0n"]
+
+[ext_resource type="ArrayMesh" uid="uid://dcs4asq8jnwfw" path="res://npc/enemy/totembot/assets/Battery_Connectors_Cable.obj" id="1_m5ksl"]
+[ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="2_g4u0i"]
+[ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="3_baslu"]
+[ext_resource type="ArrayMesh" uid="uid://nb1hsqyqrh8k" path="res://npc/enemy/totembot/assets/Battery_Connectors.obj" id="4_qk44f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oe2f0"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.109279
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qncda"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.257351
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f14a0"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.861834
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fvm0"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.75964
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqu7i"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.776638
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77fe3"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.381998
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kn0rp"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.320919
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvapr"]
+render_priority = 0
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.35465
+shader_parameter/life = 1.0
+shader_parameter/emission = 0.0
+
+[node name="UnderbellyMotorWires" type="Node3D"]
+
+[node name="Cable" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0118332, -0.110041, -0.158404)
+mesh = ExtResource("1_m5ksl")
+surface_material_override/0 = SubResource("ShaderMaterial_oe2f0")
+surface_material_override/1 = SubResource("ShaderMaterial_qncda")
+surface_material_override/2 = SubResource("ShaderMaterial_f14a0")
+surface_material_override/3 = SubResource("ShaderMaterial_0fvm0")
+script = ExtResource("3_baslu")
+EMISSIVE = 0.5
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
+[node name="Connectors_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0112773, -0.110041, -0.154009)
+mesh = ExtResource("4_qk44f")
+surface_material_override/0 = SubResource("ShaderMaterial_lqu7i")
+surface_material_override/1 = SubResource("ShaderMaterial_77fe3")
+script = ExtResource("3_baslu")
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
+[node name="Connectors_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -0.0438123, -0.118794, 0.0729311)
+mesh = ExtResource("4_qk44f")
+surface_material_override/0 = SubResource("ShaderMaterial_kn0rp")
+surface_material_override/1 = SubResource("ShaderMaterial_fvapr")
+script = ExtResource("3_baslu")
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"

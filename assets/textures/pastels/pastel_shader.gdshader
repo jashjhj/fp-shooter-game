@@ -38,10 +38,14 @@ void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
+
+
 void fragment() {
 	float vibrancy = 0.15 + life * 0.5; // remaps life to 0.15 -. 0.65
     
-    float highlight = round((sin((FRAGCOORD.x + -FRAGCOORD.y) * 1.0f + -TIME * 8.0f) + 1.0f) * 0.5 * 0.7);
+    float highlight = sin((FRAGCOORD.x + -FRAGCOORD.y) * 1.0f + -TIME * 8.0f);
+	highlight = tanh(8.0f*highlight - 4.0f);
+	highlight = highlight * 0.5f + 0.5f;
 	
 	ALBEDO = hsv2rgb(vec3(color_shade, 0.3, vibrancy));
     
