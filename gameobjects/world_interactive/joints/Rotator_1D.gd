@@ -109,7 +109,6 @@ func _physics_process(delta: float) -> void:
 			#delta_angular_velocity = sign(delta_angular_velocity) * min(ROTATION_ACCELERATION * delta, abs(delta_angular_velocity))
 		
 		
-		print(get_path())
 	elif(MODE == ROTATOR_1D_MODE.MOTOR):
 		delta_angular_velocity = ROTATION_ACCELERATION * delta
 		if(abs(current_speed + delta_angular_velocity) > abs(ROTATION_MAX_SPEED)):
