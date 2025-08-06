@@ -4,6 +4,8 @@ class_name Bullet_Source extends Node3D
 @export var SHOOT_VECTOR:Vector3 = Vector3.FORWARD
 @export var bullet_data:BulletData;
 
+@export var TRIGGER_ON_FIRE:Triggerable;
+
 @export_group("Recoil", "RECOIL_")
 @export var RECOIL_ENABLED:bool = false
 @export var RECOIL_SUBJECT:RigidBody3D
@@ -58,3 +60,5 @@ func fire_bullet(supplementary_velocity := Vector3.ZERO):
 	if(RECOIL_ENABLED):
 		if(RECOIL_SUBJECT != null):
 			RECOIL_SUBJECT.apply_impulse(-bullet_data.mass * bullet_inst.velocity * RECOIL_IMPULSE_MULT, global_position - RECOIL_SUBJECT.global_position)
+	
+	if(TRIGGER_ON_FIRE != null): TRIGGER_ON_FIRE.trigger()

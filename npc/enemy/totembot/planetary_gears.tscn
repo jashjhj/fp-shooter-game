@@ -17,7 +17,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fo7uh"]
 render_priority = 0
 shader = ExtResource("3_5y201")
-shader_parameter/color_seed = 0.255326
+shader_parameter/color_seed = 0.00606173
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -28,7 +28,7 @@ data = PackedVector3Array(0, 0.0184, -0.2818, 0, -0.0184, -0.2818, 0.055, 0.0184
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jj7ya"]
 render_priority = 0
 shader = ExtResource("3_5y201")
-shader_parameter/color_seed = 0.884174
+shader_parameter/color_seed = 0.506682
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0

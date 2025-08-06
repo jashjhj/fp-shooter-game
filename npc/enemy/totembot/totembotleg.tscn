@@ -22,7 +22,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i5fvc"]
 render_priority = 0
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_seed = 0.532947
+shader_parameter/color_seed = 0.180028
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -33,7 +33,7 @@ data = PackedVector3Array(-0.0258, 0.0258, 0.1347, -0.0212, 0.0212, 0.1283, -0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gqvb5"]
 render_priority = 0
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_seed = 0.735864
+shader_parameter/color_seed = 0.29034
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -54,7 +54,7 @@ point_count = 4
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uqywy"]
 render_priority = 0
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_seed = 0.540612
+shader_parameter/color_seed = 0.463566
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -76,7 +76,7 @@ size = Vector3(0.192383, 0.361847, 0.265869)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v3rpu"]
 render_priority = 0
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_seed = 0.858658
+shader_parameter/color_seed = 0.396471
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
