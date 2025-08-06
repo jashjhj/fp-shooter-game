@@ -56,6 +56,7 @@ mesh = ExtResource("2_2web4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_fo7uh")
 script = ExtResource("3_les2h")
+EMISSIVE = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Outer_Ring"]
 shape = SubResource("ConcavePolygonShape3D_fo7uh")
@@ -82,6 +83,7 @@ mesh = ExtResource("3_4cpku")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_jj7ya")
 script = ExtResource("3_les2h")
+EMISSIVE = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Planet"]
 shape = SubResource("ConvexPolygonShape3D_i5qaf")

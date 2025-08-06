@@ -122,6 +122,7 @@ mesh = ExtResource("2_r5lsd")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_i5fvc")
 script = ExtResource("5_gqvb5")
+EMISSIVE = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hip"]
 transform = Transform3D(1.5, 0, 0, 0, 1.35582, -0.641673, 0, 0.641673, 1.35582, 0, 0.107891, -0.218073)
@@ -145,6 +146,7 @@ mesh = ExtResource("4_mciut")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_gqvb5")
 script = ExtResource("5_gqvb5")
+EMISSIVE = null
 
 [node name="Upper_Hittable" type="Area3D" parent="Upper"]
 collision_layer = 128
@@ -239,6 +241,7 @@ mesh = ExtResource("3_aqqmv")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_uqywy")
 script = ExtResource("5_gqvb5")
+EMISSIVE = null
 
 [node name="Lower_Hittable" type="Area3D" parent="Lower"]
 collision_layer = 128
@@ -317,6 +320,7 @@ mesh = ExtResource("1_1nd10")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_v3rpu")
 script = ExtResource("5_gqvb5")
+EMISSIVE = null
 
 [node name="Hittable_Collider" type="Area3D" parent="Foot"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.00720823, 0)

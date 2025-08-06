@@ -1,12 +1,14 @@
-[gd_scene load_steps=97 format=3 uid="uid://c601y42ahg3h1"]
+[gd_scene load_steps=101 format=3 uid="uid://c601y42ahg3h1"]
 
 [ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="2_8nbuu"]
 [ext_resource type="Script" uid="uid://dnpmmrwqk78q4" path="res://false_physics/physics_lerper/angle_helper.gd" id="2_68ihi"]
 [ext_resource type="ArrayMesh" uid="uid://dx0782muv6m4d" path="res://npc/enemy/totembot/assets/abdomen_frame.obj" id="2_avg8m"]
+[ext_resource type="ArrayMesh" uid="uid://cftnsk6mitcad" path="res://npc/enemy/totembot/assets/motor_0.obj" id="3_eqw71"]
 [ext_resource type="ArrayMesh" uid="uid://vcljykjci00t" path="res://npc/enemy/totembot/assets/centrifuge_0.obj" id="3_hdgws"]
 [ext_resource type="ArrayMesh" uid="uid://d2es6etbnscdk" path="res://npc/enemy/totembot/assets/centrifuge_1.obj" id="4_heqxd"]
 [ext_resource type="ArrayMesh" uid="uid://c4hbr41ln06le" path="res://npc/enemy/totembot/assets/centrifuge_2.obj" id="5_68ihi"]
+[ext_resource type="ArrayMesh" uid="uid://c2fw4bvbkgdp4" path="res://npc/enemy/totembot/assets/motor_1.obj" id="6_0adce"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="6_gc2rj"]
 [ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="7_5jvjh"]
 [ext_resource type="ArrayMesh" uid="uid://blpf05yv67uvd" path="res://npc/enemy/totembot/assets/Shaft.obj" id="8_5jvjh"]
@@ -54,26 +56,10 @@
 [ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/hit_effects/Hit_Free.gd" id="49_0by5d"]
 [ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel_Shade.gd" id="51_kms4a"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0by5d"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57w7t"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.240919
-shader_parameter/life = 1.0
-shader_parameter/metallicity = 0.0
-shader_parameter/roughness = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbbtt"]
-render_priority = 0
-shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.532511
-shader_parameter/life = 1.0
-shader_parameter/metallicity = 0.0
-shader_parameter/roughness = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1t62q"]
-render_priority = 0
-shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.299837
+shader_parameter/color_seed = 0.0632808
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -81,15 +67,47 @@ shader_parameter/roughness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eqw71"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.17912
+shader_parameter/color_seed = 0.905855
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0adce"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m86gr"]
 render_priority = 0
 shader = ExtResource("20_klcti")
-shader_parameter/color_seed = 0.0745613
+shader_parameter/color_seed = 0.509311
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pahl6"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.987008
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2d5wd"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.0171386
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8c23"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.164502
+shader_parameter/life = 1.0
+shader_parameter/metallicity = 0.0
+shader_parameter/roughness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tof8o"]
+render_priority = 0
+shader = ExtResource("20_klcti")
+shader_parameter/color_seed = 0.356364
 shader_parameter/life = 1.0
 shader_parameter/metallicity = 0.0
 shader_parameter/roughness = 1.0
@@ -349,6 +367,24 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.1, 0)
 script = ExtResource("2_8nbuu")
 
+[node name="Underbelly" type="Node3D" parent="Body"]
+
+[node name="Motor" type="MeshInstance3D" parent="Body/Underbelly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0149403, 0, -1.33576e-09)
+mesh = ExtResource("3_eqw71")
+surface_material_override/0 = SubResource("ShaderMaterial_57w7t")
+script = ExtResource("41_hufde")
+EMISSIVE = null
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
+[node name="Motor_Node" type="MeshInstance3D" parent="Body/Underbelly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138941, 0, -1.24223e-09)
+mesh = ExtResource("6_0adce")
+surface_material_override/0 = SubResource("ShaderMaterial_eqw71")
+script = ExtResource("41_hufde")
+EMISSIVE = 0.3
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
 [node name="Hit_Impulse" type="Node" parent="Body" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("7_5jvjh")
 IMPULSE_TO = NodePath("..")
@@ -369,11 +405,11 @@ mesh = ExtResource("5_68ihi")
 skeleton = NodePath("../..")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Body/Centrifuge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.084007, 0.0895553, -1.19209e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0873527, 0.0527671, -1.19508e-07)
 light_color = Color(1, 0.45, 0.45, 1)
 light_energy = 0.01
 shadow_enabled = true
-omni_range = 0.240161
+omni_range = 0.10567
 omni_attenuation = 2.0
 
 [node name="TotemBotLeg" parent="Body" instance=ExtResource("20_heqxd")]
@@ -412,12 +448,13 @@ metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154252, 0, 0)
 mesh = ExtResource("2_avg8m")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_0by5d")
-surface_material_override/1 = SubResource("ShaderMaterial_gbbtt")
-surface_material_override/2 = SubResource("ShaderMaterial_1t62q")
-surface_material_override/3 = SubResource("ShaderMaterial_eqw71")
-surface_material_override/4 = SubResource("ShaderMaterial_0adce")
+surface_material_override/0 = SubResource("ShaderMaterial_m86gr")
+surface_material_override/1 = SubResource("ShaderMaterial_pahl6")
+surface_material_override/2 = SubResource("ShaderMaterial_2d5wd")
+surface_material_override/3 = SubResource("ShaderMaterial_u8c23")
+surface_material_override/4 = SubResource("ShaderMaterial_tof8o")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
 visible = false
@@ -448,6 +485,7 @@ mesh = ExtResource("25_mv043")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_1hdur")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Hatches_Button/Hittable_Collider"]
 shape = SubResource("ConcavePolygonShape3D_lqwa8")
@@ -489,7 +527,7 @@ MAX_HP = 1.0
 metadata/_custom_type_script = "uid://cijq708jlfumq"
 
 [node name="TotembotHatch" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.64562e-05, 0, -0.00343504)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00005, 0, -0.00343495)
 ATTACHED_TO = NodePath("..")
 
 [node name="TotembotHatch2" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
@@ -526,12 +564,14 @@ mesh = ExtResource("14_iweeg")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_ealnf")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="AmmoHolder" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model"]
 mesh = ExtResource("15_0mgnh")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_ily6p")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="Gun_Hinge" type="Node3D" parent="Body/Mid_PlanetaryGears/Model"]
 transform = Transform3D(-8.54384e-08, -1.98439e-09, 1, -1, 3.55271e-15, -8.54384e-08, -1.23739e-17, -1, -1.98439e-09, 0.209837, 0.380914, 8.75586e-09)
@@ -567,6 +607,7 @@ skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_e1vp5")
 surface_material_override/1 = SubResource("ShaderMaterial_8uadq")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="Barrel" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
 transform = Transform3D(-8.54384e-08, 1, 8.74228e-08, -8.54384e-08, -8.74228e-08, 1, 1, 8.54384e-08, 8.54384e-08, -0.387121, 0.000521401, -0.207521)
@@ -575,6 +616,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_f41kg")
 surface_material_override/1 = SubResource("ShaderMaterial_luvdn")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="Aim_At_target" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -4.37114e-08, -0.00360006, 0.000521386, 0.121401)
@@ -612,6 +654,7 @@ mesh = ExtResource("16_72w42")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_wvxuj")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="Click_triggerable" type="Node" parent="Body/Mid_PlanetaryGears/Model/Ammowheel_Rotator" node_paths=PackedStringArray("SFX")]
 script = ExtResource("30_6apot")
@@ -644,6 +687,7 @@ skeleton = NodePath("../../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_rbiss")
 surface_material_override/1 = SubResource("ShaderMaterial_2lvkp")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="Generic6DOFJoint3D_L" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.068006, 0.392729, -0.116595)
@@ -671,6 +715,7 @@ mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_vio2m")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
 shape = SubResource("ConvexPolygonShape3D_klcti")
@@ -716,6 +761,7 @@ mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_adhtu")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left"]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -0.117623, -0.391669, 0.186677)
@@ -766,6 +812,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_ib70c")
 surface_material_override/1 = SubResource("ShaderMaterial_mbg3f")
 surface_material_override/2 = SubResource("ShaderMaterial_giirl")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196112, -0.365091, -8.18315e-09)
@@ -904,6 +951,7 @@ surface_material_override/1 = SubResource("ShaderMaterial_4uh7c")
 surface_material_override/2 = SubResource("ShaderMaterial_aho8b")
 surface_material_override/3 = SubResource("ShaderMaterial_tbaow")
 script = ExtResource("41_hufde")
+EMISSIVE = null
 
 [node name="Seeking_Gun" type="Node" parent="Body/Top_PlanetaryGears/Top" node_paths=PackedStringArray("CAMERA", "AIM_THIS_TOWARDS_TARGET")]
 script = ExtResource("28_v7ac7")
@@ -968,5 +1016,3 @@ metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Body"]
 path_height_offset = -1.0
 debug_enabled = true
-
-[node name="Upper" type="Node3D" parent="Body"]
