@@ -1,4 +1,4 @@
-class_name Hit_Pastel_Shade extends Hit_HP_Tracker
+class_name Hit_Pastel extends Hit_HP_Tracker
 
 @export var PASTEL:Pastel_Colour_Mesh
 

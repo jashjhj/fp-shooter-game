@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://bk1iff825dehg" path="res://gameobjects/world_interactive/hit_effects/Hit_HP_Tracker.gd" id="9_rnmof"]
 [ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="10_oebdh"]
 [ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/hit_effects/Hit_Free.gd" id="13_p0hln"]
-[ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel_Shade.gd" id="13_uqywy"]
+[ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="13_uqywy"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="13_y2jxi"]
 [ext_resource type="Script" uid="uid://c82vodcg2hnt" path="res://gameobjects/world_interactive/joints/Persistent_Hinge.gd" id="15_etld6"]
 
