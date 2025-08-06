@@ -382,7 +382,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138941, 0, -1.24223e-09)
 mesh = ExtResource("6_0adce")
 surface_material_override/0 = SubResource("ShaderMaterial_eqw71")
 script = ExtResource("41_hufde")
-EMISSIVE = 0.3
+EMISSIVE = 0.5
 metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
 
 [node name="Hit_Impulse" type="Node" parent="Body" node_paths=PackedStringArray("IMPULSE_TO")]

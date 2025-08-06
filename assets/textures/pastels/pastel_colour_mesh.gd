@@ -20,7 +20,7 @@ class_name Pastel_Colour_Mesh extends MeshInstance3D
 @export var EMISSIVE:float = 0.0:
 	set(v):
 		EMISSIVE = v
-		get_surface_override_material(0).set_shader_parameter("emissive", EMISSIVE)
+		get_surface_override_material(0).set_shader_parameter("emission", EMISSIVE)
 
 ## randomises colour for editor and to
 func _ready() -> void:
@@ -34,5 +34,5 @@ func randomise_colours():
 		
 		#MAT.resource_local_to_scene = true
 		MAT.set_shader_parameter("color_shade", randf())
-		MAT.set_shader_parameter("emissive", EMISSIVE)
+		MAT.set_shader_parameter("emission", EMISSIVE)
 		set_surface_override_material(i, MAT)
