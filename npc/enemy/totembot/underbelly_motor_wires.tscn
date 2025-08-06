@@ -10,56 +10,48 @@ render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.109279
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qncda"]
 render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.257351
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f14a0"]
 render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.861834
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0fvm0"]
 render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.75964
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lqu7i"]
 render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.776638
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77fe3"]
 render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.381998
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kn0rp"]
 render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.320919
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fvapr"]
 render_priority = 0
 shader = ExtResource("2_g4u0i")
 shader_parameter/color_shade = 0.35465
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.0
 
 [node name="UnderbellyMotorWires" type="Node3D"]
 

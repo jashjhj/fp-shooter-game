@@ -3,8 +3,8 @@
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="1_2aus5"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_2aus5")
 shader_parameter/color_shade = 0.1
 shader_parameter/life = 1.0
-shader_parameter/emission = 0.0
