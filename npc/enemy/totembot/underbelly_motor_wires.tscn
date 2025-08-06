@@ -19,6 +19,7 @@ next_pass = SubResource("ShaderMaterial_g4u0i")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.553684
 shader_parameter/life = 1.0
 
@@ -35,6 +36,7 @@ next_pass = SubResource("ShaderMaterial_qk44f")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.201695
 shader_parameter/life = 1.0
 
@@ -51,6 +53,7 @@ next_pass = SubResource("ShaderMaterial_qncda")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.948937
 shader_parameter/life = 1.0
 
@@ -67,6 +70,7 @@ next_pass = SubResource("ShaderMaterial_0fvm0")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.232901
 shader_parameter/life = 1.0
 
@@ -83,6 +87,7 @@ next_pass = SubResource("ShaderMaterial_77fe3")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.61946
 shader_parameter/life = 1.0
 
@@ -99,6 +104,7 @@ next_pass = SubResource("ShaderMaterial_fvapr")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.297733
 shader_parameter/life = 1.0
 
@@ -115,6 +121,7 @@ next_pass = SubResource("ShaderMaterial_lb71g")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.176574
 shader_parameter/life = 1.0
 
@@ -131,6 +138,7 @@ next_pass = SubResource("ShaderMaterial_ys1jj")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.0632533
 shader_parameter/life = 1.0
 

@@ -160,7 +160,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-83.1292, -949.149)
+graph_offset = Vector2(113.333, -94.6667)
 varyings/life = "0,0"
 varyings/color_seed = "0,0"
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_2rufj")

@@ -9,6 +9,7 @@ class_name Hit_Pastel extends Hit_HP_Tracker
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	assert(PASTEL != null, "No pastel mesh set for Hit_pastel")
 	super._ready()
 	add_child(damage_timer)
 	damage_timer.timeout.connect(disable_highlight)
@@ -17,7 +18,7 @@ func _ready() -> void:
 
 func hit(damage:float) -> void:
 	super.hit(damage)
-	
+	if(PASTEL == null): return
 	PASTEL.health -= (damage-MINIMUM_DAMAGE_THRESHOLD) / float(MAX_HP)
 	
 	if(SHOW_DAMAGE_HIGHLIGHT and damage > DAMAGE_HIGHLIGHT_MINIMUM):

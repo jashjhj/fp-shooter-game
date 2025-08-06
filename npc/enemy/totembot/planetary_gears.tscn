@@ -28,6 +28,7 @@ next_pass = SubResource("ShaderMaterial_7g13a")
 shader = ExtResource("5_fo7uh")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.990846
 shader_parameter/life = 1.0
 
@@ -47,6 +48,7 @@ next_pass = SubResource("ShaderMaterial_yfb07")
 shader = ExtResource("5_fo7uh")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/transparency = 1.0
 shader_parameter/color_shade = 0.195511
 shader_parameter/life = 1.0
 

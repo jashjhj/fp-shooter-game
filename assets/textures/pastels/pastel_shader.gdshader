@@ -1,8 +1,8 @@
 shader_type spatial;
 
+
 uniform float emission = 0.0;
 uniform vec3 emission_color = vec3(0.3,0.2,0.1);
-
 
 uniform float color_shade = 0.1;
 uniform float life = 1.0;
@@ -53,5 +53,6 @@ void fragment() {
 	ALBEDO = hsv2rgb(vec3(color_shade, 0.3, vibrancy));
     
     EMISSION = emission_color * highlight * emission;
+	
 	// Called for every pixel the material is visible on.
 }
