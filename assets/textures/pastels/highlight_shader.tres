@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://h73aat0y8rqm"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bap0krowxidma"]
 
 [ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="1_3047f"]
 
@@ -6,4 +6,4 @@
 render_priority = 0
 shader = ExtResource("1_3047f")
 shader_parameter/emission = 0.5
-shader_parameter/color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)

@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode blend_add, unshaded, depth_draw_never, depth_test_disabled;
 
 uniform float emission = 0.0;
-uniform vec3 color = vec3(0.3,0.2,0.1);
+uniform vec3 emission_color = vec3(0.3,0.2,0.4);
 
 
 
@@ -16,7 +16,7 @@ void fragment() {
 	highlight = highlight * 0.5f + 0.5f;
 	
 	//ALBEDO = vec3(0.0,0.0,0.0);
-	ALBEDO = color * highlight * emission;
+	ALBEDO = emission_color * highlight * emission;
 	//EMISSION = color * highlight * emission;
 	
 }
