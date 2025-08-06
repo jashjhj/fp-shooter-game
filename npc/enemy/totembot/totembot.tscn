@@ -332,8 +332,8 @@ shader_parameter/life = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jht4a"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/emission = 0.5
+shader_parameter/emission_color = Vector3(0.351854, 0.150627, 0.183444)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pi7l0"]
 resource_local_to_scene = true
@@ -341,8 +341,8 @@ render_priority = 0
 next_pass = SubResource("ShaderMaterial_jht4a")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.254058
+shader_parameter/emission_color = Vector3(0.351854, 0.150627, 0.183444)
+shader_parameter/color_shade = 0.131194
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aq3c1"]
@@ -882,6 +882,9 @@ mesh = ExtResource("16_72w42")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_pi7l0")
 script = ExtResource("41_hufde")
+HIGHLIGHT_ENABLED = true
+HIGHLIGHT_COLOUR = Color(0.351854, 0.150627, 0.183444, 1)
+HIGHLIGHT_THROUGH_OBJECTS = true
 
 [node name="Click_triggerable" type="Node" parent="Body/Mid_PlanetaryGears/Model/Ammowheel_Rotator" node_paths=PackedStringArray("SFX")]
 script = ExtResource("30_6apot")
