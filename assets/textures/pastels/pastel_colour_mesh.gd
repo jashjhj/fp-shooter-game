@@ -1,4 +1,4 @@
-
+@tool
 class_name Pastel_Colour_Mesh extends MeshInstance3D
 
 
