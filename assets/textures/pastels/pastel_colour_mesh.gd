@@ -14,6 +14,7 @@ class_name Pastel_Colour_Mesh extends MeshInstance3D
 ##Button to rerandomise
 @export var RERANDOMISE:bool = false:
 	set(v):
+		if(!is_initialised): init()
 		RERANDOMISE = false
 		for mat in get_all_materials():
 			mat.set_shader_parameter("color_shade", randf())
