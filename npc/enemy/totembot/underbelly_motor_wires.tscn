@@ -1,56 +1,121 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3gb7jdoy1f0n"]
+[gd_scene load_steps=22 format=3 uid="uid://b3gb7jdoy1f0n"]
 
 [ext_resource type="ArrayMesh" uid="uid://dcs4asq8jnwfw" path="res://npc/enemy/totembot/assets/Battery_Connectors_Cable.obj" id="1_m5ksl"]
+[ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="2_baslu"]
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="2_g4u0i"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="3_baslu"]
 [ext_resource type="ArrayMesh" uid="uid://nb1hsqyqrh8k" path="res://npc/enemy/totembot/assets/Battery_Connectors.obj" id="4_qk44f"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oe2f0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4u0i"]
 render_priority = 0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.5
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_baslu"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_g4u0i")
 shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.109279
+shader_parameter/color_shade = 0.903988
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qk44f"]
+render_priority = 0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.5
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oe2f0"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_qk44f")
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.347767
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qncda"]
 render_priority = 0
-shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.257351
-shader_parameter/life = 1.0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.5
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f14a0"]
+resource_local_to_scene = true
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_qncda")
 shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.861834
+shader_parameter/color_shade = 0.719001
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0fvm0"]
 render_priority = 0
-shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.75964
-shader_parameter/life = 1.0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.5
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lqu7i"]
+resource_local_to_scene = true
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_0fvm0")
 shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.776638
+shader_parameter/color_shade = 0.917351
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77fe3"]
 render_priority = 0
-shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.381998
-shader_parameter/life = 1.0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.0
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kn0rp"]
+resource_local_to_scene = true
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_77fe3")
 shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.320919
+shader_parameter/color_shade = 0.872781
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fvapr"]
 render_priority = 0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.0
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbdgp"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_fvapr")
 shader = ExtResource("2_g4u0i")
-shader_parameter/color_shade = 0.35465
+shader_parameter/color_shade = 0.273279
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lb71g"]
+render_priority = 0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.0
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b41eb"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_lb71g")
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.134322
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys1jj"]
+render_priority = 0
+shader = ExtResource("2_baslu")
+shader_parameter/emission = 0.0
+shader_parameter/color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g1aru"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_ys1jj")
+shader = ExtResource("2_g4u0i")
+shader_parameter/color_shade = 0.960066
 shader_parameter/life = 1.0
 
 [node name="UnderbellyMotorWires" type="Node3D"]
@@ -58,10 +123,10 @@ shader_parameter/life = 1.0
 [node name="Cable" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0118332, -0.110041, -0.158404)
 mesh = ExtResource("1_m5ksl")
-surface_material_override/0 = SubResource("ShaderMaterial_oe2f0")
-surface_material_override/1 = SubResource("ShaderMaterial_qncda")
+surface_material_override/0 = SubResource("ShaderMaterial_baslu")
+surface_material_override/1 = SubResource("ShaderMaterial_oe2f0")
 surface_material_override/2 = SubResource("ShaderMaterial_f14a0")
-surface_material_override/3 = SubResource("ShaderMaterial_0fvm0")
+surface_material_override/3 = SubResource("ShaderMaterial_lqu7i")
 script = ExtResource("3_baslu")
 EMISSIVE = 0.5
 metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
@@ -69,15 +134,15 @@ metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
 [node name="Connectors_1" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0112773, -0.110041, -0.154009)
 mesh = ExtResource("4_qk44f")
-surface_material_override/0 = SubResource("ShaderMaterial_lqu7i")
-surface_material_override/1 = SubResource("ShaderMaterial_77fe3")
+surface_material_override/0 = SubResource("ShaderMaterial_kn0rp")
+surface_material_override/1 = SubResource("ShaderMaterial_tbdgp")
 script = ExtResource("3_baslu")
 metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
 
 [node name="Connectors_2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -0.0438123, -0.118794, 0.0729311)
 mesh = ExtResource("4_qk44f")
-surface_material_override/0 = SubResource("ShaderMaterial_kn0rp")
-surface_material_override/1 = SubResource("ShaderMaterial_fvapr")
+surface_material_override/0 = SubResource("ShaderMaterial_b41eb")
+surface_material_override/1 = SubResource("ShaderMaterial_g1aru")
 script = ExtResource("3_baslu")
 metadata/_custom_type_script = "uid://d3wk5mrnj1hx"

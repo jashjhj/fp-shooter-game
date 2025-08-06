@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b3gb7jdoy1f0n" path="res://npc/enemy/totembot/underbelly_motor_wires.tscn" id="8_1hdur"]
 [ext_resource type="ArrayMesh" uid="uid://blpf05yv67uvd" path="res://npc/enemy/totembot/assets/Shaft.obj" id="8_5jvjh"]
 [ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="8_ealnf"]
-[ext_resource type="Script" uid="uid://cbqh0dj1yt51l" path="res://gameobjects/world_interactive/hit_effects/Hit_Gib.gd" id="9_bcabd"]
+[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Gib.gd" id="9_bcabd"]
 [ext_resource type="ArrayMesh" uid="uid://cesyqctqn6koh" path="res://npc/enemy/totembot/assets/shield_0.obj" id="9_mv043"]
 [ext_resource type="Script" uid="uid://bd3thw0v5baaj" path="res://gameobjects/world_interactive/hit_effects/Hit_Translate.gd" id="10_bcabd"]
 [ext_resource type="ArrayMesh" uid="uid://0lo60yv28p3k" path="res://npc/enemy/totembot/assets/shield_1.obj" id="10_lqwa8"]
@@ -70,7 +70,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_ealnf")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.489644
+shader_parameter/color_shade = 0.457504
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1vp5"]
@@ -84,7 +84,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_e1vp5")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.362994
+shader_parameter/color_shade = 0.472932
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f41kg"]
@@ -98,7 +98,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_f41kg")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.499861
+shader_parameter/color_shade = 0.873875
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wvxuj"]
@@ -112,7 +112,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_wvxuj")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.357191
+shader_parameter/color_shade = 0.964441
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2lvkp"]
@@ -126,7 +126,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_2lvkp")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.780433
+shader_parameter/color_shade = 0.999121
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adhtu"]
@@ -140,7 +140,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_adhtu")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.945724
+shader_parameter/color_shade = 0.146076
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbg3f"]
@@ -154,7 +154,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_mbg3f")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.954599
+shader_parameter/color_shade = 0.503376
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v5pcv"]
@@ -168,7 +168,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_v5pcv")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.742096
+shader_parameter/color_shade = 0.222435
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8nbuu"]
@@ -188,7 +188,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_aho8b")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.903242
+shader_parameter/color_shade = 0.829348
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lqwa8"]
@@ -205,7 +205,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_57w7t")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.472101
+shader_parameter/color_shade = 0.752472
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m86gr"]
@@ -219,7 +219,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_m86gr")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.108178
+shader_parameter/color_shade = 0.224122
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ox312"]
@@ -254,7 +254,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_2d5wd")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.959177
+shader_parameter/color_shade = 0.765147
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tof8o"]
@@ -268,7 +268,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_tof8o")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.667032
+shader_parameter/color_shade = 0.0215538
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_601at"]
@@ -282,7 +282,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_601at")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.612887
+shader_parameter/color_shade = 0.867399
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4pw2c"]
@@ -296,7 +296,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_4pw2c")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.976328
+shader_parameter/color_shade = 0.0460553
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jht4a"]
@@ -310,7 +310,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_jht4a")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.962308
+shader_parameter/color_shade = 0.903706
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aq3c1"]
@@ -324,7 +324,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_aq3c1")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.571078
+shader_parameter/color_shade = 0.573249
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o7x6s"]
@@ -338,7 +338,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_o7x6s")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.0779566
+shader_parameter/color_shade = 0.485364
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tfvg0"]
@@ -352,7 +352,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_tfvg0")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.720399
+shader_parameter/color_shade = 0.852335
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_klcti"]
@@ -369,7 +369,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_xuvo2")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.897408
+shader_parameter/color_shade = 0.448685
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hufde"]
@@ -386,7 +386,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_jkrdq")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.456878
+shader_parameter/color_shade = 0.691973
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6cdda"]
@@ -400,7 +400,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_6cdda")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.165907
+shader_parameter/color_shade = 0.38952
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dsu6j"]
@@ -414,7 +414,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_dsu6j")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.337665
+shader_parameter/color_shade = 0.0652196
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5bgyk"]
@@ -453,7 +453,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_gdgnt")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.806839
+shader_parameter/color_shade = 0.295421
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cm6we"]
@@ -467,7 +467,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_cm6we")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.24344
+shader_parameter/color_shade = 0.141768
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cnwdb"]
@@ -481,7 +481,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_cnwdb")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.533607
+shader_parameter/color_shade = 0.274283
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_527um"]
@@ -495,7 +495,7 @@ resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_527um")
 shader = ExtResource("4_0adce")
-shader_parameter/color_shade = 0.982893
+shader_parameter/color_shade = 0.310717
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wvxuj"]
