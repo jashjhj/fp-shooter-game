@@ -22,7 +22,7 @@ next_pass = SubResource("ShaderMaterial_qusij")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.414606
+shader_parameter/color_shade = 0.589776
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdqtr"]
@@ -38,7 +38,7 @@ next_pass = SubResource("ShaderMaterial_rdqtr")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.723513
+shader_parameter/color_shade = 0.643826
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61wgc"]
@@ -54,7 +54,7 @@ next_pass = SubResource("ShaderMaterial_61wgc")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.748166
+shader_parameter/color_shade = 0.646271
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_85kxx"]
@@ -70,7 +70,7 @@ next_pass = SubResource("ShaderMaterial_85kxx")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.281838
+shader_parameter/color_shade = 0.248781
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cpvug"]
@@ -86,7 +86,7 @@ next_pass = SubResource("ShaderMaterial_cpvug")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.295959
+shader_parameter/color_shade = 0.846661
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1g4f1"]
@@ -102,7 +102,7 @@ next_pass = SubResource("ShaderMaterial_1g4f1")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.139446
+shader_parameter/color_shade = 0.37462
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vw4s1"]
@@ -118,7 +118,7 @@ next_pass = SubResource("ShaderMaterial_vw4s1")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.956708
+shader_parameter/color_shade = 0.466796
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7us8c"]
@@ -134,7 +134,7 @@ next_pass = SubResource("ShaderMaterial_7us8c")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.372842
+shader_parameter/color_shade = 0.856817
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6yjju"]
@@ -150,7 +150,7 @@ next_pass = SubResource("ShaderMaterial_6yjju")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.291113
+shader_parameter/color_shade = 0.721794
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_14nxl"]
@@ -166,7 +166,7 @@ next_pass = SubResource("ShaderMaterial_14nxl")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.693005
+shader_parameter/color_shade = 0.223458
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t70uu"]
@@ -182,7 +182,7 @@ next_pass = SubResource("ShaderMaterial_t70uu")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.301854
+shader_parameter/color_shade = 0.969386
 shader_parameter/life = 1.0
 
 [node name="Centrifuge" type="Node3D" node_paths=PackedStringArray("GIMBAL")]

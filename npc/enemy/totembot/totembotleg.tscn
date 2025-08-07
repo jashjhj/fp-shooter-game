@@ -1,10 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://dljqaqcx7cptb"]
+[gd_scene load_steps=40 format=3 uid="uid://dljqaqcx7cptb"]
 
 [ext_resource type="ArrayMesh" uid="uid://4sdhopv0l4ds" path="res://npc/enemy/totembot/assets/leg_foot.obj" id="1_1nd10"]
 [ext_resource type="Script" uid="uid://bbqoq87idvyqs" path="res://npc/tests_primitives/legs/botleg.gd" id="1_r5lsd"]
 [ext_resource type="ArrayMesh" uid="uid://d02a6oli4b3re" path="res://npc/enemy/totembot/assets/leg_hip.obj" id="2_r5lsd"]
 [ext_resource type="ArrayMesh" uid="uid://676shaw0n7e1" path="res://npc/enemy/totembot/assets/leg_lower.obj" id="3_aqqmv"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="4_aqqmv"]
+[ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="4_gqvb5"]
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="4_i5fvc"]
 [ext_resource type="ArrayMesh" uid="uid://rlobttak3vva" path="res://npc/enemy/totembot/assets/leg_upper.obj" id="4_mciut"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="5_gqvb5"]
@@ -19,19 +20,44 @@
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="13_y2jxi"]
 [ext_resource type="Script" uid="uid://c82vodcg2hnt" path="res://gameobjects/world_interactive/joints/Persistent_Hinge.gd" id="15_etld6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5fvc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqywy"]
 render_priority = 0
+shader = ExtResource("4_gqvb5")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3rpu"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_uqywy")
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_shade = 0.528474
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.649036
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_etld6"]
 data = PackedVector3Array(-0.0258, 0.0258, 0.1347, -0.0212, 0.0212, 0.1283, -0.0162, 0.0266, 0.1347, -0.0162, 0.0266, 0.1347, -0.0212, 0.0212, 0.1283, -0.0081, 0.0266, 0.1283, 0.0258, 0.0258, 0.1347, 0.0212, 0.0212, 0.1283, 0.03, 0, 0.1347, 0.03, 0, 0.1347, 0.0212, 0.0212, 0.1283, 0.03, 0, 0.1283, 0.03, 0, 0.1347, 0.03, 0, 0.1283, 0.0258, -0.0258, 0.1347, 0.0258, -0.0258, 0.1347, 0.03, 0, 0.1283, 0.0212, -0.0212, 0.1283, -0.0162, -0.0266, 0.1347, -0.0081, -0.0266, 0.1283, -0.0258, -0.0258, 0.1347, -0.0258, -0.0258, 0.1347, -0.0081, -0.0266, 0.1283, -0.0212, -0.0212, 0.1283, 0.0081, 0.0266, 0.0557, 0, 0.0376, 0.0448, 0.0212, 0.0212, 0.0557, -0.0258, -0.0258, 0.1347, -0.0212, -0.0212, 0.1283, -0.03, 0, 0.1347, -0.03, 0, 0.1347, -0.0212, -0.0212, 0.1283, -0.03, 0, 0.1283, 0.0162, 0.0266, 0.1347, 0.0081, 0.0266, 0.1283, 0.0258, 0.0258, 0.1347, 0.0258, 0.0258, 0.1347, 0.0081, 0.0266, 0.1283, 0.0212, 0.0212, 0.1283, -0.03, 0, 0.1347, -0.03, 0, 0.1283, -0.0258, 0.0258, 0.1347, -0.0258, 0.0258, 0.1347, -0.03, 0, 0.1283, -0.0212, 0.0212, 0.1283, 0.0258, -0.0258, 0.1347, 0.0212, -0.0212, 0.1283, 0.0162, -0.0266, 0.1347, 0.0162, -0.0266, 0.1347, 0.0212, -0.0212, 0.1283, 0.0081, -0.0266, 0.1283, 0.0492, -0.0112, 0.0159, 0.0506, 0, 0.0159, 0.0492, -0.0112, 0.011, 0.0492, -0.0112, 0.011, 0.0506, 0, 0.0159, 0.0506, 0, 0.011, -0.0081, -0.0266, 0.0557, 0, -0.0376, 0.0448, -0.0212, -0.0212, 0.0557, -0.03, 0, 0.0557, -0.0655, 0, 0.0207, -0.0212, 0.0212, 0.0557, -0.0212, 0.0212, 0.0557, -0.0655, 0, 0.0207, -0.0636, 0.0636, 0.0207, -0.0212, -0.0212, 0.0557, -0.0636, -0.0636, 0.0207, -0.03, 0, 0.0557, -0.03, 0, 0.0557, -0.0636, -0.0636, 0.0207, -0.0655, 0, 0.0207, 0.0081, -0.0266, 0.0557, 0.0212, -0.0212, 0.0557, 0, -0.0376, 0.0448, 0.03, 0, 0.0557, 0.0655, 0, 0.0207, 0.0212, -0.0212, 0.0557, 0.0212, -0.0212, 0.0557, 0.0655, 0, 0.0207, 0.0636, -0.0636, 0.0207, 0.0212, 0.0212, 0.0557, 0.0636, 0.0636, 0.0207, 0.03, 0, 0.0557, 0.03, 0, 0.0557, 0.0636, 0.0636, 0.0207, 0.0655, 0, 0.0207, -0.0081, 0.0266, 0.0557, -0.0212, 0.0212, 0.0557, 0, 0.0376, 0.0448, 0, 0.0655, 0.0207, 0, 0.0655, 0.0159, 0.0636, 0.0636, 0.0207, 0.0636, 0.0636, 0.0207, 0, 0.0655, 0.0159, 0.0636, 0.0636, 0.0159, 0.0636, 0.0636, 0.0207, 0.0636, 0.0636, 0.0159, 0.0655, 0, 0.0207, 0.0655, 0, 0.0207, 0.0636, 0.0636, 0.0159, 0.0655, 0, 0.0159, 0.0655, 0, 0.0207, 0.0655, 0, 0.0159, 0.0636, -0.0636, 0.0207, 0.0636, -0.0636, 0.0207, 0.0655, 0, 0.0159, 0.0636, -0.0636, 0.0159, 0.0636, -0.0636, 0.0207, 0.0636, -0.0636, 0.0159, 0, -0.0655, 0.0207, 0, -0.0655, 0.0207, 0.0636, -0.0636, 0.0159, 0, -0.0655, 0.0159, 0, -0.0655, 0.0207, 0, -0.0655, 0.0159, -0.0636, -0.0636, 0.0207, -0.0636, -0.0636, 0.0207, 0, -0.0655, 0.0159, -0.0636, -0.0636, 0.0159, -0.0636, -0.0636, 0.0207, -0.0636, -0.0636, 0.0159, -0.0655, 0, 0.0207, -0.0655, 0, 0.0207, -0.0636, -0.0636, 0.0159, -0.0655, 0, 0.0159, -0.0655, 0, 0.0207, -0.0655, 0, 0.0159, -0.0636, 0.0636, 0.0207, -0.0636, 0.0636, 0.0207, -0.0655, 0, 0.0159, -0.0636, 0.0636, 0.0159, -0.0636, 0.0636, 0.0207, -0.0636, 0.0636, 0.0159, 0, 0.0655, 0.0207, 0, 0.0655, 0.0207, -0.0636, 0.0636, 0.0159, 0, 0.0655, 0.0159, 0.0081, 0.0266, 0.0557, -0.0081, 0.0266, 0.0557, 0, 0.0376, 0.0448, -0.0081, -0.0266, 0.0557, 0.0081, -0.0266, 0.0557, 0, -0.0376, 0.0448, -0.0162, 0.0266, 0.1347, -0.0081, 0.0266, 0.1283, 0.0162, 0.0266, 0.1347, 0.0162, 0.0266, 0.1347, -0.0081, 0.0266, 0.1283, 0.0081, 0.0266, 0.1283, -0.0081, 0.0266, 0.1283, 0.0057, 0.0266, 0.1259, 0.0081, 0.0266, 0.1283, 0.0057, 0.0266, 0.1259, 0.0057, 0.0266, 0.0581, 0.0081, 0.0266, 0.1283, -0.0057, 0.0266, 0.1259, 0.0057, 0.0266, 0.1259, -0.0081, 0.0266, 0.1283, 0.0081, 0.0266, 0.1283, 0.0057, 0.0266, 0.0581, 0.0081, 0.0266, 0.0557, -0.0081, 0.0266, 0.0557, -0.0057, 0.0266, 0.1259, -0.0081, 0.0266, 0.1283, 0.0057, 0.0266, 0.0581, -0.0057, 0.0266, 0.0581, 0.0081, 0.0266, 0.0557, -0.0057, 0.0266, 0.0581, -0.0057, 0.0266, 0.1259, -0.0081, 0.0266, 0.0557, 0.0081, 0.0266, 0.0557, -0.0057, 0.0266, 0.0581, -0.0081, 0.0266, 0.0557, -0.0057, -0.0266, 0.1259, 0.0057, -0.0266, 0.1259, -0.0057, 0.0266, 0.1259, -0.0057, 0.0266, 0.1259, 0.0057, -0.0266, 0.1259, 0.0057, 0.0266, 0.1259, -0.0081, -0.0266, 0.1283, -0.0162, -0.0266, 0.1347, 0.0081, -0.0266, 0.1283, 0.0081, -0.0266, 0.1283, -0.0162, -0.0266, 0.1347, 0.0162, -0.0266, 0.1347, 0.0081, -0.0266, 0.1283, -0.0057, -0.0266, 0.1259, -0.0081, -0.0266, 0.1283, -0.0057, -0.0266, 0.1259, -0.0057, -0.0266, 0.0581, -0.0081, -0.0266, 0.1283, 0.0057, -0.0266, 0.1259, -0.0057, -0.0266, 0.1259, 0.0081, -0.0266, 0.1283, -0.0081, -0.0266, 0.1283, -0.0057, -0.0266, 0.0581, -0.0081, -0.0266, 0.0557, 0.0081, -0.0266, 0.0557, 0.0057, -0.0266, 0.1259, 0.0081, -0.0266, 0.1283, -0.0057, -0.0266, 0.0581, 0.0057, -0.0266, 0.0581, -0.0081, -0.0266, 0.0557, 0.0057, -0.0266, 0.0581, 0.0057, -0.0266, 0.1259, 0.0081, -0.0266, 0.0557, -0.0081, -0.0266, 0.0557, 0.0057, -0.0266, 0.0581, 0.0081, -0.0266, 0.0557, 0.0057, -0.0266, 0.1259, 0.0057, -0.0266, 0.0581, 0.0057, 0.0266, 0.1259, 0.0057, 0.0266, 0.1259, 0.0057, -0.0266, 0.0581, 0.0057, 0.0266, 0.0581, 0.0212, -0.0212, 0.1283, 0.0212, -0.0212, 0.0557, 0.0081, -0.0266, 0.1283, 0.0081, -0.0266, 0.1283, 0.0212, -0.0212, 0.0557, 0.0081, -0.0266, 0.0557, -0.03, 0, 0.1283, -0.03, 0, 0.0557, -0.0212, 0.0212, 0.1283, -0.0212, 0.0212, 0.1283, -0.03, 0, 0.0557, -0.0212, 0.0212, 0.0557, 0.0081, 0.0266, 0.1283, 0.0081, 0.0266, 0.0557, 0.0212, 0.0212, 0.1283, 0.0212, 0.0212, 0.1283, 0.0081, 0.0266, 0.0557, 0.0212, 0.0212, 0.0557, -0.0212, -0.0212, 0.1283, -0.0212, -0.0212, 0.0557, -0.03, 0, 0.1283, -0.03, 0, 0.1283, -0.0212, -0.0212, 0.0557, -0.03, 0, 0.0557, -0.0081, -0.0266, 0.1283, -0.0081, -0.0266, 0.0557, -0.0212, -0.0212, 0.1283, -0.0212, -0.0212, 0.1283, -0.0081, -0.0266, 0.0557, -0.0212, -0.0212, 0.0557, 0.03, 0, 0.1283, 0.03, 0, 0.0557, 0.0212, -0.0212, 0.1283, 0.0212, -0.0212, 0.1283, 0.03, 0, 0.0557, 0.0212, -0.0212, 0.0557, 0.0212, 0.0212, 0.1283, 0.0212, 0.0212, 0.0557, 0.03, 0, 0.1283, 0.03, 0, 0.1283, 0.0212, 0.0212, 0.0557, 0.03, 0, 0.0557, -0.0212, 0.0212, 0.1283, -0.0212, 0.0212, 0.0557, -0.0081, 0.0266, 0.1283, -0.0081, 0.0266, 0.1283, -0.0212, 0.0212, 0.0557, -0.0081, 0.0266, 0.0557, -0.0057, -0.0266, 0.0581, -0.0057, -0.0266, 0.1259, -0.0057, 0.0266, 0.0581, -0.0057, 0.0266, 0.0581, -0.0057, -0.0266, 0.1259, -0.0057, 0.0266, 0.1259, 0.0057, -0.0266, 0.0581, -0.0057, -0.0266, 0.0581, 0.0057, 0.0266, 0.0581, 0.0057, 0.0266, 0.0581, -0.0057, -0.0266, 0.0581, -0.0057, 0.0266, 0.0581, -0.0162, 0.0266, 0.1347, 0.0162, 0.0266, 0.1347, -0.0162, -0.0266, 0.1347, -0.0162, -0.0266, 0.1347, 0.0162, 0.0266, 0.1347, 0.0162, -0.0266, 0.1347, 0.0162, 0.0266, 0.1347, 0.0258, 0.0258, 0.1347, 0.0162, 0.0266, 0.1777, 0.0162, 0.0266, 0.1777, 0.0258, 0.0258, 0.1347, 0.0258, 0.0258, 0.1777, -0.0162, -0.0266, 0.1347, -0.0258, -0.0258, 0.1347, -0.0162, -0.0266, 0.1777, -0.0162, -0.0266, 0.1777, -0.0258, -0.0258, 0.1347, -0.0258, -0.0258, 0.1777, -0.0258, -0.0258, 0.1777, -0.03, 0, 0.1777, -0.0217, -0.0217, 0.1843, -0.0217, -0.0217, 0.1843, -0.03, 0, 0.1777, -0.0252, 0, 0.1843, 0.03, 0, 0.1777, 0.0258, -0.0258, 0.1777, 0.0252, 0, 0.1843, 0.0252, 0, 0.1843, 0.0258, -0.0258, 0.1777, 0.0217, -0.0217, 0.1843, -0.0162, 0.0266, 0.1347, -0.0162, -0.0266, 0.1347, -0.0162, 0.0266, 0.1777, -0.0162, 0.0266, 0.1777, -0.0162, -0.0266, 0.1347, -0.0162, -0.0266, 0.1777, -0.03, 0, 0.1347, -0.0258, 0.0258, 0.1347, -0.03, 0, 0.1777, -0.03, 0, 0.1777, -0.0258, 0.0258, 0.1347, -0.0258, 0.0258, 0.1777, -0.0258, 0.0258, 0.1347, -0.0162, 0.0266, 0.1347, -0.0258, 0.0258, 0.1777, -0.0258, 0.0258, 0.1777, -0.0162, 0.0266, 0.1347, -0.0162, 0.0266, 0.1777, 0.0162, -0.0266, 0.1347, 0.0162, 0.0266, 0.1347, 0.0162, -0.0266, 0.1777, 0.0162, -0.0266, 0.1777, 0.0162, 0.0266, 0.1347, 0.0162, 0.0266, 0.1777, 0.0258, -0.0258, 0.1347, 0.0162, -0.0266, 0.1347, 0.0258, -0.0258, 0.1777, 0.0258, -0.0258, 0.1777, 0.0162, -0.0266, 0.1347, 0.0162, -0.0266, 0.1777, 0.03, 0, 0.1347, 0.0258, -0.0258, 0.1347, 0.03, 0, 0.1777, 0.03, 0, 0.1777, 0.0258, -0.0258, 0.1347, 0.0258, -0.0258, 0.1777, 0.0258, 0.0258, 0.1347, 0.03, 0, 0.1347, 0.0258, 0.0258, 0.1777, 0.0258, 0.0258, 0.1777, 0.03, 0, 0.1347, 0.03, 0, 0.1777, -0.0258, -0.0258, 0.1347, -0.03, 0, 0.1347, -0.0258, -0.0258, 0.1777, -0.0258, -0.0258, 0.1777, -0.03, 0, 0.1347, -0.03, 0, 0.1777, 0.0136, 0.0223, 0.1843, 0.0217, 0.0217, 0.1843, 0.0136, -0.0223, 0.1843, 0.0136, -0.0223, 0.1843, 0.0217, 0.0217, 0.1843, 0.0217, -0.0217, 0.1843, 0.0217, -0.0217, 0.1843, 0.0217, 0.0217, 0.1843, 0.0252, 0, 0.1843, -0.0136, 0.0223, 0.1843, -0.0136, -0.0223, 0.1843, -0.0217, 0.0217, 0.1843, -0.0217, 0.0217, 0.1843, -0.0136, -0.0223, 0.1843, -0.0252, 0, 0.1843, -0.0252, 0, 0.1843, -0.0136, -0.0223, 0.1843, -0.0217, -0.0217, 0.1843, 0.0258, -0.0258, 0.1777, 0.0162, -0.0266, 0.1777, 0.0217, -0.0217, 0.1843, 0.0217, -0.0217, 0.1843, 0.0162, -0.0266, 0.1777, 0.0136, -0.0223, 0.1843, -0.03, 0, 0.1777, -0.0258, 0.0258, 0.1777, -0.0252, 0, 0.1843, -0.0252, 0, 0.1843, -0.0258, 0.0258, 0.1777, -0.0217, 0.0217, 0.1843, -0.0162, -0.0266, 0.1777, -0.0258, -0.0258, 0.1777, -0.0136, -0.0223, 0.1843, -0.0136, -0.0223, 0.1843, -0.0258, -0.0258, 0.1777, -0.0217, -0.0217, 0.1843, -0.0162, 0.0266, 0.1777, -0.0162, -0.0266, 0.1777, -0.0136, 0.0223, 0.1843, -0.0136, 0.0223, 0.1843, -0.0162, -0.0266, 0.1777, -0.0136, -0.0223, 0.1843, 0.0162, 0.0266, 0.1777, 0.0258, 0.0258, 0.1777, 0.0136, 0.0223, 0.1843, 0.0136, 0.0223, 0.1843, 0.0258, 0.0258, 0.1777, 0.0217, 0.0217, 0.1843, 0.0258, 0.0258, 0.1777, 0.03, 0, 0.1777, 0.0217, 0.0217, 0.1843, 0.0217, 0.0217, 0.1843, 0.03, 0, 0.1777, 0.0252, 0, 0.1843, 0.0162, -0.0266, 0.1777, 0.0162, 0.0266, 0.1777, 0.0136, -0.0223, 0.1843, 0.0136, -0.0223, 0.1843, 0.0162, 0.0266, 0.1777, 0.0136, 0.0223, 0.1843, -0.0258, 0.0258, 0.1777, -0.0162, 0.0266, 0.1777, -0.0217, 0.0217, 0.1843, -0.0217, 0.0217, 0.1843, -0.0162, 0.0266, 0.1777, -0.0136, 0.0223, 0.1843, 0.0492, 0.0112, 0.0159, -0.0492, 0.0112, 0.0159, 0.0492, 0.0112, 0.011, 0.0492, 0.0112, 0.011, -0.0492, 0.0112, 0.0159, -0.0492, 0.0112, 0.011, 0.0492, 0.0112, 0.0159, 0.0506, 0, 0.0159, 0.0636, 0.0636, 0.0159, 0.0636, 0.0636, 0.0159, 0.0506, 0, 0.0159, 0.0655, 0, 0.0159, 0.0636, 0.0636, 0.0159, 0, 0.0655, 0.0159, 0.0492, 0.0112, 0.0159, 0.0506, 0, 0.0159, 0.0492, -0.0112, 0.0159, 0.0655, 0, 0.0159, 0.0492, 0.0112, 0.0159, 0, 0.0655, 0.0159, -0.0492, 0.0112, 0.0159, 0.0655, 0, 0.0159, 0.0492, -0.0112, 0.0159, 0.0636, -0.0636, 0.0159, -0.0492, 0.0112, 0.0159, 0, 0.0655, 0.0159, -0.0636, 0.0636, 0.0159, 0.0492, -0.0112, 0.0159, -0.0492, -0.0112, 0.0159, 0.0636, -0.0636, 0.0159, -0.0655, 0, 0.0159, -0.0492, 0.0112, 0.0159, -0.0636, 0.0636, 0.0159, 0.0636, -0.0636, 0.0159, -0.0492, -0.0112, 0.0159, 0, -0.0655, 0.0159, -0.0506, 0, 0.0159, -0.0492, 0.0112, 0.0159, -0.0655, 0, 0.0159, 0, -0.0655, 0.0159, -0.0492, -0.0112, 0.0159, -0.0636, -0.0636, 0.0159, -0.0492, -0.0112, 0.0159, -0.0506, 0, 0.0159, -0.0636, -0.0636, 0.0159, -0.0636, -0.0636, 0.0159, -0.0506, 0, 0.0159, -0.0655, 0, 0.0159, -0.0492, 0.0112, 0.0159, -0.0506, 0, 0.0159, -0.0492, 0.0112, 0.011, -0.0492, 0.0112, 0.011, -0.0506, 0, 0.0159, -0.0506, 0, 0.011, 0.0492, 0.0112, 0.011, -0.0492, 0.0112, 0.011, 0.0506, 0, 0.011, 0.0506, 0, 0.011, -0.0492, 0.0112, 0.011, 0.0492, -0.0112, 0.011, 0.0492, -0.0112, 0.011, -0.0492, 0.0112, 0.011, -0.0492, -0.0112, 0.011, -0.0492, -0.0112, 0.011, -0.0492, 0.0112, 0.011, -0.0506, 0, 0.011, -0.0506, 0, 0.0159, -0.0492, -0.0112, 0.0159, -0.0506, 0, 0.011, -0.0506, 0, 0.011, -0.0492, -0.0112, 0.0159, -0.0492, -0.0112, 0.011, -0.0492, -0.0112, 0.0159, 0.0492, -0.0112, 0.0159, -0.0492, -0.0112, 0.011, -0.0492, -0.0112, 0.011, 0.0492, -0.0112, 0.0159, 0.0492, -0.0112, 0.011, 0.0506, 0, 0.0159, 0.0492, 0.0112, 0.0159, 0.0506, 0, 0.011, 0.0506, 0, 0.011, 0.0492, 0.0112, 0.0159, 0.0492, 0.0112, 0.011, -0.0212, 0.0212, 0.0557, -0.0636, 0.0636, 0.0207, 0, 0.0376, 0.0448, 0.0212, 0.0212, 0.0557, 0, 0.0376, 0.0448, 0.0636, 0.0636, 0.0207, -0.0212, -0.0212, 0.0557, 0, -0.0376, 0.0448, -0.0636, -0.0636, 0.0207, 0.0212, -0.0212, 0.0557, 0.0636, -0.0636, 0.0207, 0, -0.0376, 0.0448, 0, 0.0376, 0.0448, 0, 0.0655, 0.0207, 0.0636, 0.0636, 0.0207, -0.0636, 0.0636, 0.0207, 0, 0.0655, 0.0207, 0, 0.0376, 0.0448, 0, -0.0376, 0.0448, 0, -0.0655, 0.0207, -0.0636, -0.0636, 0.0207, 0.0636, -0.0636, 0.0207, 0, -0.0655, 0.0207, 0, -0.0376, 0.0448)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqvb5"]
+[sub_resource type="Curve" id="Curve_hqqhj"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.0552209, 1.05012), 0.0, 0.0, 0, 0, Vector2(0.221888, 0.639778), -3.41808, -3.41808, 0, 0, Vector2(0.320281, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqa2w"]
 render_priority = 0
+shader = ExtResource("4_gqvb5")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnciq"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_sqa2w")
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_shade = 0.77566
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.778906
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_aqqmv"]
@@ -42,15 +68,20 @@ _limits = [0.0, 3.0, 0.0, 0.4]
 _data = [Vector2(0, 1.79176), 0.0, 0.0, 0, 0, Vector2(0.118474, 1.16484), -11.1061, -11.1061, 0, 0, Vector2(0.220482, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Curve" id="Curve_hqqhj"]
-_limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.0552209, 1.05012), 0.0, 0.0, 0, 0, Vector2(0.221888, 0.639778), -3.41808, -3.41808, 0, 0, Vector2(0.320281, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqywy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xmey"]
 render_priority = 0
+shader = ExtResource("4_gqvb5")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgunu"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_8xmey")
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_shade = 0.988419
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.10032
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uogsf"]
@@ -67,10 +98,20 @@ rough = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_r5lsd"]
 size = Vector3(0.192383, 0.361847, 0.265869)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3rpu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tb88g"]
 render_priority = 0
+shader = ExtResource("4_gqvb5")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xout"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_tb88g")
 shader = ExtResource("4_i5fvc")
-shader_parameter/color_shade = 0.100698
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.294969
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mciut"]
@@ -94,7 +135,7 @@ INVERT_KNEE = true
 FOOT = NodePath("Foot")
 LOWER_HITCMP = NodePath("Lower/Lower_Hittable/Hit_Component")
 UPPER_HITCMP = NodePath("Upper/Upper_Hittable/Hit_Component")
-DISMEMBER_HIP_TRIGGER = NodePath("Upper/Hip_Weakpoint/Hit_HP_Tracker-GIB")
+DISMEMBER_HIP_TRIGGER = NodePath("Hip/Hip_Weakpoint/Hit_HP_Tracker-GIB")
 DISMEMBER_KNEE_TRIGGER = NodePath("Upper/Knee_Weakpoint/Hit_HP_Tracker-GIB")
 DISMEMBER_ANKLE_TRIGGER = NodePath("Lower/Ankle_Weakpoint/Hit_HP_Tracker-GIB")
 DISMEMBER_UPPER_RB_MAKER = NodePath("Upper/Upper_RB_Maker")
@@ -112,7 +153,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 transform = Transform3D(1.5, 0, 0, 0, 1.35582, -0.641673, 0, 0.641673, 1.35582, 0, 0.107891, -0.218073)
 mesh = ExtResource("2_r5lsd")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_i5fvc")
+surface_material_override/0 = SubResource("ShaderMaterial_v3rpu")
 script = ExtResource("5_gqvb5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hip"]
@@ -121,12 +162,31 @@ shape = SubResource("ConcavePolygonShape3D_etld6")
 
 [node name="Hit_Weakpoint" type="Node" parent="Hip" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../Upper/Hip_Weakpoint")
+WEAKPOINT = NodePath("../Hip_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Hit_Impulse" type="Node" parent="Hip"]
 script = ExtResource("5_uogsf")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
+
+[node name="Hip_Weakpoint" type="Node3D" parent="Hip"]
+transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, -1.49012e-08, 1.49012e-08)
+script = ExtResource("6_246fb")
+DAMAGE_CURVE = SubResource("Curve_hqqhj")
+metadata/_custom_type_script = "uid://dcbvai1bpx5br"
+
+[node name="Hit_HP_Tracker-GIB" type="Node" parent="Hip/Hip_Weakpoint"]
+script = ExtResource("9_rnmof")
+MAX_HP = 12.0
+MINIMUM_DAMAGE_THRESHOLD = 2.0
+metadata/_custom_type_script = "uid://bk1iff825dehg"
+
+[node name="Hip_Pastel" type="Node" parent="Hip/Hip_Weakpoint" node_paths=PackedStringArray("PASTEL")]
+script = ExtResource("13_uqywy")
+PASTEL = NodePath("../../LegHip")
+MAX_HP = 12.0
+MINIMUM_DAMAGE_THRESHOLD = 2.0
+metadata/_custom_type_script = "uid://cijq708jlfumq"
 
 [node name="Upper" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -135,7 +195,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0, 0)
 mesh = ExtResource("4_mciut")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_gqvb5")
+surface_material_override/0 = SubResource("ShaderMaterial_xnciq")
 script = ExtResource("5_gqvb5")
 
 [node name="Upper_Hittable" type="Area3D" parent="Upper"]
@@ -159,7 +219,7 @@ metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Hit_Weakpoint2" type="Node" parent="Upper/Upper_Hittable" node_paths=PackedStringArray("WEAKPOINT")]
 script = ExtResource("6_na25b")
-WEAKPOINT = NodePath("../../Hip_Weakpoint")
+WEAKPOINT = NodePath("../../../Hip/Hip_Weakpoint")
 metadata/_custom_type_script = "uid://doc2jsm3goaj0"
 
 [node name="Knee_Weakpoint" type="Node3D" parent="Upper" node_paths=PackedStringArray("HIT_COMPONENTS")]
@@ -196,30 +256,12 @@ MAX_HP = 12.0
 MINIMUM_DAMAGE_THRESHOLD = 2.0
 metadata/_custom_type_script = "uid://cijq708jlfumq"
 
-[node name="Hip_Weakpoint" type="Node3D" parent="Upper"]
-script = ExtResource("6_246fb")
-DAMAGE_CURVE = SubResource("Curve_hqqhj")
-metadata/_custom_type_script = "uid://dcbvai1bpx5br"
-
-[node name="Hit_HP_Tracker-GIB" type="Node" parent="Upper/Hip_Weakpoint"]
-script = ExtResource("9_rnmof")
-MAX_HP = 12.0
-MINIMUM_DAMAGE_THRESHOLD = 2.0
-metadata/_custom_type_script = "uid://bk1iff825dehg"
-
-[node name="Hip_Pastel" type="Node" parent="Upper/Hip_Weakpoint" node_paths=PackedStringArray("PASTEL")]
-script = ExtResource("13_uqywy")
-PASTEL = NodePath("../../../Hip/LegHip")
-MAX_HP = 12.0
-MINIMUM_DAMAGE_THRESHOLD = 2.0
-metadata/_custom_type_script = "uid://cijq708jlfumq"
-
 [node name="Upper_RB_Maker" type="Node" parent="Upper" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
 script = ExtResource("10_oebdh")
 RIGIDBODY = NodePath("../../Gibs/Upper_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("..")
 NEW_CHILDREN = [NodePath("../LegUpper"), NodePath("../Knee_Weakpoint")]
-TO_BE_REMOVED = [NodePath("../Upper_Hittable"), NodePath("../Hip_Weakpoint")]
+TO_BE_REMOVED = [NodePath("../Upper_Hittable")]
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Lower" type="Node3D" parent="."]
@@ -229,7 +271,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.
 transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, -1.10081e-09, 0.0251835)
 mesh = ExtResource("3_aqqmv")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_uqywy")
+surface_material_override/0 = SubResource("ShaderMaterial_jgunu")
 script = ExtResource("5_gqvb5")
 
 [node name="Lower_Hittable" type="Area3D" parent="Lower"]
@@ -307,7 +349,7 @@ shape = SubResource("BoxShape3D_r5lsd")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.00720632, 0)
 mesh = ExtResource("1_1nd10")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_v3rpu")
+surface_material_override/0 = SubResource("ShaderMaterial_7xout")
 script = ExtResource("5_gqvb5")
 
 [node name="Hittable_Collider" type="Area3D" parent="Foot"]
