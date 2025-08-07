@@ -9,89 +9,20 @@
 [ext_resource type="ArrayMesh" uid="uid://c4hbr41ln06le" path="res://npc/enemy/totembot/assets/centrifuge_2.obj" id="4_tgbsm"]
 [ext_resource type="Script" uid="uid://bwo18jlxllnxw" path="res://gameobjects/world_interactive/joints/Rotator_1D.gd" id="6_qusij"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vw4s1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qusij"]
 render_priority = 0
 shader = ExtResource("2_wo5lt")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gntev"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuclj"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_vw4s1")
+next_pass = SubResource("ShaderMaterial_qusij")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.903365
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7us8c"]
-render_priority = 0
-shader = ExtResource("2_wo5lt")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2thkh"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_7us8c")
-shader = ExtResource("3_tgbsm")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.572992
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yjju"]
-render_priority = 0
-shader = ExtResource("2_wo5lt")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnh2d"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_6yjju")
-shader = ExtResource("3_tgbsm")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.235596
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_14nxl"]
-render_priority = 0
-shader = ExtResource("2_wo5lt")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_64ut6"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_14nxl")
-shader = ExtResource("3_tgbsm")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.31425
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t70uu"]
-render_priority = 0
-shader = ExtResource("2_wo5lt")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6ig8"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_t70uu")
-shader = ExtResource("3_tgbsm")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.235979
+shader_parameter/color_shade = 0.414606
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdqtr"]
@@ -107,8 +38,7 @@ next_pass = SubResource("ShaderMaterial_rdqtr")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.247903
+shader_parameter/color_shade = 0.723513
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61wgc"]
@@ -124,8 +54,7 @@ next_pass = SubResource("ShaderMaterial_61wgc")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.671149
+shader_parameter/color_shade = 0.748166
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_85kxx"]
@@ -141,8 +70,7 @@ next_pass = SubResource("ShaderMaterial_85kxx")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.292015
+shader_parameter/color_shade = 0.281838
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cpvug"]
@@ -158,8 +86,7 @@ next_pass = SubResource("ShaderMaterial_cpvug")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.968176
+shader_parameter/color_shade = 0.295959
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1g4f1"]
@@ -175,40 +102,101 @@ next_pass = SubResource("ShaderMaterial_1g4f1")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.802398
+shader_parameter/color_shade = 0.139446
 shader_parameter/life = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qusij"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vw4s1"]
 render_priority = 0
 shader = ExtResource("2_wo5lt")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuclj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gntev"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_qusij")
+next_pass = SubResource("ShaderMaterial_vw4s1")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.637759
+shader_parameter/color_shade = 0.956708
 shader_parameter/life = 1.0
 
-[node name="Centrifuge" type="Node3D" node_paths=PackedStringArray("GIMBAL", "CORE")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7us8c"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2thkh"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_7us8c")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.372842
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yjju"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnh2d"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_6yjju")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.291113
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14nxl"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64ut6"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_14nxl")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.693005
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t70uu"]
+render_priority = 0
+shader = ExtResource("2_wo5lt")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6ig8"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_t70uu")
+shader = ExtResource("3_tgbsm")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.301854
+shader_parameter/life = 1.0
+
+[node name="Centrifuge" type="Node3D" node_paths=PackedStringArray("GIMBAL")]
 script = ExtResource("1_tgbsm")
 GIMBAL = NodePath("Outer/Gimbal")
-CORE = NodePath("")
 
 [node name="Pastel_Colour_Mesh3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, 0)
 mesh = ExtResource("4_tgbsm")
-surface_material_override/0 = SubResource("ShaderMaterial_gntev")
-surface_material_override/1 = SubResource("ShaderMaterial_2thkh")
-surface_material_override/2 = SubResource("ShaderMaterial_wnh2d")
-surface_material_override/3 = SubResource("ShaderMaterial_64ut6")
-surface_material_override/4 = SubResource("ShaderMaterial_i6ig8")
+surface_material_override/0 = SubResource("ShaderMaterial_tuclj")
+surface_material_override/1 = SubResource("ShaderMaterial_wmfio")
+surface_material_override/2 = SubResource("ShaderMaterial_546c6")
+surface_material_override/3 = SubResource("ShaderMaterial_oql4u")
+surface_material_override/4 = SubResource("ShaderMaterial_oiyqh")
 script = ExtResource("2_fgn0f")
 metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
 
@@ -224,11 +212,11 @@ metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0106923, -4.08282e-09, -0.093404)
 mesh = ExtResource("3_wo5lt")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_wmfio")
-surface_material_override/1 = SubResource("ShaderMaterial_546c6")
-surface_material_override/2 = SubResource("ShaderMaterial_oql4u")
-surface_material_override/3 = SubResource("ShaderMaterial_oiyqh")
-surface_material_override/4 = SubResource("ShaderMaterial_ife3o")
+surface_material_override/0 = SubResource("ShaderMaterial_ife3o")
+surface_material_override/1 = SubResource("ShaderMaterial_gntev")
+surface_material_override/2 = SubResource("ShaderMaterial_2thkh")
+surface_material_override/3 = SubResource("ShaderMaterial_wnh2d")
+surface_material_override/4 = SubResource("ShaderMaterial_64ut6")
 script = ExtResource("2_fgn0f")
 metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
 
@@ -243,6 +231,6 @@ ROTATION_ACCELERATION = 6.28319
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, 0)
 mesh = ExtResource("1_bnjpc")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_tuclj")
+surface_material_override/0 = SubResource("ShaderMaterial_i6ig8")
 script = ExtResource("2_fgn0f")
 metadata/_custom_type_script = "uid://d3wk5mrnj1hx"

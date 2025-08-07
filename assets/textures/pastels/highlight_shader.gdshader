@@ -11,7 +11,7 @@ void vertex() {
 }
 
 void fragment() {
-	float highlight = sin((FRAGCOORD.x + -FRAGCOORD.y) * 1.0f + -TIME * 8.0f);
+	float highlight = sin((FRAGCOORD.x + -FRAGCOORD.y) * 0.4f + -TIME * 8.0f);
 	highlight = tanh(8.0f*highlight - 4.0f);
 	highlight = highlight * 0.5f + 0.5f;
 	

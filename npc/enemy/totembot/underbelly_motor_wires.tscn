@@ -19,8 +19,7 @@ next_pass = SubResource("ShaderMaterial_g4u0i")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.553684
+shader_parameter/color_shade = 0.188239
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qk44f"]
@@ -36,8 +35,7 @@ next_pass = SubResource("ShaderMaterial_qk44f")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.201695
+shader_parameter/color_shade = 0.00873397
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qncda"]
@@ -53,8 +51,7 @@ next_pass = SubResource("ShaderMaterial_qncda")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.948937
+shader_parameter/color_shade = 0.979696
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0fvm0"]
@@ -70,8 +67,7 @@ next_pass = SubResource("ShaderMaterial_0fvm0")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.232901
+shader_parameter/color_shade = 0.861836
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77fe3"]
@@ -87,8 +83,7 @@ next_pass = SubResource("ShaderMaterial_77fe3")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.61946
+shader_parameter/color_shade = 0.401401
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fvapr"]
@@ -104,8 +99,7 @@ next_pass = SubResource("ShaderMaterial_fvapr")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.297733
+shader_parameter/color_shade = 0.265938
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lb71g"]
@@ -121,8 +115,7 @@ next_pass = SubResource("ShaderMaterial_lb71g")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.176574
+shader_parameter/color_shade = 0.577894
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ys1jj"]
@@ -138,8 +131,7 @@ next_pass = SubResource("ShaderMaterial_ys1jj")
 shader = ExtResource("2_g4u0i")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/transparency = 1.0
-shader_parameter/color_shade = 0.0632533
+shader_parameter/color_shade = 0.444718
 shader_parameter/life = 1.0
 
 [node name="UnderbellyMotorWires" type="Node3D"]
