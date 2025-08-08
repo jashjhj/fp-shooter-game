@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cfwnkxffdyvsp"]
+[gd_scene load_steps=60 format=3 uid="uid://cfwnkxffdyvsp"]
 
 [ext_resource type="ArrayMesh" uid="uid://vcljykjci00t" path="res://npc/enemy/totembot/assets/centrifuge_0.obj" id="1_bnjpc"]
 [ext_resource type="Script" uid="uid://dw4ngkl1ratab" path="res://npc/enemy/totembot/centrifuge.gd" id="1_tgbsm"]
@@ -15,11 +15,12 @@
 [ext_resource type="Script" uid="uid://conk5jecg1545" path="res://false_physics/triggerables/Trig_Propogate.gd" id="12_546c6"]
 [ext_resource type="Script" uid="uid://dcbvai1bpx5br" path="res://gameobjects/world_interactive/hit_effects/Hittables/Weakpoint.gd" id="12_gntev"]
 [ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="12_oql4u"]
+[ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="13_2thkh"]
 [ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="13_7us8c"]
 [ext_resource type="Script" uid="uid://d2fgde7cprrqg" path="res://false_physics/triggerables/Trig_Destroy_Body_Segment.gd" id="14_2thkh"]
 [ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="14_cpvug"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="15_oiyqh"]
-[ext_resource type="Script" uid="uid://du8l836u486x5" path="res://scripts/debug/pos_logger.gd" id="16_cpvug"]
+[ext_resource type="Script" uid="uid://dsjmnf5wst7es" path="res://false_physics/triggerables/Trig_Free.gd" id="19_7us8c"]
 [ext_resource type="Script" uid="uid://c82vodcg2hnt" path="res://gameobjects/world_interactive/joints/Persistent_Hinge.gd" id="19_gntev"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61wgc"]
@@ -366,9 +367,23 @@ script = ExtResource("12_gntev")
 DAMAGE_CURVE = SubResource("Curve_6yjju")
 metadata/_custom_type_script = "uid://dcbvai1bpx5br"
 
+[node name="Hit_Pastel" type="Node" parent="Outer/Gimbal/Inner/Weakpoint-Destroy core" node_paths=PackedStringArray("PASTEL")]
+script = ExtResource("13_2thkh")
+PASTEL = NodePath("../../Pastel_Colour_Mesh")
+MAX_HP = 9.5
+MINIMUM_DAMAGE_THRESHOLD = 0.0
+metadata/_custom_type_script = "uid://cijq708jlfumq"
+
+[node name="Hit_Pastel2" type="Node" parent="Outer/Gimbal/Inner/Weakpoint-Destroy core" node_paths=PackedStringArray("PASTEL")]
+script = ExtResource("13_2thkh")
+PASTEL = NodePath("../../../Pastel_Colour_Mesh2")
+MAX_HP = 9.5
+MINIMUM_DAMAGE_THRESHOLD = 0.0
+metadata/_custom_type_script = "uid://cijq708jlfumq"
+
 [node name="Hit_Trigger_On_HP0" type="Node" parent="Outer/Gimbal/Inner/Weakpoint-Destroy core"]
 script = ExtResource("13_7us8c")
-MAX_HP = 1.0
+MAX_HP = 9.5
 MINIMUM_DAMAGE_THRESHOLD = 0.0
 metadata/_custom_type_script = "uid://xruf68qvcqcm"
 
@@ -387,6 +402,7 @@ RIGIDBODY = NodePath("../../Outer_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("../../Outer")
 NEW_CHILDREN = [NodePath("../../Outer/Pastel_ColourMesh")]
 TO_BE_REMOVED = [NodePath("../../Outer/Hittable_Collider")]
+collision_layer = 512
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Trig_Make_Rigidbody2" type="Node" parent="Gib" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
@@ -395,6 +411,7 @@ RIGIDBODY = NodePath("../../Gimbal_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("../../Outer/Gimbal")
 NEW_CHILDREN = [NodePath("../../Outer/Gimbal/Pastel_Colour_Mesh2")]
 TO_BE_REMOVED = [NodePath("../../Outer/Gimbal/Hittable_Collider")]
+collision_layer = 512
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Trig_Make_Rigidbody3" type="Node" parent="Gib" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
@@ -403,6 +420,7 @@ RIGIDBODY = NodePath("../../Inner_Gib")
 RIGIDBODY_BASIS_CLONE = NodePath("../../Outer/Gimbal/Inner")
 NEW_CHILDREN = [NodePath("../../Outer/Gimbal/Inner/Pastel_Colour_Mesh")]
 TO_BE_REMOVED = [NodePath("../../Outer/Gimbal/Inner/Hittable_Collider")]
+collision_layer = 512
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
 [node name="Outer_Gib" type="RigidBody3D" parent="."]
@@ -456,12 +474,27 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, 0)
 shape = SubResource("ConcavePolygonShape3D_546c6")
 
-[node name="Hit_Impulse" type="Node" parent="Outer_Gib/Hittable_Collider" node_paths=PackedStringArray("IMPULSE_TO")]
-script = ExtResource("14_cpvug")
+[node name="Hit_Impulse_Repro" type="Node" parent="Outer_Gib/Hittable_Collider" node_paths=PackedStringArray("IMPULSE_TO")]
+script = ExtResource("8_wmfio")
+DISABLE_UPSTREAM = true
 IMPULSE_TO = NodePath("../..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
+[node name="Hit_Trigger_On_HP0" type="Node" parent="Outer_Gib/Hittable_Collider" node_paths=PackedStringArray("TRIGGERABLES")]
+script = ExtResource("13_7us8c")
+TRIGGERABLES = [NodePath("Trig_Free")]
+MAX_HP = 3.0
+metadata/_custom_type_script = "uid://xruf68qvcqcm"
+
+[node name="Trig_Free" type="Node" parent="Outer_Gib/Hittable_Collider/Hit_Trigger_On_HP0" node_paths=PackedStringArray("TO_FREE")]
+script = ExtResource("19_7us8c")
+TO_FREE = [NodePath("../../../Persistent_Hinge")]
+metadata/_custom_type_script = "uid://dsjmnf5wst7es"
+
 [node name="Persistent_Hinge" type="HingeJoint3D" parent="Outer_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00651285, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../Gimbal_Gib")
 script = ExtResource("19_gntev")
 NODE_A = NodePath("..")
 NODE_B = NodePath("../../Gimbal_Gib")
@@ -471,6 +504,10 @@ metadata/_custom_type_script = "uid://c82vodcg2hnt"
 mass = 0.4
 script = ExtResource("15_oiyqh")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
+
+[node name="Hit_Impulse" type="Node" parent="Gimbal_Gib"]
+script = ExtResource("14_cpvug")
+metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
 [node name="Hittable_Collider" type="Area3D" parent="Gimbal_Gib"]
 script = ExtResource("12_61wgc")
@@ -482,7 +519,7 @@ shape = SubResource("ConcavePolygonShape3D_85kxx")
 
 [node name="Hit_Impulse_Propogate" type="Node" parent="Gimbal_Gib/Hittable_Collider" node_paths=PackedStringArray("IMPULSE_UPSTREAMS", "IMPULSE_TO")]
 script = ExtResource("8_wmfio")
-IMPULSE_UPSTREAMS = [NodePath("../../../Outer_Gib/Hittable_Collider/Hit_Impulse")]
+IMPULSE_UPSTREAMS = [NodePath("../../../Outer_Gib/Hittable_Collider/Hit_Impulse_Repro"), NodePath("../../Hit_Impulse")]
 IMPULSE_TO = NodePath("../..")
 metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
@@ -490,12 +527,8 @@ metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, -4.44089e-16)
 shape = SubResource("ConvexPolygonShape3D_oql4u")
 
-[node name="Position_Logger" type="Node3D" parent="Gimbal_Gib"]
-script = ExtResource("16_cpvug")
-metadata/_custom_type_script = "uid://du8l836u486x5"
-
 [node name="Persistent_Hinge" type="HingeJoint3D" parent="Gimbal_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
-transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
 node_a = NodePath("..")
 node_b = NodePath("../../Inner_Gib")
 script = ExtResource("19_gntev")
@@ -509,6 +542,11 @@ mass = 3.1
 script = ExtResource("15_oiyqh")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
+[node name="Hit_Impulse" type="Node" parent="Inner_Gib" node_paths=PackedStringArray("IMPULSE_TO")]
+script = ExtResource("14_cpvug")
+IMPULSE_TO = NodePath("..")
+metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inner_Gib"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, 0)
 shape = SubResource("ConvexPolygonShape3D_anb6g")
@@ -521,8 +559,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106923, 0.093404, 0)
 shape = SubResource("ConcavePolygonShape3D_oql4u")
 
-[node name="Hit_Impulse_Propogate" type="Node" parent="Inner_Gib/Hittable_Collider" node_paths=PackedStringArray("IMPULSE_UPSTREAMS", "IMPULSE_TO")]
+[node name="Hit_Impulse_Propogate" type="Node" parent="Inner_Gib/Hittable_Collider" node_paths=PackedStringArray("IMPULSE_UPSTREAMS")]
 script = ExtResource("8_wmfio")
-IMPULSE_UPSTREAMS = [NodePath("../../../Gimbal_Gib/Hittable_Collider/Hit_Impulse_Propogate")]
-IMPULSE_TO = NodePath("../..")
+IMPULSE_UPSTREAMS = [NodePath("../../../Gimbal_Gib/Hittable_Collider/Hit_Impulse_Propogate"), NodePath("../../Hit_Impulse")]
 metadata/_custom_type_script = "uid://dq4im1txeg8kn"

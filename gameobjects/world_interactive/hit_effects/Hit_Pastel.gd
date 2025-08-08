@@ -50,8 +50,11 @@ func enable_highlight():
 
 func disable_highlight():
 	
+	is_damage_highlight_on = false
+	
+	if(PASTEL == null): return
+	
 	PASTEL.HIGHLIGHT_ENABLED = highlight_enabled
 	PASTEL.HIGHLIGHT_THROUGH_OBJECTS = highlight_through
 	PASTEL.HIGHLIGHT_COLOUR = highlight_color
 	
-	is_damage_highlight_on = false

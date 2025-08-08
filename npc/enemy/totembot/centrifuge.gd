@@ -37,7 +37,7 @@ func apply_random_impulse():
 
 
 func destroy():
-	print("kapow")
+	#print("kapow")
 	$Gib.trigger()
 	BODY.IS_CONTROLLED_COM_ACTIVE = false
 	

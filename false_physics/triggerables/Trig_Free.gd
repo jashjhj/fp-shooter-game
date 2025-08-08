@@ -10,4 +10,3 @@ func trigger():
 	for f in TO_FREE:
 		if(f != null):
 			f.queue_free()
-			
