@@ -30,7 +30,11 @@ func _physics_process(delta: float) -> void:
 
 ##Adds mass (default to what is set) to associated rigidbody
 func add_mass(mass_to_add:float = MASS, at:Vector3 = global_position):
-	BODY.center_of_mass = (BODY.center_of_mass * BODY.mass + BODY.to_local(at) * mass_to_add) / (BODY.mass + mass_to_add)
+	if(BODY is Grand_Body):
+		BODY.COM = (BODY.COM * BODY.mass + BODY.to_local(at) * mass_to_add) / (BODY.mass + mass_to_add)
+	else:
+		BODY.center_of_mass = (BODY.center_of_mass * BODY.mass + BODY.to_local(at) * mass_to_add) / (BODY.mass + mass_to_add)
+	
 	BODY.mass += mass_to_add
 	IS_ADDED = true
 

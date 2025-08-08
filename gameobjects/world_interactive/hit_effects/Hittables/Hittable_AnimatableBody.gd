@@ -16,3 +16,11 @@ func _ready() -> void:
 	for child in get_children():
 		if(child is Hit_Component and !HIT_COMPONENTS.has(child)):
 			HIT_COMPONENTS.append(child)
+
+
+var linear_velocity:Vector3;
+var angular_velocity:Vector3;
+
+func _physics_process(delta: float) -> void:
+	linear_velocity = PhysicsServer3D.body_get_state(get_rid(), PhysicsServer3D.BODY_STATE_LINEAR_VELOCITY)
+	angular_velocity = PhysicsServer3D.body_get_state(get_rid(), PhysicsServer3D.BODY_STATE_ANGULAR_VELOCITY)

@@ -1,5 +1,6 @@
 extends LegBot
 
+@export var IS_ACTIVE:bool = true
 
 @export var SEEKING_CAMERA_GUN:Seeking_Camera;
 @export var SEEKING_CAMERA_CAM:Seeking_Camera
@@ -12,6 +13,7 @@ extends LegBot
 
 
 func _physics_process(delta: float) -> void:
+	if(!IS_ACTIVE): return
 	super._physics_process(delta)
 	
 	

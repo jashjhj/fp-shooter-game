@@ -21,6 +21,6 @@ func hit(damage:float):
 			return
 	
 	
-	if IMPULSE_TO == null: return
+	if IMPULSE_TO == null or !IMPULSE_TO is RigidBody3D: return
 	IMPULSE_TO.apply_impulse(last_impulse, last_impulse_pos - IMPULSE_TO.global_position)
 	

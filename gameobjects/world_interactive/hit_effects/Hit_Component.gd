@@ -1,7 +1,7 @@
 class_name Hit_Component extends Node
 
 
-var previous_damage:float = 0;
+var last_damage:float = 0;
 
 ##Emitted after any hit.
 signal on_hit
@@ -17,7 +17,7 @@ func _ready() -> void:
 func trigger(damage:float, impulse:Vector3 = Vector3.ZERO, impulse_pos:Vector3 = Vector3.ZERO) -> void:
 	last_impulse = impulse
 	last_impulse_pos = impulse_pos
-	
+	last_damage = damage
 	
 	
 	on_hit.emit()

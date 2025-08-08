@@ -20,20 +20,20 @@
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="13_y2jxi"]
 [ext_resource type="Script" uid="uid://c82vodcg2hnt" path="res://gameobjects/world_interactive/joints/Persistent_Hinge.gd" id="15_etld6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqywy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqvb5"]
 render_priority = 0
 shader = ExtResource("4_gqvb5")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3rpu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqywy"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_uqywy")
+next_pass = SubResource("ShaderMaterial_gqvb5")
 shader = ExtResource("4_i5fvc")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.649036
+shader_parameter/color_shade = 0.153742
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_etld6"]
@@ -44,20 +44,20 @@ _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.0552209, 1.05012), 0.0, 0.0, 0, 0, Vector2(0.221888, 0.639778), -3.41808, -3.41808, 0, 0, Vector2(0.320281, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqa2w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3rpu"]
 render_priority = 0
 shader = ExtResource("4_gqvb5")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnciq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqa2w"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_sqa2w")
+next_pass = SubResource("ShaderMaterial_v3rpu")
 shader = ExtResource("4_i5fvc")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.778906
+shader_parameter/color_shade = 0.41754
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_aqqmv"]
@@ -68,20 +68,20 @@ _limits = [0.0, 3.0, 0.0, 0.4]
 _data = [Vector2(0, 1.79176), 0.0, 0.0, 0, 0, Vector2(0.118474, 1.16484), -11.1061, -11.1061, 0, 0, Vector2(0.220482, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xmey"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnciq"]
 render_priority = 0
 shader = ExtResource("4_gqvb5")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgunu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xmey"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_8xmey")
+next_pass = SubResource("ShaderMaterial_xnciq")
 shader = ExtResource("4_i5fvc")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.10032
+shader_parameter/color_shade = 0.814847
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uogsf"]
@@ -98,20 +98,20 @@ rough = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_r5lsd"]
 size = Vector3(0.192383, 0.361847, 0.265869)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tb88g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgunu"]
 render_priority = 0
 shader = ExtResource("4_gqvb5")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xout"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tb88g"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_tb88g")
+next_pass = SubResource("ShaderMaterial_jgunu")
 shader = ExtResource("4_i5fvc")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.294969
+shader_parameter/color_shade = 0.575187
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mciut"]
@@ -153,7 +153,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 transform = Transform3D(1.5, 0, 0, 0, 1.35582, -0.641673, 0, 0.641673, 1.35582, 0, 0.107891, -0.218073)
 mesh = ExtResource("2_r5lsd")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_v3rpu")
+surface_material_override/0 = SubResource("ShaderMaterial_uqywy")
 script = ExtResource("5_gqvb5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hip"]
@@ -195,7 +195,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0, 0)
 mesh = ExtResource("4_mciut")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_xnciq")
+surface_material_override/0 = SubResource("ShaderMaterial_sqa2w")
 script = ExtResource("5_gqvb5")
 
 [node name="Upper_Hittable" type="Area3D" parent="Upper"]
@@ -271,7 +271,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.
 transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, -1.10081e-09, 0.0251835)
 mesh = ExtResource("3_aqqmv")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_jgunu")
+surface_material_override/0 = SubResource("ShaderMaterial_8xmey")
 script = ExtResource("5_gqvb5")
 
 [node name="Lower_Hittable" type="Area3D" parent="Lower"]
@@ -349,7 +349,7 @@ shape = SubResource("BoxShape3D_r5lsd")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.00720632, 0)
 mesh = ExtResource("1_1nd10")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_7xout")
+surface_material_override/0 = SubResource("ShaderMaterial_tb88g")
 script = ExtResource("5_gqvb5")
 
 [node name="Hittable_Collider" type="Area3D" parent="Foot"]

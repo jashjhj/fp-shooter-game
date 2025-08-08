@@ -10,8 +10,8 @@ class_name Bullet extends Node3D
 
 @onready var FORWARDS_RAY:RayCast3D = $RayCast3D;
 
- #                     FLOOR + NPC + NPC_PHYSICS + NPC_HITTABLES + Debris
-const BULLET_HIT_MASK = 1+ + 32 + 0 + 128 + 8192 + 16384 
+ #                     FLOOR + NPC + NPC_HITTABLES + Debris
+const BULLET_HIT_MASK = 1 + 32 + 0 + 128 + 8192 + 16384 
 
 var lifetime_start:int;
 
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 
 func process_bullet_step(delta:float, draw_trail:bool = false) -> void:
 	
-	
+	if(delta == 0): return
 	FORWARDS_RAY.look_at(global_position - velocity*delta) # because forwards is -Z
 	FORWARDS_RAY.force_raycast_update()
 	if(FORWARDS_RAY.get_collider() != null): # Going to hit an object.
@@ -157,6 +157,11 @@ func hit_object() -> int:
 			if(hittable != null):
 				hittable.trigger(damage, impulse, impulse_pos);
 	
+	elif(collider is Hittable_AnimatableBody):
+		for hittable in collider.HIT_COMPONENTS:
+			if(hittable != null):#
+				hittable.trigger(damage, impulse, impulse_pos)
+	
 	elif(collider is RigidBody3D):
 		if(collider is Hittable_RB):
 			for hittable in collider.HIT_COMPONENTS:
@@ -167,13 +172,15 @@ func hit_object() -> int:
 			
 			collider.apply_impulse(impulse, impulse_pos - collider.global_position)
 	
+
+	
 	
 	#add bullet hole
 	var bullet_hole_inst = preload("res://gameobjects/bullets/hole/bullet_hole.tscn").instantiate()
 	collider.add_child(bullet_hole_inst);
 	Globals.RUBBISH_COLLECTOR.add_rubbish(bullet_hole_inst);
 	bullet_hole_inst.global_position = FORWARDS_RAY.get_collision_point() + collision_normal * 0.01;
-	if(collision_normal.dot(Vector3.RIGHT) != 0):
+	if(Vector3.UP.cross(collision_normal) != Vector3.ZERO):
 		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.UP.cross(collision_normal), collision_normal);
 	else: # normal is vertical, therefore use RIGHT to generate perpendicularity
 		bullet_hole_inst.look_at(bullet_hole_inst.global_position + Vector3.RIGHT.cross(collision_normal), collision_normal);
