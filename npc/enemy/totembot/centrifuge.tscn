@@ -491,6 +491,12 @@ script = ExtResource("19_7us8c")
 TO_FREE = [NodePath("../../../Persistent_Hinge")]
 metadata/_custom_type_script = "uid://dsjmnf5wst7es"
 
+[node name="Hit_Pastel" type="Node" parent="Outer_Gib/Hittable_Collider" node_paths=PackedStringArray("PASTEL")]
+script = ExtResource("13_2thkh")
+PASTEL = NodePath("../../../Outer/Pastel_ColourMesh")
+MAX_HP = 3.0
+metadata/_custom_type_script = "uid://cijq708jlfumq"
+
 [node name="Persistent_Hinge" type="HingeJoint3D" parent="Outer_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00651285, 0)
 node_a = NodePath("..")
