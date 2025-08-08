@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=3 uid="uid://c601y42ahg3h1"]
+[gd_scene load_steps=156 format=3 uid="uid://c601y42ahg3h1"]
 
 [ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
 [ext_resource type="Script" uid="uid://7pwyk2ptdcl3" path="res://npc/enemy/totembot/grand_body.gd" id="2_0adce"]
@@ -57,6 +57,22 @@
 [ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/hit_effects/Hit_Free.gd" id="49_0by5d"]
 [ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="51_kms4a"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1vp5"]
+render_priority = 0
+shader = ExtResource("8_ealnf")
+shader_parameter/emission = 0.5
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uadq"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_e1vp5")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.317214
+shader_parameter/life = 1.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0adce"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
@@ -72,6 +88,9 @@ shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.42665
 shader_parameter/life = 1.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0adce"]
+points = PackedVector3Array(-0.0124515, 0.0723839, -0.092152, -0.0124515, 0.131956, -0.092152, 0.0334833, 0.0723839, -0.07985, 0.0231057, 0.069202, -0.0618647, -0.0124515, 0.069202, -0.071379, -0.0479907, 0.069202, -0.0618647, -0.0583683, 0.0723839, -0.07985, -0.0583683, 0.131956, -0.07985, 0.0334833, 0.131956, -0.07985, 0.067116, 0.0723839, -0.0462355, 0.0491306, 0.069202, -0.03584, -0.0740156, 0.069202, -0.03584, -0.092001, 0.0723839, -0.0462355, -0.092001, 0.131956, -0.0462355, 0.067116, 0.131956, -0.0462355, 0.079436, 0.0723839, -0.000283003, 0.0586449, 0.069202, -0.000283003, -0.0835298, 0.069202, -0.000283003, -0.104303, 0.0723839, -0.000283003, -0.104303, 0.131956, -0.000283003, 0.079436, 0.131956, -0.000283003, 0.067116, 0.0723839, 0.0456335, 0.0491306, 0.069202, 0.035256, -0.0740156, 0.069202, 0.035256, -0.092001, 0.0723839, 0.0456335, -0.092001, 0.131956, 0.0456335, 0.067116, 0.131956, 0.0456335, 0.0334833, 0.0723839, 0.079266, 0.0231057, 0.069202, 0.0612807, -0.0479907, 0.069202, 0.0612807, -0.0583683, 0.0723839, 0.079266, -0.0583683, 0.131956, 0.079266, 0.0334833, 0.131956, 0.079266, -0.0124515, 0.0723839, 0.091586, -0.0124515, 0.069202, 0.070795, -0.0124515, 0.131956, 0.091586)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ealnf"]
 render_priority = 0
@@ -89,21 +108,8 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.15383
 shader_parameter/life = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1vp5"]
-render_priority = 0
-shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.5
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uadq"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_e1vp5")
-shader = ExtResource("4_0adce")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.317214
-shader_parameter/life = 1.0
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1hdur"]
+points = PackedVector3Array(-0.008874, 0.116548, 0.102227, -0.0106978, 0.116548, 0.108988, -0.008874, 0.067319, 0.102227, -0.0112057, 0.113512, 0.0992027, -0.0624849, 0.113512, 0.0853906, -0.066017, 0.116548, 0.0868391, -0.0142299, 0.113512, 0.110437, -0.0106978, 0.067319, 0.108988, -0.067835, 0.116548, 0.0936031, -0.0112057, 0.07035, 0.0992027, -0.066017, 0.067319, 0.0868391, -0.0624849, 0.07035, 0.0853906, -0.0207632, 0.102675, 0.0885047, -0.0488412, 0.102675, 0.080944, -0.0266962, 0.102675, 0.110538, -0.0142299, 0.07035, 0.110437, -0.0655091, 0.113512, 0.0966274, -0.067835, 0.067319, 0.0936031, -0.0207632, 0.0811875, 0.0885047, -0.0488412, 0.0811875, 0.080944, -0.0266962, 0.0811875, 0.110538, -0.0547742, 0.102675, 0.102974, -0.0655091, 0.07035, 0.0966274, -0.0547742, 0.0811875, 0.102974)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f41kg"]
 render_priority = 0
@@ -667,21 +673,6 @@ script = ExtResource("2_0adce")
 
 [node name="Underbelly" type="Node3D" parent="Body"]
 
-[node name="Motor" type="MeshInstance3D" parent="Body/Underbelly"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0149403, 0, -1.33576e-09)
-mesh = ExtResource("3_eqw71")
-surface_material_override/0 = SubResource("ShaderMaterial_1hdur")
-script = ExtResource("41_hufde")
-metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
-
-[node name="Motor_Node" type="MeshInstance3D" parent="Body/Underbelly"]
-transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0.0104967, 7.45058e-09, 0.00850562)
-mesh = ExtResource("6_0adce")
-surface_material_override/0 = SubResource("ShaderMaterial_ily6p")
-script = ExtResource("41_hufde")
-HIGHLIGHT_ENABLED = true
-metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
-
 [node name="Battery" type="MeshInstance3D" parent="Body/Underbelly"]
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("7_1hdur")
@@ -699,6 +690,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0843814, 0)
 BODY = NodePath("../..")
 STABILISER = NodePath("../../Angular_Damper")
 IMPULSE_UPSTREAMS = [NodePath("../../Hit_Impulse")]
+
+[node name="Motor" type="Area3D" parent="Body/Underbelly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.106658, 0)
+collision_layer = 128
+collision_mask = 0
+
+[node name="Hit_Impulse_Propogate" type="Node" parent="Body/Underbelly/Motor" node_paths=PackedStringArray("IMPULSE_UPSTREAMS")]
+script = ExtResource("41_fk2tk")
+IMPULSE_UPSTREAMS = [NodePath("../../../Hit_Impulse")]
+metadata/_custom_type_script = "uid://dq4im1txeg8kn"
+
+[node name="Mesh" type="MeshInstance3D" parent="Body/Underbelly/Motor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0149403, -0.106658, -1.33576e-09)
+mesh = ExtResource("3_eqw71")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_1hdur")
+script = ExtResource("41_hufde")
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Underbelly/Motor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0149403, -0.106658, -1.33576e-09)
+shape = SubResource("ConvexPolygonShape3D_0adce")
+
+[node name="Motor_node" type="Area3D" parent="Body/Underbelly"]
+script = ExtResource("6_gc2rj")
+metadata/_custom_type_script = "uid://c5uhnese0dn4n"
+
+[node name="Motor_Node" type="MeshInstance3D" parent="Body/Underbelly/Motor_node"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0.0104967, 7.45058e-09, 0.00850562)
+mesh = ExtResource("6_0adce")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_ily6p")
+script = ExtResource("41_hufde")
+HIGHLIGHT_ENABLED = true
+metadata/_custom_type_script = "uid://d3wk5mrnj1hx"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Underbelly/Motor_node"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0.0104967, 7.45058e-09, 0.00850562)
+shape = SubResource("ConvexPolygonShape3D_1hdur")
 
 [node name="Hit_Impulse" type="Node" parent="Body" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("7_5jvjh")
