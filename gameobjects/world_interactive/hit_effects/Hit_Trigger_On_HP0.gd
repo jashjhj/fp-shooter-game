@@ -9,8 +9,6 @@ func _ready() -> void:
 		if(c is Triggerable and !TRIGGERABLES.has(c)):
 			TRIGGERABLES.append(c)
 	
-	for t in TRIGGERABLES:
-		on_hp_becomes_negative.connect(t.trigger)
 	
 	on_hp_becomes_negative.connect(call_triggers)
 

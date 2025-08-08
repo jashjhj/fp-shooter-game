@@ -23,6 +23,7 @@ func  _ready() -> void:
 
 func trigger():
 	super.trigger()
+	#print(get_path())
 	
 	is_rb_active = true
 	
@@ -52,6 +53,7 @@ func trigger():
 		if(c != null):
 			c.queue_free()
 	
+	RIGIDBODY.top_level = true
 
 func enable_rb_processing():
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_INHERIT

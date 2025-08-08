@@ -10,3 +10,7 @@ class_name Body_Segment extends Node3D
 func _ready() -> void:
 	if(IMPULSE_PROPOGATOR != null):
 		IMPULSE_PROPOGATOR.IMPULSE_UPSTREAMS.append_array(IMPULSE_UPSTREAMS)
+
+##Called to 'destory' part - trigger gibs, etc.
+func destroy() -> void:
+	pass

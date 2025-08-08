@@ -14,7 +14,7 @@ var HP:float:
 			on_hp_becomes_negative.emit()
 		on_hp_change.emit()
 
-@onready var is_hp_positive:bool = MAX_HP >= 0
+@onready var is_hp_positive:bool;
 
 
 ##Emitted after a hit which reduces HP to <0
@@ -25,6 +25,7 @@ signal on_hp_change
 func _ready() -> void:
 	super()
 	HP = MAX_HP
+	if(HP > 0): is_hp_positive = true
 
 ## || Please call super.hit() before processing if extending this class
 func hit(damage:float) -> void:

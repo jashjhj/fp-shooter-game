@@ -36,6 +36,12 @@ func apply_random_impulse():
 	
 
 
+func destroy():
+	print("kapow")
+	$Gib.trigger()
+	BODY.IS_CONTROLLED_COM_ACTIVE = false
+	
+
 func _physics_process(delta: float) -> void:
 	pass
 	#GIMBAL.rotate(basis.z, GIMBAL_SPIN_SPEED * delta)
