@@ -28,6 +28,8 @@ func trigger():
 	is_rb_active = true
 	
 	if(RIGIDBODY_BASIS_CLONE != null):
+		
+		RIGIDBODY.top_level = true
 		RIGIDBODY.global_transform = RIGIDBODY_BASIS_CLONE.global_transform
 	else:
 		push_error("No basis to apply rigidbody to.")
@@ -42,10 +44,10 @@ func trigger():
 			c.call_deferred("reparent", RIGIDBODY)
 	
 	Globals.RUBBISH_COLLECTOR.add_rubbish(RIGIDBODY)
-	enable_rb_processing()
 	
-	for i in range(0, len(impulses)):
-		RIGIDBODY.apply_impulse(impulses[i], impulses_pos[i] - RIGIDBODY.global_position)
+	call_deferred("enable_rb_processing")
+	
+	
 	
 	
 	#Clears removables finally
@@ -53,10 +55,11 @@ func trigger():
 		if(c != null):
 			c.queue_free()
 	
-	RIGIDBODY.top_level = true
 
 func enable_rb_processing():
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_INHERIT
+	for i in range(0, len(impulses)):
+		RIGIDBODY.apply_impulse(impulses[i], impulses_pos[i] - RIGIDBODY.global_position)
 
 #Impulses handling
 

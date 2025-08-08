@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cfwnkxffdyvsp"]
+[gd_scene load_steps=59 format=3 uid="uid://cfwnkxffdyvsp"]
 
 [ext_resource type="ArrayMesh" uid="uid://vcljykjci00t" path="res://npc/enemy/totembot/assets/centrifuge_0.obj" id="1_bnjpc"]
 [ext_resource type="Script" uid="uid://dw4ngkl1ratab" path="res://npc/enemy/totembot/centrifuge.gd" id="1_tgbsm"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="14_cpvug"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="15_oiyqh"]
 [ext_resource type="Script" uid="uid://du8l836u486x5" path="res://scripts/debug/pos_logger.gd" id="16_cpvug"]
+[ext_resource type="Script" uid="uid://c82vodcg2hnt" path="res://gameobjects/world_interactive/joints/Persistent_Hinge.gd" id="19_gntev"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61wgc"]
 render_priority = 0
@@ -367,7 +368,7 @@ metadata/_custom_type_script = "uid://dcbvai1bpx5br"
 
 [node name="Hit_Trigger_On_HP0" type="Node" parent="Outer/Gimbal/Inner/Weakpoint-Destroy core"]
 script = ExtResource("13_7us8c")
-MAX_HP = 9.5
+MAX_HP = 1.0
 MINIMUM_DAMAGE_THRESHOLD = 0.0
 metadata/_custom_type_script = "uid://xruf68qvcqcm"
 
@@ -460,6 +461,12 @@ script = ExtResource("14_cpvug")
 IMPULSE_TO = NodePath("../..")
 metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
+[node name="Persistent_Hinge" type="HingeJoint3D" parent="Outer_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
+script = ExtResource("19_gntev")
+NODE_A = NodePath("..")
+NODE_B = NodePath("../../Gimbal_Gib")
+metadata/_custom_type_script = "uid://c82vodcg2hnt"
+
 [node name="Gimbal_Gib" type="RigidBody3D" parent="."]
 mass = 0.4
 script = ExtResource("15_oiyqh")
@@ -485,10 +492,19 @@ shape = SubResource("ConvexPolygonShape3D_oql4u")
 
 [node name="Position_Logger" type="Node3D" parent="Gimbal_Gib"]
 script = ExtResource("16_cpvug")
-IS_LOGGING_POSITION = false
 metadata/_custom_type_script = "uid://du8l836u486x5"
 
+[node name="Persistent_Hinge" type="HingeJoint3D" parent="Gimbal_Gib" node_paths=PackedStringArray("NODE_A", "NODE_B")]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../Inner_Gib")
+script = ExtResource("19_gntev")
+NODE_A = NodePath("..")
+NODE_B = NodePath("../../Inner_Gib")
+metadata/_custom_type_script = "uid://c82vodcg2hnt"
+
 [node name="Inner_Gib" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00189427)
 mass = 3.1
 script = ExtResource("15_oiyqh")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"

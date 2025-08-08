@@ -389,7 +389,6 @@ top_level = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Gibs/Foot_Gib"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.00834799, -0.00915508)
-visible = false
 shape = SubResource("ConvexPolygonShape3D_oebdh")
 debug_color = Color(3.27289e-06, 0.594511, 0.730556, 0.42)
 
@@ -402,7 +401,6 @@ script = ExtResource("4_aqqmv")
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Gibs/Foot_Gib/Hittable_Collider2"]
-visible = false
 shape = SubResource("ConcavePolygonShape3D_mciut")
 
 [node name="Hit_Weakpoint" type="Node" parent="Gibs/Foot_Gib/Hittable_Collider2" node_paths=PackedStringArray("WEAKPOINT")]
@@ -442,7 +440,6 @@ metadata/_custom_type_script = "uid://c82vodcg2hnt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gibs/Lower_Gib"]
 transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0, 0)
-visible = false
 shape = SubResource("ConvexPolygonShape3D_na25b")
 
 [node name="Hit_Weakpoint" type="Node" parent="Gibs/Lower_Gib" node_paths=PackedStringArray("WEAKPOINT")]

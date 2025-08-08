@@ -124,11 +124,12 @@ IMPULSE_UPSTREAMS = [NodePath("../../Hit_Impulse_Propogate")]
 IMPULSE_MULTIPLIER = 0.5
 metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 
-[node name="Planet_Gib" type="RigidBody3D" parent="Planet"]
+[node name="Planet_Gib" type="RigidBody3D" parent="Planet" node_paths=PackedStringArray("HIT_COMPONENTS")]
 collision_layer = 8384
 collision_mask = 24705
 mass = 0.3
 script = ExtResource("5_cklbe")
+HIT_COMPONENTS = [NodePath("../Hit_Pastel_Shade")]
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
 [node name="Hit_Impulse" type="Node" parent="Planet/Planet_Gib"]
