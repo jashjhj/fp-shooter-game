@@ -14,11 +14,11 @@ void fragment() {
 	float highlight = sin((FRAGCOORD.x + -FRAGCOORD.y) * 0.6f + -TIME * 8.0f);
 	highlight = tanh(8.0f*highlight - 4.0f);
 	highlight = highlight * 0.5f + 0.5f;
-	
+
 	//ALBEDO = vec3(0.0,0.0,0.0);
 	ALBEDO = emission_color * highlight * emission;
 	//EMISSION = color * highlight * emission;
-	
+
 }
 
 //void light() {

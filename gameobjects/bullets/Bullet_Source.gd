@@ -45,7 +45,7 @@ func fire_bullet(supplementary_velocity := Vector3.ZERO):
 	
 	var inaccuracy = randf() * bullet_data.base_inaccuracy;
 	var inaccuracy_vector = get_global_transform().basis.y.rotated(get_global_transform().basis.z, randf()*2*PI); # random vector to rotate around
-	bullet_inst.direction = bullet_inst.direction.rotated(inaccuracy_vector, inaccuracy)
+	bullet_inst.direction = bullet_inst.direction.rotated(inaccuracy_vector.normalized(), inaccuracy)
 	
 	bullet_inst.origin_global_pos = global_position;
 	

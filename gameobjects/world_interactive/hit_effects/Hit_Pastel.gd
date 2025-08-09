@@ -30,7 +30,7 @@ func hit(damage:float) -> void:
 
 	
 	# IF how damage highlight and dealt damage and hp > 0 if condition required 
-	if(SHOW_DAMAGE_HIGHLIGHT and damage > DAMAGE_HIGHLIGHT_MINIMUM and !(DISABLE_DAMAGE_HIGHLIGHT_ON_HP_0 and !is_hp_positive)):
+	if(SHOW_DAMAGE_HIGHLIGHT and (damage-MINIMUM_DAMAGE_THRESHOLD) > DAMAGE_HIGHLIGHT_MINIMUM and !(DISABLE_DAMAGE_HIGHLIGHT_ON_HP_0 and !is_hp_positive)):
 		enable_highlight()
 		damage_timer.start(0.15)
 	
