@@ -33,13 +33,14 @@ enum ROTATOR_1D_MODE{
 ##Also used for rotational impulses from super class.
 @export var SIMULATED_MASS_ABOVE:float = 1.0;
 
-
+@export var SFX:AudioStreamPlayer3D;
+var default_sfx_volume:float;
 
 @export var DEBUG_AXES:bool = false;
 
 
 
-
+@onready var initial_max_speed:float = ROTATION_MAX_SPEED
 var current_angle:float = 0.0;
 var current_speed:float = 0.0;
 
@@ -60,10 +61,16 @@ func _ready() -> void:
 	super()
 	target = Vector3.INF
 	if(IMPULSE_PROPOGATOR != null): IMPULSE_PROPOGATOR.on_hit.connect(take_torque_impulse)
+	
+	if(SFX != null):
+		SFX.playing = true;
+		SFX.autoplay = true
+		default_sfx_volume = SFX.volume_linear
 
 
 func _process(delta: float) -> void:
-	pass
+	if(SFX != null):
+		SFX.volume_linear = default_sfx_volume * (abs(current_speed)/initial_max_speed)**2
 
 
 
