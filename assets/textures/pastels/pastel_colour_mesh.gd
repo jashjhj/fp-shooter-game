@@ -85,7 +85,8 @@ func init():
 	HIGHLIGHT_THROUGH_OBJECTS = HIGHLIGHT_THROUGH_OBJECTS
 	HIGHLIGHT_COLOUR = HIGHLIGHT_COLOUR
 	HIGHLIGHT_ENABLED = HIGHLIGHT_ENABLED
-	RERANDOMISE = true;
+	if(!Engine.is_editor_hint()): # rerandomise if on runtime
+		RERANDOMISE = true;
 
 func get_all_materials():
 	var out:Array[ShaderMaterial]
