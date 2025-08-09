@@ -5,6 +5,9 @@ class_name Hit_Pastel extends Hit_HP_Tracker
 @export var SHOW_DAMAGE_HIGHLIGHT:bool = true
 @export var DAMAGE_HIGHLIGHT_MINIMUM:float = 1.0;
 
+@export var DISABLE_DAMAGE_HIGHLIGHT_ON_HP_0:bool = true
+@export var DISABLE_HIGHLIGHT_ON_HP_0:bool = true
+
 @onready var damage_timer := Timer.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -13,19 +16,33 @@ func _ready() -> void:
 	super._ready()
 	add_child(damage_timer)
 	damage_timer.timeout.connect(disable_highlight)
+	damage_timer.one_shot = true
 
 
 
 func hit(damage:float) -> void:
-	super.hit(damage)
+
 	if(PASTEL == null): return
-	PASTEL.health -= (damage-MINIMUM_DAMAGE_THRESHOLD) / float(MAX_HP)
+	PASTEL.health -= max(0, (damage-MINIMUM_DAMAGE_THRESHOLD)) / float(MAX_HP)
 	
-	if(SHOW_DAMAGE_HIGHLIGHT and damage > DAMAGE_HIGHLIGHT_MINIMUM):
+	PASTEL.health = max(0.0, min(1.0, PASTEL.health))
+	
+
+	
+	# IF how damage highlight and dealt damage and hp > 0 if condition required 
+	if(SHOW_DAMAGE_HIGHLIGHT and damage > DAMAGE_HIGHLIGHT_MINIMUM and !(DISABLE_DAMAGE_HIGHLIGHT_ON_HP_0 and !is_hp_positive)):
 		enable_highlight()
-		damage_timer.start(0.1)
-
-
+		damage_timer.start(0.15)
+	
+	super.hit(damage) # Must be after check for damage to see if HP WAS positive
+	
+	
+	if(DISABLE_HIGHLIGHT_ON_HP_0 and !is_hp_positive): # If should disable highlight beacsue hp=0;
+		if(!damage_timer.is_stopped()):# If timer is running, ie damage highlight is active
+			highlight_enabled = false # skew settings to reset to
+		else:
+			PASTEL.HIGHLIGHT_ENABLED = false # If no damage active
+		pass
 
 
 

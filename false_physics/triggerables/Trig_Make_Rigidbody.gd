@@ -45,7 +45,7 @@ func trigger():
 	
 	Globals.RUBBISH_COLLECTOR.add_rubbish(RIGIDBODY)
 	
-	call_deferred("enable_rb_processing")
+	enable_rb_processing()
 	
 	
 	

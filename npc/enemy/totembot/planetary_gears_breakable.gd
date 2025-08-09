@@ -4,8 +4,8 @@ class_name Planetary_Gears_Breakable extends Planetary_Gears
 
 var working_gears:int:
 	set(v):
-		working_gears = v;
-		ROTATION_MAX_SPEED = initial_rot_speed * float(working_gears) / float(GEARS_NUM)
+		working_gears = v; # MIN to nto increase speed if tis altered otherwise
+		ROTATION_MAX_SPEED = min(ROTATION_MAX_SPEED, initial_rot_speed * float(working_gears) / float(GEARS_NUM))
 
 var initial_rot_speed:float;
 

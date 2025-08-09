@@ -25,7 +25,6 @@ class_name Pastel_Colour_Mesh extends MeshInstance3D
 @export var HIGHLIGHT_ENABLED:bool = false:
 	set(v):
 		if(!is_initialised): init()
-		
 		HIGHLIGHT_ENABLED = v
 		HIGHLIGHT_STRENGTH = HIGHLIGHT_STRENGTH # triggers setter
 		
@@ -85,7 +84,7 @@ func init():
 	#Calls getters to initialise
 	HIGHLIGHT_THROUGH_OBJECTS = HIGHLIGHT_THROUGH_OBJECTS
 	HIGHLIGHT_COLOUR = HIGHLIGHT_COLOUR
-	HIGHLIGHT_STRENGTH = HIGHLIGHT_STRENGTH
+	HIGHLIGHT_ENABLED = HIGHLIGHT_ENABLED
 	RERANDOMISE = true;
 
 func get_all_materials():
