@@ -28,7 +28,7 @@ next_pass = SubResource("ShaderMaterial_jj7ya")
 shader = ExtResource("5_fo7uh")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.586856
+shader_parameter/color_shade = 0.00511434
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fo7uh"]
@@ -47,7 +47,7 @@ next_pass = SubResource("ShaderMaterial_klkk8")
 shader = ExtResource("5_fo7uh")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.859893
+shader_parameter/color_shade = 0.360951
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i5qaf"]

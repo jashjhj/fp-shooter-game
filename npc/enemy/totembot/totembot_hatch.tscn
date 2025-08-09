@@ -17,7 +17,7 @@
 render_priority = 0
 shader = ExtResource("5_1ghko")
 shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.4)
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x8wh7"]
 resource_local_to_scene = true
@@ -26,7 +26,7 @@ next_pass = SubResource("ShaderMaterial_1ghko")
 shader = ExtResource("6_x8wh7")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.699846
+shader_parameter/color_shade = 0.632155
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_85s8o"]
@@ -74,10 +74,6 @@ mesh = ExtResource("2_3kx6f")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_x8wh7")
 script = ExtResource("5_egs7j")
-HIGHLIGHT_ENABLED = null
-HIGHLIGHT_COLOUR = null
-HIGHLIGHT_STRENGTH = null
-HIGHLIGHT_THROUGH_OBJECTS = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hittable_Collider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0123641, 0, 0)
@@ -85,17 +81,17 @@ shape = SubResource("ConcavePolygonShape3D_85s8o")
 
 [node name="Hit_Make_Rigidbody" type="Node" parent="Hittable_Collider" node_paths=PackedStringArray("MAKE_RIGIDBODY")]
 script = ExtResource("3_au1bk")
-MAKE_RIGIDBODY = NodePath("../Make_Rigidbody")
+MAKE_RIGIDBODY = NodePath("Make_Rigidbody")
 MAX_HP = 20.0
 MINIMUM_DAMAGE_THRESHOLD = 4.8
 metadata/_custom_type_script = "uid://hhosnxuj45ad"
 
-[node name="Make_Rigidbody" type="Node" parent="Hittable_Collider" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
+[node name="Make_Rigidbody" type="Node" parent="Hittable_Collider/Hit_Make_Rigidbody" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
 script = ExtResource("4_ynlx0")
-RIGIDBODY = NodePath("../../Hatch_Gib")
-RIGIDBODY_BASIS_CLONE = NodePath("../..")
-NEW_CHILDREN = [NodePath("../Hatch")]
-TO_BE_REMOVED = [NodePath("..")]
+RIGIDBODY = NodePath("../../../Hatch_Gib")
+RIGIDBODY_BASIS_CLONE = NodePath("../../..")
+NEW_CHILDREN = [NodePath("../../Hatch")]
+TO_BE_REMOVED = [NodePath("../..")]
 AUTO_SET_COLLISION = false
 metadata/_custom_type_script = "uid://dpx3j3228uj6a"
 
