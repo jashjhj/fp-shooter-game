@@ -21,6 +21,8 @@ enum ROTATOR_1D_MODE{
 @export_range(-180, 180, 1.0, "radians_as_degrees") var MIN_ANGLE = -PI/4; 
 @export_range(-180, 180, 1.0, "radians_as_degrees") var MAX_ANGLE = PI/4;
 
+@export var LIMIT_RESTITUTION_COEFFICIENT:float = 0.1;
+
 ##Amount of slop allowed. If Zero, does the ebst it can without jittering.
 @export_range(0, 30, 0.1, "radians_as_degrees") var SLOP:float = 0.0;
 
@@ -131,15 +133,18 @@ func _physics_process(delta: float) -> void:
 		if(current_angle + delta_angle > MAX_ANGLE):
 			delta_angle = MAX_ANGLE - current_angle
 			current_angle = MAX_ANGLE
-			current_speed = 0;
+			current_speed = current_speed * -LIMIT_RESTITUTION_COEFFICIENT # boucne back
+			
 		elif(current_angle + delta_angle < MIN_ANGLE):
 			delta_angle = MIN_ANGLE - current_angle
 			current_angle = MIN_ANGLE
-			current_speed = 0;
+			current_speed = current_speed * -LIMIT_RESTITUTION_COEFFICIENT # bounce back
+			
 		else:
 			current_angle += delta_angle
 	else: # if no limits set:
 		pass
+		#IDK why this breaks if i set it
 		#current_angle += delta_angle
 	
 	rotate(basis.y, delta_angle)
