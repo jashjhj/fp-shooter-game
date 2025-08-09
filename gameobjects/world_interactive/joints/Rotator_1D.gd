@@ -83,34 +83,34 @@ func _physics_process(delta: float) -> void:
 	if(MODE == ROTATOR_1D_MODE.TARGETING):
 		if(target == Vector3.INF): return
 		#                                           target component that is perpendiculr to basis.y
-		var angle = global_basis.z.signed_angle_to(target - global_basis.y* target.dot(global_basis.y), global_basis.y)
+		var target_angle = global_basis.z.signed_angle_to(target - global_basis.y* target.dot(global_basis.y), global_basis.y)
 		
 		
 		
 		if(DEBUG_AXES):
 			DebugDraw3D.draw_position(global_transform)
-			print(abs(angle), " = angle, speed = ", ROTATION_MAX_SPEED * delta)
+			print(abs( target_angle ), " = angle, speed = ", ROTATION_MAX_SPEED * delta)
 		
 		#ROTATION CODE
 		
-		if(current_angle + angle > MAX_ANGLE): # Add limits
-			angle = MAX_ANGLE - current_angle
-		elif current_angle - angle < MIN_ANGLE:
-			angle = MIN_ANGLE - current_angle
+		if(current_angle + target_angle > MAX_ANGLE): # Add limits
+			target_angle = MAX_ANGLE - current_angle
+		elif current_angle - target_angle < MIN_ANGLE:
+			target_angle = MIN_ANGLE - current_angle
 		
 		
-		var max_speed:float = sqrt(abs(2*angle * ROTATION_ACCELERATION)) * 0.8
+		var max_speed:float = sqrt(abs(2*target_angle * ROTATION_ACCELERATION)) * 0.8
 		
 		max_speed = min(max_speed, ROTATION_MAX_SPEED)
-		delta_angular_velocity = ROTATION_ACCELERATION * delta * sign(angle);
+		delta_angular_velocity = ROTATION_ACCELERATION * delta * sign(target_angle);
 		
 		if(abs(current_speed + delta_angular_velocity) > max_speed):
 			
-			var goal_dv = sign(angle)*max_speed - (current_speed)
+			var goal_dv = sign(target_angle)*max_speed - (current_speed)
 			delta_angular_velocity = sign(goal_dv) * min(abs(goal_dv), ROTATION_ACCELERATION * delta) # accel to get it back to right speed
 			
 			#delta_angular_velocity = goal_dv
-			#current_speed = sign(angle)*max_speed
+			#current_speed = sign(target_angle)*max_speed
 			#delta_angular_velocity = 0
 			#Limit it abck down to max accel
 			#delta_angular_velocity = sign(delta_angular_velocity) * min(ROTATION_ACCELERATION * delta, abs(delta_angular_velocity))
@@ -131,12 +131,16 @@ func _physics_process(delta: float) -> void:
 		if(current_angle + delta_angle > MAX_ANGLE):
 			delta_angle = MAX_ANGLE - current_angle
 			current_angle = MAX_ANGLE
-		
+			current_speed = 0;
 		elif(current_angle + delta_angle < MIN_ANGLE):
 			delta_angle = MIN_ANGLE - current_angle
 			current_angle = MIN_ANGLE
+			current_speed = 0;
 		else:
 			current_angle += delta_angle
+	else: # if no limits set:
+		pass
+		#current_angle += delta_angle
 	
 	rotate(basis.y, delta_angle)
 	
