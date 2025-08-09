@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=3 uid="uid://c601y42ahg3h1"]
+[gd_scene load_steps=166 format=3 uid="uid://c601y42ahg3h1"]
 
 [ext_resource type="Script" uid="uid://bja0ergn0vbbg" path="res://npc/enemy/totembot/totembot.gd" id="1_rx6h4"]
 [ext_resource type="Script" uid="uid://7pwyk2ptdcl3" path="res://npc/enemy/totembot/grand_body.gd" id="2_0adce"]
@@ -33,6 +33,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b0ts8t4h2uuin" path="res://npc/enemy/totembot/assets/dome_glass.obj" id="18_wi7e8"]
 [ext_resource type="ArrayMesh" uid="uid://dyqo7a3imcahy" path="res://npc/enemy/totembot/assets/dome_top.obj" id="19_d4x4b"]
 [ext_resource type="PackedScene" uid="uid://dljqaqcx7cptb" path="res://npc/enemy/totembot/totembotleg.tscn" id="20_heqxd"]
+[ext_resource type="Script" uid="uid://d0lrse1kkrisc" path="res://false_physics/Intersecti_Collider_Hittable.gd" id="22_8uadq"]
 [ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="25_jg1l7"]
 [ext_resource type="PackedScene" uid="uid://x23rop0wi0ll" path="res://npc/enemy/totembot/totembot_hatch.tscn" id="25_lqwa8"]
 [ext_resource type="Script" uid="uid://bwo18jlxllnxw" path="res://gameobjects/world_interactive/joints/Rotator_1D.gd" id="25_mgybp"]
@@ -61,208 +62,208 @@
 [ext_resource type="Script" uid="uid://0vp01sycjj0a" path="res://gameobjects/world_interactive/hit_effects/Hit_Free.gd" id="49_0by5d"]
 [ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="51_kms4a"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1vp5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uadq"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.147943, 0.226878, 0.339207)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uadq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f41kg"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_e1vp5")
+next_pass = SubResource("ShaderMaterial_8uadq")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.147943, 0.226878, 0.339207)
-shader_parameter/color_shade = 0.735747
+shader_parameter/color_shade = 0.160484
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0adce"]
 points = PackedVector3Array(-0.0124515, 0.0723839, -0.092152, -0.0124515, 0.131956, -0.092152, 0.0334833, 0.0723839, -0.07985, 0.0231057, 0.069202, -0.0618647, -0.0124515, 0.069202, -0.071379, -0.0479907, 0.069202, -0.0618647, -0.0583683, 0.0723839, -0.07985, -0.0583683, 0.131956, -0.07985, 0.0334833, 0.131956, -0.07985, 0.067116, 0.0723839, -0.0462355, 0.0491306, 0.069202, -0.03584, -0.0740156, 0.069202, -0.03584, -0.092001, 0.0723839, -0.0462355, -0.092001, 0.131956, -0.0462355, 0.067116, 0.131956, -0.0462355, 0.079436, 0.0723839, -0.000283003, 0.0586449, 0.069202, -0.000283003, -0.0835298, 0.069202, -0.000283003, -0.104303, 0.0723839, -0.000283003, -0.104303, 0.131956, -0.000283003, 0.079436, 0.131956, -0.000283003, 0.067116, 0.0723839, 0.0456335, 0.0491306, 0.069202, 0.035256, -0.0740156, 0.069202, 0.035256, -0.092001, 0.0723839, 0.0456335, -0.092001, 0.131956, 0.0456335, 0.067116, 0.131956, 0.0456335, 0.0334833, 0.0723839, 0.079266, 0.0231057, 0.069202, 0.0612807, -0.0479907, 0.069202, 0.0612807, -0.0583683, 0.0723839, 0.079266, -0.0583683, 0.131956, 0.079266, 0.0334833, 0.131956, 0.079266, -0.0124515, 0.0723839, 0.091586, -0.0124515, 0.069202, 0.070795, -0.0124515, 0.131956, 0.091586)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f41kg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_luvdn"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.14902, 0.227451, 0.337255)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_luvdn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wvxuj"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_f41kg")
+next_pass = SubResource("ShaderMaterial_luvdn")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.14902, 0.227451, 0.337255)
-shader_parameter/color_shade = 0.410141
+shader_parameter/color_shade = 0.743592
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1hdur"]
 points = PackedVector3Array(-0.008874, 0.116548, 0.102227, -0.0106978, 0.116548, 0.108988, -0.008874, 0.067319, 0.102227, -0.0112057, 0.113512, 0.0992027, -0.0624849, 0.113512, 0.0853906, -0.066017, 0.116548, 0.0868391, -0.0142299, 0.113512, 0.110437, -0.0106978, 0.067319, 0.108988, -0.067835, 0.116548, 0.0936031, -0.0112057, 0.07035, 0.0992027, -0.066017, 0.067319, 0.0868391, -0.0624849, 0.07035, 0.0853906, -0.0207632, 0.102675, 0.0885047, -0.0488412, 0.102675, 0.080944, -0.0266962, 0.102675, 0.110538, -0.0142299, 0.07035, 0.110437, -0.0655091, 0.113512, 0.0966274, -0.067835, 0.067319, 0.0936031, -0.0207632, 0.0811875, 0.0885047, -0.0488412, 0.0811875, 0.080944, -0.0266962, 0.0811875, 0.110538, -0.0547742, 0.102675, 0.102974, -0.0655091, 0.07035, 0.0966274, -0.0547742, 0.0811875, 0.102974)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wvxuj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rbiss"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rbiss"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lvkp"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_wvxuj")
+next_pass = SubResource("ShaderMaterial_rbiss")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.0970087
+shader_parameter/color_shade = 0.27865
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ily6p"]
 data = PackedVector3Array(-0.1466, 0.1822, -0.2448, 0.1217, 0.1822, -0.2448, -0.1466, 0.1822, -0.1541, -0.1466, 0.1822, -0.1541, 0.1217, 0.1822, -0.2448, 0.1217, 0.1822, -0.1541, 0.1217, 0.0909, -0.2001, 0.1217, 0.0909, -0.2299, 0.1217, 0.0909, -0.215, 0.1217, 0.0909, -0.2001, 0.0323, 0.0909, -0.2001, 0.1217, 0.0857, -0.2001, 0.1217, 0.0857, -0.2001, 0.0323, 0.0909, -0.2001, 0.0323, 0.0857, -0.2001, 0.0323, 0.0909, -0.2448, -0.0571, 0.0909, -0.2448, 0.0323, 0.0857, -0.2448, 0.0323, 0.0857, -0.2448, -0.0571, 0.0909, -0.2448, -0.0571, 0.0857, -0.2448, -0.0571, 0.0857, -0.2001, -0.0571, 0.0909, -0.2001, -0.1466, 0.0857, -0.2001, -0.1466, 0.0857, -0.2001, -0.0571, 0.0909, -0.2001, -0.1466, 0.0909, -0.2001, 0.0323, 0.0857, -0.2001, 0.0323, 0.0909, -0.2001, 0.0323, 0.0857, -0.2448, 0.0323, 0.0857, -0.2448, 0.0323, 0.0909, -0.2001, 0.0323, 0.0909, -0.2448, -0.0904, 0.0909, -0.2281, -0.1132, 0.0909, -0.2281, -0.0929, 0.0789, -0.2269, -0.0929, 0.0789, -0.2269, -0.1132, 0.0909, -0.2281, -0.1108, 0.0789, -0.2269, 0.1217, 0.0909, -0.2001, 0.1217, 0.0909, -0.2448, 0.0884, 0.0909, -0.2167, 0.0884, 0.0909, -0.2167, 0.1217, 0.0909, -0.2448, 0.0884, 0.0909, -0.2281, -0.1466, 0.1427, -0.1541, -0.1466, 0.1822, -0.1541, 0.1217, 0.1427, -0.1541, 0.1217, 0.1427, -0.1541, -0.1466, 0.1822, -0.1541, 0.1217, 0.1822, -0.1541, -0.0571, 0.0909, -0.2448, -0.0571, 0.0909, -0.2001, -0.0571, 0.0857, -0.2448, -0.0571, 0.0857, -0.2448, -0.0571, 0.0909, -0.2001, -0.0571, 0.0857, -0.2001, 0.0656, 0.0909, -0.2281, 0.0656, 0.0909, -0.2167, 0.0681, 0.0789, -0.2269, 0.0681, 0.0789, -0.2269, 0.0656, 0.0909, -0.2167, 0.0681, 0.0789, -0.218, 0.0859, 0.0789, -0.2269, 0.0681, 0.0789, -0.2269, 0.0859, 0.0789, -0.218, 0.0859, 0.0789, -0.218, 0.0681, 0.0789, -0.2269, 0.0681, 0.0789, -0.218, -0.0929, 0.0789, -0.2269, -0.1108, 0.0789, -0.2269, -0.0929, 0.0789, -0.218, -0.0929, 0.0789, -0.218, -0.1108, 0.0789, -0.2269, -0.1108, 0.0789, -0.218, 0.0656, 0.0909, -0.2167, 0.0884, 0.0909, -0.2167, 0.0681, 0.0789, -0.218, 0.0681, 0.0789, -0.218, 0.0884, 0.0909, -0.2167, 0.0859, 0.0789, -0.218, -0.1132, 0.0909, -0.2281, -0.1132, 0.0909, -0.2167, -0.1108, 0.0789, -0.2269, -0.1108, 0.0789, -0.2269, -0.1132, 0.0909, -0.2167, -0.1108, 0.0789, -0.218, 0.0884, 0.0909, -0.2167, 0.0884, 0.0909, -0.2281, 0.0859, 0.0789, -0.218, 0.0859, 0.0789, -0.218, 0.0884, 0.0909, -0.2281, 0.0859, 0.0789, -0.2269, -0.1132, 0.0909, -0.2167, -0.0904, 0.0909, -0.2167, -0.1108, 0.0789, -0.218, -0.1108, 0.0789, -0.218, -0.0904, 0.0909, -0.2167, -0.0929, 0.0789, -0.218, -0.0904, 0.0909, -0.2167, -0.0904, 0.0909, -0.2281, -0.0929, 0.0789, -0.218, -0.0929, 0.0789, -0.218, -0.0904, 0.0909, -0.2281, -0.0929, 0.0789, -0.2269, 0.0884, 0.0909, -0.2281, 0.0656, 0.0909, -0.2281, 0.0859, 0.0789, -0.2269, 0.0859, 0.0789, -0.2269, 0.0656, 0.0909, -0.2281, 0.0681, 0.0789, -0.2269, 0.1217, 0.0857, -0.2001, 0.0323, 0.0857, -0.2001, 0.1217, 0.0857, -0.1541, 0.1217, 0.0857, -0.1541, 0.0323, 0.0857, -0.2001, -0.1466, 0.0857, -0.1541, -0.1466, 0.0857, -0.1541, 0.0323, 0.0857, -0.2001, -0.1466, 0.0857, -0.2001, -0.1466, 0.0857, -0.2001, 0.0323, 0.0857, -0.2001, -0.0571, 0.0857, -0.2001, -0.0571, 0.0857, -0.2001, 0.0323, 0.0857, -0.2001, -0.0571, 0.0857, -0.2448, -0.0571, 0.0857, -0.2448, 0.0323, 0.0857, -0.2001, 0.0323, 0.0857, -0.2448, -0.1466, 0.1452, -0.2448, 0.1217, 0.1452, -0.2448, -0.1466, 0.1822, -0.2448, -0.1466, 0.1822, -0.2448, 0.1217, 0.1452, -0.2448, 0.1217, 0.1822, -0.2448, 0.1217, 0.0909, -0.2001, 0.1217, 0.0909, -0.2448, 0.1217, 0.0909, -0.2299, 0.1217, 0.1303, -0.2424, 0.1217, 0.1303, -0.1541, 0.1193, 0.1312, -0.2425, 0.1193, 0.1312, -0.2425, 0.1217, 0.1303, -0.1541, 0.1105, 0.1341, -0.2343, 0.1105, 0.1341, -0.2343, 0.1217, 0.1303, -0.1541, 0.1107, 0.1341, -0.1647, 0.0884, 0.0909, -0.2167, 0.0656, 0.0909, -0.2167, 0.1217, 0.0909, -0.2001, 0.1217, 0.0909, -0.2001, 0.0656, 0.0909, -0.2167, 0.0323, 0.0909, -0.2001, 0.0323, 0.0909, -0.2001, 0.0656, 0.0909, -0.2167, 0.0323, 0.0909, -0.2448, 0.0323, 0.0909, -0.2448, 0.0656, 0.0909, -0.2167, 0.0656, 0.0909, -0.2281, 0.0323, 0.0909, -0.2448, 0.0656, 0.0909, -0.2281, 0.1217, 0.0909, -0.2448, 0.1217, 0.0909, -0.2448, 0.0656, 0.0909, -0.2281, 0.0884, 0.0909, -0.2281, -0.1132, 0.0909, -0.2167, -0.1466, 0.0909, -0.2001, -0.0904, 0.0909, -0.2167, -0.1132, 0.0909, -0.2281, -0.1466, 0.0909, -0.2001, -0.1132, 0.0909, -0.2167, -0.0904, 0.0909, -0.2167, -0.1466, 0.0909, -0.2001, -0.0571, 0.0909, -0.2001, -0.1466, 0.0909, -0.2448, -0.1466, 0.0909, -0.2001, -0.1132, 0.0909, -0.2281, -0.0904, 0.0909, -0.2167, -0.0571, 0.0909, -0.2001, -0.0904, 0.0909, -0.2281, -0.0904, 0.0909, -0.2281, -0.1466, 0.0909, -0.2448, -0.1132, 0.0909, -0.2281, -0.0904, 0.0909, -0.2281, -0.0571, 0.0909, -0.2001, -0.0571, 0.0909, -0.2448, -0.0571, 0.0909, -0.2448, -0.1466, 0.0909, -0.2448, -0.0904, 0.0909, -0.2281, -0.1466, 0.1428, -0.2424, -0.1466, 0.1427, -0.1541, -0.1442, 0.142, -0.2425, -0.1442, 0.142, -0.2425, -0.1466, 0.1427, -0.1541, -0.1355, 0.139, -0.2342, -0.1355, 0.139, -0.2342, -0.1466, 0.1427, -0.1541, -0.1353, 0.139, -0.1646, 0.1107, 0.139, -0.2342, -0.1355, 0.139, -0.2342, 0.1105, 0.1341, -0.2343, 0.1105, 0.1341, -0.2343, -0.1355, 0.139, -0.2342, -0.1353, 0.1341, -0.2343, 0.1193, 0.142, -0.2425, -0.1442, 0.142, -0.2425, 0.1107, 0.139, -0.2342, 0.1107, 0.139, -0.2342, -0.1442, 0.142, -0.2425, -0.1355, 0.139, -0.2342, -0.1466, 0.0857, -0.1541, -0.1466, 0.1303, -0.1541, 0.1217, 0.0857, -0.1541, 0.1217, 0.0857, -0.1541, -0.1466, 0.1303, -0.1541, 0.1217, 0.1303, -0.1541, 0.1217, 0.1428, -0.2424, 0.1193, 0.142, -0.2425, 0.1217, 0.1427, -0.1541, 0.1217, 0.1427, -0.1541, 0.1193, 0.142, -0.2425, 0.1105, 0.139, -0.1646, 0.1105, 0.139, -0.1646, 0.1193, 0.142, -0.2425, 0.1107, 0.139, -0.2342, -0.1466, 0.1428, -0.2424, -0.1466, 0.1452, -0.2448, -0.1466, 0.1427, -0.1541, -0.1466, 0.1427, -0.1541, -0.1466, 0.1452, -0.2448, -0.1466, 0.1822, -0.1541, -0.1466, 0.1822, -0.1541, -0.1466, 0.1452, -0.2448, -0.1466, 0.1822, -0.2448, 0.0323, 0.0909, -0.2448, 0.1217, 0.0909, -0.2448, -0.0571, 0.0909, -0.2448, -0.0571, 0.0909, -0.2448, 0.1217, 0.0909, -0.2448, -0.1466, 0.0909, -0.2448, -0.1466, 0.0909, -0.2448, 0.1217, 0.0909, -0.2448, -0.1466, 0.1279, -0.2448, -0.1466, 0.1279, -0.2448, 0.1217, 0.0909, -0.2448, 0.1217, 0.1279, -0.2448, 0.1217, 0.0857, -0.1541, 0.1217, 0.1303, -0.1541, 0.1217, 0.0857, -0.2001, 0.1217, 0.0857, -0.2001, 0.1217, 0.1303, -0.1541, 0.1217, 0.0909, -0.2001, 0.1217, 0.0909, -0.2001, 0.1217, 0.1303, -0.1541, 0.1217, 0.0909, -0.2448, 0.1217, 0.0909, -0.2448, 0.1217, 0.1303, -0.1541, 0.1217, 0.1279, -0.2448, 0.1217, 0.1279, -0.2448, 0.1217, 0.1303, -0.1541, 0.1217, 0.1303, -0.2424, -0.1441, 0.1312, -0.2425, 0.1193, 0.1312, -0.2425, -0.1353, 0.1341, -0.2343, -0.1353, 0.1341, -0.2343, 0.1193, 0.1312, -0.2425, 0.1105, 0.1341, -0.2343, 0.1105, 0.1341, -0.2343, 0.1107, 0.1341, -0.1647, 0.1107, 0.139, -0.2342, 0.1107, 0.139, -0.2342, 0.1107, 0.1341, -0.1647, 0.1105, 0.139, -0.1646, 0.1107, 0.1341, -0.1647, -0.1355, 0.1341, -0.1647, 0.1105, 0.139, -0.1646, 0.1105, 0.139, -0.1646, -0.1355, 0.1341, -0.1647, -0.1353, 0.139, -0.1646, -0.1355, 0.139, -0.2342, -0.1353, 0.139, -0.1646, -0.1353, 0.1341, -0.2343, -0.1353, 0.1341, -0.2343, -0.1353, 0.139, -0.1646, -0.1355, 0.1341, -0.1647, 0.1217, 0.1303, -0.1541, -0.1466, 0.1303, -0.1541, 0.1107, 0.1341, -0.1647, 0.1107, 0.1341, -0.1647, -0.1466, 0.1303, -0.1541, -0.1355, 0.1341, -0.1647, 0.1217, 0.1427, -0.1541, 0.1217, 0.1822, -0.1541, 0.1217, 0.1428, -0.2424, 0.1217, 0.1428, -0.2424, 0.1217, 0.1822, -0.1541, 0.1217, 0.1452, -0.2448, 0.1217, 0.1452, -0.2448, 0.1217, 0.1822, -0.1541, 0.1217, 0.1822, -0.2448, -0.1466, 0.0857, -0.2001, -0.1466, 0.0909, -0.2001, -0.1466, 0.0857, -0.1541, -0.1466, 0.0857, -0.1541, -0.1466, 0.0909, -0.2001, -0.1466, 0.1303, -0.1541, -0.1466, 0.1303, -0.1541, -0.1466, 0.0909, -0.2001, -0.1466, 0.1303, -0.2424, -0.1466, 0.1303, -0.2424, -0.1466, 0.0909, -0.2001, -0.1466, 0.1279, -0.2448, -0.1466, 0.1279, -0.2448, -0.1466, 0.0909, -0.2001, -0.1466, 0.0909, -0.2448, -0.1466, 0.1427, -0.1541, 0.1217, 0.1427, -0.1541, -0.1353, 0.139, -0.1646, -0.1353, 0.139, -0.1646, 0.1217, 0.1427, -0.1541, 0.1105, 0.139, -0.1646, -0.1466, 0.1279, -0.2448, -0.1441, 0.1312, -0.2425, -0.1466, 0.1303, -0.2424, -0.1442, 0.142, -0.2425, -0.1466, 0.1452, -0.2448, -0.1466, 0.1428, -0.2424, 0.1217, 0.1452, -0.2448, 0.1193, 0.142, -0.2425, 0.1217, 0.1428, -0.2424, 0.1193, 0.1312, -0.2425, 0.1217, 0.1279, -0.2448, 0.1217, 0.1303, -0.2424, 0.1217, 0.1452, -0.2448, -0.1466, 0.1452, -0.2448, 0.1193, 0.142, -0.2425, 0.1193, 0.142, -0.2425, -0.1466, 0.1452, -0.2448, -0.1442, 0.142, -0.2425, -0.1466, 0.1279, -0.2448, 0.1217, 0.1279, -0.2448, -0.1441, 0.1312, -0.2425, -0.1441, 0.1312, -0.2425, 0.1217, 0.1279, -0.2448, 0.1193, 0.1312, -0.2425, -0.1466, 0.1303, -0.2424, -0.1441, 0.1312, -0.2425, -0.1466, 0.1303, -0.1541, -0.1466, 0.1303, -0.1541, -0.1441, 0.1312, -0.2425, -0.1355, 0.1341, -0.1647, -0.1355, 0.1341, -0.1647, -0.1441, 0.1312, -0.2425, -0.1353, 0.1341, -0.2343)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lvkp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vio2m"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vio2m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adhtu"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_2lvkp")
+next_pass = SubResource("ShaderMaterial_vio2m")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.870586
+shader_parameter/color_shade = 0.97929
 shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_adhtu"]
-render_priority = 0
-shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ib70c"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_adhtu")
-shader = ExtResource("4_0adce")
+shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.57968
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbg3f"]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("8_ealnf")
+next_pass = SubResource("ShaderMaterial_ib70c")
+shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.870325
+shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_giirl"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_mbg3f")
-shader = ExtResource("4_0adce")
+shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.442166
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v5pcv"]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("8_ealnf")
+next_pass = SubResource("ShaderMaterial_giirl")
+shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.290863
+shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4uh7c"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_v5pcv")
-shader = ExtResource("4_0adce")
+shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.763941
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aho8b"]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("8_ealnf")
+next_pass = SubResource("ShaderMaterial_4uh7c")
+shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.355162
+shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbaow"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_aho8b")
-shader = ExtResource("4_0adce")
+shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.966478
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57w7t"]
-render_priority = 0
-shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgsg4"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_57w7t")
+next_pass = SubResource("ShaderMaterial_tbaow")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.472122
+shader_parameter/color_shade = 0.614144
 shader_parameter/life = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m86gr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgsg4"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pahl6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m86gr"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_m86gr")
+next_pass = SubResource("ShaderMaterial_mgsg4")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.0651108
+shader_parameter/color_shade = 0.0922139
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pahl6"]
+render_priority = 0
+shader = ExtResource("8_ealnf")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2d5wd"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_pahl6")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.456583
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lqwa8"]
 data = PackedVector3Array(0, 0.0211, -0.0152, 0, -0.0205, -0.0152, 0.0107, 0.0211, -0.0107, 0.0107, 0.0211, -0.0107, 0, -0.0205, -0.0152, 0.0107, -0.0205, -0.0107, 0.0107, 0.0211, -0.0107, 0.0107, -0.0205, -0.0107, 0.0152, 0.0211, 0, 0.0152, 0.0211, 0, 0.0107, -0.0205, -0.0107, 0.0152, -0.0205, 0, 0.0152, 0.0211, 0, 0.0152, -0.0205, 0, 0.0107, 0.0211, 0.0107, 0.0107, 0.0211, 0.0107, 0.0152, -0.0205, 0, 0.0107, -0.0205, 0.0107, 0.0107, 0.0211, 0.0107, 0.0107, -0.0205, 0.0107, 0, 0.0211, 0.0152, 0, 0.0211, 0.0152, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, 0, 0.0211, 0.0152, 0, -0.0205, 0.0152, -0.0107, 0.0211, 0.0107, -0.0107, 0.0211, 0.0107, 0, -0.0205, 0.0152, -0.0107, -0.0205, 0.0107, -0.0107, 0.0211, 0.0107, -0.0107, -0.0205, 0.0107, -0.0152, 0.0211, 0, -0.0152, 0.0211, 0, -0.0107, -0.0205, 0.0107, -0.0152, -0.0205, 0, 0, 0.0211, -0.0152, 0.0107, 0.0211, -0.0107, -0.0107, 0.0211, -0.0107, -0.0107, 0.0211, -0.0107, 0.0107, 0.0211, -0.0107, -0.0152, 0.0211, 0, -0.0152, 0.0211, 0, 0.0107, 0.0211, -0.0107, -0.0107, 0.0211, 0.0107, -0.0107, 0.0211, 0.0107, 0.0107, 0.0211, -0.0107, 0, 0.0211, 0.0152, 0, 0.0211, 0.0152, 0.0107, 0.0211, -0.0107, 0.0107, 0.0211, 0.0107, 0.0107, 0.0211, 0.0107, 0.0107, 0.0211, -0.0107, 0.0152, 0.0211, 0, -0.0152, 0.0211, 0, -0.0152, -0.0205, 0, -0.0107, 0.0211, -0.0107, -0.0107, 0.0211, -0.0107, -0.0152, -0.0205, 0, -0.0107, -0.0205, -0.0107, -0.0107, 0.0211, -0.0107, -0.0107, -0.0205, -0.0107, 0, 0.0211, -0.0152, 0, 0.0211, -0.0152, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0.0152, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0152, -0.0205, 0, 0.0152, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0107, -0.0205, -0.0107, 0.0152, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0247, -0.0205, 0, 0.0247, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0.0174, -0.0205, -0.0174, 0.0174, -0.0205, 0.0174, 0.0152, -0.0205, 0, 0.0247, -0.0205, 0, 0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0.0174, -0.0205, -0.0174, 0.0174, -0.0205, -0.0174, 0, -0.0205, -0.0152, 0, -0.0205, -0.0247, 0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0.0107, -0.0205, -0.0107, 0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, 0, -0.0205, -0.0152, 0.0107, -0.0205, 0.0107, 0.0152, -0.0205, 0, 0.0174, -0.0205, 0.0174, 0.0107, -0.0205, 0.0107, 0.0152, -0.0205, 0, 0.0152, -0.0205, 0, 0.0107, -0.0205, 0.0107, 0.0152, -0.0205, 0, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0247, 0.0107, -0.0205, 0.0107, 0.0174, -0.0205, 0.0174, 0, -0.0205, 0.0152, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0247, 0, -0.0205, 0.0152, 0.0107, -0.0205, 0.0107, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, 0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, -0.0174, -0.0205, 0.0174, 0, -0.0205, 0.0152, 0, -0.0205, 0.0247, -0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, -0.0174, -0.0205, 0.0174, -0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, 0, -0.0205, 0.0152, -0.0107, -0.0205, 0.0107, 0, -0.0205, 0.0152, -0.0107, -0.0205, 0.0107, -0.0247, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0174, -0.0205, 0.0174, -0.0152, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0247, -0.0205, 0, -0.0152, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0107, -0.0205, 0.0107, -0.0152, -0.0205, 0, -0.0107, -0.0205, 0.0107, -0.0152, -0.0205, 0, -0.0174, -0.0205, -0.0174, -0.0152, -0.0205, 0, -0.0247, -0.0205, 0, -0.0107, -0.0205, -0.0107, -0.0152, -0.0205, 0, -0.0174, -0.0205, -0.0174, 0, -0.0205, -0.0247, -0.0107, -0.0205, -0.0107, -0.0174, -0.0205, -0.0174, -0.0107, -0.0205, -0.0107, -0.0152, -0.0205, 0, -0.0152, -0.0205, 0, -0.0107, -0.0205, -0.0107, -0.0152, -0.0205, 0, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0247, 0, -0.0205, -0.0152, -0.0107, -0.0205, -0.0107, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, -0.0107, -0.0205, -0.0107, 0, -0.0205, -0.0152, -0.0174, -0.0205, -0.0174, -0.0174, -0.0317, -0.0174, 0, -0.0205, -0.0247, 0, -0.0205, -0.0247, -0.0174, -0.0317, -0.0174, 0, -0.0317, -0.0247, 0.0174, -0.0205, -0.0174, 0.0174, -0.0317, -0.0174, 0.0247, -0.0205, 0, 0.0247, -0.0205, 0, 0.0174, -0.0317, -0.0174, 0.0247, -0.0317, 0, -0.0247, -0.0205, 0, -0.0247, -0.0317, 0, -0.0174, -0.0205, -0.0174, -0.0174, -0.0205, -0.0174, -0.0247, -0.0317, 0, -0.0174, -0.0317, -0.0174, -0.0174, -0.0205, 0.0174, -0.0174, -0.0317, 0.0174, -0.0247, -0.0205, 0, -0.0247, -0.0205, 0, -0.0174, -0.0317, 0.0174, -0.0247, -0.0317, 0, 0, -0.0205, 0.0247, 0, -0.0317, 0.0247, -0.0174, -0.0205, 0.0174, -0.0174, -0.0205, 0.0174, 0, -0.0317, 0.0247, -0.0174, -0.0317, 0.0174, 0.0174, -0.0205, 0.0174, 0.0174, -0.0317, 0.0174, 0, -0.0205, 0.0247, 0, -0.0205, 0.0247, 0.0174, -0.0317, 0.0174, 0, -0.0317, 0.0247, 0.0247, -0.0205, 0, 0.0247, -0.0317, 0, 0.0174, -0.0205, 0.0174, 0.0174, -0.0205, 0.0174, 0.0247, -0.0317, 0, 0.0174, -0.0317, 0.0174, 0.0082, -0.0437, -0.0082, 0, -0.0437, -0.0117, 0.0117, -0.0437, 0, 0.0117, -0.0437, 0, 0, -0.0437, -0.0117, 0.0082, -0.0437, 0.0082, 0.0082, -0.0437, 0.0082, 0, -0.0437, -0.0117, 0, -0.0437, 0.0117, 0, -0.0437, 0.0117, 0, -0.0437, -0.0117, -0.0082, -0.0437, 0.0082, -0.0082, -0.0437, 0.0082, 0, -0.0437, -0.0117, -0.0117, -0.0437, 0, -0.0117, -0.0437, 0, 0, -0.0437, -0.0117, -0.0082, -0.0437, -0.0082, 0.0174, -0.0317, -0.0174, 0, -0.0317, -0.0247, 0.0147, -0.0402, -0.0147, 0.0147, -0.0402, -0.0147, 0, -0.0317, -0.0247, 0, -0.0402, -0.0209, 0.0147, -0.0402, -0.0147, 0, -0.0402, -0.0209, 0.0082, -0.0437, -0.0082, 0.0082, -0.0437, -0.0082, 0, -0.0402, -0.0209, 0, -0.0437, -0.0117, 0.0247, -0.0317, 0, 0.0174, -0.0317, -0.0174, 0.0209, -0.0402, 0, 0.0209, -0.0402, 0, 0.0174, -0.0317, -0.0174, 0.0147, -0.0402, -0.0147, 0.0209, -0.0402, 0, 0.0147, -0.0402, -0.0147, 0.0117, -0.0437, 0, 0.0117, -0.0437, 0, 0.0147, -0.0402, -0.0147, 0.0082, -0.0437, -0.0082, 0.0174, -0.0317, 0.0174, 0.0247, -0.0317, 0, 0.0147, -0.0402, 0.0147, 0.0147, -0.0402, 0.0147, 0.0247, -0.0317, 0, 0.0209, -0.0402, 0, 0.0147, -0.0402, 0.0147, 0.0209, -0.0402, 0, 0.0082, -0.0437, 0.0082, 0.0082, -0.0437, 0.0082, 0.0209, -0.0402, 0, 0.0117, -0.0437, 0, 0, -0.0317, 0.0247, 0.0174, -0.0317, 0.0174, 0, -0.0402, 0.0209, 0, -0.0402, 0.0209, 0.0174, -0.0317, 0.0174, 0.0147, -0.0402, 0.0147, 0, -0.0402, 0.0209, 0.0147, -0.0402, 0.0147, 0, -0.0437, 0.0117, 0, -0.0437, 0.0117, 0.0147, -0.0402, 0.0147, 0.0082, -0.0437, 0.0082, -0.0174, -0.0317, 0.0174, 0, -0.0317, 0.0247, -0.0147, -0.0402, 0.0147, -0.0147, -0.0402, 0.0147, 0, -0.0317, 0.0247, 0, -0.0402, 0.0209, -0.0147, -0.0402, 0.0147, 0, -0.0402, 0.0209, -0.0082, -0.0437, 0.0082, -0.0082, -0.0437, 0.0082, 0, -0.0402, 0.0209, 0, -0.0437, 0.0117, -0.0247, -0.0317, 0, -0.0174, -0.0317, 0.0174, -0.0209, -0.0402, 0, -0.0209, -0.0402, 0, -0.0174, -0.0317, 0.0174, -0.0147, -0.0402, 0.0147, -0.0209, -0.0402, 0, -0.0147, -0.0402, 0.0147, -0.0117, -0.0437, 0, -0.0117, -0.0437, 0, -0.0147, -0.0402, 0.0147, -0.0082, -0.0437, 0.0082, -0.0174, -0.0317, -0.0174, -0.0247, -0.0317, 0, -0.0147, -0.0402, -0.0147, -0.0147, -0.0402, -0.0147, -0.0247, -0.0317, 0, -0.0209, -0.0402, 0, -0.0147, -0.0402, -0.0147, -0.0209, -0.0402, 0, -0.0082, -0.0437, -0.0082, -0.0082, -0.0437, -0.0082, -0.0209, -0.0402, 0, -0.0117, -0.0437, 0, 0, -0.0317, -0.0247, -0.0174, -0.0317, -0.0174, 0, -0.0402, -0.0209, 0, -0.0402, -0.0209, -0.0174, -0.0317, -0.0174, -0.0147, -0.0402, -0.0147, 0, -0.0402, -0.0209, -0.0147, -0.0402, -0.0147, 0, -0.0437, -0.0117, 0, -0.0437, -0.0117, -0.0147, -0.0402, -0.0147, -0.0082, -0.0437, -0.0082, 0, -0.0205, -0.0247, 0, -0.0317, -0.0247, 0.0174, -0.0205, -0.0174, 0.0174, -0.0205, -0.0174, 0, -0.0317, -0.0247, 0.0174, -0.0317, -0.0174)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2d5wd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8c23"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8c23"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_2d5wd")
-shader = ExtResource("4_0adce")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.687896
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tof8o"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_u8c23")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.967141
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6qou"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6qou"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_601at"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_tof8o")
+next_pass = SubResource("ShaderMaterial_d6qou")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.56459
+shader_parameter/color_shade = 0.673427
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ox312"]
@@ -286,202 +287,202 @@ trail_material = SubResource("ShaderMaterial_ox312")
 lifetime = 2.0
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_601at"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ap0jk"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ap0jk"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_601at")
-shader = ExtResource("4_0adce")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.853148
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4pw2c"]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("8_ealnf")
+next_pass = SubResource("ShaderMaterial_ap0jk")
+shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.593878
+shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6r52o"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_4pw2c")
-shader = ExtResource("4_0adce")
+shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.302654
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jht4a"]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("8_ealnf")
+next_pass = SubResource("ShaderMaterial_6r52o")
+shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.569351
+shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pi7l0"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_jht4a")
-shader = ExtResource("4_0adce")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.25244
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq3c1"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_brjqc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq3c1"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_aq3c1")
+next_pass = SubResource("ShaderMaterial_pi7l0")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.108278
+shader_parameter/color_shade = 0.338599
 shader_parameter/life = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brjqc"]
+render_priority = 0
+shader = ExtResource("8_ealnf")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o7x6s"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_brjqc")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.449904
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5dj3"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.351854, 0.150627, 0.183444)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5dj3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfvg0"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_o7x6s")
+next_pass = SubResource("ShaderMaterial_f5dj3")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.351854, 0.150627, 0.183444)
-shader_parameter/color_shade = 0.413034
+shader_parameter/color_shade = 0.038202
 shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfvg0"]
-render_priority = 0
-shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8suxc"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_tfvg0")
-shader = ExtResource("4_0adce")
+shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.463519
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xuvo2"]
-render_priority = 0
-shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q5i5"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_xuvo2")
+next_pass = SubResource("ShaderMaterial_8suxc")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.672812
+shader_parameter/color_shade = 0.607923
 shader_parameter/life = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkrdq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q5i5"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g181p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkrdq"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_jkrdq")
+next_pass = SubResource("ShaderMaterial_5q5i5")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.629084
+shader_parameter/color_shade = 0.683668
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g181p"]
+render_priority = 0
+shader = ExtResource("8_ealnf")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6cdda"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_g181p")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.619009
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_klcti"]
 points = PackedVector3Array(0.138854, 0.483845, 0.278528, 0.153376, 0.483845, 0.270142, 0.0608459, 0.523811, 0.109885, 0.046334, 0.523811, 0.118254, 0.0859089, 0.486254, 0.186811, 0.138854, 0.280801, 0.278528, 0.100431, 0.486254, 0.178442, 0.153376, 0.280801, 0.270142, 0.0608459, 0.240862, 0.109885, 0.046334, 0.240862, 0.118254, 0.0859089, 0.278391, 0.186811, 0.100431, 0.278391, 0.178442)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6cdda"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2akm"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2akm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsu6j"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_6cdda")
+next_pass = SubResource("ShaderMaterial_j2akm")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.180219
+shader_parameter/color_shade = 0.760698
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hufde"]
 points = PackedVector3Array(0.138854, 0.483845, 0.278528, 0.153376, 0.483845, 0.270142, 0.0608459, 0.523811, 0.109885, 0.046334, 0.523811, 0.118254, 0.0859089, 0.486254, 0.186811, 0.138854, 0.280801, 0.278528, 0.100431, 0.486254, 0.178442, 0.153376, 0.280801, 0.270142, 0.0608459, 0.240862, 0.109885, 0.046334, 0.240862, 0.118254, 0.0859089, 0.278391, 0.186811, 0.100431, 0.278391, 0.178442)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsu6j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1kiwp"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1kiwp"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_dsu6j")
-shader = ExtResource("4_0adce")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.768368
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gdgnt"]
-render_priority = 0
-shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_61nnh"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_gdgnt")
+next_pass = SubResource("ShaderMaterial_1kiwp")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.869161
+shader_parameter/color_shade = 0.499152
 shader_parameter/life = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cm6we"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61nnh"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_phm4t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cm6we"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_cm6we")
+next_pass = SubResource("ShaderMaterial_61nnh")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.199861
+shader_parameter/color_shade = 0.508336
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phm4t"]
+render_priority = 0
+shader = ExtResource("8_ealnf")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cnwdb"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_phm4t")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.811789
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5bgyk"]
@@ -510,68 +511,68 @@ albedo_color = Color(1, 1, 1, 0.145098)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gbbtt"]
 data = PackedVector3Array(-0.0124, 0.798, 0.1047, -0.0124, 0.8113, 0.0532, 0.0348, 0.7938, 0.1047, 0.0348, 0.7938, 0.1047, -0.0124, 0.8113, 0.0532, 0.0377, 0.8069, 0.0532, 0.0348, 0.7938, 0.1047, 0.0377, 0.8069, 0.0532, 0.0802, 0.7815, 0.1047, -0.0124, 0.798, 0.1047, -0.0626, 0.8069, 0.0532, -0.0124, 0.8113, 0.0532, -0.0597, 0.7938, 0.1047, -0.0626, 0.8069, 0.0532, -0.0124, 0.798, 0.1047, 0.0802, 0.7815, 0.1047, 0.0377, 0.8069, 0.0532, 0.0859, 0.7938, 0.0532, 0.0802, 0.7815, 0.1047, 0.0859, 0.7938, 0.0532, 0.1221, 0.7616, 0.1047, -0.0597, 0.7938, 0.1047, -0.1108, 0.7938, 0.0532, -0.0626, 0.8069, 0.0532, -0.1051, 0.7815, 0.1047, -0.1108, 0.7938, 0.0532, -0.0597, 0.7938, 0.1047, -0.0626, 0.8069, 0.0532, -0.0636, 0.8113, -0.0003, -0.0124, 0.8113, 0.0532, -0.1051, 0.7815, 0.1047, -0.1553, 0.7726, 0.0532, -0.1108, 0.7938, 0.0532, -0.147, 0.7616, 0.1047, -0.1553, 0.7726, 0.0532, -0.1051, 0.7815, 0.1047, -0.1108, 0.7938, 0.0532, -0.1127, 0.798, -0.0003, -0.0626, 0.8069, 0.0532, -0.0626, 0.8069, 0.0532, -0.1127, 0.798, -0.0003, -0.0636, 0.8113, -0.0003, -0.1553, 0.7726, 0.0532, -0.1581, 0.7764, -0.0003, -0.1108, 0.7938, 0.0532, -0.1108, 0.7938, 0.0532, -0.1581, 0.7764, -0.0003, -0.1127, 0.798, -0.0003, -0.147, 0.7616, 0.1047, -0.1942, 0.7441, 0.0532, -0.1553, 0.7726, 0.0532, -0.1837, 0.7347, 0.1047, -0.1942, 0.7441, 0.0532, -0.147, 0.7616, 0.1047, -0.1553, 0.7726, 0.0532, -0.1978, 0.7473, -0.0003, -0.1581, 0.7764, -0.0003, -0.1942, 0.7441, 0.0532, -0.1978, 0.7473, -0.0003, -0.1553, 0.7726, 0.0532, -0.1837, 0.7347, 0.1047, -0.2262, 0.7093, 0.0532, -0.1942, 0.7441, 0.0532, -0.2138, 0.7019, 0.1047, -0.2262, 0.7093, 0.0532, -0.1837, 0.7347, 0.1047, -0.1942, 0.7441, 0.0532, -0.2304, 0.7118, -0.0003, -0.1978, 0.7473, -0.0003, -0.2262, 0.7093, 0.0532, -0.2304, 0.7118, -0.0003, -0.1942, 0.7441, 0.0532, -0.2138, 0.7019, 0.1047, -0.2499, 0.6697, 0.0532, -0.2262, 0.7093, 0.0532, -0.2361, 0.6646, 0.1047, -0.2499, 0.6697, 0.0532, -0.2138, 0.7019, 0.1047, -0.2262, 0.7093, 0.0532, -0.2546, 0.6714, -0.0003, -0.2304, 0.7118, -0.0003, -0.2499, 0.6697, 0.0532, -0.2546, 0.6714, -0.0003, -0.2262, 0.7093, 0.0532, -0.2361, 0.6646, 0.1047, -0.2646, 0.6267, 0.0532, -0.2499, 0.6697, 0.0532, -0.2499, 0.6241, 0.1047, -0.2646, 0.6267, 0.0532, -0.2361, 0.6646, 0.1047, -0.2499, 0.6241, 0.1047, -0.2695, 0.5819, 0.0532, -0.2646, 0.6267, 0.0532, -0.2546, 0.5819, 0.1047, -0.2695, 0.5819, 0.0532, -0.2499, 0.6241, 0.1047, -0.2695, 0.5819, 0.0532, -0.2745, 0.5819, -0.0003, -0.2646, 0.6267, 0.0532, -0.2646, 0.6267, 0.0532, -0.2695, 0.6275, -0.0003, -0.2499, 0.6697, 0.0532, -0.2646, 0.6267, 0.0532, -0.2745, 0.5819, -0.0003, -0.2695, 0.6275, -0.0003, -0.2499, 0.6697, 0.0532, -0.2695, 0.6275, -0.0003, -0.2546, 0.6714, -0.0003, -0.2745, 0.5819, -0.0003, -0.2695, 0.5819, -0.0538, -0.2695, 0.6275, -0.0003, -0.2695, 0.6275, -0.0003, -0.2695, 0.5819, -0.0538, -0.2646, 0.6267, -0.0538, -0.2695, 0.6275, -0.0003, -0.2646, 0.6267, -0.0538, -0.2546, 0.6714, -0.0003, -0.2695, 0.5819, -0.0538, -0.2546, 0.5819, -0.1053, -0.2646, 0.6267, -0.0538, -0.2646, 0.6267, -0.0538, -0.2546, 0.5819, -0.1053, -0.2499, 0.6241, -0.1053, -0.2546, 0.6714, -0.0003, -0.2646, 0.6267, -0.0538, -0.2499, 0.6697, -0.0538, -0.2646, 0.6267, -0.0538, -0.2499, 0.6241, -0.1053, -0.2499, 0.6697, -0.0538, -0.2546, 0.6714, -0.0003, -0.2499, 0.6697, -0.0538, -0.2304, 0.7118, -0.0003, -0.2499, 0.6697, -0.0538, -0.2499, 0.6241, -0.1053, -0.2361, 0.6646, -0.1053, -0.2304, 0.7118, -0.0003, -0.2499, 0.6697, -0.0538, -0.2262, 0.7093, -0.0538, -0.2499, 0.6697, -0.0538, -0.2361, 0.6646, -0.1053, -0.2262, 0.7093, -0.0538, -0.2304, 0.7118, -0.0003, -0.2262, 0.7093, -0.0538, -0.1978, 0.7473, -0.0003, -0.2262, 0.7093, -0.0538, -0.2361, 0.6646, -0.1053, -0.2138, 0.7019, -0.1053, -0.1978, 0.7473, -0.0003, -0.2262, 0.7093, -0.0538, -0.1942, 0.7441, -0.0538, -0.2262, 0.7093, -0.0538, -0.2138, 0.7019, -0.1053, -0.1942, 0.7441, -0.0538, -0.1978, 0.7473, -0.0003, -0.1942, 0.7441, -0.0538, -0.1581, 0.7764, -0.0003, -0.1942, 0.7441, -0.0538, -0.2138, 0.7019, -0.1053, -0.1837, 0.7347, -0.1053, -0.1581, 0.7764, -0.0003, -0.1942, 0.7441, -0.0538, -0.1553, 0.7726, -0.0538, -0.1942, 0.7441, -0.0538, -0.1837, 0.7347, -0.1053, -0.1553, 0.7726, -0.0538, -0.1581, 0.7764, -0.0003, -0.1553, 0.7726, -0.0538, -0.1127, 0.798, -0.0003, -0.1553, 0.7726, -0.0538, -0.1837, 0.7347, -0.1053, -0.147, 0.7616, -0.1053, -0.1127, 0.798, -0.0003, -0.1553, 0.7726, -0.0538, -0.1108, 0.7938, -0.0538, -0.1553, 0.7726, -0.0538, -0.147, 0.7616, -0.1053, -0.1108, 0.7938, -0.0538, -0.1127, 0.798, -0.0003, -0.1108, 0.7938, -0.0538, -0.0636, 0.8113, -0.0003, -0.1108, 0.7938, -0.0538, -0.147, 0.7616, -0.1053, -0.1051, 0.7815, -0.1053, -0.1108, 0.7938, -0.0538, -0.1051, 0.7815, -0.1053, -0.0626, 0.8069, -0.0538, -0.0636, 0.8113, -0.0003, -0.1108, 0.7938, -0.0538, -0.0626, 0.8069, -0.0538, -0.0626, 0.8069, -0.0538, -0.1051, 0.7815, -0.1053, -0.0597, 0.7938, -0.1053, -0.0636, 0.8113, -0.0003, -0.0626, 0.8069, -0.0538, -0.0124, 0.8158, -0.0003, -0.0124, 0.8113, 0.0532, -0.0636, 0.8113, -0.0003, -0.0124, 0.8158, -0.0003, -0.0124, 0.8113, 0.0532, -0.0124, 0.8158, -0.0003, 0.0377, 0.8069, 0.0532, -0.0626, 0.8069, -0.0538, -0.0597, 0.7938, -0.1053, -0.0124, 0.8113, -0.0538, -0.0124, 0.8158, -0.0003, -0.0626, 0.8069, -0.0538, -0.0124, 0.8113, -0.0538, -0.0124, 0.8113, -0.0538, -0.0597, 0.7938, -0.1053, -0.0124, 0.798, -0.1053, 0.0377, 0.8069, 0.0532, -0.0124, 0.8158, -0.0003, 0.0387, 0.8113, -0.0003, -0.0124, 0.8158, -0.0003, -0.0124, 0.8113, -0.0538, 0.0387, 0.8113, -0.0003, 0.0377, 0.8069, 0.0532, 0.0387, 0.8113, -0.0003, 0.0859, 0.7938, 0.0532, -0.0124, 0.8113, -0.0538, -0.0124, 0.798, -0.1053, 0.0377, 0.8069, -0.0538, 0.0387, 0.8113, -0.0003, -0.0124, 0.8113, -0.0538, 0.0377, 0.8069, -0.0538, 0.0377, 0.8069, -0.0538, -0.0124, 0.798, -0.1053, 0.0348, 0.7938, -0.1053, 0.0859, 0.7938, 0.0532, 0.0387, 0.8113, -0.0003, 0.0879, 0.798, -0.0003, 0.0387, 0.8113, -0.0003, 0.0377, 0.8069, -0.0538, 0.0879, 0.798, -0.0003, 0.0377, 0.8069, -0.0538, 0.0348, 0.7938, -0.1053, 0.0859, 0.7938, -0.0538, 0.0879, 0.798, -0.0003, 0.0377, 0.8069, -0.0538, 0.0859, 0.7938, -0.0538, 0.0859, 0.7938, -0.0538, 0.0348, 0.7938, -0.1053, 0.0802, 0.7815, -0.1053, 0.0859, 0.7938, 0.0532, 0.0879, 0.798, -0.0003, 0.1304, 0.7726, 0.0532, 0.1221, 0.7616, 0.1047, 0.0859, 0.7938, 0.0532, 0.1304, 0.7726, 0.0532, 0.1221, 0.7616, 0.1047, 0.1304, 0.7726, 0.0532, 0.1588, 0.7347, 0.1047, 0.1304, 0.7726, 0.0532, 0.0879, 0.798, -0.0003, 0.1332, 0.7764, -0.0003, 0.0879, 0.798, -0.0003, 0.0859, 0.7938, -0.0538, 0.1332, 0.7764, -0.0003, 0.1588, 0.7347, 0.1047, 0.1304, 0.7726, 0.0532, 0.1693, 0.7441, 0.0532, 0.1304, 0.7726, 0.0532, 0.1332, 0.7764, -0.0003, 0.1693, 0.7441, 0.0532, 0.1588, 0.7347, 0.1047, 0.1693, 0.7441, 0.0532, 0.1889, 0.7019, 0.1047, 0.0859, 0.7938, -0.0538, 0.0802, 0.7815, -0.1053, 0.1304, 0.7726, -0.0538, 0.1332, 0.7764, -0.0003, 0.0859, 0.7938, -0.0538, 0.1304, 0.7726, -0.0538, 0.1304, 0.7726, -0.0538, 0.0802, 0.7815, -0.1053, 0.1221, 0.7616, -0.1053, 0.1693, 0.7441, 0.0532, 0.1332, 0.7764, -0.0003, 0.1729, 0.7473, -0.0003, 0.1332, 0.7764, -0.0003, 0.1304, 0.7726, -0.0538, 0.1729, 0.7473, -0.0003, 0.1889, 0.7019, 0.1047, 0.1693, 0.7441, 0.0532, 0.2013, 0.7093, 0.0532, 0.1693, 0.7441, 0.0532, 0.1729, 0.7473, -0.0003, 0.2013, 0.7093, 0.0532, 0.1889, 0.7019, 0.1047, 0.2013, 0.7093, 0.0532, 0.2113, 0.6646, 0.1047, 0.1304, 0.7726, -0.0538, 0.1221, 0.7616, -0.1053, 0.1693, 0.7441, -0.0538, 0.1729, 0.7473, -0.0003, 0.1304, 0.7726, -0.0538, 0.1693, 0.7441, -0.0538, 0.1693, 0.7441, -0.0538, 0.1221, 0.7616, -0.1053, 0.1588, 0.7347, -0.1053, 0.2013, 0.7093, 0.0532, 0.1729, 0.7473, -0.0003, 0.2055, 0.7118, -0.0003, 0.1729, 0.7473, -0.0003, 0.1693, 0.7441, -0.0538, 0.2055, 0.7118, -0.0003, 0.2113, 0.6646, 0.1047, 0.2013, 0.7093, 0.0532, 0.2251, 0.6697, 0.0532, 0.2013, 0.7093, 0.0532, 0.2055, 0.7118, -0.0003, 0.2251, 0.6697, 0.0532, 0.2113, 0.6646, 0.1047, 0.2251, 0.6697, 0.0532, 0.2251, 0.6241, 0.1047, 0.1693, 0.7441, -0.0538, 0.1588, 0.7347, -0.1053, 0.2013, 0.7093, -0.0538, 0.2055, 0.7118, -0.0003, 0.1693, 0.7441, -0.0538, 0.2013, 0.7093, -0.0538, 0.2013, 0.7093, -0.0538, 0.1588, 0.7347, -0.1053, 0.1889, 0.7019, -0.1053, 0.2251, 0.6697, 0.0532, 0.2055, 0.7118, -0.0003, 0.2297, 0.6714, -0.0003, 0.2055, 0.7118, -0.0003, 0.2013, 0.7093, -0.0538, 0.2297, 0.6714, -0.0003, 0.2251, 0.6241, 0.1047, 0.2251, 0.6697, 0.0532, 0.2397, 0.6267, 0.0532, 0.2251, 0.6697, 0.0532, 0.2297, 0.6714, -0.0003, 0.2397, 0.6267, 0.0532, 0.2251, 0.6241, 0.1047, 0.2397, 0.6267, 0.0532, 0.2297, 0.5819, 0.1047, 0.2297, 0.5819, 0.1047, 0.2397, 0.6267, 0.0532, 0.2446, 0.5819, 0.0532, 0.2013, 0.7093, -0.0538, 0.1889, 0.7019, -0.1053, 0.2251, 0.6697, -0.0538, 0.2297, 0.6714, -0.0003, 0.2013, 0.7093, -0.0538, 0.2251, 0.6697, -0.0538, 0.2251, 0.6697, -0.0538, 0.1889, 0.7019, -0.1053, 0.2113, 0.6646, -0.1053, 0.2397, 0.6267, 0.0532, 0.2297, 0.6714, -0.0003, 0.2446, 0.6275, -0.0003, 0.2397, 0.6267, 0.0532, 0.2446, 0.6275, -0.0003, 0.2446, 0.5819, 0.0532, 0.2297, 0.6714, -0.0003, 0.2251, 0.6697, -0.0538, 0.2446, 0.6275, -0.0003, 0.2446, 0.5819, 0.0532, 0.2446, 0.6275, -0.0003, 0.2497, 0.5819, -0.0003, 0.2251, 0.6697, -0.0538, 0.2113, 0.6646, -0.1053, 0.2397, 0.6267, -0.0538, 0.2446, 0.6275, -0.0003, 0.2251, 0.6697, -0.0538, 0.2397, 0.6267, -0.0538, 0.2446, 0.6275, -0.0003, 0.2397, 0.6267, -0.0538, 0.2497, 0.5819, -0.0003, 0.2397, 0.6267, -0.0538, 0.2113, 0.6646, -0.1053, 0.2251, 0.6241, -0.1053, 0.2497, 0.5819, -0.0003, 0.2397, 0.6267, -0.0538, 0.2446, 0.5819, -0.0538, 0.2397, 0.6267, -0.0538, 0.2251, 0.6241, -0.1053, 0.2446, 0.5819, -0.0538, 0.2446, 0.5819, -0.0538, 0.2251, 0.6241, -0.1053, 0.2297, 0.5819, -0.1053)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cnwdb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lexvt"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lexvt"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_cnwdb")
-shader = ExtResource("4_0adce")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.0659437
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_527um"]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("8_ealnf")
+next_pass = SubResource("ShaderMaterial_lexvt")
+shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.114603
+shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m0wlk"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_527um")
-shader = ExtResource("4_0adce")
+shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.0745091
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tkueq"]
-render_priority = 0
-shader = ExtResource("8_ealnf")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwu8f"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_tkueq")
+next_pass = SubResource("ShaderMaterial_m0wlk")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.273003
+shader_parameter/color_shade = 0.410884
 shader_parameter/life = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jv5hx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwu8f"]
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_70qil"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jv5hx"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_jv5hx")
+next_pass = SubResource("ShaderMaterial_wwu8f")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.105541
+shader_parameter/color_shade = 0.162132
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70qil"]
+render_priority = 0
+shader = ExtResource("8_ealnf")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_odbhu"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_70qil")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.376744
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wvxuj"]
@@ -730,7 +731,7 @@ metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0149403, -0.106658, -1.33576e-09)
 mesh = ExtResource("3_eqw71")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_8uadq")
+surface_material_override/0 = SubResource("ShaderMaterial_f41kg")
 script = ExtResource("41_hufde")
 HIGHLIGHT_ENABLED = true
 HIGHLIGHT_COLOUR = Color(0.147943, 0.226878, 0.339207, 1)
@@ -778,7 +779,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0.0104967, 7.45058e-09, 0.00850562)
 mesh = ExtResource("6_0adce")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_luvdn")
+surface_material_override/0 = SubResource("ShaderMaterial_wvxuj")
 script = ExtResource("41_hufde")
 HIGHLIGHT_ENABLED = true
 HIGHLIGHT_COLOUR = Color(0.14902, 0.227451, 0.337255, 1)
@@ -807,7 +808,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("7_1hdur")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_rbiss")
+surface_material_override/0 = SubResource("ShaderMaterial_2lvkp")
 script = ExtResource("41_hufde")
 HIGHLIGHT_ENABLED = true
 HIGHLIGHT_THROUGH_OBJECTS = true
@@ -849,7 +850,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("7_1hdur")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_vio2m")
+surface_material_override/0 = SubResource("ShaderMaterial_adhtu")
 script = ExtResource("41_hufde")
 HIGHLIGHT_ENABLED = true
 HIGHLIGHT_THROUGH_OBJECTS = true
@@ -918,27 +919,26 @@ metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154252, 0, 0)
 mesh = ExtResource("2_avg8m")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ib70c")
-surface_material_override/1 = SubResource("ShaderMaterial_giirl")
-surface_material_override/2 = SubResource("ShaderMaterial_4uh7c")
-surface_material_override/3 = SubResource("ShaderMaterial_tbaow")
-surface_material_override/4 = SubResource("ShaderMaterial_mgsg4")
+surface_material_override/0 = SubResource("ShaderMaterial_mbg3f")
+surface_material_override/1 = SubResource("ShaderMaterial_v5pcv")
+surface_material_override/2 = SubResource("ShaderMaterial_aho8b")
+surface_material_override/3 = SubResource("ShaderMaterial_57w7t")
+surface_material_override/4 = SubResource("ShaderMaterial_m86gr")
 script = ExtResource("41_hufde")
 
 [node name="Hatches_Button" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.377751, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.368763, 0)
 
 [node name="Hittable_Collider" type="Area3D" parent="Body/Hatches_Button"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0181308, 0)
 collision_layer = 128
-collision_mask = 0
-script = ExtResource("6_gc2rj")
+script = ExtResource("22_8uadq")
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
 [node name="HatchButton" type="MeshInstance3D" parent="Body/Hatches_Button/Hittable_Collider"]
 mesh = ExtResource("25_mv043")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_pahl6")
+surface_material_override/0 = SubResource("ShaderMaterial_2d5wd")
 script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Hatches_Button/Hittable_Collider"]
@@ -952,29 +952,34 @@ metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 [node name="Hit_Gib" type="Node" parent="Body/Hatches_Button/Hittable_Collider" node_paths=PackedStringArray("GIBBABLE")]
 script = ExtResource("9_bcabd")
 GIBBABLE = NodePath("../../../TotembotHatch")
-MAX_HP = 1.0
+MAX_HP = 3.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 
 [node name="Hit_Gib2" type="Node" parent="Body/Hatches_Button/Hittable_Collider" node_paths=PackedStringArray("GIBBABLE")]
 script = ExtResource("9_bcabd")
 GIBBABLE = NodePath("../../../TotembotHatch2")
-MAX_HP = 1.0
+MAX_HP = 3.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 
 [node name="Hit_Gib3" type="Node" parent="Body/Hatches_Button/Hittable_Collider" node_paths=PackedStringArray("GIBBABLE")]
 script = ExtResource("9_bcabd")
 GIBBABLE = NodePath("../../../TotembotHatch3")
-MAX_HP = 1.0
+MAX_HP = 3.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 
 [node name="Hit_Translate" type="Node" parent="Body/Hatches_Button/Hittable_Collider" node_paths=PackedStringArray("TRANSLATE_NODE")]
 script = ExtResource("10_bcabd")
 TRANSLATE_NODE = NodePath("../..")
-TRANSLATION = Vector3(0, 0.022, 0)
-MAX_HP = 1.0
+TRANSLATION = Vector3(0, 0.019, 0)
+MAX_HP = 3.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 metadata/_custom_type_script = "uid://bd3thw0v5baaj"
 
 [node name="Hit_Pastel_Shade" type="Node" parent="Body/Hatches_Button/Hittable_Collider" node_paths=PackedStringArray("PASTEL")]
 script = ExtResource("51_kms4a")
 PASTEL = NodePath("../HatchButton")
-MAX_HP = 1.0
+MAX_HP = 3.0
+MINIMUM_DAMAGE_THRESHOLD = 8.0
 metadata/_custom_type_script = "uid://cijq708jlfumq"
 
 [node name="TotembotHatch" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
@@ -1013,13 +1018,13 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, -0.22
 [node name="AmmoBox" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model"]
 mesh = ExtResource("14_iweeg")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_u8c23")
+surface_material_override/0 = SubResource("ShaderMaterial_tof8o")
 script = ExtResource("41_hufde")
 
 [node name="AmmoHolder" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model"]
 mesh = ExtResource("15_0mgnh")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_d6qou")
+surface_material_override/0 = SubResource("ShaderMaterial_601at")
 script = ExtResource("41_hufde")
 
 [node name="Gun_Hinge" type="Node3D" parent="Body/Mid_PlanetaryGears/Model"]
@@ -1054,16 +1059,16 @@ metadata/_custom_type_script = "uid://b7whx6weh5vid"
 transform = Transform3D(-8.54384e-08, -1, 3.72226e-15, -1.98439e-09, -3.3708e-15, -1, 1, -8.54384e-08, -1.98439e-09, 0.379288, 0.000521401, -0.207521)
 mesh = ExtResource("12_v7ac7")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ap0jk")
-surface_material_override/1 = SubResource("ShaderMaterial_6r52o")
+surface_material_override/0 = SubResource("ShaderMaterial_4pw2c")
+surface_material_override/1 = SubResource("ShaderMaterial_jht4a")
 script = ExtResource("41_hufde")
 
 [node name="Barrel" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
 transform = Transform3D(-8.54384e-08, 1, 8.74228e-08, -8.54384e-08, -8.74228e-08, 1, 1, 8.54384e-08, 8.54384e-08, -0.387121, 0.000521401, -0.207521)
 mesh = ExtResource("13_mgybp")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_pi7l0")
-surface_material_override/1 = SubResource("ShaderMaterial_brjqc")
+surface_material_override/0 = SubResource("ShaderMaterial_aq3c1")
+surface_material_override/1 = SubResource("ShaderMaterial_o7x6s")
 script = ExtResource("41_hufde")
 
 [node name="Aim_At_target" type="Node3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge"]
@@ -1100,7 +1105,7 @@ metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 transform = Transform3D(-4.37114e-08, -1, -4.1727e-08, 1, -4.37114e-08, 4.1727e-08, -4.1727e-08, -4.1727e-08, 1, 0.397522, -0.156459, -0.0861752)
 mesh = ExtResource("16_72w42")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_f5dj3")
+surface_material_override/0 = SubResource("ShaderMaterial_tfvg0")
 script = ExtResource("41_hufde")
 HIGHLIGHT_ENABLED = true
 HIGHLIGHT_COLOUR = Color(0.351854, 0.150627, 0.183444, 1)
@@ -1134,8 +1139,8 @@ sync_to_physics = false
 [node name="Shaft" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
 mesh = ExtResource("9_mv043")
 skeleton = NodePath("../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_8suxc")
-surface_material_override/1 = SubResource("ShaderMaterial_5q5i5")
+surface_material_override/0 = SubResource("ShaderMaterial_xuvo2")
+surface_material_override/1 = SubResource("ShaderMaterial_jkrdq")
 script = ExtResource("41_hufde")
 
 [node name="Generic6DOFJoint3D_L" type="Generic6DOFJoint3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shaft"]
@@ -1162,7 +1167,7 @@ metadata/_custom_type_script = "uid://2go7fdnv41nr"
 [node name="Shield1" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
 mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_g181p")
+surface_material_override/0 = SubResource("ShaderMaterial_6cdda")
 script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Right"]
@@ -1213,7 +1218,7 @@ metadata/_custom_type_script = "uid://2go7fdnv41nr"
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -0.117623, -0.391669, 0.186677)
 mesh = ExtResource("10_lqwa8")
 skeleton = NodePath("../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_j2akm")
+surface_material_override/0 = SubResource("ShaderMaterial_dsu6j")
 script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield_Support_Left"]
@@ -1267,9 +1272,9 @@ metadata/_custom_type_script = "uid://2go7fdnv41nr"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196112, -0.365091, -8.18315e-09)
 mesh = ExtResource("11_bcabd")
 skeleton = NodePath("../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_1kiwp")
-surface_material_override/1 = SubResource("ShaderMaterial_61nnh")
-surface_material_override/2 = SubResource("ShaderMaterial_phm4t")
+surface_material_override/0 = SubResource("ShaderMaterial_gdgnt")
+surface_material_override/1 = SubResource("ShaderMaterial_cm6we")
+surface_material_override/2 = SubResource("ShaderMaterial_cnwdb")
 script = ExtResource("41_hufde")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="Body/Mid_PlanetaryGears/Model/Shield/Shield"]
@@ -1404,10 +1409,10 @@ metadata/_custom_type_script = "uid://dq4im1txeg8kn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106911, -0.571512, 0)
 mesh = ExtResource("19_d4x4b")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_lexvt")
-surface_material_override/1 = SubResource("ShaderMaterial_m0wlk")
-surface_material_override/2 = SubResource("ShaderMaterial_wwu8f")
-surface_material_override/3 = SubResource("ShaderMaterial_70qil")
+surface_material_override/0 = SubResource("ShaderMaterial_527um")
+surface_material_override/1 = SubResource("ShaderMaterial_tkueq")
+surface_material_override/2 = SubResource("ShaderMaterial_jv5hx")
+surface_material_override/3 = SubResource("ShaderMaterial_odbhu")
 script = ExtResource("41_hufde")
 
 [node name="Seeking_Gun" type="Node" parent="Body/Top_PlanetaryGears/Top" node_paths=PackedStringArray("CAMERA", "AIM_THIS_TOWARDS_TARGET")]
