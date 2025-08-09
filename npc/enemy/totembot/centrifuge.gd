@@ -1,24 +1,19 @@
 class_name Stabilisation_Centrifuge extends Body_Segment
 
 @export var BODY:Grand_Body;
-@export var STABILISER:Angular_Damper
 
-@export var GIMBAL:Rotator_1D;
-@export var CORE:Rotator_1D;
 
-@export var CORE_SPIN_SPEED:float = 60;
-@export var GIMBAL_SPIN_SPEED:float = 40;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assert(len(IMPULSE_UPSTREAMS) != 0, "No impulse_Upstreams set on a Centrifuge")
-	assert(STABILISER != null, "No Angular_Damper set")
 	super()
 	
 	IMPULSE_PROPOGATOR.DISABLE_UPSTREAM = true # overrides its behaviour
 	IMPULSE_PROPOGATOR.on_hit.connect(apply_random_impulse)
 	BODY.IS_CONTROLLED_COM_ACTIVE = true
 	BODY.CONTROLLED_COM = BODY.to_local(global_position)
+	
 
 
 func apply_random_impulse():
@@ -39,10 +34,10 @@ func apply_random_impulse():
 
 
 func destroy():
+	super.destroy()
 	#print("kapow")
 	$Gib.trigger()
 	BODY.IS_CONTROLLED_COM_ACTIVE = false
-	STABILISER.queue_free()
 	
 
 func _physics_process(delta: float) -> void:

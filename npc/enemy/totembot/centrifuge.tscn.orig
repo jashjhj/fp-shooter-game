@@ -1,7 +1,7 @@
 [gd_scene load_steps=60 format=3 uid="uid://cfwnkxffdyvsp"]
 
 [ext_resource type="ArrayMesh" uid="uid://vcljykjci00t" path="res://npc/enemy/totembot/assets/centrifuge_0.obj" id="1_bnjpc"]
-[ext_resource type="Script" uid="uid://dw4ngkl1ratab" path="res://npc/enemy/totembot/centrifuge.gd" id="1_tgbsm"]
+[ext_resource type="Script" uid="uid://dw4ngkl1ratab" path="res://npc/enemy/totembot/stabilisation_centrifuge.gd" id="1_tgbsm"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="2_fgn0f"]
 [ext_resource type="Script" uid="uid://bwudu5tyd6ps5" path="res://false_physics/Top_Level_Rigidbody.gd" id="2_rdqtr"]
 [ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="2_wo5lt"]
@@ -36,7 +36,11 @@ next_pass = SubResource("ShaderMaterial_7us8c")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.513037
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.123286
+=======
+shader_parameter/color_shade = 0.896966
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6yjju"]
@@ -52,7 +56,11 @@ next_pass = SubResource("ShaderMaterial_6yjju")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.279569
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.758867
+=======
+shader_parameter/color_shade = 0.0148116
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_14nxl"]
@@ -68,7 +76,11 @@ next_pass = SubResource("ShaderMaterial_14nxl")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.15349
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.822944
+=======
+shader_parameter/color_shade = 0.35286
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t70uu"]
@@ -84,7 +96,11 @@ next_pass = SubResource("ShaderMaterial_t70uu")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.235969
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.969264
+=======
+shader_parameter/color_shade = 0.595256
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4fans"]
@@ -100,7 +116,11 @@ next_pass = SubResource("ShaderMaterial_4fans")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.399498
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.940608
+=======
+shader_parameter/color_shade = 0.506211
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_546c6"]
@@ -119,7 +139,11 @@ next_pass = SubResource("ShaderMaterial_pca6w")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.986558
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.791912
+=======
+shader_parameter/color_shade = 0.784015
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_da0g4"]
@@ -135,7 +159,11 @@ next_pass = SubResource("ShaderMaterial_da0g4")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.746601
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.888066
+=======
+shader_parameter/color_shade = 0.262169
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_occg4"]
@@ -151,7 +179,11 @@ next_pass = SubResource("ShaderMaterial_occg4")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.133108
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.520551
+=======
+shader_parameter/color_shade = 0.358663
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tcnqv"]
@@ -167,7 +199,11 @@ next_pass = SubResource("ShaderMaterial_tcnqv")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.231509
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.775682
+=======
+shader_parameter/color_shade = 0.381309
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_anb6g"]
@@ -183,7 +219,11 @@ next_pass = SubResource("ShaderMaterial_anb6g")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.754807
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.0442298
+=======
+shader_parameter/color_shade = 0.143831
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_85kxx"]
@@ -202,7 +242,11 @@ next_pass = SubResource("ShaderMaterial_5t78k")
 shader = ExtResource("3_tgbsm")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.960117
+<<<<<<< HEAD
+shader_parameter/color_shade = 0.742155
+=======
+shader_parameter/color_shade = 0.377254
+>>>>>>> e0af3
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_oql4u"]

@@ -5,6 +5,7 @@ extends LegBot
 @export var SEEKING_CAMERA_GUN:Seeking_Camera;
 @export var SEEKING_CAMERA_CAM:Seeking_Camera
 @export_group("Parts")
+@export var CENTRIFUGE:Body_Segment
 ##Batteries is amn array of the HP components of the batteries.
 @export var BATTERIES:Array[Hit_HP_Tracker]
 
@@ -24,6 +25,8 @@ func _ready() -> void:
 	energy = max_energy
 	for b in BATTERIES:
 		b.on_hp_change.connect(recalculate_energy)
+	
+	if(CENTRIFUGE != null):CENTRIFUGE.on_destroy.connect(destroy_centrifuge)
 
 
 func _physics_process(delta: float) -> void:
@@ -54,3 +57,8 @@ func recalculate_energy(new_hp:float):
 	#Apply new energy value
 	MID_SWIVEL.ROTATION_ACCELERATION = energy/max_energy * MID_SWIVEL._initial_acceleration
 	TOP_SWIVEL.ROTATION_ACCELERATION = energy/max_energy * TOP_SWIVEL._initial_acceleration
+
+func destroy_centrifuge():
+	$Body/Angular_Damper.free()
+	LEG_FORCE_LATERAL = 0; # Pretend legs dont work well
+	LEG_FORCE_THROUGH *= 0.33;
