@@ -51,4 +51,6 @@ func recalculate_energy(new_hp:float):
 	for b in BATTERIES:
 		energy += min(1.0, max(0.0, b.HP/b.MAX_HP))
 	
-	print(energy)
+	#Apply new energy value
+	MID_SWIVEL.ROTATION_ACCELERATION = energy/max_energy * MID_SWIVEL._initial_acceleration
+	TOP_SWIVEL.ROTATION_ACCELERATION = energy/max_energy * TOP_SWIVEL._initial_acceleration

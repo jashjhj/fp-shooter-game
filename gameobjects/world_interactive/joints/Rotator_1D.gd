@@ -13,9 +13,11 @@ enum ROTATOR_1D_MODE{
 
 @export_group("Rotation Settings")
 ##Maximum degrees/Second
-@export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = PI/3;
+@export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_MAX_SPEED:float = PI/3.0;
 ##In degrees/second/second
-@export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_ACCELERATION:float = PI;
+@export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_ACCELERATION:float = 10.0*PI/9.0;
+##In degrees/second/second. This is always applied, e.g. can stop motor after ACCELERATION IS DISABLED
+@export_range(0, 3600, 0.1, "radians_as_degrees") var ROTATION_DECELERATION:float = PI/9.0;
 
 @export var ANGLE_LIMITS_ENABLED:bool = false
 @export_range(-180, 180, 1.0, "radians_as_degrees") var MIN_ANGLE = -PI/4; 
@@ -42,7 +44,10 @@ var default_sfx_volume:float;
 
 
 
-@onready var initial_max_speed:float = ROTATION_MAX_SPEED
+@onready var _initial_max_speed:float = ROTATION_MAX_SPEED
+@onready var _initial_acceleration:float = ROTATION_ACCELERATION
+
+
 var current_angle:float = 0.0;
 var current_speed:float = 0.0;
 
@@ -72,7 +77,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if(SFX != null):
-		SFX.volume_linear = default_sfx_volume * (abs(current_speed)/initial_max_speed)**2
+		SFX.volume_linear = default_sfx_volume * (abs(current_speed)/_initial_max_speed)**2
 
 
 
@@ -101,10 +106,11 @@ func _physics_process(delta: float) -> void:
 			target_angle = MIN_ANGLE - current_angle
 		
 		
-		var max_speed:float = sqrt(abs(2*target_angle * ROTATION_ACCELERATION)) * 0.8
+		var max_speed:float = sqrt(abs(2*target_angle * (ROTATION_ACCELERATION + ROTATION_DECELERATION))) * 0.8
 		
 		max_speed = min(max_speed, ROTATION_MAX_SPEED)
 		delta_angular_velocity = ROTATION_ACCELERATION * delta * sign(target_angle);
+		delta_angular_velocity += ROTATION_DECELERATION * delta * -sign(current_speed); # Apply deceleration
 		
 		if(abs(current_speed + delta_angular_velocity) > max_speed):
 			
