@@ -76,7 +76,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.147943, 0.226878, 0.339207)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.450526
+=======
+shader_parameter/color_shade = 0.418828
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.418828
 >>>>>>> Stashed changes
@@ -99,7 +103,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.14902, 0.227451, 0.337255)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.491594
+=======
+shader_parameter/color_shade = 0.68777
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.68777
 >>>>>>> Stashed changes
@@ -122,7 +130,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.123296
+=======
+shader_parameter/color_shade = 0.539011
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.539011
 >>>>>>> Stashed changes
@@ -145,7 +157,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.526319
+=======
+shader_parameter/color_shade = 0.959378
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.959378
 >>>>>>> Stashed changes
@@ -157,7 +173,10 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 shader_parameter/color_shade = 0.705434
 shader_parameter/life = 1.0
 >>>>>>> Stashed changes
@@ -178,7 +197,10 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 shader_parameter/color_shade = 0.650324
 shader_parameter/life = 1.0
 >>>>>>> Stashed changes
@@ -199,7 +221,10 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 shader_parameter/color_shade = 0.92626
 shader_parameter/life = 1.0
 >>>>>>> Stashed changes
@@ -220,7 +245,10 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 shader_parameter/color_shade = 0.00475821
 shader_parameter/life = 1.0
 >>>>>>> Stashed changes
@@ -233,7 +261,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.962359
+=======
+shader_parameter/color_shade = 0.898312
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.898312
 >>>>>>> Stashed changes
@@ -253,6 +285,7 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.158704
 shader_parameter/life = 1.0
 
@@ -270,6 +303,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.584482
+=======
+shader_parameter/color_shade = 0.240424
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.240424
 >>>>>>> Stashed changes
@@ -321,7 +357,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.958203
+=======
+shader_parameter/color_shade = 0.838597
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.838597
 >>>>>>> Stashed changes
@@ -374,7 +414,11 @@ next_pass = SubResource("ShaderMaterial_ap0jk")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.817992
+=======
+shader_parameter/color_shade = 0.956169
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6r52o"]
@@ -425,7 +469,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.70189
+=======
+shader_parameter/color_shade = 0.67929
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.67929
 >>>>>>> Stashed changes
@@ -461,7 +509,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.351854, 0.150627, 0.183444)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.882177
+=======
+shader_parameter/color_shade = 0.905903
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.905903
 >>>>>>> Stashed changes
@@ -473,7 +525,10 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 shader_parameter/color_shade = 0.032903
 shader_parameter/life = 1.0
 >>>>>>> Stashed changes
@@ -486,7 +541,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.702584
+=======
+shader_parameter/color_shade = 0.730962
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.730962
 >>>>>>> Stashed changes
@@ -506,6 +565,7 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.362652
 shader_parameter/life = 1.0
 
@@ -523,6 +583,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.227322
+=======
+shader_parameter/color_shade = 0.205944
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.205944
 >>>>>>> Stashed changes
@@ -545,7 +608,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.376742
+=======
+shader_parameter/color_shade = 0.936971
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.936971
 >>>>>>> Stashed changes
@@ -588,6 +655,19 @@ shader_parameter/color_shade = 0.954969
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61nnh"]
+<<<<<<< Updated upstream
+=======
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_gdgnt")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.954969
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cm6we"]
+>>>>>>> Stashed changes
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
@@ -600,6 +680,7 @@ next_pass = SubResource("ShaderMaterial_61nnh")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 shader_parameter/color_shade = 0.0265486
 shader_parameter/life = 1.0
@@ -618,6 +699,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.438539
+=======
+shader_parameter/color_shade = 0.901064
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.901064
 >>>>>>> Stashed changes
@@ -684,7 +768,10 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 shader_parameter/color_shade = 0.38752
 shader_parameter/life = 1.0
 >>>>>>> Stashed changes
@@ -697,7 +784,11 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.897877
+=======
+shader_parameter/color_shade = 0.81656
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.81656
 >>>>>>> Stashed changes
@@ -717,6 +808,7 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.103441
 shader_parameter/life = 1.0
 
@@ -734,6 +826,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.392614
+=======
+shader_parameter/color_shade = 0.195629
+>>>>>>> Stashed changes
 =======
 shader_parameter/color_shade = 0.195629
 >>>>>>> Stashed changes
