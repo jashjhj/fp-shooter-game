@@ -1,4 +1,4 @@
-class_name Hit_Modify_Damage extends Hit_Component
+class_name Hit_Multiply_Damage extends Hit_Component
 
 @export var HIT_CMP:Hit_Component;
 @export var DAMAGE_MULTIPLIER:float = 1.0;
