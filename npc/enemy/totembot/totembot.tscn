@@ -75,7 +75,11 @@ next_pass = SubResource("ShaderMaterial_8uadq")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.147943, 0.226878, 0.339207)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.450526
+=======
+shader_parameter/color_shade = 0.418828
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0adce"]
@@ -94,7 +98,11 @@ next_pass = SubResource("ShaderMaterial_luvdn")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.5
 shader_parameter/emission_color = Vector3(0.14902, 0.227451, 0.337255)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.491594
+=======
+shader_parameter/color_shade = 0.68777
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1hdur"]
@@ -113,7 +121,11 @@ next_pass = SubResource("ShaderMaterial_rbiss")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.123296
+=======
+shader_parameter/color_shade = 0.539011
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ily6p"]
@@ -132,7 +144,11 @@ next_pass = SubResource("ShaderMaterial_vio2m")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.526319
+=======
+shader_parameter/color_shade = 0.959378
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ib70c"]
@@ -140,6 +156,11 @@ render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
+=======
+shader_parameter/color_shade = 0.705434
+shader_parameter/life = 1.0
+>>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbg3f"]
 resource_local_to_scene = true
@@ -156,6 +177,11 @@ render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
+=======
+shader_parameter/color_shade = 0.650324
+shader_parameter/life = 1.0
+>>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v5pcv"]
 resource_local_to_scene = true
@@ -172,6 +198,11 @@ render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
+=======
+shader_parameter/color_shade = 0.92626
+shader_parameter/life = 1.0
+>>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aho8b"]
 resource_local_to_scene = true
@@ -188,6 +219,11 @@ render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
+=======
+shader_parameter/color_shade = 0.00475821
+shader_parameter/life = 1.0
+>>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57w7t"]
 resource_local_to_scene = true
@@ -196,7 +232,11 @@ next_pass = SubResource("ShaderMaterial_tbaow")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.962359
+=======
+shader_parameter/color_shade = 0.898312
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgsg4"]
@@ -212,6 +252,7 @@ next_pass = SubResource("ShaderMaterial_mgsg4")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.158704
 shader_parameter/life = 1.0
 
@@ -229,6 +270,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.584482
+=======
+shader_parameter/color_shade = 0.240424
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lqwa8"]
@@ -240,6 +284,19 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8c23"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_2d5wd")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.872413
+shader_parameter/life = 1.0
+
+>>>>>>> Stashed changes
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tof8o"]
 resource_local_to_scene = true
 render_priority = 0
@@ -263,7 +320,11 @@ next_pass = SubResource("ShaderMaterial_d6qou")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.958203
+=======
+shader_parameter/color_shade = 0.838597
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ox312"]
@@ -293,6 +354,19 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ap0jk"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_601at")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.274916
+shader_parameter/life = 1.0
+
+>>>>>>> Stashed changes
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4pw2c"]
 resource_local_to_scene = true
 render_priority = 0
@@ -308,6 +382,11 @@ render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
+=======
+shader_parameter/color_shade = 0.956169
+shader_parameter/life = 1.0
+>>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jht4a"]
 resource_local_to_scene = true
@@ -320,6 +399,19 @@ shader_parameter/color_shade = 0.702456
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pi7l0"]
+<<<<<<< Updated upstream
+=======
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_jht4a")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.367613
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq3c1"]
+>>>>>>> Stashed changes
 render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
@@ -332,7 +424,11 @@ next_pass = SubResource("ShaderMaterial_pi7l0")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.70189
+=======
+shader_parameter/color_shade = 0.67929
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_brjqc"]
@@ -364,7 +460,11 @@ next_pass = SubResource("ShaderMaterial_f5dj3")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.351854, 0.150627, 0.183444)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.882177
+=======
+shader_parameter/color_shade = 0.905903
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8suxc"]
@@ -372,6 +472,11 @@ render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
+=======
+shader_parameter/color_shade = 0.032903
+shader_parameter/life = 1.0
+>>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xuvo2"]
 resource_local_to_scene = true
@@ -380,7 +485,11 @@ next_pass = SubResource("ShaderMaterial_8suxc")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.702584
+=======
+shader_parameter/color_shade = 0.730962
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5q5i5"]
@@ -396,6 +505,7 @@ next_pass = SubResource("ShaderMaterial_5q5i5")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.362652
 shader_parameter/life = 1.0
 
@@ -413,6 +523,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.227322
+=======
+shader_parameter/color_shade = 0.205944
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_klcti"]
@@ -431,7 +544,11 @@ next_pass = SubResource("ShaderMaterial_j2akm")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.376742
+=======
+shader_parameter/color_shade = 0.936971
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hufde"]
@@ -443,6 +560,19 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1kiwp"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_dsu6j")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.663455
+shader_parameter/life = 1.0
+
+>>>>>>> Stashed changes
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gdgnt"]
 resource_local_to_scene = true
 render_priority = 0
@@ -450,7 +580,11 @@ next_pass = SubResource("ShaderMaterial_1kiwp")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.0593979
+=======
+shader_parameter/color_shade = 0.954969
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61nnh"]
@@ -466,6 +600,7 @@ next_pass = SubResource("ShaderMaterial_61nnh")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.0265486
 shader_parameter/life = 1.0
 
@@ -483,6 +618,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.438539
+=======
+shader_parameter/color_shade = 0.901064
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5bgyk"]
@@ -517,6 +655,19 @@ shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lexvt"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_cnwdb")
+shader = ExtResource("4_0adce")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.409104
+shader_parameter/life = 1.0
+
+>>>>>>> Stashed changes
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_527um"]
 resource_local_to_scene = true
 render_priority = 0
@@ -532,6 +683,11 @@ render_priority = 0
 shader = ExtResource("8_ealnf")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
+=======
+shader_parameter/color_shade = 0.38752
+shader_parameter/life = 1.0
+>>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tkueq"]
 resource_local_to_scene = true
@@ -540,7 +696,11 @@ next_pass = SubResource("ShaderMaterial_m0wlk")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.897877
+=======
+shader_parameter/color_shade = 0.81656
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwu8f"]
@@ -556,6 +716,7 @@ next_pass = SubResource("ShaderMaterial_wwu8f")
 shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+<<<<<<< Updated upstream
 shader_parameter/color_shade = 0.103441
 shader_parameter/life = 1.0
 
@@ -573,6 +734,9 @@ shader = ExtResource("4_0adce")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.392614
+=======
+shader_parameter/color_shade = 0.195629
+>>>>>>> Stashed changes
 shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wvxuj"]
@@ -709,10 +873,9 @@ metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 
 [node name="Underbelly" type="Node3D" parent="Body"]
 
-[node name="Centrifuge" parent="Body/Underbelly" node_paths=PackedStringArray("BODY", "STABILISER", "IMPULSE_UPSTREAMS") instance=ExtResource("10_0adce")]
+[node name="Centrifuge" parent="Body/Underbelly" node_paths=PackedStringArray("BODY", "IMPULSE_UPSTREAMS") instance=ExtResource("10_0adce")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0843814, 0)
 BODY = NodePath("../..")
-STABILISER = NodePath("../../Angular_Damper")
 IMPULSE_UPSTREAMS = [NodePath("../../Hit_Impulse")]
 
 [node name="Motor" type="Area3D" parent="Body/Underbelly" node_paths=PackedStringArray("HIT_COMPONENTS")]
