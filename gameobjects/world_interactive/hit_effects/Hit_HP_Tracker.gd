@@ -12,14 +12,14 @@ var HP:float:
 		if HP <= 0 and is_hp_positive:
 			is_hp_positive = false;
 			on_hp_becomes_negative.emit()
-		on_hp_change.emit()
+		on_hp_change.emit(HP)
 
 @onready var is_hp_positive:bool;
 
 
 ##Emitted after a hit which reduces HP to <0
 signal on_hp_becomes_negative
-signal on_hp_change
+signal on_hp_change(new_hp:float)
 
 ##Remember to call super._ready
 func _ready() -> void:
