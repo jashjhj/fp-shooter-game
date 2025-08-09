@@ -91,8 +91,8 @@ var is_physical:bool = true:
 var is_stable:bool = false
 
 ## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
-var is_stepping:bool = false
-var step_state:int = 0:
+var is_stepping:bool = true
+var step_state:int = 1:
 	set(v):
 		is_stepping = true
 		if(v == 0):
@@ -140,6 +140,7 @@ func _ready() -> void:
 	FOOT_PHYSLERP.RESERVE_FORCE = 15;
 	FOOT_PHYSLERP.RIGIDBODY = FOOT
 	FOOT_PHYSLERP.TARGET = TARGET
+	FOOT_PHYSLERP.enabled = true
 	
 	#parent's parent = RIGIDBODy's Controller
 	#await get_parent().get_parent().ready

@@ -114,7 +114,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69682, 1.65501, -8.44258)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.14506, 2.75763, -8.44259)
 
 [node name="Totembot" parent="." instance=ExtResource("6_mvpoq")]
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 4.00944, 2.04264, -23.5369)
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 4.00944, 6.55471, -23.5369)
 
 [node name="Hittable_Collider" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68814, -20.3846)
