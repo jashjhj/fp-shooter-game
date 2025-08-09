@@ -6,6 +6,9 @@ class_name Body_Segment extends Node3D
 ##The <Hit_Impulse_Propogate> (Local to this object) via which impulses are propagated through, leaving the <Body_Segment>.
 @export var IMPULSE_PROPOGATOR:Hit_Impulse_Propogate
 
+
+signal on_destroy
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if(IMPULSE_PROPOGATOR != null):
@@ -13,4 +16,5 @@ func _ready() -> void:
 
 ##Called to 'destory' part - trigger gibs, etc.
 func destroy() -> void:
-	pass
+	on_destroy.emit()
+	
