@@ -41,6 +41,8 @@ func _physics_process(delta: float) -> void:
 		CAMERA_MESH_ROTATOR.target_global = SEEKING_CAMERA_CAM.last_target_pos
 		GUN_PITCH.target_global = SEEKING_CAMERA_GUN.last_target_pos
 	
+	if(SEEKING_CAMERA_CAM.can_see_player):
+		PATHFINDER.target_position = Globals.PLAYER.global_position + (BODY.global_position - Globals.PLAYER.global_position).normalized() * 5.0; # Stand 5m away
 	
 	
 	if(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) > 0.925 and !GUN_CHAINGUN.is_spinning): # if gun is msotly aimed at its target

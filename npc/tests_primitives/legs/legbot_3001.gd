@@ -116,7 +116,7 @@ func update_target():
 	
 	if(is_pathfinding): ### ---------------- PATHFINDIUNG CODE
 		
-		PATHFINDER.target_position = Globals.PLAYER.global_position
+		#PATHFINDER.target_position = Globals.PLAYER.global_position
 		
 		var path_step_dist:float = stability;
 		

@@ -685,7 +685,6 @@ GUN_CHAINGUN = NodePath("Body/Mid_PlanetaryGears/Model/Ammowheel_Rotator")
 BODY = NodePath("Body")
 LEGS = [NodePath("Body/TotemBotLeg"), NodePath("Body/TotemBotLeg2"), NodePath("Body/TotemBotLeg3")]
 ANGLE_HELPER = NodePath("Body/Angular_Damper")
-is_pathfinding = false
 PATHFINDER = NodePath("Body/NavigationAgent3D")
 IDLE_HEIGHT = 1.7
 FOOT_PLANT_RADIUS = 0.7
