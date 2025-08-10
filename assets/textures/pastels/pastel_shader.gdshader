@@ -4,7 +4,7 @@ shader_type spatial;
 uniform float emission = 0.0;
 uniform vec3 emission_color = vec3(0.3,0.2,0.1);
 
-uniform float color_shade = 0.1;
+uniform float color_shade = 0.86;
 uniform float life = 1.0;
 //uniform float emission = 0.0;
 
