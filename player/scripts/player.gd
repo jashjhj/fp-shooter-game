@@ -123,7 +123,7 @@ func _process(delta:float) -> void:
 	mouse_input = Vector2.ZERO;
 	
 	if(aiming_down_sights):
-		CAMERA.position = CAMERA.position.lerp(HEAD.global_basis.inverse()*(GUN.ADS_CAM_POS.global_position - HEAD.global_position), min(1, delta*5));
+		CAMERA.position = CAMERA.position.lerp(HEAD.global_basis.inverse()*(GUN.ADS_CAM_POS.global_position - HEAD.global_position), min(1, delta*15));
 		#CAMERA.basis = Quaternion(CAMERA.basis).slerp(Quaternion(HEAD.global_basis.inverse()*GUN.ADS_CAM_POS.global_basis), min(1, delta*5))
 	else:
 		CAMERA.position = CAMERA.position.lerp(Vector3.ZERO, min(1, delta*5));
