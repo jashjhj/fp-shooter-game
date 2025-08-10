@@ -952,16 +952,16 @@ angular_limit_y/enabled = false
 angular_limit_z/enabled = false
 angular_spring_x/enabled = true
 angular_spring_x/stiffness = 35.0
-angular_spring_x/damping = 3.0
+angular_spring_x/damping = 4.0
 angular_spring_y/enabled = true
 angular_spring_y/stiffness = 35.0
-angular_spring_y/damping = 3.0
+angular_spring_y/damping = 4.0
 angular_spring_z/enabled = true
 angular_spring_z/stiffness = 35.0
-angular_spring_z/damping = 3.0
+angular_spring_z/damping = 4.0
 script = ExtResource("2_68ihi")
 STIFFNESS = 35.0
-DAMPING = 3.0
+DAMPING = 4.0
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 
 [node name="AbdomenFrame" type="MeshInstance3D" parent="Body"]

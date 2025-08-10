@@ -23,12 +23,15 @@ var is_mouse_focused = true;
 var CAMERA_CAPTURED:bool = false;
 var aiming_down_sights:bool = false:
 	set(v):
+		if(aiming_down_sights != v):# if set to new value
+			if(v):
+				Engine.time_scale = 0.33;
+				CAMERA.fov *= 0.5
+			else:
+				Engine.time_scale = 1.0;
+				CAMERA.fov *= 2;
+		
 		aiming_down_sights = v
-		if(aiming_down_sights):
-			Engine.time_scale = 0.33;
-		else:
-			Engine.time_scale = 1.0;
-
 
 
 func _ready():

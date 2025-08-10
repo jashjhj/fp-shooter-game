@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://3s34tf1v1kuc" path="res://maps/sandy_arena/stone_1.tscn" id="8_42d1y"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="9_gb4if"]
 [ext_resource type="FontFile" uid="uid://erdgllynwqkw" path="res://examples_dd3d/Roboto-Bold.ttf" id="10_gb4if"]
-[ext_resource type="Script" uid="uid://bbjy8b7780q1y" path="res://maps/sandy_arena/trigger)summon_totembot.gd" id="11_hra41"]
+[ext_resource type="Script" uid="uid://bbjy8b7780q1y" path="res://maps/sandy_arena/trigger_summon_totembot.gd" id="11_hra41"]
 [ext_resource type="Script" uid="uid://brs34regxccwh" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hit_Trigger.gd" id="11_kwjr5"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_kwjr5"]
@@ -112,7 +112,7 @@ transform = Transform3D(-0.829931, 0, -0.557865, -0.0774152, 0.990325, 0.11517, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.30772, -0.431386, 1.89742)
 
 [node name="Stone_6" parent="NavigationRegion3D" instance=ExtResource("8_42d1y")]
-transform = Transform3D(-0.908892, -0.0960421, 0.405823, -0.0876972, 0.995377, 0.0391571, -0.407707, 0, -0.913113, 5.985, -0.433538, 3.58182)
+transform = Transform3D(-0.908892, -0.0960421, 0.405823, -0.0876972, 0.995377, 0.0391571, -0.407707, 0, -0.913113, 6.80175, -0.433538, 1.68396)
 
 [node name="Stone_7" parent="NavigationRegion3D" instance=ExtResource("7_7wmkr")]
 transform = Transform3D(-0.673969, -0.0158714, 0.738589, -0.0106981, 0.999874, 0.0117239, -0.738682, 0, -0.674054, 4.20836, -0.480168, 7.82026)
