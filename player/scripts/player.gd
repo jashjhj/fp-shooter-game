@@ -13,6 +13,8 @@ var is_mouse_focused = true;
 @export_range(-180, 0, 1.0, "degrees") var LOOK_MIN_VERT = -85
 
 
+@export_range(0, 180, 0.01, "degrees") var DEFAULT_FOV:float = 70;
+
 @onready var HEAD:Node3D = $Hip/Torso/Head
 @onready var TORSO:Node3D = $Hip/Torso
 @onready var CAMERA:Camera3D = $Hip/Torso/Head/Camera3D
@@ -26,10 +28,8 @@ var aiming_down_sights:bool = false:
 		if(aiming_down_sights != v):# if set to new value
 			if(v):
 				Engine.time_scale = 0.33;
-				CAMERA.fov *= 0.5
 			else:
 				Engine.time_scale = 1.0;
-				CAMERA.fov *= 2;
 		
 		aiming_down_sights = v
 
@@ -42,6 +42,7 @@ func _ready():
 	
 	camera_rot_x = rotation.y; # initial values - set like this so can be set in editor
 	camera_rot_y = rotation.x;
+	CAMERA.fov = DEFAULT_FOV
 
 var mouse_input:Vector2;
 var mouse_velocity:Vector2;
@@ -131,6 +132,12 @@ func _process(delta:float) -> void:
 	else:
 		CAMERA.position = CAMERA.position.lerp(Vector3.ZERO, min(1, delta*5));
 		#CAMERA.basis = Quaternion(CAMERA.basis).slerp(Quaternion(Basis.IDENTITY), min(1, delta*5))
+	
+	
+	if(!aiming_down_sights): # change fov when ADS
+		CAMERA.fov = lerp(CAMERA.fov, DEFAULT_FOV, 5.0*delta)
+	else:
+		CAMERA.fov = lerp(CAMERA.fov, DEFAULT_FOV * 0.5, 1.0*delta)
 	
 
 func _physics_process(delta: float) -> void:
