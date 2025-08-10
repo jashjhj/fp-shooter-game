@@ -21,6 +21,17 @@ var is_mouse_focused = true;
 
 @export var GUN:Gun;
 
+@export var HP:float = 5.0:
+	set(v):
+		HP = v
+		update_ui()
+		if(HP < 0.1):
+			var timer = Timer.new()
+			add_child(timer)
+			timer.start(2.0)
+			timer.timeout.connect(reload)
+
+
 
 var CAMERA_CAPTURED:bool = false;
 var aiming_down_sights:bool = false:
@@ -138,7 +149,7 @@ func _process(delta:float) -> void:
 		CAMERA.fov = lerp(CAMERA.fov, DEFAULT_FOV, 5.0*delta)
 	else:
 		CAMERA.fov = lerp(CAMERA.fov, DEFAULT_FOV * 0.5, 1.0*delta)
-	
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -162,3 +173,11 @@ func _physics_process(delta: float) -> void:
 	
 	#velocity.y = 0
 	move_and_slide()
+
+func update_ui():
+	$Hip/Torso/Head/Control/RichTextLabel.text = "HP: "+str(int(HP))
+	if(HP <= 0.1):
+		$"Hip/Torso/Head/You DIED".visible = true
+
+func reload():
+	get_tree().change_scene_to_file("res://maps/sandy_arena/Sandy_Arena.tscn")

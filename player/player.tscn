@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=11 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
@@ -10,6 +10,16 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 radius = 0.15
 height = 1.8
+
+[sub_resource type="Gradient" id="Gradient_g6k8r"]
+offsets = PackedFloat32Array(0, 0.526316, 1)
+colors = PackedColorArray(0.356863, 0, 0, 0.478431, 1, 0, 0, 0.52549, 1, 0.305882, 0.545098, 0.447059)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_boad6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rgyib"]
+color_ramp = SubResource("Gradient_g6k8r")
+noise = SubResource("FastNoiseLite_boad6")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("GUN")]
 collision_layer = 16
@@ -50,6 +60,56 @@ visible = false
 
 [node name="WelrodSpecial" parent="Hip/Torso/Head" instance=ExtResource("4_yw30f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0886336, -0.210112, -0.298332)
+
+[node name="You DIED" type="TextureRect" parent="Hip/Torso/Head"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_rgyib")
+
+[node name="You Died" type="RichTextLabel" parent="Hip/Torso/Head/You DIED"]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 52.0
+scale = Vector2(9, 7.8)
+text = "YOU WERE SHOT"
+
+[node name="Restarting in 2" type="RichTextLabel" parent="Hip/Torso/Head/You DIED"]
+layout_mode = 1
+offset_left = 503.0
+offset_top = 562.0
+offset_right = 631.0
+offset_bottom = 614.0
+scale = Vector2(5.04001, 3.48)
+text = "Restarting in 2..."
+
+[node name="Control" type="Control" parent="Hip/Torso/Head"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -134.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hip/Torso/Head/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 73.0
+grow_horizontal = 2
+text = "HP: 0"
+horizontal_alignment = 1
 
 [node name="PlayerLeg_Left" parent="Hip" instance=ExtResource("5_qjkh3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
