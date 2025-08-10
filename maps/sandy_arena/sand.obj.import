@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cd42clqep5bi8"
+path="res://.godot/imported/sand.obj-ef8528d2c2957ea00c8bf07e8b550cfe.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sand.obj-ef8528d2c2957ea00c8bf07e8b550cfe.mesh"]
+
+source_file="res://maps/sandy_arena/sand.obj"
+dest_files=["res://.godot/imported/sand.obj-ef8528d2c2957ea00c8bf07e8b550cfe.mesh", "res://.godot/imported/sand.obj-ef8528d2c2957ea00c8bf07e8b550cfe.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
