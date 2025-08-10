@@ -102,6 +102,7 @@ material_override = ExtResource("4_mvpoq")
 mesh = SubResource("BoxMesh_l3hlc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Environment/Floor"]
+visible = false
 shape = SubResource("ConvexPolygonShape3D_sj0mj")
 
 [node name="Camera" parent="." instance=ExtResource("5_ncl7n")]
