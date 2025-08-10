@@ -19,6 +19,12 @@ class_name Pastel_Colour_Mesh extends MeshInstance3D
 		for mat in get_all_materials():
 			mat.set_shader_parameter("color_shade", randf())
 
+@export var REINIT:bool = false:
+	set(v):
+		init()
+		RERANDOMISE = false
+
+@export_flags("0","1","2","3","4") var EXCLUDE_SURFACES:int = 0;
 
 
 @export_group("Highlight", "HIGHLIGHT")
@@ -76,6 +82,7 @@ func _ready() -> void:
 func init():
 	is_initialised = true
 	for i in range(0,get_surface_override_material_count()):
+		if (EXCLUDE_SURFACES & (0b1 << i)): continue # IF this value isnt ticked in exclude surfaces
 		
 		var mat:ShaderMaterial = load("res://assets/textures/pastels/pastel_colour.tres").duplicate()
 		mat.next_pass = load("res://assets/textures/pastels/highlight_shader.tres").duplicate()
@@ -91,5 +98,7 @@ func init():
 func get_all_materials():
 	var out:Array[ShaderMaterial]
 	for i in range(0,get_surface_override_material_count()):
+		if (EXCLUDE_SURFACES & (0b1 << i)): continue # IF this value isnt ticked in exclude surfaces
+		
 		out.append(get_surface_override_material(i))
 	return out

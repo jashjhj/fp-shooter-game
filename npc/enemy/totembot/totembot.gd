@@ -12,6 +12,7 @@ extends LegBot
 @export var MID_SWIVEL:Planetary_Gears;
 @export var TOP_SWIVEL:Planetary_Gears;
 @export var CAMERA_MESH_ROTATOR:Rotator_1D;
+@export var CAMERA_LIGHT:Light3D;
 @export var GUN_PITCH:Rotator_1D
 @export var GUN_CHAINGUN:Chaingun_Rotator;
 
@@ -52,13 +53,19 @@ func _physics_process(delta: float) -> void:
 	
 
 func recalculate_energy(new_hp:float):
+	var old_energy := energy
 	energy = 0;
 	for b in BATTERIES:
-		energy += min(1.0, max(0.0, b.HP/b.MAX_HP))
+		energy += min(1.0, max(0.0, max(0.0,b.HP)/b.MAX_HP))
+	
+	var delta_proportion_energy:float = energy/max(0.1, old_energy)
 	
 	#Apply new energy value
 	MID_SWIVEL.ROTATION_ACCELERATION = energy/max_energy * MID_SWIVEL._initial_acceleration
 	TOP_SWIVEL.ROTATION_ACCELERATION = energy/max_energy * TOP_SWIVEL._initial_acceleration
+	
+	if(CAMERA_LIGHT != null):
+		CAMERA_LIGHT.light_energy *= (delta_proportion_energy)
 
 func destroy_centrifuge():
 	$Body/Angular_Damper.free()
