@@ -867,7 +867,7 @@ transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_ily6p")
 
 [node name="UnderbellyMotorWires" parent="Body/Underbelly/Battery" node_paths=PackedStringArray("HIT_COMPONENTS") instance=ExtResource("8_1hdur")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032106, 0.110661, 0.156447)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032106, 0.15118, 0.156447)
 HIT_COMPONENTS = [NodePath("Free_Wires"), NodePath("Instantly_Destroy_HP")]
 
 [node name="Instantly_Destroy_HP" type="Node" parent="Body/Underbelly/Battery/UnderbellyMotorWires" node_paths=PackedStringArray("HIT_CMP")]
@@ -909,7 +909,7 @@ transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_ily6p")
 
 [node name="UnderbellyMotorWires" parent="Body/Underbelly/Battery2" node_paths=PackedStringArray("HIT_COMPONENTS") instance=ExtResource("8_1hdur")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032106, 0.110661, 0.156447)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032106, 0.15118, 0.156447)
 HIT_COMPONENTS = [NodePath("Free_Wires"), NodePath("Instantly_Destroy_HP")]
 
 [node name="Instantly_Destroy_HP" type="Node" parent="Body/Underbelly/Battery2/UnderbellyMotorWires" node_paths=PackedStringArray("HIT_CMP")]
