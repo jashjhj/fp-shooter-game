@@ -21,7 +21,13 @@ var is_mouse_focused = true;
 
 
 var CAMERA_CAPTURED:bool = false;
-var aiming_down_sights:bool = false;
+var aiming_down_sights:bool = false:
+	set(v):
+		aiming_down_sights = v
+		if(aiming_down_sights):
+			Engine.time_scale = 0.33;
+		else:
+			Engine.time_scale = 1.0;
 
 
 
