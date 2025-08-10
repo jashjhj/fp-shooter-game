@@ -26,7 +26,7 @@ next_pass = SubResource("ShaderMaterial_1ghko")
 shader = ExtResource("6_x8wh7")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.847598
+shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_85s8o"]
@@ -65,7 +65,7 @@ metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 script = ExtResource("6_egs7j")
 PASTEL = NodePath("../Hatch")
 MAX_HP = 20.0
-MINIMUM_DAMAGE_THRESHOLD = 4.0
+MINIMUM_DAMAGE_THRESHOLD = 3.0
 metadata/_custom_type_script = "uid://cijq708jlfumq"
 
 [node name="Hatch" type="MeshInstance3D" parent="Hittable_Collider"]
@@ -83,7 +83,7 @@ shape = SubResource("ConcavePolygonShape3D_85s8o")
 script = ExtResource("3_au1bk")
 MAKE_RIGIDBODY = NodePath("../Make_Rigidbody")
 MAX_HP = 20.0
-MINIMUM_DAMAGE_THRESHOLD = 4.0
+MINIMUM_DAMAGE_THRESHOLD = 3.0
 metadata/_custom_type_script = "uid://hhosnxuj45ad"
 
 [node name="Make_Rigidbody" type="Node" parent="Hittable_Collider" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_BASIS_CLONE", "NEW_CHILDREN", "TO_BE_REMOVED")]
@@ -103,7 +103,7 @@ metadata/_custom_type_script = "uid://bnme6hhbb0h8q"
 script = ExtResource("7_ynlx0")
 MASS = 2.8
 MAX_HP = 20.0
-MINIMUM_DAMAGE_THRESHOLD = 4.0
+MINIMUM_DAMAGE_THRESHOLD = 3.0
 metadata/_custom_type_script = "uid://bcbbkvbeuuxin"
 
 [node name="Hatch_Gib" type="RigidBody3D" parent="."]
