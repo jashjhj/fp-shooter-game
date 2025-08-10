@@ -998,6 +998,7 @@ ATTACHED_TO = NodePath("..")
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
 mesh = ExtResource("8_5jvjh")
 skeleton = NodePath("../..")
+script = ExtResource("41_hufde")
 
 [node name="Mid_PlanetaryGears" parent="Body" node_paths=PackedStringArray("ATTACHED_RB", "IMPULSE_PROPOGATOR") instance=ExtResource("11_v7ac7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2267, 0)
