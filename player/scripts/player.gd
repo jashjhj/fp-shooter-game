@@ -30,6 +30,11 @@ var is_mouse_focused = true;
 			add_child(timer)
 			timer.start(2.0)
 			timer.timeout.connect(reload)
+		
+		else:
+			hurt_timer.start(0.2)
+			show_hurt_overlay()
+
 
 
 
@@ -45,6 +50,8 @@ var aiming_down_sights:bool = false:
 		aiming_down_sights = v
 
 
+var hurt_timer:Timer;
+
 func _ready():
 	Globals.PLAYER = self;
 	
@@ -54,6 +61,11 @@ func _ready():
 	camera_rot_x = rotation.y; # initial values - set like this so can be set in editor
 	camera_rot_y = rotation.x;
 	CAMERA.fov = DEFAULT_FOV
+	
+	update_ui() # initialises thign ie HP bar
+	hurt_timer = Timer.new()
+	add_child(hurt_timer)
+	hurt_timer.timeout.connect(hide_hurt_overlay)
 
 var mouse_input:Vector2;
 var mouse_velocity:Vector2;
@@ -181,3 +193,8 @@ func update_ui():
 
 func reload():
 	get_tree().change_scene_to_file("res://maps/sandy_arena/Sandy_Arena.tscn")
+
+func show_hurt_overlay():
+	$Hip/Torso/Head/Hurt.visible = true
+func hide_hurt_overlay():
+	$Hip/Torso/Head/Hurt.visible = false
