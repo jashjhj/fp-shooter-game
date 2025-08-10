@@ -1033,15 +1033,15 @@ MINIMUM_DAMAGE_THRESHOLD = 8.0
 metadata/_custom_type_script = "uid://cijq708jlfumq"
 
 [node name="TotembotHatch" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00384e-05, 0, -1.00344)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9949e-05, 0, -0.00343502)
 ATTACHED_TO = NodePath("..")
 
 [node name="TotembotHatch2" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -0.000407332, 0, -0.99733)
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -0.000407243, 0, 0.00267017)
 ATTACHED_TO = NodePath("..")
 
 [node name="TotembotHatch3" parent="Body" node_paths=PackedStringArray("ATTACHED_TO") instance=ExtResource("25_lqwa8")]
-transform = Transform3D(-0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, -0.5, 0.00478902, 0, -0.998452)
+transform = Transform3D(-0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, -0.5, 0.00478911, 0, 0.00154805)
 ATTACHED_TO = NodePath("..")
 
 [node name="Shaft" type="MeshInstance3D" parent="Body"]
