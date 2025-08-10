@@ -12,9 +12,14 @@ extends LegBot
 @export var MID_SWIVEL:Planetary_Gears;
 @export var TOP_SWIVEL:Planetary_Gears;
 @export var CAMERA_MESH_ROTATOR:Rotator_1D;
-@export var CAMERA_LIGHT:Light3D;
+
 @export var GUN_PITCH:Rotator_1D
 @export var GUN_CHAINGUN:Chaingun_Rotator;
+@export_group("Light Settings")
+@export var CAMERA_LIGHT:Light3D;
+@export var LIGHT_PASSIVE_COLOUR:Color = Color(0.5, 0.8, 1.0);
+@export var LIGHT_AGGRO_COLOUR:Color = Color(1.0, 0.5, 0.8);
+
 
 var max_energy:float;
 var energy:float;
@@ -44,7 +49,10 @@ func _physics_process(delta: float) -> void:
 	
 	if(SEEKING_CAMERA_CAM.can_see_player):
 		PATHFINDER.target_position = Globals.PLAYER.global_position + (BODY.global_position - Globals.PLAYER.global_position).normalized() * 5.0; # Stand 5m away
-	
+		
+		if(CAMERA_LIGHT != null): CAMERA_LIGHT.light_color = LIGHT_AGGRO_COLOUR
+	else:
+		if(CAMERA_LIGHT != null): CAMERA_LIGHT.light_color = LIGHT_PASSIVE_COLOUR
 	
 	if(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) > 0.925 and !GUN_CHAINGUN.is_spinning): # if gun is msotly aimed at its target
 		GUN_CHAINGUN.start_firing()
