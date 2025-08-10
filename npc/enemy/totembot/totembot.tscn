@@ -1098,7 +1098,6 @@ metadata/_custom_type_script = "uid://do4am13na3svu"
 [node name="Shoot_SFX" type="AudioStreamPlayer3D" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge/Bullet_Source"]
 transform = Transform3D(0.00267344, -0.999996, 0.00133535, 0.999996, 0.00267415, 0.000528463, -0.000532018, 0.00133394, 0.999999, 0.38413, 0.000521322, 0.530619)
 stream = ExtResource("27_gbbtt")
-volume_db = -80.0
 max_polyphony = 16
 
 [node name="Trig_Sound_Effect" type="Node" parent="Body/Mid_PlanetaryGears/Model/Gun_Hinge/Bullet_Source" node_paths=PackedStringArray("SFX")]

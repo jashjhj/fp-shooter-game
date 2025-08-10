@@ -32,7 +32,7 @@ var is_mouse_focused = true;
 			timer.timeout.connect(reload)
 		
 		else:
-			hurt_timer.start(0.2)
+			hurt_timer.start(0.1)
 			show_hurt_overlay()
 
 
