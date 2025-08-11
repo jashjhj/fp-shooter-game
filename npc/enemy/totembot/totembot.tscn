@@ -982,7 +982,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.368763, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0181308, 0)
 collision_layer = 128
 script = ExtResource("22_8uadq")
-SPAWN_IMMUNITY = 3.0
+SPAWN_IMMUNITY = 5.0
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
 [node name="HatchButton" type="MeshInstance3D" parent="Body/Hatches_Button/Hittable_Collider"]

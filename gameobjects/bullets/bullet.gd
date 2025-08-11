@@ -23,7 +23,7 @@ func _ready() -> void:
 	if(data == null):
 		push_error("Bullet instanced without data!")
 		
-		free()
+		self.queue_free()
 		return
 	
 	lifetime_start = Time.get_ticks_msec()
