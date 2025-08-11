@@ -12,6 +12,7 @@ class_name Gun_Part_Slideable extends Gun_Part_Interactive
 @export_group("Extras")
 @export var SPRING:float = 0.0;
 
+#TODO add is_seated code to tell if can fire.
 
 var model_goal:Node3D = Node3D.new()
 
@@ -65,7 +66,8 @@ func _process(delta:float) -> void:
 		visual_slide_pos = slide_pos
 	
 	prev_slide_pos = slide_pos;
-
+	
+	
 
 
 func _physics_process(delta: float) -> void:
