@@ -13,16 +13,16 @@
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="6_x8wh7"]
 [ext_resource type="Script" uid="uid://bcbbkvbeuuxin" path="res://gameobjects/world_interactive/hit_effects/Hit_Reduce_Mass.gd" id="7_ynlx0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6vgfq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ghko"]
 render_priority = 0
 shader = ExtResource("5_1ghko")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0mbng"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8wh7"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_6vgfq")
+next_pass = SubResource("ShaderMaterial_1ghko")
 shader = ExtResource("6_x8wh7")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
@@ -72,7 +72,7 @@ metadata/_custom_type_script = "uid://cijq708jlfumq"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0121874, 0, 0)
 mesh = ExtResource("2_3kx6f")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_0mbng")
+surface_material_override/0 = SubResource("ShaderMaterial_x8wh7")
 script = ExtResource("5_egs7j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hittable_Collider"]
