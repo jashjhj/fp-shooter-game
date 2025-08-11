@@ -18,12 +18,15 @@ extends LegBot
 @export_group("Light Settings")
 @export var CAMERA_LIGHT:Light3D;
 @export var LIGHT_PASSIVE_COLOUR:Color = Color(0.5, 0.8, 1.0);
+@export var LIGHT_NEUTRAL_COLOUR:Color = Color(1.0, 0.8, 0.5);
 @export var LIGHT_AGGRO_COLOUR:Color = Color(1.0, 0.5, 0.8);
 
 
 var max_energy:float;
 var energy:float;
 
+
+var is_firing:bool = false
 
 func _ready() -> void:
 	super._ready()
@@ -50,14 +53,21 @@ func _physics_process(delta: float) -> void:
 	if(SEEKING_CAMERA_CAM.can_see_player):
 		PATHFINDER.target_position = Globals.PLAYER.global_position + (BODY.global_position - Globals.PLAYER.global_position).normalized() * 5.0; # Stand 5m away
 		
-		if(CAMERA_LIGHT != null): CAMERA_LIGHT.light_color = LIGHT_AGGRO_COLOUR
+		if(CAMERA_LIGHT != null):
+			if(is_firing):
+				CAMERA_LIGHT.light_color = LIGHT_AGGRO_COLOUR
+			else:
+				CAMERA_LIGHT.light_color = LIGHT_NEUTRAL_COLOUR
 	else:
 		if(CAMERA_LIGHT != null): CAMERA_LIGHT.light_color = LIGHT_PASSIVE_COLOUR
 	
-	if(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) > 0.925 and !GUN_CHAINGUN.is_spinning): # if gun is msotly aimed at its target
+	
+	if(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) > 0.94 and !GUN_CHAINGUN.is_spinning): # if gun is msotly aimed at its target
 		GUN_CHAINGUN.start_firing()
-	elif(!SEEKING_CAMERA_CAM.can_see_player or SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) < 0.88 and GUN_CHAINGUN.is_spinning):
+		is_firing = true
+	elif(!SEEKING_CAMERA_CAM.can_see_player or SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) < 0.9 and GUN_CHAINGUN.is_spinning):
 		GUN_CHAINGUN.stop_firing()
+		is_firing = false
 	
 
 func recalculate_energy(new_hp:float):

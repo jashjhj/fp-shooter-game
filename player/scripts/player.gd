@@ -160,7 +160,7 @@ func _process(delta:float) -> void:
 	if(!aiming_down_sights): # change fov when ADS
 		CAMERA.fov = lerp(CAMERA.fov, DEFAULT_FOV, 5.0*delta)
 	else:
-		CAMERA.fov = lerp(CAMERA.fov, DEFAULT_FOV * 0.5, 1.0*delta)
+		CAMERA.fov = lerp(CAMERA.fov, DEFAULT_FOV * 0.4, 1.0*delta)
 
 
 func _physics_process(delta: float) -> void:
