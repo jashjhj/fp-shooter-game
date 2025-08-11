@@ -53,7 +53,8 @@ func _physics_process(delta: float) -> void:
 	if(SEEKING_CAMERA_CAM.can_see_player):
 		PATHFINDER.target_position = Globals.PLAYER.global_position + (BODY.global_position - Globals.PLAYER.global_position).normalized() * 5.0; # Stand 5m away
 		
-		if(CAMERA_LIGHT != null):
+		
+		if(CAMERA_LIGHT != null): # update camera light colour
 			if(is_firing):
 				CAMERA_LIGHT.light_color = LIGHT_AGGRO_COLOUR
 			else:

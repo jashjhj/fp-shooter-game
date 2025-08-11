@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void:
 		rotation_speed = min(rotation_speed, ROT_MAX_SPEED)
 	else:
 		pass
-		rotation_speed *= 0.5 ** delta # hlave spee devery second
+		rotation_speed *= 0.33 ** delta # third speed every second
 	
 	var next_rotation:float = rotation_speed*delta
 	
@@ -124,7 +124,8 @@ func fire(slot:Slot):
 		if(TRIGGERABLE_CLICK is Trig_Sound_Effect):
 			TRIGGERABLE_CLICK.PITCH_OFFSET = 0.033
 			TRIGGERABLE_CLICK.PITCH_ORIGIN = 0.7 + log(1+rotation_speed) * 0.125
-		TRIGGERABLE_CLICK.trigger() # Always click
+		
+		if is_spinning: TRIGGERABLE_CLICK.trigger() # Always click if spinning up
 	
 	if(clicks < CLICKS_BEFORE_FIRE): ## If not yet ready to fire
 		clicks += 1;

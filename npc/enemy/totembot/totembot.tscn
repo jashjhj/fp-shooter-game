@@ -1149,6 +1149,7 @@ TRIGGERABLE_FIRE = NodePath("Triggerable_Bullet_Source")
 TRIGGERABLE_EJECT = NodePath("../Trig_Debris_Spawner")
 TRIGGERABLE_CLICK = NodePath("Click_triggerable")
 ROT_MAX_SPEED = 10.0
+CLICKS_BEFORE_FIRE = 2
 metadata/_custom_type_script = "uid://bwo18jlxllnxw"
 
 [node name="AmmoWheel" type="MeshInstance3D" parent="Body/Mid_PlanetaryGears/Model/Ammowheel_Rotator"]
