@@ -107,7 +107,7 @@ func update_target():
 	#Calculate IDLE_HEIGHT Actual
 	var ideal_height = IDLE_HEIGHT
 	for leg in LEGS:
-		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 1.0) # TODO needs better work
+		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 0.8) # TODO needs better work
 	
 	
 	
