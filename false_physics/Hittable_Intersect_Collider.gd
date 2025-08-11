@@ -1,5 +1,7 @@
 class_name Hittable_Intersect_Collider extends Hittable_Collider
 
+@export_category("Collision shape must be convex!")
+
 @export var DAMAGE_ON_COLLIDE:float = 20.0;
 ##Spawn immunity time in msec
 @export var SPAWN_IMMUNITY:float = 2.5;
