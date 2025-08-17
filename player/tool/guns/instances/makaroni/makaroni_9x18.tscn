@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://7846qvqysbxv"]
+
+[ext_resource type="Script" uid="uid://bglstfp5jf4ur" path="res://player/tool/guns/parts/rounds/Gun_Round.gd" id="1_6rnxj"]
+[ext_resource type="Script" uid="uid://do4am13na3svu" path="res://gameobjects/bullets/Bullet_Source.gd" id="1_juo2g"]
+[ext_resource type="ArrayMesh" uid="uid://ovqp64fh164w" path="res://player/tool/guns/instances/makaroni/assets/bullet_bullet.obj" id="2_6rnxj"]
+[ext_resource type="ArrayMesh" uid="uid://ps2tjbh6cr8" path="res://player/tool/guns/instances/makaroni/assets/bullet_casing.obj" id="3_8hlxo"]
+[ext_resource type="Script" uid="uid://dnbfghlo7u2b" path="res://false_physics/triggerables/Trig_Bullet_Source.gd" id="5_q6u50"]
+[ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="5_yfnds"]
+[ext_resource type="Script" uid="uid://dsjmnf5wst7es" path="res://false_physics/triggerables/Trig_Free.gd" id="6_f8h2o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6u50"]
+albedo_color = Color(1, 0.878431, 0.839216, 1)
+metallic = 1.0
+roughness = 0.32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f8h2o"]
+cull_mode = 2
+albedo_color = Color(0.558155, 0.546809, 5.77569e-07, 1)
+metallic = 1.0
+roughness = 0.34
+
+[sub_resource type="Resource" id="Resource_goxg3"]
+script = ExtResource("5_yfnds")
+speed = 300
+drag = 0.1
+gravity = 9.81
+mass = 0.005
+damage = 10
+base_inaccuracy = 0.05
+amount = 1
+NEL_coefficient = 0.8
+ricochet_angle = 0.349066
+lifetime = 2.0
+metadata/_custom_type_script = "uid://cuj1evxe65gdy"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yfnds"]
+height = 0.0184326
+radius = 0.00488281
+
+[node name="Makaroni9x18" type="Node3D" node_paths=PackedStringArray("FIRE_TRIGGERS", "RIGIDBODY")]
+script = ExtResource("1_6rnxj")
+FIRE_TRIGGERS = [NodePath("Trig_Bullet_Source"), NodePath("Trig_Free")]
+RIGIDBODY = NodePath("RigidBody3D")
+
+[node name="BulletBullet" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0175775)
+mesh = ExtResource("2_6rnxj")
+surface_material_override/0 = SubResource("StandardMaterial3D_q6u50")
+
+[node name="BulletCasing" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00902385)
+mesh = ExtResource("3_8hlxo")
+surface_material_override/0 = SubResource("StandardMaterial3D_f8h2o")
+
+[node name="Bullet_Source" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0188529)
+script = ExtResource("1_juo2g")
+bullet_data = SubResource("Resource_goxg3")
+metadata/_custom_type_script = "uid://do4am13na3svu"
+
+[node name="Trig_Bullet_Source" type="Node" parent="." node_paths=PackedStringArray("BULLET_SOURCE")]
+script = ExtResource("5_q6u50")
+BULLET_SOURCE = NodePath("../Bullet_Source")
+metadata/_custom_type_script = "uid://dnbfghlo7u2b"
+
+[node name="Trig_Free" type="Node" parent="." node_paths=PackedStringArray("TO_FREE")]
+script = ExtResource("6_f8h2o")
+TO_FREE = [NodePath("../BulletBullet")]
+metadata/_custom_type_script = "uid://dsjmnf5wst7es"
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 4.76809e-06, -0.000213896, -0.000213892, -0.000759367, -1, -4.92365e-06, 1, -0.000759366, 0, 2.66794e-12, -0.00908489)
+shape = SubResource("CylinderShape3D_yfnds")

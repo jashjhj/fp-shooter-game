@@ -42,7 +42,7 @@ func _ready():
 	add_child(insertable_position)
 	add_child(model_goal);
 	
-	var insertion_tools = load("res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.tscn").instantiate()
+	var insertion_tools = load("res://player/tool/guns/parts/interactives/Gun_Part_Tools.tscn").instantiate()
 	add_child(insertion_tools)
 	INSERTION_PLANE = insertion_tools.INTERACT_PLANE;
 	INSERTION_PLANE.collision_layer = INSERTION_PLANE_LAYER;
@@ -122,11 +122,13 @@ func _process(delta:float) -> void:
 			
 			
 			if(insertion >= 0): # If being inserted
-				if(cos(CURRENT_SLOT.SLOT_ANGLE_TOLERANCE) > abs(MODEL.global_basis.y.dot(CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR))):#If within tolerances for slot
-					insertion = min(0.0, insertion)
-				else:
-					insertion = min(insertion, CURRENT_SLOT.INSERTION_LENGTH)
-					effective_lerp_rate_angular = 0.9
+				
+				#SOme weird test i dont need regarding insertion angle checking
+				#if(cos(CURRENT_SLOT.SLOT_ANGLE_TOLERANCE) > abs(MODEL.global_basis.y.dot(CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR))):#If within tolerances for slot
+					#insertion = min(0.0, insertion)
+				#else:
+				insertion = min(insertion, CURRENT_SLOT.INSERTION_LENGTH)
+				effective_lerp_rate_angular = 0.9
 				is_housed = true;
 				CURRENT_SLOT.insertion = insertion
 				#Move it in line with abrrel
@@ -142,7 +144,7 @@ func _process(delta:float) -> void:
 			CURRENT_SLOT.is_housed = is_housed
 			
 			var new_basis:Basis = Basis.IDENTITY; # Look in direction of CurrentSlot
-			new_basis.y = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR).normalized()
+			new_basis.y = (CURRENT_SLOT.global_basis*CURRENT_SLOT.basis.y).normalized()
 			if(CURRENT_SLOT.FLIP_INSERTION):
 				new_basis.y = -new_basis.y
 			new_basis.z = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized()

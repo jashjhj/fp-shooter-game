@@ -14,7 +14,7 @@ class_name Gun_Part_Insertable_Slot extends Gun_Part
 #@export var HOUSED_TOLERANCE:float = 0.001
 
 @export var PULL_OBJECT_IN_FACTOR:float = 1;
-@export_range(0, 90, 0.1, "radians_as_degrees") var SLOT_ANGLE_TOLERANCE:float = PI/12
+#@export_range(0, 90, 0.1, "radians_as_degrees") var SLOT_ANGLE_TOLERANCE:float = PI/12
 
 @export_group("Flags")
 @export_flags("1","2","4","8","16","32","64") var INSERTION_ACCEPTANCE:int = 1;

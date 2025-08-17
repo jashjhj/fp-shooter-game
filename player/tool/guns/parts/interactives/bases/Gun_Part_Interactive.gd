@@ -1,5 +1,6 @@
 class_name Gun_Part_Interactive extends Gun_Part
 
+##Area3D
 @export var BEGIN_INTERACT_COLLIDER:Area3D;
 #@export var INTERACT_PLANE_NORMAL:Node3D;
 
@@ -48,8 +49,8 @@ func _ready():
 
 
 func init(): # load the tools required.
-	var tools = load("res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.tscn").instantiate()
-	assert(tools != null, "Gun_Part_Tools does not exist @ `res://gameobjects/guns/parts/interactivity_code/Gun_Part_Tools.tscn`") # check
+	var tools = load("res://player/tool/guns/parts/interactives/Gun_Part_Tools.tscn").instantiate()
+	assert(tools != null, "Gun_Part_Tools does not exist @ `res://player/tool/guns/parts/interactives/Gun_Part_Tools.tscn`") # check
 	
 	assert(BEGIN_INTERACT_COLLIDER != null, "No Interact collider set.")
 	

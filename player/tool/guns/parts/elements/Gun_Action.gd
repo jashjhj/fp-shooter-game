@@ -2,13 +2,14 @@ class_name Gun_Action extends Gun_Part
 
 @export var ACTION_SLIDEABLE_LINK:Gun_Part_Slideable;
 
-@export var FIRE:Gun_Part_Listener;
+#@export var FIRE:Triggerable;
+@export var EJECT_TRIGGER:Triggerable
+@export var GATHER_TRIGGER:Triggerable;
 
-@export var EJECT_DIST:float = 0.1
-@export_enum("Forwards", "Backwards", "Both") var EJECT_WHEN_DIR:int = 1;
 @export var GATHER_FROM:Gun_Part_Insertable_Slot;
-@export var GATHER_DIST:float = 0.2
-@export_enum("Forwards", "Backwards", "Both") var GATHER_WHEN_DIR:int = 0;
+
+##Determines the position of the round, etc. A child of the Slideable link
+@export var ROUND_ANCHOR:Node3D;
 
 @export_group("Ejection Data")
 @export var EJECTION_VELOCITY:Vector3 = Vector3.RIGHT;
@@ -20,19 +21,21 @@ class_name Gun_Action extends Gun_Part
 @export var TRIGGER_ON_FIRE:Array[Action_Node];
 
 
-##Determines the position of the round, etc. A child of the Slideable link
-var action_node:Node3D = Node3D.new();
+
 var current_round:Gun_Round = null;
 
 func _ready() -> void:
 	assert(ACTION_SLIDEABLE_LINK != null, "No slideable link set")
 	assert(GATHER_FROM != null, "No gather-from point set")
 	
-	ACTION_SLIDEABLE_LINK.add_child(action_node)
+	#ACTION_SLIDEABLE_LINK.add_child(action_node)
 	
-	assert(FIRE != null, "No fire trigger set.")
-	FIRE.trigger.connect(fire)
-
+	EJECT_TRIGGER.on_trigger.connect(eject)
+	GATHER_TRIGGER.on_trigger.connect(gather)
+	
+	if(ROUND_ANCHOR == null):
+		ROUND_ANCHOR = Node3D.new()
+		ACTION_SLIDEABLE_LINK.add_child(ROUND_ANCHOR)
 
 
 
@@ -56,21 +59,8 @@ func _physics_process(delta: float) -> void:
 	
 	var slide_pos:float = ACTION_SLIDEABLE_LINK.slide_pos # Ejection/Feeding
 	
-	if(EJECT_WHEN_DIR == 0 or EJECT_WHEN_DIR == 2): # Eject when forwards
-		if(slide_pos >= EJECT_DIST and prev_slide_pos < EJECT_DIST):
-			eject()
-	if(EJECT_WHEN_DIR == 1 or EJECT_WHEN_DIR == 2): # Eject when backwards
-		if(slide_pos <= EJECT_DIST and prev_slide_pos > EJECT_DIST):
-			eject()
 	
-	if(GATHER_WHEN_DIR == 0 or GATHER_WHEN_DIR == 2): # Gather when forwards
-		if(slide_pos >= GATHER_DIST and prev_slide_pos < GATHER_DIST):
-			gather()
-	if(GATHER_WHEN_DIR == 1 or GATHER_WHEN_DIR == 2): # Gather when backwards
-		if(slide_pos <= GATHER_DIST and prev_slide_pos > GATHER_DIST):
-			gather()
-	
-	action_node.global_position = global_position + ACTION_SLIDEABLE_LINK.visual_slide_pos*(ACTION_SLIDEABLE_LINK.global_basis*ACTION_SLIDEABLE_LINK.SLIDE_VECTOR)
+	#action_node.global_position = global_position + ACTION_SLIDEABLE_LINK.visual_slide_pos*(ACTION_SLIDEABLE_LINK.global_basis*ACTION_SLIDEABLE_LINK.SLIDE_VECTOR)
 	
 	
 	
@@ -84,7 +74,7 @@ func gather() -> void:
 		if(mag is Gun_Insertable_Mag):
 			current_round = mag.feed()
 			if(current_round != null): # With the new bullet,
-				action_node.add_child(current_round);
+				ROUND_ANCHOR.add_child(current_round);
 				current_round.position = Vector3.ZERO
 				current_round.basis = Basis.IDENTITY
 		else:

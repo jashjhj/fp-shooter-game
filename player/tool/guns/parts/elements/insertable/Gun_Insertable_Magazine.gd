@@ -7,6 +7,7 @@ class_name Gun_Insertable_Mag extends Gun_Insertable_Droppable
 
 @export_group("Cosmetics")
 @export var AMMO_OBJECT:Gun_Round;
+##Cosmetic children freed automatically, so can be there to see
 @export var AMMO_POSITIONS:Array[Node3D];
 
 var AMMO_SPRITES:Array[Node3D]; # for access
@@ -64,7 +65,8 @@ func free_ammo_pos_children():
 	for node in AMMO_POSITIONS:
 		if node != null:
 			for node_child in node.get_children():
-				node_child.free()
+				if not AMMO_POSITIONS.has(node_child): # if its not stacked in a tree
+					node_child.free()
 
 func populate_mag():
 	free_ammo_pos_children()
