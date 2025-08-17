@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://uq1lh34pi7t0"]
+
+[ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="1_p3vh7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_p3vh7")
+shader_parameter/stretch_factor = 1.0
+shader_parameter/alpha_mult = 1.0

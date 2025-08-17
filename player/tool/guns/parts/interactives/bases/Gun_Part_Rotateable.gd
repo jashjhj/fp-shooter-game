@@ -76,6 +76,7 @@ func disable_focus():
 
 ##Starting angle
 @export var current_angle:float = 0;
+var prev_angle:float = current_angle;
 
 @export_group("Mechanism")
 ##Spring force, arbitrary units. Constant.
@@ -114,12 +115,12 @@ func _process2():
 		MODEL.transform.basis = Basis.IDENTITY
 		MODEL.rotate_object_local(ROTATION_AXIS, current_angle)
 	
-	optional_extras()
+	
 
 
 var forces:float = 0; # Outside of loop so can be altered by inherited functions
 func _physics_process(delta:float) -> void:
-	
+	prev_angle = current_angle
 	if(is_focused): #Manual controls
 		current_angular_velocity = 0; # make it grabbed
 		#Glorified lerp, following curve to add resistance
@@ -165,7 +166,8 @@ func _physics_process(delta:float) -> void:
 			hit_max_angle(current_angular_velocity)
 			
 			current_angular_velocity *= -ELASTICITY_TOP;
-		
+	
+	optional_extras()
 
 
 ##Function is called when the mechanism hits the {angle==zero} position
@@ -177,19 +179,23 @@ func hit_max_angle(_speed:float) -> void:
 
 
 
-@export_group("Optional Extras")
-@export var TOGGLE_ACTIONS:Array[Gun_Action_Toggle];
-##In degrees
-@export var WHEN_WITHIN_LIMITS: Array[Vector2];
+@export_group("Triggers", "TRIGGERS_")
+enum TRIGGERS_DIRECTION_ENUM {
+	FORWARDS = 1,
+	BACKWARDS = 2,
+	BOTH = 3
+}
+@export var TRIGGERS_TRIGGERABLE:Array[Triggerable]
+@export var TRIGGERS_DISTANCE:Array[float]
+@export var TRIGGERS_DIRECTION:Array[TRIGGERS_DIRECTION_ENUM]
 
 func optional_extras():
-	var i = 0;
-	for limits_set in WHEN_WITHIN_LIMITS:
-		if(TOGGLE_ACTIONS[i] == null):
-			push_error("Limits set, but no correlating limits object")
-		else:
-			if current_angle >= deg_to_rad(limits_set.x) and current_angle <= deg_to_rad(limits_set.y):
-				TOGGLE_ACTIONS[i].ACTIVE = true;
-			else:
-				TOGGLE_ACTIONS[i].ACTIVE = false;
-		i += 1;
+	for i in range(0, len(TRIGGERS_TRIGGERABLE)): # check thresholds
+		
+		if(TRIGGERS_DIRECTION[i] == 1 or TRIGGERS_DIRECTION[i] == 3): # Forwards
+			if(current_angle >= TRIGGERS_DISTANCE[i] and prev_angle < TRIGGERS_DISTANCE[i]):
+				TRIGGERS_TRIGGERABLE[i].trigger()
+		
+		if(TRIGGERS_DIRECTION[i] == 2 or TRIGGERS_DIRECTION[i] == 3): # Backwards
+			if(current_angle <= TRIGGERS_DISTANCE[i] and prev_angle > TRIGGERS_DISTANCE[i]):
+				TRIGGERS_TRIGGERABLE[i].trigger()

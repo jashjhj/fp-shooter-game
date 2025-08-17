@@ -1,7 +1,7 @@
 class_name BulletTrail extends MeshInstance3D
 
 var camera:Camera3D;
-var width:= 0.05;
+var width:= 0.015;
 
 var segment_origin:Vector3;
 var segment_end:Vector3;

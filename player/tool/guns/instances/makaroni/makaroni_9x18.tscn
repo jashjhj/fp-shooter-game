@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://7846qvqysbxv"]
+[gd_scene load_steps=13 format=3 uid="uid://7846qvqysbxv"]
 
 [ext_resource type="Script" uid="uid://bglstfp5jf4ur" path="res://player/tool/guns/parts/rounds/Gun_Round.gd" id="1_6rnxj"]
 [ext_resource type="Script" uid="uid://do4am13na3svu" path="res://gameobjects/bullets/Bullet_Source.gd" id="1_juo2g"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dnbfghlo7u2b" path="res://false_physics/triggerables/Trig_Bullet_Source.gd" id="5_q6u50"]
 [ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="5_yfnds"]
 [ext_resource type="Script" uid="uid://dsjmnf5wst7es" path="res://false_physics/triggerables/Trig_Free.gd" id="6_f8h2o"]
+[ext_resource type="Material" uid="uid://uq1lh34pi7t0" path="res://gameobjects/bullets/trail/bullet_trail_mat.tres" id="6_yfnds"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6u50"]
 albedo_color = Color(1, 0.878431, 0.839216, 1)
@@ -30,6 +31,7 @@ base_inaccuracy = 0.05
 amount = 1
 NEL_coefficient = 0.8
 ricochet_angle = 0.349066
+trail_material = ExtResource("6_yfnds")
 lifetime = 2.0
 metadata/_custom_type_script = "uid://cuj1evxe65gdy"
 

@@ -2,7 +2,7 @@ class_name Gun_Action extends Gun_Part
 
 @export var ACTION_SLIDEABLE_LINK:Gun_Part_Slideable;
 
-#@export var FIRE:Triggerable;
+@export var FIRE_TRIGGER:Triggerable;
 @export var EJECT_TRIGGER:Triggerable
 @export var GATHER_TRIGGER:Triggerable;
 
@@ -32,6 +32,7 @@ func _ready() -> void:
 	
 	EJECT_TRIGGER.on_trigger.connect(eject)
 	GATHER_TRIGGER.on_trigger.connect(gather)
+	FIRE_TRIGGER.on_trigger.connect(fire)
 	
 	if(ROUND_ANCHOR == null):
 		ROUND_ANCHOR = Node3D.new()

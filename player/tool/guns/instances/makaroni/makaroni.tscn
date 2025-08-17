@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=41 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -11,6 +11,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ivw6ivaqvmb4" path="res://player/tool/guns/instances/makaroni/assets/safety.obj" id="11_ry1el"]
 [ext_resource type="ArrayMesh" uid="uid://dy4cxg2u7elp3" path="res://player/tool/guns/instances/makaroni/assets/slide.obj" id="12_2isxn"]
 [ext_resource type="ArrayMesh" uid="uid://d0uicko3dtpcy" path="res://player/tool/guns/instances/makaroni/assets/trigger.obj" id="13_vi08r"]
+[ext_resource type="Script" uid="uid://cspvfnih4rfcf" path="res://player/tool/guns/parts/elements/Gun_Part_Hammer_Single.gd" id="15_8j6fe"]
 [ext_resource type="Script" uid="uid://dpp3u5ytyv45w" path="res://player/tool/guns/parts/elements/Gun_Action.gd" id="15_cawr4"]
 [ext_resource type="Script" uid="uid://1g57nvm0ti4l" path="res://false_physics/triggerables/Triggerable.gd" id="16_f6c0u"]
 [ext_resource type="Script" uid="uid://bkfsoqbr3ewi8" path="res://player/tool/guns/parts/interactives/bases/Gun_Part_Slideable.gd" id="16_jmqr6"]
@@ -237,13 +238,16 @@ script = ExtResource("4_jmqr6")
 mesh = ExtResource("9_3hwry")
 skeleton = NodePath("../../..")
 
-[node name="Trigger" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
+[node name="Trigger" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 0.00545651, -0.0391717)
 script = ExtResource("8_f6c0u")
 MODEL = NodePath("Model/Trigger")
 MIN_ANGLE = -0.436332
 MAX_ANGLE = 0.174533
 SPRING_FORCE = -4.0
+TRIGGERS_TRIGGERABLE = [NodePath("../Hammer/Release_Hammer")]
+TRIGGERS_DISTANCE = Array[float]([-0.3491])
+TRIGGERS_DIRECTION = Array[int]([2])
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 
@@ -265,10 +269,11 @@ script = ExtResource("4_jmqr6")
 [node name="Cam_Aim_Pos" type="Node3D" parent="RigidBody3D/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0427964, 0.192895)
 
-[node name="Gun_Action" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("ACTION_SLIDEABLE_LINK", "EJECT_TRIGGER", "GATHER_TRIGGER", "GATHER_FROM", "ROUND_ANCHOR")]
+[node name="Gun_Action" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("ACTION_SLIDEABLE_LINK", "FIRE_TRIGGER", "EJECT_TRIGGER", "GATHER_TRIGGER", "GATHER_FROM", "ROUND_ANCHOR")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0256293, -0.0196918)
 script = ExtResource("15_cawr4")
 ACTION_SLIDEABLE_LINK = NodePath("../Gun_Part_Slide")
+FIRE_TRIGGER = NodePath("Fire_Trigger")
 EJECT_TRIGGER = NodePath("Eject_Trigger")
 GATHER_TRIGGER = NodePath("Gather_Trigger")
 GATHER_FROM = NodePath("../Gun_Part_Insertable_Slot")
@@ -282,6 +287,10 @@ script = ExtResource("16_f6c0u")
 metadata/_custom_type_script = "uid://1g57nvm0ti4l"
 
 [node name="Gather_Trigger" type="Node" parent="RigidBody3D/Model/Gun_Action"]
+script = ExtResource("16_f6c0u")
+metadata/_custom_type_script = "uid://1g57nvm0ti4l"
+
+[node name="Fire_Trigger" type="Node" parent="RigidBody3D/Model/Gun_Action"]
 script = ExtResource("16_f6c0u")
 metadata/_custom_type_script = "uid://1g57nvm0ti4l"
 
@@ -341,11 +350,14 @@ shape = SubResource("ConvexPolygonShape3D_f5ljc")
 [node name="Round_Anchor" type="Node3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0262758, -0.0228401)
 
-[node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
+[node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0113361, 0.0353096)
-script = ExtResource("8_f6c0u")
+script = ExtResource("15_8j6fe")
+RELEASE_LISTENER = NodePath("Release_Hammer")
+TRIGGER = NodePath("../Gun_Action/Fire_Trigger")
+COCKED_ANGLE = 1.53589
 MODEL = NodePath("Model")
-MAX_ANGLE = 1.5708
+MAX_ANGLE = 1.65806
 SPRING_FORCE = 20.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
@@ -362,6 +374,10 @@ shape = SubResource("BoxShape3D_8j6fe")
 transform = Transform3D(1, 0, 0, 1.49012e-08, 1, 3.35276e-08, 2.98023e-08, -3.72529e-09, 1, 0, 0.000909589, 0.00245167)
 mesh = ExtResource("7_dsk1g")
 skeleton = NodePath("../../../../..")
+
+[node name="Release_Hammer" type="Node" parent="RigidBody3D/Model/Hammer"]
+script = ExtResource("16_f6c0u")
+metadata/_custom_type_script = "uid://1g57nvm0ti4l"
 
 [node name="Player_Insertable_Pouch" type="Node3D" parent="RigidBody3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.196625, 0.0541983, 0)

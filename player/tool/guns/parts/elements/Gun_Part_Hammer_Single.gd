@@ -1,9 +1,9 @@
 class_name Gun_Part_DAHammer extends Gun_Part_Rotateable
 
 @export_group("Listeners")
-@export var RELEASE_LISTENER:Gun_Part_Listener;
+@export var RELEASE_LISTENER:Triggerable;
 
-@export var TRIGGER:Gun_Part_Listener;
+@export var TRIGGER:Triggerable;
 
 @export_group("Settings")
 ##Cocked angle. strikes at angle == 0
@@ -21,7 +21,7 @@ var is_cocked:bool = false;
 ##Ready
 func _ready():
 	
-	connect_listener(RELEASE_LISTENER, release);
+	RELEASE_LISTENER.on_trigger.connect(release)
 	super._ready();
 
 func release():
@@ -45,7 +45,7 @@ func hit_min_angle(speed:float) -> void:
 	if current_angle == MIN_ANGLE and abs(speed) > VELOCITY_THRESHOLD:
 		#print(current_angle)
 		if(TRIGGER != null):
-			TRIGGER.trigger.emit();
+			TRIGGER.trigger()
 		else:
 			print("bang!")
 func hit_max_angle(_speed:float) -> void:
