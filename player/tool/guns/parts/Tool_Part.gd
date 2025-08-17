@@ -1,4 +1,4 @@
-class_name Gun_Part extends Node3D
+class_name Tool_Part extends Node3D
 
 #@export var TRIGGERS:Array[Signal];
 

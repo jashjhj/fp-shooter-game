@@ -1,4 +1,4 @@
-class_name Gun_Part_Insertable_Slot extends Gun_Part
+class_name Tool_Part_Insertable_Slot extends Tool_Part
 ##Magazine/Bullet/clip etc.
 
 
@@ -33,7 +33,7 @@ var is_locked:bool:
 
 var is_housed:bool = false;
 var insertion:float = 0;
-var housed_insertable:Gun_Insertable;
+var housed_insertable:Tool_Part_Insertable;
 
 
 const INSERTION_LAYER = 262144 # 2^18 = layer 19

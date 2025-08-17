@@ -1,12 +1,12 @@
-class_name Gun_Action extends Gun_Part
+class_name Gun_Action extends Tool_Part
 
-@export var ACTION_SLIDEABLE_LINK:Gun_Part_Slideable;
+@export var ACTION_SLIDEABLE_LINK:Tool_Part_Slideable;
 
 @export var FIRE_TRIGGER:Triggerable;
 @export var EJECT_TRIGGER:Triggerable
 @export var GATHER_TRIGGER:Triggerable;
 
-@export var GATHER_FROM:Gun_Part_Insertable_Slot;
+@export var GATHER_FROM:Tool_Part_Insertable_Slot;
 
 ##Determines the position of the round, etc. A child of the Slideable link
 @export var ROUND_ANCHOR:Node3D;

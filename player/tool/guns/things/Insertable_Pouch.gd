@@ -5,7 +5,7 @@ class_name Player_Insertable_Pouch extends Node3D
 
 
 var current_instances:int = 0;
-var instances:Array[Gun_Insertable];
+var instances:Array[Tool_Part_Insertable];
 
 func _ready() -> void:
 	pass
@@ -32,7 +32,7 @@ func summon_new() -> void:
 	if(INSERTABLE == null):
 		push_warning("No valid insertable to summon")
 		return
-	var new_instance:Gun_Insertable = INSERTABLE.instantiate();
+	var new_instance:Tool_Part_Insertable = INSERTABLE.instantiate();
 	new_instance.visible = true;
 	new_instance.process_mode = Node.PROCESS_MODE_INHERIT
 	get_parent().add_child(new_instance)

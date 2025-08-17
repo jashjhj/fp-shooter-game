@@ -1,6 +1,6 @@
 class_name Gun_Action_Rotateable_Impose_Limit extends Gun_Action_Toggle
 
-@export var ROTATEABLE:Gun_Part_Rotateable;
+@export var ROTATEABLE:Tool_Part_Rotateable;
 @export_range(-360, 360, 0.1, "radians_as_degrees") var LIMIT:float
 
 @export_enum("MIN", "MAX") var EDGE:int = 0

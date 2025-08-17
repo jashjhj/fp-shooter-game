@@ -2,11 +2,10 @@ class_name Gun extends Player_Tool
 
 
 
-@export var trigger_functions:Array[Gun_Part_Listener];
 
 ##Set to the default bullet scene
 #var bullet:PackedScene = load("res://gameobjects/bullets/bullet.tscn");
-
+@export var trigger_functions:Array[Triggerable];
 
 
 
@@ -17,7 +16,7 @@ func _ready() -> void:
 	
 	
 	for child in get_all_children(self):
-		if child is Gun_Part:
+		if child is Tool_Part:
 			child.PARENT_GUN = self;
 
 
@@ -32,7 +31,7 @@ func _process(_delta:float):
 func focus_set(v):
 	if(v):
 		for c in get_all_children(self):
-			if c is Gun_Part_Interactive:
+			if c is Tool_Part_Interactive:
 				c.is_focusable = v;
 			
 
@@ -45,14 +44,14 @@ func inspect_set(value):
 	
 	if(inspect):
 		for child in get_all_children(self):
-			if child is Gun_Part_Interactive:
+			if child is Tool_Part_Interactive:
 				child.is_interactive = true;
 		
 		#MODEL_POSITION_INSPECT.transform = default_inspect_transform;
 	
 	else: # interacting disabled.
 		for child in get_all_children(self):
-			if child is Gun_Part_Interactive:
+			if child is Tool_Part_Interactive:
 				child.is_interactive = false;
 
 
@@ -61,7 +60,7 @@ func interact_0_set(value):
 	
 	if(interact_0):
 		for listener in trigger_functions:
-			listener.trigger.emit();
+			listener.trigger();
 	
 
 

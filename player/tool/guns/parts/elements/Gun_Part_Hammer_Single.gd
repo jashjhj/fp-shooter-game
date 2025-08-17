@@ -1,4 +1,4 @@
-class_name Gun_Part_DAHammer extends Gun_Part_Rotateable
+class_name Gun_Part_DAHammer extends Tool_Part_Rotateable
 
 @export_group("Listeners")
 @export var RELEASE_LISTENER:Triggerable;

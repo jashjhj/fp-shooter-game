@@ -1,4 +1,4 @@
-class_name Gun_Part_Interactive extends Gun_Part
+class_name Tool_Part_Interactive extends Tool_Part
 
 ##Area3D
 @export var BEGIN_INTERACT_COLLIDER:Area3D;
@@ -57,15 +57,15 @@ func _ready():
 
 
 func init(): # load the tools required.
-	var tools = load("res://player/tool/guns/parts/interactives/Gun_Part_Tools.tscn").instantiate()
-	assert(tools != null, "Gun_Part_Tools does not exist @ `res://player/tool/guns/parts/interactives/Gun_Part_Tools.tscn`") # check
+	var tools = load("res://player/tool/guns/parts/interactives/Tool_Part_Tools.tscn").instantiate()
+	assert(tools != null, "Tool_Part_Tools does not exist @ `res://player/tool/guns/parts/interactives/Tool_Part_Tools.tscn`") # check
 	
 	assert(BEGIN_INTERACT_COLLIDER != null, "No Interact collider set.")
 	
 	add_child(tools, true) # true makes them internal so not as easy to modify
 	
 	INTERACT_PLANE = tools.INTERACT_PLANE
-	INTERACT_PLANE.collision_layer = PLANE_COLLISION_LAYER # layer 18 = Gun_Part_Interaction_Plane
+	INTERACT_PLANE.collision_layer = PLANE_COLLISION_LAYER # layer 18 = Tool_Part_Interaction_Plane
 	
 	BEGIN_INTERACT_COLLIDER.collision_layer = BEGIN_INTERACT_COLLISION_LAYER
 	BEGIN_INTERACT_COLLIDER.collision_mask = 0
@@ -131,7 +131,7 @@ func get_mouse_plane_position(mask = PLANE_COLLISION_LAYER) -> Vector3:
 
 
 func _process(_delta: float) -> void:
-	#super._process(delta); No process function in GUN_PART
+	#super._process(delta); No process function in Tool_Part
 	pass
 	
 

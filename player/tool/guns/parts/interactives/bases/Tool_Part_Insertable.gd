@@ -1,4 +1,4 @@
-class_name Gun_Insertable extends Gun_Part_Interactive
+class_name Tool_Part_Insertable extends Tool_Part_Interactive
 
 ##Everything that should move with the model, should be a child of MODEL.
 @export var MODEL:Node3D;
@@ -31,7 +31,7 @@ var model_goal:Node3D = Node3D.new() # The goal of the model, usually a relative
 var start_focus_mouse_difference:Vector3;
 var is_housed:bool = false;
 
-var CURRENT_SLOT:Gun_Part_Insertable_Slot;
+var CURRENT_SLOT:Tool_Part_Insertable_Slot;
 
 
 
@@ -42,7 +42,7 @@ func _ready():
 	add_child(insertable_position)
 	add_child(model_goal);
 	
-	var insertion_tools = load("res://player/tool/guns/parts/interactives/Gun_Part_Tools.tscn").instantiate()
+	var insertion_tools = load("res://player/tool/guns/parts/interactives/Tool_Part_Tools.tscn").instantiate()
 	add_child(insertion_tools)
 	INSERTION_PLANE = insertion_tools.INTERACT_PLANE;
 	INSERTION_PLANE.collision_layer = INSERTION_PLANE_LAYER;
@@ -97,9 +97,9 @@ func _process(delta:float) -> void:
 			var insertable_searcher:RayCast3D = get_viewport().get_camera_3d().get_ray_from_camera_through(insertable_position.global_position, 4, INSERTION_AREA_LAYER);
 			if(insertable_searcher.get_collider() != null):
 				var collider_parent = insertable_searcher.get_collider().get_parent()
-				if(not collider_parent is Gun_Part_Insertable_Slot):
+				if(not collider_parent is Tool_Part_Insertable_Slot):
 					push_error("Collider with layer 18 - INSERTION AREA LAYER - Not a child of an Insertable Slot", insertable_searcher.get_collider())
-				collider_parent = collider_parent as Gun_Part_Insertable_Slot; #type casting
+				collider_parent = collider_parent as Tool_Part_Insertable_Slot; #type casting
 				
 				#Condition for allowing a slot
 				if(collider_parent.INSERTION_ACCEPTANCE & INSERTION_ACCEPTANCE != 0 and not collider_parent.is_locked and not collider_parent.is_housed): # if overlap, ie can be accepted

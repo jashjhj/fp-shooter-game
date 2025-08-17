@@ -1,4 +1,4 @@
-class_name Gun_Insertable_Droppable extends Gun_Insertable
+class_name Gun_Insertable_Droppable extends Tool_Part_Insertable
 
 #Upon being dropped, reparents whole object to the assigned rigidbody adn adds it as rubbish globally to scene.
 

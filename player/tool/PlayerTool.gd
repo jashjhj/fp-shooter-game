@@ -5,6 +5,9 @@ class_name Player_Tool extends Node3D
 ##Optionally set.
 @export var CAM_FOCUS_POS:Node3D;
 
+
+
+
 @export_group("Model Position Nodes", "MODEL_POSITION_")
 @export var MODEL_POSITION_DEFAULT:Node3D;
 @export var MODEL_POSITION_INSPECT:Node3D;

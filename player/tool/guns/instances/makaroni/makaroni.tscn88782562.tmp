@@ -314,12 +314,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0192902, 0.00219793)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00244141)
 shape = SubResource("BoxShape3D_f5ljc")
 
-[node name="Gun_Part_Slide" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "TRIGGERS_TRIGGERABLE", "APPLY_FORCES_TO", "BEGIN_INTERACT_COLLIDER")]
+[node name="Gun_Part_Slide" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "APPLY_FORCES_TO", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 script = ExtResource("16_jmqr6")
 MODEL = NodePath("Slide")
 SLIDE_DISTANCE = 0.036
-TRIGGERS_TRIGGERABLE = [NodePath("../Gun_Action/Eject_Trigger"), NodePath("../Gun_Action/Gather_Trigger")]
 TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
 TRIGGERS_DIRECTION = Array[int]([1, 2])
 SPRING_CONSTANT = 200.0

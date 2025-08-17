@@ -1,4 +1,4 @@
-class_name Gun_Part_Rotateable extends Gun_Part_Interactive
+class_name Tool_Part_Rotateable extends Tool_Part_Interactive
 
 
 @export var ROTATION_AXIS:Vector3 = Vector3.RIGHT;

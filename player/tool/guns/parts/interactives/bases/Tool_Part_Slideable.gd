@@ -1,4 +1,4 @@
-class_name Gun_Part_Slideable extends Gun_Part_Interactive
+class_name Tool_Part_Slideable extends Tool_Part_Interactive
 
 @export var MODEL:Node3D;
 
