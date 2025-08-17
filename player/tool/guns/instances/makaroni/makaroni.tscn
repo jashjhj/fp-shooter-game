@@ -159,10 +159,11 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
 
-[node name="Makaroni" type="Node3D" node_paths=PackedStringArray("MODEL", "CAM_FOCUS_POS")]
+[node name="Makaroni" type="Node3D" node_paths=PackedStringArray("MODEL", "CAM_FOCUS_POS", "MODEL_POSITION_INSPECT")]
 script = ExtResource("1_mmcih")
 MODEL = NodePath("RigidBody3D/Model")
 CAM_FOCUS_POS = NodePath("RigidBody3D/Model/Cam_Aim_Pos")
+MODEL_POSITION_INSPECT = NodePath("Inspect_Pos")
 
 [node name="Anchor" type="RigidBody3D" parent="."]
 mass = 0.1
@@ -178,13 +179,13 @@ linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 linear_spring_x/enabled = true
 linear_spring_x/stiffness = 25.0
-linear_spring_x/damping = 0.6
+linear_spring_x/damping = 1.0
 linear_spring_y/enabled = true
 linear_spring_y/stiffness = 25.0
-linear_spring_y/damping = 0.6
+linear_spring_y/damping = 1.0
 linear_spring_z/enabled = true
 linear_spring_z/stiffness = 25.0
-linear_spring_z/damping = 0.6
+linear_spring_z/damping = 1.0
 angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
@@ -205,6 +206,7 @@ mass = 0.1
 gravity_scale = 0.0
 
 [node name="Model" type="Node3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0264405, -0.0106144)
 
 [node name="Body" type="MeshInstance3D" parent="RigidBody3D/Model"]
 mesh = ExtResource("1_ilmi0")
@@ -262,3 +264,6 @@ script = ExtResource("4_jmqr6")
 
 [node name="Cam_Aim_Pos" type="Node3D" parent="RigidBody3D/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0427964, 0.192895)
+
+[node name="Inspect_Pos" type="Node3D" parent="."]
+transform = Transform3D(0.25, 0.258819, 0.933013, -0.314705, 0.933013, -0.174494, -0.915675, -0.25, 0.314705, -0.0337516, 0.115212, 0.0808722)

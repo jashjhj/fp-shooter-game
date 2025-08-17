@@ -10,12 +10,10 @@ class_name Gun extends Player_Tool
 
 
 
-var default_inspect_transform:Transform3D;
 
 func _ready() -> void:
 	super._ready();
 	
-	default_inspect_transform = MODEL_POSITION_INSPECT.transform
 	
 	
 	for child in get_all_children(self):

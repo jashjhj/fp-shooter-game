@@ -17,6 +17,7 @@ var is_inspecting:bool = false:
 		is_inspecting = v;
 		
 		if(is_inspecting):
+			is_focussing = false
 			equipped_tool.inspect = true
 			is_mouse_focused = false;
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -25,6 +26,25 @@ var is_inspecting:bool = false:
 			is_mouse_focused = true;
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+var is_focussing:bool = false:
+	set(v):
+		if(is_inspecting):
+			is_focussing = false; # cannot focus when inspecting
+			return
+
+		if(is_focussing != v):# only run if set to new value
+			is_focussing = v
+			if(is_focussing):
+				Engine.time_scale = 0.5;
+				if(equipped_tool != null):
+					pass
+					#equipped_tool.reparent(HEAD)
+			else:
+				Engine.time_scale = 1.0;
+				if(equipped_tool != null):
+					pass
+					#equipped_tool.reparent(TORSO)
+		
 
 class PlayerState:
 	var move_mult:float = 1.0
@@ -61,6 +81,12 @@ var InspectState:PlayerState = PlayerState.new()
 			show_hurt_overlay()
 
 
+
+@export_group("Parts")
+@export var ANCHOR_HAND:Node3D;
+@export var ANCHOR_POCKET:Node3D
+@export var SHOULDER:Node3D
+
 var equipped_tool:Player_Tool:
 	set(v):
 		if v == null:
@@ -72,15 +98,8 @@ var equipped_tool:Player_Tool:
 
 
 var CAMERA_CAPTURED:bool = false;
-var is_focussing:bool = false:
-	set(v):
-		if(is_focussing != v):# if set to new value
-			if(v):
-				Engine.time_scale = 0.5;
-			else:
-				Engine.time_scale = 1.0;
+
 		
-		is_focussing = v
 
 
 var hurt_timer:Timer;
@@ -108,8 +127,9 @@ func _ready():
 	assert(PRIMARY_TOOL != null, "No PRIMARY_TOOL set")
 	primary_tool = PRIMARY_TOOL.instantiate()
 	TORSO.add_child(primary_tool)
-	primary_tool.ANCHOR = $Hip/Torso/Anchor_Pocket
-	primary_tool.global_transform = $Hip/Torso/Anchor_Pocket.global_transform
+	
+	primary_tool.ANCHOR = ANCHOR_POCKET
+	primary_tool.global_transform = ANCHOR_POCKET.global_transform
 
 
 var mouse_input:Vector2;
@@ -143,7 +163,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if event.is_action_pressed("inspect"):
 			is_inspecting = !is_inspecting
-		
+	
 	
 	if(event.is_action_pressed("focus")):
 		is_focussing = true
@@ -154,9 +174,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_focussing = false
 		if(equipped_tool == null):
 			equipped_tool = primary_tool
-			equipped_tool.ANCHOR = $Hip/Torso/Anchor_Hand
+			equipped_tool.ANCHOR = ANCHOR_HAND
 		else:
-			equipped_tool.ANCHOR = $Hip/Torso/Anchor_Pocket
+			equipped_tool.ANCHOR = ANCHOR_POCKET
+			equipped_tool.reparent(TORSO)
 			equipped_tool = null;
 			
 	
@@ -176,6 +197,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta:float) -> void:
+	#ANCHOR_HAND.basis = HEAD.basis
+	SHOULDER.basis = HEAD.basis
 	
 	mouse_velocity *= Settings.MouseAcceleration * (1-delta);
 	mouse_velocity += mouse_input/delta;
@@ -197,9 +220,9 @@ func _process(delta:float) -> void:
 	camera_rot_y = max(camera_rot_y, deg_to_rad(LOOK_MIN_VERT))
 	
 	TORSO.basis = Basis();
-	TORSO.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
+	TORSO.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/4);
 	HEAD.basis = Basis();
-	HEAD.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/2);
+	HEAD.rotate_object_local(Vector3(1, 0, 0), 3*camera_rot_y/4);
 	
 	mouse_input = Vector2.ZERO;
 	
@@ -241,14 +264,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func update_ui():
-	$Hip/Torso/Head/Control/RichTextLabel.text = "HP: "+str(int(HP))
+	$Control/RichTextLabel.text = "HP: "+str(int(HP))
 	if(HP <= 0.1):
-		$"Hip/Torso/Head/You DIED".visible = true
+		$"You DIED/You Died".visible = true
 
 func reload():
 	get_tree().change_scene_to_file("res://maps/sandy_arena/Sandy_Arena.tscn")
 
 func show_hurt_overlay():
-	$Hip/Torso/Head/Hurt.visible = true
+	$Hurt.visible = true
 func hide_hurt_overlay():
-	$Hip/Torso/Head/Hurt.visible = false
+	$Hurt.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=11 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
@@ -9,6 +9,10 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 radius = 0.15
 height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qjkh3"]
+radius = 0.03
+height = 0.1
 
 [sub_resource type="Gradient" id="Gradient_g6k8r"]
 offsets = PackedFloat32Array(0, 0.526316, 1)
@@ -22,11 +26,14 @@ fractal_octaves = 7
 color_ramp = SubResource("Gradient_g6k8r")
 noise = SubResource("FastNoiseLite_boad6")
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("ANCHOR_HAND", "ANCHOR_POCKET", "SHOULDER")]
 collision_layer = 16
 collision_mask = 113
 script = ExtResource("1_oul6g")
 PRIMARY_TOOL = ExtResource("2_qjkh3")
+ANCHOR_HAND = NodePath("Hip/Torso/Shoulder/Anchor_Hand")
+ANCHOR_POCKET = NodePath("Hip/Torso/Anchor_Pocket")
+SHOULDER = NodePath("Hip/Torso/Shoulder")
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -36,10 +43,10 @@ shape = SubResource("CapsuleShape3D_kqu6x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.756033, 0)
 
 [node name="Torso" type="Node3D" parent="Hip"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="Head" type="Node3D" parent="Hip/Torso"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Hip/Torso/Head"]
 fov = 70.0
@@ -55,70 +62,18 @@ collide_with_areas = true
 [node name="AudioListener3D" type="AudioListener3D" parent="Hip/Torso/Head/Camera3D"]
 current = true
 
-[node name="You DIED" type="TextureRect" parent="Hip/Torso/Head"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("NoiseTexture2D_rgyib")
-
-[node name="You Died" type="RichTextLabel" parent="Hip/Torso/Head/You DIED"]
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 52.0
-scale = Vector2(9, 7.8)
-text = "YOU WERE SHOT"
-
-[node name="Restarting in 2" type="RichTextLabel" parent="Hip/Torso/Head/You DIED"]
-layout_mode = 1
-offset_left = 503.0
-offset_top = 562.0
-offset_right = 631.0
-offset_bottom = 614.0
-scale = Vector2(5.04001, 3.48)
-text = "Restarting in 2..."
-
-[node name="Hurt" type="TextureRect" parent="Hip/Torso/Head"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("NoiseTexture2D_rgyib")
-
-[node name="Control" type="Control" parent="Hip/Torso/Head"]
-layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -134.0
-offset_right = 40.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Hip/Torso/Head/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = 73.0
-grow_horizontal = 2
-text = "HP: 0"
-horizontal_alignment = 1
-
-[node name="Anchor_Hand" type="Node3D" parent="Hip/Torso"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0818846, 0.297074, -0.329969)
-
 [node name="Anchor_Pocket" type="Node3D" parent="Hip/Torso"]
-transform = Transform3D(1, 0, 0, 0, 0.144484, 0.989507, 0, -0.989507, 0.144484, 0.0885508, 0.209611, -0.223575)
+transform = Transform3D(1, 0, 0, 0, 0.144484, 0.989507, 0, -0.989507, 0.144484, 0.0885508, 0.00961089, -0.123575)
+
+[node name="Shoulder" type="Node3D" parent="Hip/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="Anchor_Hand" type="Node3D" parent="Hip/Torso/Shoulder"]
+transform = Transform3D(0.996505, -0.08353, 0, 0.08353, 0.996505, 0, 0, 0, 1, 0.0946939, -0.1, -0.5)
+
+[node name="Hand_Mesh" type="MeshInstance3D" parent="Hip/Torso/Shoulder/Anchor_Hand"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_qjkh3")
 
 [node name="PlayerLeg_Left" parent="Hip" instance=ExtResource("5_qjkh3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
@@ -135,3 +90,62 @@ script = ExtResource("6_g6k8r")
 LEFT_LEG = NodePath("../Hip/PlayerLeg_Left")
 RIGHT_LEG = NodePath("../Hip/PlayerLeg_Right")
 metadata/_custom_type_script = "uid://cl7p8ax1o4fh"
+
+[node name="You DIED" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_rgyib")
+
+[node name="You Died" type="RichTextLabel" parent="You DIED"]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 52.0
+scale = Vector2(9, 7.8)
+text = "YOU WERE SHOT"
+
+[node name="Restarting in 2" type="RichTextLabel" parent="You DIED"]
+layout_mode = 1
+offset_left = 503.0
+offset_top = 562.0
+offset_right = 631.0
+offset_bottom = 614.0
+scale = Vector2(5.04001, 3.48)
+text = "Restarting in 2..."
+
+[node name="Hurt" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_rgyib")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -134.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 73.0
+grow_horizontal = 2
+text = "HP: 0"
+horizontal_alignment = 1
