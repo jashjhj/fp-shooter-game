@@ -134,6 +134,10 @@ func _ready():
 
 var mouse_input:Vector2;
 var mouse_velocity:Vector2;
+
+var is_rotating_during_inspect:bool = false
+var rotating_during_inspect_mouse_pos:Vector2;
+
 ##INPUT SCRIPT
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -147,9 +151,18 @@ func _unhandled_input(event: InputEvent) -> void:
 				mouse_input += event.xformed_by(viewport_transform).relative
 		
 		if(equipped_tool != null and equipped_tool.inspect == true and Input.is_action_pressed("rotate_during_inspect")):
+			if(!is_rotating_during_inspect):
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+				rotating_during_inspect_mouse_pos = get_viewport().get_mouse_position()
+				is_rotating_during_inspect = true;
 			equipped_tool.rotate_inspect_node(event.relative * Settings.MouseSensitivity)
-		
-	
+
+		else:
+			if(is_rotating_during_inspect):
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				Input.warp_mouse(rotating_during_inspect_mouse_pos)
+				is_rotating_during_inspect = false
+				
 	
 	
 	if(equipped_tool != null):
