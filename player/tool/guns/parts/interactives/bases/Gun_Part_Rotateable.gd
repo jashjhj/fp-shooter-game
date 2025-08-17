@@ -69,7 +69,7 @@ func disable_focus():
 # -- Extra computations - for visuals and/or deeper calculation ---------
 # =======================================================================
 
-@export var VISUAL_HAMMER:Node3D;
+@export var MODEL:Node3D;
 
 @export_range(-360, 360, 1.0, "radians_as_degrees") var MIN_ANGLE = 0.0;
 @export_range(-360, 360, 1.0, "radians_as_degrees") var MAX_ANGLE = 2*PI/3;
@@ -110,9 +110,9 @@ func _ready2():
 		FOCUS_RESISTANCE_CURVE.add_point(Vector2(0, 0.1));
 
 func _process2():
-	if(VISUAL_HAMMER != null):
-		VISUAL_HAMMER.transform.basis = Basis.IDENTITY
-		VISUAL_HAMMER.rotate_object_local(ROTATION_AXIS, current_angle)
+	if(MODEL != null):
+		MODEL.transform.basis = Basis.IDENTITY
+		MODEL.rotate_object_local(ROTATION_AXIS, current_angle)
 	
 	optional_extras()
 
