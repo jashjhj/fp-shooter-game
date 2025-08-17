@@ -29,6 +29,12 @@ func _process(_delta:float):
 
 
 
+func focus_set(v):
+	if(v):
+		for c in get_all_children(self):
+			if c is Gun_Part_Interactive:
+				c.is_focusable = v;
+			
 
 
 

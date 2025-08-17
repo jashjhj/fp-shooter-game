@@ -23,7 +23,15 @@ var is_interactive:bool = false:
 		if(!is_interactive):
 			_disable_focus()
 
-var is_focused:bool = false; # Is currently being held/clicked on
+var is_focused:bool = false: # Is currently being held/clicked on
+	set(v):
+		if(is_focused != v):
+			is_focused = v
+			if(is_focused):
+				_enable_focus()
+			else:
+				_disable_focus()
+
 var is_focusable:bool = true:
 	set(value):
 		is_focusable = value;
@@ -70,7 +78,7 @@ func disable_plane_collider():
 
 func enable_plane_collider():
 	INTERACT_PLANE.process_mode = Node.PROCESS_MODE_INHERIT;
-
+ 
 
 func _input(event: InputEvent) -> void: # Handles "is_focused"
 	if(is_focusable and is_interactive):

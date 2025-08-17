@@ -113,6 +113,9 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
+size = Vector3(0.0373535, 0.0458984, 0.0654297)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lohkq"]
 render_priority = 0
 shader = ExtResource("2_mmcih")
@@ -163,9 +166,6 @@ shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5ljc"]
 points = PackedVector3Array(-0.0140984, 0.005224, -0.0193307, -0.014876, 0.00524514, -0.108375, 0.014876, 0.00524514, -0.108375, 0.0140955, 0.005224, -0.0105346, -0.0140984, 0.005224, 0.00802645, -0.0148585, 0.0105628, -0.115518, -0.014742, 0.0163668, -0.142856, -0.0133383, 0.0150665, -0.142856, -0.00416458, 0.0113522, -0.142856, -0.014876, 0.00524514, 0.05119, -0.014876, 0.00746878, 0.05119, -0.0148731, 0.0212898, 0.031926, 0.00416167, 0.0113522, -0.142856, 0.0133354, 0.0150665, -0.142856, 0.0147391, 0.0163668, -0.142856, 0.0148556, 0.0105628, -0.115518, 0.0148702, 0.011916, 0.0497461, 0.014876, 0.00746878, 0.05119, 0.014876, 0.00524514, 0.05119, 0.0140955, 0.005224, 0.031394, -0.0148236, 0.013308, -0.12382, -0.0141887, 0.0274956, -0.142856, -0.00799425, 0.0262058, -0.142894, -0.00553336, 0.0121662, 0.050715, -0.0148731, 0.011916, 0.0497461, -0.0148585, 0.0139881, 0.0473714, -0.0142353, 0.0262269, 0.0422799, -0.0141712, 0.0275449, 0.0406841, -0.0141829, 0.0275097, 0.0300072, -0.0141887, 0.0274991, 0.00232704, -0.0141887, 0.0274991, -0.0231873, 0.00799134, 0.0262058, -0.142894, 0.0148207, 0.013308, -0.12382, 0.0141858, 0.0274956, -0.142856, 0.0141858, 0.0274991, -0.0143912, 0.0141858, 0.0274991, 0.0256946, 0.0148556, 0.0139881, 0.0473714, 0.0142324, 0.0262269, 0.0422799, 0.00553045, 0.0121662, 0.050715, -0.010295, 0.0334617, -0.142856, -0.00607505, 0.0412215, 0.0196912, -0.00532367, 0.0369857, -0.142856, -0.00174446, 0.0378772, -0.142856, -0.00553336, 0.0268683, 0.0423179, -0.00553336, 0.0285034, 0.0403421, 0, 0.037398, 0.0287153, -0.00174446, 0.0378772, 0.0277274, -0.00607505, 0.0412215, 0.0214961, 0.00174155, 0.0378772, -0.142856, 0.00532076, 0.0369857, -0.142856, 0.010292, 0.0334617, -0.142856, 0.00607213, 0.0412215, 0.0196912, 0.0141683, 0.0275449, 0.0406841, 0.00553045, 0.0285034, 0.0403421, 0.00553045, 0.0268683, 0.0423179, -0.00112997, 0.0410699, -0.135865, -0.00112997, 0.0402876, -0.142153, -0.0017765, 0.0384869, -0.142818, 0.00174155, 0.0378772, 0.0277274, 0.00607213, 0.0412215, 0.0214961, 0.00177359, 0.0384869, -0.142818, 0.00112706, 0.0402876, -0.142153, 0.00112706, 0.0410699, -0.135865)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
-size = Vector3(0.0373535, 0.0458984, 0.0654297)
 
 [node name="Makaroni" type="Node3D" node_paths=PackedStringArray("MODEL", "CAM_FOCUS_POS", "MODEL_POSITION_INSPECT")]
 script = ExtResource("1_mmcih")
@@ -254,11 +254,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0427964, 0.192895)
 [node name="Gun_Action" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("ACTION_SLIDEABLE_LINK", "EJECT_TRIGGER", "GATHER_TRIGGER", "GATHER_FROM", "ROUND_ANCHOR")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0256293, -0.0196918)
 script = ExtResource("15_cawr4")
-ACTION_SLIDEABLE_LINK = NodePath("../Gun_Part_Slideable")
+ACTION_SLIDEABLE_LINK = NodePath("../Gun_Part_Slide")
 EJECT_TRIGGER = NodePath("Eject_Trigger")
 GATHER_TRIGGER = NodePath("Gather_Trigger")
 GATHER_FROM = NodePath("../Gun_Part_Insertable_Slot")
-ROUND_ANCHOR = NodePath("../Gun_Part_Slideable/Round_Anchor")
+ROUND_ANCHOR = NodePath("../Gun_Part_Slide/Slide/Round_Anchor")
 EJECTION_VELOCITY = Vector3(0.5, 1, 0.5)
 EJECTION_VELOCITY_ANGULAR = Vector3(11, -5, 0)
 metadata/_custom_type_script = "uid://dpp3u5ytyv45w"
@@ -270,36 +270,6 @@ metadata/_custom_type_script = "uid://1g57nvm0ti4l"
 [node name="Gather_Trigger" type="Node" parent="RigidBody3D/Model/Gun_Action"]
 script = ExtResource("16_f6c0u")
 metadata/_custom_type_script = "uid://1g57nvm0ti4l"
-
-[node name="Gun_Part_Slideable" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
-script = ExtResource("16_jmqr6")
-SLIDE_DISTANCE = 0.036
-TRIGGERS_TRIGGERABLE = [NodePath("../Gun_Action/Eject_Trigger"), NodePath("../Gun_Action/Gather_Trigger")]
-TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
-TRIGGERS_DIRECTION = Array[int]([1, 2])
-BEGIN_INTERACT_COLLIDER = NodePath("Area3D")
-metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
-
-[node name="Safety" type="MeshInstance3D" parent="RigidBody3D/Model/Gun_Part_Slideable"]
-mesh = ExtResource("11_ry1el")
-skeleton = NodePath("../../../..")
-
-[node name="Slide" type="MeshInstance3D" parent="RigidBody3D/Model/Gun_Part_Slideable"]
-mesh = ExtResource("12_2isxn")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_tl72j")
-surface_material_override/1 = SubResource("ShaderMaterial_1g8f6")
-surface_material_override/2 = SubResource("ShaderMaterial_g7ykr")
-script = ExtResource("4_jmqr6")
-
-[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Gun_Part_Slideable"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Gun_Part_Slideable/Area3D"]
-shape = SubResource("ConvexPolygonShape3D_f5ljc")
-
-[node name="Round_Anchor" type="Node3D" parent="RigidBody3D/Model/Gun_Part_Slideable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0262758, -0.0228401)
 
 [node name="Gun_Part_Insertable_Slot" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("INSERTION_ENTRY_AREA")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.090634, 0.012303)
@@ -316,6 +286,43 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Gun_Part_Insertable_Slot/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00244141)
 shape = SubResource("BoxShape3D_f5ljc")
+
+[node name="Gun_Part_Slide" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
+script = ExtResource("16_jmqr6")
+MODEL = NodePath("Slide")
+SLIDE_DISTANCE = 0.036
+TRIGGERS_TRIGGERABLE = [NodePath("../Gun_Action/Eject_Trigger"), NodePath("../Gun_Action/Gather_Trigger")]
+TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
+TRIGGERS_DIRECTION = Array[int]([1, 2])
+BEGIN_INTERACT_COLLIDER = NodePath("Slide/Area3D")
+metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
+
+[node name="Slide" type="Node3D" parent="RigidBody3D/Model/Gun_Part_Slide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.65661e-09)
+
+[node name="Safety" type="MeshInstance3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
+mesh = ExtResource("11_ry1el")
+skeleton = NodePath("../../../../..")
+
+[node name="Slide" type="MeshInstance3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
+mesh = ExtResource("12_2isxn")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_tl72j")
+surface_material_override/1 = SubResource("ShaderMaterial_1g8f6")
+surface_material_override/2 = SubResource("ShaderMaterial_g7ykr")
+script = ExtResource("4_jmqr6")
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide/Area3D"]
+shape = SubResource("ConvexPolygonShape3D_f5ljc")
+
+[node name="Round_Anchor" type="Node3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0262758, -0.0228401)
 
 [node name="Inspect_Pos" type="Node3D" parent="."]
 transform = Transform3D(0.25, 0.258819, 0.933013, -0.314705, 0.933013, -0.174494, -0.915675, -0.25, 0.314705, -0.0337516, 0.149168, 0.164005)

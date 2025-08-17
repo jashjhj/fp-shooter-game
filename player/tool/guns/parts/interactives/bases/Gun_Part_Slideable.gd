@@ -1,5 +1,6 @@
 class_name Gun_Part_Slideable extends Gun_Part_Interactive
 
+@export var MODEL:Node3D;
 
 @export var SLIDE_VECTOR:Vector3 = Vector3(0, 0, 1);
 @export var SLIDE_DISTANCE:float = 0.2;
@@ -26,7 +27,6 @@ enum TRIGGERS_DIRECTION_ENUM {
 #TODO add is_seated code to tell if can fire.
 
 var model_goal:Node3D = Node3D.new()
-var origin:Node3D = Node3D.new()
 
 @onready var slide_pos:float = SLIDE_START_POS
 @onready var visual_slide_pos:float = SLIDE_START_POS;
@@ -41,10 +41,10 @@ func _ready():
 	super._ready();
 	
 	await get_parent().ready
-	get_parent().add_child(origin)
-	origin.transform = transform
+	
 	add_child(model_goal)
 	assert(len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DISTANCE) and len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DIRECTION), "Triggers Arrays must be matching lengths")
+	assert(MODEL != null, "No model Set for slideable.")
 
 
 var prev_mouse_delta:float;
@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	prev_velocity = velocity
 	
 	if(is_focused):
-		var mouse_goal_delta_from_start = (get_mouse_plane_position()-origin.global_position - origin.global_basis*mouse_focus_pos_relative).dot(origin.global_basis*SLIDE_VECTOR)
+		var mouse_goal_delta_from_start = (get_mouse_plane_position()-global_position - global_basis*mouse_focus_pos_relative).dot(global_basis*SLIDE_VECTOR)
 		var mouse_goal_delta = mouse_goal_delta_from_start - prev_mouse_delta
 		slide_pos += mouse_goal_delta# +start_focus_slide_pos 
 		
@@ -77,14 +77,13 @@ func _physics_process(delta: float) -> void:
 	slide_pos = max(0, slide_pos)
 	slide_pos = min(SLIDE_DISTANCE, slide_pos)
 	
-	model_goal.global_position = origin.global_position + slide_pos*(origin.global_basis*SLIDE_VECTOR)
+	model_goal.global_position = global_position + slide_pos*(global_basis*SLIDE_VECTOR)
 	
-	if(is_focused):
-		global_position = global_position.lerp(model_goal.global_position, LERP_RATE)
-		visual_slide_pos = lerp(visual_slide_pos, slide_pos, LERP_RATE)
-	else:
-		global_position = model_goal.global_position
-		visual_slide_pos = slide_pos
+	#Debug.point(model_goal.global_position)
+	
+	MODEL.global_position = model_goal.global_position
+	visual_slide_pos = slide_pos
+	
 	
 	
 	
@@ -108,7 +107,7 @@ func _physics_process(delta: float) -> void:
 func enable_focus():
 	INTERACT_PLANE.global_position = mouse_focus_pos
 	
-	var plane_normal = (global_basis*SLIDE_VECTOR).cross(get_viewport().get_camera_3d().global_position - INTERACT_PLANE.global_position).cross(global_basis*SLIDE_VECTOR)
+	var plane_normal = (global_basis*SLIDE_VECTOR).cross(get_viewport().get_camera_3d().global_position - global_position).cross(global_basis*SLIDE_VECTOR)
 	set_interact_plane_normal(global_basis.inverse()*plane_normal)
 
 	start_focus_slide_pos = slide_pos
