@@ -1,0 +1,73 @@
+class_name Gun extends Player_Tool
+
+
+
+@export var trigger_functions:Array[Gun_Part_Listener];
+
+##Set to the default bullet scene
+#var bullet:PackedScene = load("res://gameobjects/bullets/bullet.tscn");
+
+
+
+
+var default_inspect_transform:Transform3D;
+
+func _ready() -> void:
+	super._ready();
+	
+	default_inspect_transform = MODEL_POSITION_INSPECT.transform
+	
+	
+	for child in get_all_children(self):
+		if child is Gun_Part:
+			child.PARENT_GUN = self;
+
+
+
+
+func _process(_delta:float):
+	super._process(_delta)
+
+
+
+
+
+
+
+
+
+func inspect_set(value):
+	super.inspect_set(value)
+	
+	if(inspect):
+		for child in get_all_children(self):
+			if child is Gun_Part_Interactive:
+				child.is_interactive = true;
+		
+		#MODEL_POSITION_INSPECT.transform = default_inspect_transform;
+	
+	else: # interacting disabled.
+		for child in get_all_children(self):
+			if child is Gun_Part_Interactive:
+				child.is_interactive = false;
+
+
+func interact_0_set(value):
+	super(value)
+	
+	if(interact_0):
+		for listener in trigger_functions:
+			listener.trigger.emit();
+	
+
+
+##Recursive get_children
+func get_all_children(node) -> Array:
+	var nodes : Array = []
+	for N in node.get_children():
+		if N.get_child_count() > 0:
+			nodes.append(N)
+			nodes.append_array(get_all_children(N))
+		else:
+			nodes.append(N)
+	return nodes

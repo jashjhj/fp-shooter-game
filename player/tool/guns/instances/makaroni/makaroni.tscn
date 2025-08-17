@@ -1,0 +1,264 @@
+[gd_scene load_steps=33 format=3 uid="uid://2b1sa45f0frf"]
+
+[ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
+[ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
+[ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="2_mmcih"]
+[ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="3_cawr4"]
+[ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="4_jmqr6"]
+[ext_resource type="ArrayMesh" uid="uid://ovqp64fh164w" path="res://player/tool/guns/instances/makaroni/assets/bullet_bullet.obj" id="5_f6c0u"]
+[ext_resource type="ArrayMesh" uid="uid://ps2tjbh6cr8" path="res://player/tool/guns/instances/makaroni/assets/bullet_casing.obj" id="6_8j6fe"]
+[ext_resource type="ArrayMesh" uid="uid://bp37x28x3g45r" path="res://player/tool/guns/instances/makaroni/assets/hammer.obj" id="7_dsk1g"]
+[ext_resource type="ArrayMesh" uid="uid://33jb7iows8gm" path="res://player/tool/guns/instances/makaroni/assets/mag.obj" id="8_f5ljc"]
+[ext_resource type="ArrayMesh" uid="uid://ca124rfhr43w0" path="res://player/tool/guns/instances/makaroni/assets/mag_release.obj" id="9_3hwry"]
+[ext_resource type="ArrayMesh" uid="uid://bx61j6pm5d0v5" path="res://player/tool/guns/instances/makaroni/assets/mag_spring.obj" id="10_18edu"]
+[ext_resource type="ArrayMesh" uid="uid://ivw6ivaqvmb4" path="res://player/tool/guns/instances/makaroni/assets/safety.obj" id="11_ry1el"]
+[ext_resource type="ArrayMesh" uid="uid://dy4cxg2u7elp3" path="res://player/tool/guns/instances/makaroni/assets/slide.obj" id="12_2isxn"]
+[ext_resource type="ArrayMesh" uid="uid://d0uicko3dtpcy" path="res://player/tool/guns/instances/makaroni/assets/trigger.obj" id="13_vi08r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmcih"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cawr4"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_mmcih")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmqr6"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6c0u"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_jmqr6")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8j6fe"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsk1g"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_8j6fe")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5ljc"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hwry"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_f5ljc")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18edu"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ry1el"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_18edu")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2isxn"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vi08r"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_2isxn")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phrex"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtwg6"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_phrex")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7evtq"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nf3x5"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_7evtq")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4tnm"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqy73"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_o4tnm")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[node name="Makaroni" type="Node3D" node_paths=PackedStringArray("MODEL", "CAM_FOCUS_POS")]
+script = ExtResource("1_mmcih")
+MODEL = NodePath("RigidBody3D/Model")
+CAM_FOCUS_POS = NodePath("RigidBody3D/Model/Cam_Aim_Pos")
+
+[node name="Anchor" type="RigidBody3D" parent="."]
+mass = 0.1
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Anchor"]
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D")
+linear_limit_x/enabled = false
+linear_limit_y/enabled = false
+linear_limit_z/enabled = false
+linear_spring_x/enabled = true
+linear_spring_x/stiffness = 25.0
+linear_spring_x/damping = 0.6
+linear_spring_y/enabled = true
+linear_spring_y/stiffness = 25.0
+linear_spring_y/damping = 0.6
+linear_spring_z/enabled = true
+linear_spring_z/stiffness = 25.0
+linear_spring_z/damping = 0.6
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+angular_spring_x/enabled = true
+angular_spring_x/stiffness = 8.0
+angular_spring_x/damping = 0.6
+angular_spring_y/enabled = true
+angular_spring_y/stiffness = 8.0
+angular_spring_y/damping = 0.6
+angular_spring_z/enabled = true
+angular_spring_z/stiffness = 8.0
+angular_spring_z/damping = 0.6
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+gravity_scale = 0.0
+
+[node name="Model" type="Node3D" parent="RigidBody3D"]
+
+[node name="Body" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("1_ilmi0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_cawr4")
+surface_material_override/1 = SubResource("ShaderMaterial_f6c0u")
+surface_material_override/2 = SubResource("ShaderMaterial_dsk1g")
+surface_material_override/3 = SubResource("ShaderMaterial_3hwry")
+surface_material_override/4 = SubResource("ShaderMaterial_ry1el")
+script = ExtResource("4_jmqr6")
+
+[node name="BulletBullet" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("5_f6c0u")
+skeleton = NodePath("../../..")
+
+[node name="BulletCasing" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("6_8j6fe")
+skeleton = NodePath("../../..")
+
+[node name="Hammer" type="MeshInstance3D" parent="RigidBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0122457, 0.0377613)
+mesh = ExtResource("7_dsk1g")
+skeleton = NodePath("../../..")
+
+[node name="Mag" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("8_f5ljc")
+skeleton = NodePath("../../..")
+
+[node name="MagRelease" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("9_3hwry")
+skeleton = NodePath("../../..")
+
+[node name="MagSpring" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("10_18edu")
+skeleton = NodePath("../../..")
+
+[node name="Safety" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("11_ry1el")
+skeleton = NodePath("../../..")
+
+[node name="Slide" type="MeshInstance3D" parent="RigidBody3D/Model"]
+mesh = ExtResource("12_2isxn")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_vi08r")
+surface_material_override/1 = SubResource("ShaderMaterial_rtwg6")
+surface_material_override/2 = SubResource("ShaderMaterial_nf3x5")
+script = ExtResource("4_jmqr6")
+
+[node name="Trigger" type="MeshInstance3D" parent="RigidBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, 0.997482, -0.0709247, 0, 0.0709247, 0.997482, 0, 0.0058694, -0.0399517)
+mesh = ExtResource("13_vi08r")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xqy73")
+script = ExtResource("4_jmqr6")
+
+[node name="Cam_Aim_Pos" type="Node3D" parent="RigidBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0427964, 0.192895)

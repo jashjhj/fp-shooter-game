@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://x23rop0wi0ll"]
 
-[ext_resource type="Script" uid="uid://b16mx2mgfogl3" path="res://gameobjects/world_interactive/Gibbable.gd" id="1_au1bk"]
+[ext_resource type="Script" path="res://gameobjects/world_interactive/Gibbable.gd" id="1_au1bk"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="1_p0kae"]
 [ext_resource type="ArrayMesh" uid="uid://btf0nccu13lm" path="res://npc/enemy/totembot/assets/Hatch.obj" id="2_3kx6f"]
 [ext_resource type="Script" uid="uid://hhosnxuj45ad" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_Rigidbody.gd" id="3_au1bk"]
@@ -8,10 +8,10 @@
 [ext_resource type="Shader" uid="uid://4lyybqn30elp" path="res://assets/textures/pastels/highlight_shader.gdshader" id="5_1ghko"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="5_1gjxu"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="5_egs7j"]
-[ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="6_3kx6f"]
-[ext_resource type="Script" uid="uid://cijq708jlfumq" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="6_egs7j"]
+[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="6_3kx6f"]
+[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="6_egs7j"]
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="6_x8wh7"]
-[ext_resource type="Script" uid="uid://bcbbkvbeuuxin" path="res://gameobjects/world_interactive/hit_effects/Hit_Reduce_Mass.gd" id="7_ynlx0"]
+[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Reduce_Mass.gd" id="7_ynlx0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ghko"]
 render_priority = 0

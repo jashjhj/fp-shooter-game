@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://cwpc33y2thj7e"]
 
-[ext_resource type="Script" uid="uid://bglstfp5jf4ur" path="res://gameobjects/guns/parts/rounds/Gun_Round.gd" id="1_eo65a"]
+[ext_resource type="Script" uid="uid://bglstfp5jf4ur" path="res://player/tool/guns/parts/rounds/Gun_Round.gd" id="1_eo65a"]
 [ext_resource type="ArrayMesh" uid="uid://b33wk4e78wehj" path="res://assets/models/guns/Welrod_Special/Round.obj" id="2_k42gg"]
-[ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://gameobjects/guns/parts/rounds/Bullet_Source/bullet-source.tscn" id="3_2d7wb"]
+[ext_resource type="PackedScene" uid="uid://bk6fd80nopw" path="res://player/tool/guns/parts/rounds/Bullet_Source/bullet-source.tscn" id="3_2d7wb"]
 [ext_resource type="Script" uid="uid://cuj1evxe65gdy" path="res://gameobjects/bullets/bullet_data.gd" id="4_6bn3m"]
 [ext_resource type="Shader" uid="uid://dwgah8dihkppm" path="res://gameobjects/bullets/trail/bullet_trail_shader.tres" id="5_6bn3m"]
 

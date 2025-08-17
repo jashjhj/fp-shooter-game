@@ -1,16 +1,16 @@
 [gd_scene load_steps=15 format=3 uid="uid://k6g5l4koiagb"]
 
-[ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://gameobjects/guns/gun.gd" id="1_vac1r"]
+[ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_vac1r"]
 [ext_resource type="ArrayMesh" uid="uid://b1glaiv1kc12p" path="res://assets/models/guns/Welrod_Special/Reciever.obj" id="2_d7caa"]
 [ext_resource type="ArrayMesh" uid="uid://elmpags3uasr" path="res://assets/models/guns/Welrod_Special/Bolt.obj" id="3_cc0h1"]
-[ext_resource type="Script" uid="uid://dpp3u5ytyv45w" path="res://gameobjects/guns/parts/elements/Gun_Action.gd" id="5_ibb3d"]
-[ext_resource type="Script" uid="uid://oftnu600v54l" path="res://gameobjects/guns/parts/Gun_Part_Listener.gd" id="5_x4e7n"]
-[ext_resource type="Script" uid="uid://bkfsoqbr3ewi8" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Slideable.gd" id="5_ylrqn"]
-[ext_resource type="PackedScene" uid="uid://7ayolcmhcbpv" path="res://gameobjects/guns/instances/Welrod_Special/Magazine_32rd.tscn" id="6_8xgxp"]
-[ext_resource type="Script" uid="uid://loortei0f5ym" path="res://gameobjects/guns/things/Insertable_Pouch.gd" id="7_bhpic"]
-[ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://gameobjects/guns/parts/interactivity_code/bases/Gun_Part_Insertable_Slot.gd" id="7_jr0kp"]
+[ext_resource type="Script" uid="uid://dpp3u5ytyv45w" path="res://player/tool/guns/parts/elements/Gun_Action.gd" id="5_ibb3d"]
+[ext_resource type="Script" uid="uid://oftnu600v54l" path="res://player/tool/guns/parts/Gun_Part_Listener.gd" id="5_x4e7n"]
+[ext_resource type="Script" uid="uid://bkfsoqbr3ewi8" path="res://player/tool/guns/parts/interactivity_code/bases/Gun_Part_Slideable.gd" id="5_ylrqn"]
+[ext_resource type="PackedScene" uid="uid://7ayolcmhcbpv" path="res://player/tool/guns/instances/Welrod_Special/Magazine_32rd.tscn" id="6_8xgxp"]
+[ext_resource type="Script" uid="uid://loortei0f5ym" path="res://player/tool/guns/things/Insertable_Pouch.gd" id="7_bhpic"]
+[ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://player/tool/guns/parts/interactivity_code/bases/Gun_Part_Insertable_Slot.gd" id="7_jr0kp"]
 [ext_resource type="ArrayMesh" uid="uid://bwtm4vp7jdn8" path="res://assets/models/guns/Welrod_Special/Trigger.obj" id="7_l63kn"]
-[ext_resource type="Script" uid="uid://un4puemevabk" path="res://gameobjects/guns/parts/interactivity_code/action_nodes/trigger/Gun_Action_Slideable_Apply_Velocity.gd" id="8_x4e7n"]
+[ext_resource type="Script" uid="uid://un4puemevabk" path="res://player/tool/guns/parts/interactivity_code/action_nodes/trigger/Gun_Action_Slideable_Apply_Velocity.gd" id="8_x4e7n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ibb3d"]
 height = 0.200195
@@ -22,11 +22,9 @@ size = Vector3(0.043457, 0.0178223, 0.017334)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bhpic"]
 size = Vector3(0.0100098, 0.0564728, 0.109375)
 
-[node name="WelrodSpecial" type="Node3D" node_paths=PackedStringArray("trigger_functions", "GUN_MODEL", "INSPECT_POSITION", "ADS_CAM_POS")]
+[node name="WelrodSpecial" type="Node3D" node_paths=PackedStringArray("trigger_functions", "ADS_CAM_POS")]
 script = ExtResource("1_vac1r")
 trigger_functions = [NodePath("Model/Gun_Action/Gun_Part_Listener")]
-GUN_MODEL = NodePath("Model")
-INSPECT_POSITION = NodePath("Inspect_Pos")
 ADS_CAM_POS = NodePath("Model/ADS_Cam_pos")
 metadata/_custom_type_script = "uid://7yjt2q14eqdj"
 

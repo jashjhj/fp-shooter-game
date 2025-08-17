@@ -43,7 +43,7 @@ var is_focusable:bool = true:
 func _ready():
 	init();
 	if(get_parent() is Gun):
-		if(get_parent().is_inspecting):
+		if(get_parent().inspect):
 			is_interactive = true;
 
 

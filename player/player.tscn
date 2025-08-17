@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=10 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://diui1vqmyxnjp" path="res://gameobjects/guns/instances/Flare_Gun/Flare_Gun.tscn" id="3_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://k6g5l4koiagb" path="res://gameobjects/guns/instances/Welrod_Special/Welrod_Special.tscn" id="4_yw30f"]
+[ext_resource type="PackedScene" uid="uid://2b1sa45f0frf" path="res://player/tool/guns/instances/makaroni/makaroni.tscn" id="2_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://5upxu38ed4sw" path="res://player/elements/leg/player_leg.tscn" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://cl7p8ax1o4fh" path="res://player/elements/leg/bipedal_leg_controller.gd" id="6_g6k8r"]
 
@@ -23,11 +22,11 @@ fractal_octaves = 7
 color_ramp = SubResource("Gradient_g6k8r")
 noise = SubResource("FastNoiseLite_boad6")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("GUN")]
+[node name="Player" type="CharacterBody3D"]
 collision_layer = 16
 collision_mask = 113
 script = ExtResource("1_oul6g")
-GUN = NodePath("Hip/Torso/Head/WelrodSpecial")
+PRIMARY_TOOL = ExtResource("2_qjkh3")
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -55,13 +54,6 @@ collide_with_areas = true
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Hip/Torso/Head/Camera3D"]
 current = true
-
-[node name="FlareGun" parent="Hip/Torso/Head" instance=ExtResource("3_g1dw6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0740882, -0.0829843, -0.171616)
-visible = false
-
-[node name="WelrodSpecial" parent="Hip/Torso/Head" instance=ExtResource("4_yw30f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0886336, -0.210112, -0.298332)
 
 [node name="You DIED" type="TextureRect" parent="Hip/Torso/Head"]
 visible = false
@@ -121,6 +113,12 @@ offset_bottom = 73.0
 grow_horizontal = 2
 text = "HP: 0"
 horizontal_alignment = 1
+
+[node name="Anchor_Hand" type="Node3D" parent="Hip/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0818846, 0.297074, -0.329969)
+
+[node name="Anchor_Pocket" type="Node3D" parent="Hip/Torso"]
+transform = Transform3D(1, 0, 0, 0, 0.144484, 0.989507, 0, -0.989507, 0.144484, 0.0885508, 0.209611, -0.223575)
 
 [node name="PlayerLeg_Left" parent="Hip" instance=ExtResource("5_qjkh3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)

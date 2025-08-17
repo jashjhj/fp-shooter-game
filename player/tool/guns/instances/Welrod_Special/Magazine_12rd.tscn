@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://dearvhy02jr7o"]
 
-[ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://gameobjects/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_k4cmo"]
+[ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://player/tool/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_k4cmo"]
 [ext_resource type="ArrayMesh" uid="uid://bv662ngxvypbh" path="res://assets/models/guns/Welrod_Special/Magazine.obj" id="2_wd8w7"]
 [ext_resource type="ArrayMesh" uid="uid://b33wk4e78wehj" path="res://assets/models/guns/Welrod_Special/Round.obj" id="3_dkgn8"]
 [ext_resource type="ArrayMesh" uid="uid://c8hdndbsrjlm4" path="res://assets/models/guns/Welrod_Special/Magazine_Spring.obj" id="4_45m7n"]
-[ext_resource type="PackedScene" uid="uid://cwpc33y2thj7e" path="res://gameobjects/guns/instances/Welrod_Special/Welrod_Round.tscn" id="5_eslu3"]
+[ext_resource type="PackedScene" uid="uid://cwpc33y2thj7e" path="res://player/tool/guns/instances/Welrod_Special/Welrod_Round.tscn" id="5_eslu3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dmk8"]
 cull_mode = 2

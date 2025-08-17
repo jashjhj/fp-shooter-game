@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bp37x28x3g45r"
+path="res://.godot/imported/hammer.obj-e3d401443b8bd543e6a59a619691b6df.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hammer.obj-e3d401443b8bd543e6a59a619691b6df.mesh"]
+
+source_file="res://player/tool/guns/instances/makaroni/assets/hammer.obj"
+dest_files=["res://.godot/imported/hammer.obj-e3d401443b8bd543e6a59a619691b6df.mesh", "res://.godot/imported/hammer.obj-e3d401443b8bd543e6a59a619691b6df.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
