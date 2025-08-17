@@ -17,6 +17,54 @@
 [ext_resource type="Script" uid="uid://loortei0f5ym" path="res://player/tool/guns/things/Insertable_Pouch.gd" id="19_f5ljc"]
 [ext_resource type="PackedScene" uid="uid://b517ttrlv06s" path="res://player/tool/guns/instances/makaroni/makaroni_8rd.tscn" id="20_3hwry"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmqr6"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6c0u"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_jmqr6")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.812933
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8j6fe"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsk1g"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_8j6fe")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.406925
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5ljc"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hwry"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_f5ljc")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.856688
+shader_parameter/life = 1.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_18edu"]
 render_priority = 0
 shader = ExtResource("2_mmcih")
@@ -30,7 +78,7 @@ next_pass = SubResource("ShaderMaterial_18edu")
 shader = ExtResource("3_cawr4")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.86
+shader_parameter/color_shade = 0.859054
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2isxn"]
@@ -46,55 +94,7 @@ next_pass = SubResource("ShaderMaterial_2isxn")
 shader = ExtResource("3_cawr4")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.86
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_phrex"]
-render_priority = 0
-shader = ExtResource("2_mmcih")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtwg6"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_phrex")
-shader = ExtResource("3_cawr4")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.86
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7evtq"]
-render_priority = 0
-shader = ExtResource("2_mmcih")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nf3x5"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_7evtq")
-shader = ExtResource("3_cawr4")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.86
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4tnm"]
-render_priority = 0
-shader = ExtResource("2_mmcih")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqy73"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_o4tnm")
-shader = ExtResource("3_cawr4")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.86
+shader_parameter/color_shade = 0.469727
 shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m7h8j"]
@@ -186,37 +186,31 @@ linear_limit_x/enabled = false
 linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 linear_spring_x/enabled = true
-linear_spring_x/stiffness = 25.0
-linear_spring_x/damping = 1.0
+linear_spring_x/stiffness = 200.0
+linear_spring_x/damping = 8.0
 linear_spring_y/enabled = true
-linear_spring_y/stiffness = 25.0
-linear_spring_y/damping = 1.0
+linear_spring_y/stiffness = 200.0
+linear_spring_y/damping = 8.0
 linear_spring_z/enabled = true
-linear_spring_z/stiffness = 25.0
-linear_spring_z/damping = 1.0
+linear_spring_z/stiffness = 200.0
+linear_spring_z/damping = 8.0
 angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
 angular_spring_x/enabled = true
-angular_spring_x/stiffness = 8.0
-angular_spring_x/damping = 0.6
+angular_spring_x/stiffness = 64.0
+angular_spring_x/damping = 5.0
 angular_spring_y/enabled = true
-angular_spring_y/stiffness = 8.0
-angular_spring_y/damping = 0.6
+angular_spring_y/stiffness = 64.0
+angular_spring_y/damping = 5.0
 angular_spring_z/enabled = true
-angular_spring_z/stiffness = 8.0
-angular_spring_z/damping = 0.6
-
-[node name="Player_Insertable_Pouch" type="Node3D" parent="Anchor"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.196625, 0.0541983, 0)
-script = ExtResource("19_f5ljc")
-INSERTABLE = ExtResource("20_3hwry")
-metadata/_custom_type_script = "uid://loortei0f5ym"
+angular_spring_z/stiffness = 64.0
+angular_spring_z/damping = 5.0
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 collision_layer = 0
 collision_mask = 0
-mass = 0.1
+mass = 0.8
 gravity_scale = 0.0
 
 [node name="Model" type="Node3D" parent="RigidBody3D"]
@@ -225,11 +219,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0264405, -0.0106144)
 [node name="Body" type="MeshInstance3D" parent="RigidBody3D/Model"]
 mesh = ExtResource("1_ilmi0")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ry1el")
-surface_material_override/1 = SubResource("ShaderMaterial_vi08r")
-surface_material_override/2 = SubResource("ShaderMaterial_rtwg6")
-surface_material_override/3 = SubResource("ShaderMaterial_nf3x5")
-surface_material_override/4 = SubResource("ShaderMaterial_xqy73")
+surface_material_override/0 = SubResource("ShaderMaterial_f6c0u")
+surface_material_override/1 = SubResource("ShaderMaterial_dsk1g")
+surface_material_override/2 = SubResource("ShaderMaterial_3hwry")
+surface_material_override/3 = SubResource("ShaderMaterial_ry1el")
+surface_material_override/4 = SubResource("ShaderMaterial_vi08r")
 script = ExtResource("4_jmqr6")
 
 [node name="Hammer" type="MeshInstance3D" parent="RigidBody3D/Model"]
@@ -272,22 +266,22 @@ script = ExtResource("16_f6c0u")
 metadata/_custom_type_script = "uid://1g57nvm0ti4l"
 
 [node name="Gun_Part_Insertable_Slot" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("INSERTION_ENTRY_AREA")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.090634, 0.012303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.090634, 0.012303)
 script = ExtResource("18_8j6fe")
 INSERTION_LENGTH = 0.11
 INSERTION_ENTRY_AREA = NodePath("Area3D")
-INSERTION_VECTOR = Vector3(0.1, 1, 0)
+INSERTION_VECTOR = Vector3(0, 1, -0.1)
 PULL_OBJECT_IN_FACTOR = 0.6
 metadata/_custom_type_script = "uid://dymfggnfgsan6"
 
 [node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Gun_Part_Insertable_Slot"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.0192902, 0.00219793)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0192902, 0.00219793)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Gun_Part_Insertable_Slot/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00244141)
 shape = SubResource("BoxShape3D_f5ljc")
 
-[node name="Gun_Part_Slide" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER")]
+[node name="Gun_Part_Slide" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "TRIGGERS_TRIGGERABLE", "APPLY_FORCES_TO", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 script = ExtResource("16_jmqr6")
 MODEL = NodePath("Slide")
@@ -295,6 +289,9 @@ SLIDE_DISTANCE = 0.036
 TRIGGERS_TRIGGERABLE = [NodePath("../Gun_Action/Eject_Trigger"), NodePath("../Gun_Action/Gather_Trigger")]
 TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
 TRIGGERS_DIRECTION = Array[int]([1, 2])
+SPRING_CONSTANT = 200.0
+SPRING_COMPRESSION = -0.05
+APPLY_FORCES_TO = NodePath("../..")
 BEGIN_INTERACT_COLLIDER = NodePath("Slide/Area3D")
 metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 
@@ -323,6 +320,12 @@ shape = SubResource("ConvexPolygonShape3D_f5ljc")
 
 [node name="Round_Anchor" type="Node3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0262758, -0.0228401)
+
+[node name="Player_Insertable_Pouch" type="Node3D" parent="RigidBody3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.196625, 0.0541983, 0)
+script = ExtResource("19_f5ljc")
+INSERTABLE = ExtResource("20_3hwry")
+metadata/_custom_type_script = "uid://loortei0f5ym"
 
 [node name="Inspect_Pos" type="Node3D" parent="."]
 transform = Transform3D(0.25, 0.258819, 0.933013, -0.314705, 0.933013, -0.174494, -0.915675, -0.25, 0.314705, -0.0337516, 0.149168, 0.164005)

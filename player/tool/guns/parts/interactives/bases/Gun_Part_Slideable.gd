@@ -22,7 +22,11 @@ enum TRIGGERS_DIRECTION_ENUM {
 
 
 @export_group("Extras")
-@export var SPRING:float = 0.0;
+@export var SPRING_CONSTANT:float = 0.0;
+##Simulated compressed length, added to extension. Use negative for negative forces.
+@export var SPRING_COMPRESSION:float = 0.05;
+@export var APPLY_FORCES_TO:RigidBody3D;
+@export var SIMULATED_MASS:float = 0.2;
 
 #TODO add is_seated code to tell if can fire.
 
@@ -59,6 +63,7 @@ func _process(delta:float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	prev_slide_pos = slide_pos;
 	prev_velocity = velocity
 	
 	if(is_focused):
@@ -85,10 +90,21 @@ func _physics_process(delta: float) -> void:
 	visual_slide_pos = slide_pos
 	
 	
+	#f=ke, (dv) = a*t = f/m * t
+	var spring_force:float = SPRING_CONSTANT*(SPRING_COMPRESSION + slide_pos) / SIMULATED_MASS
+	if(is_focused):
+		velocity = (slide_pos - prev_slide_pos) / delta
+		
+		APPLY_FORCES_TO.apply_force(-spring_force * (global_basis*SLIDE_VECTOR) * 0.1, global_position - APPLY_FORCES_TO.global_position)
+	else:
+		velocity += spring_force*delta;
+		if(APPLY_FORCES_TO != null): # applies DV to object
+			APPLY_FORCES_TO.apply_impulse(-(velocity - prev_velocity) * (global_basis*SLIDE_VECTOR.normalized()), global_position - APPLY_FORCES_TO.global_position)
+			
+	
+	#aif(APPLY_FORCES_TO != null):
 	
 	
-	if(not is_focused):
-		velocity += SPRING*delta;
 	
 	for i in range(0, len(TRIGGERS_TRIGGERABLE)): # check thresholds
 		
@@ -101,7 +117,8 @@ func _physics_process(delta: float) -> void:
 				TRIGGERS_TRIGGERABLE[i].trigger()
 	
 	
-	prev_slide_pos = slide_pos;
+	
+	
 
 #Enable and disable being clicked on
 func enable_focus():

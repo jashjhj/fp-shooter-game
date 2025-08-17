@@ -137,7 +137,7 @@ func _process(delta:float) -> void:
 				is_housed = false;
 				CURRENT_SLOT.insertion = 0;
 				# Move closer to barrel                                     PARRALLEL                                                           PERPENDICULAR
-				var perpendicular_vector:Vector3 = CURRENT_SLOT.global_basis*(CURRENT_SLOT.INSERTION_VECTOR.cross(CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized())
+				var perpendicular_vector:Vector3 = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR).cross(CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized()
 				var perpendicular_distance:float = (insertion_plane_position - CURRENT_SLOT.global_position).dot(perpendicular_vector)
 				model_goal.global_position = CURRENT_SLOT.global_position + CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR*insertion + CURRENT_SLOT.PULL_OBJECT_IN_FACTOR*500*(insertion*insertion)*perpendicular_vector*perpendicular_distance;
 			
@@ -149,7 +149,7 @@ func _process(delta:float) -> void:
 				new_basis.y = -new_basis.y
 			new_basis.z = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized()
 			new_basis.x = new_basis.y.cross(new_basis.z);
-			model_goal.global_basis = new_basis
+			model_goal.global_basis = CURRENT_SLOT.global_basis#new_basis
 			
 			if(!is_housed): # if just come unhoused
 				var insertable_searcher:RayCast3D = get_viewport().get_camera_3d().get_ray_from_camera_through(insertable_position.global_position, 4, INSERTION_AREA_LAYER);
