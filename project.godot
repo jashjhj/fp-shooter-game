@@ -142,7 +142,6 @@ jolt_physics_3d/simulation/baumgarte_stabilization_factor=0.2
 jolt_physics_3d/simulation/continuous_cd_movement_threshold=0.3
 jolt_physics_3d/simulation/continuous_cd_max_penetration=0.2
 3d/solver/solver_iterations=20
-common/physics_interpolation=true
 
 [rendering]
 

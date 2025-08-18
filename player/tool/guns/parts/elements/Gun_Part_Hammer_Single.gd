@@ -8,15 +8,33 @@ class_name Gun_Part_DAHammer extends Tool_Part_Rotateable
 @export_group("Settings")
 ##Cocked angle. strikes at angle == 0
 @export_range(0, 180, 1.0, "radians_as_degrees") var COCKED_ANGLE = PI/4;
+@export_range(0, 180, 1.0, "radians_as_degrees") var TRIGGER_ANGLE = 0;
 
 
 ##Rads^-1. Minimum velocity to strike, and trigger.
-@export var VELOCITY_THRESHOLD:float = 0.4
+@export var VELOCITY_THRESHOLD:float = 0.04
 ## IF TRUE, cannot be manipulated past cock unless triggered to release.
 @export var LOCK_IN_COCK:bool = false;
 
+var is_cock_limit_set:bool = false:
+	set(v):
+		if(v != is_cock_limit_set): # applies / removes limit
+			is_cock_limit_set = v;
+			if(is_cock_limit_set):
+				add_min_limit(COCKED_ANGLE)
+			else:
+				remove_min_limit(COCKED_ANGLE)
 
-var is_cocked:bool = false;
+#Is it behind the cocking point
+var is_cocked:bool = false:
+	set(v):
+		is_cocked = v
+		if(is_cocked and !is_cock_limit_set):
+			if(!is_focused or LOCK_IN_COCK):
+				is_cock_limit_set = true
+		
+		if(!is_cocked and is_cock_limit_set):
+			is_cock_limit_set = false
 
 ##Ready
 func _ready():
@@ -26,28 +44,30 @@ func _ready():
 
 func release():
 	if(is_cocked):
-		functional_min = MIN_ANGLE
-		is_cocked = false;
+		is_cock_limit_set = false;
 	
 
 func enable_focus():
 	super.enable_focus()
-	if(!LOCK_IN_COCK): # limit @ cock when held
-		functional_min = MIN_ANGLE
+	if(!LOCK_IN_COCK):
+		is_cock_limit_set = false
 
 func disable_focus():
 	super.disable_focus()
-	if(is_cocked):
-		functional_min = COCKED_ANGLE
+	if(!LOCK_IN_COCK and is_cocked): # set on mosue focus release if its cocked but not locked YET
+		is_cock_limit_set = true
 
 
-func hit_min_angle(speed:float) -> void:
-	if DISTANCE == MIN_ANGLE and abs(speed) > VELOCITY_THRESHOLD:
+func hit_min_limit() -> void:
+	print(velocity)
+	super.hit_min_limit()
+	if DISTANCE <= TRIGGER_ANGLE and abs(velocity) > VELOCITY_THRESHOLD:
 		#print(current_angle)
 		if(TRIGGER != null):
 			TRIGGER.trigger()
-		else:
+		else: # if no trigger set, just say BANG to communicate while debugging.
 			print("bang!")
+
 func hit_max_angle(_speed:float) -> void:
 	pass
 
@@ -59,12 +79,9 @@ func _process(delta:float) -> void:
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
 	
-	if(is_focused):
-		if(DISTANCE >= COCKED_ANGLE):
-			is_cocked = true;
-			if(LOCK_IN_COCK):
-				functional_min = COCKED_ANGLE
-		else:
-			is_cocked = false;
+	if(DISTANCE >= COCKED_ANGLE):
+		is_cocked = true;
+	else:
+		is_cocked = false;
 		#if(LOCK_IN_COCK):
 		#	MIN_ANGLE = COCKED_ANGLE;

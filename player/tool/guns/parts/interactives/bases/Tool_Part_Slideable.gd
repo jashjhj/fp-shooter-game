@@ -12,12 +12,9 @@ class_name Tool_Part_Slideable extends Tool_Part_Interactive_1D
 @export var LERP_RATE:float = 0.3;
 
 
-@export_group("Extras")
-@export var SPRING_CONSTANT:float = 0.0;
-##Simulated compressed length, added to extension. Use negative for negative forces.
-@export var SPRING_COMPRESSION:float = 0.05;
-@export var APPLY_FORCES_TO:RigidBody3D;
-@export var SIMULATED_MASS:float = 0.2;
+#@export_group("Extras")
+#@export var APPLY_FORCES_TO:RigidBody3D;
+#@export var SIMULATED_MASS:float = 0.2;
 
 #TODO add is_seated code to tell if can fire.
 
@@ -27,7 +24,6 @@ var model_goal:Node3D = Node3D.new()
 var start_focus_slide_pos:float;
 
 
-var velocity:float = 0.0;
 
 ##Ready
 func _ready():
@@ -49,6 +45,7 @@ func _process(delta:float) -> void:
 	
 	
 
+var stored_velocity:float = 0.0;
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -79,15 +76,15 @@ func _physics_process(delta: float) -> void:
 	
 	
 	#f=ke, (dv) = a*t = f/m * t
-	var spring_force:float = SPRING_CONSTANT*(SPRING_COMPRESSION + DISTANCE) / SIMULATED_MASS
+	#var spring_force:float = SPRING_CONSTANT*(SPRING_COMPRESSION + DISTANCE) / SIMULATED_MASS
 	if(is_focused):
-		velocity = (DISTANCE - prev_distance) / delta
-		
-		APPLY_FORCES_TO.apply_force(-spring_force * (global_basis*SLIDE_VECTOR) * 0.1, global_position - APPLY_FORCES_TO.global_position)
+		stored_velocity = lerp(stored_velocity, (DISTANCE - prev_distance) / delta, delta / 0.03) # over 0.5s
+		velocity = 0;
+		#APPLY_FORCES_TO.apply_force(-spring_force * (global_basis*SLIDE_VECTOR) * 0.1, global_position - APPLY_FORCES_TO.global_position)
 	else:
-		velocity += spring_force*delta;
-		if(APPLY_FORCES_TO != null): # applies DV to object
-			APPLY_FORCES_TO.apply_impulse(-(velocity - prev_velocity) * (global_basis*SLIDE_VECTOR.normalized()), global_position - APPLY_FORCES_TO.global_position)
+		pass
+		#if(APPLY_FORCES_TO != null): # applies DV to object
+		#	APPLY_FORCES_TO.apply_impulse(-(velocity - prev_velocity) * (global_basis*SLIDE_VECTOR.normalized()), global_position - APPLY_FORCES_TO.global_position)
 			
 	
 	#aif(APPLY_FORCES_TO != null):
@@ -107,4 +104,5 @@ func enable_focus():
 	prev_mouse_delta = 0;
 
 func disable_focus():
-	pass
+	super.disable_focus()
+	#velocity = stored_velocity * 0.1
