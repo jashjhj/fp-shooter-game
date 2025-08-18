@@ -48,32 +48,31 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta);
-	optional_extras()
 
 
 ## OPTIONAL EXTRAS
 
-@export_group("Optional Extras")
-@export var IMPOSED_LIMITS_ROTATEABLES:Array[Gun_Action_Rotateable_Impose_Limit];
-@export var WHEN_WITHIN_LIMITS: Array[Vector2];
-
-
-var are_limits_active := true;
-func optional_extras():
-	if(are_limits_active):
-		var i = 0;
-		for limits_set in WHEN_WITHIN_LIMITS:
-			if(len(IMPOSED_LIMITS_ROTATEABLES) <= i):
-				push_warning("Limits set, but no correlating limits object")
-				are_limits_active = false
-				return
-			elif(IMPOSED_LIMITS_ROTATEABLES[i] == null):
-				push_warning("Limits set, but no correlating limits object")
-				are_limits_active = false
-				return
-			else:
-				if insertion > limits_set.x and insertion < limits_set.y:
-					IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = true;
-				else:
-					IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = false;
-			i += 1;
+#@export_group("Optional Extras")
+#@export var IMPOSED_LIMITS_ROTATEABLES:Array[Gun_Action_Rotateable_Impose_Limit];
+#@export var WHEN_WITHIN_LIMITS: Array[Vector2];
+#
+#
+#var are_limits_active := true;
+#func optional_extras():
+	#if(are_limits_active):
+		#var i = 0;
+		#for limits_set in WHEN_WITHIN_LIMITS:
+			#if(len(IMPOSED_LIMITS_ROTATEABLES) <= i):
+				#push_warning("Limits set, but no correlating limits object")
+				#are_limits_active = false
+				#return
+			#elif(IMPOSED_LIMITS_ROTATEABLES[i] == null):
+				#push_warning("Limits set, but no correlating limits object")
+				#are_limits_active = false
+				#return
+			#else:
+				#if insertion > limits_set.x and insertion < limits_set.y:
+					#IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = true;
+				#else:
+					#IMPOSED_LIMITS_ROTATEABLES[i].ACTIVE = false;
+			#i += 1;

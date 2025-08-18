@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://loortei0f5ym" path="res://player/tool/guns/things/Insertable_Pouch.gd" id="7_bhpic"]
 [ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Insertable_Slot.gd" id="7_jr0kp"]
 [ext_resource type="ArrayMesh" uid="uid://bwtm4vp7jdn8" path="res://assets/models/guns/Welrod_Special/Trigger.obj" id="7_l63kn"]
-[ext_resource type="Script" uid="uid://un4puemevabk" path="res://player/tool/guns/parts/interactives/action_nodes/trigger/Gun_Action_Slideable_Apply_Velocity.gd" id="8_x4e7n"]
+[ext_resource type="Script" uid="uid://un4puemevabk" path="res://player/tool/guns/parts/interactives/action_nodes/trigger/Trig_Apply_Velocity.gd" id="8_x4e7n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ibb3d"]
 height = 0.200195

@@ -18,7 +18,7 @@ class_name Gun_Action extends Tool_Part
 @export var EJECTION_SPEED_MULTIPLIER = 1.0;
 
 @export_group("Extras")
-@export var TRIGGER_ON_FIRE:Array[Action_Node];
+@export var TRIGGER_ON_FIRE:Array[Triggerable];
 
 
 
@@ -103,7 +103,8 @@ func eject() -> void:
 func fire() -> void:
 	#If harbouring a round, tis live, and seated
 	if(current_round != null and current_round.is_live and abs(ACTION_SLIDEABLE_LINK.DISTANCE) < 0.05):
-		current_round.fire.emit()
+		current_round.trigger()
 		
 		for trigger in TRIGGER_ON_FIRE:
-			trigger.trigger.emit();
+			
+			trigger.trigger()
