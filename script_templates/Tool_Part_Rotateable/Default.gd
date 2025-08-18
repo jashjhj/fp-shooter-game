@@ -1,4 +1,4 @@
-extends Gun_Part_Rotateable
+extends Tool_Part_Rotateable
 
 
 

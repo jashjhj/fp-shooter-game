@@ -42,7 +42,7 @@ func disable_focus():
 
 
 func hit_min_angle(speed:float) -> void:
-	if current_angle == MIN_ANGLE and abs(speed) > VELOCITY_THRESHOLD:
+	if DISTANCE == MIN_ANGLE and abs(speed) > VELOCITY_THRESHOLD:
 		#print(current_angle)
 		if(TRIGGER != null):
 			TRIGGER.trigger()
@@ -60,7 +60,7 @@ func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
 	
 	if(is_focused):
-		if(current_angle >= COCKED_ANGLE):
+		if(DISTANCE >= COCKED_ANGLE):
 			is_cocked = true;
 			if(LOCK_IN_COCK):
 				functional_min = COCKED_ANGLE

@@ -1,4 +1,4 @@
-class_name Tool_Part_Slideable extends Tool_Part_Interactive
+class_name Tool_Part_Slideable extends Tool_Part_Interactive_1D
 
 @export var MODEL:Node3D;
 
@@ -7,16 +7,7 @@ class_name Tool_Part_Slideable extends Tool_Part_Interactive
 @export var SLIDE_START_POS:float = 0;
 
 
-@export_group("Triggers", "TRIGGERS_")
-enum TRIGGERS_DIRECTION_ENUM {
-	FORWARDS = 1,
-	BACKWARDS = 2,
-	BOTH = 3
-}
-@export var TRIGGERS_TRIGGERABLE:Array[Triggerable]
-@export var TRIGGERS_DISTANCE:Array[float]
-@export var TRIGGERS_DIRECTION:Array[TRIGGERS_DIRECTION_ENUM]
-#@export_enum("Forwards", "Backwards", "Both") var EJECT_WHEN_DIR:int = 1;
+
 
 @export var LERP_RATE:float = 0.3;
 
@@ -32,8 +23,7 @@ enum TRIGGERS_DIRECTION_ENUM {
 
 var model_goal:Node3D = Node3D.new()
 
-@onready var slide_pos:float = SLIDE_START_POS
-@onready var visual_slide_pos:float = SLIDE_START_POS;
+#@onready var visual_slide_pos:float = SLIDE_START_POS;
 var start_focus_slide_pos:float;
 
 
@@ -52,7 +42,6 @@ func _ready():
 
 
 var prev_mouse_delta:float;
-var prev_slide_pos:float = 0;
 var prev_velocity:float = 0;
 func _process(delta:float) -> void:
 	super._process(delta);
@@ -62,38 +51,37 @@ func _process(delta:float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 	
-	prev_slide_pos = slide_pos;
 	prev_velocity = velocity
 	
 	if(is_focused):
 		var mouse_goal_delta_from_start = (get_mouse_plane_position()-global_position - global_basis*mouse_focus_pos_relative).dot(global_basis*SLIDE_VECTOR)
 		var mouse_goal_delta = mouse_goal_delta_from_start - prev_mouse_delta
-		slide_pos += mouse_goal_delta# +start_focus_slide_pos 
+		DISTANCE += mouse_goal_delta# +start_focus_slide_pos 
 		
-		velocity = (slide_pos - prev_slide_pos)/delta
+		velocity = (DISTANCE - prev_distance)/delta
 		
 		prev_mouse_delta = mouse_goal_delta_from_start
 	
 	else:#not focused
-		slide_pos += velocity*delta;
+		DISTANCE += velocity*delta;
 	
-	if(slide_pos < 0 or slide_pos > SLIDE_DISTANCE): velocity = 0;
-	slide_pos = max(0, slide_pos)
-	slide_pos = min(SLIDE_DISTANCE, slide_pos)
+	if(DISTANCE < 0 or DISTANCE > SLIDE_DISTANCE): velocity = 0;
+	DISTANCE = max(0, DISTANCE)
+	DISTANCE = min(SLIDE_DISTANCE, DISTANCE)
 	
-	model_goal.global_position = global_position + slide_pos*(global_basis*SLIDE_VECTOR)
+	model_goal.global_position = global_position + DISTANCE*(global_basis*SLIDE_VECTOR)
 	
 	#Debug.point(model_goal.global_position)
 	
 	MODEL.global_position = model_goal.global_position
-	visual_slide_pos = slide_pos
 	
 	
 	#f=ke, (dv) = a*t = f/m * t
-	var spring_force:float = SPRING_CONSTANT*(SPRING_COMPRESSION + slide_pos) / SIMULATED_MASS
+	var spring_force:float = SPRING_CONSTANT*(SPRING_COMPRESSION + DISTANCE) / SIMULATED_MASS
 	if(is_focused):
-		velocity = (slide_pos - prev_slide_pos) / delta
+		velocity = (DISTANCE - prev_distance) / delta
 		
 		APPLY_FORCES_TO.apply_force(-spring_force * (global_basis*SLIDE_VECTOR) * 0.1, global_position - APPLY_FORCES_TO.global_position)
 	else:
@@ -106,18 +94,6 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	for i in range(0, len(TRIGGERS_TRIGGERABLE)): # check thresholds
-		
-		if(TRIGGERS_DIRECTION[i] == 1 or TRIGGERS_DIRECTION[i] == 3): # Forwards
-			if(slide_pos >= TRIGGERS_DISTANCE[i] and prev_slide_pos < TRIGGERS_DISTANCE[i]):
-				TRIGGERS_TRIGGERABLE[i].trigger()
-		
-		if(TRIGGERS_DIRECTION[i] == 2 or TRIGGERS_DIRECTION[i] == 3): # Backwards
-			if(slide_pos <= TRIGGERS_DISTANCE[i] and prev_slide_pos > TRIGGERS_DISTANCE[i]):
-				TRIGGERS_TRIGGERABLE[i].trigger()
-	
-	
-	
 	
 
 #Enable and disable being clicked on
@@ -127,7 +103,7 @@ func enable_focus():
 	var plane_normal = (global_basis*SLIDE_VECTOR).cross(get_viewport().get_camera_3d().global_position - global_position).cross(global_basis*SLIDE_VECTOR)
 	set_interact_plane_normal(global_basis.inverse()*plane_normal)
 
-	start_focus_slide_pos = slide_pos
+	start_focus_slide_pos = DISTANCE
 	prev_mouse_delta = 0;
 
 func disable_focus():

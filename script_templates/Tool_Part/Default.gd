@@ -1,4 +1,4 @@
-extends Gun_Part
+extends Tool_Part
 
 
 @export var LISTENER:Gun_Part_Listener;

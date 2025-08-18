@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	var slide_pos:float = ACTION_SLIDEABLE_LINK.slide_pos # Ejection/Feeding
+	var slide_pos:float = ACTION_SLIDEABLE_LINK.DISTANCE # Ejection/Feeding
 	
 	
 	#action_node.global_position = global_position + ACTION_SLIDEABLE_LINK.visual_slide_pos*(ACTION_SLIDEABLE_LINK.global_basis*ACTION_SLIDEABLE_LINK.SLIDE_VECTOR)

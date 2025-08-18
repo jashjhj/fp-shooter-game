@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://chpycq5ayxcov"]
+
+[ext_resource type="Script" uid="uid://ml4l6f77j40" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Interactive.gd" id="1_jurb7"]
+
+[node name="ToolPartInteract1d" type="Node3D"]
+script = ExtResource("1_jurb7")
+metadata/_custom_type_script = "uid://ml4l6f77j40"

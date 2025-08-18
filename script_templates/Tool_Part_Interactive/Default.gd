@@ -1,4 +1,4 @@
-extends Gun_Part_Interactive
+extends Tool_Part_Interactive
 
 ##Ready
 func _ready():

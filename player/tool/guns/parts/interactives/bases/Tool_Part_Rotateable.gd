@@ -1,4 +1,4 @@
-class_name Tool_Part_Rotateable extends Tool_Part_Interactive
+class_name Tool_Part_Rotateable extends Tool_Part_Interactive_1D
 
 
 @export var ROTATION_AXIS:Vector3 = Vector3.RIGHT;
@@ -44,7 +44,7 @@ func _process(delta:float)->void:
 		angle_change_goal += angle_change_delta
 		angle_goal += angle_change_delta
 		
-		mouse_torque_radm = (angle_change_goal + start_focus_angle - current_angle) * min(next_focus_mouse_pos.length(), MAX_MOUSE_TORQUE_DIST);
+		mouse_torque_radm = (angle_change_goal + start_focus_angle - DISTANCE) * min(next_focus_mouse_pos.length(), MAX_MOUSE_TORQUE_DIST);
 		#print(torque_radm)
 	
 	_process2()
@@ -58,8 +58,8 @@ func enable_focus():
 	start_focus_mouse_pos = get_mouse_plane_position() - global_position;
 	previous_focus_mouse_pos = start_focus_mouse_pos
 	angle_change_goal = 0.0;
-	start_focus_angle = current_angle;
-	angle_goal = current_angle;
+	start_focus_angle = DISTANCE;
+	angle_goal = DISTANCE;
 
 func disable_focus():
 	angle_change_goal = 0.0;
@@ -74,9 +74,6 @@ func disable_focus():
 @export_range(-360, 360, 1.0, "radians_as_degrees") var MIN_ANGLE = 0.0;
 @export_range(-360, 360, 1.0, "radians_as_degrees") var MAX_ANGLE = 2*PI/3;
 
-##Starting angle
-@export var current_angle:float = 0;
-var prev_angle:float = current_angle;
 
 @export_group("Mechanism")
 ##Spring force, arbitrary units. Constant.
@@ -113,37 +110,37 @@ func _ready2():
 func _process2():
 	if(MODEL != null):
 		MODEL.transform.basis = Basis.IDENTITY
-		MODEL.rotate_object_local(ROTATION_AXIS, current_angle)
+		MODEL.rotate_object_local(ROTATION_AXIS, DISTANCE)
 	
 	
 
 
 var forces:float = 0; # Outside of loop so can be altered by inherited functions
 func _physics_process(delta:float) -> void:
-	prev_angle = current_angle
+	super._physics_process(delta)
 	if(is_focused): #Manual controls
 		current_angular_velocity = 0; # make it grabbed
 		#Glorified lerp, following curve to add resistance
-		var follow_delta = (angle_goal - current_angle) * min(FOCUS_RESISTANCE_CURVE.sample(current_angle/functional_max), 0.8)
-		current_angle += follow_delta
+		var follow_delta = (angle_goal - DISTANCE) * min(FOCUS_RESISTANCE_CURVE.sample(DISTANCE/functional_max), 0.8)
+		DISTANCE += follow_delta
 		
 		
-		current_angle = max(min(current_angle, functional_max), functional_min);
+		DISTANCE = max(min(DISTANCE, functional_max), functional_min);
 		
 		
 	else:
 		forces = -SPRING_FORCE
-		if(is_affected_by_gravity): forces += GRAVITY_FORCE * cos(acos(global_basis.y.dot(Vector3.UP)) + current_angle); # gravity calculation
+		if(is_affected_by_gravity): forces += GRAVITY_FORCE * cos(acos(global_basis.y.dot(Vector3.UP)) + DISTANCE); # gravity calculation
 		
 		#Initial checks:
-		if(current_angle <= functional_min and current_angular_velocity >= 0): # Previously...
-			current_angle = functional_min
+		if(DISTANCE <= functional_min and current_angular_velocity >= 0): # Previously...
+			DISTANCE = functional_min
 			current_angular_velocity = 0;
 			if(forces > 0): # if forces will push it away ,
 				current_angular_velocity += forces*delta;
 				
-		elif(current_angle >= functional_max and current_angular_velocity <= 0):
-			current_angle = functional_max
+		elif(DISTANCE >= functional_max and current_angular_velocity <= 0):
+			DISTANCE = functional_max
 			current_angular_velocity = 0;
 			if(forces < 0): # if forces will push it away
 				current_angular_velocity += forces*delta;
@@ -151,17 +148,17 @@ func _physics_process(delta:float) -> void:
 			current_angular_velocity += forces*delta;
 		
 		
-		current_angle += current_angular_velocity
+		DISTANCE += current_angular_velocity
 		
-		if(current_angle <= functional_min and current_angular_velocity < 0): # if JUST hit the wall
-			current_angle = functional_min;
+		if(DISTANCE <= functional_min and current_angular_velocity < 0): # if JUST hit the wall
+			DISTANCE = functional_min;
 			
 			hit_min_angle(current_angular_velocity)
 			
 			current_angular_velocity *= -ELASTICITY_TOP;
 		
-		if(current_angle >= functional_max and current_angular_velocity > 0): # if JUST hit the wall
-			current_angle = functional_max;
+		if(DISTANCE >= functional_max and current_angular_velocity > 0): # if JUST hit the wall
+			DISTANCE = functional_max;
 			
 			hit_max_angle(current_angular_velocity)
 			
@@ -176,26 +173,3 @@ func hit_min_angle(_speed:float) -> void:
 ##Function is called when the mechanism hits the {angle==MAX} position
 func hit_max_angle(_speed:float) -> void:
 	pass
-
-
-
-@export_group("Triggers", "TRIGGERS_")
-enum TRIGGERS_DIRECTION_ENUM {
-	FORWARDS = 1,
-	BACKWARDS = 2,
-	BOTH = 3
-}
-@export var TRIGGERS_TRIGGERABLE:Array[Triggerable]
-@export var TRIGGERS_DISTANCE:Array[float]
-@export var TRIGGERS_DIRECTION:Array[TRIGGERS_DIRECTION_ENUM]
-
-func optional_extras():
-	for i in range(0, len(TRIGGERS_TRIGGERABLE)): # check thresholds
-		
-		if(TRIGGERS_DIRECTION[i] == 1 or TRIGGERS_DIRECTION[i] == 3): # Forwards
-			if(current_angle >= TRIGGERS_DISTANCE[i] and prev_angle < TRIGGERS_DISTANCE[i]):
-				TRIGGERS_TRIGGERABLE[i].trigger()
-		
-		if(TRIGGERS_DIRECTION[i] == 2 or TRIGGERS_DIRECTION[i] == 3): # Backwards
-			if(current_angle <= TRIGGERS_DISTANCE[i] and prev_angle > TRIGGERS_DISTANCE[i]):
-				TRIGGERS_TRIGGERABLE[i].trigger()
