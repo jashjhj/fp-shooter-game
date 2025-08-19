@@ -7,7 +7,7 @@ class_name BulletData extends Resource
 
 @export var damage := 10;
 
-@export var base_inaccuracy := 0.05;
+@export var base_inaccuracy := 0.005;
 
 @export var amount:int = 1;
 
