@@ -2,13 +2,14 @@ class_name Player_Insertable_Pouch extends Node3D
 
 @export var INSERTABLE:PackedScene;
 @export var MAX_EXISTING:int = 2;
+@export var RESPAWN_TIME:float = 1.0;
 
 
 var current_instances:int = 0;
 var instances:Array[Tool_Part_Insertable];
 
 func _ready() -> void:
-	pass
+	summon_new_after_delay(0.1)
 
 func _process(_delta: float) -> void:
 	#Logic to decide if to summon a new instance
@@ -19,10 +20,10 @@ func _process(_delta: float) -> void:
 				current_instances -= 1
 			if(i == current_instances-1):
 				if instances[i].has_been_focused == true and current_instances < MAX_EXISTING:
-					summon_new_after_delay(0.3)
+					summon_new_after_delay(RESPAWN_TIME)
 					
 	if(current_instances == 0 and !summoning_in_progress):
-		summon_new_after_delay(0.3)
+		summon_new_after_delay(RESPAWN_TIME)
 
 
 

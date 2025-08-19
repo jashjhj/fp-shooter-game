@@ -184,7 +184,7 @@ shader_parameter/life = 1.0
 [node name="Makaroni" type="Node3D" node_paths=PackedStringArray("trigger_functions_continuous", "STRAP_TO_TORSO", "MODEL", "MODEL_POSITION_INSPECT", "MODEL_POSITION_FOCUS")]
 script = ExtResource("1_mmcih")
 trigger_functions_continuous = [NodePath("Push_Trigger")]
-STRAP_TO_TORSO = [NodePath("Player_Insertable_Pouch"), NodePath("Player_Insertable_Pouch2")]
+STRAP_TO_TORSO = [NodePath("Player_Insertable_Pouch"), NodePath("Player_Insertable_Pouch2"), NodePath("Player_Insertable_Pouch3")]
 MODEL = NodePath("RigidBody3D/Model")
 MODEL_POSITION_INSPECT = NodePath("Inspect_Pos")
 MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
@@ -451,10 +451,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0666408, 0.213207)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0537771, 0.268739, -0.137256)
 script = ExtResource("19_f5ljc")
 INSERTABLE = ExtResource("20_3hwry")
+RESPAWN_TIME = 3.0
 metadata/_custom_type_script = "uid://loortei0f5ym"
 
 [node name="Player_Insertable_Pouch2" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.000184391, 0.268739, -0.137256)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.2687, -0.1373)
 script = ExtResource("19_f5ljc")
 INSERTABLE = ExtResource("20_3hwry")
+RESPAWN_TIME = 3.0
+metadata/_custom_type_script = "uid://loortei0f5ym"
+
+[node name="Player_Insertable_Pouch3" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0538, 0.2687, -0.1373)
+script = ExtResource("19_f5ljc")
+INSERTABLE = ExtResource("20_3hwry")
+RESPAWN_TIME = 3.0
 metadata/_custom_type_script = "uid://loortei0f5ym"
