@@ -14,16 +14,20 @@ var is_inspecting:bool = false:
 			is_inspecting = false;
 			return
 		
+		if(is_inspecting == v): return # if no update
+		
 		is_inspecting = v;
 		
 		if(is_inspecting):
 			is_focussing = false
 			equipped_tool.inspect = true
+			equipped_tool.ANCHOR = CAMERA
 			is_mouse_focused = false;
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			equipped_tool.inspect = false
 			is_mouse_focused = true;
+			equipped_tool.ANCHOR = ANCHOR_HAND # reset to hand
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 var is_focussing:bool = false:
@@ -37,12 +41,13 @@ var is_focussing:bool = false:
 			if(is_focussing):
 				Engine.time_scale = 0.5;
 				if(equipped_tool != null):
-					pass
-					#equipped_tool.reparent(HEAD)
+					equipped_tool.ANCHOR = CAMERA
+					equipped_tool.focus = true
 			else:
 				Engine.time_scale = 1.0;
 				if(equipped_tool != null):
-					pass
+					equipped_tool.ANCHOR = ANCHOR_HAND
+					equipped_tool.focus = false
 					#equipped_tool.reparent(TORSO)
 		
 
@@ -60,6 +65,7 @@ var InspectState:PlayerState = PlayerState.new()
 
 @export_range(0, 180, 0.01, "degrees") var DEFAULT_FOV:float = 70;
 
+@onready var BODY_ORIGIN:Node3D = $Hip
 @onready var HEAD:Node3D = $Hip/Torso/Head
 @onready var TORSO:Node3D = $Hip/Torso
 @onready var CAMERA:Camera3D = $Hip/Torso/Head/Camera3D
@@ -126,10 +132,19 @@ func _ready():
 	
 	assert(PRIMARY_TOOL != null, "No PRIMARY_TOOL set")
 	primary_tool = PRIMARY_TOOL.instantiate()
-	TORSO.add_child(primary_tool)
+	add_child(primary_tool)
+	
+	if(primary_tool is Gun): # straps object to torso if required
+		for c in primary_tool.STRAP_TO_TORSO:
+			
+			var trans:Transform3D = c.transform
+			c.reparent(TORSO)
+			c.transform = trans; # Keep its local transform
+	
 	
 	primary_tool.ANCHOR = ANCHOR_POCKET
 	primary_tool.global_transform = ANCHOR_POCKET.global_transform
+
 
 
 var mouse_input:Vector2;
@@ -176,18 +191,23 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if event.is_action_pressed("inspect"):
 			is_inspecting = !is_inspecting
+			
+		
+		
 	
 	
 	if(event.is_action_pressed("focus")):
 		is_focussing = true
+
 	if(event.is_action_released("focus")):
 		is_focussing = false
 	
-	if(event.is_action_pressed("equip_primary")):
+	if(event.is_action_pressed("equip_primary")): # equip/dequip primary.
 		is_focussing = false
 		if(equipped_tool == null):
 			equipped_tool = primary_tool
 			equipped_tool.ANCHOR = ANCHOR_HAND
+			equipped_tool.reparent(self)
 		else:
 			equipped_tool.ANCHOR = ANCHOR_POCKET
 			equipped_tool.reparent(TORSO)
@@ -227,23 +247,23 @@ func _process(delta:float) -> void:
 	
 	transform.basis = Basis();
 	
-	rotate_object_local(Vector3(0, 1, 0), camera_rot_x);
+	BODY_ORIGIN.rotate_object_local(Vector3(0, 1, 0), mouse_vector.x); # yaw
 	
 	camera_rot_y = min(camera_rot_y, deg_to_rad(LOOK_MAX_VERT)); # impose limits
 	camera_rot_y = max(camera_rot_y, deg_to_rad(LOOK_MIN_VERT))
 	
-	TORSO.basis = Basis();
+	TORSO.basis = Basis(); # pitch
 	TORSO.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/4);
 	HEAD.basis = Basis();
 	HEAD.rotate_object_local(Vector3(1, 0, 0), 3*camera_rot_y/4);
 	
 	mouse_input = Vector2.ZERO;
 	
-	if(is_focussing and equipped_tool != null and equipped_tool.CAM_FOCUS_POS != null):
-		CAMERA.position = CAMERA.position.lerp(HEAD.global_basis.inverse()*(equipped_tool.CAM_FOCUS_POS.global_position - HEAD.global_position), min(1, delta*15));
+	#if(is_focussing and equipped_tool != null and equipped_tool.CAM_FOCUS_POS != null):
+		#CAMERA.position = CAMERA.position.lerp(HEAD.global_basis.inverse()*(equipped_tool.CAM_FOCUS_POS.global_position - HEAD.global_position), min(1, delta*15));
 		#CAMERA.basis = Quaternion(CAMERA.basis).slerp(Quaternion(HEAD.global_basis.inverse()*GUN.ADS_CAM_POS.global_basis), min(1, delta*5))
-	else:
-		CAMERA.position = CAMERA.position.lerp(Vector3.ZERO, min(1, delta*5));
+	#else:
+	CAMERA.position = CAMERA.position.lerp(Vector3.ZERO, min(1, delta*5));
 		#CAMERA.basis = Quaternion(CAMERA.basis).slerp(Quaternion(Basis.IDENTITY), min(1, delta*5))
 	
 	
@@ -265,7 +285,7 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (BODY_ORIGIN.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
