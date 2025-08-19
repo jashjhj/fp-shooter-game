@@ -220,14 +220,14 @@ angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
 angular_spring_x/enabled = true
-angular_spring_x/stiffness = 128.0
-angular_spring_x/damping = 4.0
+angular_spring_x/stiffness = 64.0
+angular_spring_x/damping = 5.0
 angular_spring_y/enabled = true
-angular_spring_y/stiffness = 128.0
-angular_spring_y/damping = 4.0
+angular_spring_y/stiffness = 64.0
+angular_spring_y/damping = 5.0
 angular_spring_z/enabled = true
-angular_spring_z/stiffness = 128.0
-angular_spring_z/damping = 4.0
+angular_spring_z/stiffness = 64.0
+angular_spring_z/damping = 5.0
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 collision_layer = 0
