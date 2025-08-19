@@ -4,6 +4,10 @@ class_name Tool_Part_Interactive extends Tool_Part
 @export var BEGIN_INTERACT_COLLIDER:Area3D;
 #@export var INTERACT_PLANE_NORMAL:Node3D;
 
+##when this part is selected, it simultaneously focuses others in this array.
+@export var ALSO_SELECT:Array[Tool_Part_Interactive]
+
+
 var INTERACT_PLANE:Area3D;
 
 
@@ -96,15 +100,19 @@ func _enable_focus():
 	is_focused = true;
 	mouse_focus_pos = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collision_point();
 	mouse_focus_pos_relative = global_basis.inverse()*(mouse_focus_pos - global_position)
-	enable_plane_collider()
+	#enable_plane_collider()
 	#Do not call scripts that may interfere with further rays in the same moment - e.g. Reparenting, or changing the area collider
+	
+	for element in ALSO_SELECT:
+		element._enable_focus()
+	
 	enable_focus() # inherited function
 
 ##Disables focus if applicable
 func _disable_focus():
 	if(!is_focused): return
 	is_focused = false;
-	disable_plane_collider()
+	#disable_plane_collider()
 	
 	disable_focus() # inherited function
 
@@ -123,7 +131,10 @@ func disable_focus():
 
 ##Gets position of mouse on the plane in global space
 func get_mouse_plane_position(mask = PLANE_COLLISION_LAYER) -> Vector3:
+	enable_plane_collider() # enable collide rwgen necessary
 	var ray = get_viewport().get_camera_3d().get_mouse_ray(4, mask);
+	disable_plane_collider()
+	
 	if(ray.is_colliding()):
 		return ray.get_collision_point();
 	return Vector3.ZERO
