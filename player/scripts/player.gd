@@ -207,10 +207,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if(equipped_tool == null):
 			equipped_tool = primary_tool
 			equipped_tool.ANCHOR = ANCHOR_HAND
-			equipped_tool.reparent(self)
+			#equipped_tool.reparent(self)
 		else:
 			equipped_tool.ANCHOR = ANCHOR_POCKET
-			equipped_tool.reparent(TORSO)
+			#equipped_tool.reparent(TORSO)
 			equipped_tool = null;
 			
 	

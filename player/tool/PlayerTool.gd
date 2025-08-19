@@ -124,7 +124,7 @@ func _physics_process(delta: float) -> void:
 			MY_ANCHOR.basis *= Basis(focus_rot)
 			MY_ANCHOR.global_position += ANCHOR.global_basis * MODEL_POSITION_FOCUS.basis.inverse() * -MODEL_POSITION_FOCUS.position
 		else:
-			#MY_ANCHOR.basis *= Basis(hold_rot)
+			MY_ANCHOR.basis *= Basis(hold_rot)
 			MY_ANCHOR.global_position += ANCHOR.global_basis * MODEL_POSITION_DEFAULT.basis.inverse() * MODEL_POSITION_DEFAULT.position
 
 
