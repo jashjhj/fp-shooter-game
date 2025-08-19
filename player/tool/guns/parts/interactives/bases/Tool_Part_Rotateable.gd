@@ -3,7 +3,7 @@ class_name Tool_Part_Rotateable extends Tool_Part_Interactive_1D
 
 @export var ROTATION_AXIS:Vector3 = Vector3.RIGHT;
 
-
+@export var MODEL:Node3D;
 
 
 var start_focus_mouse_pos:Vector3;
@@ -23,9 +23,6 @@ func _ready():
 	INTERACT_PLANE.position = Vector3(0,0,0);
 	set_interact_plane_normal(ROTATION_AXIS) # looks perpendicularly to the rotation axis.
 	
-	#Extras
-	
-	_ready2()
 
 
 
@@ -69,7 +66,7 @@ func disable_focus():
 # -- Extra computations - for visuals and/or deeper calculation ---------
 # =======================================================================
 
-@export var MODEL:Node3D;
+
 
 #@export_range(-360, 360, 1.0, "radians_as_degrees") var MIN_ANGLE = 0.0;
 #@export_range(-360, 360, 1.0, "radians_as_degrees") var MAX_ANGLE = 2*PI/3;
@@ -82,15 +79,6 @@ func disable_focus():
 
 
 
-func _ready2():
-	pass
-	#if(FOCUS_RESISTANCE_CURVE == null):
-		#push_error("No Resistance Curve set.")
-		#FOCUS_RESISTANCE_CURVE = Curve.new()
-		#FOCUS_RESISTANCE_CURVE.add_point(Vector2(0, 0.1));
-	#elif(FOCUS_RESISTANCE_CURVE.point_count <= 0):
-		#push_warning("No points set on Resistance Curve.")
-		#FOCUS_RESISTANCE_CURVE.add_point(Vector2(0, 0.1));
 
 func _process2():
 	if(MODEL != null):
@@ -102,7 +90,7 @@ func _process2():
 
 var forces:float = 0; # Outside of loop so can be altered by inherited functions
 func _physics_process(delta:float) -> void:
-	super._physics_process(delta)
+	
 	if(is_focused): #Manual controls
 		velocity = 0; # make it grabbed
 		#Glorified lerp, following curve to add resistance
@@ -111,4 +99,4 @@ func _physics_process(delta:float) -> void:
 		
 		
 		#DISTANCE = max(min(DISTANCE, functional_max), functional_min);
-		
+	super._physics_process(delta)

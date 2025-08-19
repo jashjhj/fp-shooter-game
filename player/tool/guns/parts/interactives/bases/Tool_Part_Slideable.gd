@@ -20,7 +20,8 @@ var model_goal:Node3D = Node3D.new()
 
 #@onready var visual_slide_pos:float = SLIDE_START_POS;
 var start_focus_slide_pos:float;
-
+##THE distance the mouse is trying to get to
+var goal_distance:float;
 
 
 ##Ready
@@ -51,9 +52,7 @@ func _process(delta:float) -> void:
 var stored_velocity:float = 0.0;
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
 	
-	prev_velocity = velocity
 	
 	if(is_focused):
 		mouse_goal_delta_from_start = (get_mouse_plane_position()-global_position - global_basis*mouse_focus_pos_relative).dot(global_basis*SLIDE_VECTOR)
@@ -61,42 +60,20 @@ func _physics_process(delta: float) -> void:
 		
 		
 		
-		DISTANCE += mouse_goal_delta# +start_focus_slide_pos 
-		
-		velocity = (DISTANCE - prev_distance)/delta
+		goal_distance += mouse_goal_delta# +start_focus_slide_pos 
+		#DISTANCE += mouse_goal_delta
+		DISTANCE = goal_distance
+		#velocity = (DISTANCE - prev_distance)/delta
 		
 		prev_mouse_delta = mouse_goal_delta_from_start
+		
+		velocity = 0
 	
-	#else:#not focused
-		#DISTANCE += velocity*delta;
+	super._physics_process(delta)
 	
-	#if(DISTANCE < 0 or DISTANCE > SLIDE_DISTANCE): velocity = 0;
-	#DISTANCE = max(0, DISTANCE)
-	#DISTANCE = min(SLIDE_DISTANCE, DISTANCE)
 	
 	model_goal.global_position = global_position + DISTANCE*(global_basis*SLIDE_VECTOR)
-	
-	#Debug.point(model_goal.global_position)
-	
 	MODEL.global_position = model_goal.global_position
-	
-	
-	#f=ke, (dv) = a*t = f/m * t
-	#var spring_force:float = SPRING_CONSTANT*(SPRING_COMPRESSION + DISTANCE) / SIMULATED_MASS
-	if(is_focused):
-		#stored_velocity = lerp(stored_velocity, (DISTANCE - prev_distance) / delta, delta / 0.03) # over 0.5s
-		velocity = 0;
-		#APPLY_FORCES_TO.apply_force(-spring_force * (global_basis*SLIDE_VECTOR) * 0.1, global_position - APPLY_FORCES_TO.global_position)
-	else:
-		pass
-		#if(APPLY_FORCES_TO != null): # applies DV to object
-		#	APPLY_FORCES_TO.apply_impulse(-(velocity - prev_velocity) * (global_basis*SLIDE_VECTOR.normalized()), global_position - APPLY_FORCES_TO.global_position)
-			
-	
-	#aif(APPLY_FORCES_TO != null):
-	
-	
-	
 	
 
 #Enable and disable being clicked on
@@ -108,6 +85,7 @@ func enable_focus():
 
 	start_focus_slide_pos = DISTANCE
 	prev_mouse_delta = 0;
+	goal_distance = DISTANCE
 
 func disable_focus():
 	super.disable_focus()

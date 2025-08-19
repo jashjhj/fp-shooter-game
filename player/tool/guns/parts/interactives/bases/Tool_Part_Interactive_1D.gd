@@ -47,19 +47,11 @@ func _ready():
 func _process(delta:float) -> void:
 	super._process(delta);
 
-##Call before processing.
+##CallAfter processing / when you want distance to be calculated
 func _physics_process(delta:float) -> void:
 	
 	prev_distance = DISTANCE
 	
-	
-	call_deferred("late_physics", delta)
-	
-	
-	
-	#super(delta)
-
-func late_physics(delta:float):
 	
 	
 	var accel:float = 0;
