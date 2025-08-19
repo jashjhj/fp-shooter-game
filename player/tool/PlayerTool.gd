@@ -118,7 +118,7 @@ func _physics_process(delta: float) -> void:
 		
 		if(inspect):    
 			MY_ANCHOR.basis *= Basis(inspect_rot)
-			MY_ANCHOR.global_position += ANCHOR.global_basis * current_model_position_inspect.basis.inverse() *  -current_model_position_inspect.position
+			MY_ANCHOR.global_position += ANCHOR.global_basis * MODEL_POSITION_INSPECT.basis.inverse() *  -current_model_position_inspect.position
 		elif(focus):
 			MY_ANCHOR.basis *= Basis(focus_rot)
 			MY_ANCHOR.global_position += ANCHOR.global_basis * MODEL_POSITION_FOCUS.basis.inverse() * -MODEL_POSITION_FOCUS.position
@@ -141,7 +141,7 @@ func focus_set(value:bool):
 
 
 func rotate_inspect_node(rot: Vector2):
-	current_model_position_inspect.rotate_y(rot.x)
-	current_model_position_inspect.rotate_x(rot.y)
+	current_model_position_inspect.rotate_object_local(Vector3.UP, -rot.x)
+	current_model_position_inspect.rotate_object_local(Vector3.RIGHT, -rot.y)
 	
-	MODEL.basis = Quaternion(MODEL.transform.basis).slerp(Quaternion(current_model_position_inspect.transform.basis), 0.1); # increases responsiveness
+	#MODEL.basis = Quaternion(MODEL.transform.basis).slerp(Quaternion(current_model_position_inspect.transform.basis), 0.1); # increases responsiveness
