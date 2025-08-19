@@ -25,22 +25,6 @@
 [ext_resource type="AudioStream" uid="uid://iqya3bdulwq5" path="res://assets/sfx/gunfire_colt_peacemaker.wav" id="19_vi08r"]
 [ext_resource type="PackedScene" uid="uid://b517ttrlv06s" path="res://player/tool/guns/instances/makaroni/makaroni_8rd.tscn" id="20_3hwry"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_18edu"]
-render_priority = 0
-shader = ExtResource("2_mmcih")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ry1el"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_18edu")
-shader = ExtResource("3_cawr4")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.86
-shader_parameter/life = 1.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2isxn"]
 render_priority = 0
 shader = ExtResource("2_mmcih")
@@ -105,9 +89,6 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
-size = Vector3(0.0373535, 0.0458984, 0.0654297)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m7h8j"]
 render_priority = 0
 shader = ExtResource("2_mmcih")
@@ -123,6 +104,9 @@ shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
+size = Vector3(0.0373535, 0.0458984, 0.0654297)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lohkq"]
 render_priority = 0
@@ -156,15 +140,6 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5ljc"]
-points = PackedVector3Array(-0.0140984, 0.005224, -0.0193307, -0.014876, 0.00524514, -0.108375, 0.014876, 0.00524514, -0.108375, 0.0140955, 0.005224, -0.0105346, -0.0140984, 0.005224, 0.00802645, -0.0148585, 0.0105628, -0.115518, -0.014742, 0.0163668, -0.142856, -0.0133383, 0.0150665, -0.142856, -0.00416458, 0.0113522, -0.142856, -0.014876, 0.00524514, 0.05119, -0.014876, 0.00746878, 0.05119, -0.0148731, 0.0212898, 0.031926, 0.00416167, 0.0113522, -0.142856, 0.0133354, 0.0150665, -0.142856, 0.0147391, 0.0163668, -0.142856, 0.0148556, 0.0105628, -0.115518, 0.0148702, 0.011916, 0.0497461, 0.014876, 0.00746878, 0.05119, 0.014876, 0.00524514, 0.05119, 0.0140955, 0.005224, 0.031394, -0.0148236, 0.013308, -0.12382, -0.0141887, 0.0274956, -0.142856, -0.00799425, 0.0262058, -0.142894, -0.00553336, 0.0121662, 0.050715, -0.0148731, 0.011916, 0.0497461, -0.0148585, 0.0139881, 0.0473714, -0.0142353, 0.0262269, 0.0422799, -0.0141712, 0.0275449, 0.0406841, -0.0141829, 0.0275097, 0.0300072, -0.0141887, 0.0274991, 0.00232704, -0.0141887, 0.0274991, -0.0231873, 0.00799134, 0.0262058, -0.142894, 0.0148207, 0.013308, -0.12382, 0.0141858, 0.0274956, -0.142856, 0.0141858, 0.0274991, -0.0143912, 0.0141858, 0.0274991, 0.0256946, 0.0148556, 0.0139881, 0.0473714, 0.0142324, 0.0262269, 0.0422799, 0.00553045, 0.0121662, 0.050715, -0.010295, 0.0334617, -0.142856, -0.00607505, 0.0412215, 0.0196912, -0.00532367, 0.0369857, -0.142856, -0.00174446, 0.0378772, -0.142856, -0.00553336, 0.0268683, 0.0423179, -0.00553336, 0.0285034, 0.0403421, 0, 0.037398, 0.0287153, -0.00174446, 0.0378772, 0.0277274, -0.00607505, 0.0412215, 0.0214961, 0.00174155, 0.0378772, -0.142856, 0.00532076, 0.0369857, -0.142856, 0.010292, 0.0334617, -0.142856, 0.00607213, 0.0412215, 0.0196912, 0.0141683, 0.0275449, 0.0406841, 0.00553045, 0.0285034, 0.0403421, 0.00553045, 0.0268683, 0.0423179, -0.00112997, 0.0410699, -0.135865, -0.00112997, 0.0402876, -0.142153, -0.0017765, 0.0384869, -0.142818, 0.00174155, 0.0378772, 0.0277274, 0.00607213, 0.0412215, 0.0214961, 0.00177359, 0.0384869, -0.142818, 0.00112706, 0.0402876, -0.142153, 0.00112706, 0.0410699, -0.135865)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8j6fe"]
-size = Vector3(0.0134277, 0.0377197, 0.0290527)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_f6c0u"]
-size = Vector3(0.00219727, 0.0297852, 0.0180664)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_suvc2"]
 render_priority = 0
 shader = ExtResource("2_mmcih")
@@ -175,6 +150,31 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_suvc2")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5ljc"]
+points = PackedVector3Array(-0.0140984, 0.005224, -0.0193307, -0.014876, 0.00524514, -0.108375, 0.014876, 0.00524514, -0.108375, 0.0140955, 0.005224, -0.0105346, -0.0140984, 0.005224, 0.00802645, -0.0148585, 0.0105628, -0.115518, -0.014742, 0.0163668, -0.142856, -0.0133383, 0.0150665, -0.142856, -0.00416458, 0.0113522, -0.142856, -0.014876, 0.00524514, 0.05119, -0.014876, 0.00746878, 0.05119, -0.0148731, 0.0212898, 0.031926, 0.00416167, 0.0113522, -0.142856, 0.0133354, 0.0150665, -0.142856, 0.0147391, 0.0163668, -0.142856, 0.0148556, 0.0105628, -0.115518, 0.0148702, 0.011916, 0.0497461, 0.014876, 0.00746878, 0.05119, 0.014876, 0.00524514, 0.05119, 0.0140955, 0.005224, 0.031394, -0.0148236, 0.013308, -0.12382, -0.0141887, 0.0274956, -0.142856, -0.00799425, 0.0262058, -0.142894, -0.00553336, 0.0121662, 0.050715, -0.0148731, 0.011916, 0.0497461, -0.0148585, 0.0139881, 0.0473714, -0.0142353, 0.0262269, 0.0422799, -0.0141712, 0.0275449, 0.0406841, -0.0141829, 0.0275097, 0.0300072, -0.0141887, 0.0274991, 0.00232704, -0.0141887, 0.0274991, -0.0231873, 0.00799134, 0.0262058, -0.142894, 0.0148207, 0.013308, -0.12382, 0.0141858, 0.0274956, -0.142856, 0.0141858, 0.0274991, -0.0143912, 0.0141858, 0.0274991, 0.0256946, 0.0148556, 0.0139881, 0.0473714, 0.0142324, 0.0262269, 0.0422799, 0.00553045, 0.0121662, 0.050715, -0.010295, 0.0334617, -0.142856, -0.00607505, 0.0412215, 0.0196912, -0.00532367, 0.0369857, -0.142856, -0.00174446, 0.0378772, -0.142856, -0.00553336, 0.0268683, 0.0423179, -0.00553336, 0.0285034, 0.0403421, 0, 0.037398, 0.0287153, -0.00174446, 0.0378772, 0.0277274, -0.00607505, 0.0412215, 0.0214961, 0.00174155, 0.0378772, -0.142856, 0.00532076, 0.0369857, -0.142856, 0.010292, 0.0334617, -0.142856, 0.00607213, 0.0412215, 0.0196912, 0.0141683, 0.0275449, 0.0406841, 0.00553045, 0.0285034, 0.0403421, 0.00553045, 0.0268683, 0.0423179, -0.00112997, 0.0410699, -0.135865, -0.00112997, 0.0402876, -0.142153, -0.0017765, 0.0384869, -0.142818, 0.00174155, 0.0378772, 0.0277274, 0.00607213, 0.0412215, 0.0214961, 0.00177359, 0.0384869, -0.142818, 0.00112706, 0.0402876, -0.142153, 0.00112706, 0.0410699, -0.135865)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8j6fe"]
+size = Vector3(0.0134277, 0.0377197, 0.0290527)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f6c0u"]
+size = Vector3(0.00219727, 0.0297852, 0.0180664)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j64g3"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00cj4"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_j64g3")
 shader = ExtResource("3_cawr4")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
@@ -246,11 +246,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0264405, -0.0106144)
 [node name="Body" type="MeshInstance3D" parent="RigidBody3D/Model"]
 mesh = ExtResource("1_ilmi0")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ry1el")
-surface_material_override/1 = SubResource("ShaderMaterial_vi08r")
-surface_material_override/2 = SubResource("ShaderMaterial_rtwg6")
-surface_material_override/3 = SubResource("ShaderMaterial_nf3x5")
-surface_material_override/4 = SubResource("ShaderMaterial_xqy73")
+surface_material_override/0 = SubResource("ShaderMaterial_vi08r")
+surface_material_override/1 = SubResource("ShaderMaterial_rtwg6")
+surface_material_override/2 = SubResource("ShaderMaterial_nf3x5")
+surface_material_override/3 = SubResource("ShaderMaterial_xqy73")
+surface_material_override/4 = SubResource("ShaderMaterial_towq5")
 script = ExtResource("4_jmqr6")
 
 [node name="MagRelease" type="MeshInstance3D" parent="RigidBody3D/Model"]
@@ -353,9 +353,9 @@ skeleton = NodePath("../../../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 mesh = ExtResource("12_2isxn")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_towq5")
-surface_material_override/1 = SubResource("ShaderMaterial_tl72j")
-surface_material_override/2 = SubResource("ShaderMaterial_1g8f6")
+surface_material_override/0 = SubResource("ShaderMaterial_tl72j")
+surface_material_override/1 = SubResource("ShaderMaterial_1g8f6")
+surface_material_override/2 = SubResource("ShaderMaterial_g7ykr")
 script = ExtResource("4_jmqr6")
 
 [node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide"]
@@ -429,7 +429,7 @@ shape = SubResource("BoxShape3D_f6c0u")
 transform = Transform3D(1, -1.49012e-08, 0, 1.49012e-08, 0.997482, -0.0709247, 2.98023e-08, 0.0709247, 0.997482, 3.72529e-09, 0.000412866, -0.000779983)
 mesh = ExtResource("13_vi08r")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_g7ykr")
+surface_material_override/0 = SubResource("ShaderMaterial_00cj4")
 script = ExtResource("4_jmqr6")
 
 [node name="Inspect_Pos" type="Node3D" parent="."]

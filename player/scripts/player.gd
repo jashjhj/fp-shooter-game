@@ -269,9 +269,14 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		
+		if(is_inspecting):
+			velocity *= 0.2;
+		
+		
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED/8)
-		velocity.z = move_toward(velocity.z, 0, SPEED/8)
+		velocity.x = move_toward(velocity.x, 0, SPEED * delta * 8) # returns over 1/8 of a second
+		velocity.z = move_toward(velocity.z, 0, SPEED * delta * 8)
 	
 	#velocity.y = 0
 	move_and_slide()
