@@ -101,6 +101,7 @@ func eject() -> void:
 	pass
 
 func fire() -> void:
+	
 	#If harbouring a round, tis live, and seated
 	if(current_round != null and current_round.is_live and abs(ACTION_SLIDEABLE_LINK.DISTANCE) < 0.05):
 		current_round.trigger()
