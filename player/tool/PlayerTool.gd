@@ -24,7 +24,7 @@ var current_model_position_inspect:Node3D = Node3D.new();
 
 var ANCHOR:Node3D:
 	set(v):
-		print(v.get_path())
+		#print(v.get_path())
 		ANCHOR = v
 		#MY_ANCHOR.reparent(ANCHOR);
 		#MY_ANCHOR.reparent(ANCHOR.get_parent())
