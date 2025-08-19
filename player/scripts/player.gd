@@ -284,7 +284,8 @@ func _physics_process(delta: float) -> void:
 func update_ui():
 	$Control/RichTextLabel.text = "HP: "+str(int(HP))
 	if(HP <= 0.1):
-		$"You DIED/You Died".visible = true
+		print("showing you died")
+		$"You DIED".visible = true
 
 func reload():
 	get_tree().change_scene_to_file("res://maps/sandy_arena/Sandy_Arena.tscn")

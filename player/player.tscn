@@ -73,6 +73,7 @@ transform = Transform3D(0.996505, -0.08353, 0, 0.08353, 0.996505, 0, 0, 0, 1, 0.
 
 [node name="Hand_Mesh" type="MeshInstance3D" parent="Hip/Torso/Shoulder/Anchor_Hand"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_qjkh3")
 
 [node name="PlayerLeg_Left" parent="Hip" instance=ExtResource("5_qjkh3")]
