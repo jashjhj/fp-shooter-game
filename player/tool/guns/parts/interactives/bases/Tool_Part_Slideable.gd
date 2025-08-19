@@ -3,13 +3,11 @@ class_name Tool_Part_Slideable extends Tool_Part_Interactive_1D
 @export var MODEL:Node3D;
 
 @export var SLIDE_VECTOR:Vector3 = Vector3(0, 0, 1);
-@export var SLIDE_DISTANCE:float = 0.2;
-@export var SLIDE_START_POS:float = 0;
 
 
 
 
-@export var LERP_RATE:float = 0.3;
+#@export var LERP_RATE:float = 0.3;
 
 
 #@export_group("Extras")
@@ -69,12 +67,12 @@ func _physics_process(delta: float) -> void:
 		
 		prev_mouse_delta = mouse_goal_delta_from_start
 	
-	else:#not focused
-		DISTANCE += velocity*delta;
+	#else:#not focused
+		#DISTANCE += velocity*delta;
 	
-	if(DISTANCE < 0 or DISTANCE > SLIDE_DISTANCE): velocity = 0;
-	DISTANCE = max(0, DISTANCE)
-	DISTANCE = min(SLIDE_DISTANCE, DISTANCE)
+	#if(DISTANCE < 0 or DISTANCE > SLIDE_DISTANCE): velocity = 0;
+	#DISTANCE = max(0, DISTANCE)
+	#DISTANCE = min(SLIDE_DISTANCE, DISTANCE)
 	
 	model_goal.global_position = global_position + DISTANCE*(global_basis*SLIDE_VECTOR)
 	
@@ -86,7 +84,7 @@ func _physics_process(delta: float) -> void:
 	#f=ke, (dv) = a*t = f/m * t
 	#var spring_force:float = SPRING_CONSTANT*(SPRING_COMPRESSION + DISTANCE) / SIMULATED_MASS
 	if(is_focused):
-		stored_velocity = lerp(stored_velocity, (DISTANCE - prev_distance) / delta, delta / 0.03) # over 0.5s
+		#stored_velocity = lerp(stored_velocity, (DISTANCE - prev_distance) / delta, delta / 0.03) # over 0.5s
 		velocity = 0;
 		#APPLY_FORCES_TO.apply_force(-spring_force * (global_basis*SLIDE_VECTOR) * 0.1, global_position - APPLY_FORCES_TO.global_position)
 	else:
