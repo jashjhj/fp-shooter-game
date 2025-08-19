@@ -8,6 +8,7 @@ class_name Gun_Part_DAHammer extends Tool_Part_Rotateable
 @export_group("Settings")
 ##Cocked angle. strikes at angle == 0
 @export_range(0, 180, 1.0, "radians_as_degrees") var COCKED_ANGLE = PI/4;
+##Angle at which hammer hits what it wants to trigger
 @export_range(0, 180, 1.0, "radians_as_degrees") var TRIGGER_ANGLE = 0;
 
 
@@ -29,12 +30,12 @@ var is_cock_limit_set:bool = false:
 var is_cocked:bool = false:
 	set(v):
 		is_cocked = v
-		if(is_cocked and !is_cock_limit_set):
-			if(!is_focused or LOCK_IN_COCK):
-				is_cock_limit_set = true
-		
-		if(!is_cocked and is_cock_limit_set):
-			is_cock_limit_set = false
+		#if(is_cocked and !is_cock_limit_set):
+			#if(!is_focused or LOCK_IN_COCK):
+				#is_cock_limit_set = true
+		#
+		#if(!is_cocked and is_cock_limit_set):
+			#is_cock_limit_set = false
 
 ##Ready
 func _ready():
@@ -43,8 +44,7 @@ func _ready():
 	super._ready();
 
 func release():
-	if(is_cocked):
-		is_cock_limit_set = false;
+	is_cock_limit_set = false;
 	
 
 func enable_focus():
@@ -59,7 +59,8 @@ func disable_focus():
 
 
 func hit_min_limit() -> void:
-	print(velocity)
+	#print(velocity)
+	
 	super.hit_min_limit()
 	if DISTANCE <= TRIGGER_ANGLE and abs(velocity) > VELOCITY_THRESHOLD:
 		#print(current_angle)
@@ -79,7 +80,14 @@ func _process(delta:float) -> void:
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
 	
+	#if abs(velocity) > 1: # rad/second
+	#	print(velocity)
+	
 	if(DISTANCE >= COCKED_ANGLE):
+		
+		if(!is_focused and !is_cocked): # Checker for if its made to be cocked during play
+			is_cock_limit_set = true
+		
 		is_cocked = true;
 	else:
 		is_cocked = false;

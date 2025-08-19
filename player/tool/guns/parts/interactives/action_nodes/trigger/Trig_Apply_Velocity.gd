@@ -5,7 +5,7 @@ class_name Trig_Apply_Velocity_To_Interactive_1D extends Triggerable
 
 func _ready() -> void:
 	super._ready()
-	assert(I1D != null, "No Interactive_1D Set")
+	assert(I1D != null, "No Interactive_1D Set @ " + str(get_path()))
 
 func trigger():
 	super.trigger()

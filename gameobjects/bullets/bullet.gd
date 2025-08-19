@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 
 
 
-func process_bullet_step(delta:float, draw_trail:bool = false) -> void:
+func process_bullet_step(delta:float, do_draw_trail:bool = false) -> void:
 	
 	if(delta == 0): return
 	FORWARDS_RAY.look_at(global_position - velocity*delta) # because forwards is -Z
@@ -94,7 +94,7 @@ func process_bullet_step(delta:float, draw_trail:bool = false) -> void:
 		
 		position += velocity*delta;
 		
-		if(draw_trail):
+		if(do_draw_trail):
 			draw_trail(prev_bullet_trail_pos, global_position)
 			prev_bullet_trail_pos = global_position
 		
