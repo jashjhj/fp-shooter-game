@@ -11,4 +11,4 @@ I've put my physics and maths education to finally some good use, letting me bui
 
 Feel free to give it a go with the Releases, and tell your friends about it!
 
-(Current release is VERY outdated, shows only basic gun mechanics. VERY SOOM expect a small gladiator arena with robots to fight! - expected by ~11th/12th july)
+(Current release is has an interestign weapon and an arena to fight Totembots in!)
