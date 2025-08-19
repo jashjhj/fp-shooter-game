@@ -41,7 +41,8 @@ func summon_new() -> void:
 	new_instance.MODEL.global_basis = global_basis
 	
 	instances.push_back(new_instance)
-
+	new_instance.is_interactive = true
+	
 	current_instances += 1
 
 
