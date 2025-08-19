@@ -1,4 +1,4 @@
-class_name Map_Constraint extends Node
+class_name Map_Constraint extends Enableable
 
 @export var PRIMARY:Tool_Part_Interactive_1D
 @export var SECONDARY:Tool_Part_Interactive_1D
@@ -13,23 +13,20 @@ var is_first_max:bool = true;
 var prev_min_val:float;
 var prev_max_val:float
 
-@export var is_enabled:bool = true:
-	set(v):
-		if(is_enabled == v): return # if no change, do nothing
-		is_enabled = v;
-		
-		if(!is_enabled): # rens enabling/disabling
-			if(!is_first_min):
-				SECONDARY.remove_min_limit(prev_min_val)
-			if(!is_first_max):
-				SECONDARY.remove_max_limit(prev_max_val)
+
+func is_enabled_set():
+	super.is_enabled_set()
+	if(!is_enabled): # rens enabling/disabling
+		if(!is_first_min):
+			SECONDARY.remove_min_limit(prev_min_val)
+		if(!is_first_max):
+			SECONDARY.remove_max_limit(prev_max_val)
 		
 		else:
 			if(!is_first_min):
 				SECONDARY.add_min_limit(prev_min_val)
 			if(!is_first_max):
 				SECONDARY.add_max_limit(prev_max_val)
-
 
 func apply_constraint_min(val):
 	if(is_first_min):

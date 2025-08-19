@@ -50,7 +50,7 @@ func _process(delta:float) -> void:
 ##CallAfter processing / when you want distance to be calculated
 func _physics_process(delta:float) -> void:
 	
-	prev_distance = DISTANCE
+	
 	
 	
 	
@@ -115,16 +115,21 @@ func _physics_process(delta:float) -> void:
 	
 	
 	for i in range(0, len(TRIGGERS_TRIGGERABLE)): # check thresholds for triggers
-	
 		if(TRIGGERS_DIRECTION[i] == 1 or TRIGGERS_DIRECTION[i] == 3): # Forwards
+			
+			#if(TRIGGERS_TRIGGERABLE[i] is Trig_Set_Enableable):
+			#	print("checking trigger", TRIGGERS_TRIGGERABLE[i], " @ DIST ", DISTANCE, " & prev d ", prev_distance)
+			
 			if(DISTANCE >= TRIGGERS_DISTANCE[i] and prev_distance < TRIGGERS_DISTANCE[i]):
+				
 				TRIGGERS_TRIGGERABLE[i].trigger()
+				continue # if trigger, escape this loop. DOnt trigger it twice Somehow
 		
-		if(TRIGGERS_DIRECTION[i] == 2 or TRIGGERS_DIRECTION[i] == 3): # Backwards
+		elif(TRIGGERS_DIRECTION[i] == 2 or TRIGGERS_DIRECTION[i] == 3): # Backwards
 			if(DISTANCE <= TRIGGERS_DISTANCE[i] and prev_distance > TRIGGERS_DISTANCE[i]):
 				TRIGGERS_TRIGGERABLE[i].trigger()
 	
-	
+	prev_distance = DISTANCE
 
 
 
