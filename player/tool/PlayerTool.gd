@@ -18,8 +18,8 @@ class_name Player_Tool extends Node3D
 ##For rotations
 var current_model_position_inspect:Node3D = Node3D.new();
 
-@onready var MY_ANCHOR:PhysicsBody3D = $Anchor;
-@onready var ANCHOR_SPRING:Generic6DOFJoint3D = $Anchor/Generic6DOFJoint3D
+@onready var MY_ANCHOR:PhysicsBody3D = $My_Anchor;
+@onready var ANCHOR_SPRING:Generic6DOFJoint3D = $My_Anchor/Generic6DOFJoint3D
 @onready var RIGIDBODY:RigidBody3D = $RigidBody3D
 
 var ANCHOR:Node3D:
@@ -105,6 +105,7 @@ func _physics_process(delta: float) -> void:
 	if(ANCHOR != null):
 		#print(ANCHOR.get_path())
 		MY_ANCHOR.global_transform = ANCHOR.global_transform
+		#print(MY_ANCHOR.global_position)
 		
 		var current_rot := Quaternion(MY_ANCHOR.transform.basis)
 	
@@ -123,7 +124,7 @@ func _physics_process(delta: float) -> void:
 			MY_ANCHOR.basis *= Basis(focus_rot)
 			MY_ANCHOR.global_position += ANCHOR.global_basis * MODEL_POSITION_FOCUS.basis.inverse() * -MODEL_POSITION_FOCUS.position
 		else:
-			MY_ANCHOR.basis *= Basis(hold_rot)
+			#MY_ANCHOR.basis *= Basis(hold_rot)
 			MY_ANCHOR.global_position += ANCHOR.global_basis * MODEL_POSITION_DEFAULT.basis.inverse() * MODEL_POSITION_DEFAULT.position
 
 
