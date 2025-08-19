@@ -369,6 +369,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0262758, -0.0228401)
 
 [node name="Gunshot" type="AudioStreamPlayer3D" parent="RigidBody3D/Model/Gun_Part_Slide/Slide/Round_Anchor"]
 stream = ExtResource("19_vi08r")
+max_polyphony = 8
 
 [node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0113361, 0.0353096)
