@@ -133,6 +133,12 @@ func _process(delta:float) -> void:
 				CURRENT_SLOT.insertion = insertion
 				#Move it in line with abrrel
 				model_goal.global_position = CURRENT_SLOT.global_position + CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR*insertion;
+				
+				if(is_housed and abs(insertion - CURRENT_SLOT.INSERTION_LENGTH) < 0.005):
+					CURRENT_SLOT.is_housed_fully = true
+				else:
+					CURRENT_SLOT.is_housed_fully = false
+				
 			else:
 				is_housed = false;
 				CURRENT_SLOT.insertion = 0;

@@ -6,6 +6,8 @@ class_name Enableable extends Node
 		is_enabled = v
 		is_enabled_set()
 
+func _ready():
+	pass
 
 func is_enabled_set():
 	pass

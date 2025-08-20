@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=54 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://1g57nvm0ti4l" path="res://false_physics/triggerables/Triggerable.gd" id="16_f6c0u"]
 [ext_resource type="Script" uid="uid://bkfsoqbr3ewi8" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Slideable.gd" id="16_jmqr6"]
 [ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Insertable_Slot.gd" id="18_8j6fe"]
+[ext_resource type="Script" uid="uid://cs1x2h8hfgu13" path="res://player/tool/guns/parts/interactives/action_nodes/Map_Constraints/Map_Constraint_Linear_Min.gd" id="18_rtwg6"]
 [ext_resource type="ArrayMesh" uid="uid://carhnos3cqlph" path="res://player/tool/guns/instances/makaroni/assets/slidelock.obj" id="19_dsk1g"]
 [ext_resource type="Script" uid="uid://loortei0f5ym" path="res://player/tool/guns/things/Insertable_Pouch.gd" id="19_f5ljc"]
 [ext_resource type="AudioStream" uid="uid://iqya3bdulwq5" path="res://assets/sfx/gunfire_colt_peacemaker.wav" id="19_vi08r"]
@@ -26,6 +27,8 @@
 [ext_resource type="Script" uid="uid://d1kaw4geaca7m" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Rotateable_Trigger.gd" id="22_vi08r"]
 [ext_resource type="Script" uid="uid://dfrv0v2loygmk" path="res://player/tool/guns/parts/interactives/action_nodes/Map_Constraints/One_Way_Constraint.gd" id="23_vi08r"]
 [ext_resource type="Script" uid="uid://dqvhxoec7wfa1" path="res://false_physics/triggerables/Trig_Set_Enableable.gd" id="24_phrex"]
+[ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Rotateable.gd" id="26_o4tnm"]
+[ext_resource type="Script" uid="uid://bdlivs60vnnyg" path="res://player/tool/guns/instances/makaroni/makaroni_brain.gd" id="30_xqy73"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_phrex"]
 render_priority = 0
@@ -160,6 +163,9 @@ shader_parameter/life = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5ljc"]
 points = PackedVector3Array(-0.0140984, 0.005224, -0.0193307, -0.014876, 0.00524514, -0.108375, 0.014876, 0.00524514, -0.108375, 0.0140955, 0.005224, -0.0105346, -0.0140984, 0.005224, 0.00802645, -0.0148585, 0.0105628, -0.115518, -0.014742, 0.0163668, -0.142856, -0.0133383, 0.0150665, -0.142856, -0.00416458, 0.0113522, -0.142856, -0.014876, 0.00524514, 0.05119, -0.014876, 0.00746878, 0.05119, -0.0148731, 0.0212898, 0.031926, 0.00416167, 0.0113522, -0.142856, 0.0133354, 0.0150665, -0.142856, 0.0147391, 0.0163668, -0.142856, 0.0148556, 0.0105628, -0.115518, 0.0148702, 0.011916, 0.0497461, 0.014876, 0.00746878, 0.05119, 0.014876, 0.00524514, 0.05119, 0.0140955, 0.005224, 0.031394, -0.0148236, 0.013308, -0.12382, -0.0141887, 0.0274956, -0.142856, -0.00799425, 0.0262058, -0.142894, -0.00553336, 0.0121662, 0.050715, -0.0148731, 0.011916, 0.0497461, -0.0148585, 0.0139881, 0.0473714, -0.0142353, 0.0262269, 0.0422799, -0.0141712, 0.0275449, 0.0406841, -0.0141829, 0.0275097, 0.0300072, -0.0141887, 0.0274991, 0.00232704, -0.0141887, 0.0274991, -0.0231873, 0.00799134, 0.0262058, -0.142894, 0.0148207, 0.013308, -0.12382, 0.0141858, 0.0274956, -0.142856, 0.0141858, 0.0274991, -0.0143912, 0.0141858, 0.0274991, 0.0256946, 0.0148556, 0.0139881, 0.0473714, 0.0142324, 0.0262269, 0.0422799, 0.00553045, 0.0121662, 0.050715, -0.010295, 0.0334617, -0.142856, -0.00607505, 0.0412215, 0.0196912, -0.00532367, 0.0369857, -0.142856, -0.00174446, 0.0378772, -0.142856, -0.00553336, 0.0268683, 0.0423179, -0.00553336, 0.0285034, 0.0403421, 0, 0.037398, 0.0287153, -0.00174446, 0.0378772, 0.0277274, -0.00607505, 0.0412215, 0.0214961, 0.00174155, 0.0378772, -0.142856, 0.00532076, 0.0369857, -0.142856, 0.010292, 0.0334617, -0.142856, 0.00607213, 0.0412215, 0.0196912, 0.0141683, 0.0275449, 0.0406841, 0.00553045, 0.0285034, 0.0403421, 0.00553045, 0.0268683, 0.0423179, -0.00112997, 0.0410699, -0.135865, -0.00112997, 0.0402876, -0.142153, -0.0017765, 0.0384869, -0.142818, 0.00174155, 0.0378772, 0.0277274, 0.00607213, 0.0412215, 0.0214961, 0.00177359, 0.0384869, -0.142818, 0.00112706, 0.0402876, -0.142153, 0.00112706, 0.0410699, -0.135865)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_m7h8j"]
+data = PackedVector3Array(-0.0159, 0.0271, 0.0198, -0.0124, 0.0271, 0.0198, -0.0159, 0.0266, 0.027, -0.0159, 0.0266, 0.027, -0.0124, 0.0271, 0.0198, -0.0124, 0.0266, 0.027, -0.0124, 0.0271, 0.0198, -0.0159, 0.0271, 0.0198, -0.0124, 0.0267, 0.0171, -0.0124, 0.0267, 0.0171, -0.0159, 0.0271, 0.0198, -0.0159, 0.0267, 0.0171, -0.0159, 0.0252, 0.0287, -0.0159, 0.0235, 0.0298, -0.0159, 0.0266, 0.027, -0.0159, 0.0266, 0.027, -0.0159, 0.0235, 0.0298, -0.0159, 0.0271, 0.0198, -0.0159, 0.0271, 0.0198, -0.0159, 0.0235, 0.0298, -0.0159, 0.0231, 0.0239, -0.0159, 0.0271, 0.0198, -0.0159, 0.0231, 0.0239, -0.0159, 0.0267, 0.0171, -0.0159, 0.0267, 0.0171, -0.0159, 0.0231, 0.0239, -0.0159, 0.0239, 0.0103, -0.0159, 0.0235, 0.0298, -0.0159, 0.0201, 0.0297, -0.0159, 0.0231, 0.0239, -0.0159, 0.0231, 0.0239, -0.0159, 0.0201, 0.0297, -0.0159, 0.0208, 0.0238, -0.0159, 0.0201, 0.0297, -0.0159, 0.0172, 0.0268, -0.0159, 0.0208, 0.0238, -0.0159, 0.0184, 0.0285, -0.0159, 0.0172, 0.0268, -0.0159, 0.0201, 0.0297, -0.0159, 0.0208, 0.0238, -0.0159, 0.0172, 0.0268, -0.0159, 0.017, 0.0196, -0.0159, 0.0208, 0.0238, -0.0159, 0.017, 0.0196, -0.0159, 0.0206, 0.0102, -0.0159, 0.0206, 0.0102, -0.0159, 0.017, 0.0196, -0.0159, 0.0175, 0.0168, -0.0124, 0.0201, 0.0297, -0.0124, 0.0184, 0.0285, -0.0159, 0.0201, 0.0297, -0.0159, 0.0201, 0.0297, -0.0124, 0.0184, 0.0285, -0.0159, 0.0184, 0.0285, -0.0159, 0.0235, 0.0298, -0.0124, 0.0201, 0.0297, -0.0159, 0.0201, 0.0297, -0.0124, 0.0235, 0.0298, -0.0124, 0.0201, 0.0297, -0.0159, 0.0235, 0.0298, -0.0159, 0.0252, 0.0287, -0.0124, 0.0235, 0.0298, -0.0159, 0.0235, 0.0298, -0.0124, 0.0252, 0.0287, -0.0124, 0.0235, 0.0298, -0.0159, 0.0252, 0.0287, -0.0159, 0.0252, 0.0287, -0.0124, 0.0266, 0.027, -0.0124, 0.0252, 0.0287, -0.0159, 0.0266, 0.027, -0.0124, 0.0266, 0.027, -0.0159, 0.0252, 0.0287, -0.0124, 0.0271, 0.0198, -0.0124, 0.017, 0.0196, -0.0124, 0.0266, 0.027, -0.0124, 0.0266, 0.027, -0.0124, 0.017, 0.0196, -0.0124, 0.0252, 0.0287, -0.0124, 0.0252, 0.0287, -0.0124, 0.017, 0.0196, -0.0124, 0.0235, 0.0298, -0.0124, 0.0235, 0.0298, -0.0124, 0.017, 0.0196, -0.0124, 0.0201, 0.0297, -0.0124, 0.0201, 0.0297, -0.0124, 0.017, 0.0196, -0.0124, 0.0184, 0.0285, -0.0124, 0.0184, 0.0285, -0.0124, 0.017, 0.0196, -0.0124, 0.0172, 0.0268, -0.0124, 0.017, 0.0196, -0.0124, 0.0271, 0.0198, -0.0124, 0.0175, 0.0168, -0.0124, 0.0175, 0.0168, -0.0124, 0.0271, 0.0198, -0.0124, 0.0206, 0.0102, -0.0124, 0.0206, 0.0102, -0.0124, 0.0271, 0.0198, -0.0124, 0.0239, 0.0103, -0.0124, 0.0239, 0.0103, -0.0124, 0.0271, 0.0198, -0.0124, 0.0267, 0.0171, -0.0159, 0.0239, 0.0103, -0.0124, 0.0239, 0.0103, -0.0159, 0.0267, 0.0171, -0.0159, 0.0267, 0.0171, -0.0124, 0.0239, 0.0103, -0.0124, 0.0267, 0.0171, -0.0159, 0.0239, 0.0103, -0.0159, 0.0206, 0.0102, -0.0124, 0.0239, 0.0103, -0.0124, 0.0239, 0.0103, -0.0159, 0.0206, 0.0102, -0.0124, 0.0206, 0.0102, -0.0159, 0.0206, 0.0102, -0.0159, 0.0175, 0.0168, -0.0124, 0.0206, 0.0102, -0.0124, 0.0206, 0.0102, -0.0159, 0.0175, 0.0168, -0.0124, 0.0175, 0.0168, -0.0159, 0.017, 0.0196, -0.0124, 0.017, 0.0196, -0.0159, 0.0175, 0.0168, -0.0159, 0.0175, 0.0168, -0.0124, 0.017, 0.0196, -0.0124, 0.0175, 0.0168, -0.0124, 0.017, 0.0196, -0.0159, 0.017, 0.0196, -0.0124, 0.0172, 0.0268, -0.0124, 0.0172, 0.0268, -0.0159, 0.017, 0.0196, -0.0159, 0.0172, 0.0268, -0.0124, 0.0172, 0.0268, -0.0159, 0.0172, 0.0268, -0.0124, 0.0184, 0.0285, -0.0124, 0.0184, 0.0285, -0.0159, 0.0172, 0.0268, -0.0159, 0.0184, 0.0285, -0.0159, 0.0239, 0.0103, -0.0159, 0.0231, 0.0239, -0.0194, 0.0239, 0.0103, -0.0194, 0.0239, 0.0103, -0.0159, 0.0231, 0.0239, -0.0196, 0.0237, 0.0141, -0.0196, 0.0237, 0.0141, -0.0159, 0.0231, 0.0239, -0.0175, 0.0235, 0.018, -0.0196, 0.0237, 0.0141, -0.0196, 0.0207, 0.014, -0.0194, 0.0239, 0.0103, -0.0194, 0.0239, 0.0103, -0.0196, 0.0207, 0.014, -0.0194, 0.0206, 0.0102, -0.0159, 0.0206, 0.0102, -0.0159, 0.0239, 0.0103, -0.0194, 0.0206, 0.0102, -0.0194, 0.0206, 0.0102, -0.0159, 0.0239, 0.0103, -0.0194, 0.0239, 0.0103, -0.0159, 0.0208, 0.0238, -0.0159, 0.0206, 0.0102, -0.0175, 0.0207, 0.0179, -0.0175, 0.0207, 0.0179, -0.0159, 0.0206, 0.0102, -0.0196, 0.0207, 0.014, -0.0196, 0.0207, 0.014, -0.0159, 0.0206, 0.0102, -0.0194, 0.0206, 0.0102, -0.0175, 0.0235, 0.018, -0.0175, 0.0207, 0.0179, -0.0196, 0.0237, 0.0141, -0.0196, 0.0237, 0.0141, -0.0175, 0.0207, 0.0179, -0.0196, 0.0207, 0.014, -0.0175, 0.0235, 0.018, -0.0159, 0.0208, 0.0238, -0.0175, 0.0207, 0.0179, -0.0159, 0.0231, 0.0239, -0.0159, 0.0208, 0.0238, -0.0175, 0.0235, 0.018)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8j6fe"]
 size = Vector3(0.0134277, 0.0377197, 0.0290527)
@@ -326,9 +332,10 @@ script = ExtResource("16_jmqr6")
 MODEL = NodePath("Slide")
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.036])
-SPRING_FORCE_CONSTANT = -1.0
-SPRING_FORCE_LINEAR = -5.0
+SPRING_FORCE_CONSTANT = -0.2
+SPRING_FORCE_LINEAR = -0.2
 ELASTICITY_AT_MAX = 0.333
+ELASTICITY_AT_MIN = 0.0
 TRIGGERS_TRIGGERABLE = [NodePath("../Gun_Action/Eject_Trigger"), NodePath("../Gun_Action/Gather_Trigger")]
 TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
 TRIGGERS_DIRECTION = Array[int]([1, 2])
@@ -346,11 +353,6 @@ metadata/_custom_type_script = "uid://dsw7frhgyjmgr"
 
 [node name="Slide" type="Node3D" parent="RigidBody3D/Model/Slide"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.65661e-09)
-
-[node name="Safety" type="MeshInstance3D" parent="RigidBody3D/Model/Slide/Slide"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
-mesh = ExtResource("11_ry1el")
-skeleton = NodePath("../../../../..")
 
 [node name="Slide" type="MeshInstance3D" parent="RigidBody3D/Model/Slide/Slide"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
@@ -373,6 +375,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0262758, -0.0228401)
 [node name="Gunshot" type="AudioStreamPlayer3D" parent="RigidBody3D/Model/Slide/Slide/Round_Anchor"]
 stream = ExtResource("19_vi08r")
 max_polyphony = 8
+
+[node name="Safety" type="Node3D" parent="RigidBody3D/Model/Slide/Slide" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014354, 0.0218146, 0.0256933)
+script = ExtResource("26_o4tnm")
+ROTATION_AXIS = Vector3(-1, 0, 0)
+MODEL = NodePath("Model")
+MIN_LIMITS = Array[float]([0.0])
+MAX_LIMITS = Array[float]([1.0])
+BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
+metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
+
+[node name="Model" type="Node3D" parent="RigidBody3D/Model/Slide/Slide/Safety"]
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slide/Slide/Safety/Model"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Slide/Slide/Safety/Model/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014354, -0.0218146, -0.0256933)
+shape = SubResource("ConcavePolygonShape3D_m7h8j")
+
+[node name="Safety" type="MeshInstance3D" parent="RigidBody3D/Model/Slide/Slide/Safety/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014354, -0.0218146, -0.0256933)
+mesh = ExtResource("11_ry1el")
+skeleton = NodePath("../../../../../../..")
+
+[node name="Raise_Slidelock" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("PRIMARY", "SECONDARY")]
+process_mode = 4
+script = ExtResource("18_rtwg6")
+PRIMARY = NodePath("..")
+SECONDARY = NodePath("../../Slidelock")
+DOMAIN_START = 0.035
+DOMAIN_END = 0.034
+RANGE_END = 0.002
+is_enabled = false
+metadata/_custom_type_script = "uid://cs1x2h8hfgu13"
+
+[node name="Enable_Slidelock_Raiser" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("ENABLEABLE")]
+script = ExtResource("24_phrex")
+ENABLEABLE = NodePath("../Raise_Slidelock")
+SET_ENABLED_TO = true
+metadata/_custom_type_script = "uid://dqvhxoec7wfa1"
+
+[node name="Disable_Slidelock_Raiser" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("ENABLEABLE")]
+script = ExtResource("24_phrex")
+ENABLEABLE = NodePath("../Raise_Slidelock")
+metadata/_custom_type_script = "uid://dqvhxoec7wfa1"
 
 [node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0113361, 0.0353096)
@@ -416,7 +463,7 @@ ROTATION_AXIS = Vector3(-1, 0, 0)
 MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.5])
-SPRING_FORCE_CONSTANT = -20.0
+SPRING_FORCE_CONSTANT = -15.0
 ELASTICITY_AT_MAX = 0.0
 ELASTICITY_AT_MIN = 0.0
 TRIGGERS_TRIGGERABLE = [NodePath("../Hammer/Release_Hammer")]
@@ -513,3 +560,6 @@ script = ExtResource("19_f5ljc")
 INSERTABLE = ExtResource("20_3hwry")
 RESPAWN_TIME = 3.0
 metadata/_custom_type_script = "uid://loortei0f5ym"
+
+[node name="Interconnectedness" type="Node" parent="."]
+script = ExtResource("30_xqy73")

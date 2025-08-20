@@ -291,7 +291,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED
 		
 		if(is_inspecting):
-			velocity *= 0.2;
+			velocity.x *= 0.2;
+			velocity.z *= 0.2;
 		
 		
 	else:

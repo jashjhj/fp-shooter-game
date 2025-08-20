@@ -32,6 +32,7 @@ var is_locked:bool:
 				housed_insertable.is_focusable = true;
 
 var is_housed:bool = false;
+var is_housed_fully:bool = false;
 var insertion:float = 0;
 var housed_insertable:Tool_Part_Insertable;
 
@@ -48,7 +49,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta);
-
 
 ## OPTIONAL EXTRAS
 

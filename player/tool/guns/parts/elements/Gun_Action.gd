@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 
 func gather() -> void:
 	if(current_round != null): return
-	if(GATHER_FROM.is_housed):
+	if(GATHER_FROM.is_housed_fully):
 		var mag = GATHER_FROM.housed_insertable;
 		if(mag is Gun_Insertable_Mag):
 			current_round = mag.feed()

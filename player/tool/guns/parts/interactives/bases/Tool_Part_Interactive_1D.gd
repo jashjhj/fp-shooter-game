@@ -115,6 +115,7 @@ func _physics_process(delta:float) -> void:
 	
 	
 	for i in range(0, len(TRIGGERS_TRIGGERABLE)): # check thresholds for triggers
+		var triggered:bool = false
 		if(TRIGGERS_DIRECTION[i] == 1 or TRIGGERS_DIRECTION[i] == 3): # Forwards
 			
 			#if(TRIGGERS_TRIGGERABLE[i] is Trig_Set_Enableable):
@@ -123,11 +124,16 @@ func _physics_process(delta:float) -> void:
 			if(DISTANCE >= TRIGGERS_DISTANCE[i] and prev_distance < TRIGGERS_DISTANCE[i]):
 				
 				TRIGGERS_TRIGGERABLE[i].trigger()
-				continue # if trigger, escape this loop. DOnt trigger it twice Somehow
+				triggered = true
+				#continue # if trigger, escape this loop. DOnt trigger it twice Somehow
 		
 		elif(TRIGGERS_DIRECTION[i] == 2 or TRIGGERS_DIRECTION[i] == 3): # Backwards
 			if(DISTANCE <= TRIGGERS_DISTANCE[i] and prev_distance > TRIGGERS_DISTANCE[i]):
 				TRIGGERS_TRIGGERABLE[i].trigger()
+				triggered = true
+		
+		if(triggered):
+			print(TRIGGERS_TRIGGERABLE[i], " @ ", Time.get_ticks_msec())
 	
 	prev_distance = DISTANCE
 

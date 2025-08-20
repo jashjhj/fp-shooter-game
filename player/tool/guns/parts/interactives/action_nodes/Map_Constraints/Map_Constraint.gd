@@ -13,10 +13,20 @@ var is_first_max:bool = true;
 var prev_min_val:float;
 var prev_max_val:float
 
+var is_initialised:bool = false
+
+func _ready() -> void:
+	super._ready()
+	is_initialised = true
+	assert(PRIMARY != null, "No primary set")
+	assert(SECONDARY != null, "No secondary set")
+
 
 func is_enabled_set():
 	super.is_enabled_set()
+	
 	if(!is_enabled): # rens enabling/disabling
+		set_constraints() # If its just been disabled
 		if(!is_first_min):
 			SECONDARY.remove_min_limit(prev_min_val)
 		if(!is_first_max):
@@ -48,6 +58,11 @@ func apply_constraint_max(val):
 func _physics_process(delta: float) -> void:
 	if(!is_enabled): return
 	
+	set_constraints()
+
+
+func set_constraints():
+	if(!is_initialised): return
 	#Processes. CALCULATE_RANGE_MIN works entirely on remapped, normalised values
 	apply_constraint_min(remap(calculate_range_min(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))
 	apply_constraint_max(remap(calculate_range_max(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))

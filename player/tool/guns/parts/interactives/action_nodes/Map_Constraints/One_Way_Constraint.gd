@@ -7,6 +7,13 @@ class_name One_Way_Constraint extends Enableable
 ## Is the limit a min or a max, once its gone past it  |-|  0 == min, 1 == max. 
 @export_enum("MIN:0", "MAX:1") var MIN_MAX:int;
 
+##Just sets it on
+@export var FORCE_ENABLE:bool = false:
+	set(v):
+		if FORCE_ENABLE == v: return
+		FORCE_ENABLE = v;
+		if(FORCE_ENABLE): is_limit_set = true
+		FORCE_ENABLE = false; # Just force-sets it. Only has to happen once.
 
 
 var is_limit_set:bool = false:
