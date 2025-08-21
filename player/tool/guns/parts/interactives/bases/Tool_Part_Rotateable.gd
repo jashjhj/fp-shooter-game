@@ -41,10 +41,13 @@ func _process(delta:float)->void:
 		angle_change_goal += angle_change_delta
 		angle_goal += angle_change_delta
 		
+		velocity = 0;
 		#mouse_torque_radm = (angle_change_goal + start_focus_angle - DISTANCE) * min(next_focus_mouse_pos.length(), MAX_MOUSE_TORQUE_DIST);
 		#print(torque_radm)
 	
-	_process2()
+	if(MODEL != null):
+		MODEL.transform.basis = Basis.IDENTITY
+		MODEL.rotate_object_local(ROTATION_AXIS, DISTANCE)
 
 
 
@@ -78,12 +81,6 @@ func disable_focus():
 
 
 
-
-
-func _process2():
-	if(MODEL != null):
-		MODEL.transform.basis = Basis.IDENTITY
-		MODEL.rotate_object_local(ROTATION_AXIS, DISTANCE)
 	
 	
 

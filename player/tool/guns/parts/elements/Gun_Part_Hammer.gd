@@ -17,6 +17,10 @@ class_name Gun_Part_DAHammer extends Tool_Part_Rotateable
 ## IF TRUE, cannot be manipulated past cock unless triggered to release.
 @export var LOCK_IN_COCK:bool = false;
 
+
+@export_group("DEBUG")
+@export var show_hit_speed:bool = false;
+
 var is_cock_limit_set:bool = false:
 	set(v):
 		if(v != is_cock_limit_set): # applies / removes limit
@@ -59,10 +63,11 @@ func disable_focus():
 
 
 func hit_min_limit() -> void:
-	#print(velocity)
+	if(show_hit_speed):print(velocity)
 	
 	super.hit_min_limit()
 	if DISTANCE <= TRIGGER_ANGLE and abs(velocity) > VELOCITY_THRESHOLD:
+		#print(velocity)
 		#print(current_angle)
 		if(TRIGGER != null):
 			TRIGGER.trigger()
@@ -79,6 +84,7 @@ func _process(delta:float) -> void:
 
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
+	print(velocity)
 	
 	#if abs(velocity) > 1: # rad/second
 	#	print(velocity)

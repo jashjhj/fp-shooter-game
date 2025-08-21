@@ -1,4 +1,4 @@
-class_name Tool_Part_Trigger_DA extends Tool_Part_Rotateable
+class_name Tool_Part_DA_Hammer_Cocker extends Tool_Part_Rotateable
 
 @export var HAMMER:Tool_Part_Interactive_1D
 
@@ -21,8 +21,8 @@ func _ready():
 	hammer_cocker.SECONDARY = HAMMER
 	hammer_cocker.DOMAIN_START = TRIGGER_START # tolerances so it can slide, wont get stuck.
 	hammer_cocker.DOMAIN_END = TRIGGER_END
-	hammer_cocker.RANGE_START = HAMMER_DECOCK - 0.04
-	hammer_cocker.RANGE_END = HAMMER_COCK - 0.04
+	hammer_cocker.RANGE_START = HAMMER_DECOCK - 0.31
+	hammer_cocker.RANGE_END = HAMMER_COCK - 0.31
 	
 	
 	trigger_cocker.PRIMARY = HAMMER

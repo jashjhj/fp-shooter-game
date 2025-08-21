@@ -59,18 +59,17 @@ func _physics_process(delta:float) -> void:
 	#DISTANCE += velocity * delta * 0.5
 	var prev_vel:float = velocity
 	
-	
 	if(is_focused):
 		velocity = 0;
 	
 	else:
-		DISTANCE += velocity / 2
 		
 		velocity += (SPRING_FORCE_CONSTANT + SPRING_FORCE_LINEAR*DISTANCE) * delta
 		velocity = sign(velocity) * max(0, abs(velocity) - FRICTION_FORCE * delta)
 		
+		accel = (velocity - prev_vel) / delta
 		#print("v:",velocity, " pv:", prev_vel, " d: ", DISTANCE)
-		DISTANCE += velocity / 2 # lazy integrator.
+		DISTANCE += prev_vel*delta + 0.5*accel*delta*delta # s=ut+1/2at^2.
 	
 	# apply limits.
 	var hit_limit:bool = false;
@@ -83,11 +82,14 @@ func _physics_process(delta:float) -> void:
 	if(hit_limit):
 		
 		if(velocity > 0):
-			if prev_vel >= 0: # if has accumulated speed
-				
-				hit_max_limit()
 			
-			velocity = -velocity * ELASTICITY_AT_MIN
+			#v^2 = u^2 + 2as, calculates Velocity actual at impact
+			var u2add2as = prev_vel*prev_vel + 2*accel*(DISTANCE-prev_distance);
+			velocity = sqrt(abs(u2add2as)) * sign(u2add2as) 
+			
+			if(abs(velocity) > 0.001): hit_max_limit()
+			
+			velocity = -velocity * ELASTICITY_AT_MAX
 		
 	
 	
@@ -102,11 +104,14 @@ func _physics_process(delta:float) -> void:
 	if(hit_limit):
 		
 		if(velocity < 0):
-			if prev_vel <= 0: # if has accumulated speed
-				
-				hit_min_limit()
 			
-			#velocity = 0;
+			
+			#v^2 = u^2 + 2as, calculates Velocity actual at impact
+			var u2add2as = prev_vel*prev_vel + 2*accel*(DISTANCE-prev_distance);
+			velocity = sqrt(abs(u2add2as)) * sign(u2add2as) 
+			
+			if(abs(velocity) > 0.001): hit_min_limit()
+			
 			velocity = -velocity * ELASTICITY_AT_MIN
 	
 	
@@ -132,8 +137,8 @@ func _physics_process(delta:float) -> void:
 				TRIGGERS_TRIGGERABLE[i].trigger()
 				triggered = true
 		
-		if(triggered):
-			print(TRIGGERS_TRIGGERABLE[i], " @ ", Time.get_ticks_msec())
+		#if(triggered):
+		#	print(TRIGGERS_TRIGGERABLE[i], " @ ", Time.get_ticks_msec())
 	
 	prev_distance = DISTANCE
 
