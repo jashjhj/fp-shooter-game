@@ -7,6 +7,9 @@ class_name Tool_Part_DA_Hammer_Cocker extends Tool_Part_Rotateable
 @export var HAMMER_DECOCK:float;
 @export var HAMMER_COCK:float;
 
+##Looseness is a tolerance that will prevent bounces.
+@export var HAMMER_LOOSENESS:float = 0.1;
+
 @onready var hammer_cocker:Map_Constraint_Linear_Min = Map_Constraint_Linear_Min.new()
 @onready var trigger_cocker:Map_Constraint_Linear_Min = Map_Constraint_Linear_Min.new();
 
@@ -21,8 +24,8 @@ func _ready():
 	hammer_cocker.SECONDARY = HAMMER
 	hammer_cocker.DOMAIN_START = TRIGGER_START # tolerances so it can slide, wont get stuck.
 	hammer_cocker.DOMAIN_END = TRIGGER_END
-	hammer_cocker.RANGE_START = HAMMER_DECOCK - 0.31
-	hammer_cocker.RANGE_END = HAMMER_COCK - 0.31
+	hammer_cocker.RANGE_START = HAMMER_DECOCK - HAMMER_LOOSENESS
+	hammer_cocker.RANGE_END = HAMMER_COCK - HAMMER_LOOSENESS
 	
 	
 	trigger_cocker.PRIMARY = HAMMER

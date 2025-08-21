@@ -84,7 +84,7 @@ func _process(delta:float) -> void:
 
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
-	print(velocity)
+	#print(velocity)
 	
 	#if abs(velocity) > 1: # rad/second
 	#	print(velocity)
