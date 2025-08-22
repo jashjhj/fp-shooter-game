@@ -142,6 +142,19 @@ func _physics_process(delta:float) -> void:
 	
 	prev_distance = DISTANCE
 
+##Adds a trigegrable at distance in direction to the tirggers
+func add_trigger(triggerable:Triggerable, distance:float, direction:TRIGGERS_DIRECTION_ENUM) -> void:
+	TRIGGERS_TRIGGERABLE.append(triggerable)
+	TRIGGERS_DISTANCE.append(distance)
+	TRIGGERS_DIRECTION.append(direction)
+
+##Creates a new trigger at distance in direction and returns the signal called hen the trigger is observed 
+func add_new_trigger(distance:float, direction:TRIGGERS_DIRECTION_ENUM) -> Signal:
+	var new_trig := Triggerable.new()
+	TRIGGERS_TRIGGERABLE.append(new_trig)
+	TRIGGERS_DISTANCE.append(distance)
+	TRIGGERS_DIRECTION.append(direction)
+	return new_trig.on_trigger
 
 
 var min_limits
@@ -174,5 +187,18 @@ func remove_max_limit(at:float) -> bool:
 		return false
 
 
+##Returns maximum extension allowed for, or -INF if no limit set.
+func get_max_distance() -> float:
+	var maxest:float = -INF;
+	for lim in MAX_LIMITS:
+		if(lim > maxest):
+			maxest = lim
+	return maxest
 
-	
+##Returns maximum extension allowed for, or -INF if no limit set.
+func get_min_distance() -> float:
+	var minest:float = INF;
+	for lim in MIN_LIMITS:
+		if(lim < minest):
+			minest = lim
+	return minest

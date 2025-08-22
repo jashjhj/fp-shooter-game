@@ -8,6 +8,24 @@ class_name Map_Constraint extends Enableable
 @export var RANGE_START:float = 0;
 @export var RANGE_END:float = 0.1
 
+@export var SET_MIN:bool = true:
+	set(v):
+		SET_MIN = v
+		if(SET_MIN == false):
+			if(!is_first_min):
+				SECONDARY.remove_min_limit(prev_min_val)
+			
+			is_first_min = true # set for reinitialisation when enabled.
+
+@export var SET_MAX:bool = true:
+	set(v):
+		SET_MAX = v
+		if(SET_MAX == false):
+			if(!is_first_max):
+				SECONDARY.remove_min_limit(prev_max_val)
+			
+			is_first_max = true
+
 var is_first_min:bool = true;
 var is_first_max:bool = true;
 var prev_min_val:float;
@@ -26,17 +44,15 @@ func is_enabled_set():
 	super.is_enabled_set()
 	
 	if(!is_enabled): # rens enabling/disabling
-		set_constraints() # If its just been disabled
 		if(!is_first_min):
 			SECONDARY.remove_min_limit(prev_min_val)
 		if(!is_first_max):
 			SECONDARY.remove_max_limit(prev_max_val)
-		
-		else:
-			if(!is_first_min):
-				SECONDARY.add_min_limit(prev_min_val)
-			if(!is_first_max):
-				SECONDARY.add_max_limit(prev_max_val)
+		is_first_max = true
+		is_first_min = true
+	else: # if just enabled
+		set_constraints()
+
 
 func apply_constraint_min(val):
 	if(is_first_min):
@@ -64,12 +80,12 @@ func _physics_process(delta: float) -> void:
 func set_constraints():
 	if(!is_initialised): return
 	#Processes. CALCULATE_RANGE_MIN works entirely on remapped, normalised values
-	apply_constraint_min(remap(calculate_range_min(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))
-	apply_constraint_max(remap(calculate_range_max(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))
+	if(SET_MIN):	apply_constraint_min(remap(calculate_range_min(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))
+	if(SET_MAX):	apply_constraint_max(remap(calculate_range_max(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))
 
 ##Domain: 0.0 -> 1.0. Return range, 0.0 -> 1.0
 func calculate_range_min(domain:float) -> float:
-	return -INF
+	return -INF # these can break atransform if range start-end are not in ascending order. If so, disable SET_MIN/SET_MAX
 
 ##Domain: 0.0 -> 1.0. Return range, 0.0 -> 1.0
 func calculate_range_max(domain:float) -> float:

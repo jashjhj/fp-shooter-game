@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=52 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -15,18 +15,16 @@
 [ext_resource type="ArrayMesh" uid="uid://d0uicko3dtpcy" path="res://player/tool/guns/instances/makaroni/assets/trigger.obj" id="13_vi08r"]
 [ext_resource type="Script" uid="uid://cspvfnih4rfcf" path="res://player/tool/guns/parts/elements/Gun_Part_Hammer.gd" id="15_8j6fe"]
 [ext_resource type="Script" uid="uid://dpp3u5ytyv45w" path="res://player/tool/guns/parts/elements/Gun_Action.gd" id="15_cawr4"]
-[ext_resource type="Script" uid="uid://dsw7frhgyjmgr" path="res://player/tool/guns/parts/interactives/action_nodes/Map_Constraints/Map_Constraint_ASin_Min.gd" id="16_3hwry"]
+[ext_resource type="Script" uid="uid://dsw7frhgyjmgr" path="res://player/tool/guns/parts/interactives/Constraints/Map_Constraint_ASin_Min.gd" id="16_3hwry"]
 [ext_resource type="Script" uid="uid://1g57nvm0ti4l" path="res://false_physics/triggerables/Triggerable.gd" id="16_f6c0u"]
 [ext_resource type="Script" uid="uid://bkfsoqbr3ewi8" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Slideable.gd" id="16_jmqr6"]
 [ext_resource type="Script" uid="uid://dymfggnfgsan6" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Insertable_Slot.gd" id="18_8j6fe"]
-[ext_resource type="Script" uid="uid://cs1x2h8hfgu13" path="res://player/tool/guns/parts/interactives/action_nodes/Map_Constraints/Map_Constraint_Linear_Min.gd" id="18_rtwg6"]
 [ext_resource type="ArrayMesh" uid="uid://carhnos3cqlph" path="res://player/tool/guns/instances/makaroni/assets/slidelock.obj" id="19_dsk1g"]
 [ext_resource type="Script" uid="uid://loortei0f5ym" path="res://player/tool/guns/things/Insertable_Pouch.gd" id="19_f5ljc"]
 [ext_resource type="AudioStream" uid="uid://iqya3bdulwq5" path="res://assets/sfx/gunfire_colt_peacemaker.wav" id="19_vi08r"]
 [ext_resource type="PackedScene" uid="uid://b517ttrlv06s" path="res://player/tool/guns/instances/makaroni/makaroni_8rd.tscn" id="20_3hwry"]
 [ext_resource type="Script" uid="uid://d1kaw4geaca7m" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Hammer_Cocker.gd" id="22_vi08r"]
-[ext_resource type="Script" uid="uid://dfrv0v2loygmk" path="res://player/tool/guns/parts/interactives/action_nodes/Map_Constraints/One_Way_Constraint.gd" id="23_vi08r"]
-[ext_resource type="Script" uid="uid://dqvhxoec7wfa1" path="res://false_physics/triggerables/Trig_Set_Enableable.gd" id="24_phrex"]
+[ext_resource type="Script" uid="uid://coc5w1i0xrx5r" path="res://player/tool/guns/parts/interactives/interactions/slide_lock_mechanism.gd" id="24_rtwg6"]
 [ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Rotateable.gd" id="26_o4tnm"]
 [ext_resource type="Script" uid="uid://bdlivs60vnnyg" path="res://player/tool/guns/instances/makaroni/makaroni_brain.gd" id="30_xqy73"]
 
@@ -266,50 +264,6 @@ skeleton = NodePath("../../..")
 [node name="Cam_Aim_Pos" type="Node3D" parent="RigidBody3D/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0427964, 0.192895)
 
-[node name="Gun_Action" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("ACTION_SLIDEABLE_LINK", "FIRE_TRIGGER", "EJECT_TRIGGER", "GATHER_TRIGGER", "GATHER_FROM", "ROUND_ANCHOR", "TRIGGER_ON_FIRE")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0256293, -0.0196918)
-script = ExtResource("15_cawr4")
-ACTION_SLIDEABLE_LINK = NodePath("../Slide")
-FIRE_TRIGGER = NodePath("Fire_Trigger")
-EJECT_TRIGGER = NodePath("Eject_Trigger")
-GATHER_TRIGGER = NodePath("Gather_Trigger")
-GATHER_FROM = NodePath("../Magwell")
-ROUND_ANCHOR = NodePath("../Slide/Slide/Round_Anchor")
-EJECTION_VELOCITY = Vector3(0.5, 1, 0.5)
-EJECTION_VELOCITY_ANGULAR = Vector3(11, -5, 0)
-TRIGGER_ON_FIRE = [NodePath("Blowback_Slide"), NodePath("Apply_Recoil_Impulse"), NodePath("Gunfire_Sound_Effect")]
-metadata/_custom_type_script = "uid://dpp3u5ytyv45w"
-
-[node name="Blowback_Slide" type="Node" parent="RigidBody3D/Model/Gun_Action" node_paths=PackedStringArray("I1D")]
-script = ExtResource("10_f5ljc")
-I1D = NodePath("../../Slide")
-metadata/_custom_type_script = "uid://un4puemevabk"
-
-[node name="Eject_Trigger" type="Node" parent="RigidBody3D/Model/Gun_Action"]
-script = ExtResource("16_f6c0u")
-metadata/_custom_type_script = "uid://1g57nvm0ti4l"
-
-[node name="Gather_Trigger" type="Node" parent="RigidBody3D/Model/Gun_Action"]
-script = ExtResource("16_f6c0u")
-metadata/_custom_type_script = "uid://1g57nvm0ti4l"
-
-[node name="Fire_Trigger" type="Node" parent="RigidBody3D/Model/Gun_Action"]
-script = ExtResource("16_f6c0u")
-metadata/_custom_type_script = "uid://1g57nvm0ti4l"
-
-[node name="Apply_Recoil_Impulse" type="Node" parent="RigidBody3D/Model/Gun_Action" node_paths=PackedStringArray("RIGIDBODY", "IMPULSE_POS_NODE")]
-script = ExtResource("10_18edu")
-RIGIDBODY = NodePath("../../..")
-IMPULSE = Vector3(0, 0.4, 1.3)
-IMPULSE_RANDOM = Vector3(0.2, 0.2, 0.3)
-IMPULSE_POS_NODE = NodePath("../../Slide/Slide/Round_Anchor")
-metadata/_custom_type_script = "uid://b3i0b7a4kf8v6"
-
-[node name="Gunfire_Sound_Effect" type="Node" parent="RigidBody3D/Model/Gun_Action" node_paths=PackedStringArray("SFX")]
-script = ExtResource("13_2isxn")
-SFX = NodePath("../../Slide/Slide/Round_Anchor/Gunshot")
-metadata/_custom_type_script = "uid://b7whx6weh5vid"
-
 [node name="Magwell" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("INSERTION_ENTRY_AREA")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.090634, 0.012303)
 script = ExtResource("18_8j6fe")
@@ -329,17 +283,17 @@ shape = SubResource("BoxShape3D_f5ljc")
 [node name="Slide" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 script = ExtResource("16_jmqr6")
-MODEL = NodePath("Slide")
+MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.036])
 SPRING_FORCE_CONSTANT = -16.0
 SPRING_FORCE_LINEAR = -16.0
 ELASTICITY_AT_MAX = 0.333
 ELASTICITY_AT_MIN = 0.0
-TRIGGERS_TRIGGERABLE = [NodePath("../Gun_Action/Eject_Trigger"), NodePath("../Gun_Action/Gather_Trigger")]
+TRIGGERS_TRIGGERABLE = [NodePath("Model/Gun_Action/Eject_Trigger"), NodePath("Model/Gun_Action/Gather_Trigger")]
 TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
 TRIGGERS_DIRECTION = Array[int]([1, 2])
-BEGIN_INTERACT_COLLIDER = NodePath("Slide/Area3D")
+BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 
 [node name="Map_Constraints_Asin" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("PRIMARY", "SECONDARY")]
@@ -351,10 +305,10 @@ DOMAIN_END = 0.022
 RANGE_END = 1.6
 metadata/_custom_type_script = "uid://dsw7frhgyjmgr"
 
-[node name="Slide" type="Node3D" parent="RigidBody3D/Model/Slide"]
+[node name="Model" type="Node3D" parent="RigidBody3D/Model/Slide"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.65661e-09)
 
-[node name="Slide" type="MeshInstance3D" parent="RigidBody3D/Model/Slide/Slide"]
+[node name="Slide" type="MeshInstance3D" parent="RigidBody3D/Model/Slide/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 mesh = ExtResource("12_2isxn")
 skeleton = NodePath("../../../../..")
@@ -363,20 +317,20 @@ surface_material_override/1 = SubResource("ShaderMaterial_5o4gb")
 surface_material_override/2 = SubResource("ShaderMaterial_trx11")
 script = ExtResource("4_jmqr6")
 
-[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slide/Slide"]
+[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slide/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Slide/Slide/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Slide/Model/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_f5ljc")
 
-[node name="Round_Anchor" type="Node3D" parent="RigidBody3D/Model/Slide/Slide"]
+[node name="Round_Anchor" type="Node3D" parent="RigidBody3D/Model/Slide/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0262758, -0.0228401)
 
-[node name="Gunshot" type="AudioStreamPlayer3D" parent="RigidBody3D/Model/Slide/Slide/Round_Anchor"]
+[node name="Gunshot" type="AudioStreamPlayer3D" parent="RigidBody3D/Model/Slide/Model/Round_Anchor"]
 stream = ExtResource("19_vi08r")
 max_polyphony = 8
 
-[node name="Safety" type="Node3D" parent="RigidBody3D/Model/Slide/Slide" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
+[node name="Safety" type="Node3D" parent="RigidBody3D/Model/Slide/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014354, 0.0218146, 0.0256933)
 script = ExtResource("26_o4tnm")
 ROTATION_AXIS = Vector3(-1, 0, 0)
@@ -386,46 +340,68 @@ MAX_LIMITS = Array[float]([1.0])
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 
-[node name="Model" type="Node3D" parent="RigidBody3D/Model/Slide/Slide/Safety"]
+[node name="Model" type="Node3D" parent="RigidBody3D/Model/Slide/Model/Safety"]
 
-[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slide/Slide/Safety/Model"]
+[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slide/Model/Safety/Model"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Slide/Slide/Safety/Model/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Slide/Model/Safety/Model/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014354, -0.0218146, -0.0256933)
 shape = SubResource("ConcavePolygonShape3D_m7h8j")
 
-[node name="Safety" type="MeshInstance3D" parent="RigidBody3D/Model/Slide/Slide/Safety/Model"]
+[node name="Safety" type="MeshInstance3D" parent="RigidBody3D/Model/Slide/Model/Safety/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014354, -0.0218146, -0.0256933)
 mesh = ExtResource("11_ry1el")
 skeleton = NodePath("../../../../../../..")
 
-[node name="Raise_Slidelock" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("PRIMARY", "SECONDARY")]
-process_mode = 4
-script = ExtResource("18_rtwg6")
-PRIMARY = NodePath("..")
-SECONDARY = NodePath("../../Slidelock")
-DOMAIN_START = 0.035
-DOMAIN_END = 0.034
-RANGE_END = 0.002
-is_enabled = false
-metadata/_custom_type_script = "uid://cs1x2h8hfgu13"
+[node name="Gun_Action" type="Node3D" parent="RigidBody3D/Model/Slide/Model" node_paths=PackedStringArray("ACTION_SLIDEABLE_LINK", "FIRE_TRIGGER", "EJECT_TRIGGER", "GATHER_TRIGGER", "GATHER_FROM", "ROUND_ANCHOR", "TRIGGER_ON_FIRE")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0256293, -0.0196918)
+script = ExtResource("15_cawr4")
+ACTION_SLIDEABLE_LINK = NodePath("../..")
+FIRE_TRIGGER = NodePath("Fire_Trigger")
+EJECT_TRIGGER = NodePath("Eject_Trigger")
+GATHER_TRIGGER = NodePath("Gather_Trigger")
+GATHER_FROM = NodePath("../../../Magwell")
+ROUND_ANCHOR = NodePath("../Round_Anchor")
+EJECTION_VELOCITY = Vector3(0.5, 1, 0.5)
+EJECTION_VELOCITY_ANGULAR = Vector3(11, -5, 0)
+TRIGGER_ON_FIRE = [NodePath("Blowback_Slide"), NodePath("Apply_Recoil_Impulse"), NodePath("Gunfire_Sound_Effect")]
+metadata/_custom_type_script = "uid://dpp3u5ytyv45w"
 
-[node name="Enable_Slidelock_Raiser" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("ENABLEABLE")]
-script = ExtResource("24_phrex")
-ENABLEABLE = NodePath("../Raise_Slidelock")
-SET_ENABLED_TO = true
-metadata/_custom_type_script = "uid://dqvhxoec7wfa1"
+[node name="Blowback_Slide" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action" node_paths=PackedStringArray("I1D")]
+script = ExtResource("10_f5ljc")
+I1D = NodePath("../../..")
+metadata/_custom_type_script = "uid://un4puemevabk"
 
-[node name="Disable_Slidelock_Raiser" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("ENABLEABLE")]
-script = ExtResource("24_phrex")
-ENABLEABLE = NodePath("../Raise_Slidelock")
-metadata/_custom_type_script = "uid://dqvhxoec7wfa1"
+[node name="Eject_Trigger" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action"]
+script = ExtResource("16_f6c0u")
+metadata/_custom_type_script = "uid://1g57nvm0ti4l"
+
+[node name="Gather_Trigger" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action"]
+script = ExtResource("16_f6c0u")
+metadata/_custom_type_script = "uid://1g57nvm0ti4l"
+
+[node name="Fire_Trigger" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action"]
+script = ExtResource("16_f6c0u")
+metadata/_custom_type_script = "uid://1g57nvm0ti4l"
+
+[node name="Apply_Recoil_Impulse" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action" node_paths=PackedStringArray("RIGIDBODY", "IMPULSE_POS_NODE")]
+script = ExtResource("10_18edu")
+RIGIDBODY = NodePath("../../../../..")
+IMPULSE = Vector3(0, 0.4, 1.3)
+IMPULSE_RANDOM = Vector3(0.2, 0.2, 0.3)
+IMPULSE_POS_NODE = NodePath("../../Round_Anchor")
+metadata/_custom_type_script = "uid://b3i0b7a4kf8v6"
+
+[node name="Gunfire_Sound_Effect" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action" node_paths=PackedStringArray("SFX")]
+script = ExtResource("13_2isxn")
+SFX = NodePath("../../Round_Anchor/Gunshot")
+metadata/_custom_type_script = "uid://b7whx6weh5vid"
 
 [node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0113361, 0.0353096)
 script = ExtResource("15_8j6fe")
 RELEASE_LISTENER = NodePath("Release_Hammer")
-TRIGGER = NodePath("../Gun_Action/Fire_Trigger")
+TRIGGER = NodePath("../Slide/Model/Gun_Action/Fire_Trigger")
 COCKED_ANGLE = 1.48353
 VELOCITY_THRESHOLD = -40.0
 MODEL = NodePath("Model")
@@ -491,18 +467,14 @@ skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_8gvu5")
 script = ExtResource("4_jmqr6")
 
-[node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER", "ALSO_SELECT")]
+[node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113463, 0.002696, -0.0157803)
 script = ExtResource("16_jmqr6")
 MODEL = NodePath("Model")
 SLIDE_VECTOR = Vector3(0, 1, 0)
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.002])
-TRIGGERS_TRIGGERABLE = [NodePath("Enable_Constraint"), NodePath("Disable_Constraint")]
-TRIGGERS_DISTANCE = Array[float]([0.0018, 0.0017])
-TRIGGERS_DIRECTION = Array[int]([1, 2])
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
-ALSO_SELECT = [NodePath("../Slide")]
 metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 
 [node name="Model" type="Node3D" parent="RigidBody3D/Model/Slidelock"]
@@ -518,23 +490,14 @@ skeleton = NodePath("../../../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000488281, -0.000732422, 0)
 shape = SubResource("BoxShape3D_2isxn")
 
-[node name="One_Way_Constraint" type="Node" parent="RigidBody3D/Model/Slidelock" node_paths=PackedStringArray("INTERACTIVE")]
-script = ExtResource("23_vi08r")
-INTERACTIVE = NodePath("../../Slide")
-THRESHOLD = 0.032
-is_enabled = false
-metadata/_custom_type_script = "uid://dfrv0v2loygmk"
-
-[node name="Enable_Constraint" type="Node" parent="RigidBody3D/Model/Slidelock" node_paths=PackedStringArray("ENABLEABLE")]
-script = ExtResource("24_phrex")
-ENABLEABLE = NodePath("../One_Way_Constraint")
-SET_ENABLED_TO = true
-metadata/_custom_type_script = "uid://dqvhxoec7wfa1"
-
-[node name="Disable_Constraint" type="Node" parent="RigidBody3D/Model/Slidelock" node_paths=PackedStringArray("ENABLEABLE")]
-script = ExtResource("24_phrex")
-ENABLEABLE = NodePath("../One_Way_Constraint")
-metadata/_custom_type_script = "uid://dqvhxoec7wfa1"
+[node name="Mechanism_Slide_Lock" type="Node" parent="RigidBody3D/Model/Slidelock" node_paths=PackedStringArray("SLIDE", "SLIDELOCK")]
+script = ExtResource("24_rtwg6")
+SLIDE = NodePath("../../Slide")
+SLIDELOCK = NodePath("..")
+SLIDE_LOCK_DISTANCE = 0.032
+SLIDE_LOCK_DISTANCE_SET = 0.033
+SLIDE_LOCK_DISTANCE_RESET = 0.034
+metadata/_custom_type_script = "uid://coc5w1i0xrx5r"
 
 [node name="Inspect_Pos" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.273426, 0.0196733, -0.0496492)

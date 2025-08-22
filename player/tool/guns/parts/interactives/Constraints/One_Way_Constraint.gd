@@ -50,10 +50,8 @@ func is_enabled_set():
 
 
 func _ready() -> void:
-	INTERACTIVE.TRIGGERS_TRIGGERABLE.append(THRESHOLD_TRIGGER)
-	INTERACTIVE.TRIGGERS_DISTANCE.append(THRESHOLD)
-	INTERACTIVE.TRIGGERS_DIRECTION.append(INTERACTIVE.TRIGGERS_DIRECTION_ENUM.BOTH)
-	THRESHOLD_TRIGGER.on_trigger.connect(passes_threshold)
+	assert(INTERACTIVE != null, "No Interactive_1D for One-way-Constraint set.")
+	INTERACTIVE.add_new_trigger(THRESHOLD, INTERACTIVE.TRIGGERS_DIRECTION_ENUM.BOTH).connect(passes_threshold)
 
 func passes_threshold():
 	if(!is_enabled): return
