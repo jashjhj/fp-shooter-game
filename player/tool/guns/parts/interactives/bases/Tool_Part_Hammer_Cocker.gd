@@ -66,10 +66,13 @@ func _physics_process(delta:float) -> void:
 
 
 func fully_cock():
-	hammer_cocker.is_enabled = false
-	trigger_cocker.is_enabled = false
+	call_deferred("release_hammer") # calls deferered so ti ahppens next tick, so hammer cna be updated.
 	
 	pass
+
+func release_hammer():
+	hammer_cocker.is_enabled = false
+	trigger_cocker.is_enabled = false
 
 func reset_cock():
 	hammer_cocker.is_enabled = true

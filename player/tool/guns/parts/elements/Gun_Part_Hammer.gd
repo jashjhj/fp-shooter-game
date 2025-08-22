@@ -18,6 +18,7 @@ class_name Gun_Part_DAHammer extends Tool_Part_Rotateable
 @export var LOCK_IN_COCK:bool = false;
 
 
+
 @export_group("DEBUG")
 @export var show_hit_speed:bool = false;
 
@@ -66,7 +67,7 @@ func hit_min_limit() -> void:
 	if(show_hit_speed):print(velocity)
 	
 	super.hit_min_limit()
-	if DISTANCE <= TRIGGER_ANGLE and abs(velocity) > VELOCITY_THRESHOLD:
+	if DISTANCE <= TRIGGER_ANGLE and abs(velocity) > abs(VELOCITY_THRESHOLD):
 		#print(velocity)
 		#print(current_angle)
 		if(TRIGGER != null):

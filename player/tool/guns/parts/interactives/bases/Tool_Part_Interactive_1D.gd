@@ -2,8 +2,8 @@ class_name Tool_Part_Interactive_1D extends Tool_Part_Interactive
 ##Inheriting classes must set VELOCITY.
 
 
-##Start position / distance / rotation.
-@export var DISTANCE:float = 0.0;
+##Start position / distance / rotation
+var DISTANCE:float = 0.0;
 var prev_distance:float = DISTANCE
 
 ##In metres or rads
