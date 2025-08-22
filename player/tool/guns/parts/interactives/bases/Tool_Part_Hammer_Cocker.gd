@@ -26,6 +26,7 @@ func _ready():
 	hammer_cocker.DOMAIN_END = TRIGGER_END
 	hammer_cocker.RANGE_START = HAMMER_DECOCK - HAMMER_LOOSENESS
 	hammer_cocker.RANGE_END = HAMMER_COCK - HAMMER_LOOSENESS
+	hammer_cocker.is_enabled = true
 	
 	
 	trigger_cocker.PRIMARY = HAMMER
@@ -34,7 +35,7 @@ func _ready():
 	trigger_cocker.DOMAIN_END = HAMMER_COCK
 	trigger_cocker.RANGE_START = TRIGGER_START - 0.04
 	trigger_cocker.RANGE_END = TRIGGER_END - 0.04
-
+	trigger_cocker.is_enabled = true
 	
 	#Connect triggers
 	fully_cock_triggerable.on_trigger.connect(fully_cock)

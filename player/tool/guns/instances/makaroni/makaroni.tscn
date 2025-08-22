@@ -201,7 +201,7 @@ MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
 [node name="Push_Trigger" type="Node" parent="." node_paths=PackedStringArray("I1D")]
 script = ExtResource("10_f5ljc")
 I1D = NodePath("../RigidBody3D/Model/Trigger")
-VELOCITY = 1.8
+VELOCITY = 3.0
 metadata/_custom_type_script = "uid://un4puemevabk"
 
 [node name="My_Anchor" type="RigidBody3D" parent="."]
@@ -303,6 +303,7 @@ SECONDARY = NodePath("../../Hammer")
 DOMAIN_START = 0.001
 DOMAIN_END = 0.022
 RANGE_END = 1.6
+is_enabled = true
 metadata/_custom_type_script = "uid://dsw7frhgyjmgr"
 
 [node name="Model" type="Node3D" parent="RigidBody3D/Model/Slide"]
@@ -370,6 +371,7 @@ metadata/_custom_type_script = "uid://dpp3u5ytyv45w"
 [node name="Blowback_Slide" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action" node_paths=PackedStringArray("I1D")]
 script = ExtResource("10_f5ljc")
 I1D = NodePath("../../..")
+VELOCITY = 4.0
 metadata/_custom_type_script = "uid://un4puemevabk"
 
 [node name="Eject_Trigger" type="Node" parent="RigidBody3D/Model/Slide/Model/Gun_Action"]
@@ -490,13 +492,14 @@ skeleton = NodePath("../../../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000488281, -0.000732422, 0)
 shape = SubResource("BoxShape3D_2isxn")
 
-[node name="Mechanism_Slide_Lock" type="Node" parent="RigidBody3D/Model/Slidelock" node_paths=PackedStringArray("SLIDE", "SLIDELOCK")]
+[node name="Mechanism_Slide_Lock" type="Node" parent="RigidBody3D/Model/Slidelock" node_paths=PackedStringArray("SLIDE", "SLIDELOCK", "LOCK_IF_MAG_EMPTY")]
 script = ExtResource("24_rtwg6")
 SLIDE = NodePath("../../Slide")
 SLIDELOCK = NodePath("..")
 SLIDE_LOCK_DISTANCE = 0.032
 SLIDE_LOCK_DISTANCE_SET = 0.033
 SLIDE_LOCK_DISTANCE_RESET = 0.034
+LOCK_IF_MAG_EMPTY = NodePath("../../Magwell")
 metadata/_custom_type_script = "uid://coc5w1i0xrx5r"
 
 [node name="Inspect_Pos" type="Node3D" parent="."]
