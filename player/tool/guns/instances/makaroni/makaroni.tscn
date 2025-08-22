@@ -201,7 +201,7 @@ MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
 [node name="Push_Trigger" type="Node" parent="." node_paths=PackedStringArray("I1D")]
 script = ExtResource("10_f5ljc")
 I1D = NodePath("../RigidBody3D/Model/Trigger")
-VELOCITY = 3.0
+VELOCITY = 4.0
 metadata/_custom_type_script = "uid://un4puemevabk"
 
 [node name="My_Anchor" type="RigidBody3D" parent="."]
@@ -443,7 +443,7 @@ ROTATION_AXIS = Vector3(-1, 0, 0)
 MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.5])
-SPRING_FORCE_CONSTANT = -60.0
+SPRING_FORCE_CONSTANT = -1000.0
 ELASTICITY_AT_MAX = 0.0
 ELASTICITY_AT_MIN = 0.0
 TRIGGERS_TRIGGERABLE = [NodePath("../Hammer/Release_Hammer")]

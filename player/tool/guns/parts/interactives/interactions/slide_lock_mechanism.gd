@@ -114,16 +114,11 @@ func check_force_slidelock():
 	#FInd cases to enable force slidelock.
 	# IF (SLIDELOCK IS NOT FOCUSED) and if(LOCK_IS_MOUSE_EMPTY IS SET) then CHECK ITS FULLY HOUSED and if ITS A MAG check if MAG IS EMPTY (lock slide on empty mag. 
 	#
-	if(LOCK_IF_MAG_EMPTY):
+	if(LOCK_IF_MAG_EMPTY and LOCK_IF_MAG_EMPTY.housed_insertable != null):
 		if(LOCK_IF_MAG_EMPTY.housed_insertable is Gun_Insertable_Mag):
-			if(!SLIDELOCK.is_focused and LOCK_IF_MAG_EMPTY.is_housed_fully and LOCK_IF_MAG_EMPTY.housed_insertable.STORING == 0):
-				do_force = true
-		else:
-			if(LOCK_IF_MAG_EMPTY.is_housed_fully):
+			if(!SLIDELOCK.is_focused and LOCK_IF_MAG_EMPTY.is_housed_fully and LOCK_IF_MAG_EMPTY.housed_insertable != null and LOCK_IF_MAG_EMPTY.housed_insertable.STORING == 0):
 				do_force = true
 	
-	elif(!SLIDELOCK.is_focused):
-		do_force = true
 	
 	
 	if(do_force):
