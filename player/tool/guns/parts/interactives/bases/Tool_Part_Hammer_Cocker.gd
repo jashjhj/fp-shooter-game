@@ -7,8 +7,6 @@ class_name Tool_Part_DA_Hammer_Cocker extends Tool_Part_Rotateable
 @export var RELEASE_HAMMER:float = 0.48
 @export var RELEASE_HAMMER_TRIGGER:Triggerable;
 
-##Looseness is a tolerance that will prevent bounces.
-@export var HAMMER_LOOSENESS:float = 0.1;
 
 
 
@@ -19,8 +17,8 @@ func _ready():
 	
 	
 	#Connects triggers
-	add_new_trigger(RELEASE_HAMMER, TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(release_hammer)
-	
+	add_new_trigger(RELEASE_HAMMER, TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(release_hammer) # TODO: this is called even whemn trigger is locked
+	add_new_trigger(CONSTRAINT.SECONDARY_END, TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(disengage_link)
 	
 	
 	#add_new_trigger(RELEASE_HAMMER, TRIGGERS_DIRECTION_ENUM.).connect(engage_link)
@@ -33,11 +31,16 @@ func _ready():
 func _process(delta:float) -> void:
 	super._process(delta);
 
+
+
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
 	
-	if(!is_link_engaged()):
-		if(CONSTRAINT.secondary_to_primary(CONSTRAINT.SECONDARY.DISTANCE) <= CONSTRAINT.PRIMARY.DISTANCE): # engages when 'caught' by trigger
+	print(DISTANCE)
+	
+	
+	if(!is_link_engaged()): # when 'caught' so the double actioness shoudl engage, & its not beyond the point fo no return
+		if(CONSTRAINT.secondary_to_primary(CONSTRAINT.SECONDARY.DISTANCE) <= CONSTRAINT.PRIMARY.DISTANCE and DISTANCE <= CONSTRAINT.SECONDARY_END): # engages when 'caught' by trigger
 			engage_link()
 
 
@@ -47,6 +50,7 @@ func _physics_process(delta:float) -> void:
 	#pass
 
 func release_hammer():
+	#print("drop")
 	RELEASE_HAMMER_TRIGGER.trigger()
 	disengage_link()
 

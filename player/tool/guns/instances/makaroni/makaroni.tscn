@@ -203,7 +203,7 @@ MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
 [node name="Push_Trigger" type="Node" parent="." node_paths=PackedStringArray("I1D")]
 script = ExtResource("10_f5ljc")
 I1D = NodePath("../RigidBody3D/Model/Trigger")
-VELOCITY = 15.0
+VELOCITY = 6.0
 metadata/_custom_type_script = "uid://un4puemevabk"
 
 [node name="My_Anchor" type="RigidBody3D" parent="."]
@@ -304,7 +304,7 @@ PRIMARY = NodePath("..")
 SECONDARY = NodePath("../../Hammer")
 DOMAIN_START = 0.001
 DOMAIN_END = 0.022
-RANGE_END = 1.6
+RANGE_END = 1.5708
 SET_MAX = false
 is_enabled = true
 metadata/_custom_type_script = "uid://dsw7frhgyjmgr"
@@ -405,11 +405,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014354, -0.0218146, -0.0256
 mesh = ExtResource("11_ry1el")
 skeleton = NodePath("../../../../../../..")
 
-[node name="Mechanism_Safety" type="Node" parent="RigidBody3D/Model/Slide/Model/Safety" node_paths=PackedStringArray("SAFETY", "HAMMER", "SLIDE")]
+[node name="Mechanism_Safety" type="Node" parent="RigidBody3D/Model/Slide/Model/Safety" node_paths=PackedStringArray("SAFETY", "HAMMER", "SLIDE", "ACTION")]
 script = ExtResource("15_7evtq")
 SAFETY = NodePath("..")
 HAMMER = NodePath("../../../../Hammer")
 SLIDE = NodePath("../../..")
+ACTION = NodePath("../../../Gun_Action")
 metadata/_custom_type_script = "uid://c1qvg1lbju86d"
 
 [node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER")]
@@ -421,7 +422,7 @@ COCKED_ANGLE = 1.48353
 VELOCITY_THRESHOLD = 30.0
 MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
-MAX_LIMITS = Array[float]([1.6])
+MAX_LIMITS = Array[float]([1.708])
 SPRING_FORCE_CONSTANT = -1000.0
 ELASTICITY_AT_MAX = 0.0
 ELASTICITY_AT_MIN = 0.0
@@ -452,7 +453,6 @@ HAMMER = NodePath("../Hammer")
 CONSTRAINT = NodePath("Mechanism_2way_Mapper")
 RELEASE_HAMMER = 0.49
 RELEASE_HAMMER_TRIGGER = NodePath("../Hammer/Release_Hammer")
-HAMMER_LOOSENESS = 0.3
 ROTATION_AXIS = Vector3(-1, 0, 0)
 MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
@@ -487,8 +487,6 @@ SECONDARY = NodePath("..")
 PRIMARY_END = 1.5708
 SECONDARY_START = 0.1
 SECONDARY_END = 0.45
-AFFECT_MIN = false
-AFFECT_MAX = true
 is_enabled = true
 
 [node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]

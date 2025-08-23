@@ -49,9 +49,13 @@ func _ready():
 	
 	super._ready();
 
+
+#var last_release_tick:int;
+#const release_window:int = 17; # window in which being told to relase does not hold abck the hammer
+
 func release_hammer():
-	#print("released")
 	is_cock_limit_set = false;
+	#last_release_tick = Time.get_ticks_msec()
 	
 
 
@@ -94,9 +98,14 @@ func _physics_process(delta:float) -> void:
 	#	print(velocity)
 	
 	if(DISTANCE >= COCKED_ANGLE):
-	
-		if(!is_focused and !is_cock_limit_set): # Checker for if its made to be cocked during play
+		
+		#if(!is_focused and !is_cock_limit_set): # Checker for if its made to be cocked during play
+			#if(Time.get_ticks_msec() - last_release_tick > release_window):
+				#is_cock_limit_set = true
+		if(!is_focused and !is_cocked):
+			#print("CoCK")
 			is_cock_limit_set = true
+		
 		
 		is_cocked = true;
 	else:

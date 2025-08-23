@@ -9,8 +9,8 @@ class_name Mechanism_2Way_Mapper extends Enableable
 @export var SECONDARY_END:float = 0.1
 
 ##Does this only work on the minimum ends of each?   Means that things can go as far as they want one way but not somuch the other.   Primary applies min limit on secondary, secondary has full motion ( when its > priamry)
-@export var AFFECT_MIN:bool = true
-@export var AFFECT_MAX:bool = false
+#@export var AFFECT_MIN:bool = true
+#@export var AFFECT_MAX:bool = false
 
 #operates in l8 physics process
 
@@ -64,7 +64,7 @@ func resolve_deltas(delta:float) -> void:
 		
 		secondary_projection = primary_to_secondary(primary_projection) # maps back to secondary in case anythign ahs cahnged
 		
-		#if(true or (AFFECT_MIN and secondary_projection < SECONDARY.DISTANCE) or (AFFECT_MAX and primary_projection > SECONDARY.DISTANCE)):
+		#if((AFFECT_MIN and secondary_projection < SECONDARY.DISTANCE) or (AFFECT_MAX and primary_projection > SECONDARY.DISTANCE)):
 		SECONDARY.velocity += (secondary_projection - SECONDARY.DISTANCE) / delta # sets new velocity by hwo much it was forced.
 		SECONDARY.DISTANCE = secondary_projection
 		
@@ -104,6 +104,7 @@ func resolve_deltas(delta:float) -> void:
 		PRIMARY.velocity += (primary_projection - PRIMARY.DISTANCE) / delta
 		PRIMARY.DISTANCE = primary_projection
 		
+		#if((AFFECT_MIN and secondary_projection < SECONDARY.DISTANCE) or (AFFECT_MAX and primary_projection > SECONDARY.DISTANCE)):
 		SECONDARY.velocity += (secondary_projection - SECONDARY.DISTANCE) / delta # sets new velocity by hwo much it was forced.
 		SECONDARY.DISTANCE = secondary_projection
 	
@@ -137,10 +138,11 @@ func resolve_deltas(delta:float) -> void:
 		
 		secondary_projection = primary_to_secondary(primary_projection)# maps back to secondary in case anythign ahs cahnged
 		
-		#PRIMARY.velocity += (primary_projection - PRIMARY.DISTANCE) / delta
+		PRIMARY.velocity += (primary_projection - PRIMARY.DISTANCE) / delta
 		PRIMARY.DISTANCE = primary_projection
 		
-		#SECONDARY.velocity += (secondary_projection - SECONDARY.DISTANCE) / delta # sets new velocity by hwo much it was forced.
+		#if((AFFECT_MIN and secondary_projection < SECONDARY.DISTANCE) or (AFFECT_MAX and primary_projection > SECONDARY.DISTANCE)):
+		SECONDARY.velocity += (secondary_projection - SECONDARY.DISTANCE) / delta # sets new velocity by hwo much it was forced.
 		SECONDARY.DISTANCE = secondary_projection
 
 func primary_to_secondary(primary_float:float) -> float:

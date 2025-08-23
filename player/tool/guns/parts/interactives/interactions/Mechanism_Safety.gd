@@ -8,7 +8,13 @@ class_name Mechanism_Safety extends Node
 
 @onready var CONSTRAINT_HAMMER:Map_Constraint_Linear_Max = Map_Constraint_Linear_Max.new();
 
+@export var ACTION:Gun_Action;
 
+@onready var is_safety_on:bool = SAFETY_STARTS_ON:
+	set(v):
+		is_safety_on = v
+		if(ACTION != null):
+			ACTION.is_firing_pin_connected = !is_safety_on
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,12 +47,14 @@ func _ready() -> void:
 
 var is_slide_limit_set:bool = false
 func enable_safety():
+	is_safety_on = true
 	HAMMER.release_hammer()
 	if(SLIDE != null and !is_slide_limit_set):
 		SLIDE.add_max_limit(0.003)
 		is_slide_limit_set = true
 
 func disable_safety():
+	is_safety_on = false
 	if(SLIDE != null and is_slide_limit_set):
 		SLIDE.remove_max_limit(0.003)
 		is_slide_limit_set = false
