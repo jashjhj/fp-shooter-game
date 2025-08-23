@@ -4,6 +4,7 @@ class_name Mechanism_Safety extends Node
 @export var SAFETY_STARTS_ON:bool = true
 
 @export var HAMMER:Gun_Part_DAHammer
+@export var SLIDE:Tool_Part_Interactive_1D
 
 @onready var CONSTRAINT_HAMMER:Map_Constraint_Linear_Max = Map_Constraint_Linear_Max.new();
 
@@ -28,10 +29,27 @@ func _ready() -> void:
 	CONSTRAINT_HAMMER.SET_MAX = true
 	CONSTRAINT_HAMMER.is_enabled = true
 	
+	if(SAFETY_STARTS_ON):
+		SAFETY.add_new_trigger((SAFETY.get_max_distance() * 3 + SAFETY.get_min_distance()) / 4.0, Tool_Part_Interactive_1D.TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(disable_safety)
+		SAFETY.add_new_trigger((SAFETY.get_min_distance() * 3 + SAFETY.get_max_distance()) / 4.0, Tool_Part_Interactive_1D.TRIGGERS_DIRECTION_ENUM.BACKWARDS).connect(enable_safety)
+		enable_safety()
+	else:
+		SAFETY.add_new_trigger((SAFETY.get_min_distance() * 3 + SAFETY.get_max_distance()) / 4.0, Tool_Part_Interactive_1D.TRIGGERS_DIRECTION_ENUM.BACKWARDS).connect(disable_safety)
+		SAFETY.add_new_trigger((SAFETY.get_max_distance() * 3 + SAFETY.get_min_distance()) / 4.0, Tool_Part_Interactive_1D.TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(enable_safety)
+	
 	add_child(CONSTRAINT_HAMMER)
+
+func enable_safety():
+	if(SLIDE != null):
+		SLIDE.add_max_limit(0.003)
+
+func disable_safety():
+	if(SLIDE != null):
+		SLIDE.remove_max_limit(0.003)
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	print(HAMMER.MAX_LIMITS)
+	#print_debug(HAMMER.MAX_LIMITS)
+	pass

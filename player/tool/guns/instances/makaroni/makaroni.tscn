@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=54 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -25,25 +25,10 @@
 [ext_resource type="AudioStream" uid="uid://iqya3bdulwq5" path="res://assets/sfx/gunfire_colt_peacemaker.wav" id="19_vi08r"]
 [ext_resource type="PackedScene" uid="uid://b517ttrlv06s" path="res://player/tool/guns/instances/makaroni/makaroni_8rd.tscn" id="20_3hwry"]
 [ext_resource type="Script" uid="uid://d1kaw4geaca7m" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Hammer_Cocker.gd" id="22_vi08r"]
+[ext_resource type="Script" uid="uid://d02y7orm5bxym" path="res://player/tool/guns/parts/interactives/interactions/Mechanism_2Way_Mapper.gd" id="24_nf3x5"]
 [ext_resource type="Script" uid="uid://coc5w1i0xrx5r" path="res://player/tool/guns/parts/interactives/interactions/Mechanism_Slide_lock.gd" id="24_rtwg6"]
 [ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Rotateable.gd" id="26_o4tnm"]
 [ext_resource type="Script" uid="uid://bdlivs60vnnyg" path="res://player/tool/guns/instances/makaroni/makaroni_brain.gd" id="30_xqy73"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtwg6"]
-render_priority = 0
-shader = ExtResource("2_mmcih")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7evtq"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_rtwg6")
-shader = ExtResource("3_cawr4")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-shader_parameter/color_shade = 0.86
-shader_parameter/life = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nf3x5"]
 render_priority = 0
@@ -109,9 +94,6 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
-size = Vector3(0.0373535, 0.0458984, 0.0654297)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1g8f6"]
 render_priority = 0
 shader = ExtResource("2_mmcih")
@@ -127,6 +109,9 @@ shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
+size = Vector3(0.0373535, 0.0458984, 0.0654297)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7ykr"]
 render_priority = 0
@@ -160,6 +145,22 @@ shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_msppm"]
+render_priority = 0
+shader = ExtResource("2_mmcih")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trx11"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_msppm")
+shader = ExtResource("3_cawr4")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5ljc"]
 points = PackedVector3Array(-0.0140984, 0.005224, -0.0193307, -0.014876, 0.00524514, -0.108375, 0.014876, 0.00524514, -0.108375, 0.0140955, 0.005224, -0.0105346, -0.0140984, 0.005224, 0.00802645, -0.0148585, 0.0105628, -0.115518, -0.014742, 0.0163668, -0.142856, -0.0133383, 0.0150665, -0.142856, -0.00416458, 0.0113522, -0.142856, -0.014876, 0.00524514, 0.05119, -0.014876, 0.00746878, 0.05119, -0.0148731, 0.0212898, 0.031926, 0.00416167, 0.0113522, -0.142856, 0.0133354, 0.0150665, -0.142856, 0.0147391, 0.0163668, -0.142856, 0.0148556, 0.0105628, -0.115518, 0.0148702, 0.011916, 0.0497461, 0.014876, 0.00746878, 0.05119, 0.014876, 0.00524514, 0.05119, 0.0140955, 0.005224, 0.031394, -0.0148236, 0.013308, -0.12382, -0.0141887, 0.0274956, -0.142856, -0.00799425, 0.0262058, -0.142894, -0.00553336, 0.0121662, 0.050715, -0.0148731, 0.011916, 0.0497461, -0.0148585, 0.0139881, 0.0473714, -0.0142353, 0.0262269, 0.0422799, -0.0141712, 0.0275449, 0.0406841, -0.0141829, 0.0275097, 0.0300072, -0.0141887, 0.0274991, 0.00232704, -0.0141887, 0.0274991, -0.0231873, 0.00799134, 0.0262058, -0.142894, 0.0148207, 0.013308, -0.12382, 0.0141858, 0.0274956, -0.142856, 0.0141858, 0.0274991, -0.0143912, 0.0141858, 0.0274991, 0.0256946, 0.0148556, 0.0139881, 0.0473714, 0.0142324, 0.0262269, 0.0422799, 0.00553045, 0.0121662, 0.050715, -0.010295, 0.0334617, -0.142856, -0.00607505, 0.0412215, 0.0196912, -0.00532367, 0.0369857, -0.142856, -0.00174446, 0.0378772, -0.142856, -0.00553336, 0.0268683, 0.0423179, -0.00553336, 0.0285034, 0.0403421, 0, 0.037398, 0.0287153, -0.00174446, 0.0378772, 0.0277274, -0.00607505, 0.0412215, 0.0214961, 0.00174155, 0.0378772, -0.142856, 0.00532076, 0.0369857, -0.142856, 0.010292, 0.0334617, -0.142856, 0.00607213, 0.0412215, 0.0196912, 0.0141683, 0.0275449, 0.0406841, 0.00553045, 0.0285034, 0.0403421, 0.00553045, 0.0268683, 0.0423179, -0.00112997, 0.0410699, -0.135865, -0.00112997, 0.0402876, -0.142153, -0.0017765, 0.0384869, -0.142818, 0.00174155, 0.0378772, 0.0277274, 0.00607213, 0.0412215, 0.0214961, 0.00177359, 0.0384869, -0.142818, 0.00112706, 0.0402876, -0.142153, 0.00112706, 0.0410699, -0.135865)
 
@@ -172,16 +173,16 @@ size = Vector3(0.0134277, 0.0377197, 0.0290527)
 [sub_resource type="BoxShape3D" id="BoxShape3D_f6c0u"]
 size = Vector3(0.00219727, 0.0297852, 0.0180664)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_msppm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stdsh"]
 render_priority = 0
 shader = ExtResource("2_mmcih")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trx11"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gvu5"]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_msppm")
+next_pass = SubResource("ShaderMaterial_stdsh")
 shader = ExtResource("3_cawr4")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
@@ -251,11 +252,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0264405, -0.0106144)
 [node name="Body" type="MeshInstance3D" parent="RigidBody3D/Model"]
 mesh = ExtResource("1_ilmi0")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_7evtq")
-surface_material_override/1 = SubResource("ShaderMaterial_o4tnm")
-surface_material_override/2 = SubResource("ShaderMaterial_m7h8j")
-surface_material_override/3 = SubResource("ShaderMaterial_lohkq")
-surface_material_override/4 = SubResource("ShaderMaterial_oxpvn")
+surface_material_override/0 = SubResource("ShaderMaterial_o4tnm")
+surface_material_override/1 = SubResource("ShaderMaterial_m7h8j")
+surface_material_override/2 = SubResource("ShaderMaterial_lohkq")
+surface_material_override/3 = SubResource("ShaderMaterial_oxpvn")
+surface_material_override/4 = SubResource("ShaderMaterial_suvc2")
 script = ExtResource("4_jmqr6")
 
 [node name="MagRelease" type="MeshInstance3D" parent="RigidBody3D/Model"]
@@ -297,13 +298,14 @@ TRIGGERS_DIRECTION = Array[int]([1, 2])
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 
-[node name="Map_Constraints_Asin" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("PRIMARY", "SECONDARY")]
+[node name="Push_back_Hammer" type="Node" parent="RigidBody3D/Model/Slide" node_paths=PackedStringArray("PRIMARY", "SECONDARY")]
 script = ExtResource("16_3hwry")
 PRIMARY = NodePath("..")
 SECONDARY = NodePath("../../Hammer")
 DOMAIN_START = 0.001
 DOMAIN_END = 0.022
 RANGE_END = 1.6
+SET_MAX = false
 is_enabled = true
 metadata/_custom_type_script = "uid://dsw7frhgyjmgr"
 
@@ -359,9 +361,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.65661e-09)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 mesh = ExtResource("12_2isxn")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_suvc2")
-surface_material_override/1 = SubResource("ShaderMaterial_j64g3")
-surface_material_override/2 = SubResource("ShaderMaterial_5o4gb")
+surface_material_override/0 = SubResource("ShaderMaterial_j64g3")
+surface_material_override/1 = SubResource("ShaderMaterial_5o4gb")
+surface_material_override/2 = SubResource("ShaderMaterial_trx11")
 script = ExtResource("4_jmqr6")
 
 [node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slide/Model"]
@@ -402,10 +404,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014354, -0.0218146, -0.0256
 mesh = ExtResource("11_ry1el")
 skeleton = NodePath("../../../../../../..")
 
-[node name="Mechanism_Safety" type="Node" parent="RigidBody3D/Model/Slide/Model/Safety" node_paths=PackedStringArray("SAFETY", "HAMMER")]
+[node name="Mechanism_Safety" type="Node" parent="RigidBody3D/Model/Slide/Model/Safety" node_paths=PackedStringArray("SAFETY", "HAMMER", "SLIDE")]
 script = ExtResource("15_7evtq")
 SAFETY = NodePath("..")
 HAMMER = NodePath("../../../../Hammer")
+SLIDE = NodePath("../../..")
 metadata/_custom_type_script = "uid://c1qvg1lbju86d"
 
 [node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER")]
@@ -418,8 +421,7 @@ VELOCITY_THRESHOLD = 30.0
 MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([1.6])
-SPRING_FORCE_CONSTANT = -500.0
-SPRING_FORCE_LINEAR = -600.0
+SPRING_FORCE_CONSTANT = -1000.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 
@@ -475,8 +477,14 @@ shape = SubResource("BoxShape3D_f6c0u")
 transform = Transform3D(1, -1.49012e-08, 0, 1.02415e-08, 0.975414, -0.220383, 3.1707e-08, 0.220383, 0.975414, 3.72529e-09, 0.00046926, -0.000744432)
 mesh = ExtResource("13_vi08r")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_trx11")
+surface_material_override/0 = SubResource("ShaderMaterial_8gvu5")
 script = ExtResource("4_jmqr6")
+
+[node name="Mechanism_2way_Mapper" type="Node" parent="RigidBody3D/Model/Trigger" node_paths=PackedStringArray("PRIMARY", "SECONDARY")]
+script = ExtResource("24_nf3x5")
+PRIMARY = NodePath("..")
+SECONDARY = NodePath("../../Hammer")
+SECONDARY_END = 1.5708
 
 [node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113463, 0.002696, -0.0157803)

@@ -80,8 +80,8 @@ func _physics_process(delta: float) -> void:
 func set_constraints():
 	if(!is_initialised): return
 	#Processes. CALCULATE_RANGE_MIN works entirely on remapped, normalised values
-	if(SET_MIN):	apply_constraint_min(remap(calculate_range_min(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))
-	if(SET_MAX):	apply_constraint_max(remap(calculate_range_max(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END))
+	if(SET_MIN):	apply_constraint_min(remap(calculate_range_min(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END));
+	if(SET_MAX):	apply_constraint_max(remap(calculate_range_max(min(1.0, max(0.0, remap(PRIMARY.DISTANCE, DOMAIN_START, DOMAIN_END, 0.0, 1.0)))), 0.0, 1.0, RANGE_START, RANGE_END));
 
 ##Domain: 0.0 -> 1.0. Return range, 0.0 -> 1.0
 func calculate_range_min(domain:float) -> float:

@@ -42,6 +42,7 @@ enum TRIGGERS_DIRECTION_ENUM {
 
 ##Ready
 func _ready():
+	
 	super._ready();
 
 func _process(delta:float) -> void:
