@@ -2,57 +2,28 @@ class_name Tool_Part_DA_Hammer_Cocker extends Tool_Part_Rotateable
 
 @export var HAMMER:Tool_Part_Interactive_1D
 
-@export var TRIGGER_START:float;
-@export var TRIGGER_END:float;
-@export var HAMMER_DECOCK:float;
-@export var HAMMER_COCK:float;
+@export var CONSTRAINT:Mechanism_2Way_Mapper;
+
+@export var RELEASE_HAMMER:float = 0.48
+@export var RELEASE_HAMMER_TRIGGER:Triggerable;
 
 ##Looseness is a tolerance that will prevent bounces.
 @export var HAMMER_LOOSENESS:float = 0.1;
 
-@onready var hammer_cocker:Map_Constraint_Linear_Min = Map_Constraint_Linear_Min.new()
-@onready var trigger_cocker:Map_Constraint_Linear_Min = Map_Constraint_Linear_Min.new();
 
-@onready var fully_cock_triggerable:Triggerable = Triggerable.new();
-@onready var reset_cock_triggerable:Triggerable = Triggerable.new();
 
 ##Ready
 func _ready():
 	super._ready();
 	
-	#hammer_cocker.PRIMARY = self
-	#hammer_cocker.SECONDARY = HAMMER
-	#hammer_cocker.DOMAIN_START = TRIGGER_START # tolerances so it can slide, wont get stuck.
-	#hammer_cocker.DOMAIN_END = TRIGGER_END
-	#hammer_cocker.RANGE_START = HAMMER_DECOCK - HAMMER_LOOSENESS
-	#hammer_cocker.RANGE_END = HAMMER_COCK - HAMMER_LOOSENESS
-	#hammer_cocker.is_enabled = true
 	
 	
-	#trigger_cocker.PRIMARY = HAMMER
-	#trigger_cocker.SECONDARY = self
-	#trigger_cocker.DOMAIN_START = HAMMER_DECOCK
-	#trigger_cocker.DOMAIN_END = HAMMER_COCK
-	#trigger_cocker.RANGE_START = TRIGGER_START - 0.04
-	#trigger_cocker.RANGE_END = TRIGGER_END - 0.04
-	#trigger_cocker.is_enabled = true
+	#Connects triggers
+	add_new_trigger(RELEASE_HAMMER, TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(release_hammer)
 	
-	#add_child(hammer_cocker)
-	#add_child(trigger_cocker)
-
-
-	#Connect triggers
-	fully_cock_triggerable.on_trigger.connect(fully_cock)
-	reset_cock_triggerable.on_trigger.connect(reset_cock)
 	
-	TRIGGERS_TRIGGERABLE.append(fully_cock_triggerable)
-	TRIGGERS_DIRECTION.append(TRIGGERS_DIRECTION_ENUM.FORWARDS)
-	TRIGGERS_DISTANCE.append(TRIGGER_END)
 	
-	TRIGGERS_TRIGGERABLE.append(reset_cock_triggerable)
-	TRIGGERS_DIRECTION.append(TRIGGERS_DIRECTION_ENUM.BACKWARDS)
-	TRIGGERS_DISTANCE.append(TRIGGER_START)
-	
+	#add_new_trigger(RELEASE_HAMMER, TRIGGERS_DIRECTION_ENUM.).connect(engage_link)
 	
 	
 
@@ -64,20 +35,26 @@ func _process(delta:float) -> void:
 
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
-
-
-
-func fully_cock():
-	call_deferred("release_hammer") # calls deferered so ti ahppens next tick, so hammer cna be updated.
 	
-	pass
+	if(!is_link_engaged()):
+		if(CONSTRAINT.secondary_to_primary(CONSTRAINT.SECONDARY.DISTANCE) <= CONSTRAINT.PRIMARY.DISTANCE): # engages when 'caught' by trigger
+			engage_link()
+
+
+#func fully_cock():
+	#call_deferred("release_hammer") # calls deferered so ti ahppens next tick, so hammer cna be updated.
+	#
+	#pass
 
 func release_hammer():
-	hammer_cocker.is_enabled = false
-	trigger_cocker.is_enabled = false
+	RELEASE_HAMMER_TRIGGER.trigger()
+	disengage_link()
 
-func reset_cock():
-	hammer_cocker.is_enabled = true
-	trigger_cocker.is_enabled = true
-	
-	pass
+func disengage_link():
+	CONSTRAINT.is_enabled = false
+
+func engage_link():
+	CONSTRAINT.is_enabled = true
+
+func is_link_engaged():
+	return CONSTRAINT.is_enabled

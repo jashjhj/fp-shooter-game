@@ -108,7 +108,7 @@ func _physics_process(delta:float) -> void:
 			
 			
 			#v^2 = u^2 + 2as, calculates Velocity actual at impact
-			var u2add2as = prev_vel*prev_vel + 2*accel*(DISTANCE-prev_distance);
+			var u2add2as = prev_vel*prev_vel + 2*((velocity - prev_vel)/delta)*(DISTANCE-prev_distance);
 			velocity = sqrt(abs(u2add2as)) * sign(u2add2as) 
 			
 			if(abs(velocity) > 0.001): hit_min_limit()
@@ -142,6 +142,10 @@ func _physics_process(delta:float) -> void:
 		#	print(TRIGGERS_TRIGGERABLE[i], " @ ", Time.get_ticks_msec())
 	
 	prev_distance = DISTANCE
+
+
+
+
 
 ##Adds a trigegrable at distance in direction to the tirggers
 func add_trigger(triggerable:Triggerable, distance:float, direction:TRIGGERS_DIRECTION_ENUM) -> void:

@@ -39,14 +39,17 @@ func _ready() -> void:
 	
 	add_child(CONSTRAINT_HAMMER)
 
+var is_slide_limit_set:bool = false
 func enable_safety():
-	HAMMER.is_cock_limit_set = false
-	if(SLIDE != null):
+	HAMMER.release_hammer()
+	if(SLIDE != null and !is_slide_limit_set):
 		SLIDE.add_max_limit(0.003)
+		is_slide_limit_set = true
 
 func disable_safety():
-	if(SLIDE != null):
+	if(SLIDE != null and is_slide_limit_set):
 		SLIDE.remove_max_limit(0.003)
+		is_slide_limit_set = false
 
 
 

@@ -203,7 +203,7 @@ MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
 [node name="Push_Trigger" type="Node" parent="." node_paths=PackedStringArray("I1D")]
 script = ExtResource("10_f5ljc")
 I1D = NodePath("../RigidBody3D/Model/Trigger")
-VELOCITY = 15.0
+VELOCITY = 4.0
 metadata/_custom_type_script = "uid://un4puemevabk"
 
 [node name="My_Anchor" type="RigidBody3D" parent="."]
@@ -423,8 +423,6 @@ MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([1.6])
 SPRING_FORCE_CONSTANT = -1000.0
-ELASTICITY_AT_MAX = 0.0
-ELASTICITY_AT_MIN = 0.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 
@@ -445,21 +443,23 @@ skeleton = NodePath("../../../../..")
 script = ExtResource("16_f6c0u")
 metadata/_custom_type_script = "uid://1g57nvm0ti4l"
 
-[node name="Trigger" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("HAMMER", "CONSTRAINT", "RELEASE_HAMMER_TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER")]
+[node name="Trigger" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("HAMMER", "CONSTRAINT", "RELEASE_HAMMER_TRIGGER", "MODEL", "TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00313732, -0.0385703)
 script = ExtResource("22_vi08r")
 HAMMER = NodePath("../Hammer")
 CONSTRAINT = NodePath("Mechanism_2way_Mapper")
-RELEASE_HAMMER = 0.49
 RELEASE_HAMMER_TRIGGER = NodePath("../Hammer/Release_Hammer")
 HAMMER_LOOSENESS = 0.3
 ROTATION_AXIS = Vector3(-1, 0, 0)
 MODEL = NodePath("Model")
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.5])
-SPRING_FORCE_CONSTANT = -200.0
+SPRING_FORCE_CONSTANT = -1000.0
 ELASTICITY_AT_MAX = 0.0
 ELASTICITY_AT_MIN = 0.0
+TRIGGERS_TRIGGERABLE = [NodePath("../Hammer/Release_Hammer")]
+TRIGGERS_DISTANCE = Array[float]([0.46])
+TRIGGERS_DIRECTION = Array[int]([1])
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 

@@ -45,12 +45,15 @@ var is_cocked:bool = false:
 ##Ready
 func _ready():
 	
-	RELEASE_LISTENER.on_trigger.connect(release)
+	RELEASE_LISTENER.on_trigger.connect(release_hammer)
+	
 	super._ready();
 
-func release():
+func release_hammer():
+	#print("released")
 	is_cock_limit_set = false;
 	
+
 
 func enable_focus():
 	super.enable_focus()
@@ -91,8 +94,8 @@ func _physics_process(delta:float) -> void:
 	#	print(velocity)
 	
 	if(DISTANCE >= COCKED_ANGLE):
-		
-		if(!is_focused and !is_cocked): # Checker for if its made to be cocked during play
+	
+		if(!is_focused and !is_cock_limit_set): # Checker for if its made to be cocked during play
 			is_cock_limit_set = true
 		
 		is_cocked = true;
