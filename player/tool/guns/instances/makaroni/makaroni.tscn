@@ -388,6 +388,7 @@ MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([1.0])
 SPRING_FORCE_CONSTANT = -20.0
 SPRING_FORCE_LINEAR = 40.0
+FRICTION_FORCE = 0.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 

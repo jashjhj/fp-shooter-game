@@ -40,6 +40,7 @@ func _ready() -> void:
 	add_child(CONSTRAINT_HAMMER)
 
 func enable_safety():
+	HAMMER.is_cock_limit_set = false
 	if(SLIDE != null):
 		SLIDE.add_max_limit(0.003)
 
