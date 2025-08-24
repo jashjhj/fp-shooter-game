@@ -94,6 +94,8 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 			_disable_focus()
 
 func _enable_focus():
+	#Cancel if mouse not visible
+	if(! (Input.mouse_mode == Input.MOUSE_MODE_VISIBLE or Input.mouse_mode == Input.MOUSE_MODE_CONFINED)) : return
 	if(is_focused): return # If already focused, cancel
 	if(!is_focusable): return
 	has_been_focused = true;
