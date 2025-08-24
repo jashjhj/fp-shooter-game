@@ -6,7 +6,7 @@ class_name Mechanism_Safety extends Node
 @export var HAMMER:Gun_Part_DAHammer
 @export var SLIDE:Tool_Part_Interactive_1D
 
-@onready var CONSTRAINT_HAMMER:Map_Constraint_Linear_Max = Map_Constraint_Linear_Max.new();
+@onready var CONSTRAINT_HAMMER:Map_Constraint_Linear = Map_Constraint_Linear.new();
 
 @export var ACTION:Gun_Action;
 

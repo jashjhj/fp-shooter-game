@@ -311,8 +311,9 @@ PRIMARY = NodePath("..")
 SECONDARY = NodePath("../Model/Safety")
 DOMAIN_START = 0.01
 DOMAIN_END = 0.014
-RANGE_END = 0.9
-SET_MAX = false
+RANGE_START = 1.0
+RANGE_END = 0.0
+SET_MIN = false
 is_enabled = true
 metadata/_custom_type_script = "uid://cefwi113hlf3a"
 

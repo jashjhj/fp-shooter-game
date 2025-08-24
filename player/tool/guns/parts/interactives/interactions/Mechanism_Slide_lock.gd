@@ -10,8 +10,8 @@ class_name Mechanism_Slide_Lock extends Node
 @export var LOCK_IF_MAG_EMPTY:Tool_Part_Insertable_Slot;
 
 
-@onready var CONSTRAINT_SLIDELOCK_SET:Map_Constraint_Linear_Min = Map_Constraint_Linear_Min.new()
-@onready var CONSTRAINT_SLIDELOCK_RESET:Map_Constraint_Linear_Max = Map_Constraint_Linear_Max.new()
+@onready var CONSTRAINT_SLIDELOCK_SET:Map_Constraint_Linear = Map_Constraint_Linear.new()
+@onready var CONSTRAINT_SLIDELOCK_RESET:Map_Constraint_Linear = Map_Constraint_Linear.new()
 @onready var CONSTRAINT_SLIDE:One_Way_Constraint = One_Way_Constraint.new()
 
 
@@ -62,6 +62,7 @@ func _ready() -> void:
 	CONSTRAINT_SLIDELOCK_SET.RANGE_END = SLIDELOCK.get_max_distance()
 	CONSTRAINT_SLIDELOCK_SET.is_enabled = false;
 	CONSTRAINT_SLIDELOCK_SET.SET_MAX = false
+	CONSTRAINT_SLIDELOCK_SET.SET_MIN = true
 	
 	CONSTRAINT_SLIDELOCK_RESET.PRIMARY = SLIDE
 	CONSTRAINT_SLIDELOCK_RESET.SECONDARY = SLIDELOCK
@@ -71,6 +72,7 @@ func _ready() -> void:
 	CONSTRAINT_SLIDELOCK_RESET.RANGE_END = SLIDELOCK.get_min_distance()
 	CONSTRAINT_SLIDELOCK_RESET.is_enabled = false
 	CONSTRAINT_SLIDELOCK_RESET.SET_MIN = false
+	CONSTRAINT_SLIDELOCK_RESET.SET_MAX = true
 	
 	CONSTRAINT_SLIDE.INTERACTIVE = SLIDE
 	CONSTRAINT_SLIDE.THRESHOLD = SLIDE_LOCK_DISTANCE

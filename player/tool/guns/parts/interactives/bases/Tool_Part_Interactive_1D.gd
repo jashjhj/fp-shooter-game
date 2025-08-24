@@ -64,6 +64,7 @@ func _physics_process(delta:float) -> void:
 	var prev_vel:float = velocity
 	
 	if(is_focused):
+		#pass
 		velocity = 0;
 	
 	else:

@@ -85,8 +85,8 @@ func set_constraints():
 
 ##Domain: 0.0 -> 1.0. Return range, 0.0 -> 1.0
 func calculate_range_min(domain:float) -> float:
-	return -INF # these can break atransform if range start-end are not in ascending order. If so, disable SET_MIN/SET_MAX
+	return INF * (RANGE_START - RANGE_END) # these can break atransform if range start-end are not in ascending order. If so, disable SET_MIN/SET_MAX
 
 ##Domain: 0.0 -> 1.0. Return range, 0.0 -> 1.0
 func calculate_range_max(domain:float) -> float:
-	return INF
+	return INF * (RANGE_END - RANGE_START)
