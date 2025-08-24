@@ -52,10 +52,13 @@ func _ready():
 
 #var last_release_tick:int;
 #const release_window:int = 17; # window in which being told to relase does not hold abck the hammer
+var release_timer:float = 0.0
+
 
 func release_hammer():
+	#print("release")
 	is_cock_limit_set = false;
-	#last_release_tick = Time.get_ticks_msec()
+	release_timer = 0.1
 	
 
 
@@ -94,21 +97,25 @@ func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
 	#print(velocity)
 	
-	#if abs(velocity) > 1: # rad/second
-	#	print(velocity)
+	
 	
 	if(DISTANCE >= COCKED_ANGLE):
 		
-		#if(!is_focused and !is_cock_limit_set): # Checker for if its made to be cocked during play
-			#if(Time.get_ticks_msec() - last_release_tick > release_window):
-				#is_cock_limit_set = true
-		if(!is_focused and !is_cocked):
-			#print("CoCK")
-			is_cock_limit_set = true
+		if(!is_focused and !is_cocked):# Checker for if its made to be cocked during play.
+			is_cock_limit_set = true # called the first time the hammer is cocked
+		
+		
+		release_timer -= delta # Essentially: If it was 'told' to fall, and does not for 0.1 seconds (remains cocked throughout), it resets the cock
+		if(!is_focused and !is_cock_limit_set): 
+			if(release_timer < 0):
+				is_cock_limit_set = true
+
+		
 		
 		
 		is_cocked = true;
 	else:
+		release_timer = INF
 		is_cocked = false;
 		#if(LOCK_IN_COCK):
 		#	MIN_ANGLE = COCKED_ANGLE;

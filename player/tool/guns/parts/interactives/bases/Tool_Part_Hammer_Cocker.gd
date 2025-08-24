@@ -50,7 +50,7 @@ func _physics_process(delta:float) -> void:
 	#pass
 
 func release_hammer():
-	print("drop")
+	#print("drop")
 	RELEASE_HAMMER_TRIGGER.trigger()
 	disengage_link()
 
