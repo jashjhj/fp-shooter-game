@@ -28,7 +28,7 @@
 [ext_resource type="Script" uid="uid://d02y7orm5bxym" path="res://player/tool/guns/parts/interactives/interactions/Mechanism_2Way_Mapper.gd" id="24_nf3x5"]
 [ext_resource type="Script" uid="uid://coc5w1i0xrx5r" path="res://player/tool/guns/parts/interactives/interactions/Mechanism_Slide_lock.gd" id="24_rtwg6"]
 [ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Rotateable.gd" id="26_o4tnm"]
-[ext_resource type="Script" uid="uid://bdlivs60vnnyg" path="res://player/tool/guns/instances/makaroni/makaroni_brain.gd" id="30_xqy73"]
+[ext_resource type="Script" uid="uid://cgthymytlw708" path="res://player/tool/guns/instances/makaroni/disable_safety.gd" id="29_nf3x5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nf3x5"]
 render_priority = 0
@@ -199,6 +199,11 @@ STRAP_TO_TORSO = [NodePath("Player_Insertable_Pouch"), NodePath("Player_Insertab
 MODEL = NodePath("RigidBody3D/Model")
 MODEL_POSITION_INSPECT = NodePath("Inspect_Pos")
 MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
+
+[node name="Disable_Safety" type="Node" parent="." node_paths=PackedStringArray("SAFETY")]
+script = ExtResource("29_nf3x5")
+SAFETY = NodePath("../RigidBody3D/Model/Slide/Model/Safety/Mechanism_Safety")
+trigger_on_ready = true
 
 [node name="Push_Trigger" type="Node" parent="." node_paths=PackedStringArray("I1D")]
 script = ExtResource("10_f5ljc")
@@ -548,6 +553,3 @@ script = ExtResource("19_f5ljc")
 INSERTABLE = ExtResource("20_3hwry")
 RESPAWN_TIME = 3.0
 metadata/_custom_type_script = "uid://loortei0f5ym"
-
-[node name="Interconnectedness" type="Node" parent="."]
-script = ExtResource("30_xqy73")
