@@ -17,7 +17,7 @@ func _ready():
 	
 	
 	#Connects triggers
-	add_new_trigger(RELEASE_HAMMER, TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(release_hammer) # TODO: this is called even whemn trigger is locked
+	add_new_trigger(RELEASE_HAMMER, TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(release_hammer)
 	add_new_trigger(CONSTRAINT.SECONDARY_END, TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(disengage_link)
 	
 	
@@ -36,7 +36,7 @@ func _process(delta:float) -> void:
 func _physics_process(delta:float) -> void:
 	super._physics_process(delta);
 	
-	print(DISTANCE)
+	#print(DISTANCE)
 	
 	
 	if(!is_link_engaged()): # when 'caught' so the double actioness shoudl engage, & its not beyond the point fo no return
@@ -50,12 +50,14 @@ func _physics_process(delta:float) -> void:
 	#pass
 
 func release_hammer():
-	#print("drop")
+	print("drop")
 	RELEASE_HAMMER_TRIGGER.trigger()
 	disengage_link()
 
 func disengage_link():
+	
 	CONSTRAINT.is_enabled = false
+	velocity = 0;
 
 func engage_link():
 	CONSTRAINT.is_enabled = true

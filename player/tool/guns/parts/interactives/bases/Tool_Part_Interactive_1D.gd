@@ -48,10 +48,13 @@ func _ready():
 func _process(delta:float) -> void:
 	super._process(delta);
 
+
+signal pre_physics_process(delta:float)
+
 ##CallAfter processing / when you want distance to be calculated
 func _physics_process(delta:float) -> void:
 	
-	
+	pre_physics_process.emit(delta)
 	
 	
 	

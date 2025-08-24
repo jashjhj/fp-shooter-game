@@ -485,8 +485,8 @@ script = ExtResource("24_nf3x5")
 PRIMARY = NodePath("../../Hammer")
 SECONDARY = NodePath("..")
 PRIMARY_END = 1.5708
-SECONDARY_START = 0.1
-SECONDARY_END = 0.45
+SECONDARY_END = 0.4
+SECONDARY_END_LIMIT = 1
 is_enabled = true
 
 [node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
