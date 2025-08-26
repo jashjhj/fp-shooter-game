@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=57 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -9,6 +9,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ca124rfhr43w0" path="res://player/tool/guns/instances/makaroni/assets/mag_release.obj" id="9_3hwry"]
 [ext_resource type="Script" uid="uid://b3i0b7a4kf8v6" path="res://player/tool/guns/parts/interactives/Apply_Impulse.gd" id="10_18edu"]
 [ext_resource type="Script" uid="uid://un4puemevabk" path="res://player/tool/guns/parts/interactives/action_nodes/trigger/Trig_Apply_Velocity.gd" id="10_f5ljc"]
+[ext_resource type="Script" uid="uid://ml4l6f77j40" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Interactive.gd" id="10_xqy73"]
 [ext_resource type="Script" uid="uid://cs1x2h8hfgu13" path="res://player/tool/guns/parts/interactives/Constraints/Map_Constraint_Linear.gd" id="11_o4tnm"]
 [ext_resource type="ArrayMesh" uid="uid://ivw6ivaqvmb4" path="res://player/tool/guns/instances/makaroni/assets/safety.obj" id="11_ry1el"]
 [ext_resource type="ArrayMesh" uid="uid://dy4cxg2u7elp3" path="res://player/tool/guns/instances/makaroni/assets/slide.obj" id="12_2isxn"]
@@ -113,6 +114,9 @@ shader_parameter/life = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
 size = Vector3(0.0373535, 0.0458984, 0.0654297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m7h8j"]
+size = Vector3(0.0146484, 0.074707, 0.0562744)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j64g3"]
 render_priority = 0
@@ -278,7 +282,6 @@ script = ExtResource("18_8j6fe")
 INSERTION_LENGTH = 0.11
 INSERTION_ENTRY_AREA = NodePath("Area3D")
 INSERTION_VECTOR = Vector3(0, 1, -0.1)
-PULL_OBJECT_IN_FACTOR = 0.6
 metadata/_custom_type_script = "uid://dymfggnfgsan6"
 
 [node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Magwell"]
@@ -287,6 +290,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0192902, 0.00219793)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Magwell/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00244141)
 shape = SubResource("BoxShape3D_f5ljc")
+
+[node name="Grab" type="Node3D" parent="RigidBody3D/Model/Magwell" node_paths=PackedStringArray("BEGIN_INTERACT_COLLIDER", "ALSO_SELECT")]
+script = ExtResource("10_xqy73")
+BEGIN_INTERACT_COLLIDER = NodePath("Area3D")
+ALSO_SELECT = [NodePath("..")]
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Magwell/Grab"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Model/Magwell/Grab/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.026709, 0.00396951)
+shape = SubResource("BoxShape3D_m7h8j")
 
 [node name="Slide" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "APPLY_FORCES_TO", "TRIGGERS_TRIGGERABLE", "BEGIN_INTERACT_COLLIDER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
@@ -507,7 +521,7 @@ SECONDARY_END = 0.4
 SECONDARY_END_LIMIT = 1
 is_enabled = true
 
-[node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER")]
+[node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER", "ALSO_SELECT")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113463, 0.002696, -0.0157803)
 script = ExtResource("16_jmqr6")
 MODEL = NodePath("Model")
@@ -515,6 +529,7 @@ SLIDE_VECTOR = Vector3(0, 1, 0)
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.002])
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
+ALSO_SELECT = [NodePath("../Slide")]
 metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 
 [node name="Model" type="Node3D" parent="RigidBody3D/Model/Slidelock"]

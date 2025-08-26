@@ -8,7 +8,7 @@ class_name Tool_Part_Insertable extends Tool_Part_Interactive
 @export var LERP_RATE_LINEAR:float = 0.5;
 @export var LERP_RATE_ANGULAR:float = 0.1;
 
-@export var HIDES_MOUSE:bool = true;
+
 
 @export var MODEL_OFFSET:Vector3 = Vector3(0.0, 0.0, 0)
 @export var DEFAULT_DIRECTION:Vector3 = Vector3.UP;
@@ -60,7 +60,7 @@ func _ready():
 
 func enable_focus():
 	INSERTION_PLANE.process_mode = Node.PROCESS_MODE_INHERIT;
-	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	
 	
 	insertable_position.global_position = model_goal.global_position
 	var mouse_click_position := get_mouse_plane_position() - global_position;
@@ -75,7 +75,7 @@ func enable_focus():
 
 func disable_focus():
 	INSERTION_PLANE.process_mode = Node.PROCESS_MODE_DISABLED;
-	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 	if(is_housed):
 		MODEL.reparent(CURRENT_SLOT)
 	else:
@@ -134,7 +134,7 @@ func _process(delta:float) -> void:
 				#Move it in line with abrrel
 				model_goal.global_position = CURRENT_SLOT.global_position + CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR*insertion;
 				
-				if(is_housed and abs(insertion - CURRENT_SLOT.INSERTION_LENGTH) < 0.005):
+				if(is_housed and abs(insertion - CURRENT_SLOT.INSERTION_LENGTH) < CURRENT_SLOT.INSERTION_HOUSED_TOLERANCE):
 					CURRENT_SLOT.is_housed_fully = true
 				else:
 					CURRENT_SLOT.is_housed_fully = false
@@ -145,14 +145,14 @@ func _process(delta:float) -> void:
 				# Move closer to barrel                                     PARRALLEL                                                           PERPENDICULAR
 				var perpendicular_vector:Vector3 = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR).cross(CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized()
 				var perpendicular_distance:float = (insertion_plane_position - CURRENT_SLOT.global_position).dot(perpendicular_vector)
-				model_goal.global_position = CURRENT_SLOT.global_position + CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR*insertion + CURRENT_SLOT.PULL_OBJECT_IN_FACTOR*500*(insertion*insertion)*perpendicular_vector*perpendicular_distance;
+				model_goal.global_position = CURRENT_SLOT.global_position + CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_VECTOR*insertion + CURRENT_SLOT.INSERTION_PULL_OBJECT_IN_FACTOR*500*(insertion*insertion)*perpendicular_vector*perpendicular_distance;
 			
 			CURRENT_SLOT.is_housed = is_housed
 			
 			var new_basis:Basis = Basis.IDENTITY; # Look in direction of CurrentSlot
 			new_basis.y = (CURRENT_SLOT.global_basis*CURRENT_SLOT.basis.y).normalized()
-			if(CURRENT_SLOT.FLIP_INSERTION):
-				new_basis.y = -new_basis.y
+			#if(CURRENT_SLOT.INSERTION_FLIP):
+			#	new_basis.y = -new_basis.y
 			new_basis.z = (CURRENT_SLOT.global_basis*CURRENT_SLOT.INSERTION_PLANE_NORMAL).normalized()
 			new_basis.x = new_basis.y.cross(new_basis.z);
 			model_goal.global_basis = CURRENT_SLOT.global_basis#new_basis

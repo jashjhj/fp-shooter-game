@@ -32,7 +32,10 @@ func _ready():
 	await get_parent().ready
 	
 	add_child(model_goal)
-	assert(len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DISTANCE) and len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DIRECTION), "Triggers Arrays must be matching lengths")
+	if not (len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DISTANCE) and len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DIRECTION)):
+		print(TRIGGERS_TRIGGERABLE, TRIGGERS_DISTANCE, TRIGGERS_DIRECTION)
+		push_error("Triggers Arrays must be matching lengths")
+		
 	assert(MODEL != null, "No model Set for slideable.")
 
 

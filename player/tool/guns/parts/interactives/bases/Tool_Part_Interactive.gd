@@ -4,8 +4,11 @@ class_name Tool_Part_Interactive extends Tool_Part
 @export var BEGIN_INTERACT_COLLIDER:Area3D;
 #@export var INTERACT_PLANE_NORMAL:Node3D;
 
-##when this part is selected, it simultaneously focuses others in this array.
-@export var ALSO_SELECT:Array[Tool_Part_Interactive]
+##Does the mosue hide when interacting?
+@export var HIDES_MOUSE:bool = false;
+
+##when this part is selected, it simultaneously focuses others in this array.. Accepts Tool_Part_Interactive, Tool_part_Insertable (Grabs what is housed)
+@export var ALSO_SELECT:Array[Node]
 
 
 var INTERACT_PLANE:Area3D;
@@ -27,7 +30,8 @@ var is_interactive:bool = false:
 		if(!is_interactive):
 			_disable_focus()
 
-var is_focused:bool = false: # Is currently being held/clicked on
+## Is currently being held/clicked on
+var is_focused:bool = false: 
 	set(v):
 		if(is_focused != v):
 			is_focused = v
@@ -36,6 +40,7 @@ var is_focused:bool = false: # Is currently being held/clicked on
 			else:
 				_disable_focus()
 
+##Can it be focused? If clicked on, will it Focus?
 var is_focusable:bool = true:
 	set(value):
 		is_focusable = value;
@@ -98,6 +103,9 @@ func _enable_focus():
 	if(! (Input.mouse_mode == Input.MOUSE_MODE_VISIBLE or Input.mouse_mode == Input.MOUSE_MODE_CONFINED)) : return
 	if(is_focused): return # If already focused, cancel
 	if(!is_focusable): return
+	
+	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	
 	has_been_focused = true;
 	is_focused = true;
 	mouse_focus_pos = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collision_point();
@@ -105,14 +113,24 @@ func _enable_focus():
 	#enable_plane_collider()
 	#Do not call scripts that may interfere with further rays in the same moment - e.g. Reparenting, or changing the area collider
 	
-	for element in ALSO_SELECT:
-		element._enable_focus()
+	for element in ALSO_SELECT: # also select other interactives
+		if element is Tool_Part_Interactive:
+			element.is_focused = true
+		
+		elif element is Tool_Part_Insertable_Slot: # select object within slot (slot is just a host)
+			if(element.housed_insertable != null):
+				element.housed_insertable.is_focused = true
+		else:
+			push_error("Invalid element in ALSO_SELECT of an Interactive: ", element, " | in interactive: ", self)
 	
 	enable_focus() # inherited function
 
 ##Disables focus if applicable
 func _disable_focus():
 	if(!is_focused): return
+	
+	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
 	is_focused = false;
 	#disable_plane_collider()
 	

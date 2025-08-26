@@ -1,19 +1,24 @@
 class_name Tool_Part_Insertable_Slot extends Tool_Part
 ##Magazine/Bullet/clip etc.
 
-
+@export_group("Insertion Settings", "INSERTION_")
 @export var INSERTION_PLANE_NORMAL:Vector3 = Vector3.LEFT;
 @export var INSERTION_LENGTH:float = 0.1;
 
 @export var INSERTION_ENTRY_AREA:Area3D;
 
 @export var INSERTION_VECTOR:Vector3 = Vector3(0, 0, -1);
-@export var FLIP_INSERTION:bool = false;
 #@export var OFFSET_NOT_IN_ENTRY:float = 0.02;
 
-#@export var HOUSED_TOLERANCE:float = 0.001
 
-@export var PULL_OBJECT_IN_FACTOR:float = 1;
+
+@export var INSERTION_PULL_OBJECT_IN_FACTOR:float = 1;
+
+@export var INSERTION_HOUSED_TOLERANCE:float = 0.005
+
+@export_group("Extraction", "EXTRACTION_")
+@export var EXTRACTION_GRAB_AREA:Area3D;
+
 #@export_range(0, 90, 0.1, "radians_as_degrees") var SLOT_ANGLE_TOLERANCE:float = PI/12
 
 @export_group("Flags")
@@ -31,7 +36,18 @@ var is_locked:bool:
 			if(housed_insertable != null):
 				housed_insertable.is_focusable = true;
 
-var is_housed:bool = false;
+var is_housed:bool = false:
+	set(v):
+		if(is_housed == v): return
+		is_housed = v
+		if(is_housed):
+			if(EXTRACTION_GRAB_AREA != null):
+				EXTRACTION_GRAB_AREA.process_mode = Node.PROCESS_MODE_INHERIT
+		else: #(!is_housed):
+			if(EXTRACTION_GRAB_AREA != null):
+				EXTRACTION_GRAB_AREA.process_mode = Node.PROCESS_MODE_DISABLED
+		
+		
 var is_housed_fully:bool = false;
 var insertion:float = 0;
 var housed_insertable:Tool_Part_Insertable;
@@ -45,6 +61,11 @@ func _ready() -> void:
 	#assert(INSERTION_PATH != null, "No insertion path node set.")
 	INSERTION_VECTOR = INSERTION_VECTOR.normalized()
 	INSERTION_ENTRY_AREA.collision_layer = INSERTION_LAYER;
+	
+	if(EXTRACTION_GRAB_AREA != null):
+		EXTRACTION_GRAB_AREA.collision_layer = 65536 # Begin interaction
+		EXTRACTION_GRAB_AREA.collision_mask = 0
+		EXTRACTION_GRAB_AREA.process_mode = Node.PROCESS_MODE_DISABLED
 	
 
 func _process(delta: float) -> void:
