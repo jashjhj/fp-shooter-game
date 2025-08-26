@@ -16,6 +16,9 @@ class_name Tool_Part_Insertable_Slot extends Tool_Part
 
 @export var INSERTION_HOUSED_TOLERANCE:float = 0.005
 
+##Angles so that it doesnt snap jarringly in
+@export var INSERTION_ANGLE_TOLERANCE:float = 0.15
+
 
 #@export_range(0, 90, 0.1, "radians_as_degrees") var SLOT_ANGLE_TOLERANCE:float = PI/12
 
