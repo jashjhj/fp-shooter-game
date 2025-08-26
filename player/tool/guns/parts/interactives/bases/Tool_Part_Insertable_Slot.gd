@@ -16,8 +16,6 @@ class_name Tool_Part_Insertable_Slot extends Tool_Part
 
 @export var INSERTION_HOUSED_TOLERANCE:float = 0.005
 
-@export_group("Extraction", "EXTRACTION_")
-@export var EXTRACTION_GRAB_AREA:Area3D;
 
 #@export_range(0, 90, 0.1, "radians_as_degrees") var SLOT_ANGLE_TOLERANCE:float = PI/12
 
@@ -40,14 +38,8 @@ var is_housed:bool = false:
 	set(v):
 		if(is_housed == v): return
 		is_housed = v
-		if(is_housed):
-			if(EXTRACTION_GRAB_AREA != null):
-				EXTRACTION_GRAB_AREA.process_mode = Node.PROCESS_MODE_INHERIT
-		else: #(!is_housed):
-			if(EXTRACTION_GRAB_AREA != null):
-				EXTRACTION_GRAB_AREA.process_mode = Node.PROCESS_MODE_DISABLED
-		
-		
+
+
 var is_housed_fully:bool = false;
 var insertion:float = 0;
 var housed_insertable:Tool_Part_Insertable;
@@ -61,11 +53,6 @@ func _ready() -> void:
 	#assert(INSERTION_PATH != null, "No insertion path node set.")
 	INSERTION_VECTOR = INSERTION_VECTOR.normalized()
 	INSERTION_ENTRY_AREA.collision_layer = INSERTION_LAYER;
-	
-	if(EXTRACTION_GRAB_AREA != null):
-		EXTRACTION_GRAB_AREA.collision_layer = 65536 # Begin interaction
-		EXTRACTION_GRAB_AREA.collision_mask = 0
-		EXTRACTION_GRAB_AREA.process_mode = Node.PROCESS_MODE_DISABLED
 	
 
 func _process(delta: float) -> void:
