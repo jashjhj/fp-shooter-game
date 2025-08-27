@@ -14,8 +14,7 @@ var velocity:float = 0.0;
 
 #@export_group("Interaction", "INTERACT_")
 @export var INTERACT_POSITIVE_DIRECTION:Vector3 = Vector3.FORWARD
-##If this was equal to the distance between the tool and the camera, would match mosue 1:1
-@export var INTERACT_SENSITIVITY:float = 0.01;
+
 
 
 
@@ -67,7 +66,7 @@ func _process(delta:float) -> void:
 func mouse_movement(motion:Vector3):
 	super(motion)
 	
-	var delta = motion.dot(global_basis*INTERACT_POSITIVE_DIRECTION) * INTERACT_SENSITIVITY
+	var delta = motion.dot(global_basis*INTERACT_POSITIVE_DIRECTION)
 	#print(delta)
 	DISTANCE += delta
 
@@ -99,7 +98,8 @@ func _physics_process(delta:float) -> void:
 		#print("v:",velocity, " pv:", prev_vel, " d: ", DISTANCE)
 		DISTANCE += prev_vel*delta + 0.5*accel*delta*delta # s=ut+1/2at^2.
 	
-	# apply limits.
+	
+	# apply limits.                                MAX LIMIT --
 	var hit_limit:bool = false;
 	for lim in MAX_LIMITS:
 		
@@ -121,7 +121,7 @@ func _physics_process(delta:float) -> void:
 		
 	
 	
-	hit_limit = false;
+	hit_limit = false; #                        MIN LIMIT --
 	for lim in MIN_LIMITS:
 		
 		if(DISTANCE <= lim):

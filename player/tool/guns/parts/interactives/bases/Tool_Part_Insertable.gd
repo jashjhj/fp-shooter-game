@@ -83,6 +83,12 @@ func disable_focus():
 		MODEL.reparent(self)
 
 
+func mouse_movement(motion):
+	super(motion)
+	
+	insertable_position.global_position += motion - PLANE_NORMAL * motion.dot(PLANE_NORMAL); # move it around
+
+
 func _process(delta:float) -> void:
 	super._process(delta);
 	
@@ -92,7 +98,7 @@ func _process(delta:float) -> void:
 		
 		var insertion:float = -1;
 		
-		insertable_position.global_position = get_mouse_plane_position() + start_focus_mouse_difference;
+		
 		if(CURRENT_SLOT == null): # ---------------------- NO CURRENT SLOT
 			
 			

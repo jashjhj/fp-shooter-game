@@ -1,5 +1,7 @@
 class_name Tool_Part_Interactive extends Tool_Part
 
+@export var INTERACT_SENSITIVITY:float = 0.01;
+
 ##Area3D
 @export var BEGIN_INTERACT_COLLIDER:Area3D;
 #@export var INTERACT_PLANE_NORMAL:Node3D;
@@ -95,7 +97,7 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 	if(is_focused):
 		if(event is InputEventMouseMotion):
 			#print(event.screen_relative)
-			mouse_movement(get_viewport().get_camera_3d().delta_pixels_to_world_space(event.screen_relative))
+			mouse_movement(INTERACT_SENSITIVITY * get_viewport().get_camera_3d().delta_pixels_to_world_space(event.screen_relative))
 	
 	elif(is_focusable and is_interactive): # and not focuesed (yet)
 		if(event.is_action_pressed("interact_0")):

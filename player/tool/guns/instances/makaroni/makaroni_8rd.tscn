@@ -35,6 +35,7 @@ MAG_MIN_EXTENSION_SCALE = 0.4
 MAG_MAX_EXTENSION_SCALE = 1.2
 RIGIDBODY = NodePath("RigidBody3D")
 MODEL = NodePath("Model")
+INTERACT_SENSITIVITY = 0.025
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Interact_Area")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
