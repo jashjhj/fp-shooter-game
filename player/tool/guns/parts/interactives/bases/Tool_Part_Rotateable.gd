@@ -2,6 +2,8 @@ class_name Tool_Part_Rotateable extends Tool_Part_Interactive_1D
 
 
 @export var ROTATION_AXIS:Vector3 = Vector3.RIGHT;
+##'Through' the rotateable; ie down the trigger, 'up' through the hammer
+@export var THROUGH_AXIS:Vector3 = Vector3.UP
 
 @export var MODEL:Node3D;
 
@@ -29,27 +31,15 @@ func _ready():
 func _process(delta:float)->void:
 	super._process(delta);
 	
-	if(is_focused):
-		#print(get_mouse_plane_position())
-		var next_focus_mouse_pos:Vector3 = get_mouse_plane_position() - global_position
-		
-		var clockwise_right_vector = previous_focus_mouse_pos.normalized().cross(INTERACT_PLANE.global_basis.z);
-		angle_change_delta = asin(clockwise_right_vector.dot(next_focus_mouse_pos.normalized())) # Gets angle
-		
-		previous_focus_mouse_pos = next_focus_mouse_pos
-		
-		angle_change_goal += angle_change_delta
-		angle_goal += angle_change_delta
-		
-		velocity = 0;
-		#mouse_torque_radm = (angle_change_goal + start_focus_angle - DISTANCE) * min(next_focus_mouse_pos.length(), MAX_MOUSE_TORQUE_DIST);
-		#print(torque_radm)
-	
 	if(MODEL != null):
 		MODEL.transform.basis = Basis.IDENTITY
 		MODEL.rotate_object_local(ROTATION_AXIS, DISTANCE)
 
 
+
+func mouse_movement(motion):
+	super(motion)
+	print(DISTANCE)
 
 
 func enable_focus():
@@ -90,10 +80,11 @@ func _physics_process(delta:float) -> void:
 	
 	if(is_focused): #Manual controls
 		velocity = 0; # make it grabbed
-		#Glorified lerp, following curve to add resistance
-		var follow_delta = (angle_goal - DISTANCE)# * min(FOCUS_RESISTANCE_CURVE.sample(DISTANCE/functional_max), 0.8)
-		DISTANCE += follow_delta
 		
+		
+		
+		INTERACT_POSITIVE_DIRECTION = MODEL.basis * (THROUGH_AXIS.cross(ROTATION_AXIS))
+		#print(INTERACT_POSITIVE_DIRECTION)
 		
 		#DISTANCE = max(min(DISTANCE, functional_max), functional_min);
 	super._physics_process(delta)

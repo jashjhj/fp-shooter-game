@@ -29,12 +29,11 @@ func _ready():
 	SLIDE_VECTOR = SLIDE_VECTOR.normalized()
 	super._ready();
 	
+	
 	await get_parent().ready
 	
 	add_child(model_goal)
-	if not (len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DISTANCE) and len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DIRECTION)):
-		print(TRIGGERS_TRIGGERABLE, TRIGGERS_DISTANCE, TRIGGERS_DIRECTION)
-		push_error("Triggers Arrays must be matching lengths")
+
 		
 	assert(MODEL != null, "No model Set for slideable.")
 
@@ -58,28 +57,29 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if(is_focused):
-		mouse_goal_delta_from_start = (get_mouse_plane_position()-global_position - global_basis*mouse_focus_pos_relative).dot(global_basis*SLIDE_VECTOR)
-		mouse_goal_delta = mouse_goal_delta_from_start - prev_mouse_delta
-		
-		
-		
-		goal_distance += mouse_goal_delta# +start_focus_slide_pos 
-		#DISTANCE += mouse_goal_delta
-		DISTANCE = goal_distance
-		
-		
-		#velocity = (DISTANCE - prev_distance)/delta
-		
-		prev_mouse_delta = mouse_goal_delta_from_start
-		
-		velocity = 0
+		#mouse_goal_delta_from_start = (get_mouse_plane_position()-global_position - global_basis*mouse_focus_pos_relative).dot(global_basis*SLIDE_VECTOR)
+		#mouse_goal_delta = mouse_goal_delta_from_start - prev_mouse_delta
+		#
+		#
+		#
+		#goal_distance += mouse_goal_delta# +start_focus_slide_pos 
+		##DISTANCE += mouse_goal_delta
+		#DISTANCE = goal_distance
+		#
+		#
+		##velocity = (DISTANCE - prev_distance)/delta
+		#
+		#prev_mouse_delta = mouse_goal_delta_from_start
+		#
+		#velocity = 0
+		pass
 	
 	super._physics_process(delta)
 	
 	
 	model_goal.global_position = global_position + DISTANCE*(global_basis*SLIDE_VECTOR)
 	MODEL.global_position = model_goal.global_position
-	
+
 
 #Enable and disable being clicked on
 func enable_focus():

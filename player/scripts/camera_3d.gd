@@ -10,10 +10,18 @@ var current_normal:Vector3;
 
 func _ready() -> void:
 	RAY.top_level = true;
+	get_tree().get_root().size_changed.connect(recalculate_scalar) # call if resolution changed
+	
+	recalculate_scalar() # init
 
+var old_fov:float;
 func _process(_delta: float):
 	has_been_updated = false;
 	RAY.transform = transform
+	
+	if(fov != old_fov): # update if fov change
+		recalculate_scalar()
+	old_fov = fov
 
 func get_mouse_ray(length:int = 10, mask:int = -1) -> RayCast3D:
 	if(!has_been_updated): # Updates if hasnt been updated yet
@@ -40,3 +48,17 @@ func get_ray_from_camera_through(pos:Vector3, length:int = 10, mask:int = -1) ->
 	
 	RAY.force_raycast_update();
 	return RAY;
+
+
+
+#var tangent_deg_per_px:float;
+var deg_per_px:float;
+func recalculate_scalar():
+	var res = DisplayServer.screen_get_size()
+	deg_per_px = fov / res.y # fov is vertical, so if its wider doesnt go funny
+
+
+##Pixels of mosue movement -> M of movement at 1m from camera at (at_distance) away
+func delta_pixels_to_world_space(delta_pixels:Vector2, at_distance:float = 0.5) -> Vector3:
+	
+	return global_basis * Vector3(tan(delta_pixels.x * deg_per_px) * at_distance, tan(-delta_pixels.y * deg_per_px) * at_distance, 0)

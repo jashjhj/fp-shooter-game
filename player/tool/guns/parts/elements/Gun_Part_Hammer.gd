@@ -109,7 +109,7 @@ func _physics_process(delta:float) -> void:
 		if(!is_focused and !is_cock_limit_set): 
 			if(release_timer < 0):
 				is_cock_limit_set = true
-
+		
 		
 		
 		

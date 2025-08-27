@@ -36,7 +36,6 @@ MAG_MAX_EXTENSION_SCALE = 1.2
 RIGIDBODY = NodePath("RigidBody3D")
 MODEL = NodePath("Model")
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Interact_Area")
-HIDES_MOUSE = true
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 

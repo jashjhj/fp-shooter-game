@@ -5,7 +5,7 @@ class_name Tool_Part_Interactive extends Tool_Part
 #@export var INTERACT_PLANE_NORMAL:Node3D;
 
 ##Does the mosue hide when interacting?
-@export var HIDES_MOUSE:bool = false;
+@export var HIDES_MOUSE:bool = true;
 
 ##when this part is selected, it simultaneously focuses others in this array.. Accepts Tool_Part_Interactive, Tool_part_Insertable (Grabs what is housed)
 @export var ALSO_SELECT:Array[Node]
@@ -89,14 +89,37 @@ func enable_plane_collider():
 	INTERACT_PLANE.process_mode = Node.PROCESS_MODE_INHERIT;
  
 
+var mouse_velocity:Vector2;
 func _input(event: InputEvent) -> void: # Handles "is_focused"
-	if(is_focusable and is_interactive):
+	
+	if(is_focused):
+		if(event is InputEventMouseMotion):
+			#print(event.screen_relative)
+			mouse_movement(get_viewport().get_camera_3d().delta_pixels_to_world_space(event.screen_relative))
+	
+	elif(is_focusable and is_interactive): # and not focuesed (yet)
 		if(event.is_action_pressed("interact_0")):
 			var mouse_collider = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collider(); # Was this begun to be clicked on.
 			if(mouse_collider == BEGIN_INTERACT_COLLIDER):
 				_enable_focus()
-		if(event.is_action_released("interact_0")):
-			_disable_focus()
+	
+	if(event.is_action_released("interact_0")):
+		_disable_focus()
+
+
+##Motion is in global space
+func mouse_movement(motion:Vector3):
+	pass
+	
+	#print(motion)
+
+
+func _process(delta: float) -> void:
+	pass
+	
+	#print(mouse_velocity)
+
+
 
 func _enable_focus():
 	#Cancel if mouse not visible
@@ -104,7 +127,7 @@ func _enable_focus():
 	if(is_focused): return # If already focused, cancel
 	if(!is_focusable): return
 	
-	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	has_been_focused = true;
 	is_focused = true;
@@ -161,10 +184,7 @@ func get_mouse_plane_position(mask = PLANE_COLLISION_LAYER) -> Vector3:
 	
 
 
-func _process(_delta: float) -> void:
-	#super._process(delta); No process function in Tool_Part
-	pass
-	
+
 
 func set_interact_plane_normal(n:Vector3) -> void:
 	INTERACT_PLANE.look_at(INTERACT_PLANE.global_position + global_basis * n)

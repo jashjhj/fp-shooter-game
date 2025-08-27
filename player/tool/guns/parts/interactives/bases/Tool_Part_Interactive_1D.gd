@@ -5,14 +5,24 @@ class_name Tool_Part_Interactive_1D extends Tool_Part_Interactive
 ##Start position / distance / rotation
 var DISTANCE:float = 0.0;
 var prev_distance:float = DISTANCE
+##Current velocity (Considering: DISTANCE)
+var velocity:float = 0.0;
+
+
+
+
+
+#@export_group("Interaction", "INTERACT_")
+@export var INTERACT_POSITIVE_DIRECTION:Vector3 = Vector3.FORWARD
+##If this was equal to the distance between the tool and the camera, would match mosue 1:1
+@export var INTERACT_SENSITIVITY:float = 0.01;
+
+
 
 ##In metres or rads
 @export var MIN_LIMITS:Array[float]
 ##In metres or rads
 @export var MAX_LIMITS:Array[float]
-
-
-var velocity:float = 0.0;
 
 
 @export_group("Mechanism")
@@ -43,10 +53,23 @@ enum TRIGGERS_DIRECTION_ENUM {
 ##Ready
 func _ready():
 	
+	#INTERACT_POSITIVE_DIRECTION = INTERACT_POSITIVE_DIRECTION.normalized() - #doesnt matter, can be iffy for more complex results.
+	
+	if not (len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DISTANCE) and len(TRIGGERS_TRIGGERABLE) == len(TRIGGERS_DIRECTION)):
+		print_debug(TRIGGERS_TRIGGERABLE, TRIGGERS_DISTANCE, TRIGGERS_DIRECTION)
+		push_error("Triggers Arrays must be matching lengths")
+	
 	super._ready();
 
 func _process(delta:float) -> void:
 	super._process(delta);
+
+func mouse_movement(motion:Vector3):
+	super(motion)
+	
+	var delta = motion.dot(global_basis*INTERACT_POSITIVE_DIRECTION) * INTERACT_SENSITIVITY
+	#print(delta)
+	DISTANCE += delta
 
 
 signal pre_physics_process(delta:float)
