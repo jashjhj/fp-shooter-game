@@ -5,7 +5,9 @@
 [sub_resource type="ImageTexture" id="ImageTexture_ntgtx"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_ntgtx")
 shader_parameter/depth = SubResource("ImageTexture_ntgtx")
 shader_parameter/down = Vector3(0, -1, 0)
+shader_parameter/quality = 1

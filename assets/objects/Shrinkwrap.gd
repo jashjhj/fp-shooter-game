@@ -19,13 +19,17 @@ func _ready() -> void:
 	assert(mesh is PlaneMesh, "Mesh must be a PLANEMESH")
 	mesh = mesh as PlaneMesh
 	
-	shrinkwrap_mat = load("res://assets/objects/Shrinkwrap_Material.tres")
+	shrinkwrap_mat = load("res://assets/objects/Shrinkwrap_Material.tres").duplicate()
 	
 	
 	
-	if(get_surface_override_material(0) == null): # Sets material in render
+	if(get_surface_override_material(0) == null or true): # Sets material in render
 		set_surface_override_material(0, shrinkwrap_mat)
 	else:
+		#var sm1 = get_surface_override_material(0) # adds it underneath
+		#set_surface_override_material(0, shrinkwrap_mat)
+		#shrinkwrap_mat.next_pass = sm1;
+		
 		get_surface_override_material(0).next_pass = shrinkwrap_mat
 	
 	depth = Image.create(mesh.subdivide_width + 1, mesh.subdivide_depth + 1, false, Image.FORMAT_L8)
@@ -33,6 +37,7 @@ func _ready() -> void:
 	add_child(ray)
 	ray.target_position = PROBE_LENGTH * Vector3.DOWN
 	ray.collision_mask = RAY_MASK
+	ray.collide_with_areas = true
 	
 	refresh()
 	
@@ -42,14 +47,19 @@ func _ready() -> void:
 
 var ticks_til_refresh:int = 0;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	
+	
+	
 	if(ticks_til_refresh == 0):
 		refresh()
-		ticks_til_refresh = 10
+		ticks_til_refresh = 16
 	ticks_til_refresh -= 1;
 	
-	
-	shrinkwrap_mat.set_shader_parameter("down", -global_basis.y * PROBE_LENGTH)
+	shrinkwrap_mat.set_shader_parameter("down", Vector3.DOWN * PROBE_LENGTH)
+
+
+
 
 
 var is_first:bool = true
