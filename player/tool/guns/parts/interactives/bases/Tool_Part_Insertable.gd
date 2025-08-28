@@ -63,15 +63,15 @@ func enable_focus():
 	
 	
 	
-	var mouse_click_position := get_mouse_plane_position() - global_position;
-	var insertable_visual_position := screen_raycast(MODEL.global_position, PLANE_COLLISION_LAYER).get_collision_point()
+	#var mouse_click_position := get_mouse_plane_position() - global_position;
+	#var insertable_visual_position := screen_raycast(MODEL.global_position, PLANE_COLLISION_LAYER).get_collision_point()
 	#var insertable_position_distance_from_plane := (insertable_position.global_position - insertable_visual_position).dot(global_basis*PLANE_NORMAL) # this shits borked
 	
-	insertable_position.global_position = insertable_visual_position# + insertable_position_distance_from_plane * (global_basis*PLANE_NORMAL);
-	start_focus_mouse_difference = MODEL.global_position - (global_position + mouse_click_position)
+	#insertable_position.global_position = insertable_visual_position# + insertable_position_distance_from_plane * (global_basis*PLANE_NORMAL);
+	#start_focus_mouse_difference = MODEL.global_position - (global_position + mouse_click_position)
 	
-	insertable_position.global_position = model_goal.global_position
-	Debug.point(insertable_visual_position, 1, Color(1, 0, 0, 0))
+	insertable_position.global_position = MODEL.global_position
+	#Debug.point(insertable_visual_position, 1, Color(1, 0, 0, 0))
 	#Debug.point(insertable_position.global_position, 1, Color(0, 1, 0, 0))
 
 func disable_focus():

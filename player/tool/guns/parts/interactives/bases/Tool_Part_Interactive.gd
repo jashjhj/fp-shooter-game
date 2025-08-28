@@ -96,7 +96,7 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 	
 	if(is_focused):
 		if(event is InputEventMouseMotion):
-			#print(event.screen_relative)
+			print(event.screen_relative)
 			mouse_movement(INTERACT_SENSITIVITY * get_viewport().get_camera_3d().delta_pixels_to_world_space(event.screen_relative))
 	
 	elif(is_focusable and is_interactive): # and not focuesed (yet)
@@ -125,7 +125,7 @@ func _process(delta: float) -> void:
 
 func _enable_focus():
 	#Cancel if mouse not visible
-	if(! (Input.mouse_mode == Input.MOUSE_MODE_VISIBLE or Input.mouse_mode == Input.MOUSE_MODE_CONFINED)) : return
+	if( not Globals.PLAYER.is_inspecting ) : return
 	if(is_focused): return # If already focused, cancel
 	if(!is_focusable): return
 	
@@ -140,11 +140,11 @@ func _enable_focus():
 	
 	for element in ALSO_SELECT: # also select other interactives
 		if element is Tool_Part_Interactive:
-			element.is_focused = true
+			element._enable_focus()
 		
 		elif element is Tool_Part_Insertable_Slot: # select object within slot (slot is just a host)
 			if(element.housed_insertable != null):
-				element.housed_insertable.is_focused = true
+				element.housed_insertable._enable_focus()
 		else:
 			push_error("Invalid element in ALSO_SELECT of an Interactive: ", element, " | in interactive: ", self)
 	
