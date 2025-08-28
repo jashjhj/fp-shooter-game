@@ -138,7 +138,7 @@ func _ready():
 		for c in primary_tool.STRAP_TO_TORSO:
 			
 			var trans:Transform3D = c.transform
-			c.reparent(TORSO)
+			c.reparent($Hip/Anchors/Anchors_Chest)
 			c.transform = trans; # Keep its local transform
 	
 	
@@ -253,9 +253,9 @@ func _process(delta:float) -> void:
 	camera_rot_y = max(camera_rot_y, deg_to_rad(LOOK_MIN_VERT))
 	
 	TORSO.basis = Basis(); # pitch
-	TORSO.rotate_object_local(Vector3(1, 0, 0), camera_rot_y/4);
+	TORSO.rotate_object_local(Vector3(1, 0, 0), 2*camera_rot_y/4);
 	HEAD.basis = Basis();
-	HEAD.rotate_object_local(Vector3(1, 0, 0), 3*camera_rot_y/4);
+	HEAD.rotate_object_local(Vector3(1, 0, 0), 2*camera_rot_y/4);
 	
 	mouse_input = Vector2.ZERO;
 	

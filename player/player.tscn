@@ -30,9 +30,10 @@ noise = SubResource("FastNoiseLite_boad6")
 collision_layer = 16
 collision_mask = 113
 script = ExtResource("1_oul6g")
+LOOK_MIN_VERT = -140
 PRIMARY_TOOL = ExtResource("2_qjkh3")
 ANCHOR_HAND = NodePath("Hip/Torso/Shoulder/Anchor_Hand")
-ANCHOR_POCKET = NodePath("Hip/Torso/Anchor_Pocket")
+ANCHOR_POCKET = NodePath("Hip/Anchors/Anchor_Pocket")
 SHOULDER = NodePath("Hip/Torso/Shoulder")
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
@@ -62,9 +63,6 @@ collide_with_areas = true
 [node name="AudioListener3D" type="AudioListener3D" parent="Hip/Torso/Head/Camera3D"]
 current = true
 
-[node name="Anchor_Pocket" type="Node3D" parent="Hip/Torso"]
-transform = Transform3D(1, 0, 0, 0, 0.144484, 0.989507, 0, -0.989507, 0.144484, 0.0885508, 0.00961089, -0.123575)
-
 [node name="Shoulder" type="Node3D" parent="Hip/Torso"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
@@ -85,6 +83,15 @@ LOWER_LENGTH = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
 UPPER_LENGTH = 0.45
 LOWER_LENGTH = 0.5
+
+[node name="Anchors" type="Node3D" parent="Hip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="Anchor_Pocket" type="Node3D" parent="Hip/Anchors"]
+transform = Transform3D(1, 0, 0, 0, 0.144484, 0.989507, 0, -0.989507, 0.144484, 0.169005, -0.267064, -0.198124)
+
+[node name="Anchors_Chest" type="Node3D" parent="Hip/Anchors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.194147)
 
 [node name="Bipedal_Leg_Controller" type="Node" parent="." node_paths=PackedStringArray("LEFT_LEG", "RIGHT_LEG")]
 script = ExtResource("6_g6k8r")

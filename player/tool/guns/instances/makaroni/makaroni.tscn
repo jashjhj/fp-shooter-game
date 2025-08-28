@@ -568,21 +568,21 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.273
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0666408, 0.31793)
 
 [node name="Player_Insertable_Pouch" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0537771, 0.268739, -0.137256)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0537771, 0.00185008, -0.00460374)
 script = ExtResource("19_f5ljc")
 INSERTABLE = ExtResource("20_3hwry")
 RESPAWN_TIME = 3.0
 metadata/_custom_type_script = "uid://loortei0f5ym"
 
 [node name="Player_Insertable_Pouch2" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.2687, -0.1373)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.00181107, -0.00464775)
 script = ExtResource("19_f5ljc")
 INSERTABLE = ExtResource("20_3hwry")
 RESPAWN_TIME = 3.0
 metadata/_custom_type_script = "uid://loortei0f5ym"
 
 [node name="Player_Insertable_Pouch3" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0538, 0.2687, -0.1373)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0538, 0.00181107, -0.00464775)
 script = ExtResource("19_f5ljc")
 INSERTABLE = ExtResource("20_3hwry")
 RESPAWN_TIME = 3.0
