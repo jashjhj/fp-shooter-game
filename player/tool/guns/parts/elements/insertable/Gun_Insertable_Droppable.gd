@@ -10,7 +10,7 @@ class_name Gun_Insertable_Droppable extends Tool_Part_Insertable
 func _ready():
 	super._ready();
 	RIGIDBODY.process_mode = Node.PROCESS_MODE_DISABLED
-	RIGIDBODY.collision_mask = 1 + 8192;
+	RIGIDBODY.collision_mask = 1 + 8192 + 16384 + 512 + 1024; # Floor + Debris larger than small
 	RIGIDBODY.collision_layer = 4096
 
 

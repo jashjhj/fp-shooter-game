@@ -39,6 +39,8 @@ INTERACT_SENSITIVITY = 0.025
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Interact_Area")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_layer = 0
+mass = 0.15
 
 [node name="Interact_Collider2" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0194729, 0)
