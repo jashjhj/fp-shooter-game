@@ -86,7 +86,7 @@ func disable_focus():
 func mouse_movement(motion):
 	super(motion)
 	
-	insertable_position.global_position += motion - PLANE_NORMAL * motion.dot(PLANE_NORMAL); # move it around
+	insertable_position.global_position += motion - global_basis*PLANE_NORMAL * motion.dot(global_basis*PLANE_NORMAL); # move it around
 
 
 func _process(delta:float) -> void:
