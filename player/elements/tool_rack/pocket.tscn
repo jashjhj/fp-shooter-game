@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpgxqe4v07quh"]
+
+[ext_resource type="Script" uid="uid://ba5polh4aitla" path="res://assets/objects/Shrinkwrap.gd" id="1_12kpx"]
+[ext_resource type="Material" uid="uid://574okpq5vgmo" path="res://player/elements/tool_rack/pocket_material_shrinkwrap.tres" id="1_fg487"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fg487"]
+size = Vector2(0.06, 0.12)
+subdivide_width = 15
+subdivide_depth = 22
+
+[node name="Pocket" type="Node3D"]
+
+[node name="Shrinkwrap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.03)
+mesh = SubResource("PlaneMesh_fg487")
+surface_material_override/0 = ExtResource("1_fg487")
+script = ExtResource("1_12kpx")
+PROBE_LENGTH = 0.03
+HEMS = 3
+metadata/_custom_type_script = "uid://ba5polh4aitla"

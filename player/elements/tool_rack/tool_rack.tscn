@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfrj764tqclus"]
+
+[ext_resource type="PackedScene" uid="uid://bpgxqe4v07quh" path="res://player/elements/tool_rack/pocket.tscn" id="1_4sod8"]
+[ext_resource type="Script" uid="uid://dmcmcvv20sg7j" path="res://player/elements/tool_rack/tool_rack.gd" id="1_t38ds"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t38ds"]
+size = Vector3(0.3, 0.2, 0.01)
+
+[node name="ToolRack" type="Node3D" node_paths=PackedStringArray("CAMERA_POS")]
+script = ExtResource("1_t38ds")
+CAMERA_POS = NodePath("Camera_Inspect")
+
+[node name="Back" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12648, 0.00530317)
+mesh = SubResource("BoxMesh_t38ds")
+
+[node name="Pocket" parent="." instance=ExtResource("1_4sod8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0963541, -0.0613171, 0)
+
+[node name="Pocket2" parent="." instance=ExtResource("1_4sod8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000787839, -0.0613171, 0)
+
+[node name="Pocket3" parent="." instance=ExtResource("1_4sod8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0944978, -0.0613171, 0)
+
+[node name="Camera_Inspect" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.982938, 0.183939, 0, -0.183939, 0.982938, 0, 0.0867103, 0.11212)

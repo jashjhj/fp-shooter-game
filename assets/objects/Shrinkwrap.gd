@@ -3,6 +3,7 @@ class_name Shrinkwrap extends MeshInstance3D
 
 
 @export var PROBE_LENGTH:float = 5.0;
+@export_flags("1", "2", "3", "4") var HEMS = 15;
 
 @export_flags_3d_physics var RAY_MASK:int = 1 + 65536 + 1048576 # Floor + Gun parts
 @onready var ray:RayCast3D = RayCast3D.new()
@@ -19,20 +20,15 @@ func _ready() -> void:
 	assert(mesh is PlaneMesh, "Mesh must be a PLANEMESH")
 	mesh = mesh as PlaneMesh
 	
-	shrinkwrap_mat = load("res://assets/objects/Shrinkwrap_Material.tres").duplicate()
 	
+	if(get_surface_override_material(0) == null): # Sets material in render
+		push_error("Please set shrinkwrap material")
 	
-	
-	if(get_surface_override_material(0) == null or true): # Sets material in render
-		set_surface_override_material(0, shrinkwrap_mat)
-	else:
-		#var sm1 = get_surface_override_material(0) # adds it underneath
-		#set_surface_override_material(0, shrinkwrap_mat)
-		#shrinkwrap_mat.next_pass = sm1;
-		
-		get_surface_override_material(0).next_pass = shrinkwrap_mat
+	shrinkwrap_mat = get_surface_override_material(0)
 	
 	depth = Image.create(mesh.subdivide_width + 1, mesh.subdivide_depth + 1, false, Image.FORMAT_L8)
+	
+	shrinkwrap_mat.set_shader_parameter("hem", HEMS)
 	
 	add_child(ray)
 	ray.target_position = PROBE_LENGTH * Vector3.DOWN

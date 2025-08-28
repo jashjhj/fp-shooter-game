@@ -101,7 +101,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_sg58x")
 
 [node name="Interact_Collider" type="CollisionShape3D" parent="Model/Interact_Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0194729, 0)
-visible = false
 shape = SubResource("ConvexPolygonShape3D_w42xb")
 
 [node name="Makaroni9x18" parent="." instance=ExtResource("5_jngrp")]

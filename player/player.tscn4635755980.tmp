@@ -91,9 +91,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="Anchor_Pocket" type="Node3D" parent="Hip/Anchors"]
 transform = Transform3D(1, 0, 0, 0, 0.144484, 0.989507, 0, -0.989507, 0.144484, 0.169005, -0.267064, -0.198124)
 
-[node name="ToolRack" parent="Hip/Anchors" node_paths=PackedStringArray("VIEW_ANCHOR") instance=ExtResource("5_g6k8r")]
+[node name="ToolRack" parent="Hip/Anchors" instance=ExtResource("5_g6k8r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.159928, -0.188204)
-VIEW_ANCHOR = NodePath("../../Torso/Head")
 
 [node name="Bipedal_Leg_Controller" type="Node" parent="." node_paths=PackedStringArray("LEFT_LEG", "RIGHT_LEG")]
 script = ExtResource("6_g6k8r")

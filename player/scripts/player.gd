@@ -21,11 +21,16 @@ var is_inspecting:bool = false:
 		if(is_inspecting):
 			is_focussing = false
 			equipped_tool.inspect = true
+			TOOL_RACK.is_inspecting = true
+			
 			equipped_tool.ANCHOR = CAMERA
+			
 			is_mouse_focused = false;
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			equipped_tool.inspect = false
+			TOOL_RACK.is_inspecting = false
+			
 			is_mouse_focused = true;
 			equipped_tool.ANCHOR = ANCHOR_HAND # reset to hand
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -69,6 +74,7 @@ var InspectState:PlayerState = PlayerState.new()
 @onready var HEAD:Node3D = $Hip/Torso/Head
 @onready var TORSO:Node3D = $Hip/Torso
 @onready var CAMERA:Camera3D = $Hip/Torso/Head/Camera3D
+@onready var TOOL_RACK:Tool_Rack = $Hip/Anchors/ToolRack
 
 @export var PRIMARY_TOOL:PackedScene
 
@@ -138,7 +144,7 @@ func _ready():
 		for c in primary_tool.STRAP_TO_TORSO:
 			
 			var trans:Transform3D = c.transform
-			c.reparent($Hip/Anchors/Anchors_Chest)
+			c.reparent($Hip/Anchors/ToolRack)
 			c.transform = trans; # Keep its local transform
 	
 	

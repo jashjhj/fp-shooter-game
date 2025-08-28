@@ -49,10 +49,10 @@ var is_focusable:bool = true:
 		if(!is_focusable): # cancel focus when this is toggled.
 			_disable_focus()
 		
-		if(is_focusable): # makes it unregisterable
-			BEGIN_INTERACT_COLLIDER.collision_layer = BEGIN_INTERACT_COLLISION_LAYER;
-		else:
-			BEGIN_INTERACT_COLLIDER.collision_layer = 0;
+		#if(is_focusable): # makes it unregisterable   --- REMOVED so i can use the collider as a bounding box for cosmetics
+		BEGIN_INTERACT_COLLIDER.collision_layer = BEGIN_INTERACT_COLLISION_LAYER;
+		#else:
+		#	BEGIN_INTERACT_COLLIDER.collision_layer = 0;
 		
 
 
@@ -71,7 +71,7 @@ func init(): # load the tools required.
 	var tools = load("res://player/tool/guns/parts/interactives/Tool_Part_Tools.tscn").instantiate()
 	assert(tools != null, "Tool_Part_Tools does not exist @ `res://player/tool/guns/parts/interactives/Tool_Part_Tools.tscn`") # check
 	
-	assert(BEGIN_INTERACT_COLLIDER != null, "No Interact collider set.")
+	assert(BEGIN_INTERACT_COLLIDER != null, "No Begin-Interact collider set.")
 	
 	add_child(tools, true) # true makes them internal so not as easy to modify
 	
@@ -96,7 +96,7 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 	
 	if(is_focused):
 		if(event is InputEventMouseMotion):
-			print(event.screen_relative)
+			#print(event.screen_relative)
 			mouse_movement(INTERACT_SENSITIVITY * get_viewport().get_camera_3d().delta_pixels_to_world_space(event.screen_relative))
 	
 	elif(is_focusable and is_interactive): # and not focuesed (yet)

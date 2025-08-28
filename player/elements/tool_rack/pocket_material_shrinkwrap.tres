@@ -1,0 +1,113 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://574okpq5vgmo"]
+
+[ext_resource type="Texture2D" uid="uid://b87yl2kbg8myj" path="res://player/elements/tool_rack/rough_sew_patch.jpg" id="1_rghwr"]
+
+[sub_resource type="Shader" id="Shader_rghwr"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec4 backlight : source_color;
+uniform sampler2D texture_backlight : hint_default_black, filter_linear_mipmap, repeat_enable;
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+uniform sampler2D depth: filter_nearest;
+uniform vec3 down = vec3(0.0,-1.0,0.0);
+uniform int quality = 1;
+uniform int hem = 15;
+
+const float plateau_radius = 0.05; // relative to UV
+
+
+float sample_depth(vec2 pos){
+	return texture(depth, pos * 0.98 + 0.01).x;
+}
+
+
+void vertex() {
+	
+	
+	float depth_dist = sample_depth(UV);
+	
+	//Get highest point in neighbours
+	
+	if(quality > 0){
+		depth_dist = min(depth_dist, sample_depth(vec2(min(1.0, UV.x + plateau_radius), UV.y)));
+		depth_dist = min(depth_dist, sample_depth(vec2(max(0.0, UV.x - plateau_radius), UV.y)));
+		depth_dist = min(depth_dist, sample_depth(vec2(UV.x, min(1.0, UV.y + plateau_radius))));
+		depth_dist = min(depth_dist, sample_depth(vec2(UV.x, max(0.0, UV.y - plateau_radius))));
+	}
+	if(quality > 1){ // this doesnt matter as its already set to align to a grid
+		//depth_dist = min(depth_dist, sample_depth(vec2(min(1.0, UV.x + plateau_radius*0.7), min(1.0, UV.y + plateau_radius*0.7))).x);
+		//depth_dist = min(depth_dist, sample_depth(vec2(min(1.0, UV.x + plateau_radius*0.7), max(1.0, UV.y - plateau_radius*0.7))).x);
+		//depth_dist = min(depth_dist, sample_depth(vec2(max(1.0, UV.x - plateau_radius*0.7), min(1.0, UV.y + plateau_radius*0.7))).x);
+		//depth_dist = min(depth_dist, sample_depth(vec2(max(1.0, UV.x - plateau_radius*0.7), max(1.0, UV.y - plateau_radius*0.7))).x);
+	}
+	if((UV.x <= 0.01 && (hem&1)==1 )|| (UV.x >= 0.99 && (hem&2)==2 ) || (UV.y <= 0.01 && (hem&4)==4 ) || (UV.y >= 0.99 && (hem&8)==8 )){
+		depth_dist = 1.0; // tamp down corners of pocket
+	}
+	
+	
+	VERTEX += down * depth_dist;
+	
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+
+	// Backlight: Enabled
+	vec3 backlight_tex = texture(texture_backlight, base_uv).rgb;
+	BACKLIGHT = (backlight.rgb + backlight_tex);
+}"
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_rghwr")
+shader_parameter/albedo = Color(0.278431, 0.384314, 0.356863, 1)
+shader_parameter/texture_albedo = ExtResource("1_rghwr")
+shader_parameter/albedo_texture_size = Vector2i(612, 408)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/backlight = Color(0.439216, 0.541176, 0.109804, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/down = Vector3(0, 0, 0)
+shader_parameter/quality = 1
+shader_parameter/hem = 15
