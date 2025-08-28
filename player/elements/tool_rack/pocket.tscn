@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://574okpq5vgmo" path="res://player/elements/tool_rack/pocket_material_shrinkwrap.tres" id="1_fg487"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fg487"]
-size = Vector2(0.06, 0.12)
+size = Vector2(0.06, 0.16)
 subdivide_width = 15
 subdivide_depth = 22
 

@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c5kt6wu25077p" path="res://player/tool/guns/instances/makaroni/assets/spring_mask.png" id="4_sqm0m"]
 [ext_resource type="PackedScene" uid="uid://7846qvqysbxv" path="res://player/tool/guns/instances/makaroni/makaroni_9x18.tscn" id="5_jngrp"]
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w42xb"]
+points = PackedVector3Array(0.009525, -0.092579, 0.0261189, -0.009525, -0.092579, 0.0261189, 0.009525, -0.092579, -0.0118327, 0.009525, -0.0887837, 0.0256223, 0.00910917, 0.0185186, 0.0134435, 0.00183675, -0.0811022, 0.0253657, -0.009525, -0.092579, -0.0118327, -0.00183862, -0.0811022, 0.0253657, -0.00911103, 0.0185186, 0.0134435, -0.009525, -0.0887837, 0.0256223, 0.009525, -0.0903745, -0.0123707, 0.009525, -0.0887837, -0.00660614, 0.00897864, 0.0181095, -0.0135045, 0.00675216, 0.0225525, -0.00717307, 0.00675216, 0.0225525, 0.0110971, -0.009525, -0.0903745, -0.0123707, -0.00675402, 0.0225525, 0.0110971, -0.00675402, 0.0225525, -0.00717307, -0.0089805, 0.0181095, -0.0135045, -0.009525, -0.0887837, -0.00660614, 0.00299288, 0.0166891, -0.016153, 0.00440634, 0.023507, -0.00793864, 0.00440634, 0.023507, 0.0086018, -0.00299474, 0.0166891, -0.016153, -0.0044082, 0.023507, 0.0086018, -0.0044082, 0.023507, -0.00793864)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w42xb"]
 albedo_color = Color(0.380268, 0.380293, 0.410325, 1)
 metallic = 1.0
@@ -20,9 +23,6 @@ metallic = 0.57
 metallic_specular = 0.0
 roughness = 0.58
 texture_filter = 0
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w42xb"]
-points = PackedVector3Array(0.009525, -0.092579, 0.0261189, -0.009525, -0.092579, 0.0261189, 0.009525, -0.092579, -0.0118327, 0.009525, -0.0887837, 0.0256223, 0.00910917, 0.0185186, 0.0134435, 0.00183675, -0.0811022, 0.0253657, -0.009525, -0.092579, -0.0118327, -0.00183862, -0.0811022, 0.0253657, -0.00911103, 0.0185186, 0.0134435, -0.009525, -0.0887837, 0.0256223, 0.009525, -0.0903745, -0.0123707, 0.009525, -0.0887837, -0.00660614, 0.00897864, 0.0181095, -0.0135045, 0.00675216, 0.0225525, -0.00717307, 0.00675216, 0.0225525, 0.0110971, -0.009525, -0.0903745, -0.0123707, -0.00675402, 0.0225525, 0.0110971, -0.00675402, 0.0225525, -0.00717307, -0.0089805, 0.0181095, -0.0135045, -0.009525, -0.0887837, -0.00660614, 0.00299288, 0.0166891, -0.016153, 0.00440634, 0.023507, -0.00793864, 0.00440634, 0.023507, 0.0086018, -0.00299474, 0.0166891, -0.016153, -0.0044082, 0.023507, 0.0086018, -0.0044082, 0.023507, -0.00793864)
 
 [node name="Makaroni_8Rd" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "RIGIDBODY", "MODEL", "BEGIN_INTERACT_COLLIDER")]
 script = ExtResource("1_w42xb")
@@ -39,6 +39,10 @@ INTERACT_SENSITIVITY = 0.025
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Interact_Area")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="Interact_Collider2" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0194729, 0)
+shape = SubResource("ConvexPolygonShape3D_w42xb")
 
 [node name="Model" type="Node3D" parent="."]
 
