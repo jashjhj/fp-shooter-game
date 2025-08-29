@@ -32,8 +32,8 @@ func _ready() -> void:
 	assert(SECONDARY != null, "No Secondary set")
 	ratio = (SECONDARY_START-SECONDARY_END) / (PRIMARY_START - PRIMARY_END)
 	
-	#SECONDARY.pre_physics_process.connect(resolve_deltas)
-	#PRIMARY.pre_physics_process.connect(resolve_deltas)
+	#SECONDARY.within_physics_process.connect(resolve_deltas)
+	#PRIMARY.within_physics_process.connect(resolve_deltas)
 
 
 func _physics_process(delta: float) -> void:

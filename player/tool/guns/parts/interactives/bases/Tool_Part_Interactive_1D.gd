@@ -72,6 +72,7 @@ func mouse_movement(motion:Vector3):
 
 
 signal pre_physics_process(delta:float)
+signal within_physics_process(delta:float)
 
 ##CallAfter processing / when you want distance to be calculated
 func _physics_process(delta:float) -> void:
@@ -143,7 +144,7 @@ func _physics_process(delta:float) -> void:
 	
 	
 	
-	
+	within_physics_process.emit(delta)
 	
 	
 	for i in range(0, len(TRIGGERS_TRIGGERABLE)): # check thresholds for triggers
