@@ -39,7 +39,7 @@ func _process(delta:float)->void:
 
 func mouse_movement(motion):
 	super(motion)
-	print(DISTANCE)
+	#print(DISTANCE)
 
 
 func enable_focus():

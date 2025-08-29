@@ -317,7 +317,6 @@ ELASTICITY_AT_MIN = 0.0
 TRIGGERS_TRIGGERABLE = [NodePath("Gun_Action/Eject_Trigger"), NodePath("Gun_Action/Gather_Trigger")]
 TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
 TRIGGERS_DIRECTION = Array[int]([1, 2])
-INTERACT_SENSITIVITY = 0.025
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 
@@ -424,7 +423,7 @@ MAX_LIMITS = Array[float]([1.0])
 SPRING_FORCE_CONSTANT = -20.0
 SPRING_FORCE_LINEAR = 40.0
 FRICTION_FORCE = 0.0
-INTERACT_SENSITIVITY = -1.5
+INTERACT_SENSITIVITY = -60.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 
@@ -462,7 +461,7 @@ MAX_LIMITS = Array[float]([1.708])
 SPRING_FORCE_CONSTANT = -1000.0
 ELASTICITY_AT_MAX = 0.0
 ELASTICITY_AT_MIN = 0.0
-INTERACT_SENSITIVITY = -0.4
+INTERACT_SENSITIVITY = -24.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 
@@ -497,7 +496,7 @@ MAX_LIMITS = Array[float]([0.5])
 SPRING_FORCE_CONSTANT = -200.0
 ELASTICITY_AT_MAX = 0.0
 ELASTICITY_AT_MIN = 0.0
-INTERACT_SENSITIVITY = 1.0
+INTERACT_SENSITIVITY = 60.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 metadata/_custom_type_script = "uid://d3ti8mrkqn6ai"
 

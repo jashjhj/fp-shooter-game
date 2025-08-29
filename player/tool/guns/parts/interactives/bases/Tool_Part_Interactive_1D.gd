@@ -67,7 +67,7 @@ func mouse_movement(motion:Vector3):
 	super(motion)
 	
 	var delta = motion.dot(global_basis*INTERACT_POSITIVE_DIRECTION)
-	#print(delta)
+	
 	DISTANCE += delta
 
 
@@ -108,7 +108,6 @@ func _physics_process(delta:float) -> void:
 			hit_limit = true
 		
 	if(hit_limit):
-		
 		if(velocity > 0):
 			
 			#v^2 = u^2 + 2as, calculates Velocity actual at impact
