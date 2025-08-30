@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 
 #Enable and disable being clicked on
 func enable_focus():
+	super()
 	INTERACT_PLANE.global_position = mouse_focus_pos
 	
 	var plane_normal = (global_basis*SLIDE_VECTOR).cross(get_viewport().get_camera_3d().global_position - global_position).cross(global_basis*SLIDE_VECTOR)

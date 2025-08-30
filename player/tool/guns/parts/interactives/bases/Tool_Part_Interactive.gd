@@ -192,7 +192,7 @@ func _disable_focus():
 
 #Inherited functions. called when focused and unfocused
 func enable_focus():
-	pass
+	is_being_hovered = true
 
 func disable_focus():
 	pass

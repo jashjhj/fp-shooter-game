@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b517ttrlv06s"]
+[gd_scene load_steps=10 format=3 uid="uid://b517ttrlv06s"]
 
 [ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://player/tool/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_w42xb"]
 [ext_resource type="ArrayMesh" uid="uid://33jb7iows8gm" path="res://player/tool/guns/instances/makaroni/assets/mag.obj" id="2_2gyi0"]
+[ext_resource type="Script" uid="uid://dcn0rbebynmii" path="res://assets/textures/highlight/highlightable_mesh.gd" id="3_2gyi0"]
 [ext_resource type="ArrayMesh" uid="uid://bx61j6pm5d0v5" path="res://player/tool/guns/instances/makaroni/assets/mag_spring.obj" id="3_nhsnl"]
 [ext_resource type="Texture2D" uid="uid://c5kt6wu25077p" path="res://player/tool/guns/instances/makaroni/assets/spring_mask.png" id="4_sqm0m"]
 [ext_resource type="PackedScene" uid="uid://7846qvqysbxv" path="res://player/tool/guns/instances/makaroni/makaroni_9x18.tscn" id="5_jngrp"]
@@ -24,7 +25,7 @@ metallic_specular = 0.0
 roughness = 0.58
 texture_filter = 0
 
-[node name="Makaroni_8Rd" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "RIGIDBODY", "MODEL", "BEGIN_INTERACT_COLLIDER")]
+[node name="Makaroni_8Rd" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "RIGIDBODY", "MODEL", "BEGIN_INTERACT_COLLIDER", "HIGHLIGHT_ON_HOVER")]
 script = ExtResource("1_w42xb")
 MAX_CAPACITY = 8
 STORING = 8
@@ -36,6 +37,7 @@ MAG_MAX_EXTENSION_SCALE = 1.2
 RIGIDBODY = NodePath("RigidBody3D")
 MODEL = NodePath("Model")
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Interact_Area")
+HIGHLIGHT_ON_HOVER = [NodePath("Model/Mag")]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 collision_layer = 0
@@ -52,6 +54,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0194729, 0)
 mesh = ExtResource("2_2gyi0")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_w42xb")
+script = ExtResource("3_2gyi0")
+HIGHLIGHT_THROUGH_OBJECTS = true
 
 [node name="Ammopos" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0101216)

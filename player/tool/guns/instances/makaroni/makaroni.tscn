@@ -1,11 +1,10 @@
-[gd_scene load_steps=66 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=68 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="3_cawr4"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="4_jmqr6"]
 [ext_resource type="ArrayMesh" uid="uid://bp37x28x3g45r" path="res://player/tool/guns/instances/makaroni/assets/hammer.obj" id="7_dsk1g"]
-[ext_resource type="Script" uid="uid://dcn0rbebynmii" path="res://assets/textures/highlight/highlightable_mesh.gd" id="8_m7h8j"]
 [ext_resource type="ArrayMesh" uid="uid://ca124rfhr43w0" path="res://player/tool/guns/instances/makaroni/assets/mag_release.obj" id="9_3hwry"]
 [ext_resource type="Script" uid="uid://b3i0b7a4kf8v6" path="res://player/tool/guns/parts/interactives/Apply_Impulse.gd" id="10_18edu"]
 [ext_resource type="Script" uid="uid://un4puemevabk" path="res://player/tool/guns/parts/interactives/action_nodes/trigger/Trig_Apply_Velocity.gd" id="10_f5ljc"]
@@ -134,6 +133,27 @@ next_pass = SubResource("ShaderMaterial_g7ykr")
 shader = ExtResource("3_cawr4")
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dm23f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_cawr4")
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hkynf"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_dm23f")
+shader = ExtResource("26_lohkq")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61lfa"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_hkynf")
+shader = ExtResource("27_tl72j")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
 size = Vector3(0.0373535, 0.0458984, 0.0654297)
@@ -323,7 +343,8 @@ script = ExtResource("4_jmqr6")
 [node name="MagRelease" type="MeshInstance3D" parent="RigidBody3D/Model"]
 mesh = ExtResource("9_3hwry")
 skeleton = NodePath("../../..")
-script = ExtResource("8_m7h8j")
+surface_material_override/0 = SubResource("ShaderMaterial_61lfa")
+script = ExtResource("4_jmqr6")
 HIGHLIGHT_THROUGH_OBJECTS = true
 
 [node name="Cam_Aim_Pos" type="Node3D" parent="RigidBody3D/Model"]

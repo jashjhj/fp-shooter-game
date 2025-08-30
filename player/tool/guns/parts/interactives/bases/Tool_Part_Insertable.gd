@@ -59,6 +59,7 @@ func _ready():
 
 
 func enable_focus():
+	super()
 	INSERTION_PLANE.process_mode = Node.PROCESS_MODE_INHERIT;
 	
 	
@@ -75,6 +76,7 @@ func enable_focus():
 	#Debug.point(insertable_position.global_position, 1, Color(0, 1, 0, 0))
 
 func disable_focus():
+	super()
 	INSERTION_PLANE.process_mode = Node.PROCESS_MODE_DISABLED;
 
 	if(is_housed):
