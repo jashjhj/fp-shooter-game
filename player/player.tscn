@@ -162,10 +162,21 @@ text = "HP: 0"
 horizontal_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -398.0
+offset_top = -177.5
+offset_bottom = 177.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Tool Instructions are here."
+horizontal_alignment = 2
 
-[node name="Instruction_UI" type="Node" parent="RichTextLabel" node_paths=PackedStringArray("TEXTBOX")]
+[node name="Instruction_UI" type="Node" parent="RichTextLabel" node_paths=PackedStringArray("TEXTBOX", "PLAYER")]
 script = ExtResource("7_boad6")
 TEXTBOX = NodePath("..")
+PLAYER = NodePath("../..")
 metadata/_custom_type_script = "uid://f64yitw5hcyb"

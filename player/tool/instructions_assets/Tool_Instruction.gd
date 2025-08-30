@@ -12,7 +12,7 @@ enum Case{
 
 @export var conditional_to:Array[Tool_Instruction]
 
-signal is_done_set()
+signal is_done_set
 var is_done:bool = false:
 	set(v):
 		if(is_done == v): return

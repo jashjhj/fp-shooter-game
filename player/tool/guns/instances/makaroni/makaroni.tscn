@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=84 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -35,9 +35,23 @@
 [ext_resource type="Shader" uid="uid://vj6ja41yrlse" path="res://assets/textures/highlight/highlight.gdshader" id="27_tl72j"]
 [ext_resource type="Script" uid="uid://cgthymytlw708" path="res://player/tool/guns/instances/makaroni/disable_safety.gd" id="29_nf3x5"]
 
+[sub_resource type="Resource" id="Resource_lohkq"]
+script = ExtResource("2_lohkq")
+instruction = &"Disable Safety"
+case = 0
+conditional_to = Array[ExtResource("2_lohkq")]([])
+metadata/_custom_type_script = "uid://du6hkfpnpi12"
+
+[sub_resource type="Resource" id="Resource_tl72j"]
+script = ExtResource("2_lohkq")
+instruction = &"Cock Hammer"
+case = 0
+conditional_to = Array[ExtResource("2_lohkq")]([])
+metadata/_custom_type_script = "uid://du6hkfpnpi12"
+
 [sub_resource type="Resource" id="Resource_oxpvn"]
 script = ExtResource("3_tl72j")
-instructions = Array[ExtResource("2_lohkq")]([])
+instructions = Array[ExtResource("2_lohkq")]([SubResource("Resource_lohkq"), SubResource("Resource_tl72j")])
 metadata/_custom_type_script = "uid://ddo6xy3d81dii"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m7h8j"]
@@ -681,7 +695,7 @@ SECONDARY_END = 0.4
 SECONDARY_END_LIMIT = 1
 is_enabled = true
 
-[node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER", "ALSO_SELECT", "HIGHLIGHT_ON_HOVER")]
+[node name="Slidelock" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("MODEL", "BEGIN_INTERACT_COLLIDER", "HIGHLIGHT_ON_HOVER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113463, 0.002696, -0.0157803)
 script = ExtResource("16_jmqr6")
 MODEL = NodePath("Model")
@@ -690,7 +704,6 @@ INTERACT_POSITIVE_DIRECTION = Vector3(0, 1, 0.3)
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.002])
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
-ALSO_SELECT = [NodePath("../Slide")]
 HIGHLIGHT_ON_HOVER = [NodePath("Model/Slidelock")]
 metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 
