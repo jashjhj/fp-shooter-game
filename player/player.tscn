@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=14 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
@@ -27,6 +27,8 @@ fractal_octaves = 7
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rgyib"]
 color_ramp = SubResource("Gradient_g6k8r")
 noise = SubResource("FastNoiseLite_boad6")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_boad6"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("ANCHOR_HAND", "ANCHOR_POCKET", "SHOULDER")]
 collision_layer = 16
@@ -172,8 +174,10 @@ offset_top = -177.5
 offset_bottom = 177.5
 grow_horizontal = 0
 grow_vertical = 2
+bbcode_enabled = true
 text = "Tool Instructions are here."
 horizontal_alignment = 2
+custom_effects = [SubResource("RichTextEffect_boad6")]
 
 [node name="Instruction_UI" type="Node" parent="RichTextLabel" node_paths=PackedStringArray("TEXTBOX", "PLAYER")]
 script = ExtResource("7_boad6")

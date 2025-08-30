@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Tool_Instructions" load_steps=5 format=3 uid="uid://b2h5suiaxo1h3"]
+
+[ext_resource type="Script" uid="uid://du6hkfpnpi12" path="res://player/tool/instructions_assets/Tool_Instruction.gd" id="1_img6w"]
+[ext_resource type="Resource" uid="uid://cw8g6rj6qjrvb" path="res://player/tool/guns/instances/makaroni/instructions/disable_safety.tres" id="2_wr1fi"]
+[ext_resource type="Resource" uid="uid://drknjuv2yarnx" path="res://player/tool/guns/instances/makaroni/instructions/cock_hammer.tres" id="3_835x1"]
+[ext_resource type="Script" uid="uid://ddo6xy3d81dii" path="res://player/tool/instructions_assets/Tool_Instructions.gd" id="4_im4q0"]
+
+[resource]
+script = ExtResource("4_im4q0")
+instructions = Array[ExtResource("1_img6w")]([ExtResource("2_wr1fi"), ExtResource("3_835x1")])
+metadata/_custom_type_script = "uid://ddo6xy3d81dii"

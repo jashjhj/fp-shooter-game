@@ -1,11 +1,13 @@
-[gd_scene load_steps=84 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=83 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
-[ext_resource type="Script" uid="uid://du6hkfpnpi12" path="res://player/tool/instructions_assets/Tool_Instruction.gd" id="2_lohkq"]
+[ext_resource type="Resource" uid="uid://b2h5suiaxo1h3" path="res://player/tool/guns/instances/makaroni/instructions/instructions.tres" id="2_lohkq"]
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="3_cawr4"]
-[ext_resource type="Script" uid="uid://ddo6xy3d81dii" path="res://player/tool/instructions_assets/Tool_Instructions.gd" id="3_tl72j"]
+[ext_resource type="Script" uid="uid://cad5847gal3w0" path="res://player/tool/instructions_assets/specific_instructions/Tool_Instr_1DPos.gd" id="3_tl72j"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="4_jmqr6"]
+[ext_resource type="Resource" uid="uid://cw8g6rj6qjrvb" path="res://player/tool/guns/instances/makaroni/instructions/disable_safety.tres" id="4_oxpvn"]
+[ext_resource type="Resource" uid="uid://drknjuv2yarnx" path="res://player/tool/guns/instances/makaroni/instructions/cock_hammer.tres" id="5_1g8f6"]
 [ext_resource type="ArrayMesh" uid="uid://bp37x28x3g45r" path="res://player/tool/guns/instances/makaroni/assets/hammer.obj" id="7_dsk1g"]
 [ext_resource type="ArrayMesh" uid="uid://ca124rfhr43w0" path="res://player/tool/guns/instances/makaroni/assets/mag_release.obj" id="9_3hwry"]
 [ext_resource type="Script" uid="uid://b3i0b7a4kf8v6" path="res://player/tool/guns/parts/interactives/Apply_Impulse.gd" id="10_18edu"]
@@ -34,67 +36,6 @@
 [ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Rotateable.gd" id="26_o4tnm"]
 [ext_resource type="Shader" uid="uid://vj6ja41yrlse" path="res://assets/textures/highlight/highlight.gdshader" id="27_tl72j"]
 [ext_resource type="Script" uid="uid://cgthymytlw708" path="res://player/tool/guns/instances/makaroni/disable_safety.gd" id="29_nf3x5"]
-
-[sub_resource type="Resource" id="Resource_lohkq"]
-script = ExtResource("2_lohkq")
-instruction = &"Disable Safety"
-case = 0
-conditional_to = Array[ExtResource("2_lohkq")]([])
-metadata/_custom_type_script = "uid://du6hkfpnpi12"
-
-[sub_resource type="Resource" id="Resource_tl72j"]
-script = ExtResource("2_lohkq")
-instruction = &"Cock Hammer"
-case = 0
-conditional_to = Array[ExtResource("2_lohkq")]([])
-metadata/_custom_type_script = "uid://du6hkfpnpi12"
-
-[sub_resource type="Resource" id="Resource_oxpvn"]
-script = ExtResource("3_tl72j")
-instructions = Array[ExtResource("2_lohkq")]([SubResource("Resource_lohkq"), SubResource("Resource_tl72j")])
-metadata/_custom_type_script = "uid://ddo6xy3d81dii"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7h8j"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_cawr4")
-shader_parameter/color_shade = 0.86
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_towq5"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_m7h8j")
-shader = ExtResource("26_lohkq")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lohkq"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_towq5")
-shader = ExtResource("27_tl72j")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tl72j"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_cawr4")
-shader_parameter/color_shade = 0.86
-shader_parameter/life = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxpvn"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_tl72j")
-shader = ExtResource("26_lohkq")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1g8f6"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_oxpvn")
-shader = ExtResource("27_tl72j")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_suvc2"]
 resource_local_to_scene = true
@@ -180,12 +121,6 @@ shader = ExtResource("27_tl72j")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
-size = Vector3(0.0373535, 0.0458984, 0.0654297)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_m7h8j"]
-size = Vector3(0.0146484, 0.074707, 0.0562744)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7fin"]
 resource_local_to_scene = true
 render_priority = 0
@@ -228,6 +163,12 @@ shader = ExtResource("27_tl72j")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_f5ljc"]
+size = Vector3(0.0373535, 0.0458984, 0.0654297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m7h8j"]
+size = Vector3(0.0146484, 0.074707, 0.0562744)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61lfa"]
 resource_local_to_scene = true
 render_priority = 0
@@ -248,12 +189,6 @@ next_pass = SubResource("ShaderMaterial_mtebj")
 shader = ExtResource("27_tl72j")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5ljc"]
-points = PackedVector3Array(-0.0140984, 0.005224, -0.0193307, -0.014876, 0.00524514, -0.108375, 0.014876, 0.00524514, -0.108375, 0.0140955, 0.005224, -0.0105346, -0.0140984, 0.005224, 0.00802645, -0.0148585, 0.0105628, -0.115518, -0.014742, 0.0163668, -0.142856, -0.0133383, 0.0150665, -0.142856, -0.00416458, 0.0113522, -0.142856, -0.014876, 0.00524514, 0.05119, -0.014876, 0.00746878, 0.05119, -0.0148731, 0.0212898, 0.031926, 0.00416167, 0.0113522, -0.142856, 0.0133354, 0.0150665, -0.142856, 0.0147391, 0.0163668, -0.142856, 0.0148556, 0.0105628, -0.115518, 0.0148702, 0.011916, 0.0497461, 0.014876, 0.00746878, 0.05119, 0.014876, 0.00524514, 0.05119, 0.0140955, 0.005224, 0.031394, -0.0148236, 0.013308, -0.12382, -0.0141887, 0.0274956, -0.142856, -0.00799425, 0.0262058, -0.142894, -0.00553336, 0.0121662, 0.050715, -0.0148731, 0.011916, 0.0497461, -0.0148585, 0.0139881, 0.0473714, -0.0142353, 0.0262269, 0.0422799, -0.0141712, 0.0275449, 0.0406841, -0.0141829, 0.0275097, 0.0300072, -0.0141887, 0.0274991, 0.00232704, -0.0141887, 0.0274991, -0.0231873, 0.00799134, 0.0262058, -0.142894, 0.0148207, 0.013308, -0.12382, 0.0141858, 0.0274956, -0.142856, 0.0141858, 0.0274991, -0.0143912, 0.0141858, 0.0274991, 0.0256946, 0.0148556, 0.0139881, 0.0473714, 0.0142324, 0.0262269, 0.0422799, 0.00553045, 0.0121662, 0.050715, -0.010295, 0.0334617, -0.142856, -0.00607505, 0.0412215, 0.0196912, -0.00532367, 0.0369857, -0.142856, -0.00174446, 0.0378772, -0.142856, -0.00553336, 0.0268683, 0.0423179, -0.00553336, 0.0285034, 0.0403421, 0, 0.037398, 0.0287153, -0.00174446, 0.0378772, 0.0277274, -0.00607505, 0.0412215, 0.0214961, 0.00174155, 0.0378772, -0.142856, 0.00532076, 0.0369857, -0.142856, 0.010292, 0.0334617, -0.142856, 0.00607213, 0.0412215, 0.0196912, 0.0141683, 0.0275449, 0.0406841, 0.00553045, 0.0285034, 0.0403421, 0.00553045, 0.0268683, 0.0423179, -0.00112997, 0.0410699, -0.135865, -0.00112997, 0.0402876, -0.142153, -0.0017765, 0.0384869, -0.142818, 0.00174155, 0.0378772, 0.0277274, 0.00607213, 0.0412215, 0.0214961, 0.00177359, 0.0384869, -0.142818, 0.00112706, 0.0402876, -0.142153, 0.00112706, 0.0410699, -0.135865)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xqy73"]
-size = Vector3(0.00390625, 0.0107422, 0.0221074)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkedo"]
 resource_local_to_scene = true
@@ -276,9 +211,6 @@ shader = ExtResource("27_tl72j")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8j6fe"]
-size = Vector3(0.0134277, 0.0377197, 0.0290527)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ufwyg"]
 resource_local_to_scene = true
 render_priority = 0
@@ -300,8 +232,11 @@ shader = ExtResource("27_tl72j")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_f6c0u"]
-size = Vector3(0.00219727, 0.0297852, 0.0180664)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5ljc"]
+points = PackedVector3Array(-0.0140984, 0.005224, -0.0193307, -0.014876, 0.00524514, -0.108375, 0.014876, 0.00524514, -0.108375, 0.0140955, 0.005224, -0.0105346, -0.0140984, 0.005224, 0.00802645, -0.0148585, 0.0105628, -0.115518, -0.014742, 0.0163668, -0.142856, -0.0133383, 0.0150665, -0.142856, -0.00416458, 0.0113522, -0.142856, -0.014876, 0.00524514, 0.05119, -0.014876, 0.00746878, 0.05119, -0.0148731, 0.0212898, 0.031926, 0.00416167, 0.0113522, -0.142856, 0.0133354, 0.0150665, -0.142856, 0.0147391, 0.0163668, -0.142856, 0.0148556, 0.0105628, -0.115518, 0.0148702, 0.011916, 0.0497461, 0.014876, 0.00746878, 0.05119, 0.014876, 0.00524514, 0.05119, 0.0140955, 0.005224, 0.031394, -0.0148236, 0.013308, -0.12382, -0.0141887, 0.0274956, -0.142856, -0.00799425, 0.0262058, -0.142894, -0.00553336, 0.0121662, 0.050715, -0.0148731, 0.011916, 0.0497461, -0.0148585, 0.0139881, 0.0473714, -0.0142353, 0.0262269, 0.0422799, -0.0141712, 0.0275449, 0.0406841, -0.0141829, 0.0275097, 0.0300072, -0.0141887, 0.0274991, 0.00232704, -0.0141887, 0.0274991, -0.0231873, 0.00799134, 0.0262058, -0.142894, 0.0148207, 0.013308, -0.12382, 0.0141858, 0.0274956, -0.142856, 0.0141858, 0.0274991, -0.0143912, 0.0141858, 0.0274991, 0.0256946, 0.0148556, 0.0139881, 0.0473714, 0.0142324, 0.0262269, 0.0422799, 0.00553045, 0.0121662, 0.050715, -0.010295, 0.0334617, -0.142856, -0.00607505, 0.0412215, 0.0196912, -0.00532367, 0.0369857, -0.142856, -0.00174446, 0.0378772, -0.142856, -0.00553336, 0.0268683, 0.0423179, -0.00553336, 0.0285034, 0.0403421, 0, 0.037398, 0.0287153, -0.00174446, 0.0378772, 0.0277274, -0.00607505, 0.0412215, 0.0214961, 0.00174155, 0.0378772, -0.142856, 0.00532076, 0.0369857, -0.142856, 0.010292, 0.0334617, -0.142856, 0.00607213, 0.0412215, 0.0196912, 0.0141683, 0.0275449, 0.0406841, 0.00553045, 0.0285034, 0.0403421, 0.00553045, 0.0268683, 0.0423179, -0.00112997, 0.0410699, -0.135865, -0.00112997, 0.0402876, -0.142153, -0.0017765, 0.0384869, -0.142818, 0.00174155, 0.0378772, 0.0277274, 0.00607213, 0.0412215, 0.0214961, 0.00177359, 0.0384869, -0.142818, 0.00112706, 0.0402876, -0.142153, 0.00112706, 0.0410699, -0.135865)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xqy73"]
+size = Vector3(0.00390625, 0.0107422, 0.0221074)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iswqc"]
 resource_local_to_scene = true
@@ -324,6 +259,9 @@ shader = ExtResource("27_tl72j")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8j6fe"]
+size = Vector3(0.0134277, 0.0377197, 0.0290527)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qgtp6"]
 resource_local_to_scene = true
 render_priority = 0
@@ -345,6 +283,51 @@ shader = ExtResource("27_tl72j")
 shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_f6c0u"]
+size = Vector3(0.00219727, 0.0297852, 0.0180664)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7ybb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_cawr4")
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8yqy"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_u7ybb")
+shader = ExtResource("26_lohkq")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bx7no"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_s8yqy")
+shader = ExtResource("27_tl72j")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_effpo"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_cawr4")
+shader_parameter/color_shade = 0.86
+shader_parameter/life = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jsy3"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_effpo")
+shader = ExtResource("26_lohkq")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gf61a"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_2jsy3")
+shader = ExtResource("27_tl72j")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2isxn"]
 size = Vector3(0.00683594, 0.0141602, 0.0195313)
 
@@ -353,11 +336,27 @@ script = ExtResource("1_mmcih")
 trigger_functions_continuous = [NodePath("Push_Trigger")]
 STRAP_TO_TORSO = [NodePath("Player_Insertable_Pouch"), NodePath("Player_Insertable_Pouch2"), NodePath("Player_Insertable_Pouch3")]
 MODEL = NodePath("RigidBody3D/Model")
-INSTRUCTIONS = SubResource("Resource_oxpvn")
+INSTRUCTIONS = ExtResource("2_lohkq")
 MODEL_POSITION_INSPECT = NodePath("Inspect_Pos")
 MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
 
-[node name="Disable_Safety" type="Node" parent="." node_paths=PackedStringArray("SAFETY")]
+[node name="Instructions" type="Node" parent="."]
+
+[node name="Safety" type="Node" parent="Instructions" node_paths=PackedStringArray("interactive")]
+script = ExtResource("3_tl72j")
+interactive = NodePath("../../RigidBody3D/Model/Slide/Model/Safety")
+distance = 0.5
+MY_INSTRUCTION = ExtResource("4_oxpvn")
+metadata/_custom_type_script = "uid://cad5847gal3w0"
+
+[node name="Hammer" type="Node" parent="Instructions" node_paths=PackedStringArray("interactive")]
+script = ExtResource("3_tl72j")
+interactive = NodePath("../../RigidBody3D/Model/Hammer")
+distance = 1.5
+MY_INSTRUCTION = ExtResource("5_1g8f6")
+metadata/_custom_type_script = "uid://cad5847gal3w0"
+
+[node name="Disable_Safety_on_ready" type="Node" parent="." node_paths=PackedStringArray("SAFETY")]
 script = ExtResource("29_nf3x5")
 SAFETY = NodePath("../RigidBody3D/Model/Slide/Model/Safety/Mechanism_Safety")
 trigger_on_ready = true
@@ -414,17 +413,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0264405, -0.0106144)
 [node name="Body" type="MeshInstance3D" parent="RigidBody3D/Model"]
 mesh = ExtResource("1_ilmi0")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_lohkq")
-surface_material_override/1 = SubResource("ShaderMaterial_1g8f6")
-surface_material_override/2 = SubResource("ShaderMaterial_j64g3")
-surface_material_override/3 = SubResource("ShaderMaterial_msppm")
-surface_material_override/4 = SubResource("ShaderMaterial_8gvu5")
+surface_material_override/0 = SubResource("ShaderMaterial_j64g3")
+surface_material_override/1 = SubResource("ShaderMaterial_msppm")
+surface_material_override/2 = SubResource("ShaderMaterial_8gvu5")
+surface_material_override/3 = SubResource("ShaderMaterial_cvwg4")
+surface_material_override/4 = SubResource("ShaderMaterial_4xck8")
 script = ExtResource("4_jmqr6")
 
 [node name="MagRelease" type="MeshInstance3D" parent="RigidBody3D/Model"]
 mesh = ExtResource("9_3hwry")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_cvwg4")
+surface_material_override/0 = SubResource("ShaderMaterial_hkynf")
 script = ExtResource("4_jmqr6")
 HIGHLIGHT_THROUGH_OBJECTS = true
 
@@ -552,9 +551,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.65661e-09)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 mesh = ExtResource("12_2isxn")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_4xck8")
-surface_material_override/1 = SubResource("ShaderMaterial_hkynf")
-surface_material_override/2 = SubResource("ShaderMaterial_xec01")
+surface_material_override/0 = SubResource("ShaderMaterial_xec01")
+surface_material_override/1 = SubResource("ShaderMaterial_33ojq")
+surface_material_override/2 = SubResource("ShaderMaterial_3ldye")
 script = ExtResource("4_jmqr6")
 
 [node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slide/Model"]
@@ -598,7 +597,7 @@ shape = SubResource("BoxShape3D_xqy73")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014354, -0.0218146, -0.0256933)
 mesh = ExtResource("11_ry1el")
 skeleton = NodePath("../../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_33ojq")
+surface_material_override/0 = SubResource("ShaderMaterial_vnbkt")
 script = ExtResource("4_jmqr6")
 
 [node name="Mechanism_Safety" type="Node" parent="RigidBody3D/Model/Slide/Model/Safety" node_paths=PackedStringArray("SAFETY", "HAMMER", "SLIDE", "ACTION")]
@@ -642,7 +641,7 @@ shape = SubResource("BoxShape3D_8j6fe")
 transform = Transform3D(1, 0, 0, 1.49012e-08, 1, 3.35276e-08, 2.98023e-08, -3.72529e-09, 1, 0, 0.000909589, 0.00245167)
 mesh = ExtResource("7_dsk1g")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_3ldye")
+surface_material_override/0 = SubResource("ShaderMaterial_4f0jf")
 script = ExtResource("4_jmqr6")
 HIGHLIGHT_THROUGH_OBJECTS = true
 
@@ -683,7 +682,7 @@ shape = SubResource("BoxShape3D_f6c0u")
 transform = Transform3D(1, -1.49012e-08, 0, 1.02415e-08, 0.975414, -0.220383, 3.1707e-08, 0.220383, 0.975414, 3.72529e-09, 0.00046926, -0.000744432)
 mesh = ExtResource("13_vi08r")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_vnbkt")
+surface_material_override/0 = SubResource("ShaderMaterial_bx7no")
 script = ExtResource("4_jmqr6")
 
 [node name="Mechanism_2way_Mapper" type="Node" parent="RigidBody3D/Model/Trigger" node_paths=PackedStringArray("PRIMARY", "SECONDARY")]
@@ -713,7 +712,7 @@ metadata/_custom_type_script = "uid://bkfsoqbr3ewi8"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0113463, -0.0029531, 0.0157668)
 mesh = ExtResource("19_dsk1g")
 skeleton = NodePath("../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_4f0jf")
+surface_material_override/0 = SubResource("ShaderMaterial_gf61a")
 script = ExtResource("4_jmqr6")
 
 [node name="Area3D" type="Area3D" parent="RigidBody3D/Model/Slidelock/Model"]

@@ -6,11 +6,11 @@ class_name Tool_Instruction extends Resource
 
 enum Case{
 	ALWAYS,
-	HAS_DEPENDENT
+	HAS_DEPENDANT
 }
 @export var case:Case
 
-@export var conditional_to:Array[Tool_Instruction]
+@export var depends_on:Array[Tool_Instruction]
 
 signal is_done_set
 var is_done:bool = false:

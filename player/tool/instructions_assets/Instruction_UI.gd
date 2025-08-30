@@ -16,8 +16,6 @@ func _ready() -> void:
 
 
 
-
-
 func player_changed_equipped(new_item:Player_Tool):
 	
 	for instr in loaded_instructions: # bind new signals
@@ -25,7 +23,7 @@ func player_changed_equipped(new_item:Player_Tool):
 	
 	loaded_instructions = []
 	if new_item != null:
-		for instr in new_item.INSTRUCTIONS.instructions:
+		for instr in new_item.INSTRUCTIONS.instructions: # binds instructions to update function
 			instr.is_done_set.connect(update)
 			loaded_instructions.append(instr)
 	
@@ -34,17 +32,26 @@ func player_changed_equipped(new_item:Player_Tool):
 	else:
 		pass
 		
-		
-		
-		
 	
 	equipped_tool = new_item
 	update()
+
+
 
 func update():
 	
 	var text = ""
 	for instr in loaded_instructions:
-		text = text + instr.instruction + "\n"
+		var available_to_show:bool = true
+		
+		if instr.case == instr.Case.HAS_DEPENDANT: # if requires on dependants. check them!
+			for e in instr.depends_on:
+				
+				if !e.is_done:
+					
+					available_to_show = false
+		
+		if(!available_to_show): continue
+		text = text + instr.instruction + ": [" + ("[color=green]✓[/color]" if instr.is_done else "[color=red]x[/color]") + "]\n"
 	
 	TEXTBOX.text = text
