@@ -25,10 +25,10 @@ func _ready() -> void:
 	CONSTRAINT_HAMMER.SECONDARY = HAMMER
 	if(SAFETY_STARTS_ON):
 		CONSTRAINT_HAMMER.DOMAIN_START = SAFETY.get_min_distance()
-		CONSTRAINT_HAMMER.DOMAIN_END = SAFETY.get_max_distance()
-	else: # have opposite way round otherwise
+		CONSTRAINT_HAMMER.DOMAIN_END = (3 * SAFETY.get_min_distance() + SAFETY.get_max_distance()) / 4
+	else: # Safety starts off
 		CONSTRAINT_HAMMER.DOMAIN_START = SAFETY.get_max_distance()
-		CONSTRAINT_HAMMER.DOMAIN_END = SAFETY.get_min_distance()
+		CONSTRAINT_HAMMER.DOMAIN_END = (SAFETY.get_min_distance() + 3 *SAFETY.get_max_distance()) / 4
 	CONSTRAINT_HAMMER.RANGE_START = HAMMER.get_min_distance()
 	CONSTRAINT_HAMMER.RANGE_END = HAMMER.get_max_distance()
 	CONSTRAINT_HAMMER.SET_MIN = false
