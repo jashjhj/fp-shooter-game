@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c007vgboxblaa"]
+[gd_scene load_steps=13 format=3 uid="uid://c007vgboxblaa"]
 
 [ext_resource type="Script" uid="uid://bgovjysirxbhv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://veedg70g6tse" path="res://player/scripts/camera_3d.gd" id="2_g1dw6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfrj764tqclus" path="res://player/elements/tool_rack/tool_rack.tscn" id="5_g6k8r"]
 [ext_resource type="PackedScene" uid="uid://5upxu38ed4sw" path="res://player/elements/leg/player_leg.tscn" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://cl7p8ax1o4fh" path="res://player/elements/leg/bipedal_leg_controller.gd" id="6_g6k8r"]
+[ext_resource type="Script" uid="uid://f64yitw5hcyb" path="res://player/tool/instructions_assets/Instruction_UI.gd" id="7_boad6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 radius = 0.15
@@ -163,3 +164,8 @@ horizontal_alignment = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Instruction_UI" type="Node" parent="RichTextLabel" node_paths=PackedStringArray("TEXTBOX")]
+script = ExtResource("7_boad6")
+TEXTBOX = NodePath("..")
+metadata/_custom_type_script = "uid://f64yitw5hcyb"

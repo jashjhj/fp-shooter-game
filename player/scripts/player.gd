@@ -76,6 +76,7 @@ var InspectState:PlayerState = PlayerState.new()
 @onready var CAMERA:Camera3D = $Hip/Torso/Head/Camera3D
 @onready var TOOL_RACK:Tool_Rack = $Hip/Anchors/ToolRack
 
+signal changed_equipped(item:Player_Tool)
 @export var PRIMARY_TOOL:PackedScene
 
 @export var HP:float = 5.0:
@@ -107,6 +108,8 @@ var equipped_tool:Player_Tool:
 			equipped_tool.focus = false
 			equipped_tool.inspect = false
 		equipped_tool = v;
+		
+		changed_equipped.emit(equipped_tool)
 
 
 var CAMERA_CAPTURED:bool = false;
