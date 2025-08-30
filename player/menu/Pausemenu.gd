@@ -14,6 +14,10 @@ var is_menu_enabled:bool = false:
 
 func _ready() -> void:
 	disable_menu()
+	init()
+
+func init():
+	$PanelContainer/VBoxContainer/Sens.value = Settings.Mouse_LookSensitivity
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
@@ -32,3 +36,8 @@ func disable_menu():
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_sens_drag_ended(value_changed: bool) -> void:
+	Settings.Mouse_LookSensitivity = $PanelContainer/VBoxContainer/Sens.value
+	Settings.value_updated()

@@ -12,7 +12,7 @@ func init():
 		config.load(SETTINGS_FILE_PATH);
 		load_settings()
 	
-	tree_exiting.connect(save_settings())
+	tree_exiting.connect(save_settings)
 	# Temporary - Until actual settings menu implemented. Resets on laod each time.
 	#print_debug("Setting keybinds")
 

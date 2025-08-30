@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://doa7cbfkctnca" path="res://player/menu/Pausemenu.gd" id="1_tvqcu"]
 [ext_resource type="FontFile" uid="uid://7am1h57ldd6" path="res://examples_dd3d/PixelatedElegance.ttf" id="2_enubt"]
 
-[node name="Pusemenu" type="Control"]
+[node name="Pausemenu" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -24,7 +24,7 @@ anchor_bottom = 0.5
 offset_left = -100.0
 offset_top = -50.0
 offset_right = 100.0
-offset_bottom = 50.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -45,4 +45,18 @@ vertical_alignment = 1
 layout_mode = 2
 text = "Quit"
 
+[node name="Mosue_Sens_Label" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Mouse Sensitivity
+0                    1                     2"
+vertical_alignment = 2
+
+[node name="Sens" type="HSlider" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="drag_ended" from="PanelContainer/VBoxContainer/Sens" to="." method="_on_sens_drag_ended"]

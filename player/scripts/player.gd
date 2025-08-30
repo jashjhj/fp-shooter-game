@@ -240,13 +240,13 @@ func _process(delta:float) -> void:
 	#ANCHOR_HAND.basis = HEAD.basis
 	SHOULDER.basis = HEAD.basis
 	
-	mouse_velocity *= Settings.MouseAcceleration * (1-delta);
-	mouse_velocity += mouse_input/delta;
+	#mouse_velocity *= Settings.MouseAcceleration * (1-delta);
+	#mouse_velocity += mouse_input/delta;
 	
 	#Camera rotation
 	#camera_rot_x += mouse_velocity.x * -Settings.MouseSensitivity.x * delta
 	#camera_rot_y += mouse_velocity.y * -Settings.MouseSensitivity.y * delta
-	var mouse_vector := mouse_input * -Settings.Mouse_LookSensitivity
+	var mouse_vector := mouse_input * -Settings.Mouse_LookSensitivity * 0.004
 	if(is_focussing): mouse_vector *= Settings.Mouse_AimSensitivity
 	camera_rot_x += mouse_vector.x
 	camera_rot_y += mouse_vector.y

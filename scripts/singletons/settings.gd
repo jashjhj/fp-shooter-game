@@ -13,3 +13,6 @@ func _ready() -> void:
 	config_loader.init()
 	
 	print_debug("Settings Loaded")
+
+func value_updated() -> void:
+	config_loader.save_settings()
