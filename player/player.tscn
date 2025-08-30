@@ -159,3 +159,7 @@ offset_bottom = 73.0
 grow_horizontal = 2
 text = "HP: 0"
 horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

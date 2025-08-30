@@ -1,8 +1,10 @@
-[gd_scene load_steps=79 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=82 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
+[ext_resource type="Script" uid="uid://du6hkfpnpi12" path="res://player/tool/instructions_assets/Tool_Instruction.gd" id="2_lohkq"]
 [ext_resource type="Shader" uid="uid://47lmcypm20bi" path="res://assets/textures/pastels/pastel_shader.gdshader" id="3_cawr4"]
+[ext_resource type="Script" uid="uid://ddo6xy3d81dii" path="res://player/tool/instructions_assets/Tool_Instructions.gd" id="3_tl72j"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="4_jmqr6"]
 [ext_resource type="ArrayMesh" uid="uid://bp37x28x3g45r" path="res://player/tool/guns/instances/makaroni/assets/hammer.obj" id="7_dsk1g"]
 [ext_resource type="ArrayMesh" uid="uid://ca124rfhr43w0" path="res://player/tool/guns/instances/makaroni/assets/mag_release.obj" id="9_3hwry"]
@@ -32,6 +34,11 @@
 [ext_resource type="Script" uid="uid://d3ti8mrkqn6ai" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Rotateable.gd" id="26_o4tnm"]
 [ext_resource type="Shader" uid="uid://vj6ja41yrlse" path="res://assets/textures/highlight/highlight.gdshader" id="27_tl72j"]
 [ext_resource type="Script" uid="uid://cgthymytlw708" path="res://player/tool/guns/instances/makaroni/disable_safety.gd" id="29_nf3x5"]
+
+[sub_resource type="Resource" id="Resource_oxpvn"]
+script = ExtResource("3_tl72j")
+instructions = Array[ExtResource("2_lohkq")]([])
+metadata/_custom_type_script = "uid://ddo6xy3d81dii"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m7h8j"]
 resource_local_to_scene = true
@@ -332,6 +339,7 @@ script = ExtResource("1_mmcih")
 trigger_functions_continuous = [NodePath("Push_Trigger")]
 STRAP_TO_TORSO = [NodePath("Player_Insertable_Pouch"), NodePath("Player_Insertable_Pouch2"), NodePath("Player_Insertable_Pouch3")]
 MODEL = NodePath("RigidBody3D/Model")
+INSTRUCTIONS = SubResource("Resource_oxpvn")
 MODEL_POSITION_INSPECT = NodePath("Inspect_Pos")
 MODEL_POSITION_FOCUS = NodePath("Focus_Pos")
 

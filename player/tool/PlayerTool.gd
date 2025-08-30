@@ -2,6 +2,7 @@ class_name Player_Tool extends Node3D
 
 @export var MODEL:Node3D;
 
+@export var INSTRUCTIONS:Tool_Instructions
 ##Optionally set.
 ##@export var CAM_FOCUS_POS:Node3D;
 
