@@ -22,9 +22,13 @@ func trigger():
 func get_all_children(from:Node = self):
 	var children:Array[Node];
 	
+	#TODO
+	
 	if(len(from.get_children(true))) == 0: return [from]
+	
 	
 	for child in from.get_children(true):
 		children.append_array(get_all_children(child))
 	
+	#print(children)
 	return children

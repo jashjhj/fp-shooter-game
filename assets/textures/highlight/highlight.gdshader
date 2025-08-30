@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_add, unshaded, depth_draw_never, depth_test_disabled;
+render_mode blend_add, unshaded, depth_draw_never;
 
 uniform float emission = 0.0;
 uniform vec3 emission_color = vec3(0.3,0.2,0.4);
@@ -20,8 +20,3 @@ void fragment() {
 	//EMISSION = color * highlight * emission;
 
 }
-
-//void light() {
-//	// Called for every pixel for every light affecting the material.
-//	// Uncomment to replace the default light processing function with this one.
-//}

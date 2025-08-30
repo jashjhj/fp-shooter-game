@@ -87,6 +87,12 @@ func recalculate_energy(new_hp:float):
 		CAMERA_LIGHT.light_energy *= (delta_proportion_energy)
 
 func destroy_centrifuge():
-	$Body/Angular_Damper.free()
+	if($Body/Angular_Damper != null):
+		$Body/Angular_Damper.queue_free()
 	LEG_FORCE_LATERAL = 0; # Pretend legs dont work well
 	LEG_FORCE_THROUGH *= 0.33;
+	
+	var gib = Trig_Gib.new()
+	gib.TO_GIB = self;
+	gib.trigger()
+	gib.queue_free()

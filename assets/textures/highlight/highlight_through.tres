@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b3fujfmtgeica"]
+
+[ext_resource type="Shader" uid="uid://cyyi0ufunq0rf" path="res://assets/textures/highlight/highlight_through.gdshader" id="1_b2fyv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_b2fyv")
+shader_parameter/emission = 0.0
+shader_parameter/emission_color = Vector3(0.3, 0.2, 0.4)

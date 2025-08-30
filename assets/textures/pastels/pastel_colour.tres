@@ -6,7 +6,5 @@
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_2aus5")
-shader_parameter/emission = 0.0
-shader_parameter/emission_color = Vector3(0.3, 0.2, 0.1)
 shader_parameter/color_shade = 0.86
 shader_parameter/life = 1.0
