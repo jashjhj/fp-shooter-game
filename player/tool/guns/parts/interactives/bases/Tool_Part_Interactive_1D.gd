@@ -8,7 +8,8 @@ var prev_distance:float = DISTANCE
 ##Current velocity (Considering: DISTANCE)
 var velocity:float = 0.0;
 
-
+##Tracks last 20 velocity ticks by the mouse (4/frame @ 60fps, 20 ~= 0.8 seconds)
+var velocity_tracker:Array[float]
 
 
 
@@ -63,16 +64,21 @@ func _ready():
 func _process(delta:float) -> void:
 	super._process(delta);
 
+
+
 func mouse_movement(motion:Vector3):
 	super(motion)
 	
 	var delta = motion.dot(global_basis*INTERACT_POSITIVE_DIRECTION)
 	
+	frame_mouse_accumulated_dist += delta
 	DISTANCE += delta
 
 
 signal pre_physics_process(delta:float)
 signal within_physics_process(delta:float)
+
+var frame_mouse_accumulated_dist:float = 0;
 
 ##CallAfter processing / when you want distance to be calculated
 func _physics_process(delta:float) -> void:
@@ -80,11 +86,17 @@ func _physics_process(delta:float) -> void:
 	pre_physics_process.emit(delta)
 	
 	
+	velocity_tracker.append(frame_mouse_accumulated_dist / delta)
+	if(len(velocity_tracker) > 20):
+		velocity_tracker.remove_at(0)
+	
+	frame_mouse_accumulated_dist = 0;
+	
 	
 	var accel:float = 0;
 	
 	#DISTANCE += velocity * delta * 0.5
-	var prev_vel:float = velocity
+	var prev_velocity:float = velocity
 	
 	if(is_focused):
 		#pass
@@ -95,11 +107,17 @@ func _physics_process(delta:float) -> void:
 		velocity += (SPRING_FORCE_CONSTANT + SPRING_FORCE_LINEAR*DISTANCE) * delta
 		velocity = sign(velocity) * max(0, abs(velocity) - FRICTION_FORCE * delta)
 		
-		accel = (velocity - prev_vel) / delta
+		accel = (velocity - prev_velocity) / delta
 		#print("v:",velocity, " pv:", prev_vel, " d: ", DISTANCE)
-		DISTANCE += prev_vel*delta + 0.5*accel*delta*delta # s=ut+1/2at^2.
+		DISTANCE += prev_velocity*delta + 0.5*accel*delta*delta # s=ut+1/2at^2.
 	
-	prev_velocity = velocity
+	if(is_focused):
+		prev_velocity = read_velocity()
+		velocity = read_velocity()
+		
+	
+	
+	
 	
 	# apply limits.                                MAX LIMIT --
 	var hit_limit:bool = false;
@@ -110,15 +128,19 @@ func _physics_process(delta:float) -> void:
 			hit_limit = true
 		
 	if(hit_limit):
-		if(velocity > 0):
+		
+		if(!is_focused and velocity > 0):
 			
 			#v^2 = u^2 + 2as, calculates Velocity actual at impact
-			var u2add2as = prev_vel*prev_vel + 2*accel*(DISTANCE-prev_distance);
-			velocity = sqrt(abs(u2add2as)) * sign(u2add2as) 
+			var u2add2as = prev_velocity*prev_velocity + 2*accel*(DISTANCE-prev_distance);
+			velocity = sqrt(abs(u2add2as)) * sign(prev_velocity) 
 			
-			if(abs(velocity) > 0.001): hit_max_limit()
+			if(abs(velocity) > 0.001): hit_max_limit(velocity)
 			
 			velocity = -velocity * ELASTICITY_AT_MAX
+			
+		elif(is_focused and read_velocity() > 0):
+			if(abs(velocity) > 0.001): hit_max_limit(velocity * 0.1)
 		
 	
 	
@@ -132,17 +154,19 @@ func _physics_process(delta:float) -> void:
 		
 	if(hit_limit):
 		
-		if(velocity < 0):
+		if(!is_focused and velocity < 0):
 			
 			
 			#v^2 = u^2 + 2as, calculates Velocity actual at impact
-			var u2add2as = prev_vel*prev_vel + 2*((velocity - prev_vel)/delta)*(DISTANCE-prev_distance);
-			velocity = sqrt(abs(u2add2as)) * sign(u2add2as) 
+			var u2add2as = prev_velocity*prev_velocity + 2*(accel)*(DISTANCE-prev_distance);
+			velocity = sqrt(abs(u2add2as)) * sign(prev_velocity) 
 			
-			if(abs(velocity) > 0.001): hit_min_limit()
+			if(abs(velocity) > 0.001): hit_min_limit(velocity)
 			
 			velocity = -velocity * ELASTICITY_AT_MIN
-	
+		
+		elif(is_focused and read_velocity() < 0):
+			if(abs(velocity) > 0.001): hit_min_limit(velocity * 0.1) # * 0.1 becasue otherwise ti looks too sensitive
 	
 	
 	within_physics_process.emit(delta)
@@ -173,6 +197,12 @@ func _physics_process(delta:float) -> void:
 	
 
 
+func read_velocity() -> float:
+	var sum:float;
+	for e in velocity_tracker:
+		sum += e
+	if(len(velocity_tracker) < 5): return 0 # Not enough data
+	return sum / len(velocity_tracker)
 
 
 
@@ -193,11 +223,23 @@ func add_new_trigger(distance:float, direction:TRIGGERS_DIRECTION_ENUM) -> Signa
 
 var min_limits
 
-func hit_min_limit():
+func hit_min_limit(velocity:float):
 	pass
 
-func hit_max_limit():
+func hit_max_limit(velocity:float):
 	pass
+
+
+func enable_focus():
+	super()
+
+func disable_focus():
+	super()
+	velocity = read_velocity()
+
+
+
+
 
 ##Adds limit. If it is already written as limit, adds anyway. Only add once at a time.
 func add_min_limit(at:float):

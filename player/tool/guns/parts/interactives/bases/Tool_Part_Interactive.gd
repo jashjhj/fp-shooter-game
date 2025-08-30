@@ -187,6 +187,7 @@ func _disable_focus():
 	#disable_plane_collider()
 	
 	is_being_hovered = false
+	
 	disable_focus() # inherited function
 
 #Inherited functions. called when focused and unfocused

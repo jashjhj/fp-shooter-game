@@ -73,10 +73,10 @@ func disable_focus():
 		is_cock_limit_set = true
 
 
-func hit_min_limit() -> void:
+func hit_min_limit(velocity) -> void:
 	if(show_hit_speed):print(velocity)
 	
-	super.hit_min_limit()
+	super.hit_min_limit(velocity)
 	if DISTANCE <= TRIGGER_ANGLE and abs(velocity) > abs(VELOCITY_THRESHOLD):
 		#print(velocity)
 		#print(current_angle)

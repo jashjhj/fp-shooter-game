@@ -361,7 +361,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 script = ExtResource("16_jmqr6")
 MODEL = NodePath("Model")
 APPLY_FORCES_TO = NodePath("../..")
-SIMULATED_MASS = 1.0
 INTERACT_POSITIVE_DIRECTION = Vector3(0, 0, 1)
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.036])
