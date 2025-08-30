@@ -42,6 +42,7 @@ var is_initialised:bool = false
 ##Makes the highlight work through walls.
 @export var HIGHLIGHT_THROUGH_OBJECTS:bool = false:
 	set(v):
+		if(!is_initialised): init()
 		HIGHLIGHT_THROUGH_OBJECTS = v;
 		for mat in get_all_materials():
 			if(HIGHLIGHT_THROUGH_OBJECTS):

@@ -12,6 +12,7 @@ class_name Tool_Part_Interactive extends Tool_Part
 ##when this part is selected, it simultaneously focuses others in this array.. Accepts Tool_Part_Interactive, Tool_part_Insertable (Grabs what is housed)
 @export var ALSO_SELECT:Array[Node]
 
+@export var HIGHLIGHT_ON_HOVER:Array[Node];
 
 var INTERACT_PLANE:Area3D;
 
@@ -65,6 +66,11 @@ func _ready():
 	if(get_parent() is Gun):
 		if(get_parent().inspect):
 			is_interactive = true;
+	
+	for e in HIGHLIGHT_ON_HOVER:
+		if not e is Highlightable_Mesh:
+			e.set_script(load("res://assets/textures/highlight/highlightable_mesh.gd"))
+			
 
 
 func init(): # load the tools required.
@@ -93,6 +99,14 @@ func enable_plane_collider():
 	INTERACT_PLANE.process_mode = Node.PROCESS_MODE_INHERIT;
  
 
+var is_being_hovered:bool = false:
+	set(v):
+		if(is_being_hovered == v): return
+		is_being_hovered = v
+		
+		for mesh in HIGHLIGHT_ON_HOVER:
+			mesh.HIGHLIGHT_ENABLED = is_being_hovered
+
 var mouse_velocity:Vector2;
 func _input(event: InputEvent) -> void: # Handles "is_focused"
 	
@@ -104,10 +118,14 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 			mouse_movement(INTERACT_SENSITIVITY * world_coords)
 	
 	elif(is_focusable and is_interactive): # and not focuesed (yet)
-		if(event.is_action_pressed("interact_0")):
-			var mouse_collider = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collider(); # Was this begun to be clicked on.
-			if(mouse_collider == BEGIN_INTERACT_COLLIDER):
+		var mouse_collider = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collider();
+		if(mouse_collider == BEGIN_INTERACT_COLLIDER):#If hovering over
+			if(event.is_action_pressed("interact_0")):
 				_enable_focus()
+			else:
+				is_being_hovered = true
+		else:
+			is_being_hovered = false
 	
 	if(event.is_action_released("interact_0")):
 		_disable_focus()
@@ -168,6 +186,7 @@ func _disable_focus():
 	is_focused = false;
 	#disable_plane_collider()
 	
+	is_being_hovered = false
 	disable_focus() # inherited function
 
 #Inherited functions. called when focused and unfocused
