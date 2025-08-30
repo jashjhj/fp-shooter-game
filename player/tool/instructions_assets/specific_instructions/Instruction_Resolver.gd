@@ -13,11 +13,11 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-var ticks_till_check:int = 165
+var ticks_till_check:int = 6
 func _process(delta: float) -> void:
 	ticks_till_check -= 1
 	if(ticks_till_check <= 0):
-		ticks_till_check = 15
+		ticks_till_check = 6
 		check()
 	
 
