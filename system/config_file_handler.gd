@@ -49,9 +49,9 @@ func save_settings():
 func load_settings():
 	load_keybindings()
 	
-	config.get_value("mouse", "look_sensitivity", 1.0); # these are defualts
-	config.get_value("mouse", "ads_sensitivity_mult", 0.5);
-	config.get_value("mouse", "interact_sensitivity", 1.0);
+	Settings.Mouse_LookSensitivity = config.get_value("mouse", "look_sensitivity", 1.0); # these are defualts
+	Settings.Mouse_AimSensitivity = config.get_value("mouse", "ads_sensitivity_mult", 0.5);
+	Settings.Mouse_InteractSensitivity = config.get_value("mouse", "interact_sensitivity", 1.0);
 
 
 
