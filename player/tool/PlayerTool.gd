@@ -127,7 +127,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			MY_ANCHOR.basis *= Basis(hold_rot)
 			MY_ANCHOR.global_position += ANCHOR.global_basis * MODEL_POSITION_DEFAULT.basis.inverse() * MODEL_POSITION_DEFAULT.position
-
+		
+		MY_ANCHOR.basis = MY_ANCHOR.basis.orthonormalized()
 
 ##Internal function. Externally, please directly set inspect.
 func inspect_set(value:bool):
