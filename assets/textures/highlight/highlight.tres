@@ -5,5 +5,5 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_bw2tu")
-shader_parameter/emission = 0.7735
+shader_parameter/emission = 0.0
 shader_parameter/emission_color = Vector3(0.3, 0.2, 0.4)
