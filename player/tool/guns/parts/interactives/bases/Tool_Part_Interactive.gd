@@ -84,6 +84,8 @@ func init(): # load the tools required.
 	
 
 
+
+
 func disable_plane_collider():
 	INTERACT_PLANE.process_mode = Node.PROCESS_MODE_DISABLED;
 
@@ -124,6 +126,11 @@ func _process(delta: float) -> void:
 	#print(mouse_velocity)
 
 
+func steal_mouse():
+	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func replace_mouse():
+	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _enable_focus():
 	#Cancel if mouse not visible
@@ -131,7 +138,7 @@ func _enable_focus():
 	if(is_focused): return # If already focused, cancel
 	if(!is_focusable): return
 	
-	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if(HIDES_MOUSE): steal_mouse()
 	
 	has_been_focused = true;
 	is_focused = true;
@@ -156,7 +163,7 @@ func _enable_focus():
 func _disable_focus():
 	if(!is_focused): return
 	
-	if(HIDES_MOUSE): Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if(HIDES_MOUSE): replace_mouse()
 	
 	is_focused = false;
 	#disable_plane_collider()

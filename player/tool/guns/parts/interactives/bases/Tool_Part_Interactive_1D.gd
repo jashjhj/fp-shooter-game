@@ -47,7 +47,7 @@ enum TRIGGERS_DIRECTION_ENUM {
 @export var TRIGGERS_DIRECTION:Array[TRIGGERS_DIRECTION_ENUM]
 
 
-
+var prev_velocity:float;
 
 ##Ready
 func _ready():
@@ -99,6 +99,7 @@ func _physics_process(delta:float) -> void:
 		#print("v:",velocity, " pv:", prev_vel, " d: ", DISTANCE)
 		DISTANCE += prev_vel*delta + 0.5*accel*delta*delta # s=ut+1/2at^2.
 	
+	prev_velocity = velocity
 	
 	# apply limits.                                MAX LIMIT --
 	var hit_limit:bool = false;
@@ -169,6 +170,7 @@ func _physics_process(delta:float) -> void:
 		#	print(TRIGGERS_TRIGGERABLE[i], " @ ", Time.get_ticks_msec())
 	
 	prev_distance = DISTANCE
+	
 
 
 
