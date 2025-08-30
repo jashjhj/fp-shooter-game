@@ -96,3 +96,13 @@ func destroy_centrifuge():
 	gib.TO_GIB = self;
 	gib.trigger()
 	gib.queue_free()
+	
+	
+	#Kill
+	IS_ACTIVE = false
+	if(is_firing):
+		GUN_CHAINGUN.stop_firing()
+	
+	#Apply new energy value
+	MID_SWIVEL.ROTATION_ACCELERATION = 0
+	TOP_SWIVEL.ROTATION_ACCELERATION = 0
