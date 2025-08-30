@@ -179,7 +179,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 				rotating_during_inspect_mouse_pos = get_viewport().get_mouse_position()
 				is_rotating_during_inspect = true;
-			equipped_tool.rotate_inspect_node(event.relative * Settings.MouseSensitivity)
+			equipped_tool.rotate_inspect_node(event.relative * Settings.MouseSensitivity * 0.004)
 
 		else:
 			if(is_rotating_during_inspect):
