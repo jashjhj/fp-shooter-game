@@ -34,6 +34,27 @@ func save_keybinding(action:StringName, event:InputEvent) -> bool:
 	return true
 	
 
+
+
+
+func save_settings():
+	config.set_value("mouse", "look_sensitivity", Settings.Mouse_LookSensitivity);
+	config.set_value("mouse", "ads_sensitivity_mult", Settings.Mouse_AimSensitivity);
+	config.set_value("mouse", "interact_sensitivity", Settings.Mouse_InteractSensitivity);
+	
+	reset_keybindings()
+	
+	config.save(SETTINGS_FILE_PATH);
+
+func load_settings():
+	load_keybindings()
+	
+	config.get_value("mouse", "look_sensitivity", 1.0); # these are defualts
+	config.get_value("mouse", "ads_sensitivity_mult", 0.5);
+	config.get_value("mouse", "interact_sensitivity", 1.0);
+
+
+
 func load_keybindings():
 	var keybindings = {};
 	var keys = config.get_section_keys("keybinding")
@@ -63,7 +84,7 @@ func set_keybindings():
 		InputMap.action_add_event(action, keybindings[action]);
 
 
-## Set config to default
+## Set config to default - beacsue load them wont leave auto-sets. 
 func reset_keybindings():
 	# CATEGORY, action, binding
 	config.set_value("keybinding", "move_forward", "W");
@@ -75,20 +96,3 @@ func reset_keybindings():
 	config.set_value("keybinding", "focus", "mouse_2");
 	
 	
-
-
-func save_settings():
-	config.set_value("mouse", "look_sensitivity", Settings.Mouse_LookSensitivity);
-	config.set_value("mouse", "ads_sensitivity_mult", Settings.Mouse_AimSensitivity);
-	config.set_value("mouse", "interact_sensitivity", Settings.Mouse_InteractSensitivity);
-	
-	reset_keybindings()
-	
-	config.save(SETTINGS_FILE_PATH);
-
-func load_settings():
-	load_keybindings()
-	
-	config.get_value("mouse", "look_sensitivity", 1.0); # these are defualts
-	config.get_value("mouse", "ads_sensitivity_mult", 0.5);
-	config.get_value("mouse", "interact_sensitivity", 1.0);

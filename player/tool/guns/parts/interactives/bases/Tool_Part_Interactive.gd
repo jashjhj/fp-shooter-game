@@ -115,7 +115,7 @@ func _input(event: InputEvent) -> void: # Handles "is_focused"
 			var pixels:Vector2 = event.screen_relative
 			var world_coords:Vector3 = get_viewport().get_camera_3d().delta_pixels_to_world_space(pixels)
 			#print(pixels, " -> ", world_coords)
-			mouse_movement(INTERACT_SENSITIVITY * world_coords)
+			mouse_movement(INTERACT_SENSITIVITY * world_coords * Settings.Mouse_InteractSensitivity)
 	
 	elif(is_focusable and is_interactive): # and not focuesed (yet)
 		var mouse_collider = get_viewport().get_camera_3d().get_mouse_ray(2, BEGIN_INTERACT_COLLISION_LAYER).get_collider();
