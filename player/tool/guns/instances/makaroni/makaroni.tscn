@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=88 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -8,8 +8,13 @@
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="4_jmqr6"]
 [ext_resource type="Resource" uid="uid://cw8g6rj6qjrvb" path="res://player/tool/guns/instances/makaroni/instructions/disable_safety.tres" id="4_oxpvn"]
 [ext_resource type="Resource" uid="uid://drknjuv2yarnx" path="res://player/tool/guns/instances/makaroni/instructions/cock_hammer.tres" id="5_1g8f6"]
+[ext_resource type="Script" uid="uid://dyqksabuucsm" path="res://player/tool/instructions_assets/specific_instructions/Instr_Load_Round.gd" id="6_suvc2"]
 [ext_resource type="ArrayMesh" uid="uid://bp37x28x3g45r" path="res://player/tool/guns/instances/makaroni/assets/hammer.obj" id="7_dsk1g"]
+[ext_resource type="Resource" uid="uid://dtt3400t0hcf7" path="res://player/tool/guns/instances/makaroni/instructions/load_round.tres" id="7_g7ykr"]
+[ext_resource type="Script" uid="uid://bljq6bxgqey11" path="res://player/tool/instructions_assets/specific_instructions/Instr_Insert.gd" id="8_j64g3"]
+[ext_resource type="Resource" uid="uid://bhqcfa7766wf8" path="res://player/tool/guns/instances/makaroni/instructions/insert_mag.tres" id="9_00cj4"]
 [ext_resource type="ArrayMesh" uid="uid://ca124rfhr43w0" path="res://player/tool/guns/instances/makaroni/assets/mag_release.obj" id="9_3hwry"]
+[ext_resource type="Resource" uid="uid://bjvufxkyshc4i" path="res://player/tool/guns/instances/makaroni/instructions/release_the_slide.tres" id="10_00cj4"]
 [ext_resource type="Script" uid="uid://b3i0b7a4kf8v6" path="res://player/tool/guns/parts/interactives/Apply_Impulse.gd" id="10_18edu"]
 [ext_resource type="Script" uid="uid://un4puemevabk" path="res://player/tool/guns/parts/interactives/action_nodes/trigger/Trig_Apply_Velocity.gd" id="10_f5ljc"]
 [ext_resource type="Script" uid="uid://ml4l6f77j40" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Interactive.gd" id="10_xqy73"]
@@ -352,9 +357,30 @@ metadata/_custom_type_script = "uid://cad5847gal3w0"
 [node name="Hammer" type="Node" parent="Instructions" node_paths=PackedStringArray("interactive")]
 script = ExtResource("3_tl72j")
 interactive = NodePath("../../RigidBody3D/Model/Hammer")
-distance = 1.5
+distance = 1.4
 MY_INSTRUCTION = ExtResource("5_1g8f6")
 metadata/_custom_type_script = "uid://cad5847gal3w0"
+
+[node name="Instr_Load_Round" type="Node" parent="Instructions" node_paths=PackedStringArray("ACTION")]
+script = ExtResource("6_suvc2")
+ACTION = NodePath("../../RigidBody3D/Model/Slide/Gun_Action")
+MY_INSTRUCTION = ExtResource("7_g7ykr")
+metadata/_custom_type_script = "uid://dyqksabuucsm"
+
+[node name="Instr_Insert_mag" type="Node" parent="Instructions" node_paths=PackedStringArray("INSERTABLE_SLOT")]
+script = ExtResource("8_j64g3")
+INSERTABLE_SLOT = NodePath("../../RigidBody3D/Model/Magwell")
+MY_INSTRUCTION = ExtResource("9_00cj4")
+metadata/_custom_type_script = "uid://bljq6bxgqey11"
+
+[node name="Release_Slide" type="Node" parent="Instructions" node_paths=PackedStringArray("interactive")]
+script = ExtResource("3_tl72j")
+interactive = NodePath("../../RigidBody3D/Model/Slidelock")
+distance = 0.001
+successful_if_above = false
+successful_if_below = true
+MY_INSTRUCTION = ExtResource("10_00cj4")
+metadata/_custom_type_script = "uid://cij1t15nap32q"
 
 [node name="Disable_Safety_on_ready" type="Node" parent="." node_paths=PackedStringArray("SAFETY")]
 script = ExtResource("29_nf3x5")

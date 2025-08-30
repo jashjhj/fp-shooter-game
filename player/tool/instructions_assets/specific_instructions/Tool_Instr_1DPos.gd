@@ -13,6 +13,7 @@ func _ready() -> void:
 	interactive.add_new_trigger(distance, Tool_Part_Interactive_1D.TRIGGERS_DIRECTION_ENUM.FORWARDS).connect(set_above)
 	interactive.add_new_trigger(distance, Tool_Part_Interactive_1D.TRIGGERS_DIRECTION_ENUM.BACKWARDS).connect(set_below)
 	
+	is_done = successful_if_above if interactive.DISTANCE > distance else successful_if_below # set intitially
 
 func set_below():
 	is_done = successful_if_below

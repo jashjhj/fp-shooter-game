@@ -6,7 +6,8 @@ class_name Tool_Instruction extends Resource
 
 enum Case{
 	ALWAYS,
-	HAS_DEPENDANT
+	HAS_DEPENDANT,
+	IF_NOT_DONE
 }
 @export var case:Case
 
