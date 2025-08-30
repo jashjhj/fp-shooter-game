@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://2b1sa45f0frf"]
+[gd_scene load_steps=90 format=3 uid="uid://2b1sa45f0frf"]
 
 [ext_resource type="ArrayMesh" uid="uid://ccdhpchwj4tlu" path="res://player/tool/guns/instances/makaroni/assets/body.obj" id="1_ilmi0"]
 [ext_resource type="Script" uid="uid://7yjt2q14eqdj" path="res://player/tool/guns/gun.gd" id="1_mmcih"]
@@ -18,9 +18,11 @@
 [ext_resource type="Script" uid="uid://b3i0b7a4kf8v6" path="res://player/tool/guns/parts/interactives/Apply_Impulse.gd" id="10_18edu"]
 [ext_resource type="Script" uid="uid://un4puemevabk" path="res://player/tool/guns/parts/interactives/action_nodes/trigger/Trig_Apply_Velocity.gd" id="10_f5ljc"]
 [ext_resource type="Script" uid="uid://ml4l6f77j40" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Interactive.gd" id="10_xqy73"]
+[ext_resource type="Script" uid="uid://cu8x1n66a5b0i" path="res://player/tool/instructions_assets/specific_instructions/Instr_Depleted_Mag.gd" id="11_5o4gb"]
 [ext_resource type="Script" uid="uid://cs1x2h8hfgu13" path="res://player/tool/guns/parts/interactives/Constraints/Map_Constraint_Linear.gd" id="11_o4tnm"]
 [ext_resource type="ArrayMesh" uid="uid://ivw6ivaqvmb4" path="res://player/tool/guns/instances/makaroni/assets/safety.obj" id="11_ry1el"]
 [ext_resource type="ArrayMesh" uid="uid://dy4cxg2u7elp3" path="res://player/tool/guns/instances/makaroni/assets/slide.obj" id="12_2isxn"]
+[ext_resource type="Resource" uid="uid://ddnb66yb0v5v5" path="res://player/tool/guns/instances/makaroni/instructions/drop_old_mag.tres" id="12_msppm"]
 [ext_resource type="Script" uid="uid://b7whx6weh5vid" path="res://false_physics/triggerables/Trig_Sound_Effect.gd" id="13_2isxn"]
 [ext_resource type="ArrayMesh" uid="uid://d0uicko3dtpcy" path="res://player/tool/guns/instances/makaroni/assets/trigger.obj" id="13_vi08r"]
 [ext_resource type="Script" uid="uid://c1qvg1lbju86d" path="res://player/tool/guns/parts/interactives/interactions/Mechanism_Safety.gd" id="15_7evtq"]
@@ -380,6 +382,12 @@ distance = 0.001
 successful_if_above = false
 successful_if_below = true
 MY_INSTRUCTION = ExtResource("10_00cj4")
+metadata/_custom_type_script = "uid://cij1t15nap32q"
+
+[node name="Drop_Empty_Mag" type="Node" parent="Instructions" node_paths=PackedStringArray("MAG_SLOT")]
+script = ExtResource("11_5o4gb")
+MAG_SLOT = NodePath("../../RigidBody3D/Model/Magwell")
+MY_INSTRUCTION = ExtResource("12_msppm")
 metadata/_custom_type_script = "uid://cij1t15nap32q"
 
 [node name="Disable_Safety_on_ready" type="Node" parent="." node_paths=PackedStringArray("SAFETY")]

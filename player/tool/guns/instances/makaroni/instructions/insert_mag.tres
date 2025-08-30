@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Tool_Instruction" load_steps=2 format=3 uid="uid://bhqcfa7766wf8"]
+[gd_resource type="Resource" script_class="Tool_Instruction" load_steps=3 format=3 uid="uid://bhqcfa7766wf8"]
 
 [ext_resource type="Script" uid="uid://du6hkfpnpi12" path="res://player/tool/instructions_assets/Tool_Instruction.gd" id="1_h7fca"]
+[ext_resource type="Resource" uid="uid://ddnb66yb0v5v5" path="res://player/tool/guns/instances/makaroni/instructions/drop_old_mag.tres" id="2_t6n1x"]
 
 [resource]
 script = ExtResource("1_h7fca")
 instruction = &"Insert a magazine"
 case = 0
-depends_on = Array[ExtResource("1_h7fca")]([])
+depends_on = Array[ExtResource("1_h7fca")]([ExtResource("2_t6n1x")])
 metadata/_custom_type_script = "uid://du6hkfpnpi12"

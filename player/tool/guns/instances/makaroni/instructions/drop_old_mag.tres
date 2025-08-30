@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Tool_Instruction" load_steps=2 format=3 uid="uid://ddnb66yb0v5v5"]
+
+[ext_resource type="Script" uid="uid://du6hkfpnpi12" path="res://player/tool/instructions_assets/Tool_Instruction.gd" id="1_nbb2g"]
+
+[resource]
+script = ExtResource("1_nbb2g")
+instruction = &"Drop the empty magazine"
+case = 2
+depends_on = Array[ExtResource("1_nbb2g")]([null])
+metadata/_custom_type_script = "uid://du6hkfpnpi12"

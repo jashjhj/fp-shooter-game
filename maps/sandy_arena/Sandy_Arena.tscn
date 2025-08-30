@@ -48,6 +48,7 @@ font = ExtResource("10_gb4if")
 font_size = 127
 
 [node name="Sandy_Arena" type="Node3D"]
+process_mode = 1
 
 [node name="Environment" parent="." instance=ExtResource("1_h3cbt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.14581, 0)
