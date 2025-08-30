@@ -88,3 +88,11 @@ func _physics_process(delta:float) -> void:
 		
 		#DISTANCE = max(min(DISTANCE, functional_max), functional_min);
 	super._physics_process(delta)
+
+func hit_min_limit(v):
+	INTERACT_POSITIVE_DIRECTION = MODEL.basis * (THROUGH_AXIS.cross(ROTATION_AXIS))
+	super(v)
+
+func hit_max_limit(v):
+	INTERACT_POSITIVE_DIRECTION = MODEL.basis * (THROUGH_AXIS.cross(ROTATION_AXIS))
+	super(v)

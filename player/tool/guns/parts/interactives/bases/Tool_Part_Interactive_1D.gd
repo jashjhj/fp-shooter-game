@@ -36,6 +36,12 @@ var velocity_tracker:Array[float]
 @export var ELASTICITY_AT_MAX:float = 0.2;
 @export var ELASTICITY_AT_MIN:float = 0.1;
 
+@export_group("Feedback")
+@export var APPLY_FORCES_TO:RigidBody3D;
+##Ham this up for more dramatic effects. Remmeber that it treats 1 Radian/s as 1 m/s
+@export var SIMULATED_MASS:float = 0.2;
+##This is the amount of mass when focusing, so interacts nicely. Remmeber that it treats 1 Radian/s as 1 m/s
+@export var SIMULATED_MASS_FOCUSED:float = 0.1;
 
 @export_group("Triggers", "TRIGGERS_")
 enum TRIGGERS_DIRECTION_ENUM {
@@ -140,7 +146,7 @@ func _physics_process(delta:float) -> void:
 			velocity = -velocity * ELASTICITY_AT_MAX
 			
 		elif(is_focused and read_velocity() > 0):
-			if(abs(velocity) > 0.001): hit_max_limit(velocity * 0.1)
+			if(abs(velocity) > 0.001): hit_max_limit(velocity)
 		
 	
 	
@@ -166,7 +172,7 @@ func _physics_process(delta:float) -> void:
 			velocity = -velocity * ELASTICITY_AT_MIN
 		
 		elif(is_focused and read_velocity() < 0):
-			if(abs(velocity) > 0.001): hit_min_limit(velocity * 0.1) # * 0.1 becasue otherwise ti looks too sensitive
+			if(abs(velocity) > 0.001): hit_min_limit(velocity) # * 0.1 becasue otherwise ti looks too sensitive
 	
 	
 	within_physics_process.emit(delta)
@@ -223,11 +229,21 @@ func add_new_trigger(distance:float, direction:TRIGGERS_DIRECTION_ENUM) -> Signa
 
 var min_limits
 
-func hit_min_limit(velocity:float):
-	pass
+func hit_min_limit(v):
+	
+	if(APPLY_FORCES_TO == null): return # apply forces for feedback
+	if(is_focused):
+		APPLY_FORCES_TO.apply_impulse(global_basis *INTERACT_POSITIVE_DIRECTION * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS_FOCUSED, global_position - APPLY_FORCES_TO.global_position)
+	else:
+		APPLY_FORCES_TO.apply_impulse(global_basis *INTERACT_POSITIVE_DIRECTION * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS, global_position - APPLY_FORCES_TO.global_position)
 
-func hit_max_limit(velocity:float):
-	pass
+func hit_max_limit(v):
+	
+	if(APPLY_FORCES_TO == null): return # apply forces for feedback
+	if(is_focused):
+		APPLY_FORCES_TO.apply_impulse(global_basis *INTERACT_POSITIVE_DIRECTION * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS_FOCUSED, global_position - APPLY_FORCES_TO.global_position)
+	else:
+		APPLY_FORCES_TO.apply_impulse(global_basis *INTERACT_POSITIVE_DIRECTION * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS, global_position - APPLY_FORCES_TO.global_position)
 
 
 func enable_focus():

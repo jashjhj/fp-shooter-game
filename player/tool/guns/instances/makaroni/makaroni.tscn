@@ -360,8 +360,6 @@ shape = SubResource("BoxShape3D_m7h8j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.65661e-09)
 script = ExtResource("16_jmqr6")
 MODEL = NodePath("Model")
-APPLY_FORCES_TO = NodePath("../..")
-SIMULATED_MASS = 1.0
 INTERACT_POSITIVE_DIRECTION = Vector3(0, 0, 1)
 MIN_LIMITS = Array[float]([0.0])
 MAX_LIMITS = Array[float]([0.036])
@@ -369,6 +367,8 @@ SPRING_FORCE_CONSTANT = -16.0
 SPRING_FORCE_LINEAR = -16.0
 ELASTICITY_AT_MAX = 0.333
 ELASTICITY_AT_MIN = 0.0
+APPLY_FORCES_TO = NodePath("../..")
+SIMULATED_MASS = 1.0
 TRIGGERS_TRIGGERABLE = [NodePath("Gun_Action/Eject_Trigger"), NodePath("Gun_Action/Gather_Trigger")]
 TRIGGERS_DISTANCE = Array[float]([0.026, 0.03])
 TRIGGERS_DIRECTION = Array[int]([1, 2])
@@ -506,7 +506,7 @@ SLIDE = NodePath("../../..")
 ACTION = NodePath("../../../Gun_Action")
 metadata/_custom_type_script = "uid://c1qvg1lbju86d"
 
-[node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "BEGIN_INTERACT_COLLIDER", "HIGHLIGHT_ON_HOVER")]
+[node name="Hammer" type="Node3D" parent="RigidBody3D/Model" node_paths=PackedStringArray("RELEASE_LISTENER", "TRIGGER", "MODEL", "APPLY_FORCES_TO", "BEGIN_INTERACT_COLLIDER", "HIGHLIGHT_ON_HOVER")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0113361, 0.0353096)
 script = ExtResource("15_8j6fe")
 RELEASE_LISTENER = NodePath("Release_Hammer")
@@ -519,6 +519,9 @@ MAX_LIMITS = Array[float]([1.708])
 SPRING_FORCE_CONSTANT = -1000.0
 ELASTICITY_AT_MAX = 0.0
 ELASTICITY_AT_MIN = 0.0
+APPLY_FORCES_TO = NodePath("../..")
+SIMULATED_MASS = -0.005
+SIMULATED_MASS_FOCUSED = -0.002
 INTERACT_SENSITIVITY = -24.0
 BEGIN_INTERACT_COLLIDER = NodePath("Model/Area3D")
 HIGHLIGHT_ON_HOVER = [NodePath("Model/Hammer")]
@@ -538,6 +541,7 @@ mesh = ExtResource("7_dsk1g")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_u7fin")
 script = ExtResource("4_jmqr6")
+HIGHLIGHT_THROUGH_OBJECTS = true
 
 [node name="Release_Hammer" type="Node" parent="RigidBody3D/Model/Hammer"]
 script = ExtResource("16_f6c0u")

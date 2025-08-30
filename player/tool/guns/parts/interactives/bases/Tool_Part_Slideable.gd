@@ -10,10 +10,7 @@ class_name Tool_Part_Slideable extends Tool_Part_Interactive_1D
 #@export var LERP_RATE:float = 0.3;
 
 
-@export_group("Extras")
-@export var APPLY_FORCES_TO:RigidBody3D;
-##Ham this up for more dramatic effects
-@export var SIMULATED_MASS:float = 0.2;
+
 
 #TODO add is_seated code to tell if can fire.
 
@@ -70,10 +67,10 @@ func disable_focus():
 
 func hit_min_limit(v):
 	super(v);
-	if(APPLY_FORCES_TO == null): return
-	APPLY_FORCES_TO.apply_impulse(global_basis *SLIDE_VECTOR * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS, global_position - APPLY_FORCES_TO.global_position)
+	#if(APPLY_FORCES_TO == null): return
+	#APPLY_FORCES_TO.apply_impulse(global_basis *INTERACT_POSITIVE_DIRECTION * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS, global_position - APPLY_FORCES_TO.global_position)
 
 func hit_max_limit(v):
 	super(v)
-	if(APPLY_FORCES_TO == null): return
-	APPLY_FORCES_TO.apply_impulse(global_basis *SLIDE_VECTOR * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS, global_position - APPLY_FORCES_TO.global_position)
+	#if(APPLY_FORCES_TO == null): return
+	#APPLY_FORCES_TO.apply_impulse(global_basis *INTERACT_POSITIVE_DIRECTION * v * (1+ELASTICITY_AT_MIN) * SIMULATED_MASS, global_position - APPLY_FORCES_TO.global_position)
