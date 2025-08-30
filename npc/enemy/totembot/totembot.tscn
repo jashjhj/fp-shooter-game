@@ -49,7 +49,7 @@
 [ext_resource type="Script" uid="uid://bwudu5tyd6ps5" path="res://false_physics/Top_Level_Rigidbody.gd" id="35_hufde"]
 [ext_resource type="Script" uid="uid://dn68rquobbhe6" path="res://false_physics/triggerables/Trig_Debris_Spawner.gd" id="35_kc2pp"]
 [ext_resource type="PackedScene" uid="uid://bro7feroy3qeq" path="res://npc/enemy/totembot/totembot_ammo_debris.tscn" id="36_il53q"]
-[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="40_fk2tk"]
+[ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="40_fk2tk"]
 [ext_resource type="Script" uid="uid://qb3qx5r7xsth" path="res://false_physics/RB_Mass_Source.gd" id="40_m8d25"]
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse_Propogate.gd" id="41_fk2tk"]
 [ext_resource type="Script" uid="uid://d3wk5mrnj1hx" path="res://assets/textures/pastels/pastel_colour_mesh.gd" id="41_hufde"]

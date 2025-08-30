@@ -2,6 +2,7 @@ class_name Trig_Gib extends Triggerable
 
 @export var TO_GIB:Node
 
+
 func trigger():
 	super()
 	
@@ -15,20 +16,22 @@ func trigger():
 		
 		#Bit too extreme, but funny 
 		elif child is Triggerable:
-			child.trigger()
+			if child == Trig_Free:
+				child.trigger()
 		
 
 
-func get_all_children(from:Node = self):
+func get_all_children(from:Node = self) -> Array[Node]:
 	var children:Array[Node];
 	
+	var unvisited_nodes:Array[Node] = [from]
 	#TODO
 	
-	if(len(from.get_children(true))) == 0: return [from]
+	while(len(unvisited_nodes) > 0):
+		var current_node_children = unvisited_nodes.pop_front().get_children(true)
+		if(len(current_node_children) == 0): continue
+		unvisited_nodes.append_array(current_node_children)
+		children.append_array(current_node_children)
 	
 	
-	for child in from.get_children(true):
-		children.append_array(get_all_children(child))
-	
-	#print(children)
 	return children

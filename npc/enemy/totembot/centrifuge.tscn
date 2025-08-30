@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dcbvai1bpx5br" path="res://gameobjects/world_interactive/hit_effects/Hittables/Weakpoint.gd" id="12_gntev"]
 [ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="12_oql4u"]
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="13_2thkh"]
-[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="13_7us8c"]
+[ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="13_7us8c"]
 [ext_resource type="Script" uid="uid://d2fgde7cprrqg" path="res://false_physics/triggerables/Trig_Destroy_Body_Segment.gd" id="14_2thkh"]
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="14_cpvug"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="15_oiyqh"]

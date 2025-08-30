@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="7_lyahv"]
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="7_osnwx"]
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="8_osnwx"]
-[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="10_cdoda"]
+[ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="10_cdoda"]
 [ext_resource type="Script" uid="uid://dpx3j3228uj6a" path="res://false_physics/triggerables/Trig_Make_Rigidbody.gd" id="11_fo7uh"]
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Make_RB_Impulse.gd" id="12_cdoda"]
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse_Propogate.gd" id="13_fo7uh"]
