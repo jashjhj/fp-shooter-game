@@ -42,6 +42,7 @@ func _physics_process(delta: float) -> void:
 	if(!IS_ACTIVE): return
 	super._physics_process(delta)
 	
+
 	
 	if(SEEKING_CAMERA_CAM.last_target_pos != Vector3.INF):
 		
@@ -50,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		CAMERA_MESH_ROTATOR.target_global = SEEKING_CAMERA_CAM.last_target_pos
 		GUN_PITCH.target_global = SEEKING_CAMERA_GUN.last_target_pos
 	
-	if(SEEKING_CAMERA_CAM.can_see_player):
+	if(SEEKING_CAMERA_CAM.can_see_player and CAMERA_LIGHT != null): # checks light as that , when broken, means the camera is broken too.
 		PATHFINDER.target_position = Globals.PLAYER.global_position + (BODY.global_position - Globals.PLAYER.global_position).normalized() * 5.0; # Stand 5m away
 		
 		
@@ -63,10 +64,10 @@ func _physics_process(delta: float) -> void:
 		if(CAMERA_LIGHT != null): CAMERA_LIGHT.light_color = LIGHT_PASSIVE_COLOUR
 	
 	
-	if(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) > 0.94 and !GUN_CHAINGUN.is_spinning): # if gun is msotly aimed at its target
+	if(SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) > 0.94 and !GUN_CHAINGUN.is_spinning and CAMERA_LIGHT != null): # if gun is msotly aimed at its target
 		GUN_CHAINGUN.start_firing()
 		is_firing = true
-	elif(!SEEKING_CAMERA_CAM.can_see_player or SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) < 0.9 and GUN_CHAINGUN.is_spinning):
+	elif(!SEEKING_CAMERA_CAM.can_see_player or SEEKING_CAMERA_GUN.target_pos_local.normalized().dot(Vector3(1,0,0)) < 0.9  or CAMERA_LIGHT == null ) and GUN_CHAINGUN.is_spinning: # Stop shooting udner these conditions
 		GUN_CHAINGUN.stop_firing()
 		is_firing = false
 	

@@ -66,8 +66,14 @@ func check_for_player() -> Vector3:
 		
 		if(angle_x > camera_fov_x/2.0):
 			return Vector3.INF
+		elif(angle_x < -camera_fov_x/2.0):
+			return Vector3.INF
+		
 		if(angle_y > camera_fov_y/2.0):
 			return Vector3.INF
+		elif(angle_y < -camera_fov_y/2.0):
+			return Vector3.INF
+		
 		#Else: It okay 👍
 		can_see_player = true
 		return CAMERA_RAY.get_collision_point()
