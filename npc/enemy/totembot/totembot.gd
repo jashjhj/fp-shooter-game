@@ -106,5 +106,5 @@ func destroy_centrifuge():
 	#Apply new energy value
 	MID_SWIVEL.ROTATION_ACCELERATION = 0
 	TOP_SWIVEL.ROTATION_ACCELERATION = 0
-	MID_SWIVEL.SFX.volume_db = -9999
-	TOP_SWIVEL.SFX.volume_db = -9999
+	#MID_SWIVEL.default_sfx_volume = 0
+	#TOP_SWIVEL.default_sfx_volume = 0

@@ -51,7 +51,7 @@ func _ready():
 
 
 #var last_release_tick:int;
-#const release_window:int = 17; # window in which being told to relase does not hold abck the hammer
+#const release_window:int = 17; # window in which being told to relase does not hold abck the hammer - measured in physics-process frames.
 var release_timer:int = 0
 
 

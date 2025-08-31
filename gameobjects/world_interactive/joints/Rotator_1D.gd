@@ -82,7 +82,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if(!IS_ACTIVE): return
+	#if(!IS_ACTIVE): return
 
 	var delta_angle:float;
 	var delta_angular_velocity:float;
@@ -109,13 +109,16 @@ func _physics_process(delta: float) -> void:
 		var max_speed:float = sqrt(abs(2*target_angle * (ROTATION_ACCELERATION + ROTATION_DECELERATION))) * 0.8
 		
 		max_speed = min(max_speed, ROTATION_MAX_SPEED)
-		delta_angular_velocity = ROTATION_ACCELERATION * delta * sign(target_angle);
+		if(IS_ACTIVE):
+			delta_angular_velocity = ROTATION_ACCELERATION * delta * sign(target_angle);
+		else:
+			delta_angular_velocity = 0;
 		delta_angular_velocity += ROTATION_DECELERATION * delta * -sign(current_speed); # Apply deceleration
 		
 		if(abs(current_speed + delta_angular_velocity) > max_speed):
 			
 			var goal_dv = sign(target_angle)*max_speed - (current_speed)
-			delta_angular_velocity = sign(goal_dv) * min(abs(goal_dv), ROTATION_ACCELERATION * delta) # accel to get it back to right speed
+			delta_angular_velocity = sign(goal_dv) * min(abs(goal_dv), (ROTATION_ACCELERATION+ROTATION_DECELERATION) * delta) # accel to get it back to right speed
 			
 			#delta_angular_velocity = goal_dv
 			#current_speed = sign(target_angle)*max_speed
