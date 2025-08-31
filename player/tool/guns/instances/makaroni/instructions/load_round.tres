@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="Tool_Instruction" load_steps=4 format=3 uid="uid://dtt3400t0hcf7"]
+[gd_resource type="Resource" script_class="Tool_Instruction" load_steps=5 format=3 uid="uid://dtt3400t0hcf7"]
 
 [ext_resource type="Script" uid="uid://du6hkfpnpi12" path="res://player/tool/instructions_assets/Tool_Instruction.gd" id="1_jqwjd"]
 [ext_resource type="Resource" uid="uid://cw8g6rj6qjrvb" path="res://player/tool/guns/instances/makaroni/instructions/disable_safety.tres" id="2_5g0g3"]
 [ext_resource type="Resource" uid="uid://bhqcfa7766wf8" path="res://player/tool/guns/instances/makaroni/instructions/insert_mag.tres" id="3_frbac"]
+[ext_resource type="Resource" uid="uid://bjvufxkyshc4i" path="res://player/tool/guns/instances/makaroni/instructions/release_the_slide.tres" id="4_oyox6"]
 
 [resource]
 script = ExtResource("1_jqwjd")
 instruction = &"Pull back the slide"
 case = 1
-depends_on = Array[ExtResource("1_jqwjd")]([ExtResource("2_5g0g3"), ExtResource("3_frbac")])
+depends_on = Array[ExtResource("1_jqwjd")]([ExtResource("2_5g0g3"), ExtResource("3_frbac"), ExtResource("4_oyox6")])
 metadata/_custom_type_script = "uid://du6hkfpnpi12"
