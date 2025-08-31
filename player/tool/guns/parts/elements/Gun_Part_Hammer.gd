@@ -52,13 +52,13 @@ func _ready():
 
 #var last_release_tick:int;
 #const release_window:int = 17; # window in which being told to relase does not hold abck the hammer
-var release_timer:float = 0.0
+var release_timer:int = 0
 
 
 func release_hammer():
 	#print("release")
 	is_cock_limit_set = false;
-	release_timer = 0.1
+	release_timer = 2
 	
 
 
@@ -105,7 +105,7 @@ func _physics_process(delta:float) -> void:
 			is_cock_limit_set = true # called the first time the hammer is cocked
 		
 		
-		release_timer -= delta # Essentially: If it was 'told' to fall, and does not for 0.1 seconds (remains cocked throughout), it resets the cock
+		release_timer -= 1 # Essentially: If it was 'told' to fall, and does not for 0.1 seconds (remains cocked throughout), it resets the cock
 		if(!is_focused and !is_cock_limit_set): 
 			if(release_timer < 0):
 				is_cock_limit_set = true
