@@ -11,5 +11,5 @@
 
 [resource]
 script = ExtResource("4_im4q0")
-instructions = Array[ExtResource("1_img6w")]([ExtResource("2_wr1fi"), ExtResource("3_835x1"), ExtResource("4_835x1"), ExtResource("4_wr1fi"), ExtResource("6_im4q0"), ExtResource("7_0roq2")])
+instructions = Array[ExtResource("1_img6w")]([ExtResource("7_0roq2"), ExtResource("4_835x1"), ExtResource("2_wr1fi"), ExtResource("6_im4q0"), ExtResource("4_wr1fi"), ExtResource("3_835x1")])
 metadata/_custom_type_script = "uid://ddo6xy3d81dii"
