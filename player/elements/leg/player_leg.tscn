@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://5upxu38ed4sw"]
+[gd_scene load_steps=6 format=3 uid="uid://5upxu38ed4sw"]
 
 [ext_resource type="Script" uid="uid://g5cfdgejd2qs" path="res://player/elements/leg/player_leg.gd" id="1_iqbap"]
+[ext_resource type="ArrayMesh" uid="uid://df138kg37kmpm" path="res://npc/enemy/humanoid/legoman_models/legoman_upperleg.obj" id="2_c2ley"]
+[ext_resource type="ArrayMesh" uid="uid://b6iqgp66vrd56" path="res://npc/enemy/humanoid/legoman_models/legoman_lowerleg.obj" id="3_30ewk"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4p6b8"]
 radius = 0.05
@@ -21,9 +23,18 @@ LOWER_LEG = NodePath("Lower")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.000475567, -0.223158)
 mesh = SubResource("CapsuleMesh_4p6b8")
 
+[node name="LegomanUpperleg" type="MeshInstance3D" parent="Upper"]
+transform = Transform3D(-0.08, 0, 1.74846e-08, 0, 0.1, 0, -6.99382e-09, 0, -0.2, 0.00348487, 0, -0.0523657)
+mesh = ExtResource("2_c2ley")
+
 [node name="Lower" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00549312, -0.452887)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lower"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.00380434, -0.234928)
 mesh = SubResource("CapsuleMesh_c2ley")
+
+[node name="LegomanLowerleg" type="MeshInstance3D" parent="Lower"]
+transform = Transform3D(-0.08, 0, -3.6239e-08, 0, 0.1, 0, 1.20797e-08, 0, -0.24, 0.00164688, -0.0464439, 0.083508)
+mesh = ExtResource("3_30ewk")
+skeleton = NodePath("../../Upper")

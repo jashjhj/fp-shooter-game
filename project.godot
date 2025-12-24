@@ -12,7 +12,7 @@ config_version=5
 
 config/name="first_person_shooter"
 config/tags=PackedStringArray("current")
-run/main_scene="uid://wblmidpmgh2g"
+run/main_scene="uid://dnmnoq0b7qr1d"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

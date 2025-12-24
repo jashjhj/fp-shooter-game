@@ -12,6 +12,9 @@ class_name LegBot extends Node3D
 @export var is_pathfinding:bool = true;
 @export var PATHFINDER:NavigationAgent3D
 
+##Set this to the body's hit-component.
+@export var BODY_HITTABLE:Hit_Component;
+
 @export_group("Gait Settings")
 @export var IDLE_HEIGHT:float = 1.5;
 @export var FOOT_PLANT_RADIUS:float = 1.0;
@@ -26,8 +29,7 @@ class_name LegBot extends Node3D
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
-##Set this to the body's hit-component.
-@export var BODY_HITTABLE:Hit_Component;
+
 
 
 @onready var LEGS_INITIAL:int = len(LEGS)

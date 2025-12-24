@@ -50,7 +50,7 @@ var BODY:RigidBody3D:
 
 #DISMEMBERMENT
 @export_group("Dismemberment", "DISMEMBER")
-@export var DISMEMBER_ENABLED:bool = true;
+@export var DISMEMBER_ENABLED:bool = false;
 @export var DISMEMBER_HIP_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_KNEE_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_ANKLE_TRIGGER:Hit_HP_Tracker;

@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://onsgls4ekdfi"]
+
+[ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="1_lcoid"]
+[ext_resource type="Script" uid="uid://b5ipcbyyx3hkv" path="res://npc/tests_primitives/legs/legbot_3001.gd" id="2_7c0b4"]
+[ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="2_mk5mw"]
+[ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/tests_primitives/legs/legbotleg.tscn" id="3_mk5mw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_02ybs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7c0b4"]
+
+[node name="Humanoid" type="Node3D" node_paths=PackedStringArray("BODY", "LEGS", "BODY_HITTABLE")]
+script = ExtResource("2_7c0b4")
+BODY = NodePath("Root")
+LEGS = [NodePath("Root/LegR"), NodePath("Root/LegL")]
+is_pathfinding = false
+BODY_HITTABLE = NodePath("Root/Hit_Component")
+
+[node name="Root" type="RigidBody3D" parent="."]
+script = ExtResource("1_lcoid")
+metadata/_custom_type_script = "uid://2go7fdnv41nr"
+
+[node name="Hit_Component" type="Node" parent="Root"]
+script = ExtResource("2_mk5mw")
+metadata/_custom_type_script = "uid://kaqwxa5dtqay"
+
+[node name="Torso" type="Node3D" parent="Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Shoulders" type="Node3D" parent="Root/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="Neck" type="Node3D" parent="Root/Torso/Shoulders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="Head" type="Node3D" parent="Root/Torso/Shoulders/Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="Eyes" type="Node3D" parent="Root/Torso/Shoulders/Neck/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+
+[node name="HeadTop" type="Node3D" parent="Root/Torso/Shoulders/Neck/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="ArmL" type="Node3D" parent="Root/Torso/Shoulders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+
+[node name="ArmR" type="Node3D" parent="Root/Torso/Shoulders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Root"]
+shape = SubResource("BoxShape3D_02ybs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Root/CollisionShape3D"]
+mesh = SubResource("BoxMesh_7c0b4")
+
+[node name="LegR" parent="Root" instance=ExtResource("3_mk5mw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+
+[node name="LegL" parent="Root" instance=ExtResource("3_mk5mw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
