@@ -226,7 +226,10 @@ func calculate_stable_area() -> Array[Vector3]:
 	
 	for leg in LEGS:
 		if(leg.is_stable):
-			out.append(leg.FOOT.global_position)
+			for stable_foot_pos in leg.STABLE_FOOT_POINTS:
+				var stable_pos:Vector3 = leg.FOOT.global_position + stable_foot_pos * leg.FOOT.global_basis
+				out.append(stable_pos)
+				Debug.point(stable_pos, 0.1)
 	
 	return out
 

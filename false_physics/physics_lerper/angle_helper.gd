@@ -2,6 +2,8 @@
 
 class_name Angular_Damper extends Generic6DOFJoint3D
 
+@export_category("Parent under a Body, Set Node A to said Body")
+
 @export var STIFFNESS:float = 8.0:
 	set(v):
 		STIFFNESS = v

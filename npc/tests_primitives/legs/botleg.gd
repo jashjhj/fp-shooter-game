@@ -28,7 +28,9 @@ var BODY:RigidBody3D:
 @export var INVERT_KNEE:bool = false
 
 @export var FOOT:RigidBody3D;
-
+var foot_basis:Basis = Basis.IDENTITY;
+@export var STABLE_FOOT_POINTS:Array[Vector3];
+var FOOT_RAY:RayCast3D;
 
 @export var LOWER_HITCMP:Hit_Component;
 @export var UPPER_HITCMP:Hit_Component;
@@ -151,6 +153,13 @@ func _ready() -> void:
 	FOOT.contact_monitor = true
 	FOOT.max_contacts_reported = 3;
 	
+	FOOT_RAY = RayCast3D.new()
+	FOOT.add_child(FOOT_RAY);
+	FOOT_RAY.target_position = Vector3(0, -0.2, 0);
+	
+	if(len(STABLE_FOOT_POINTS) == 0):
+		STABLE_FOOT_POINTS.append(Vector3.ZERO)
+		push_warning("No Stable foot points set.")
 	
 	if(UPPER_HITCMP == null):
 		push_warning("No upper-leg hit-component set")
@@ -269,6 +278,16 @@ func _physics_process(delta: float) -> void:
 	
 	impose_footpos_limits()
 	global_basis = global_basis.orthonormalized()
+	
+	if(FOOT_RAY.is_colliding()): # orientate cosmetic foot basis
+		foot_basis.y = FOOT_RAY.get_collision_normal()
+		foot_basis.z = ((FOOT.global_position - global_position) * (Vector3.ONE - foot_basis.y)).normalized() # squish the forwards vector
+		foot_basis.x = foot_basis.y.cross(foot_basis.z)
+	
+	else:
+		foot_basis.y = Vector3.DOWN
+		foot_basis.z = ((FOOT.global_position - global_position) * (Vector3.ONE - foot_basis.y)).normalized()
+		foot_basis.x = foot_basis.y.cross(foot_basis.z)
 
 
 ##Impulse; global position at which hit-limit occured. May be necessary
@@ -407,11 +426,10 @@ func is_on_floor() -> bool:
 	#Else, no staticbody in contact
 	return false;
 
-
 var prop_old_pos:Vector3;
 var prop_foot_old_pos:Vector3
 var prop_old_basis:Basis = Basis.IDENTITY
-##Must be called each 'tick' to get accurate deltas. if arg == true, actually updates position.
+##Must be called each 'tick' to get accurate deltas. if arg == true, actually updates position. This makes the foot move if the body is shifted
 func propagate_motion(propagating:bool = true):
 	if(propagating):
 		
@@ -446,10 +464,8 @@ func break_hip():
 	DISMEMBER_UPPER_RB_MAKER.add_impulse(DISMEMBER_HIP_TRIGGER.last_impulse, DISMEMBER_HIP_TRIGGER.last_impulse_pos)
 	DISMEMBER_UPPER_RB_MAKER.trigger()
 	
-	break_knee()
-	
+	break_knee() # beacsue of a buig, it breaks otherwise.
 
-## owie
 func break_knee():
 	if(intactity.knee == false): return
 	intactity.knee = false
@@ -464,7 +480,6 @@ func break_knee():
 	
 	LOWER_LENGTH = 0.01;
 	IKCALC.LOWER_LENGTH = 0.01
-	
 
 ##Breaking the ankle will ideally allow the robot to still walk, however with no shoes on. Effectively shorten the FOOT hitbox (or raise it)
 func break_ankle():
