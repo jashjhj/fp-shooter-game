@@ -66,10 +66,12 @@ mesh = SubResource("BoxMesh_7c0b4")
 
 [node name="LegR" parent="Root" instance=ExtResource("3_mk5mw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+INVERT_KNEE = true
 STABLE_FOOT_POINTS = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, -0.15)])
 
 [node name="LegL" parent="Root" instance=ExtResource("3_mk5mw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+INVERT_KNEE = true
 STABLE_FOOT_POINTS = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, -0.15)])
 
 [node name="Angular_Damper" type="Generic6DOFJoint3D" parent="Root"]
