@@ -5,6 +5,8 @@ class_name Hit_Make_Rigidbody extends Hit_HP_Tracker
 
 @export var AT_THRESHOLD:float = 0;
 
+@export var IMPULSE_MULTIPLIER:float = 1.0;
+
 func  _ready() -> void:
 	super._ready()
 	if(MAKE_RIGIDBODY == null):
@@ -18,5 +20,5 @@ func  _ready() -> void:
 	on_hp_becomes_negative.connect(trigger_make_rb)
 
 func trigger_make_rb():
-	MAKE_RIGIDBODY.add_impulse(last_impulse, last_impulse_pos)
+	MAKE_RIGIDBODY.add_impulse(last_impulse * IMPULSE_MULTIPLIER, last_impulse_pos)
 	MAKE_RIGIDBODY.trigger()
