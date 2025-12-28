@@ -1,4 +1,4 @@
-@tool
+
 
 class_name Rotator_1D extends Body_Segment
 

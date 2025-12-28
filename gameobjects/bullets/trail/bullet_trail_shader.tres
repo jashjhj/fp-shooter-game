@@ -51,10 +51,10 @@ frequency = 0.065
 width = 128
 height = 128
 depth = 128
+noise = SubResource("FastNoiseLite_u2f7m")
+color_ramp = SubResource("Gradient_u2f7m")
 seamless = true
 seamless_blend_skirt = 0.244
-color_ramp = SubResource("Gradient_u2f7m")
-noise = SubResource("FastNoiseLite_u2f7m")
 
 [sub_resource type="VisualShaderNodeTexture3D" id="VisualShaderNodeTexture3D_mt3kf"]
 texture = SubResource("NoiseTexture3D_6y56m")
@@ -115,7 +115,7 @@ input_name = "vertex"
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_add, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_disabled;
+render_mode blend_add, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_disabled;
 
 uniform float stretch_factor = 1.0;
 uniform sampler2D tex_frg_2;

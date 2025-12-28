@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Pastel.gd" id="13_2thkh"]
 [ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="13_7us8c"]
 [ext_resource type="Script" uid="uid://d2fgde7cprrqg" path="res://false_physics/triggerables/Trig_Destroy_Body_Segment.gd" id="14_2thkh"]
-[ext_resource type="Script" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="14_cpvug"]
+[ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="14_cpvug"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="15_oiyqh"]
 [ext_resource type="Script" uid="uid://dsjmnf5wst7es" path="res://false_physics/triggerables/Trig_Free.gd" id="19_7us8c"]
 [ext_resource type="Script" uid="uid://c82vodcg2hnt" path="res://gameobjects/world_interactive/joints/Persistent_Hinge.gd" id="19_gntev"]
@@ -344,7 +344,7 @@ script = ExtResource("8_vw4s1")
 WEAKPOINT = NodePath("../../Gimbal/Inner/Weakpoint-Destroy core")
 
 [node name="Gimbal" type="Node3D" parent="Outer" node_paths=PackedStringArray("IMPULSE_UPSTREAMS", "IMPULSE_PROPOGATOR")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-0.97778535, 0, -0.208327, -0.208327, -4.37114e-08, 0.97778535, -9.106106e-09, 1, 4.2740325e-08, 0, 0, 0)
 script = ExtResource("6_qusij")
 MODE = 1
 ROTATION_MAX_SPEED = 6.28319
@@ -383,7 +383,7 @@ script = ExtResource("8_vw4s1")
 WEAKPOINT = NodePath("../../Inner/Weakpoint-Destroy core")
 
 [node name="Inner" type="Node3D" parent="Outer/Gimbal" node_paths=PackedStringArray("IMPULSE_UPSTREAMS", "IMPULSE_PROPOGATOR")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-0.97778535, 0, -0.208327, 0.208327, -4.37114e-08, -0.97778535, -9.106106e-09, -1, 4.2740325e-08, 0, 0, 0)
 script = ExtResource("6_qusij")
 MODE = 1
 ROTATION_MAX_SPEED = 6.28319
