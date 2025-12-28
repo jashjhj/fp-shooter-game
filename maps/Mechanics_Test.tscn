@@ -144,3 +144,15 @@ metadata/_custom_type_script = "uid://bl756y4d1ou61"
 
 [node name="Humanoid" parent="." instance=ExtResource("12_jl4bw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03949, 2.05, -0.396266)
+FOOT_PLANT_RADIUS = 0.35
+LEG_FORCE_LATERAL = 3.0
+
+[node name="Humanoid2" parent="." instance=ExtResource("12_jl4bw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.89472, 2.05, -0.396266)
+FOOT_PLANT_RADIUS = 0.35
+LEG_FORCE_LATERAL = 3.0
+
+[node name="Humanoid3" parent="." instance=ExtResource("12_jl4bw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.80448, 2.05, -0.396266)
+FOOT_PLANT_RADIUS = 0.35
+LEG_FORCE_LATERAL = 3.0

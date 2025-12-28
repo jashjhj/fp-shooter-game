@@ -1,4 +1,4 @@
-class_name BotLeg extends Node3D
+class_name Leg extends Node3D
 
 ##Rigidbody sibling to attach to - Must be set at runtime by parent.
 var BODY:RigidBody3D:
@@ -92,8 +92,9 @@ var is_physical:bool = true:
 
 var is_stable:bool = false
 
-## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
+##Private 
 var is_stepping:bool = true
+## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
 var step_state:int = 1:
 	set(v):
 		is_stepping = true
