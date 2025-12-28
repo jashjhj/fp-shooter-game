@@ -1,4 +1,4 @@
-class_name Humanoid extends Leg_Manager
+class_name Humanoid_Legs extends Leg_Manager
 
 @export var ANGLE_HELPER:Angular_Damper;
 
