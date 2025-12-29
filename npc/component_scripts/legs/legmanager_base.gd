@@ -20,7 +20,7 @@ var body_hit_component:Hit_Component;
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
-var is_stable:bool = false;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -307,6 +307,9 @@ func get_intersection_components(s1:Vector3, s2:Vector3, d1:Vector3, d2:Vector3)
 	
 	return Vector2(lambda, mu)
 
+
+var is_stable:bool = false;
+var unstable_distance:float = 0.0;
 func apply_offbalance_force(delta:float):
 	var stable_area := calculate_stable_area()
 	
@@ -322,11 +325,14 @@ func apply_offbalance_force(delta:float):
 	
 	if(pivot_point == Vector3.INF):
 		is_stable = false
+		unstable_distance = 0.0;
 		return
 	
 	 # this line mathematically checks if the nearest stable point places the COM pos outside of the stable area.
-	if(((pivot_point - stable_centre)*Vector3(1, 0, 1)).length_squared() >= ((com_global - stable_centre)*Vector3(1,0,1)).length_squared()):
+	unstable_distance = ((com_global - stable_centre)*Vector3(1,0,1)).length() - ((pivot_point - stable_centre)*Vector3(1, 0, 1)).length();
+	if(unstable_distance < 0):
 		#ONLY case where this IS actually stable :
+		unstable_distance = 0;
 		is_stable = true;
 		return
 	

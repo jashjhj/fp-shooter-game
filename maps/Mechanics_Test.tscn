@@ -45,7 +45,7 @@ data = PackedVector3Array(0, 0.2, 0, 0, 0.2, 0, 0, 0.1879, 0.0684, 0, 0.2, 0, 0.
 [node name="MechanicsTest" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_uyhpc")]
-transform = Transform3D(0.99288, 0, -0.119125, 0, 1, 0, 0.119125, 0, 0.99288, 0.474699, 0, 4.33597)
+transform = Transform3D(0.99288, 0, -0.119125, 0, 1, 0, 0.119125, 0, 0.99288, -5.0792103, 0, 4.33597)
 
 [node name="Rubbish" parent="." instance=ExtResource("2_kpkau")]
 
@@ -116,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69682, 1.65501, -8.44258)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.14506, 2.75763, -8.44259)
 
 [node name="Totembot" parent="." instance=ExtResource("6_mvpoq")]
-transform = Transform3D(0.197074, 0, 0.980388, 0, 1, 0, -0.980388, 0, 0.197074, -8.37236, 2.78647, 4.63935)
+transform = Transform3D(0.197074, 0, 0.980388, 0, 1, 0, -0.980388, 0, 0.197074, -12.437206, 2.78647, 4.63935)
 
 [node name="Hittable_Collider" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68814, -20.3846)
@@ -145,14 +145,4 @@ metadata/_custom_type_script = "uid://bl756y4d1ou61"
 [node name="Humanoid" parent="." instance=ExtResource("12_jl4bw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03949, 2.05, -0.396266)
 FOOT_PLANT_RADIUS = 0.35
-LEG_FORCE_LATERAL = 3.0
-
-[node name="Humanoid2" parent="." instance=ExtResource("12_jl4bw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.89472, 2.05, -0.396266)
-FOOT_PLANT_RADIUS = 0.35
-LEG_FORCE_LATERAL = 3.0
-
-[node name="Humanoid3" parent="." instance=ExtResource("12_jl4bw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.80448, 2.05, -0.396266)
-FOOT_PLANT_RADIUS = 0.35
-LEG_FORCE_LATERAL = 3.0
+LEG_FORCE_THROUGH = 12.0
