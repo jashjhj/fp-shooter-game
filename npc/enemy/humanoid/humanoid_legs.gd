@@ -63,8 +63,18 @@ func consider_step():
 		leg_to_move.begin_step()
 		
 	elif(stability > 0.6):
-		var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() else LEGS[1];
-		leg_to_move.begin_step()
+		
+		var leg_0_distance:float = (LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
+		var leg_1_distance:float = (LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
+		if leg_0_distance > leg_1_distance:
+			if leg_0_distance > 0.1: # tolerance to actually move foot
+				LEGS[0].begin_step()
+		else:
+			if(leg_1_distance > 0.1):
+				LEGS[1].begin_step()
+		
+		#var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() else LEGS[1]; # pickes furthest leg.
+		#leg_to_move.begin_step()
 
 ##Updates self target
 func update_target_pos():
@@ -73,7 +83,7 @@ func update_target_pos():
 	for leg in LEGS:
 		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 0.99) # TODO needs better work
 	
-	ideal_height = lerp(ideal_height * 0.5, ideal_height, stability)
+	ideal_height = lerp(ideal_height * 0.8, ideal_height, stability)
 	
 	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height

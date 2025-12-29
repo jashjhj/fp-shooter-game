@@ -27,18 +27,13 @@ class_name LegBot extends Node3D
 ##Amount fo force the physlerper imagiens it has, at full capacity. Disregarding Gravity.
 @export var IMAGINED_FORCE:float = 60;
 
+@onready var LEGS_INITIAL:int = len(LEGS)
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
 
-
-
-@onready var LEGS_INITIAL:int = len(LEGS)
-
-
 var stability:float = 0.0;
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
