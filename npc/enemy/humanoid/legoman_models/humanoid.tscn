@@ -14,9 +14,10 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ewtnf"]
 
-[node name="Humanoid" type="Node3D" node_paths=PackedStringArray("LEGS")]
+[node name="Humanoid" type="Node3D" node_paths=PackedStringArray("LEGS", "ANGLE_HELPER")]
 script = ExtResource("1_ewtnf")
 LEGS = NodePath("Legs_Manager")
+ANGLE_HELPER = NodePath("Legs_Manager/Root/Angular_Damper")
 metadata/_custom_type_script = "uid://csps1qo6dg4dh"
 
 [node name="Legs_Manager" type="Node3D" parent="." node_paths=PackedStringArray("BODY", "LEGS")]

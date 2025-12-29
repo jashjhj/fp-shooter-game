@@ -1,6 +1,7 @@
 class_name Humanoid extends Node3D
 
 @export var LEGS:Humanoid_Legs;
+@export var ANGLE_HELPER:Angular_Damper;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

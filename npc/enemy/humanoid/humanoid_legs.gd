@@ -1,6 +1,5 @@
 class_name Humanoid_Legs extends Leg_Manager
 
-@export var ANGLE_HELPER:Angular_Damper;
 
 @export var is_pathfinding:bool = true;
 @export var PATHFINDER:NavigationAgent3D
@@ -217,7 +216,7 @@ func calculate_leg_target_stabilise(leg:Leg, stable_leg:Leg) -> Vector3:
 	var leg_length:float = LEGS[0].UPPER_LENGTH + LEGS[0].LOWER_LENGTH;
 	var max_extension:float = sqrt(leg_length**2 - body_height**2);
 	stable_offset_xz = stable_offset_xz.normalized() * min(stable_offset_xz.length(), 2* max_extension - stable_offset_xz.length()) # ensures its not reaching too far
-	#
+	
 	#stable_offset_xz = stable_offset_xz.normalized() * min(stable_offset_xz.length(), 0.4)
 	#-- Apply it
 	
