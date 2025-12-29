@@ -16,10 +16,10 @@
 [node name="Humanoid" type="Node3D" node_paths=PackedStringArray("BODY", "LEGS")]
 script = ExtResource("1_02ybs")
 is_pathfinding = false
-IDLE_HEIGHT = 2.0
 FOOT_PLANT_RADIUS = 0.4
 BODY = NodePath("Root")
 LEGS = [NodePath("Root/LegR"), NodePath("Root/LegL")]
+IDLE_HEIGHT = 2.0
 LEG_FORCE_THROUGH = 6.0
 LEG_FORCE_LATERAL = 1.0
 IMAGINED_FORCE = 10.0

@@ -7,7 +7,7 @@ class_name Leg_Manager extends Node3D
 
 var body_hit_component:Hit_Component;
 @export_group("Gait Settings")
-#@export var IDLE_HEIGHT:float = 1.5;
+@export var IDLE_HEIGHT:float = 1.5;
 #@export var FOOT_PLANT_RADIUS:float = 1.0;
 ##The full force that can be put 'through' a leg of the robot. Consider gravity when setting this value.
 ##These default values are for an object of 4Kg with 3 Legs
@@ -19,6 +19,8 @@ var body_hit_component:Hit_Component;
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
+
+var is_stable:bool = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,7 +44,7 @@ func _ready() -> void:
 	#Init dow-ray
 	add_child(DOWN_RAY)
 	DOWN_RAY.hit_from_inside = true
-	DOWN_RAY.target_position = Vector3.DOWN * 5;
+	DOWN_RAY.target_position = Vector3.DOWN * IDLE_HEIGHT * 2.0;
 	DOWN_RAY.collide_with_areas = true
 
 func connect_body_hit_cmp(): # connects trigger of when body hit.
@@ -316,14 +318,19 @@ func apply_offbalance_force(delta:float):
 	var pivot_point:Vector3 = get_closest_stable_point_to(com_global)
 		
 		#Finally - ensure that COM is actually outside of the calculated nearest point on perimeter of polygon
-		
-	if(((pivot_point - stable_centre)*Vector3(1, 0, 1)).length_squared() >= ((com_global - stable_centre)*Vector3(1,0,1)).length_squared() \
-		or pivot_point == Vector3.INF): # INF means no stable point, cancel
-		
+	
+	
+	if(pivot_point == Vector3.INF):
+		is_stable = false
 		return
-		
-		#print("im unstable hahah")
-		#Debug.point(pivot_point + BODY.global_position, 1, Color.RED)
+	
+	 # this line mathematically checks if the nearest stable point places the COM pos outside of the stable area.
+	if(((pivot_point - stable_centre)*Vector3(1, 0, 1)).length_squared() >= ((com_global - stable_centre)*Vector3(1,0,1)).length_squared()):
+		#ONLY case where this IS actually stable :
+		is_stable = true;
+		return
+	
+	is_stable = false
 	
 	#We now have pivot_point
 	var com_pivot_delta:Vector3 = com_global - pivot_point
