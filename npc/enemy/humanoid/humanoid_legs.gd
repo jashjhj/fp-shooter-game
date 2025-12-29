@@ -33,8 +33,10 @@ func _physics_process(delta: float) -> void:
 	consider_step()
 	update_leg_targets()
 	
-	
-	
+	update_target_pos()
+
+
+
 
 func update_stability(delta:float) -> void:
 	if stable_legs == 2:
@@ -49,7 +51,7 @@ func update_stability(delta:float) -> void:
 var last_leg_movement:int;
 var percieved_stability:float = 0.0;
 func consider_step():
-	var stable_area := calculate_stable_area()
+	#var stable_area := calculate_stable_area()
 
 	
 	if(!is_above_stable_zone and stable_legs == 2 and unstable_distance > 0.2):
@@ -64,20 +66,27 @@ func consider_step():
 		var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() else LEGS[1];
 		leg_to_move.begin_step()
 
-
-func update_leg_targets():
+##Updates self target
+func update_target_pos():
 	var stable_area := calculate_stable_area()
-	#var stable_legs:float = len(stable_area)
-	
-	#Calculate IDLE_HEIGHT Actual
 	var ideal_height = IDLE_HEIGHT
 	for leg in LEGS:
-		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 0.8) # TODO needs better work
+		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 0.99) # TODO needs better work
 	
+	ideal_height = lerp(ideal_height * 0.5, ideal_height, stability)
 	
 	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
-	Debug.point(TARGET.global_position, 0.1)
+	Debug.point(TARGET.global_position, 0.01, Color(0.591, 0.912, 0.707, 1.0))
+
+
+func update_leg_targets():
+	
+	
+	#var stable_legs:float = len(stable_area)
+	
+	#Calculate IDLE_HEIGHT Actual
+	
 	
 	if(stable_legs == 1): # making a step
 		var stable_leg:Leg;
