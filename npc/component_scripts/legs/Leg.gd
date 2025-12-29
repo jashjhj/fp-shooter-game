@@ -415,7 +415,10 @@ func apply_foot_impulse(impulse:Vector3):
 	else:
 		FOOT.apply_central_impulse(impulse)
 
-
+##new_target in global coords
+func set_leg_target(new_target:Vector3) -> void:
+	if(new_target == Vector3.ZERO): return;
+	TARGET.global_position = new_target
 
 
 

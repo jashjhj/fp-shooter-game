@@ -20,6 +20,10 @@ var body_hit_component:Hit_Component;
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
+var stable_legs:int = 0;
+##Is it above the stable zone
+var is_above_stable_zone:bool = false;
+var unstable_distance:float = 0.0;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -61,7 +65,10 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#update_stability(delta)
-	
+	stable_legs = 0;
+	for leg in LEGS:
+		if leg.is_stable:
+			stable_legs +=1;
 	#Physlerper forces to self
 	apply_self_forces(delta)
 	
@@ -72,60 +79,8 @@ func _physics_process(delta: float) -> void:
 	
 	apply_offbalance_force(delta)
 	#consider_step()
-	
 
-#func update_stability(delta:float):
-#
-	#
-	#var stable_legs:int = 0;
-	#for leg in LEGS:
-		#if leg.is_stable:
-			#stable_legs += 1;
-	#
-	#if(stable_legs >= 3):
-		#stability = lerp(stability, 1.0, min(1.0, 0.5*delta))
-	#else:
-		#stability = lerp(stability, 0.0, min(1.0, 1.0*delta))
-	#
-	#stability -= BODY.linear_velocity.length() ** 3 * 0.001
-	#stability -= BODY.angular_velocity.length() ** 3 * 0.001
-	#
-	#stability = min(1.0, max(0.0, stability))
-	#
-	##DebugDraw3D.draw_text(BODY.global_position + Vector3.UP * 0.8, str(stability))
-#
-#func update_target():
-	#var stable_area := calculate_stable_area()
-	#var stable_legs:float = len(stable_area)
-	#
-	##Calculate IDLE_HEIGHT Actual
-	#var ideal_height = IDLE_HEIGHT
-	#for leg in LEGS:
-		#ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 0.8) # TODO needs better work
-	#
-	#
-	#
-	#TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
-	#Debug.point(TARGET.global_position, 0.1)
-	#
-	#if(is_pathfinding): ### ---------------- PATHFINDIUNG CODE
-		#
-		##PATHFINDER.target_position = Globals.PLAYER.global_position
-		#
-		#var path_step_dist:float = stability;
-		#
-		#var next_pos:Vector3 = PATHFINDER.get_next_path_position()
-		#var next_pos_delta_xz:Vector3 = (next_pos - BODY.global_position) * Vector3(1, 0, 1)
-		#
-		#
-		#if(next_pos_delta_xz.length() > path_step_dist):
-			#next_pos_delta_xz = next_pos_delta_xz.normalized() * path_step_dist
-		#
-		#TARGET.global_position += next_pos_delta_xz
-		#
-		##Doesnt work
-		##Need to reconsider 'Facingness'
-		##ANGLE_HELPER.look_at(ANGLE_HELPER.global_position + next_pos_delta_xz)
+
 
 var last_force_applied:Vector3 = Vector3.ZERO # Logging
 func apply_self_forces(delta):
@@ -308,8 +263,7 @@ func get_intersection_components(s1:Vector3, s2:Vector3, d1:Vector3, d2:Vector3)
 	return Vector2(lambda, mu)
 
 
-var is_stable:bool = false;
-var unstable_distance:float = 0.0;
+
 func apply_offbalance_force(delta:float):
 	var stable_area := calculate_stable_area()
 	
@@ -324,7 +278,7 @@ func apply_offbalance_force(delta:float):
 	
 	
 	if(pivot_point == Vector3.INF):
-		is_stable = false
+		is_above_stable_zone = false
 		unstable_distance = 0.0;
 		return
 	
@@ -333,10 +287,10 @@ func apply_offbalance_force(delta:float):
 	if(unstable_distance < 0):
 		#ONLY case where this IS actually stable :
 		unstable_distance = 0;
-		is_stable = true;
+		is_above_stable_zone = true;
 		return
 	
-	is_stable = false
+	is_above_stable_zone = false
 	
 	#We now have pivot_point
 	var com_pivot_delta:Vector3 = com_global - pivot_point

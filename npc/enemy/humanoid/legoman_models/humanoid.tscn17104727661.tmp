@@ -27,9 +27,6 @@ IMAGINED_FORCE = 10.0
 [node name="Root" type="RigidBody3D" parent="."]
 collision_layer = 32
 collision_mask = 17505
-axis_lock_angular_x = true
-axis_lock_angular_z = true
-angular_damp = 1.0
 script = ExtResource("1_lcoid")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
@@ -42,6 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_02ybs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Root/CollisionShape3D"]
+visible = false
 mesh = SubResource("BoxMesh_7c0b4")
 
 [node name="Hittable_Collider" type="Area3D" parent="Root" node_paths=PackedStringArray("HIT_COMPONENTS")]
@@ -97,12 +95,14 @@ linear_limit_z/enabled = false
 angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
+angular_spring_x/enabled = true
 angular_spring_x/stiffness = 8.0
 angular_spring_x/damping = 2.0
+angular_spring_y/enabled = true
 angular_spring_y/stiffness = 8.0
 angular_spring_y/damping = 2.0
+angular_spring_z/enabled = true
 angular_spring_z/stiffness = 8.0
 angular_spring_z/damping = 2.0
 script = ExtResource("5_mk5mw")
-enabled = false
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
