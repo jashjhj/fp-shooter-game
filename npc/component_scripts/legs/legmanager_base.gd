@@ -29,12 +29,15 @@ var unstable_distance:float = 0.0;
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#super._ready()
+	
+	for leg in LEGS: # first, wait for legs to ready up. This should be automatic if legs are beneath this
+		if !leg.is_node_ready(): await leg.ready
+	
 	assert(BODY != null, "NO BODY Set for object with Leg_Manager @ " + str(get_path()))
 	
-	BODY.collision_layer = 64
-	BODY.collision_mask = 1;
 	
 	add_child(TARGET) # target set to position
+	TARGET.top_level = true
 	
 	for leg in LEGS:
 		leg.BODY = BODY
@@ -45,7 +48,7 @@ func _ready() -> void:
 	
 	BODY.ready.connect(connect_body_hit_cmp);
 	
-	#Init dow-ray
+	#Init down-ray
 	add_child(DOWN_RAY)
 	DOWN_RAY.hit_from_inside = true
 	DOWN_RAY.target_position = Vector3.DOWN * IDLE_HEIGHT * 2.0;

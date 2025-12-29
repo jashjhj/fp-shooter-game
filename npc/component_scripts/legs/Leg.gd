@@ -4,7 +4,7 @@ class_name Leg extends Node3D
 var BODY:RigidBody3D:
 	set(v):
 		BODY = v;
-		TARGET.reparent(BODY)
+		TARGET.reparent.call_deferred(BODY)
 		
 		for i in IMPULSE_TO_BODY: # Updates target
 			i.IMPULSE_TO = BODY
@@ -129,8 +129,8 @@ signal became_stable
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	add_child(TARGET)
+	
 	add_child(FOOT_PHYSLERP)
 	TARGET.global_position = FOOT.global_position
 	
@@ -169,7 +169,7 @@ func _ready() -> void:
 		UPPER_HITCMP.on_hit.connect(generic_hit)
 	
 	if(LOWER_HITCMP == null):
-		push_warning("No lower-leg hit-componennt set")
+		push_warning("No lower-leg hit-component set")
 	else:
 		LOWER_HITCMP.on_hit.connect(lower_hit)
 		LOWER_HITCMP.on_hit.connect(generic_hit)

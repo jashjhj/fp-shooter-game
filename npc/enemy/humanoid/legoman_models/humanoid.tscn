@@ -16,22 +16,11 @@
 
 [node name="Humanoid" type="Node3D" node_paths=PackedStringArray("LEGS", "ANGLE_HELPER")]
 script = ExtResource("1_ewtnf")
-LEGS = NodePath("Legs_Manager")
-ANGLE_HELPER = NodePath("Legs_Manager/Root/Angular_Damper")
+LEGS = NodePath("Root/Legs_Manager")
+ANGLE_HELPER = NodePath("Root/Angular_Damper")
 metadata/_custom_type_script = "uid://csps1qo6dg4dh"
 
-[node name="Legs_Manager" type="Node3D" parent="." node_paths=PackedStringArray("BODY", "LEGS")]
-script = ExtResource("1_02ybs")
-is_pathfinding = false
-FOOT_PLANT_RADIUS = 0.4
-BODY = NodePath("Root")
-LEGS = [NodePath("Root/LegL"), NodePath("Root/LegR")]
-IDLE_HEIGHT = 2.0
-LEG_FORCE_THROUGH = 6.0
-LEG_FORCE_LATERAL = 1.0
-IMAGINED_FORCE = 10.0
-
-[node name="Root" type="RigidBody3D" parent="Legs_Manager"]
+[node name="Root" type="RigidBody3D" parent="."]
 collision_layer = 32
 collision_mask = 17505
 axis_lock_angular_x = true
@@ -40,18 +29,18 @@ angular_damp = 1.0
 script = ExtResource("1_lcoid")
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
-[node name="Hit_Impulse" type="Node" parent="Legs_Manager/Root" node_paths=PackedStringArray("IMPULSE_TO")]
+[node name="Hit_Impulse" type="Node" parent="Root" node_paths=PackedStringArray("IMPULSE_TO")]
 script = ExtResource("3_02ybs")
 IMPULSE_TO = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Legs_Manager/Root"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_02ybs")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Legs_Manager/Root/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Root/CollisionShape3D"]
 mesh = SubResource("BoxMesh_7c0b4")
 
-[node name="Hittable_Collider" type="Area3D" parent="Legs_Manager/Root" node_paths=PackedStringArray("HIT_COMPONENTS")]
+[node name="Hittable_Collider" type="Area3D" parent="Root" node_paths=PackedStringArray("HIT_COMPONENTS")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 32
 collision_mask = 0
@@ -59,44 +48,34 @@ script = ExtResource("6_02ybs")
 HIT_COMPONENTS = [NodePath("../Hit_Impulse")]
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Legs_Manager/Root/Hittable_Collider"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Root/Hittable_Collider"]
 shape = SubResource("BoxShape3D_ewtnf")
 
-[node name="Torso" type="Node3D" parent="Legs_Manager/Root"]
+[node name="Torso" type="Node3D" parent="Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
-[node name="Shoulders" type="Node3D" parent="Legs_Manager/Root/Torso"]
+[node name="Shoulders" type="Node3D" parent="Root/Torso"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
-[node name="Neck" type="Node3D" parent="Legs_Manager/Root/Torso/Shoulders"]
+[node name="Neck" type="Node3D" parent="Root/Torso/Shoulders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
-[node name="Head" type="Node3D" parent="Legs_Manager/Root/Torso/Shoulders/Neck"]
+[node name="Head" type="Node3D" parent="Root/Torso/Shoulders/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 
-[node name="Eyes" type="Node3D" parent="Legs_Manager/Root/Torso/Shoulders/Neck/Head"]
+[node name="Eyes" type="Node3D" parent="Root/Torso/Shoulders/Neck/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 
-[node name="HeadTop" type="Node3D" parent="Legs_Manager/Root/Torso/Shoulders/Neck/Head"]
+[node name="HeadTop" type="Node3D" parent="Root/Torso/Shoulders/Neck/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
-[node name="ArmL" type="Node3D" parent="Legs_Manager/Root/Torso/Shoulders"]
+[node name="ArmL" type="Node3D" parent="Root/Torso/Shoulders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
 
-[node name="ArmR" type="Node3D" parent="Legs_Manager/Root/Torso/Shoulders"]
+[node name="ArmR" type="Node3D" parent="Root/Torso/Shoulders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
 
-[node name="LegR" parent="Legs_Manager/Root" instance=ExtResource("3_mk5mw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
-INVERT_KNEE = true
-STABLE_FOOT_POINTS = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, 0.15)])
-
-[node name="LegL" parent="Legs_Manager/Root" instance=ExtResource("3_mk5mw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
-INVERT_KNEE = true
-STABLE_FOOT_POINTS = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, 0.15)])
-
-[node name="Angular_Damper" type="Generic6DOFJoint3D" parent="Legs_Manager/Root"]
+[node name="Angular_Damper" type="Generic6DOFJoint3D" parent="Root"]
 node_a = NodePath("..")
 linear_limit_x/enabled = false
 linear_limit_y/enabled = false
@@ -113,3 +92,24 @@ angular_spring_z/damping = 2.0
 script = ExtResource("5_mk5mw")
 enabled = false
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
+
+[node name="Legs_Manager" type="Node3D" parent="Root" node_paths=PackedStringArray("BODY", "LEGS")]
+script = ExtResource("1_02ybs")
+is_pathfinding = false
+FOOT_PLANT_RADIUS = 0.4
+BODY = NodePath("..")
+LEGS = [NodePath("LegL"), NodePath("LegR")]
+IDLE_HEIGHT = 2.0
+LEG_FORCE_THROUGH = 6.0
+LEG_FORCE_LATERAL = 1.0
+IMAGINED_FORCE = 10.0
+
+[node name="LegR" parent="Root/Legs_Manager" instance=ExtResource("3_mk5mw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+INVERT_KNEE = true
+STABLE_FOOT_POINTS = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, 0.15)])
+
+[node name="LegL" parent="Root/Legs_Manager" instance=ExtResource("3_mk5mw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+INVERT_KNEE = true
+STABLE_FOOT_POINTS = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, 0.15)])
