@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://boqxnmfhynrbb"]
+
+[ext_resource type="Script" uid="uid://bbqoq87idvyqs" path="res://npc/component_scripts/legs/Leg.gd" id="1_wvcid"]
+[ext_resource type="ArrayMesh" uid="uid://df138kg37kmpm" path="res://npc/enemy/humanoid/legoman_models/legoman_upperleg.obj" id="2_12bi1"]
+[ext_resource type="ArrayMesh" uid="uid://b6iqgp66vrd56" path="res://npc/enemy/humanoid/legoman_models/legoman_lowerleg.obj" id="3_6bf7b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvcid"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12bi1"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ipxfc"]
+rough = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qkvfa"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bf7b"]
+resource_local_to_scene = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_1ydg8"]
+material = SubResource("StandardMaterial3D_6bf7b")
+radius = 0.1
+height = 0.2
+
+[node name="LegomanLeg" type="Node3D" node_paths=PackedStringArray("UPPER", "LOWER", "FOOT")]
+script = ExtResource("1_wvcid")
+UPPER = NodePath("Upper")
+LOWER = NodePath("Lower")
+UPPER_LENGTH = 0.5
+LOWER_LENGTH = 0.5
+INVERT_KNEE = true
+FOOT = NodePath("Foot")
+STABLE_FOOT_POINTS = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, 0)])
+
+[node name="Upper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0, 0)
+
+[node name="LegomanUpperleg" type="MeshInstance3D" parent="Upper"]
+transform = Transform3D(0.11994232, 0, 0, 0, -0.09005242, 1.9518835e-08, 0, -7.872632e-09, -0.22326946, 0, -0.0013385713, 2.1889806e-05)
+mesh = ExtResource("2_12bi1")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_wvcid")
+
+[node name="Lower" type="Node3D" parent="."]
+transform = Transform3D(-1, -8.742278e-08, -3.821371e-15, 0, -4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, 0, -0.47826993, 0)
+
+[node name="LegomanLowerleg" type="MeshInstance3D" parent="Lower"]
+transform = Transform3D(-0.119942315, -7.872631e-09, -2.5595862e-15, -1.04856905e-08, 0.09005242, 3.9037676e-08, -4.5834414e-16, 1.5745266e-08, -0.22326949, 8.092577e-09, -0.044226896, 0.08228296)
+mesh = ExtResource("3_6bf7b")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_12bi1")
+
+[node name="Foot" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9881685, 0)
+collision_layer = 128
+collision_mask = 26113
+mass = 0.333
+physics_material_override = SubResource("PhysicsMaterial_ipxfc")
+lock_rotation = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Foot"]
+shape = SubResource("SphereShape3D_qkvfa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Foot"]
+mesh = SubResource("SphereMesh_1ydg8")

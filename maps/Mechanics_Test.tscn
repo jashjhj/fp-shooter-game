@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dnmnoq0b7qr1d"]
+[gd_scene load_steps=19 format=3 uid="uid://dnmnoq0b7qr1d"]
 
 [ext_resource type="PackedScene" uid="uid://c007vgboxblaa" path="res://player/player.tscn" id="1_uyhpc"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="2_kpkau"]
@@ -7,7 +7,6 @@
 [ext_resource type="Material" uid="uid://58xrrn0c2p73" path="res://assets/textures/dev/default_surface.tres" id="4_mvpoq"]
 [ext_resource type="Script" uid="uid://bbwpfkb0f30f2" path="res://gameobjects/static/materials/StaticMaterial.gd" id="5_jl4bw"]
 [ext_resource type="PackedScene" uid="uid://nsu34clptgvc" path="res://gameobjects/security_cameras/security_camera.tscn" id="5_ncl7n"]
-[ext_resource type="PackedScene" uid="uid://c601y42ahg3h1" path="res://npc/enemy/totembot/totembot.tscn" id="6_mvpoq"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="7_ab8vu"]
 [ext_resource type="Script" uid="uid://xruf68qvcqcm" path="res://gameobjects/world_interactive/hit_effects/Hit_Trigger_On_HP0.gd" id="8_dgwmy"]
 [ext_resource type="Script" uid="uid://bl756y4d1ou61" path="res://false_physics/triggerables/Trig_Gib.gd" id="9_78n53"]
@@ -45,7 +44,7 @@ data = PackedVector3Array(0, 0.2, 0, 0, 0.2, 0, 0, 0.1879, 0.0684, 0, 0.2, 0, 0.
 [node name="MechanicsTest" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_uyhpc")]
-transform = Transform3D(0.99288, 0, -0.119125, 0, 1, 0, 0.119125, 0, 0.99288, -5.0792103, 0, 4.33597)
+transform = Transform3D(0.99288, 0, -0.119125, 0, 1, 0, 0.119125, 0, 0.99288, -5.07921, 0, 4.33597)
 
 [node name="Rubbish" parent="." instance=ExtResource("2_kpkau")]
 
@@ -115,9 +114,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69682, 1.65501, -8.44258)
 [node name="Camera3" parent="." instance=ExtResource("5_ncl7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.14506, 2.75763, -8.44259)
 
-[node name="Totembot" parent="." instance=ExtResource("6_mvpoq")]
-transform = Transform3D(0.197074, 0, 0.980388, 0, 1, 0, -0.980388, 0, 0.197074, -12.437206, 2.78647, 4.63935)
-
 [node name="Hittable_Collider" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68814, -20.3846)
 script = ExtResource("7_ab8vu")
@@ -137,12 +133,9 @@ MAX_HP = 1.0
 MINIMUM_DAMAGE_THRESHOLD = 0.0
 metadata/_custom_type_script = "uid://xruf68qvcqcm"
 
-[node name="Trig_Gib" type="Node" parent="Hittable_Collider/Hit_Trigger_On_HP0" node_paths=PackedStringArray("TO_GIB")]
+[node name="Trig_Gib" type="Node" parent="Hittable_Collider/Hit_Trigger_On_HP0"]
 script = ExtResource("9_78n53")
-TO_GIB = NodePath("../../../Totembot")
 metadata/_custom_type_script = "uid://bl756y4d1ou61"
 
 [node name="Humanoid" parent="." instance=ExtResource("12_jl4bw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03949, 2.05, -0.396266)
-FOOT_PLANT_RADIUS = 0.35
-LEG_FORCE_THROUGH = 12.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.35086, 2.05, -1.57273)
