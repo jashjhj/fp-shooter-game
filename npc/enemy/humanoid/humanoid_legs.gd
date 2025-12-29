@@ -11,8 +11,6 @@ class_name Humanoid_Legs extends Leg_Manager
 
 @export_category("LEGS: Left leg first")
 
-##The direction it attempts to look
-var GOAL_HEADING:Vector3 = Vector3.FORWARD
 
 var stability:float = 0.0;
 
