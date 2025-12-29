@@ -13,6 +13,7 @@ class_name Humanoid_Legs extends Leg_Manager
 
 
 var stability:float = 0.0;
+var body_height:float;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,19 +33,23 @@ func _physics_process(delta: float) -> void:
 	update_leg_targets()
 	
 	update_target_pos()
+	
+	
+	DOWN_RAY.global_position = BODY.global_position # update body height
+	DOWN_RAY.force_raycast_update()
+	if(DOWN_RAY.is_colliding()):
+		body_height = (DOWN_RAY.get_collision_point() - BODY.global_position).y
 
 
 
 
 func update_stability(delta:float) -> void:
+	
 	if stable_legs == 2:
 		stability = lerp(stability, max(0.0, (1-BODY.linear_velocity.length())), 0.5*delta)
-	
-	
 	else:
 		stability *= 0.4 ** delta # divides by 20 a second
-	
-	print(stability)
+
 
 var last_leg_movement:int;
 var percieved_stability:float = 0.0;
@@ -79,7 +84,13 @@ func update_target_pos():
 	var stable_area := calculate_stable_area()
 	var ideal_height = IDLE_HEIGHT
 	for leg in LEGS:
-		ideal_height = min(ideal_height, (leg.UPPER_LENGTH+leg.LOWER_LENGTH) * 0.99) # TODO needs better work
+		#If foot is extended far out (imagine the splits) cannot stand so tall. Calcualted theoretical max height
+		var gradient:float = 1.0;
+		
+		var max_reachable_height:float = sqrt( (leg.UPPER_LENGTH+leg.LOWER_LENGTH)**2 - ((leg.FOOT.global_position - leg.global_position) * Vector3(1, 0, 1)).length_squared() )
+		#if(stability < 0.2): max_reachable_height = leg.UPPER_LENGTH+leg.LOWER_LENGTH
+		
+		ideal_height = min(ideal_height, gradient * max_reachable_height)
 	
 	ideal_height = lerp(ideal_height * 0.8, ideal_height, stability)
 	
@@ -203,7 +214,11 @@ func calculate_leg_target_stabilise(leg:Leg, stable_leg:Leg) -> Vector3:
 	#stable_offset_xz *= 2.0; # Find where to plant foot to make it stable
 	stable_offset_xz += BODY.linear_velocity * 0.3 # Add velocity for small amount of preempting
 	
-	
+	var leg_length:float = LEGS[0].UPPER_LENGTH + LEGS[0].LOWER_LENGTH;
+	var max_extension:float = sqrt(leg_length**2 - body_height**2);
+	stable_offset_xz = stable_offset_xz.normalized() * min(stable_offset_xz.length(), 2* max_extension - stable_offset_xz.length()) # ensures its not reaching too far
+	#
+	#stable_offset_xz = stable_offset_xz.normalized() * min(stable_offset_xz.length(), 0.4)
 	#-- Apply it
 	
 	#Stable offset xz is where to plant the foot to make the body stable.
