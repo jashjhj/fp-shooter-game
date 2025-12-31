@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://csps1qo6dg4dh"
 
 [node name="Root" type="RigidBody3D" parent="."]
 collision_layer = 32
-collision_mask = 17505
+collision_mask = 17409
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 angular_damp = 3.756
@@ -99,7 +99,7 @@ BODY = NodePath("..")
 LEGS = [NodePath("Legbotleg2"), NodePath("Legbotleg")]
 IDLE_HEIGHT = 2.0
 LEG_FORCE_THROUGH = 12.0
-LEG_FORCE_LATERAL = 1.0
+LEG_FORCE_LATERAL = 0.0
 IMAGINED_FORCE = 15.0
 metadata/_custom_type_script = "uid://cmp2xm5k8f2xk"
 

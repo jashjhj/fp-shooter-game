@@ -59,15 +59,29 @@ func consider_step():
 	if(!is_above_stable_zone and stable_legs == 2 and unstable_distance > 0.2):
 		#print(unstable_distance)
 		#pick leg to move - The one with its foot planted further away from the body.
-		var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() else LEGS[1];
 		
-		#var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position)).length_squared() else LEGS[1];
-		leg_to_move.begin_step()
+		var leg_0_distance:float = (LEGS[0].FOOT.global_position - body_com_global()).length();#(LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
+		var leg_1_distance:float = (LEGS[1].FOOT.global_position - body_com_global()).length();#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
+		
+		if leg_0_distance > leg_1_distance:
+			if leg_0_distance > 0.1: # tolerance to actually move foot
+				LEGS[0].begin_step()
+		else:
+			if(leg_1_distance > 0.1):
+				LEGS[1].begin_step()
+		
+		
+		
+		#var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() else LEGS[1];
+		#
+		##var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position)).length_squared() else LEGS[1];
+		#leg_to_move.begin_step()
 		
 	elif(stability > 0.6):
 		
-		var leg_0_distance:float = (LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
-		var leg_1_distance:float = (LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
+		var leg_0_distance:float = (LEGS[0].FOOT.global_position - body_com_global()).length();#(LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
+		var leg_1_distance:float = (LEGS[1].FOOT.global_position - body_com_global()).length();#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
+		
 		if leg_0_distance > leg_1_distance:
 			if leg_0_distance > 0.1: # tolerance to actually move foot
 				LEGS[0].begin_step()
@@ -105,6 +119,11 @@ func update_leg_targets():
 	
 	#Calculate IDLE_HEIGHT Actual
 	
+	
+	LEGS[0].set_leg_target(calculate_leg_target_inline(LEGS[0], LEGS[1]))
+	LEGS[1].set_leg_target(calculate_leg_target_inline(LEGS[1], LEGS[0]))
+	
+	return
 	
 	if(stable_legs == 1): # making a step
 		var stable_leg:Leg;
@@ -234,4 +253,21 @@ func calculate_leg_target_stabilise(leg:Leg, stable_leg:Leg) -> Vector3:
 
 func calculate_leg_target_inline(leg:Leg, stable_leg:Leg) -> Vector3:
 	
-	return Vector3.DOWN
+	var stable_leg_stable_point:Vector3 = get_centre_of_stable_area(stable_leg.STABLE_FOOT_POINTS) * stable_leg.FOOT.global_basis + stable_leg.global_position
+	var stable_com_vector:Vector3 = stable_leg_stable_point - body_com_global();
+	
+	var intersection_components:Vector2 = get_intersection_components(stable_leg_stable_point, leg.global_position, stable_com_vector, leg.global_basis.z);
+	var stable_foot_point = leg.global_position + intersection_components.y * leg.global_basis.z
+	stable_foot_point += BODY.linear_velocity * 0.3;
+	
+	
+	DOWN_RAY.global_position = stable_foot_point
+	DOWN_RAY.force_raycast_update()
+	
+	if(DOWN_RAY.is_colliding()): # There is floor in reasonable distance down
+		var collision:Vector3 = DOWN_RAY.get_collision_point()
+		if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
+			Debug.point(collision)
+			return collision
+	
+	return Vector3.ZERO

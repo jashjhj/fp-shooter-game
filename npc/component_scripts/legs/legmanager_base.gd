@@ -417,3 +417,6 @@ func leg_hit_limit(impulse:Vector3, pos:Vector3):
 #Where pos = global offset from Body origin (irrespective of current rotation/basis).
 func get_point_velocity(pos:Vector3) -> Vector3:
 	return BODY.linear_velocity + BODY.angular_velocity.cross(pos - BODY.center_of_mass)
+
+func body_com_global() -> Vector3:
+	return BODY.global_position + BODY.global_basis * BODY.center_of_mass
