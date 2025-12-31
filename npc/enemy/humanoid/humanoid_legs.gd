@@ -95,7 +95,7 @@ func update_target_pos():
 	
 	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
-	Debug.point(TARGET.global_position, 0.01, Color(0.591, 0.912, 0.707, 1.0))
+	Debug.point(TARGET.global_position, 0.1, Color(0.591, 0.912, 0.707))
 
 
 func update_leg_targets():

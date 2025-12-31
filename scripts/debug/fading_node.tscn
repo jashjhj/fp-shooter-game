@@ -20,3 +20,5 @@ disable_fog = true
 mesh = SubResource("SphereMesh_fqb20")
 surface_material_override/0 = SubResource("StandardMaterial3D_w5jng")
 script = ExtResource("1_e6q5i")
+
+[node name="Timer" type="Timer" parent="."]

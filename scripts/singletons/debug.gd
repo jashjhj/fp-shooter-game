@@ -4,6 +4,7 @@ extends Node
 
 const GHOST_POINT = preload("res://scripts/debug/fading_node.tscn");
 func point(position:Vector3, lifetime:float = 1, colour: Color = Color(1,1,1)):
+	lifetime = max(lifetime, 0.05) # prevents it not spawning
 	var ghost = GHOST_POINT.instantiate()
 	ghost.LIFETIME = lifetime
 	ghost.COLOUR = colour
