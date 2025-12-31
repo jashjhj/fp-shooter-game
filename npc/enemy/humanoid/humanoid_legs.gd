@@ -231,3 +231,7 @@ func calculate_leg_target_stabilise(leg:Leg, stable_leg:Leg) -> Vector3:
 	
 	return Vector3.ZERO
 	#return calculate_leg_target_idle(leg) # Fallback on putting foot DOWN if it cant find a floor
+
+func calculate_leg_target_inline(leg:Leg, stable_leg:Leg) -> Vector3:
+	
+	return Vector3.DOWN
