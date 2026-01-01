@@ -91,6 +91,7 @@ func apply_self_forces(delta):
 	
 	#Capacity for forces.
 	var force_capacity:Vector3 = Vector3.ZERO;
+	var force_capacity_one_directional:Vector3 = Vector3.ZERO;
 	
 	for leg in LEGS:
 		if(!leg.is_stable): continue
@@ -133,6 +134,21 @@ func apply_self_forces(delta):
 		#print("Percieved under-powered force: ", force_to_apply, "Applied out of", force_goal)
 	
 	last_force_applied = force_to_apply
+
+func add_1d_force_capacity(capacity:Vector3, add:Vector3) -> Array[Vector3]:
+	var old_capacity = capacity
+	var nondirectional_capacity:Vector3 = Vector3.ZERO;
+	
+	capacity += add
+	if(sign(old_capacity.x) != sign(add.x)):
+		nondirectional_capacity.x += abs(old_capacity.x - capacity.x)
+	if(sign(old_capacity.y) != sign(add.y)):
+		nondirectional_capacity.y += abs(old_capacity.y - capacity.y)
+	if(sign(old_capacity.z) != sign(add.z)):
+		nondirectional_capacity.z += abs(old_capacity.z - capacity.z)
+	
+	
+	return [capacity, nondirectional_capacity]
 
 
 func body_hit():

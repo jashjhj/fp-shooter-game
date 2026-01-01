@@ -258,7 +258,7 @@ func calculate_leg_target_inline(leg:Leg, stable_leg:Leg) -> Vector3:
 	
 	var intersection_components:Vector2 = get_intersection_components(stable_leg_stable_point, leg.global_position, stable_com_vector, leg.global_basis.z);
 	var stable_foot_point = leg.global_position + intersection_components.y * leg.global_basis.z
-	stable_foot_point += BODY.linear_velocity * 0.3;
+	stable_foot_point += BODY.linear_velocity * abs(BODY.linear_velocity) * 0.1;
 	
 	
 	DOWN_RAY.global_position = stable_foot_point
