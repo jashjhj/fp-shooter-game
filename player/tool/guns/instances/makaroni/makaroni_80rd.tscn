@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b517ttrlv06s"]
+[gd_scene load_steps=12 format=3 uid="uid://b517ttrlv06s"]
 
 [ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://player/tool/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_3nre5"]
 [ext_resource type="ArrayMesh" uid="uid://33jb7iows8gm" path="res://player/tool/guns/instances/makaroni/assets/mag.obj" id="2_bipjg"]
@@ -29,6 +29,11 @@ texture_filter = 0
 top_radius = 0.14
 bottom_radius = 0.14
 height = 0.03
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3nre5"]
+top_radius = 0.1
+bottom_radius = 0.12
+height = 0.01
 
 [node name="Makaroni_80Rd" type="Node3D" node_paths=PackedStringArray("AMMO_OBJECT", "AMMO_POSITIONS", "MAG_SPRING", "RIGIDBODY", "MODEL", "BEGIN_INTERACT_COLLIDER", "HIGHLIGHT_ON_HOVER")]
 script = ExtResource("1_3nre5")
@@ -120,6 +125,10 @@ shape = SubResource("ConvexPolygonShape3D_w42xb")
 [node name="Round" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -0.0998981, 0.9949977, 0, -0.9949977, -0.0998981, 0, -0.24537888, 0.0233199)
 mesh = SubResource("CylinderMesh_2gyi0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Round"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018217277, 0.001829043)
+mesh = SubResource("CylinderMesh_3nre5")
 
 [node name="Makaroni9x18" parent="." instance=ExtResource("4_noxc8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042357, 0, 0)
