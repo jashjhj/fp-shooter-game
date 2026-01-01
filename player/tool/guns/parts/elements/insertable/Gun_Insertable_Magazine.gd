@@ -19,7 +19,7 @@ var AMMO_SPRITES:Array[Node3D]; # for access
 func _ready():
 	AMMO_OBJECT.visible = false;
 	AMMO_OBJECT.process_mode = Node.PROCESS_MODE_DISABLED
-	free_ammo_pos_children()
+	free_ammo_pos_children() # kilsl children of ammopos tht arent more ammopeses. Lets me use cosmetics in the editor.
 	super._ready()
 	
 	#Setup cosmetics
