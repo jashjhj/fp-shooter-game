@@ -35,7 +35,7 @@
 [ext_resource type="ArrayMesh" uid="uid://carhnos3cqlph" path="res://player/tool/guns/instances/makaroni/assets/slidelock.obj" id="19_dsk1g"]
 [ext_resource type="Script" uid="uid://loortei0f5ym" path="res://player/tool/guns/things/Insertable_Pouch.gd" id="19_f5ljc"]
 [ext_resource type="AudioStream" uid="uid://iqya3bdulwq5" path="res://assets/sfx/gunfire_colt_peacemaker.wav" id="19_vi08r"]
-[ext_resource type="PackedScene" uid="uid://b517ttrlv06s" path="res://player/tool/guns/instances/makaroni/makaroni_80rd.tscn" id="20_3hwry"]
+[ext_resource type="PackedScene" path="res://player/tool/guns/instances/makaroni/makaroni_80rd.tscn" id="20_3hwry"]
 [ext_resource type="Script" uid="uid://d1kaw4geaca7m" path="res://player/tool/guns/parts/interactives/bases/Tool_Part_Hammer_Cocker.gd" id="22_vi08r"]
 [ext_resource type="Script" uid="uid://d02y7orm5bxym" path="res://player/tool/guns/parts/interactives/interactions/Mechanism_2Way_Mapper.gd" id="24_nf3x5"]
 [ext_resource type="Script" uid="uid://coc5w1i0xrx5r" path="res://player/tool/guns/parts/interactives/interactions/Mechanism_Slide_lock.gd" id="24_rtwg6"]

@@ -193,9 +193,10 @@ shape = SubResource("SphereShape3D_d8oae")
 [node name="Text" type="MeshInstance3D" parent="Physics_Lerper_Test/Scenario 2 - Arm/Target"]
 mesh = SubResource("TextMesh_adhgo")
 
-[node name="Physics_Lerper" type="Node" parent="Physics_Lerper_Test/Scenario 2 - Arm" node_paths=PackedStringArray("RIGIDBODY", "TARGET")]
+[node name="Physics_Lerper" type="Node" parent="Physics_Lerper_Test/Scenario 2 - Arm" node_paths=PackedStringArray("RIGIDBODY", "RIGIDBODY_PEG", "TARGET")]
 script = ExtResource("4_si6hl")
 RIGIDBODY = NodePath("../Upper")
+RIGIDBODY_PEG = NodePath("../Upper/End")
 TARGET = NodePath("../Target")
 RESERVE_FORCE = 300.0
 metadata/_custom_type_script = "uid://btawb6tqvuf8s"

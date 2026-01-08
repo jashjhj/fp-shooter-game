@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b517ttrlv06s"]
+[gd_scene load_steps=12 format=3 uid="uid://pl6jy8ow5ryd"]
 
 [ext_resource type="Script" uid="uid://bqp7hj0rvxcq8" path="res://player/tool/guns/parts/elements/insertable/Gun_Insertable_Magazine.gd" id="1_3nre5"]
 [ext_resource type="ArrayMesh" uid="uid://33jb7iows8gm" path="res://player/tool/guns/instances/makaroni/assets/mag.obj" id="2_bipjg"]
