@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cmp2xm5k8f2xk" path="res://npc/enemy/humanoid/humanoid_legs.gd" id="1_02ybs"]
 [ext_resource type="Script" uid="uid://csps1qo6dg4dh" path="res://npc/enemy/humanoid/humanoid.gd" id="1_ewtnf"]
 [ext_resource type="Script" uid="uid://2go7fdnv41nr" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_RB.gd" id="1_lcoid"]
-[ext_resource type="Script" uid="uid://bnme6hhbb0h8q" path="res://gameobjects/world_interactive/hit_effects/Hit_Impulse.gd" id="3_02ybs"]
+[ext_resource type="Script" uid="uid://kaqwxa5dtqay" path="res://gameobjects/world_interactive/hit_effects/Hit_Component.gd" id="3_ewtnf"]
 [ext_resource type="Script" uid="uid://dnpmmrwqk78q4" path="res://false_physics/physics_lerper/angle_helper.gd" id="5_mk5mw"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="6_02ybs"]
 [ext_resource type="PackedScene" uid="uid://wj3o5lh1ipji" path="res://npc/component_scripts/legs/legbotleg.tscn" id="7_ewtnf"]
@@ -20,18 +20,19 @@ LEGS = NodePath("Root/Humanoid_Legs")
 ANGLE_HELPER = NodePath("Root/Angular_Damper")
 metadata/_custom_type_script = "uid://csps1qo6dg4dh"
 
-[node name="Root" type="RigidBody3D" parent="."]
+[node name="Root" type="RigidBody3D" parent="." node_paths=PackedStringArray("HIT_COMPONENTS")]
 collision_layer = 32
 collision_mask = 17409
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 angular_damp = 3.756
 script = ExtResource("1_lcoid")
+HIT_COMPONENTS = [NodePath("Hit_Component")]
 metadata/_custom_type_script = "uid://2go7fdnv41nr"
 
-[node name="Hit_Impulse" type="Node" parent="Root" node_paths=PackedStringArray("IMPULSE_TO")]
-script = ExtResource("3_02ybs")
-IMPULSE_TO = NodePath("..")
+[node name="Hit_Component" type="Node" parent="Root"]
+script = ExtResource("3_ewtnf")
+metadata/_custom_type_script = "uid://kaqwxa5dtqay"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -42,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("6_02ybs")
-HIT_COMPONENTS = [NodePath("../Hit_Impulse")]
+HIT_COMPONENTS = [NodePath("")]
 metadata/_custom_type_script = "uid://c5uhnese0dn4n"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Root/Hittable_Collider"]

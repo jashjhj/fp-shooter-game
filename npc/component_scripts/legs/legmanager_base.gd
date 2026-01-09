@@ -5,7 +5,7 @@ class_name Leg_Manager extends Node3D
 @export var LEGS:Array[Leg]
 @onready var LEGS_INITIAL:int = len(LEGS)
 
-var body_hit_component:Hit_Component;
+var body_hit_component:Hit_Component; # auto initialised
 @export_group("Gait Settings")
 @export var IDLE_HEIGHT:float = 1.5;
 #@export var FOOT_PLANT_RADIUS:float = 1.0;
@@ -23,6 +23,7 @@ var body_hit_component:Hit_Component;
 var stable_legs:int = 0;
 ##Is it above the stable zone
 var is_above_stable_zone:bool = false;
+##Distance perpendicularly from the stable zone.
 var unstable_distance:float = 0.0;
 
 
@@ -53,11 +54,16 @@ func _ready() -> void:
 	DOWN_RAY.hit_from_inside = true
 	DOWN_RAY.target_position = Vector3.DOWN * IDLE_HEIGHT * 2.0;
 	DOWN_RAY.collide_with_areas = true
+	
+
 
 func connect_body_hit_cmp(): # connects trigger of when body hit.
 	if(len(BODY.HIT_COMPONENTS) >= 1):
 		body_hit_component = BODY.HIT_COMPONENTS[0]
 		body_hit_component.on_hit.connect(body_hit)
+		if len(BODY.HIT_COMPONENTS) >= 2 and BODY.HIT_COMPONENTS[1] is Hit_Impulse:
+			push_warning("Impusle automatically applied to Humanoid's Root node - not computed properly. Please remove its Hit_Impulse.");
+			
 	else:
 		push_warning("No Body hit component found! Cannot communicate impulses through to the feet.")
 
@@ -152,36 +158,14 @@ func add_1d_force_capacity(capacity:Vector3, add:Vector3) -> Array[Vector3]:
 
 
 func body_hit():
-	var impulse = body_hit_component.last_impulse
+	var impulse:Vector3 = body_hit_component.last_impulse;
+	var impulse_pos:Vector3 = body_hit_component.last_impulse_pos;
+	
+	BODY.apply_torque_impulse(Vector3(0, 0, 0))
+	BODY.apply_impulse(impulse)
+	
 	apply_dv_to_feet(impulse/BODY.mass)
-#
-#func set_leg_target(leg:Leg) -> void:
-	#var target_pos = calculate_leg_target(leg)
-	##Debug.point(target_pos)
-	#if target_pos == Vector3.ZERO: return # If no readings, stay as was
-	#leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.2)
-#
-#func calculate_leg_target(leg:Leg) -> Vector3:
-	#var leg_delta:Vector3 = leg.global_position - BODY.global_position # Leg must be a direct child 
-	##leg_delta *= global_basis.inverse()
-	#var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
-	#
-	###Pre-muddied by velocity
-	#var leg_idle_goal_xz:Vector3 = leg_delta_xz.normalized() * FOOT_PLANT_RADIUS
-	#
-	#var leg_prospective_xz = leg_idle_goal_xz + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1)*0.2 # Calculates prospective pos. Needs work
-	#
-	#DOWN_RAY.global_position = BODY.global_position + leg_prospective_xz
-	#DOWN_RAY.force_raycast_update()
-	#if(DOWN_RAY.is_colliding()):
-		#var collision:Vector3 = DOWN_RAY.get_collision_point()
-		#if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
-			#return collision
-	#
-	#else:#No collision
-		#return DOWN_RAY.global_position
-	#
-	#return Vector3.ZERO
+	
 
 ##Stable area is as a global
 func calculate_stable_area() -> Array[Vector3]:
@@ -299,6 +283,7 @@ func apply_offbalance_force(delta:float):
 	if(pivot_point == Vector3.INF):
 		is_above_stable_zone = false
 		unstable_distance = 0.0;
+		
 		return
 	
 	 # this line mathematically checks if the nearest stable point places the COM pos outside of the stable area.
