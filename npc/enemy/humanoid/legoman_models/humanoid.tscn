@@ -14,8 +14,9 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_ewtnf"]
 
-[node name="Humanoid" type="Node3D" node_paths=PackedStringArray("ANGLE_HELPER")]
+[node name="Humanoid" type="Node3D" node_paths=PackedStringArray("LEGS", "ANGLE_HELPER")]
 script = ExtResource("1_ewtnf")
+LEGS = NodePath("Root/Humanoid_Legs")
 ANGLE_HELPER = NodePath("Root/Angular_Damper")
 metadata/_custom_type_script = "uid://csps1qo6dg4dh"
 

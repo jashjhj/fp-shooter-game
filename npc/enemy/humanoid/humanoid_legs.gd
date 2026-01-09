@@ -38,7 +38,10 @@ func _physics_process(delta: float) -> void:
 	DOWN_RAY.force_raycast_update()
 	if(DOWN_RAY.is_colliding()):
 		body_height = (DOWN_RAY.get_collision_point() - BODY.global_position).y
-
+	
+	
+	#Debug.point(TARGET.global_position, 0.1, Color(0.591, 0.912, 0.707))
+	
 
 
 
@@ -77,7 +80,7 @@ func consider_step():
 		##var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position)).length_squared() else LEGS[1];
 		#leg_to_move.begin_step()
 		
-	elif(stability > 0.6):
+	elif(stability > 0.6 and false): # currently disabled recenter feet code
 		
 		var leg_0_distance:float = (LEGS[0].FOOT.global_position - body_com_global()).length();#(LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
 		var leg_1_distance:float = (LEGS[1].FOOT.global_position - body_com_global()).length();#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
@@ -109,7 +112,7 @@ func update_target_pos():
 	
 	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
-	Debug.point(TARGET.global_position, 0.1, Color(0.591, 0.912, 0.707))
+	
 
 
 func update_leg_targets():
@@ -124,30 +127,30 @@ func update_leg_targets():
 	LEGS[1].set_leg_target(calculate_leg_target_inline(LEGS[1], LEGS[0]))
 	
 	return
-	
-	if(stable_legs == 1): # making a step
-		var stable_leg:Leg;
-		var unstable_leg:Leg;
-		if LEGS[0].is_stable:
-			stable_leg = LEGS[0]
-			unstable_leg = LEGS[1]
-		else:
-			unstable_leg = LEGS[0]
-			stable_leg = LEGS[1]
-		
-		if(stability > 0.2): # if making a step stably, to balance
-			
-			if(LEGS[0].is_stable): # detech if is left or right leg
-				unstable_leg.set_leg_target(calculate_leg_target_idle(unstable_leg, stable_leg, true))
-			else:
-				unstable_leg.set_leg_target(calculate_leg_target_idle(unstable_leg, stable_leg, false))
-		else:
-			unstable_leg.set_leg_target(calculate_leg_target_stabilise(unstable_leg, stable_leg))
-	
-	else:
-		
-		LEGS[0].set_leg_target(calculate_leg_target_idle(LEGS[0], LEGS[1], true))
-		LEGS[1].set_leg_target(calculate_leg_target_idle(LEGS[1], LEGS[0], false))
+	#
+	#if(stable_legs == 1): # making a step
+		#var stable_leg:Leg;
+		#var unstable_leg:Leg;
+		#if LEGS[0].is_stable:
+			#stable_leg = LEGS[0]
+			#unstable_leg = LEGS[1]
+		#else:
+			#unstable_leg = LEGS[0]
+			#stable_leg = LEGS[1]
+		#
+		#if(stability > 0.2): # if making a step stably, to balance
+			#
+			#if(LEGS[0].is_stable): # detech if is left or right leg
+				#unstable_leg.set_leg_target(calculate_leg_target_idle(unstable_leg, stable_leg, true))
+			#else:
+				#unstable_leg.set_leg_target(calculate_leg_target_idle(unstable_leg, stable_leg, false))
+		#else:
+			#unstable_leg.set_leg_target(calculate_leg_target_stabilise(unstable_leg, stable_leg))
+	#
+	#else:
+		#
+		#LEGS[0].set_leg_target(calculate_leg_target_idle(LEGS[0], LEGS[1], true))
+		#LEGS[1].set_leg_target(calculate_leg_target_idle(LEGS[1], LEGS[0], false))
 	
 	#if(is_pathfinding): ### ---------------- PATHFINDIUNG CODE
 		#
@@ -168,15 +171,7 @@ func update_leg_targets():
 		##Need to reconsider 'Facingness'
 		##ANGLE_HELPER.look_at(ANGLE_HELPER.global_position + next_pos_delta_xz)
 
-#func set_leg_target(leg:Leg) -> void:
-	#var target_pos:Vector3;
-	#if(stability > 0.2):
-		#target_pos = calculate_leg_target_idle(leg)
-	#else:
-		#target_pos = calculate_leg_target_stabilise(leg, )
-	##Debug.point(target_pos)
-	#if target_pos == Vector3.ZERO: return # If no readings, stay as was
-	#leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.2)
+
 
 ##Is left leg is about the first leg
 func calculate_leg_target_idle(leg:Leg, other_leg:Leg, is_left_leg:bool) -> Vector3:
@@ -228,7 +223,11 @@ func calculate_leg_target_idle(leg:Leg, other_leg:Leg, is_left_leg:bool) -> Vect
 
 func calculate_leg_target_stabilise(leg:Leg, stable_leg:Leg) -> Vector3:
 	# -- -calculate new pos
-	var stable_offset_xz:Vector3 = (BODY.global_position - stable_leg.FOOT.global_position) * Vector3(1, 0, 1);
+	var body_pos:Vector3 = body_com_global() + BODY.linear_velocity
+	print(body_pos)
+	Debug.point(body_pos + Vector3.UP, 1, Color(1.0, 0.933, 0.0, 1.0));
+	
+	var stable_offset_xz:Vector3 = (body_pos - stable_leg.FOOT.global_position) * Vector3(1, 0, 1);
 	#stable_offset_xz *= 2.0; # Find where to plant foot to make it stable
 	stable_offset_xz += BODY.linear_velocity * 0.3 # Add velocity for small amount of preempting
 	
@@ -254,7 +253,10 @@ func calculate_leg_target_stabilise(leg:Leg, stable_leg:Leg) -> Vector3:
 func calculate_leg_target_inline(leg:Leg, stable_leg:Leg) -> Vector3:
 	
 	var stable_leg_stable_point:Vector3 = get_centre_of_stable_area(stable_leg.STABLE_FOOT_POINTS) * stable_leg.FOOT.global_basis + stable_leg.global_position
-	var stable_com_vector:Vector3 = stable_leg_stable_point - body_com_global();
+	
+	var body_pos:Vector3 = body_com_global() + BODY.linear_velocity * Vector3(1, 0, 1)
+	Debug.point(body_pos, 0.1, Color(0.994, 1.0, 0.66, 1.0))
+	var stable_com_vector:Vector3 = stable_leg_stable_point - body_pos;
 	
 	var intersection_components:Vector2 = get_intersection_components(stable_leg_stable_point, leg.global_position, stable_com_vector, leg.global_basis.z);
 	var stable_foot_point = leg.global_position + intersection_components.y * leg.global_basis.z
@@ -267,7 +269,9 @@ func calculate_leg_target_inline(leg:Leg, stable_leg:Leg) -> Vector3:
 	if(DOWN_RAY.is_colliding()): # There is floor in reasonable distance down
 		var collision:Vector3 = DOWN_RAY.get_collision_point()
 		if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
-			Debug.point(collision)
+			
+			#Debug.point(collision) - get the foot target
+			
 			return collision
 	
 	return Vector3.ZERO
