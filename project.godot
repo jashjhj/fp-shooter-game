@@ -132,7 +132,7 @@ equip_primary={
 
 [physics]
 
-common/physics_ticks_per_second=240
+common/physics_ticks_per_second=120
 common/max_physics_steps_per_frame=16
 3d/physics_engine="Jolt Physics"
 jolt_physics_3d/simulation/generate_all_kinematic_contacts=true
