@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://574okpq5vgmo"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://574okpq5vgmo"]
 
 [ext_resource type="Texture2D" uid="uid://b87yl2kbg8myj" path="res://player/elements/tool_rack/rough_sew_patch.jpg" id="1_rghwr"]
 
