@@ -120,12 +120,8 @@ var step_height:float = 0;
 	#SEEKING,
 	#MOVING
 #}
-
-
 signal became_stable
-
-
-
+signal began_step
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -199,17 +195,11 @@ func _process(delta: float) -> void:
 	
 	update_leg()
 
+##Visual update; Make the legh segments look correct.
 func update_leg() -> void:
 	
 	var global_target_delta:Vector3 = FOOT.global_position - global_position
 	var local_target_delta:Vector3 = global_basis.inverse()*global_target_delta
-	
-	#if(!is_stable): return
-	#if(logging or true):
-	
-	#DebugDraw3D.draw_line(global_position, global_position + global_target_delta)
-	#DebugDraw3D.draw_line(global_position, global_position + local_target_delta, Color(0, 1, 0))
-	#DebugDraw3D.draw_line(global_position, global_position + -global_basis.y, Color(0, 0, 1))
 	
 	if(LOWER_LENGTH > 0.02):
 		
@@ -218,8 +208,6 @@ func update_leg() -> void:
 		UPPER.transform = ik.upper.transform
 		LOWER.transform = ik.lower.transform
 		
-		
-		#FOOT.transform = ik.end.transform
 	else:
 		##This si the case where it breaks
 		UPPER.look_at(UPPER.global_position - global_target_delta)
@@ -229,6 +217,7 @@ func begin_step(pos:Vector3 = TARGET.global_position):
 	step_state = 1;
 	step_start = Time.get_ticks_msec()
 	step_height = tanh((pos - FOOT.global_position).length())
+	began_step.emit();
 
 
 func _physics_process(delta: float) -> void:
@@ -442,7 +431,7 @@ func propagate_motion(propagating:bool = true):
 		var delta_pos:Vector3 = global_position - prop_old_pos
 		
 		
-		var delta_basis:Basis = prop_old_basis * global_basis.inverse()
+		#var delta_basis:Basis = prop_old_basis * global_basis.inverse()
 		
 		#Evil fucked up maths to apply a delta-position based on Basis change (Applies rotation)
 		#TODO not convicned this works

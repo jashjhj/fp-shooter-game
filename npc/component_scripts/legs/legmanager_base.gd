@@ -16,23 +16,25 @@ var body_hit_component:Hit_Component; # auto initialised
 ##Amount fo force the physlerper imagiens it has, at full capacity. Disregarding Gravity.
 @export var IMAGINED_FORCE:float = 60;
 
+##TARGET for PHYSLERP, Not edited in legmanager_base. Use to control movement.
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
 var stable_legs:int = 0;
-##Is it above the stable zone
-var is_above_stable_zone:bool = false;
+
 ##Distance perpendicularly from the stable zone.
 var unstable_distance:float = 0.0;
 
 
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready() -> void:
 	#super._ready()
 	
 	for leg in LEGS: # first, wait for legs to ready up. This should be automatic if legs are beneath this
 		if !leg.is_node_ready(): await leg.ready
+		leg.began_step.connect(leg_stepped);
 	
 	assert(BODY != null, "NO BODY Set for object with Leg_Manager @ " + str(get_path()))
 	
@@ -67,7 +69,7 @@ func connect_body_hit_cmp(): # connects trigger of when body hit.
 	else:
 		push_warning("No Body hit component found! Cannot communicate impulses through to the feet.")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	pass
 
@@ -97,7 +99,7 @@ func apply_self_forces(delta):
 	
 	#Capacity for forces.
 	var force_capacity:Vector3 = Vector3.ZERO;
-	var force_capacity_one_directional:Vector3 = Vector3.ZERO;
+	#var force_capacity_one_directional:Vector3 = Vector3.ZERO;
 	
 	for leg in LEGS:
 		if(!leg.is_stable): continue
@@ -141,6 +143,7 @@ func apply_self_forces(delta):
 	
 	last_force_applied = force_to_apply
 
+##Helper function for apply self forces
 func add_1d_force_capacity(capacity:Vector3, add:Vector3) -> Array[Vector3]:
 	var old_capacity = capacity
 	var nondirectional_capacity:Vector3 = Vector3.ZERO;
@@ -157,6 +160,12 @@ func add_1d_force_capacity(capacity:Vector3, add:Vector3) -> Array[Vector3]:
 	return [capacity, nondirectional_capacity]
 
 
+##Last time [sub-leg].begin_step() was called, tick msec.
+var last_step_time:int;
+##Called every time a leg.begin_step() is called.
+func leg_stepped():
+	last_step_time = Time.get_ticks_msec();
+
 func body_hit():
 	var impulse:Vector3 = body_hit_component.last_impulse;
 	var impulse_pos:Vector3 = body_hit_component.last_impulse_pos;
@@ -166,6 +175,8 @@ func body_hit():
 	
 	apply_dv_to_feet(impulse/BODY.mass)
 	
+
+
 
 ##Stable area is as a global
 func calculate_stable_area() -> Array[Vector3]:
@@ -192,60 +203,6 @@ func get_centre_of_stable_area(arr:Array[Vector3]) -> Vector3:
 	#Completely unstable
 	return Vector3.ZERO
 
-
-#var last_leg_movement:int;
-#var percieved_stability:float = 0.0;
-#func consider_step():
-	#var stable_area := calculate_stable_area()
-	#var stable_legs:float = len(stable_area)
-	#
-	###calculate percieved stability
-	##if(stable_legs != len(LEGS)):
-		##percieved_stability = lerp(percieved_stability, 0.0, 0.01)
-	##else:
-		##percieved_stability  = lerp(percieved_stability, 1.0, 0.01)
-	##
-	##percieved_stability -= BODY.linear_velocity.length() * 0.01
-	#
-	##Special case - 1 leg is unstable: Make it take a step
-	#if(stable_legs == LEGS_INITIAL - 1): # If one elg unstable
-		#for leg in LEGS:
-			#if(!leg.is_stable and !leg.is_stepping):
-				#leg.begin_step()
-				#return
-	#
-	#if Time.get_ticks_msec() - last_leg_movement > 1500: # TODO: Add better criteria for when stepping.
-		#last_leg_movement = Time.get_ticks_msec()
-		#var leg_to_move := pick_leg_to_move(percieved_stability)
-		#if(leg_to_move != null):
-			#leg_to_move.begin_step()
-
-
-#
-#func pick_leg_to_move(stability:float = 0.5) -> Leg:
-	#var legs := LEGS.duplicate()
-	#var i = len(legs) - 1;
-	#while i >= 0:
-		#if(legs[i].is_stable == false):
-			#legs.remove_at(i)
-		#i -= 1
-	#if(len(legs) == 0): return null # If all legs are unstable
-	#
-	#var best_leg:int = 0;
-	#var best_leg_score:float = -INF
-	#
-	#for j in range(0, len(legs)):
-		#var leg_goal_delta = legs[j].TARGET.global_position - legs[j].FOOT.global_position
-		#var score = leg_goal_delta.length() + leg_goal_delta.dot(get_point_velocity(legs[j].global_position - BODY.global_position)) * 2 # COnsiders rate at which moving away more.
-		#if score > best_leg_score:
-			#best_leg_score = score
-			#best_leg = j
-	#
-	##Best leg si the one in the worst position and needs moving next.
-	#if(best_leg_score > 0.33): # Minimum score to require moving - basically  1/3m unless velocity is involved.
-		#return legs[best_leg]
-	#else:
-		#return null
 
 
 ##S = start of line, D = delta. Considers X,Z. returns component lambda of 1 as x and 2 as y. |     Simple mathematical solver.
@@ -280,9 +237,8 @@ func apply_offbalance_force(delta:float):
 		#Finally - ensure that COM is actually outside of the calculated nearest point on perimeter of polygon
 	
 	
-	if(pivot_point == Vector3.INF):
-		is_above_stable_zone = false
-		unstable_distance = 0.0;
+	if(pivot_point == Vector3.INF): # case in which there IS no stable zone
+		unstable_distance = INF;
 		
 		return
 	
@@ -291,10 +247,8 @@ func apply_offbalance_force(delta:float):
 	if(unstable_distance < 0):
 		#ONLY case where this IS actually stable :
 		unstable_distance = 0;
-		is_above_stable_zone = true;
 		return
 	
-	is_above_stable_zone = false
 	
 	#We now have pivot_point
 	var com_pivot_delta:Vector3 = com_global - pivot_point

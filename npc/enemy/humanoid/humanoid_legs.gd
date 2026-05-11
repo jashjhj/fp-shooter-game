@@ -1,35 +1,42 @@
 class_name Humanoid_Legs extends Leg_Manager
 
-
-@export var is_pathfinding:bool = true;
-@export var PATHFINDER:NavigationAgent3D
+var walk_vector:Vector3 = Vector3.ZERO
 
 @export_group("Gait Settings")
 #@export var IDLE_HEIGHT:float = 1.5;
 @export var FOOT_PLANT_RADIUS:float = 1.0;
-
-@export_category("LEGS: Left leg first")
 
 
 var stability:float = 0.0;
 var body_height:float;
 
 
+
+var LEGS_STATE_IDLE:Humanoid_Legs_State = Humanoid_Legs_State_Idle.new()
+var LEGS_STATE_STABILISING:Humanoid_Legs_State = Humanoid_Legs_State_Stabilising.new()
+var LEGS_STATE_WALKING:Humanoid_Legs_State = Humanoid_Legs_State_Walking.new()
+
+
+var current_state:Humanoid_Legs_State = LEGS_STATE_STABILISING;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready();
 	assert(len(LEGS) == 2, "Humanoid does not have 2 Legs :( " + str(get_path));
+	
+	LEGS_STATE_IDLE.LEGS = self
+	LEGS_STATE_STABILISING.LEGS = self
+	LEGS_STATE_WALKING.LEGS = self;
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-
 	
 	
-	update_stability(delta) # just guessed how stable - not useful
+	current_state.update_stability(delta) # if error, need to set the legs states.
+	current_state.update_state()
 	
-	
-	consider_step()
-	update_leg_targets()
+	current_state.consider_step()
+	current_state.update_leg_targets()
 	
 	update_target_pos()
 	
@@ -40,60 +47,18 @@ func _physics_process(delta: float) -> void:
 		body_height = (DOWN_RAY.get_collision_point() - BODY.global_position).y
 	
 	
-	#Debug.point(TARGET.global_position, 0.1, Color(0.591, 0.912, 0.707))
 	
+	Debug.point(TARGET.global_position, 0.1, Color(0.591, 0.912, 0.707))
+	DebugDraw3D.draw_text(global_position + 2*Vector3.UP, str("%2f" % stability));
+
+
+#STATES:
+# IF STABLE > 0.6, walk or idle, depends on walking vector.
+# IF STABLE < 0.2, stabilise mode.
 
 
 
-func update_stability(delta:float) -> void:
-	
-	if stable_legs == 2:
-		stability = lerp(stability, max(0.0, (1-BODY.linear_velocity.length())), 0.5*delta)
-	else:
-		stability *= 0.4 ** delta # divides by 20 a second
 
-
-var last_leg_movement:int;
-var percieved_stability:float = 0.0;
-func consider_step():
-	#var stable_area := calculate_stable_area()
-
-	
-	if(!is_above_stable_zone and stable_legs == 2 and unstable_distance > 0.2):
-		#print(unstable_distance)
-		#pick leg to move - The one with its foot planted further away from the body.
-		
-		var leg_0_distance:float = (LEGS[0].FOOT.global_position - body_com_global()).length();#(LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
-		var leg_1_distance:float = (LEGS[1].FOOT.global_position - body_com_global()).length();#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
-		
-		if leg_0_distance > leg_1_distance:
-			if leg_0_distance > 0.1: # tolerance to actually move foot
-				LEGS[0].begin_step()
-		else:
-			if(leg_1_distance > 0.1):
-				LEGS[1].begin_step()
-		
-		
-		
-		#var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() else LEGS[1];
-		#
-		##var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position)).length_squared() else LEGS[1];
-		#leg_to_move.begin_step()
-		
-	elif(stability > 0.6 and false): # currently disabled recenter feet code
-		
-		var leg_0_distance:float = (LEGS[0].FOOT.global_position - body_com_global()).length();#(LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
-		var leg_1_distance:float = (LEGS[1].FOOT.global_position - body_com_global()).length();#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
-		
-		if leg_0_distance > leg_1_distance:
-			if leg_0_distance > 0.1: # tolerance to actually move foot
-				LEGS[0].begin_step()
-		else:
-			if(leg_1_distance > 0.1):
-				LEGS[1].begin_step()
-		
-		#var leg_to_move:Leg = LEGS[0] if ((LEGS[0].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() > ((LEGS[1].FOOT.global_position - BODY.global_position) * (BODY.global_basis.x)).length_squared() else LEGS[1]; # pickes furthest leg.
-		#leg_to_move.begin_step()
 
 ##Updates self target
 func update_target_pos():
@@ -113,165 +78,6 @@ func update_target_pos():
 	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
 	
-
-
-func update_leg_targets():
-	
-	
-	#var stable_legs:float = len(stable_area)
-	
-	#Calculate IDLE_HEIGHT Actual
-	
-	
-	LEGS[0].set_leg_target(calculate_leg_target_inline(LEGS[0], LEGS[1]))
-	LEGS[1].set_leg_target(calculate_leg_target_inline(LEGS[1], LEGS[0]))
-	
-	return
-	#
-	#if(stable_legs == 1): # making a step
-		#var stable_leg:Leg;
-		#var unstable_leg:Leg;
-		#if LEGS[0].is_stable:
-			#stable_leg = LEGS[0]
-			#unstable_leg = LEGS[1]
-		#else:
-			#unstable_leg = LEGS[0]
-			#stable_leg = LEGS[1]
-		#
-		#if(stability > 0.2): # if making a step stably, to balance
-			#
-			#if(LEGS[0].is_stable): # detech if is left or right leg
-				#unstable_leg.set_leg_target(calculate_leg_target_idle(unstable_leg, stable_leg, true))
-			#else:
-				#unstable_leg.set_leg_target(calculate_leg_target_idle(unstable_leg, stable_leg, false))
-		#else:
-			#unstable_leg.set_leg_target(calculate_leg_target_stabilise(unstable_leg, stable_leg))
-	#
-	#else:
-		#
-		#LEGS[0].set_leg_target(calculate_leg_target_idle(LEGS[0], LEGS[1], true))
-		#LEGS[1].set_leg_target(calculate_leg_target_idle(LEGS[1], LEGS[0], false))
-	
-	#if(is_pathfinding): ### ---------------- PATHFINDIUNG CODE
-		#
-		##PATHFINDER.target_position = Globals.PLAYER.global_position
-		#
-		#var path_step_dist:float = stability;
-		#
-		#var next_pos:Vector3 = PATHFINDER.get_next_path_position()
-		#var next_pos_delta_xz:Vector3 = (next_pos - BODY.global_position) * Vector3(1, 0, 1)
-		#
-		#
-		#if(next_pos_delta_xz.length() > path_step_dist):
-			#next_pos_delta_xz = next_pos_delta_xz.normalized() * path_step_dist
-		#
-		#TARGET.global_position += next_pos_delta_xz
-		#
-		##Doesnt work
-		##Need to reconsider 'Facingness'
-		##ANGLE_HELPER.look_at(ANGLE_HELPER.global_position + next_pos_delta_xz)
-
-
-
-##Is left leg is about the first leg
-func calculate_leg_target_idle(leg:Leg, other_leg:Leg, is_left_leg:bool) -> Vector3:
-	
-	#Calculates where the leg would LIKE to be if it could be in the correct place relative to the other leg.
-	
-	var offset_direction:Vector3
-	
-	var goal_heading:Vector3 = BODY.global_basis.z;
-	
-	if(is_left_leg):
-		offset_direction = goal_heading.rotated(Vector3.UP, PI/2).normalized()
-	else:
-		offset_direction = goal_heading.rotated(Vector3.UP, -PI/2).normalized()
-	
-	var goal_pos:Vector3 = other_leg.global_position + (leg.global_position-other_leg.global_position).length() * offset_direction
-	
-	DOWN_RAY.global_position = goal_pos
-	DOWN_RAY.force_raycast_update()
-	if(DOWN_RAY.is_colliding()): # There is floor in reasonable distance down
-		var collision:Vector3 = DOWN_RAY.get_collision_point()
-		if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
-			return collision
-	
-	return Vector3.ZERO
-
-	
-	
-	##Delta to the origin of the leg. Global
-	
-	#var leg_delta:Vector3 = leg.global_position - BODY.global_position # Leg must be a direct child 
-	###Hporizontal component
-	#var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
-	#
-	###Leg idle goal pos. By default, under the hip. Could be altered for a combat stance.
-	#var leg_idle_goal_xz:Vector3 = leg_delta_xz.normalized()
-	#
-	##var leg_prospective_xz = leg_idle_goal_xz + get_point_velocity(leg.global_position - BODY.global_position)*Vector3(1, 0, 1)*0.2 # Calculates prospective pos. Needs work
-	#var leg_goal_xz:Vector3 = leg_idle_goal_xz;
-	#
-	#DOWN_RAY.global_position = BODY.global_position + leg_goal_xz
-	#DOWN_RAY.force_raycast_update()
-	#if(DOWN_RAY.is_colliding()): # There is floor in reasonable distance down
-		#var collision:Vector3 = DOWN_RAY.get_collision_point()
-		#if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
-			#return collision
-	#
-	#return Vector3.ZERO
-
-func calculate_leg_target_stabilise(leg:Leg, stable_leg:Leg) -> Vector3:
-	# -- -calculate new pos
-	var body_pos:Vector3 = body_com_global() + BODY.linear_velocity
-	print(body_pos)
-	Debug.point(body_pos + Vector3.UP, 1, Color(1.0, 0.933, 0.0, 1.0));
-	
-	var stable_offset_xz:Vector3 = (body_pos - stable_leg.FOOT.global_position) * Vector3(1, 0, 1);
-	#stable_offset_xz *= 2.0; # Find where to plant foot to make it stable
-	stable_offset_xz += BODY.linear_velocity * 0.3 # Add velocity for small amount of preempting
-	
-	var leg_length:float = LEGS[0].UPPER_LENGTH + LEGS[0].LOWER_LENGTH;
-	var max_extension:float = sqrt(leg_length**2 - body_height**2);
-	stable_offset_xz = stable_offset_xz.normalized() * min(stable_offset_xz.length(), 2* max_extension - stable_offset_xz.length()) # ensures its not reaching too far
-	
-	#stable_offset_xz = stable_offset_xz.normalized() * min(stable_offset_xz.length(), 0.4)
-	#-- Apply it
-	
-	#Stable offset xz is where to plant the foot to make the body stable.
-	DOWN_RAY.global_position = BODY.global_position + stable_offset_xz;
-	DOWN_RAY.force_raycast_update()
-	
-	if(DOWN_RAY.is_colliding()): # There is floor in reasonable distance down
-		var collision:Vector3 = DOWN_RAY.get_collision_point()
-		if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
-			return collision
-	
-	return Vector3.ZERO
-	#return calculate_leg_target_idle(leg) # Fallback on putting foot DOWN if it cant find a floor
-
-func calculate_leg_target_inline(leg:Leg, stable_leg:Leg) -> Vector3:
-	
-	var stable_leg_stable_point:Vector3 = get_centre_of_stable_area(stable_leg.STABLE_FOOT_POINTS) * stable_leg.FOOT.global_basis + stable_leg.global_position
-	
-	var body_pos:Vector3 = body_com_global() + BODY.linear_velocity * Vector3(1, 0, 1)
-	Debug.point(body_pos, 0.1, Color(0.994, 1.0, 0.66, 1.0))
-	var stable_com_vector:Vector3 = stable_leg_stable_point - body_pos;
-	
-	var intersection_components:Vector2 = get_intersection_components(stable_leg_stable_point, leg.global_position, stable_com_vector, leg.global_basis.z);
-	var stable_foot_point = leg.global_position + intersection_components.y * leg.global_basis.z
-	stable_foot_point += BODY.linear_velocity * abs(BODY.linear_velocity) * 0.1;
-	
-	
-	DOWN_RAY.global_position = stable_foot_point
-	DOWN_RAY.force_raycast_update()
-	
-	if(DOWN_RAY.is_colliding()): # There is floor in reasonable distance down
-		var collision:Vector3 = DOWN_RAY.get_collision_point()
-		if((collision - leg.global_position).length() < (leg.UPPER_LENGTH + leg.LOWER_LENGTH)): # If collision is within reach of said leg
-			
-			#Debug.point(collision) - get the foot target
-			
-			return collision
-	
-	return Vector3.ZERO
+	if current_state == LEGS_STATE_WALKING: # move target pos to slowly push body forwards.
+		
+		TARGET.global_position += walk_vector;
