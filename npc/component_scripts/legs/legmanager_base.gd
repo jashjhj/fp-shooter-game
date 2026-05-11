@@ -166,12 +166,12 @@ var last_step_time:int;
 func leg_stepped():
 	last_step_time = Time.get_ticks_msec();
 
-func body_hit():
+func body_hit(): # Hijacks the impulse given by a hit component.
 	var impulse:Vector3 = body_hit_component.last_impulse;
 	var impulse_pos:Vector3 = body_hit_component.last_impulse_pos;
 	
 	BODY.apply_torque_impulse(Vector3(0, 0, 0))
-	BODY.apply_impulse(impulse)
+	BODY.apply_impulse(impulse, impulse_pos - BODY.global_position)
 	
 	apply_dv_to_feet(impulse/BODY.mass)
 	

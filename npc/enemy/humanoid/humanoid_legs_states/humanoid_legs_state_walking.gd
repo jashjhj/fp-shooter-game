@@ -1,5 +1,6 @@
 class_name Humanoid_Legs_State_Walking extends Humanoid_Legs_State
 
+
 var step_cooldown = 2000;
 func consider_step():
 	

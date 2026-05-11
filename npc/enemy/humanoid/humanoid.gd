@@ -3,7 +3,7 @@ class_name Humanoid extends Node3D
 @export var LEGS:Humanoid_Legs;
 @export var ANGLE_HELPER:Angular_Damper;
 
-var walk_vector:Vector3 = Vector3(0, 0, 0.2)
+var walk_vector:Vector3 = Vector3(0, 0, 0)
 
 enum STABILITY{
 	FULL,
