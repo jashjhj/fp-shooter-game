@@ -1,9 +1,11 @@
 class_name Humanoid_Legs_State_Walking extends Humanoid_Legs_State
 
+@export var STRIDE_LENGTH:float = 0.4;
 
-var step_cooldown = 2000;
+var step_cooldown:int = 2000;
+var last_leg:int = -1;
+var leg_reps:int = 0;
 func consider_step():
-	
 	if Time.get_ticks_msec() - LEGS.last_step_time < step_cooldown: return; # dont step since last step.
 	
 	if(LEGS.stable_legs == 2): # if fully stable, take next step
@@ -12,9 +14,32 @@ func consider_step():
 		var leg_1_distance:float = (LEGS.LEGS[1].FOOT.global_position - LEGS.body_com_global()).dot(LEGS.walk_vector);#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
 		
 		if leg_0_distance < leg_1_distance: # step leg that is behind
-			LEGS.LEGS[0].begin_step() # position already set in update_leg_targets().
+			if(last_leg == 0):
+				leg_reps += 1;
+			else:
+				last_leg = 0
+				leg_reps = 1
+			
+			if leg_reps < 2: # if ive kept using this leg, swap.
+				LEGS.LEGS[0].begin_step()
+			else:
+				LEGS.LEGS[1].begin_step()
+				last_leg = 1;
+				leg_reps = 1;
+			
 		else:
-			LEGS.LEGS[1].begin_step()
+			if(last_leg == 1):
+				leg_reps += 1;
+			else:
+				last_leg = 1
+				leg_reps = 1
+			
+			if leg_reps < 2: # if ive kept using this leg, swap.
+				LEGS.LEGS[1].begin_step()
+			else:
+				LEGS.LEGS[0].begin_step()
+				last_leg = 0;
+				leg_reps = 1;
 
 
 func update_leg_targets():
@@ -33,19 +58,11 @@ func update_state():
 ##Inline: in the line that will stabilise, a line through the other leg + the COM with minor consideration for velocity.
 func calculate_leg_target(leg:Leg, stable_leg:Leg) -> Vector3:
 	
-	var stable_leg_stable_point:Vector3 = LEGS.get_centre_of_stable_area(stable_leg.STABLE_FOOT_POINTS) * stable_leg.FOOT.global_basis + stable_leg.global_position
+	var forwards_angle:float = (LEGS.global_basis.z).signed_angle_to(LEGS.walk_vector, Vector3.UP);
+	var project_forward_orthogonal:Vector3 = -(leg.position - stable_leg.position).rotated(Vector3.UP, -forwards_angle);
+	var project_forward:Vector3 = (STRIDE_LENGTH * 0.5 * Vector3.FORWARD).rotated(Vector3.UP, forwards_angle); 
 	
-	##Calculates body + velocity = roughly where foot needs to go to slow velocity.
-	var body_pos:Vector3 = LEGS.body_com_global()
-	##Vector from Good foot to COM.
-	var stable_com_vector:Vector3 = stable_leg_stable_point - body_pos;
-	# Y component does not matter.
-	var intersection_components:Vector2 = LEGS.get_intersection_components(stable_leg_stable_point, leg.global_position, stable_com_vector, leg.global_basis.z);
-	var stable_foot_point = leg.global_position + intersection_components.y * leg.global_basis.z
-	stable_foot_point += LEGS.BODY.linear_velocity * abs(LEGS.BODY.linear_velocity) * 0.1;
-	
-	
-	LEGS.DOWN_RAY.global_position = stable_foot_point
+	LEGS.DOWN_RAY.global_position = stable_leg.global_position + project_forward + project_forward_orthogonal;
 	LEGS.DOWN_RAY.force_raycast_update()
 	
 	if(LEGS.DOWN_RAY.is_colliding()): # There is floor in reasonable distance down

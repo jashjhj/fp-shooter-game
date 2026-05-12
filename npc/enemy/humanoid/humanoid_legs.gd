@@ -37,7 +37,6 @@ func _physics_process(delta: float) -> void:
 	
 	current_state.consider_step()
 	current_state.update_leg_targets()
-	
 	update_target_pos()
 	
 	
@@ -80,4 +79,5 @@ func update_target_pos():
 	
 	if current_state == LEGS_STATE_WALKING: # move target pos to slowly push body forwards.
 		
-		TARGET.global_position += walk_vector;
+		#TARGET.global_position += walk_vector;
+		pass

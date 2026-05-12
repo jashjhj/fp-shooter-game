@@ -138,4 +138,4 @@ script = ExtResource("9_78n53")
 metadata/_custom_type_script = "uid://bl756y4d1ou61"
 
 [node name="Humanoid" parent="." unique_id=490982331 instance=ExtResource("12_jl4bw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.35086, 2.05, -1.57273)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -6.35086, 2.05, -1.57273)
