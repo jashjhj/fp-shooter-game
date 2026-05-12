@@ -101,8 +101,8 @@ BODY = NodePath("..")
 LEGS = [NodePath("Legbotleg2"), NodePath("Legbotleg")]
 IDLE_HEIGHT = 2.0
 LEG_FORCE_THROUGH = 40.0
-LEG_FORCE_LATERAL = 4.0
-IMAGINED_FORCE = 15.0
+LEG_FORCE_LATERAL = 5.0
+IMAGINED_FORCE = 40.0
 metadata/_custom_type_script = "uid://cmp2xm5k8f2xk"
 
 [node name="Legbotleg" parent="Root/Humanoid_Legs" unique_id=579883746 instance=ExtResource("7_ewtnf")]

@@ -35,6 +35,7 @@ func _ready() -> void:
 	for leg in LEGS: # first, wait for legs to ready up. This should be automatic if legs are beneath this
 		if !leg.is_node_ready(): await leg.ready
 		leg.began_step.connect(leg_stepped);
+		leg.became_stable.connect(leg_became_stable);
 	
 	assert(BODY != null, "NO BODY Set for object with Leg_Manager @ " + str(get_path()))
 	
@@ -162,9 +163,12 @@ func add_1d_force_capacity(capacity:Vector3, add:Vector3) -> Array[Vector3]:
 
 ##Last time [sub-leg].begin_step() was called, tick msec.
 var last_step_time:int;
+var last_step_land_time:int;
 ##Called every time a leg.begin_step() is called.
 func leg_stepped():
 	last_step_time = Time.get_ticks_msec();
+func leg_became_stable():
+	last_step_land_time = Time.get_ticks_msec();
 
 func body_hit(): # Hijacks the impulse given by a hit component.
 	var impulse:Vector3 = body_hit_component.last_impulse;

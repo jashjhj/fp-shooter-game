@@ -103,6 +103,7 @@ var step_state:int = 1:
 		if(v == 0): # Foot just got planted
 			FOOT_PHYSLERP.enabled = false
 			is_stepping = false
+			became_stable.emit()
 		else:
 			is_stepping = true;
 		

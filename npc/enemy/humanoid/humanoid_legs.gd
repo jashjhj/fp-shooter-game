@@ -32,7 +32,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
-	
 	current_state.update_stability(delta) # if error, need to set the legs states.
 	current_state.update_state()
 	
@@ -45,7 +44,6 @@ func _physics_process(delta: float) -> void:
 	DOWN_RAY.force_raycast_update()
 	if(DOWN_RAY.is_colliding()):
 		body_height = (DOWN_RAY.get_collision_point() - BODY.global_position).y
-	
 	
 	
 	Debug.point(TARGET.global_position, 0.1, Color(0.591, 0.912, 0.707))
