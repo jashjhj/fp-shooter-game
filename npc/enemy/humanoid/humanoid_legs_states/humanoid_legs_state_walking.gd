@@ -1,10 +1,11 @@
 class_name Humanoid_Legs_State_Walking extends Humanoid_Legs_State
 
-@export var STRIDE_LENGTH:float = 0.4;
+@export var STRIDE_LENGTH:float = 1.0;
 
 var step_cooldown:int = 2000;
 var last_leg:int = -1;
 var leg_reps:int = 0;
+
 func consider_step():
 	if Time.get_ticks_msec() - LEGS.last_step_time < step_cooldown: return; # dont step since last step.
 	
@@ -72,3 +73,33 @@ func calculate_leg_target(leg:Leg, stable_leg:Leg) -> Vector3:
 			return collision
 	
 	return Vector3.ZERO
+
+
+
+var stand_height:float = 1.9;
+func update_target_pos():
+	
+	var height:float = 1.0;
+	for leg in LEGS.LEGS:
+		if leg.is_stable:
+			var leg_delta:Vector3 = (LEGS.global_position - leg.ground_contact_point) * Vector3(1, 0, 1);
+			height = max(height, sqrt(stand_height*stand_height - leg_delta.length_squared()));
+	
+	if(LEGS.LEGS[0].is_stable and LEGS.LEGS[1].is_stable): # case both legs are stable, stand normally.
+		var stable_area = LEGS.calculate_stable_area()
+		var stable_centre:Vector3 = LEGS.get_centre_of_stable_area(stable_area);
+		LEGS.TARGET.global_position = stable_centre + Vector3.UP * stand_height;
+	
+	elif(LEGS.LEGS[0].is_stable): # case only leg 0 is stable.
+		
+		#var forwards_angle:float = (LEGS.global_basis.z).signed_angle_to(LEGS.walk_vector, Vector3.UP); # Script to push the target towards the middle, to make it look less of a waddle.
+		#var project_forward_orthogonal:Vector3 = -(LEGS.LEGS[1].position - LEGS.LEGS[0].position).rotated(Vector3.UP, -forwards_angle) * 0.5;
+		
+		LEGS.TARGET.global_position = LEGS.LEGS[0].ground_contact_point + Vector3.UP * height
+		
+	elif(LEGS.LEGS[1].is_stable): # case only leg 0 is stable.
+		LEGS.TARGET.global_position = LEGS.LEGS[1].ground_contact_point + Vector3.UP * height
+	
+	else: # case neither leg is stable. falling, oh dear.
+		pass
+		

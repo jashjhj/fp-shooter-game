@@ -42,11 +42,7 @@ var FOOT_RAY:RayCast3D;
 @onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
 @onready var FOOT_PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
-
-
-
 @onready var STEP_TARGET:Node3D = Node3D.new()
-
 @onready var TARGET:Node3D = Node3D.new();
 
 
@@ -67,7 +63,7 @@ var FOOT_RAY:RayCast3D;
 
 
 
-
+var ground_contact_point:Vector3 = Vector3.INF;
 class Intactity:
 	var hip:bool = true;
 	var knee:bool = true;
@@ -90,24 +86,31 @@ var is_physical:bool = true:
 
 # If stable, attached to floor UNTIl pushed up. If not stable, attached to body and any deltas will be appliead appropriately
 
-var is_stable:bool = false
+var is_stable:bool = false:
+	set(v):
+		is_stable = v;
+		
+		if(is_stable):
+			ground_contact_point = FOOT_RAY.get_collision_point();
+		else:
+			ground_contact_point = Vector3.INF;
 
 ##Private 
 var is_stepping:bool = true
 ## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
 var step_state:int = 1:
 	set(v):
-		is_stepping = true
-		if(v == 0):
+		if(v == 0): # Foot just got planted
 			FOOT_PHYSLERP.enabled = false
 			is_stepping = false
-		elif v == 1:
+		else:
+			is_stepping = true;
+		
+		if v == 1:
 			FOOT_PHYSLERP.enabled = true
 		elif v == 2:
 			FOOT_PHYSLERP.enabled = true
-		else:
-			push_error("Attempted to set step_state of a leg to a value not in the range 0,1,2")
-			return
+		
 		step_state = v
 var step_start:int;
 var step_height:float = 0;
@@ -253,7 +256,7 @@ func _physics_process(delta: float) -> void:
 		
 	elif step_state == 2:
 		STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * -0.35
-		if(is_stable):
+		if(is_stable): # Just planted foot
 			step_state = 0;
 		pass
 	else:
@@ -283,6 +286,7 @@ func _physics_process(delta: float) -> void:
 ##Impulse; global position at which hit-limit occured. May be necessary
 #Currently no use
 signal hit_limit(impulse, pos)
+
 
 func impose_footpos_limits():
 	# Function disabled temporaily
