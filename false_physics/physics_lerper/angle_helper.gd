@@ -31,6 +31,11 @@ func _ready() -> void:
 	set("linear_limit_x/enabled", false)
 	set("linear_limit_y/enabled", false)
 	set("linear_limit_z/enabled", false)
+	
+	if !Engine.is_editor_hint(): # if running for real
+		var rb:RigidBody3D = RigidBody3D.new()
+		add_child(rb)
+		node_b = rb.get_path();
 
 
 
