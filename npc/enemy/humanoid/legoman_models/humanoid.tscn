@@ -14,18 +14,15 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_ewtnf"]
 
-[node name="Humanoid" type="Node3D" unique_id=326344970 node_paths=PackedStringArray("LEGS", "ANGLE_HELPER")]
+[node name="Humanoid" type="Node3D" unique_id=326344970 node_paths=PackedStringArray("LEGS", "ANGULAR_DAMPER")]
 script = ExtResource("1_ewtnf")
 LEGS = NodePath("Root/Humanoid_Legs")
-ANGLE_HELPER = NodePath("Root/Angular_Damper")
+ANGULAR_DAMPER = NodePath("Root/Angular_Damper")
 metadata/_custom_type_script = "uid://csps1qo6dg4dh"
 
 [node name="Root" type="RigidBody3D" parent="." unique_id=2016116175 node_paths=PackedStringArray("HIT_COMPONENTS")]
 collision_layer = 32
 collision_mask = 17409
-axis_lock_angular_x = true
-axis_lock_angular_z = true
-lock_rotation = true
 angular_damp = 3.75
 script = ExtResource("1_lcoid")
 HIT_COMPONENTS = [NodePath("Hit_Component")]
@@ -85,20 +82,23 @@ linear_limit_z/enabled = false
 angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
+angular_spring_x/enabled = true
 angular_spring_x/stiffness = 8.0
 angular_spring_x/damping = 2.0
+angular_spring_y/enabled = true
 angular_spring_y/stiffness = 8.0
 angular_spring_y/damping = 2.0
+angular_spring_z/enabled = true
 angular_spring_z/stiffness = 8.0
 angular_spring_z/damping = 2.0
 script = ExtResource("5_mk5mw")
-enabled = false
 metadata/_custom_type_script = "uid://dnpmmrwqk78q4"
 
-[node name="Humanoid_Legs" type="Node3D" parent="Root" unique_id=288456831 node_paths=PackedStringArray("BODY", "LEGS")]
+[node name="Humanoid_Legs" type="Node3D" parent="Root" unique_id=288456831 node_paths=PackedStringArray("BODY", "LEGS", "ANGULAR_DAMPER")]
 script = ExtResource("1_02ybs")
 BODY = NodePath("..")
 LEGS = [NodePath("Legbotleg2"), NodePath("Legbotleg")]
+ANGULAR_DAMPER = NodePath("../Angular_Damper")
 IDLE_HEIGHT = 2.0
 LEG_FORCE_THROUGH = 40.0
 LEG_FORCE_LATERAL = 5.0

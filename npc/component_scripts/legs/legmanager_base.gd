@@ -5,7 +5,12 @@ class_name Leg_Manager extends Node3D
 @export var LEGS:Array[Leg]
 @onready var LEGS_INITIAL:int = len(LEGS)
 
+@export var ANGULAR_DAMPER:Angular_Damper;
+@onready var damper_max_stiffness = ANGULAR_DAMPER.STIFFNESS;
+@onready var damper_max_damping = ANGULAR_DAMPER.DAMPING;
+
 var body_hit_component:Hit_Component; # auto initialised
+
 @export_group("Gait Settings")
 @export var IDLE_HEIGHT:float = 1.5;
 #@export var FOOT_PLANT_RADIUS:float = 1.0;
@@ -16,16 +21,17 @@ var body_hit_component:Hit_Component; # auto initialised
 ##Amount fo force the physlerper imagiens it has, at full capacity. Disregarding Gravity.
 @export var IMAGINED_FORCE:float = 60;
 
+
+
 ##TARGET for PHYSLERP, Not edited in legmanager_base. Use to control movement.
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
-var stable_legs:int = 0;
 
+var stable_legs:int = 0;
 ##Distance perpendicularly from the stable zone.
 var unstable_distance:float = 0.0;
-
 
 
 
@@ -84,6 +90,8 @@ func _physics_process(delta: float) -> void:
 	#Physlerper forces to self
 	apply_self_forces(delta)
 	
+	ANGULAR_DAMPER.DAMPING = damper_max_damping * stable_legs / LEGS_INITIAL
+	ANGULAR_DAMPER.STIFFNESS = damper_max_stiffness * stable_legs / LEGS_INITIAL
 	
 	#for leg in LEGS:
 	#	set_leg_target(leg)

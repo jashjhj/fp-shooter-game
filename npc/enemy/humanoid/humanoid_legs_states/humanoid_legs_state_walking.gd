@@ -15,11 +15,11 @@ func consider_step():
 		var stable_area = LEGS.calculate_stable_area()
 		var stable_centre:Vector3 = LEGS.get_centre_of_stable_area(stable_area);
 		
-		if((LEGS.global_position - stable_centre).dot(LEGS.walk_vector) < -0.01): return # Dotn step till youre past equlibrium point, ready for enxt step.
+		if((LEGS.global_position - stable_centre).dot(LEGS.walk_vector.normalized()) < -0.01): return # Dotn step till youre past equlibrium point, ready for enxt step.
 		
 		
-		var leg_0_distance:float = (LEGS.LEGS[0].FOOT.global_position - LEGS.body_com_global()).dot(LEGS.walk_vector);#(LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
-		var leg_1_distance:float = (LEGS.LEGS[1].FOOT.global_position - LEGS.body_com_global()).dot(LEGS.walk_vector);#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
+		var leg_0_distance:float = (LEGS.LEGS[0].FOOT.global_position - LEGS.body_com_global()).dot(LEGS.walk_vector.normalized());#(LEGS[0].FOOT.global_position - calculate_leg_target_idle(LEGS[0], LEGS[1], true)).length()
+		var leg_1_distance:float = (LEGS.LEGS[1].FOOT.global_position - LEGS.body_com_global()).dot(LEGS.walk_vector.normalized());#(LEGS[1].FOOT.global_position - calculate_leg_target_idle(LEGS[1], LEGS[0], false)).length()
 		
 		if leg_0_distance < leg_1_distance: # step leg that is behind
 			if(last_leg == 0):
@@ -95,17 +95,17 @@ func update_target_pos():
 	if(LEGS.LEGS[0].is_stable and LEGS.LEGS[1].is_stable): # case both legs are stable, stand normally.
 		var stable_area = LEGS.calculate_stable_area()
 		var stable_centre:Vector3 = LEGS.get_centre_of_stable_area(stable_area);
-		LEGS.TARGET.global_position = stable_centre + Vector3.UP * stand_height  + (STRIDE_LENGTH * LEGS.walk_vector * 0.25)
+		LEGS.TARGET.global_position = stable_centre + Vector3.UP * stand_height  + (STRIDE_LENGTH * LEGS.walk_vector.normalized() * 0.25)
 	
 	elif(LEGS.LEGS[0].is_stable): # case only leg 0 is stable.
 		
 		#var forwards_angle:float = (LEGS.global_basis.z).signed_angle_to(LEGS.walk_vector, Vector3.UP); # Script to push the target towards the middle, to make it look less of a waddle.
 		#var project_forward_orthogonal:Vector3 = -(LEGS.LEGS[1].position - LEGS.LEGS[0].position).rotated(Vector3.UP, -forwards_angle) * 0.5;
 		
-		LEGS.TARGET.global_position = LEGS.LEGS[0].ground_contact_point + Vector3.UP * height + (STRIDE_LENGTH * LEGS.walk_vector * 0.5)
+		LEGS.TARGET.global_position = LEGS.LEGS[0].ground_contact_point + Vector3.UP * height + (STRIDE_LENGTH * LEGS.walk_vector.normalized() * 0.5)
 		
 	elif(LEGS.LEGS[1].is_stable): # case only leg 0 is stable.
-		LEGS.TARGET.global_position = LEGS.LEGS[1].ground_contact_point + Vector3.UP * height + (STRIDE_LENGTH * LEGS.walk_vector * 0.5)
+		LEGS.TARGET.global_position = LEGS.LEGS[1].ground_contact_point + Vector3.UP * height + (STRIDE_LENGTH * LEGS.walk_vector.normalized() * 0.5)
 	
 	else: # case neither leg is stable. falling, oh dear.
 		pass
