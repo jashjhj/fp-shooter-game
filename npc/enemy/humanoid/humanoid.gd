@@ -25,4 +25,3 @@ func _physics_process(delta: float) -> void:
 	#ANGULAR_DAMPER.rotate(Vector3.UP, 0.1*delta)
 	if LEGS.current_state is Humanoid_Legs_State_Walking:
 		ANGULAR_DAMPER.set_node_facing(ANGULAR_DAMPER.global_position - walk_vector, Vector3.UP);
-		DebugDraw3D.draw_position(ANGULAR_DAMPER.global_transform.translated(Vector3.UP * 3))

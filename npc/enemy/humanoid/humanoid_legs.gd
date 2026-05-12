@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	Debug.point(TARGET.global_position, 0.1, Color(0.591, 0.912, 0.707))
-	DebugDraw3D.draw_text(global_position + 2*Vector3.UP, str("%2f" % stability));
+	DebugDraw3D.draw_text(global_position + 2*Vector3.UP, str("%1f" % stability));
 
 
 #STATES:

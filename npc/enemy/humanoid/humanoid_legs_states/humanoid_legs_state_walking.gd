@@ -67,8 +67,8 @@ func update_state():
 func calculate_leg_target(leg:Leg, stable_leg:Leg) -> Vector3:
 	
 	var forwards_angle:float = (LEGS.global_basis.z).signed_angle_to(LEGS.walk_vector, Vector3.UP);
-	var project_forward_orthogonal:Vector3 = -(leg.position - stable_leg.position).rotated(Vector3.UP, -forwards_angle);
-	var project_forward:Vector3 = (STRIDE_LENGTH * 0.5 * Vector3.FORWARD).rotated(Vector3.UP, forwards_angle); 
+	var project_forward_orthogonal:Vector3 = (leg.global_position - stable_leg.global_position).rotated(Vector3.UP, forwards_angle);
+	var project_forward:Vector3 = (STRIDE_LENGTH * 0.5 * LEGS.global_basis.z).rotated(Vector3.UP, forwards_angle); 
 	
 	LEGS.DOWN_RAY.global_position = stable_leg.global_position + project_forward + project_forward_orthogonal;
 	LEGS.DOWN_RAY.force_raycast_update()
@@ -83,7 +83,7 @@ func calculate_leg_target(leg:Leg, stable_leg:Leg) -> Vector3:
 
 
 
-var stand_height:float = 1.9;
+var stand_height:float = 1.7;
 func update_target_pos():
 	
 	var height:float = 1.0;
