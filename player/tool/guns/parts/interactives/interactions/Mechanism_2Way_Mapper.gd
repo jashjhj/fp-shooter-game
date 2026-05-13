@@ -109,8 +109,11 @@ func resolve_deltas(delta:float) -> void:
 	
 	else:#Equal. Fight out over deltas
 		var primary_wants:float = PRIMARY.DISTANCE
-		var primary_maps_to:float = primary_to_secondary(PRIMARY.DISTANCE)
+		
+		
+		var primary_maps_to:float = primary_to_secondary(primary_wants)
 		var secondary_wants:float = SECONDARY.DISTANCE
+		
 		
 		var resolved:float = (primary_maps_to + secondary_wants) / 2.0
 		
@@ -137,7 +140,7 @@ func resolve_deltas(delta:float) -> void:
 		
 		secondary_projection = primary_to_secondary(primary_projection)# maps back to secondary in case anythign ahs cahnged
 		
-	
+		
 	
 	
 	#Apply projections
@@ -153,7 +156,7 @@ func resolve_deltas(delta:float) -> void:
 				PRIMARY.velocity += (primary_projection - PRIMARY.DISTANCE) / delta
 				PRIMARY.DISTANCE = primary_projection
 	else:
-		PRIMARY.velocity += (primary_projection - PRIMARY.DISTANCE) / delta
+		#PRIMARY.velocity += (primary_projection - PRIMARY.DISTANCE) / delta # caused issues regarding limits, especially in makarovni dual action trigger/hammer. Hammer sent back by slide so fast that it re-shot the trigger.
 		PRIMARY.DISTANCE = primary_projection
 	
 	#Secondary
@@ -169,13 +172,12 @@ func resolve_deltas(delta:float) -> void:
 				SECONDARY.velocity += (secondary_projection - SECONDARY.DISTANCE) / delta
 				SECONDARY.DISTANCE = secondary_projection
 	else:
-		SECONDARY.velocity += (secondary_projection - SECONDARY.DISTANCE) / delta
+		#SECONDARY.velocity += (secondary_projection - SECONDARY.DISTANCE) / delta # caused issues regarding limits, especially in makarovni dual action trigger/hammer. Hammer sent back by slide so fast that it re-shot the trigger.
 		SECONDARY.DISTANCE = secondary_projection
 	
-	
-	
-	
-	
+
+
+
 
 func secondary_normalised():
 	return remap(SECONDARY.DISTANCE, SECONDARY_START, SECONDARY_END, 0.0, 1.0)
