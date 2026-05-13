@@ -2,6 +2,8 @@
 
 class_name Angular_Damper extends Generic6DOFJoint3D
 
+@export_category("Parent under a Body, Set Node A to said Body")
+
 @export var STIFFNESS:float = 8.0:
 	set(v):
 		STIFFNESS = v
@@ -29,6 +31,16 @@ func _ready() -> void:
 	set("linear_limit_x/enabled", false)
 	set("linear_limit_y/enabled", false)
 	set("linear_limit_z/enabled", false)
+
+##Global position
+func set_node_facing(pos:Vector3, up:Vector3 = Vector3.UP):
+	var forwards = (pos - global_position).normalized()
+	var right = up.cross(forwards).normalized();
+	var new_up = right.cross(forwards); # automatically normalised
+	
+	set("angular_spring_x/equilibrium_point", Vector3.UP.signed_angle_to(new_up, Vector3.RIGHT))
+	set("angular_spring_y/equilibrium_point", Vector3.FORWARD.signed_angle_to(forwards, Vector3.UP))
+	set("angular_spring_z/equilibrium_point", Vector3.UP.signed_angle_to(new_up, Vector3.FORWARD))
 
 
 

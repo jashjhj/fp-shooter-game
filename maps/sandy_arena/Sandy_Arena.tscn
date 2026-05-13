@@ -57,7 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.14581, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.14581, 0)
 
 [node name="Player" parent="." instance=ExtResource("5_gb4if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.68255, 2.05398, 13.9407)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.964, 2.05398, 13.9407)
 
 [node name="Totembot" parent="." instance=ExtResource("6_hra41")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378439, 3.79858, -4.82752)

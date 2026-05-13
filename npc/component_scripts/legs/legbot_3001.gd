@@ -1,16 +1,21 @@
 class_name LegBot extends Node3D
 
+
+##Body should be a child/Under this Onject
 @export var BODY:Hittable_RB
 
 
 ##Legs should be direct children of BODY
-@export var LEGS:Array[BotLeg]
+@export var LEGS:Array[Leg]
 
 
 @export var ANGLE_HELPER:Angular_Damper;
 
 @export var is_pathfinding:bool = true;
 @export var PATHFINDER:NavigationAgent3D
+
+##Set this to the body's hit-component.
+@export var BODY_HITTABLE:Hit_Component;
 
 @export_group("Gait Settings")
 @export var IDLE_HEIGHT:float = 1.5;
@@ -22,23 +27,17 @@ class_name LegBot extends Node3D
 ##Amount fo force the physlerper imagiens it has, at full capacity. Disregarding Gravity.
 @export var IMAGINED_FORCE:float = 60;
 
+@onready var LEGS_INITIAL:int = len(LEGS)
 @onready var TARGET:Node3D = Node3D.new()
 @onready var DOWN_RAY:RayCast3D = RayCast3D.new()
 @onready var PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
-##Set this to the body's hit-component.
-@export var BODY_HITTABLE:Hit_Component;
-
-
-@onready var LEGS_INITIAL:int = len(LEGS)
-
 
 var stability:float = 0.0;
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	#super._ready();
 	BODY.collision_layer = 64
 	BODY.collision_mask = 1;
 	
@@ -77,8 +76,8 @@ func _physics_process(delta: float) -> void:
 	consider_step()
 	
 
-
 func update_stability(delta:float):
+
 	
 	var stable_legs:int = 0;
 	for leg in LEGS:
@@ -97,9 +96,6 @@ func update_stability(delta:float):
 	
 	#DebugDraw3D.draw_text(BODY.global_position + Vector3.UP * 0.8, str(stability))
 
-
-
-
 func update_target():
 	var stable_area := calculate_stable_area()
 	var stable_legs:float = len(stable_area)
@@ -112,7 +108,7 @@ func update_target():
 	
 	
 	TARGET.global_position = get_centre_of_stable_area(stable_area) + Vector3.UP * ideal_height
-	
+	Debug.point(TARGET.global_position, 0.1)
 	
 	if(is_pathfinding): ### ---------------- PATHFINDIUNG CODE
 		
@@ -132,8 +128,6 @@ func update_target():
 		#Doesnt work
 		#Need to reconsider 'Facingness'
 		#ANGLE_HELPER.look_at(ANGLE_HELPER.global_position + next_pos_delta_xz)
-
-
 
 var last_force_applied:Vector3 = Vector3.ZERO # Logging
 func apply_self_forces(delta):
@@ -189,13 +183,13 @@ func body_hit():
 	var impulse = BODY_HITTABLE.last_impulse
 	apply_dv_to_feet(impulse/BODY.mass)
 
-func set_leg_target(leg:BotLeg) -> void:
+func set_leg_target(leg:Leg) -> void:
 	var target_pos = calculate_leg_target(leg)
 	#Debug.point(target_pos)
 	if target_pos == Vector3.ZERO: return # If no readings, stay as was
 	leg.TARGET.global_position = leg.TARGET.global_position.lerp(target_pos, 0.2)
 
-func calculate_leg_target(leg:BotLeg) -> Vector3:
+func calculate_leg_target(leg:Leg) -> Vector3:
 	var leg_delta:Vector3 = leg.global_position - BODY.global_position # Leg must be a direct child 
 	#leg_delta *= global_basis.inverse()
 	var leg_delta_xz:Vector3 = (leg_delta * Vector3(1, 0, 1))
@@ -224,7 +218,10 @@ func calculate_stable_area() -> Array[Vector3]:
 	
 	for leg in LEGS:
 		if(leg.is_stable):
-			out.append(leg.FOOT.global_position)
+			for stable_foot_pos in leg.STABLE_FOOT_POINTS:
+				var stable_pos:Vector3 = leg.FOOT.global_position + stable_foot_pos * leg.FOOT.global_basis
+				out.append(stable_pos)
+				#Debug.point(stable_pos, 0.1)
 	
 	return out
 
@@ -270,7 +267,7 @@ func consider_step():
 
 
 
-func pick_leg_to_move(stability:float = 0.5) -> BotLeg:
+func pick_leg_to_move(stability:float = 0.5) -> Leg:
 	var legs := LEGS.duplicate()
 	var i = len(legs) - 1;
 	while i >= 0:

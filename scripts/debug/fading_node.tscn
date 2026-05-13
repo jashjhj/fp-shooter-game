@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cp4y5wf12eti7" path="res://scripts/debug/fading_point.gd" id="1_e6q5i"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fqb20"]
+resource_local_to_scene = true
 radius = 0.02
 height = 0.04
 radial_segments = 6
@@ -20,3 +21,5 @@ disable_fog = true
 mesh = SubResource("SphereMesh_fqb20")
 surface_material_override/0 = SubResource("StandardMaterial3D_w5jng")
 script = ExtResource("1_e6q5i")
+
+[node name="Timer" type="Timer" parent="."]

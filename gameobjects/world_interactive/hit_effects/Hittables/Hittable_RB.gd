@@ -7,6 +7,7 @@ class_name Hittable_RB extends RigidBody3D
 ##Reference to inbuilt hitcomponent
 var inbuilt_hit_component:Hit_Component;
 
+
 func _ready() -> void:
 	HIT_COMPONENTS.insert(0, Hit_Component.new())
 	

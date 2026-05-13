@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="first_person_shooter"
 config/tags=PackedStringArray("current")
-run/main_scene="uid://wblmidpmgh2g"
+run/main_scene="uid://dnmnoq0b7qr1d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

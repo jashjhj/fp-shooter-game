@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://df138kg37kmpm"
+path="res://.godot/imported/legoman_upperleg.obj-bb1cd8ab1b8bdd54afd9400b13e0fc1e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/legoman_upperleg.obj-bb1cd8ab1b8bdd54afd9400b13e0fc1e.mesh"]
+
+source_file="res://npc/enemy/humanoid/legoman_models/legoman_upperleg.obj"
+dest_files=["res://.godot/imported/legoman_upperleg.obj-bb1cd8ab1b8bdd54afd9400b13e0fc1e.mesh", "res://.godot/imported/legoman_upperleg.obj-bb1cd8ab1b8bdd54afd9400b13e0fc1e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

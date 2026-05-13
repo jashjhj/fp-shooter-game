@@ -1,4 +1,4 @@
-@tool
+# @tool -- Used to be tool possibly to automatically update parameters. Bad idea 
 class_name Body_Segment extends Node3D
 
 ##This acts as its own little locally-sources Hit_Impulse_Propogate for propogating upstream.

@@ -1,10 +1,10 @@
-class_name BotLeg extends Node3D
+class_name Leg extends Node3D
 
 ##Rigidbody sibling to attach to - Must be set at runtime by parent.
 var BODY:RigidBody3D:
 	set(v):
 		BODY = v;
-		TARGET.reparent(BODY)
+		TARGET.reparent.call_deferred(BODY)
 		
 		for i in IMPULSE_TO_BODY: # Updates target
 			i.IMPULSE_TO = BODY
@@ -28,7 +28,9 @@ var BODY:RigidBody3D:
 @export var INVERT_KNEE:bool = false
 
 @export var FOOT:RigidBody3D;
-
+var foot_basis:Basis = Basis.IDENTITY;
+@export var STABLE_FOOT_POINTS:Array[Vector3];
+var FOOT_RAY:RayCast3D;
 
 @export var LOWER_HITCMP:Hit_Component;
 @export var UPPER_HITCMP:Hit_Component;
@@ -40,17 +42,13 @@ var BODY:RigidBody3D:
 @onready var IKCALC:IK_Leg_Abstract = IK_Leg_Abstract.new()
 @onready var FOOT_PHYSLERP:Physics_Lerper = Physics_Lerper.new()
 
-
-
-
 @onready var STEP_TARGET:Node3D = Node3D.new()
-
 @onready var TARGET:Node3D = Node3D.new();
 
 
 #DISMEMBERMENT
 @export_group("Dismemberment", "DISMEMBER")
-@export var DISMEMBER_ENABLED:bool = true;
+@export var DISMEMBER_ENABLED:bool = false;
 @export var DISMEMBER_HIP_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_KNEE_TRIGGER:Hit_HP_Tracker;
 @export var DISMEMBER_ANKLE_TRIGGER:Hit_HP_Tracker;
@@ -65,7 +63,7 @@ var BODY:RigidBody3D:
 
 
 
-
+var ground_contact_point:Vector3 = Vector3.INF;
 class Intactity:
 	var hip:bool = true;
 	var knee:bool = true;
@@ -88,23 +86,32 @@ var is_physical:bool = true:
 
 # If stable, attached to floor UNTIl pushed up. If not stable, attached to body and any deltas will be appliead appropriately
 
-var is_stable:bool = false
+var is_stable:bool = false:
+	set(v):
+		is_stable = v;
+		
+		if(is_stable):
+			ground_contact_point = FOOT_RAY.get_collision_point();
+		else:
+			ground_contact_point = Vector3.INF;
 
-## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
+##Private 
 var is_stepping:bool = true
+## 0 == Not currently Stepping, 1 == Locating, 2 == Planting
 var step_state:int = 1:
 	set(v):
-		is_stepping = true
-		if(v == 0):
+		if(v == 0): # Foot just got planted
 			FOOT_PHYSLERP.enabled = false
 			is_stepping = false
-		elif v == 1:
+			became_stable.emit()
+		else:
+			is_stepping = true;
+		
+		if v == 1:
 			FOOT_PHYSLERP.enabled = true
 		elif v == 2:
 			FOOT_PHYSLERP.enabled = true
-		else:
-			push_error("Attempted to set step_state of a leg to a value not in the range 0,1,2")
-			return
+		
 		step_state = v
 var step_start:int;
 var step_height:float = 0;
@@ -117,17 +124,13 @@ var step_height:float = 0;
 	#SEEKING,
 	#MOVING
 #}
-
-
 signal became_stable
-
-
-
+signal began_step
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	add_child(TARGET)
+	
 	add_child(FOOT_PHYSLERP)
 	TARGET.global_position = FOOT.global_position
 	
@@ -151,6 +154,13 @@ func _ready() -> void:
 	FOOT.contact_monitor = true
 	FOOT.max_contacts_reported = 3;
 	
+	FOOT_RAY = RayCast3D.new()
+	FOOT.add_child(FOOT_RAY);
+	FOOT_RAY.target_position = Vector3(0, -0.2, 0);
+	
+	if(len(STABLE_FOOT_POINTS) == 0):
+		STABLE_FOOT_POINTS.append(Vector3.ZERO)
+		push_warning("No Stable foot points set.")
 	
 	if(UPPER_HITCMP == null):
 		push_warning("No upper-leg hit-component set")
@@ -159,7 +169,7 @@ func _ready() -> void:
 		UPPER_HITCMP.on_hit.connect(generic_hit)
 	
 	if(LOWER_HITCMP == null):
-		push_warning("No lower-leg hit-componennt set")
+		push_warning("No lower-leg hit-component set")
 	else:
 		LOWER_HITCMP.on_hit.connect(lower_hit)
 		LOWER_HITCMP.on_hit.connect(generic_hit)
@@ -189,17 +199,11 @@ func _process(delta: float) -> void:
 	
 	update_leg()
 
+##Visual update; Make the legh segments look correct.
 func update_leg() -> void:
 	
 	var global_target_delta:Vector3 = FOOT.global_position - global_position
 	var local_target_delta:Vector3 = global_basis.inverse()*global_target_delta
-	
-	#if(!is_stable): return
-	#if(logging or true):
-	
-	#DebugDraw3D.draw_line(global_position, global_position + global_target_delta)
-	#DebugDraw3D.draw_line(global_position, global_position + local_target_delta, Color(0, 1, 0))
-	#DebugDraw3D.draw_line(global_position, global_position + -global_basis.y, Color(0, 0, 1))
 	
 	if(LOWER_LENGTH > 0.02):
 		
@@ -208,8 +212,6 @@ func update_leg() -> void:
 		UPPER.transform = ik.upper.transform
 		LOWER.transform = ik.lower.transform
 		
-		
-		#FOOT.transform = ik.end.transform
 	else:
 		##This si the case where it breaks
 		UPPER.look_at(UPPER.global_position - global_target_delta)
@@ -219,6 +221,7 @@ func begin_step(pos:Vector3 = TARGET.global_position):
 	step_state = 1;
 	step_start = Time.get_ticks_msec()
 	step_height = tanh((pos - FOOT.global_position).length())
+	began_step.emit();
 
 
 func _physics_process(delta: float) -> void:
@@ -254,7 +257,7 @@ func _physics_process(delta: float) -> void:
 		
 	elif step_state == 2:
 		STEP_TARGET.global_position = TARGET.global_position + Vector3.UP * -0.35
-		if(is_stable):
+		if(is_stable): # Just planted foot
 			step_state = 0;
 		pass
 	else:
@@ -269,11 +272,22 @@ func _physics_process(delta: float) -> void:
 	
 	impose_footpos_limits()
 	global_basis = global_basis.orthonormalized()
+	
+	if(FOOT_RAY.is_colliding()): # orientate cosmetic foot basis
+		foot_basis.y = FOOT_RAY.get_collision_normal()
+		foot_basis.z = ((FOOT.global_position - global_position) * (Vector3.ONE - foot_basis.y)).normalized() # squish the forwards vector
+		foot_basis.x = foot_basis.y.cross(foot_basis.z)
+	
+	else:
+		foot_basis.y = Vector3.DOWN
+		foot_basis.z = ((FOOT.global_position - global_position) * (Vector3.ONE - foot_basis.y)).normalized()
+		foot_basis.x = foot_basis.y.cross(foot_basis.z)
 
 
 ##Impulse; global position at which hit-limit occured. May be necessary
 #Currently no use
 signal hit_limit(impulse, pos)
+
 
 func impose_footpos_limits():
 	# Function disabled temporaily
@@ -395,7 +409,10 @@ func apply_foot_impulse(impulse:Vector3):
 	else:
 		FOOT.apply_central_impulse(impulse)
 
-
+##new_target in global coords
+func set_leg_target(new_target:Vector3) -> void:
+	if(new_target == Vector3.ZERO): return;
+	TARGET.global_position = new_target
 
 
 
@@ -407,11 +424,10 @@ func is_on_floor() -> bool:
 	#Else, no staticbody in contact
 	return false;
 
-
 var prop_old_pos:Vector3;
 var prop_foot_old_pos:Vector3
 var prop_old_basis:Basis = Basis.IDENTITY
-##Must be called each 'tick' to get accurate deltas. if arg == true, actually updates position.
+##Must be called each 'tick' to get accurate deltas. if arg == true, actually updates position. This makes the foot move if the body is shifted
 func propagate_motion(propagating:bool = true):
 	if(propagating):
 		
@@ -420,7 +436,7 @@ func propagate_motion(propagating:bool = true):
 		var delta_pos:Vector3 = global_position - prop_old_pos
 		
 		
-		var delta_basis:Basis = prop_old_basis * global_basis.inverse()
+		#var delta_basis:Basis = prop_old_basis * global_basis.inverse()
 		
 		#Evil fucked up maths to apply a delta-position based on Basis change (Applies rotation)
 		#TODO not convicned this works
@@ -446,10 +462,8 @@ func break_hip():
 	DISMEMBER_UPPER_RB_MAKER.add_impulse(DISMEMBER_HIP_TRIGGER.last_impulse, DISMEMBER_HIP_TRIGGER.last_impulse_pos)
 	DISMEMBER_UPPER_RB_MAKER.trigger()
 	
-	break_knee()
-	
+	break_knee() # beacsue of a buig, it breaks otherwise.
 
-## owie
 func break_knee():
 	if(intactity.knee == false): return
 	intactity.knee = false
@@ -464,7 +478,6 @@ func break_knee():
 	
 	LOWER_LENGTH = 0.01;
 	IKCALC.LOWER_LENGTH = 0.01
-	
 
 ##Breaking the ankle will ideally allow the robot to still walk, however with no shoes on. Effectively shorten the FOOT hitbox (or raise it)
 func break_ankle():
