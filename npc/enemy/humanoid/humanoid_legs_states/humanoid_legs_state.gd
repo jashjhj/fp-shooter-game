@@ -35,5 +35,13 @@ func update_target_pos():
 func update_stability(delta:float):
 	if LEGS.stable_legs == 2:
 		LEGS.stability = lerp(LEGS.stability, max(0.0, (1-LEGS.BODY.linear_velocity.length())), 0.5*delta)
+	elif LEGS.stable_legs == 1:
+		var velocity_away_from_stability = LEGS.BODY.linear_velocity.dot(LEGS.global_position - LEGS.get_centre_of_stable_area(LEGS.calculate_stable_area()))
+		if velocity_away_from_stability < 0: # moving towards stable
+			LEGS.stability *= 1.2 ** delta
+			LEGS.stability = min(LEGS.stability, 1.0);
+		else:
+			LEGS.stability *= 0.4 ** delta # divides by 20 a second
+			
 	else:
 		LEGS.stability *= 0.4 ** delta # divides by 20 a second
