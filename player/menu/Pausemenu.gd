@@ -26,11 +26,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func enable_menu():
 	get_tree().paused = true
 	get_child(0).visible = true
+	$Debug_Toggle_Visibility.visible = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func disable_menu():
 	get_tree().paused = false
 	get_child(0).visible = false
+	$Debug_Toggle_Visibility.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 

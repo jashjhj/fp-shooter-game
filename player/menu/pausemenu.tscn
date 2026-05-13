@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://doa7cbfkctnca" path="res://player/menu/Pausemenu.gd" id="1_tvqcu"]
 [ext_resource type="FontFile" uid="uid://cgappm46d7kiy" path="res://assets/fonts/PixelatedElegance.ttf" id="2_enubt"]
-[ext_resource type="FontFile" uid="uid://erdgllynwqkw" path="res://assets/fonts/Roboto-Bold.ttf" id="3_3612l"]
+[ext_resource type="FontFile" uid="uid://erdgllynwqkw" path="res://examples_dd3d/Roboto-Bold.ttf" id="3_3612l"]
+[ext_resource type="Script" uid="uid://5vy2i0ppoviy" path="res://player/menu/debug_menu.gd" id="4_puxji"]
 
 [node name="Pausemenu" type="Control" unique_id=321726020]
 process_mode = 3
@@ -23,9 +24,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -51.0
+offset_top = -106.5
 offset_right = 100.0
-offset_bottom = 162.0
+offset_bottom = 106.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -48,7 +49,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_enubt")
 text = "Quit"
 
-[node name="Mosue_Sens_Label" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=1491977924]
+[node name="Mouse_Sens_Label" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=1491977924]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("3_3612l")
@@ -62,5 +63,59 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
+[node name="Debug_Toggle_Visibility" type="Button" parent="." unique_id=1940748846]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.0
+offset_bottom = 76.0
+grow_horizontal = 0
+text = "Debug Menu"
+
+[node name="Debug Menu" type="Control" parent="." unique_id=627543123]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_puxji")
+
+[node name="Debug Menu" type="PanelContainer" parent="Debug Menu" unique_id=228835495]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 934.0
+offset_top = 192.0
+offset_right = 1112.0
+offset_bottom = 458.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug Menu/Debug Menu" unique_id=135880683]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Debug Menu/Debug Menu/VBoxContainer" unique_id=664313740]
+layout_mode = 2
+text = "Debug Settings."
+fit_content = true
+
+[node name="Slider Label" type="RichTextLabel" parent="Debug Menu/Debug Menu/VBoxContainer" unique_id=1572014273]
+layout_mode = 2
+text = "
+
+Timescale in ticks per second
+1                60             120"
+fit_content = true
+
+[node name="Timescale Slider" type="HSlider" parent="Debug Menu/Debug Menu/VBoxContainer" unique_id=2042578100]
+layout_mode = 2
+min_value = 1.0
+max_value = 120.0
+value = 120.0
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="drag_ended" from="PanelContainer/VBoxContainer/Sens" to="." method="_on_sens_drag_ended"]
+[connection signal="button_up" from="Debug_Toggle_Visibility" to="Debug Menu" method="_on_toggle_visibility_button_up"]
+[connection signal="drag_ended" from="Debug Menu/Debug Menu/VBoxContainer/Timescale Slider" to="Debug Menu" method="_on_timescale_slider_drag_ended"]
