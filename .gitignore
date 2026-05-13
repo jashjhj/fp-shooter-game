@@ -3,8 +3,8 @@
 .uid
 
 #Addons
-#addons/*
-#examples_dd3d/*
+addons/*
+examples_dd3d/*
 
 #images
 #*.png
