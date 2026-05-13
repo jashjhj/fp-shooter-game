@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://wblmidpmgh2g"]
+[gd_scene format=3 uid="uid://wblmidpmgh2g"]
 
 [ext_resource type="PackedScene" uid="uid://6iwvem2ecddd" path="res://maps/map_resources/environment.tscn" id="1_h3cbt"]
 [ext_resource type="PackedScene" uid="uid://miyu0xijfe7m" path="res://maps/map_resources/RubbishCollector.tscn" id="2_ypn5n"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://3s34tf1v1kuc" path="res://maps/sandy_arena/stone_1.tscn" id="8_42d1y"]
 [ext_resource type="Material" uid="uid://ciyagowiuydhc" path="res://maps/sandy_arena/assets/sand_mat.tres" id="8_k0kd4"]
 [ext_resource type="Script" uid="uid://c5uhnese0dn4n" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hittable_Collider.gd" id="9_gb4if"]
-[ext_resource type="FontFile" uid="uid://erdgllynwqkw" path="res://examples_dd3d/Roboto-Bold.ttf" id="10_gb4if"]
+[ext_resource type="FontFile" uid="uid://erdgllynwqkw" path="res://assets/fonts/Roboto-Bold.ttf" id="10_gb4if"]
 [ext_resource type="Script" uid="uid://bbjy8b7780q1y" path="res://maps/sandy_arena/trigger_summon_totembot.gd" id="11_hra41"]
 [ext_resource type="Script" uid="uid://brs34regxccwh" path="res://gameobjects/world_interactive/hit_effects/Hittables/Hit_Trigger.gd" id="11_kwjr5"]
 
